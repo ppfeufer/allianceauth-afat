@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from afat import __version__
+import os
 
 from setuptools import setup, find_packages
 
-import os
+from afat import __version__
 
 # read the contents of your README file
 this_directory = os.path.abspath(os.path.dirname(__file__))
