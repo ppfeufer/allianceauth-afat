@@ -7,7 +7,7 @@ on:
       - v*
 
 jobs:
-  python-3.6:
+  python-3_6:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
       run: |
         pylint `ls -R|grep .py$|xargs`
         
-  python-3.7:
+  python-3_7:
     runs-on: ubuntu-latest
 
     steps:
@@ -41,7 +41,7 @@ jobs:
       run: |
         pylint `ls -R|grep .py$|xargs`
 
-  python-3.8:
+  python-3_8:
     runs-on: ubuntu-latest
 
     steps:
