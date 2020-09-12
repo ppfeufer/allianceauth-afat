@@ -2,8 +2,7 @@ name: Pylint
 on:
   push:
     branches:
-      - master
-      - development
+      - '**'
     tags-ignore:
       - v*
 
