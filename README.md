@@ -79,7 +79,7 @@ python manage.py migrate
 
 Finally restart your supervisor services for AA
 
-## Data Migration 
+## Data Migration
 
 Right after the **initial** installation and running migrations,
 you can import the data from Alliance Auth's native FAT system,
