@@ -86,7 +86,11 @@ class Command(BaseCommand):
 
                 afatlink.id = bfat_fatlink.id
                 afatlink.afattime = bfat_fatlink.fattime
-                afatlink.fleet = bfat_fatlink.fleet
+                afatlink.fleet = (
+                    bfat_fatlink.fleet
+                    if bfat_fatlink.fleet is not None
+                    else bfat_fatlink.hash
+                )
                 afatlink.hash = bfat_fatlink.hash
                 afatlink.creator_id = bfat_fatlink.creator_id
 

@@ -204,12 +204,15 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
 
     fleet_time = fat.afatlink.afattime
     fleet_time_timestamp = fleet_time.timestamp()
+    fleet_name = (
+        fat.afatlink.fleet if fat.afatlink.fleet is not None else fat.afatlink.hash
+    )
 
     summary = {
         "system": fat.system,
         "ship_type": fat.shiptype,
         "character_name": fat.character.character_name,
-        "fleet_name": fat.afatlink.fleet + esi_fleet_marker,
+        "fleet_name": fleet_name + esi_fleet_marker,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
         "fleet_type": fleet_type,
         "via_esi": via_esi,
