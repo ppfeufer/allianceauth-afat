@@ -188,6 +188,9 @@ To do so, login to your mysql database and run the following commands:
 # de-activate foreign key checks
 SET FOREIGN_KEY_CHECKS=0;
 
+# Make sure there are no empty fleet names
+UPDATE imicusfat_ifatlink SET `fleet` = `hash` WHERE `fleet` IS NULL;
+
 # remove all "deleted" FATs
 delete from imicusfat_ifat where deleted_at is not null;
 
