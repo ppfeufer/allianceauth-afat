@@ -160,7 +160,13 @@ python myauth/manage.py afat_import_from_allianceauth_fat
 
 ### Import from bFAT
 
-To import from the bFAT module, simply run the following command:
+Some preparations are needed here, since bFAT allowed fat links without fleet names.
+Login to your mysql database and run the following command.
+```mysql
+UPDATE bfat_fatlink SET `fleet` = `hash` WHERE `fleet` IS NULL;
+```
+
+Now, to import from the bFAT module, simply run the following command:
 
 ```shell
 python myauth/manage.py afat_import_from_bfat
