@@ -33,10 +33,7 @@ def convert_fatlinks_to_dict(
     """
 
     # Fleet name
-    fatlink_fleet = fatlink.hash
-
-    if fatlink.fleet:
-        fatlink_fleet = fatlink.fleet
+    fatlink_fleet = fatlink.fleet if fatlink.fleet is not None else fatlink.hash
 
     # ESI marker
     via_esi = "No"
@@ -56,10 +53,7 @@ def convert_fatlinks_to_dict(
         )
 
     # Fleet type
-    fatlink_type = ""
-
-    if fatlink.link_type:
-        fatlink_type = fatlink.link_type.name
+    fatlink_type = fatlink.link_type.name if fatlink.link_type else ""
 
     # Creator name
     creator_main_character = get_main_character_from_user(user=fatlink.creator)
@@ -79,9 +73,9 @@ def convert_fatlinks_to_dict(
             "afat:fatlinks_close_esi_fatlink", args=[fatlink.hash]
         )
 
-        close_esi_redirect_parameter = ""
-        if close_esi_redirect is not None:
-            close_esi_redirect_parameter = f"?next={close_esi_redirect}"
+        close_esi_redirect_parameter = (
+            f"?next={close_esi_redirect}" if close_esi_redirect is not None else ""
+        )
 
         button_title = _(
             "Clicking here will stop the automatic tracking through ESI for this "
@@ -159,9 +153,9 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
     """
 
     # fleet type
-    fleet_type = ""
-    if fat.afatlink.link_type is not None:
-        fleet_type = fat.afatlink.link_type.name
+    fleet_type = (
+        fat.afatlink.link_type.name if fat.afatlink.link_type is not None else ""
+    )
 
     # esi marker
     via_esi = "No"
@@ -204,12 +198,15 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
 
     fleet_time = fat.afatlink.afattime
     fleet_time_timestamp = fleet_time.timestamp()
+    fleet_name = (
+        fat.afatlink.fleet if fat.afatlink.fleet is not None else fat.afatlink.hash
+    )
 
     summary = {
         "system": fat.system,
         "ship_type": fat.shiptype,
         "character_name": fat.character.character_name,
-        "fleet_name": fat.afatlink.fleet + esi_fleet_marker,
+        "fleet_name": fleet_name + esi_fleet_marker,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
         "fleet_type": fleet_type,
         "via_esi": via_esi,

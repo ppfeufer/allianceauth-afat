@@ -133,7 +133,8 @@ class AFatLink(models.Model):
 
     fleet = models.CharField(
         max_length=254,
-        null=True,
+        blank=False,
+        default=None,
         help_text="The FAT link fleet name",
     )
 
