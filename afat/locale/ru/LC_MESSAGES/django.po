@@ -377,7 +377,7 @@ msgstr "Участники для этой УБВ записи"
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:15
 #: templates/afat/partials/statistics/corporation/tabs/member.html:10
 msgid "Character"
-msgstr "Персонаж"
+msgstr "Пилот"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:27
 msgid "Ship Type Overview"
