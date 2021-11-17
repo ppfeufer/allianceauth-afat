@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 15:49+0100\n"
+"POT-Creation-Date: 2021-11-17 19:20+0100\n"
 "PO-Revision-Date: 2021-11-17 12:26+0000\n"
 "Last-Translator: Peter Pfeufer <rounon.dax@terra-nanotech.de>, 2021\n"
 "Language-Team: German (https://www.transifex.com/ppfeufer/teams/113732/de/)\n"
@@ -68,6 +68,8 @@ msgid "Expiry time in minutes"
 msgstr "Ablaufzeit in Minuten"
 
 #: helper/views_helper.py:50 helper/views_helper.py:169
+#: templates/afat/partials/fatlinks/fatlink_list_legend.html:5
+#: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:83
 msgid "via ESI"
 msgstr "via ESI"
@@ -202,7 +204,7 @@ msgstr "Deine neuesten FAT Links"
 
 #: templates/afat/partials/dashboard/tabs/fats.html:12
 msgid ""
-"Only charaters that have recent FATs are shown. <small>(latest 10 FATs per "
+"Only characters that have recent FATs are shown. <small>(latest 10 FATs per "
 "character)</small>"
 msgstr ""
 "Nur Charaktere mit kürzlichen FATs werden angezeigt. <small>(Letzte 10 FATs "
@@ -601,7 +603,7 @@ msgid "Only months with FAT data of the selected year are shown."
 msgstr "Nur Monate in denen auch FAT Links registriert sind werden angezeigt."
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:10
-msgid "Only charaters that have FATs for the selected year are shown."
+msgid "Only characters that have FATs for the selected year are shown."
 msgstr ""
 "Nur Charaktere für die auch FAT Links registriert sind werden angezeigt."
 
