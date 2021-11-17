@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Spelling in some templates
+- Sorting of months on statistics view
 
 
 ## [2.2.16] - 2021-11-17
