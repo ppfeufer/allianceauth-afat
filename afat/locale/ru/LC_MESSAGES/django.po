@@ -523,7 +523,7 @@ msgstr "Боевые Вылеты по дням недели"
 #: templates/afat/partials/statistics/character/tabs/graphs.html:6
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:14
 msgid "FATs by Ship Type"
-msgstr "БВ по типам кораблей"
+msgstr "Боевые Вылеты по типам кораблей"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:42
 msgid "FATs by Time"
