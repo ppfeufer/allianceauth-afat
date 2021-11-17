@@ -78,12 +78,10 @@ def convert_fatlinks_to_dict(
         )
 
         button_title = _(
-            "Clicking here will stop the automatic tracking through ESI for this "
-            "fleet and close the associated FAT link."
+            "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
         )
         modal_body_text = _(
-            "<p>Are you sure you want to close ESI fleet with "
-            f"ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
+            f"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
         )
         modal_confirm_text = _("Stop Tracking")
 
@@ -181,8 +179,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
         )
         button_delete_text = _("Delete")
         modal_body_text = _(
-            "<p>Are you sure you want to remove "
-            f"{fat.character.character_name} from this FAT link?</p>"
+            f"<p>Are you sure you want to remove {fat.character.character_name} from this FAT link?</p>"
         )
 
         actions += (
