@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 13:21+0100\n"
+"POT-Creation-Date: 2021-11-17 14:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Expiry time in minutes"
 msgstr ""
 
-#: helper/views_helper.py:50 helper/views_helper.py:171
+#: helper/views_helper.py:50 helper/views_helper.py:169
 #: templates/afat/view/fatlinks/fatlinks_overview.html:83
 msgid "via ESI"
 msgstr ""
@@ -77,11 +77,14 @@ msgid ""
 "and close the associated FAT link."
 msgstr ""
 
-#: helper/views_helper.py:85
-msgid "<p>Are you sure you want to close ESI fleet with "
+#: helper/views_helper.py:84
+#, python-brace-format
+msgid ""
+"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
+"from {fatlink.character.character_name}?</p>"
 msgstr ""
 
-#: helper/views_helper.py:88
+#: helper/views_helper.py:86
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:39
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:42
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:31
@@ -89,20 +92,23 @@ msgstr ""
 msgid "Stop Tracking"
 msgstr ""
 
-#: helper/views_helper.py:112 helper/views_helper.py:182
+#: helper/views_helper.py:110 helper/views_helper.py:180
 msgid "Delete"
 msgstr ""
 
-#: helper/views_helper.py:114
+#: helper/views_helper.py:112
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr ""
 
-#: helper/views_helper.py:184
-msgid "<p>Are you sure you want to remove "
+#: helper/views_helper.py:182
+#, python-brace-format
+msgid ""
+"<p>Are you sure you want to remove {fat.character.character_name} from this "
+"FAT link?</p>"
 msgstr ""
 
-#: helper/views_helper.py:236
+#: helper/views_helper.py:233
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr ""
