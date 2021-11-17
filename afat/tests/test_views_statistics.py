@@ -132,7 +132,7 @@ class TestStatistics(TestCase):
 
         # then
         self.assertListEqual(
-            result, [("Clark Kent", {"04": 2}, 1002), ("Lex Luther", {"04": 2}, 1101)]
+            result, [("Clark Kent", {"4": 2}, 1002), ("Lex Luther", {"4": 2}, 1101)]
         )
 
     def test_should_show_statistics_dashboard(self):
