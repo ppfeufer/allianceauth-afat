@@ -123,7 +123,7 @@ def _calculate_year_stats(request, year) -> list:
         # Only if there are FATs for this years for the character
         if fat_counts:
             fat_counts_2 = {
-                str(result["afatlink__afattime__month"]).zfill(2): result["fat_count"]
+                int(result["afatlink__afattime__month"]): result["fat_count"]
                 for result in fat_counts
             }
 
