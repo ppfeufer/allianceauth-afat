@@ -549,7 +549,7 @@ msgstr "Корпорации"
 
 #: templates/afat/partials/statistics/character/tabs/graphs.html:28
 msgid "FATs by Time of Day"
-msgstr "БВ по времени суток"
+msgstr "Боевые Вылеты по времени суток"
 
 #: templates/afat/partials/statistics/character/tabs/graphs.html:37
 #: templates/afat/view/fatlinks/fatlinks_overview.html:30
