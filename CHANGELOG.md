@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Russian translation (Thanks to -7- [0RIG] Neomad Miromme)
 
+### Fixed
+
+- Spelling in some templates
+- Sorting of months in statistics view
+
 
 ## [2.2.16] - 2021-11-17
 

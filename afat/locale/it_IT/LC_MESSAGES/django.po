@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 15:49+0100\n"
+"POT-Creation-Date: 2021-11-17 19:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -64,6 +64,8 @@ msgid "Expiry time in minutes"
 msgstr ""
 
 #: helper/views_helper.py:50 helper/views_helper.py:169
+#: templates/afat/partials/fatlinks/fatlink_list_legend.html:5
+#: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:83
 msgid "via ESI"
 msgstr ""
@@ -191,7 +193,7 @@ msgstr ""
 
 #: templates/afat/partials/dashboard/tabs/fats.html:12
 msgid ""
-"Only charaters that have recent FATs are shown. <small>(latest 10 FATs per "
+"Only characters that have recent FATs are shown. <small>(latest 10 FATs per "
 "character)</small>"
 msgstr ""
 
@@ -561,7 +563,7 @@ msgid "Only months with FAT data of the selected year are shown."
 msgstr ""
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:10
-msgid "Only charaters that have FATs for the selected year are shown."
+msgid "Only characters that have FATs for the selected year are shown."
 msgstr ""
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:32
