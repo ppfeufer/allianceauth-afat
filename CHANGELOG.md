@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.2.18] - 2021-11-17
+
+### Fixed
+
+- Month numbers are integers not strings
+
+### Updated
+
+- Russian translation
+
+
 ## [2.2.17] - 2021-11-17
 
 ### Added
