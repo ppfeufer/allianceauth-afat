@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 19:20+0100\n"
+"POT-Creation-Date: 2021-11-17 22:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -677,6 +677,54 @@ msgstr ""
 
 #: templates/afat/view/statistics/statistics_character.html:6
 msgid "FAT Statistics"
+msgstr ""
+
+#: templatetags/filters.py:19
+msgid "January"
+msgstr ""
+
+#: templatetags/filters.py:20
+msgid "February"
+msgstr ""
+
+#: templatetags/filters.py:21
+msgid "March"
+msgstr ""
+
+#: templatetags/filters.py:22
+msgid "April"
+msgstr ""
+
+#: templatetags/filters.py:23
+msgid "May"
+msgstr ""
+
+#: templatetags/filters.py:24
+msgid "June"
+msgstr ""
+
+#: templatetags/filters.py:25
+msgid "July"
+msgstr ""
+
+#: templatetags/filters.py:26
+msgid "August"
+msgstr ""
+
+#: templatetags/filters.py:27
+msgid "September"
+msgstr ""
+
+#: templatetags/filters.py:28
+msgid "October"
+msgstr ""
+
+#: templatetags/filters.py:29
+msgid "November"
+msgstr ""
+
+#: templatetags/filters.py:30
+msgid "December"
 msgstr ""
 
 #: views/fatlinks.py:208
