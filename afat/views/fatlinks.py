@@ -188,8 +188,7 @@ def create_clickable_fatlink(
                 request=request,
                 log_event=AFatLogEvent.CREATE_FATLINK,
                 log_text=(
-                    f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and '
-                    f'a duration of {form.cleaned_data["duration"]} minutes was created'
+                    f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and a duration of {form.cleaned_data["duration"]} minutes was created'
                 ),
                 fatlink_hash=fatlink.hash,
             )
@@ -316,11 +315,7 @@ def create_esi_fatlink_callback(
             request,
             mark_safe(
                 _(
-                    "<h4>Warning!</h4>"
-                    f'<p>Fleet with ID "{fleet_from_esi["fleet_id"]}" for your '
-                    f"character {creator_character.character_name} has already been "
-                    f"registered and pilots joining this fleet are automatically "
-                    f"tracked.</p>"
+                    f'<h4>Warning!</h4><p>Fleet with ID "{fleet_from_esi["fleet_id"]}" for your character {creator_character.character_name} has already been registered and pilots joining this fleet are automatically tracked.</p>'
                 )
             ),
         )
@@ -395,14 +390,13 @@ def create_esi_fatlink_callback(
     # Writing DB log
     fleet_type = ""
     if fatlink.link_type:
-        fleet_type = f" (Fleet Type: {fatlink.link_type.name})"
+        fleet_type = f"(Fleet Type: {fatlink.link_type.name})"
 
     write_log(
         request=request,
         log_event=AFatLogEvent.CREATE_FATLINK,
         log_text=(
-            f'ESI FAT link with name "{request.session["fatlink_form__name"]}"'
-            f"{fleet_type} was created by {request.user}"
+            f'ESI FAT link with name "{request.session["fatlink_form__name"]}" {fleet_type} was created by {request.user}'
         ),
         fatlink_hash=fatlink.hash,
     )
@@ -596,16 +590,13 @@ def add_fat(
                         request,
                         mark_safe(
                             _(
-                                "<h4>Success!</h4>"
-                                f"<p>FAT registered for {character.character_name} "
-                                f"at {fleet_name}</p>"
+                                f"<h4>Success!</h4><p>FAT registered for {character.character_name} at {fleet_name}</p>"
                             )
                         ),
                     )
 
                     logger.info(
-                        f'Participation for fleet "{fleet_name}" registered '
-                        f"for pilot {character.character_name}"
+                        f'Participation for fleet "{fleet_name}" registered for pilot {character.character_name}'
                     )
 
                     return redirect("afat:dashboard")
@@ -614,10 +605,7 @@ def add_fat(
                         request,
                         mark_safe(
                             _(
-                                "<h4>Warning!</h4>"
-                                f"<p>A FAT already exists for the selected "
-                                f"character ({character.character_name}) and fleet "
-                                f"combination.</p>"
+                                f"<h4>Warning!</h4><p>A FAT already exists for the selected character ({character.character_name}) and fleet combination.</p>"
                             )
                         ),
                     )
@@ -628,10 +616,7 @@ def add_fat(
                     request,
                     mark_safe(
                         _(
-                            "<h4>Warning!</h4>"
-                            f"<p>Cannot register the fleet participation "
-                            f"for {character.character_name}. "
-                            f"The character needs to be online.</p>"
+                            f"<h4>Warning!</h4><p>Cannot register the fleet participation for {character.character_name}. The character needs to be online.</p>"
                         )
                     ),
                 )
@@ -642,9 +627,7 @@ def add_fat(
                 request,
                 mark_safe(
                     _(
-                        "<h4>Warning!</h4>"
-                        f"<p>There was an issue with the ESI token "
-                        f"for {character.character_name}. Please try again.</p>"
+                        f"<h4>Warning!</h4><p>There was an issue with the ESI token for {character.character_name}. Please try again.</p>"
                     )
                 ),
             )
@@ -898,9 +881,7 @@ def delete_fatlink(
         request,
         mark_safe(
             _(
-                "<h4>Success!</h4>"
-                f'<p>The FAT Link "{fatlink_hash}" and all associated FATs '
-                f"have been successfully deleted.</p>"
+                f'<h4>Success!</h4><p>The FAT Link "{fatlink_hash}" and all associated FATs have been successfully deleted.</p>'
             )
         ),
     )
@@ -966,9 +947,7 @@ def delete_fat(request: WSGIRequest, fatlink_hash: str, fat) -> HttpResponseRedi
         request,
         mark_safe(
             _(
-                "<h4>Success!</h4>"
-                f"<p>The FAT for {fat_details.character.character_name} "
-                f'has been successfully deleted from FAT link "{fatlink_hash}".</p>'
+                f'<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has been successfully deleted from FAT link "{fatlink_hash}".</p>'
             )
         ),
     )
@@ -1070,8 +1049,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
                 # log_event=AFatLogEvent.REOPEN_FATLINK,
                 log_event=AFatLogEvent.REOPEN_FATLINK,
                 log_text=(
-                    f"FAT link re-opened for a "
-                    f"duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
+                    f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
                 ),
                 fatlink_hash=fatlink_duration.fleet.hash,
             )

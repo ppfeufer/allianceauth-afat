@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.2.20] - 2021-11-21
+
+### Updated
+
+- Russian and German translations (We should have it all now ...)
+
+
 ## [2.2.19] - 2021-11-20
 
 ### Updated

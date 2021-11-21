@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-17 22:41+0100\n"
+"POT-Creation-Date: 2021-11-21 07:39+0100\n"
 "PO-Revision-Date: 2021-11-17 12:26+0000\n"
 "Last-Translator: Николай Постников, 2021\n"
 "Language-Team: Russian (https://www.transifex.com/ppfeufer/teams/113732/ru/)\n"
@@ -759,7 +759,7 @@ msgstr "Ноябрь"
 msgid "December"
 msgstr "Декабрь"
 
-#: views/fatlinks.py:208
+#: views/fatlinks.py:207
 msgid ""
 "<h4>Success!</h4><p>Clickable FAT Link Created!</p><p>Make sure to give your"
 " fleet members the link to click so that they get credit for this fleet.</p>"
@@ -767,21 +767,21 @@ msgstr ""
 "<h4>Успех!</h4><p>УБВ ссылка создана!</p><p>Предоставьте данную ссылку "
 "членам флота, чтобы они могли зарегистрировать свое участие.</p>"
 
-#: views/fatlinks.py:222
+#: views/fatlinks.py:221
 msgid ""
 "<h4>Error!</h4><p>Something went wrong when attempting to submit your "
 "clickable FAT Link.</p>"
 msgstr ""
 "<h4>Ошибка!</h4><p>Что-то пошло не так при попытке создания УБВ записи.</p>"
 
-#: views/fatlinks.py:235
+#: views/fatlinks.py:234
 msgid ""
 "<h4>Warning!</h4><p>You must fill out the form on the \"Add FAT Link\" page "
 "to create a clickable FAT Link</p>"
 msgstr ""
 "<h4>Внимание!</h4><p>Для создания ссылки необходимо заполнить поля формы</p>"
 
-#: views/fatlinks.py:277
+#: views/fatlinks.py:276
 msgid ""
 "<h4>Warning!</h4><p>To use the ESI function, you need to be in fleet and you"
 " need to be the fleet boss! You can create a clickable FAT link and share "
@@ -790,12 +790,17 @@ msgstr ""
 "<h4>Внимание!</h4><p>Для использования ESI отслеживания вы должны быть "
 "командиром флота!</p>"
 
-#: views/fatlinks.py:319 views/fatlinks.py:617 views/fatlinks.py:631
-#: views/fatlinks.py:645
-msgid "<h4>Warning!</h4>"
-msgstr "<h4>Внимание!</h4>"
+#: views/fatlinks.py:318
+msgid ""
+"<h4>Warning!</h4><p>Fleet with ID \"{fleet_from_esi[\"fleet_id\"]}\" for "
+"your character {creator_character.character_name} has already been "
+"registered and pilots joining this fleet are automatically tracked.</p>"
+msgstr ""
+"<h4>Внимание!</h4><p>Флот с ID \"{fleet_from_esi[\"fleet_id\"]}\" под "
+"командованием {creator_character.character_name} уже зарегистрирован и "
+"пилоты участники отслеживаются автоматически.</p>"
 
-#: views/fatlinks.py:363
+#: views/fatlinks.py:358
 msgid ""
 "<h4>Warning!</h4><p>Not Fleet Boss! Only the fleet boss can utilize the ESI "
 "function. You can create a clickable FAT link and share it, if you like.</p>"
@@ -803,18 +808,18 @@ msgstr ""
 "<h4>Внимание!</h4><p>Вы не командир флота! Только командиру флота доступна "
 "функция ESI отлеживания.</p>"
 
-#: views/fatlinks.py:429
+#: views/fatlinks.py:423
 msgid ""
 "<h4>Success!</h4><p>FAT Link Created!</p><p>FATs have been queued, they may "
 "take a few mins to show up.</p><p>Pilots who join later will be "
 "automatically added until you close or leave the fleet in-game.</p>"
 msgstr ""
-"<h4>Успех!</h4><p>УБВ запись создана!</p><p>Для отображения записей текущих "
-"членов флота может потребоваться несколько минут.</p><p>Присоединяющиеся "
-"позже пилоты будут зарегистрированы автоматически, до тех пора пока Вы "
-"находитесь во флоте.</p>"
+"<h4>Успех!</h4><p>Запись УБВ флота создана!</p><p>Для отображения записей "
+"текущих членов флота может потребоваться несколько "
+"минут.</p><p>Присоединяющиеся позже пилоты будут зарегистрированы "
+"автоматически, до тех пора пока Вы находитесь во флоте.</p>"
 
-#: views/fatlinks.py:475
+#: views/fatlinks.py:469
 msgid ""
 "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI "
 "FAT Link.</p>"
@@ -822,15 +827,15 @@ msgstr ""
 "<h4>Ошибка!</h4><p>Что-то пошло не так при попытке ESI отслеживания "
 "флота.</p>"
 
-#: views/fatlinks.py:512
+#: views/fatlinks.py:506
 msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
-msgstr "<h4>Внимание!</h4><p>Не предоставлен hash УБВ записи.</p>"
+msgstr "<h4>Внимание!</h4><p>Не предоставлен hash Записи УБВ.</p>"
 
-#: views/fatlinks.py:523 views/fatlinks.py:685
+#: views/fatlinks.py:517 views/fatlinks.py:668
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr "<h4>Внимание!</h4><p>Предоставлен некорректный hash.</p>"
 
-#: views/fatlinks.py:536
+#: views/fatlinks.py:530
 msgid ""
 "<h4>Warning!</h4><p>Sorry, that FAT Link is expired. If you were on that "
 "fleet, contact your FC about having your FAT manually added.</p>"
@@ -839,26 +844,58 @@ msgstr ""
 "участвовали во флоте, обратитесь к командиру флота с просьбой добавить Вас "
 "ручном режиме.</p>"
 
-#: views/fatlinks.py:599 views/fatlinks.py:901 views/fatlinks.py:969
-msgid "<h4>Success!</h4>"
-msgstr "<h4>Успех!</h4>"
+#: views/fatlinks.py:593
+#, python-brace-format
+msgid ""
+"<h4>Success!</h4><p>FAT registered for {character.character_name} at "
+"{fleet_name}</p>"
+msgstr ""
+"<h4>Успех!</h4><p>Пилот {character.character_name} зарегистрирован в Боевом "
+"Вылете флота {fleet_name}</p>"
 
-#: views/fatlinks.py:658
+#: views/fatlinks.py:608
+#, python-brace-format
+msgid ""
+"<h4>Warning!</h4><p>A FAT already exists for the selected character "
+"({character.character_name}) and fleet combination.</p>"
+msgstr ""
+"<h4>Внимание!</h4><p>Боевой Вылет пилота ({character.character_name}) в "
+"выбранном флоте уже был учтен.</p>"
+
+#: views/fatlinks.py:619
+#, python-brace-format
+msgid ""
+"<h4>Warning!</h4><p>Cannot register the fleet participation for "
+"{character.character_name}. The character needs to be online.</p>"
+msgstr ""
+"<h4>Внимание!</h4><p>Невозможно зарегистрировать участие пилота "
+"{character.character_name}. Пилот должен быть онлайн.</p>"
+
+#: views/fatlinks.py:630
+#, python-brace-format
+msgid ""
+"<h4>Warning!</h4><p>There was an issue with the ESI token for "
+"{character.character_name}. Please try again.</p>"
+msgstr ""
+"<h4>Внимание!</h4><p>Возникли проблемы с ESI токеном пилота "
+"{character.character_name}. Повторите операцию.</p>"
+
+#: views/fatlinks.py:641
 msgid ""
 "<h4>Warning!</h4><p>The hash provided is not for a clickable FAT Link.</p>"
 msgstr ""
-"<h4>Внимание!</h4><p>Предоставленный hash не соответствует ссылке на УБВ "
-"запись.</p>"
+"<h4>Внимание!</h4><p>Предоставленный hash не соответствует ссылке на Запись "
+"УБВ.</p>"
 
-#: views/fatlinks.py:714
+#: views/fatlinks.py:697
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Успех!</h4><p>Название флота успешно изменено.</p>"
 
-#: views/fatlinks.py:733
+#: views/fatlinks.py:716
 msgid "<h4>Success!</h4><p>Manual FAT processed.</p>"
 msgstr "<h4>Успех!</h4><p>Редактирование УБВ выполнено.</p>"
 
-#: views/fatlinks.py:757
+#: views/fatlinks.py:740
 msgid ""
 "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you "
 "entered was not found.</p>"
@@ -866,54 +903,73 @@ msgstr ""
 "<h4>Упс!</h4><p>Ошибка редактирования УБВ! Пилот с введенным именем не "
 "найден.</p>"
 
-#: views/fatlinks.py:766
+#: views/fatlinks.py:749
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr "<h4>Упс!</h4><p>Что-то пошло не так!</p>"
 
-#: views/fatlinks.py:865
+#: views/fatlinks.py:848
 msgid "<h4>Warning!</h4><p>No FAT Link hash provided.</p>"
-msgstr "<h4>Внимание!</h4><p>Не предоставлен hash записи УБВ.</p>"
+msgstr "<h4>Внимание!</h4><p>Не предоставлен hash Записи УБВ.</p>"
 
-#: views/fatlinks.py:877
+#: views/fatlinks.py:860
 msgid ""
 "<h4>Error!</h4><p>The fatlink hash provided is either invalid or the fatlink"
 " has already been deleted.</p>"
 msgstr ""
 "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или относится к ранее "
-"удаленной записи УБВ.</p>"
+"удаленной Записи УБВ.</p>"
 
-#: views/fatlinks.py:938
+#: views/fatlinks.py:884
+#, python-brace-format
+msgid ""
+"<h4>Success!</h4><p>The FAT Link \"{fatlink_hash}\" and all associated FATs "
+"have been successfully deleted.</p>"
+msgstr ""
+"<h4>Успех!</h4><p>Запись УБВ флота \"{fatlink_hash}\" и все "
+"зарегистрированные Боевые Вылеты были удалены.</p>"
+
+#: views/fatlinks.py:919
 msgid ""
 "<h4>Error!</h4><p>The hash provided is either invalid or has been "
 "deleted.</p>"
 msgstr ""
 "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или ранее удален.</p>"
 
-#: views/fatlinks.py:951
+#: views/fatlinks.py:932
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
-"<h4>Ошибка!</h4><p>Значение hash и идентификатор УБВ записи не "
+"<h4>Ошибка!</h4><p>Значение hash и идентификатор Записи УБВ не "
 "соврадают.</p>"
 
-#: views/fatlinks.py:1089
-msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
-msgstr "<h4>Успех!</h4><p>УБВ запись успешно реактивирована.</p>"
+#: views/fatlinks.py:950
+#, python-brace-format
+msgid ""
+"<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has "
+"been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
+msgstr ""
+"<h4>Успех!</h4><p>Регистрация Боевого Вылета пилота "
+"{fat_details.character.character_name} удалена из Записи УБВ флота "
+"\"{fatlink_hash}\".</p>"
 
-#: views/fatlinks.py:1099
+#: views/fatlinks.py:1067
+msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
+msgstr "<h4>Успех!</h4><p>Запись УБВ успешно реактивирована.</p>"
+
+#: views/fatlinks.py:1077
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
 msgstr ""
-"<h4>Внимание!</h4><p>Данная УБВ запись уже была реактивирована ранее. "
-"Возможна только одна реактивация УБВ записи!</p>"
+"<h4>Внимание!</h4><p>Данная Запись УБВ уже была реактивирована ранее. "
+"Возможна только одна реактивация Записи УБВ!</p>"
 
-#: views/fatlinks.py:1110
+#: views/fatlinks.py:1088
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT "
 "link.</p>"
 msgstr ""
-"<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакой УБВ "
-"записи.</p>"
+"<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакой Записи "
+"УБВ.</p>"
 
 #: views/statistics.py:170
 msgid ""
