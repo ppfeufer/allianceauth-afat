@@ -23,15 +23,13 @@ project_license = "GPLv3"
 project_author = "Peter Pfeufer"
 project_author_email = "development@ppfeufer.de"
 project_git_url = "https://github.com/ppfeufer/allianceauth-afat"
-project_issues_url = "https://github.com/ppfeufer/allianceauth-afat/issues"
-project_changelog_url = (
-    "https://github.com/ppfeufer/allianceauth-afat/blob/master/CHANGELOG.md"
-)
+project_issues_url = f"{project_git_url}/issues"
+project_changelog_url = f"{project_git_url}/blob/master/CHANGELOG.md"
 project_homepage_url = project_git_url
 project_install_requirements = [
-    "allianceauth>=2.8.0",
-    "django-esi>=2.0.4",
-    "allianceauth-app-utils>=1.8.1",
+    "allianceauth>=2.8.8",
+    "django-esi>=3.0.1",
+    "allianceauth-app-utils>=1.8.2",
 ]
 project_python_requires = "~=3.6"
 project_classifiers = [
