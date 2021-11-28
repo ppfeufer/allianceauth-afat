@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [Unreleased] - Unknown
+
+### Changed
+
+- DataTables keep their state (Page and number of entries per page) for the current
+  session. (This does not affect the filter though)
+
+
 ## [2.2.20] - 2021-11-21
 
 ### Updated

@@ -22,7 +22,7 @@ $(document).ready(function () {
                         return moment(data.time).utc().format(DATETIME_FORMAT);
                     },
                     _: 'timestamp'
-                },
+                }
             },
             {data: 'log_event'},
             {data: 'user'},
@@ -33,7 +33,7 @@ $(document).ready(function () {
                     _: 'hash'
                 }
             },
-            {data: 'description'},
+            {data: 'description'}
         ],
 
         order: [
@@ -51,6 +51,9 @@ $(document).ready(function () {
             ],
             autoSize: false,
             bootstrap: true
-        }
+        },
+
+        stateSave: true,
+        stateDuration: -1
     });
 });
