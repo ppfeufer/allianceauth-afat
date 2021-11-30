@@ -51,7 +51,10 @@ $(document).ready(function () {
             }
 
             sortTable(shipTypeOverviewTable, 'asc');
-        }
+        },
+
+        stateSave: true,
+        stateDuration: -1
     });
 
     /**
@@ -77,34 +80,37 @@ $(document).ready(function () {
             );
         }
 
-        fatListTable.ajax.reload(function (tableData) {
-            let shipTypeOverviewTable = $('#fleet-edit-ship-types');
-            shipTypeOverviewTable.find('tbody').html('');
+        fatListTable.ajax.reload(
+            function (tableData) {
+                let shipTypeOverviewTable = $('#fleet-edit-ship-types');
+                shipTypeOverviewTable.find('tbody').html('');
 
-            $.each(tableData, function (i, item) {
-                let shipTypeSlug = convertStringToSlug(item.ship_type);
+                $.each(tableData, function (i, item) {
+                    let shipTypeSlug = convertStringToSlug(item.ship_type);
 
-                if ($('tr.shiptype-' + shipTypeSlug).length) {
-                    let currentCount = shipTypeOverviewTable.find(
-                        'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                    ).html();
-                    let newCount = parseInt(currentCount) + 1;
+                    if ($('tr.shiptype-' + shipTypeSlug).length) {
+                        let currentCount = shipTypeOverviewTable.find(
+                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
+                        ).html();
+                        let newCount = parseInt(currentCount) + 1;
 
-                    shipTypeOverviewTable.find(
-                        'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                    ).html(newCount);
-                } else {
-                    shipTypeOverviewTable.append(
-                        '<tr class="shiptype-' + shipTypeSlug + '">' +
-                        '<td class="ship-type">' + item.ship_type + '</td>' +
-                        '<td class="ship-type-count text-right">1</td>' +
-                        '</tr>'
-                    );
-                }
-            });
+                        shipTypeOverviewTable.find(
+                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
+                        ).html(newCount);
+                    } else {
+                        shipTypeOverviewTable.append(
+                            '<tr class="shiptype-' + shipTypeSlug + '">' +
+                            '<td class="ship-type">' + item.ship_type + '</td>' +
+                            '<td class="ship-type-count text-right">1</td>' +
+                            '</tr>'
+                        );
+                    }
+                });
 
-            sortTable(shipTypeOverviewTable, 'asc');
-        });
+                sortTable(shipTypeOverviewTable, 'asc');
+            },
+            false
+        );
 
         expectedReloadDatatable += intervalReloadDatatable;
 

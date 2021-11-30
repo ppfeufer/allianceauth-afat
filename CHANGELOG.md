@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.3.0] - 2021-11-30
+
+### Changed
+
+- DataTables keep their state (Page and number of entries per page) for the current
+  session.
+- Minimum requirements
+  - Python 3.7
+  - Alliance Auth v2.9.3
+
+
 ## [2.2.20] - 2021-11-21
 
 ### Updated

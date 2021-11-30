@@ -75,7 +75,10 @@ $(document).ready(function () {
             ],
             autoSize: false,
             bootstrap: true
-        }
+        },
+
+        stateSave: true,
+        stateDuration: -1
     });
 
     /**
@@ -100,7 +103,7 @@ $(document).ready(function () {
             );
         }
 
-        linkListTable.ajax.reload();
+        linkListTable.ajax.reload(null, false);
 
         expectedReloadDatatable += intervalReloadDatatable;
 
