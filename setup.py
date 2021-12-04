@@ -30,6 +30,7 @@ project_install_requirements = [
     "allianceauth>=2.9.3",
     "django-esi>=3.0.1",
     "allianceauth-app-utils>=1.8.2",
+    "unidecode>=1.3.2",
 ]
 project_python_requires = "~=3.7"
 project_classifiers = [

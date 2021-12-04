@@ -2,6 +2,8 @@
 Our app setting
 """
 
+import unidecode
+
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,4 +29,4 @@ AFAT_APP_NAME = clean_setting(
     "AFAT_APP_NAME", _("Fleet Activity Tracking"), required_type=str
 )
 
-AFAT_BASE_URL = slugify(AFAT_APP_NAME, allow_unicode=True)
+AFAT_BASE_URL = slugify(unidecode.unidecode(AFAT_APP_NAME), allow_unicode=True)

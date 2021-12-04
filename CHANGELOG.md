@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Unused `DEFAULT_TASK_PRIORITY` setting for tasks
 - Commented code that's no longer used
 
+### Fixed
+
+- Slugified links with unicode characters in `AFAT_APP_NAME`
+
 
 ## [2.3.0] - 2021-11-30
 
