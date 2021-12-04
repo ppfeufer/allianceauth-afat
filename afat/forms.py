@@ -109,11 +109,3 @@ class FatLinkEditForm(forms.Form):
         label=get_mandatory_form_label_text(_("Fleet Name")),
         max_length=255,
     )
-
-
-# class ExtendFatLinkDuration(forms.Form):
-#     """
-#     Extending the duration time of a fatlink
-#     """
-#
-#     duration = forms.IntegerField(label=_("Re-open for (in minutes)"), min_value=1)

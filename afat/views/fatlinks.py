@@ -28,7 +28,7 @@ from afat.app_settings import (
     AFAT_DEFAULT_FATLINK_REOPEN_DURATION,
     AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME,
 )
-from afat.forms import (  # ExtendFatLinkDuration,
+from afat.forms import (
     AFatClickFatForm,
     AFatEsiFatForm,
     AFatManualFatForm,
@@ -1000,26 +1000,6 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
     :return:
     :rtype:
     """
-
-    # if request.method == "POST":
-    #     fatlink_reopen_form = ExtendFatLinkDuration(request.POST)
-    #
-    #     if fatlink_reopen_form.is_valid():
-    #         duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
-    #         reopen_for = fatlink_reopen_form.cleaned_data["duration"]
-    #
-    #         # get minutes already passed since fatlink creation
-    #         created_at = duration.fleet.afattime
-    #         now = datetime.now()
-    #
-    #         time_difference_in_minutes = get_time_delta(created_at, now, "minutes")
-    #         new_duration = (
-    #             time_difference_in_minutes
-    #             + fatlink_reopen_form.cleaned_data["duration"]
-    #         )
-    #
-    #         duration.duration = new_duration
-    #         duration.save()
 
     try:
         fatlink_duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
