@@ -7,8 +7,6 @@ from datetime import datetime, timedelta
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.handlers.wsgi import WSGIRequest
-
-# from django.db.models import Count, F
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -161,7 +159,6 @@ def create_clickable_fatlink(
 
         if form.is_valid():
             fatlink_hash = get_hash_on_save()
-            # fatlink_hash = get_random_string(length=30)
 
             fatlink = AFatLink()
             fatlink.fleet = form.cleaned_data["name"]
@@ -448,7 +445,6 @@ def create_esi_fatlink(
 
     if fatlink_form.is_valid():
         fatlink_hash = get_hash_on_save()
-        # fatlink_hash = get_random_string(length=30)
 
         fatlink_type = None
         if fatlink_form.cleaned_data["type_esi"]:
@@ -1046,7 +1042,6 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
             # writing DB log
             write_log(
                 request=request,
-                # log_event=AFatLogEvent.REOPEN_FATLINK,
                 log_event=AFatLogEvent.REOPEN_FATLINK,
                 log_text=(
                     f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
