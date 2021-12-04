@@ -29,8 +29,6 @@ from afat.utils import get_or_create_character
 logger = LoggerAddTag(get_extension_logger(__name__), __title__)
 
 
-DEFAULT_TASK_PRIORITY = 6
-
 ESI_ERROR_LIMIT = 50
 ESI_TIMEOUT_ONCE_ERROR_LIMIT_REACHED = 60
 ESI_MAX_RETRIES = 3

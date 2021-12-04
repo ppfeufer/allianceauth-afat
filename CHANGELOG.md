@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.3.1] - Unreleased
+
+### Removed
+
+- Unused `DEFAULT_TASK_PRIORITY` setting for tasks
+
+
 ## [2.3.0] - 2021-11-30
 
 ### Changed
