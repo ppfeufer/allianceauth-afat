@@ -2,8 +2,10 @@
 App config
 """
 
+# Django
 from django.apps import AppConfig
 
+# Alliance Auth AFAT
 from afat import __version__
 
 

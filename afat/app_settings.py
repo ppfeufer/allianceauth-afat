@@ -2,11 +2,14 @@
 Our app setting
 """
 
+# Third Party
 import unidecode
 
+# Django
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
+# Alliance Auth (External Libs)
 from app_utils.django import clean_setting
 
 # Set default expiry time in minutes

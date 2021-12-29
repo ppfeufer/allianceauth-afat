@@ -2,8 +2,10 @@
 Constants used in this module
 """
 
+# Django
 from django.utils.text import slugify
 
+# Alliance Auth AFAT
 from afat import __version__
 
 VERBOSE_NAME = "AFAT Fleet Activity Tracking for Alliance Auth"

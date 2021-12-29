@@ -2,10 +2,12 @@
 Statistics related views
 """
 
+# Standard Library
 import calendar
 from collections import OrderedDict
 from datetime import datetime
 
+# Django
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Permission
@@ -16,12 +18,16 @@ from django.shortcuts import redirect, render
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 
+# Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.authentication.models import CharacterOwnership
 from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
 from allianceauth.services.hooks import get_extension_logger
+
+# Alliance Auth (External Libs)
 from app_utils.logging import LoggerAddTag
 
+# Alliance Auth AFAT
 from afat import __title__
 from afat.helper.views_helper import characters_with_permission, get_random_rgba_color
 from afat.models import AFat

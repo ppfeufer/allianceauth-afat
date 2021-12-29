@@ -2,8 +2,10 @@
 Tasks
 """
 
+# Standard Library
 from datetime import timedelta
 
+# Third Party
 from bravado.exception import (
     HTTPBadGateway,
     HTTPGatewayTimeout,
@@ -12,14 +14,19 @@ from bravado.exception import (
 )
 from celery import shared_task
 
+# Django
 from django.core.cache import cache
 from django.utils import timezone
 
+# Alliance Auth
 from allianceauth.services.hooks import get_extension_logger
 from allianceauth.services.tasks import QueueOnce
-from app_utils.logging import LoggerAddTag
 from esi.models import Token
 
+# Alliance Auth (External Libs)
+from app_utils.logging import LoggerAddTag
+
+# Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
 from afat.models import AFat, AFatLink, AFatLog

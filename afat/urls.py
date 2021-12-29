@@ -2,8 +2,10 @@
 URL configuration
 """
 
+# Django
 from django.conf.urls import url
 
+# Alliance Auth AFAT
 from afat.views import dashboard, fatlinks, logs, statistics
 
 app_name: str = "afat"

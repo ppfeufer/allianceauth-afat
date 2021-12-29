@@ -2,10 +2,12 @@
 The forms we use
 """
 
+# Django
 from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
+# Alliance Auth AFAT
 from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
 from afat.models import AFatLinkType
 

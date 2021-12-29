@@ -2,11 +2,14 @@
 Import FAT data from alliance auth fat module
 """
 
+# Django
 from django.apps import apps
 from django.core.management.base import BaseCommand
 
+# Alliance Auth
 from allianceauth.fleetactivitytracking.models import Fat, Fatlink
 
+# Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLog, AFatLogEvent
 
 

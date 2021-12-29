@@ -2,10 +2,13 @@
 Helper functions for fat links view
 """
 
+# Standard Library
 from typing import Dict, List, Union
 
+# Alliance Auth
 from allianceauth.authentication.admin import User
 
+# Alliance Auth AFAT
 from afat.models import AFatLink
 
 

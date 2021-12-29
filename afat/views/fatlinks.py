@@ -2,8 +2,10 @@
 Fat links related views
 """
 
+# Standard Library
 from datetime import datetime, timedelta
 
+# Django
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.handlers.wsgi import WSGIRequest
@@ -14,14 +16,18 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
+# Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.eveonline.models import EveCharacter
 from allianceauth.eveonline.providers import provider
 from allianceauth.services.hooks import get_extension_logger
-from app_utils.logging import LoggerAddTag
 from esi.decorators import token_required
 from esi.models import Token
 
+# Alliance Auth (External Libs)
+from app_utils.logging import LoggerAddTag
+
+# Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import (
     AFAT_DEFAULT_FATLINK_EXPIRY_TIME,

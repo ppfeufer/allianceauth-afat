@@ -2,13 +2,18 @@
 Test access to the afat module
 """
 
+# Django
 from django.test import TestCase
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import create_user_from_evecharacter
 
-from .fixtures.load_allianceauth import load_allianceauth
+# Alliance Auth AFAT
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
 
 MODULE_PATH = "afat.views.statistics"
 

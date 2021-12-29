@@ -2,23 +2,36 @@
 Test fatlinks views
 """
 
+# Standard Library
 import datetime as dt
 
 # import json
 from datetime import datetime
 
+# Third Party
 from pytz import utc
 
+# Django
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import create_user_from_evecharacter
 
-from ..models import AFat, AFatLink, AFatLinkType, ClickAFatDuration, get_hash_on_save
-from ..utils import get_main_character_from_user
-from .fixtures.load_allianceauth import load_allianceauth
+# Alliance Auth AFAT
+from afat.models import (
+    AFat,
+    AFatLink,
+    AFatLinkType,
+    ClickAFatDuration,
+    get_hash_on_save,
+)
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.utils import get_main_character_from_user
 
 MODULE_PATH = "afat.views.fatlinks"
 

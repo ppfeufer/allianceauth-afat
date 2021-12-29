@@ -2,10 +2,13 @@
 Setup for allianceauth-afat
 """
 
+# Standard Library
 import os
 
+# Third Party
 from setuptools import find_packages, setup
 
+# Alliance Auth AFAT
 from afat import __version__
 
 # Read the contents of your README file

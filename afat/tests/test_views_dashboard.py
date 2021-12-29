@@ -1,13 +1,18 @@
+# Django
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
-from ..models import AFat, AFatLink
-from ..views.dashboard import overview
-from .fixtures.load_allianceauth import load_allianceauth
+# Alliance Auth AFAT
+from afat.models import AFat, AFatLink
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.views.dashboard import overview
 
 MODULE_PATH = "afat.views.dashboard"
 

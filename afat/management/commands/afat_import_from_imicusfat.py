@@ -2,9 +2,11 @@
 Import FAT data from ImicusFAT module
 """
 
+# Django
 from django.apps import apps
 from django.core.management.base import BaseCommand
 
+# Alliance Auth AFAT
 from afat import __version__ as afat_version_installed
 from afat.models import (
     AFat,
@@ -39,8 +41,10 @@ def imicusfat_installed() -> bool:
 
 
 if imicusfat_installed():
+    # Standard Library
     import sys
 
+    # Third Party
     import requests
     from imicusfat import __version__ as ifat_version_installed
     from imicusfat.models import (

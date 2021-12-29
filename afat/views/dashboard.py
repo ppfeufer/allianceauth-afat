@@ -2,16 +2,21 @@
 Dashboard related views
 """
 
+# Django
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
 from allianceauth.services.hooks import get_extension_logger
+
+# Alliance Auth (External Libs)
 from app_utils.logging import LoggerAddTag
 
+# Alliance Auth AFAT
 from afat import __title__
 from afat.helper.views_helper import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import AFat, AFatLink

@@ -2,10 +2,12 @@
 Utilities
 """
 
+# Django
 from django.core.handlers.wsgi import WSGIRequest
 from django.utils.functional import lazy
 from django.utils.html import format_html
 
+# Alliance Auth
 from allianceauth.authentication.admin import User
 from allianceauth.eveonline.models import (
     EveAllianceInfo,
@@ -13,8 +15,11 @@ from allianceauth.eveonline.models import (
     EveCorporationInfo,
 )
 from allianceauth.services.hooks import get_extension_logger
+
+# Alliance Auth (External Libs)
 from app_utils.logging import LoggerAddTag
 
+# Alliance Auth AFAT
 from afat import __title__
 from afat.providers import esi
 
@@ -50,6 +55,7 @@ def write_log(request: WSGIRequest, log_event: str, fatlink_hash: str, log_text:
     :rtype:
     """
 
+    # Alliance Auth AFAT
     from afat.models import AFatLog
 
     afat_log = AFatLog()

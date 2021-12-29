@@ -2,14 +2,17 @@
 Import FAT data from bFAT module
 """
 
+# Third Party
 from bfat.models import ClickFatDuration as BfatClickFatDuration
 from bfat.models import Fat as BfatFat
 from bfat.models import FatLink as BfatFatLink
 from bfat.models import ManualFat as BfatManualFat
 
+# Django
 from django.apps import apps
 from django.core.management.base import BaseCommand
 
+# Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLog, AFatLogEvent, ClickAFatDuration
 
 
