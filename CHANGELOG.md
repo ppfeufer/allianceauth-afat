@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.3.x] - Unreleased
+
+### Changed
+
+- Code modernized
+- Cleanup for ImicusFAT migration moved to migration command and removed from README
+
+
 ## [2.3.1] - 2022-01-04
 
 ### Removed
