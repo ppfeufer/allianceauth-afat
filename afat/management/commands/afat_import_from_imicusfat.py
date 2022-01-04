@@ -117,20 +117,14 @@ class Command(BaseCommand):
             if not latest:
                 self.stdout.write(
                     self.style.WARNING(
-                        "Could not find a suitable release of '{package_name}'".format(
-                            package_name=package_name
-                        )
+                        f"Could not find a suitable release of '{package_name}'"
                     )
                 )
 
             return latest
 
         self.stdout.write(
-            self.style.WARNING(
-                "Package '{package_name}' is not registered in PyPI".format(
-                    package_name=package_name
-                )
-            )
+            self.style.WARNING(f"Package '{package_name}' is not registered in PyPI")
         )
 
         return None
@@ -170,11 +164,7 @@ class Command(BaseCommand):
         # Import fat link type
         imicusfat_fleettypes = IFatLinkType.objects.all()
         for imicusfat_fleettype in imicusfat_fleettypes:
-            self.stdout.write(
-                "Importing fleet type '{fleet_type}'.".format(
-                    fleet_type=imicusfat_fleettype.name
-                )
-            )
+            self.stdout.write(f"Importing fleet type '{imicusfat_fleettype.name}'.")
 
             afat_fleettype = AFatLinkType()
 
@@ -187,12 +177,13 @@ class Command(BaseCommand):
         # Import FAT links
         imicusfat_fatlinks = IFatLink.objects.all()
         for imicusfat_fatlink in imicusfat_fatlinks:
+            fleet = imicusfat_fatlink.fleet
+            fatlink_hash = imicusfat_fatlink.hash
+            fatlink_name = imicusfat_fatlink.fleet
+            fatlink_creator = imicusfat_fatlink.creator
+
             self.stdout.write(
-                "Importing FAT link for fleet '{fleet}' with "
-                "hash '{fatlink_hash}'.".format(
-                    fleet=imicusfat_fatlink.fleet,
-                    fatlink_hash=imicusfat_fatlink.hash,
-                )
+                f"Importing FAT link for fleet '{fleet}' with hash '{fatlink_hash}'."
             )
 
             afatlink = AFatLink()
@@ -202,9 +193,9 @@ class Command(BaseCommand):
             afatlink.fleet = (
                 imicusfat_fatlink.fleet
                 if imicusfat_fatlink.fleet is not None
-                else imicusfat_fatlink.hash
+                else fatlink_hash
             )
-            afatlink.hash = imicusfat_fatlink.hash
+            afatlink.hash = fatlink_hash
             afatlink.creator_id = imicusfat_fatlink.creator_id
             afatlink.link_type_id = imicusfat_fatlink.link_type_id
             afatlink.is_esilink = imicusfat_fatlink.is_esilink
@@ -214,11 +205,8 @@ class Command(BaseCommand):
             # Write to log table
             if imicusfat_fatlink.is_esilink:
                 log_text = (
-                    "ESI FAT link {fatlink_hash} with name {name} was created by {user}"
-                ).format(
-                    fatlink_hash=imicusfat_fatlink.hash,
-                    name=imicusfat_fatlink.fleet,
-                    user=imicusfat_fatlink.creator,
+                    f"ESI FAT link {fatlink_hash} with name {fatlink_name} "
+                    f"was created by {fatlink_creator}"
                 )
             else:
                 try:
@@ -227,21 +215,14 @@ class Command(BaseCommand):
                     )
 
                     log_text = (
-                        "FAT link {fatlink_hash} with name {name} and a "
-                        "duration of {duration} minutes was created by {user}"
-                    ).format(
-                        fatlink_hash=imicusfat_fatlink.hash,
-                        name=imicusfat_fatlink.fleet,
-                        duration=fleet_duration.duration,
-                        user=imicusfat_fatlink.creator,
+                        f"FAT link {fatlink_hash} with name {fatlink_name} and a "
+                        f"duration of {fleet_duration.duration} minutes was created "
+                        f"by {fatlink_creator}"
                     )
                 except ClickIFatDuration.DoesNotExist:
                     log_text = (
-                        "FAT link {fatlink_hash} with name {name} was created by {user}"
-                    ).format(
-                        fatlink_hash=imicusfat_fatlink.hash,
-                        name=imicusfat_fatlink.fleet,
-                        user=imicusfat_fatlink.creator,
+                        f"FAT link {fatlink_hash} with name {fatlink_name} "
+                        f"was created by {fatlink_creator}"
                     )
 
             afatlog = AFatLog()
@@ -254,11 +235,7 @@ class Command(BaseCommand):
         # Import FATs
         imicustaf_fats = IFat.objects.all()
         for imicusfat_fat in imicustaf_fats:
-            self.stdout.write(
-                "Importing FATs for FAT link ID '{fatlink_id}'.".format(
-                    fatlink_id=imicusfat_fat.id
-                )
-            )
+            self.stdout.write(f"Importing FATs for FAT link ID '{imicusfat_fat.id}'.")
 
             afat = AFat()
 
@@ -274,9 +251,7 @@ class Command(BaseCommand):
         imicusfat_clickfatdurations = ClickIFatDuration.objects.all()
         for imicusfat_clickfatduration in imicusfat_clickfatdurations:
             self.stdout.write(
-                "Importing FAT duration with ID '{duration_id}'.".format(
-                    duration_id=imicusfat_clickfatduration.id
-                )
+                f"Importing FAT duration with ID '{imicusfat_clickfatduration.id}'."
             )
 
             afat_clickfatduration = ClickAFatDuration()
@@ -291,18 +266,14 @@ class Command(BaseCommand):
         imicusfat_manualfats = ManualIFat.objects.all()
         for imicusfat_manualfat in imicusfat_manualfats:
             self.stdout.write(
-                "Importing manual FAT with ID '{manualfat_id}'.".format(
-                    manualfat_id=imicusfat_manualfat.id
-                )
+                f"Importing manual FAT with ID '{imicusfat_manualfat.id}'."
             )
 
             fatlink = IFatLink.objects.get(manualifat=imicusfat_manualfat)
+            pilot_name = imicusfat_manualfat.character.character_name
             log_text = (
-                "Pilot {pilot_name} was manually added to "
-                'FAT link with hash "{fatlink_hash}"'
-            ).format(
-                pilot_name=imicusfat_manualfat.character.character_name,
-                fatlink_hash=fatlink.hash,
+                f"Pilot {pilot_name} was manually added to "
+                f'FAT link with hash "{fatlink.hash}"'
             )
 
             if imicusfat_manualfat.created_at is not None:
@@ -362,19 +333,13 @@ class Command(BaseCommand):
 
                     self.stdout.write(
                         self.style.WARNING(
-                            "ImicusFAT version installed: "
-                            "{ifat_version_installed}".format(
-                                ifat_version_installed=ifat_version_installed
-                            )
+                            f"ImicusFAT version installed: {ifat_version_installed}"
                         )
                     )
 
                     self.stdout.write(
                         self.style.WARNING(
-                            "ImicusFAT version available: "
-                            "{ifat_version_available}".format(
-                                ifat_version_available=ifat_version_available
-                            )
+                            f"ImicusFAT version available: {ifat_version_available}"
                         )
                     )
 
@@ -396,17 +361,13 @@ class Command(BaseCommand):
 
                     self.stdout.write(
                         self.style.WARNING(
-                            "aFAT version installed: {afat_version_installed}".format(
-                                afat_version_installed=afat_version_installed
-                            )
+                            f"aFAT version installed: {afat_version_installed}"
                         )
                     )
 
                     self.stdout.write(
                         self.style.WARNING(
-                            "aFAT version available: {afat_version_available}".format(
-                                afat_version_available=afat_version_available
-                            )
+                            f"aFAT version available: {afat_version_available}"
                         )
                     )
 
