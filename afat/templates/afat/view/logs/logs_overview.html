@@ -1,6 +1,7 @@
 {% extends 'afat/base.html' %}
 
 {% load static %}
+{% load afat_versioned_static %}
 {% load i18n %}
 
 {% block page_title %}{% translate 'Fleet Activity Tracking Logs' %}{% endblock %}
@@ -41,8 +42,8 @@
 {% block extra_css %}
     {% include 'bundles/datatables-css.html' %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'afat/css/aa-bootstrap-fix.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'afat/css/allianceauth-afat.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/aa-bootstrap-fix.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/allianceauth-afat.min.css' %}">
 {% endblock %}
 
 {% block extra_javascript %}
@@ -52,7 +53,7 @@
     <script type="application/javascript" src="{% static 'afat/libs/datatables/plugins/dataTables.rowGroup.min.js' %}"></script>
     <script type="application/javascript" src="{% static 'afat/libs/datatables/plugins/datetime.min.js' %}"></script>
     <script type="application/javascript" src="{% static 'js/filterDropDown/filterDropDown.min.js' %}"></script>
-    <script type="application/javascript" src="{% static 'afat/javascript/allianceauth-afat.min.js' %}"></script>
+    <script type="application/javascript" src="{% afat_static 'afat/javascript/allianceauth-afat.min.js' %}"></script>
 
     <script type="application/javascript">
         let afatSettings = {
@@ -61,5 +62,5 @@
             },
         }
     </script>
-    <script type="application/javascript" src="{% static 'afat/javascript/afat-logs.min.js' %}"></script>
+    <script type="application/javascript" src="{% afat_static 'afat/javascript/afat-logs.min.js' %}"></script>
 {% endblock %}

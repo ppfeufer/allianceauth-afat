@@ -2,6 +2,7 @@
 
 {% load evelinks %}
 {% load static %}
+{% load afat_versioned_static %}
 {% load i18n %}
 
 {% block page_title %}{{ alliance }} {% translate "Statistics" %}{% endblock %}
@@ -14,7 +15,7 @@
 {% endblock %}
 
 {% block afat_body %}
-    <script type="application/javascript" src="{% static 'afat/javascript/chart-js/Chart.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'afat/libs/Chart.js/2.7.2/Chart.min.js' %}"></script>
 
     {% if month == '1' %}
         {% url 'afat:statistics_alliance' ally.alliance_id year_prev 12 as url_previous_month %}
@@ -42,8 +43,8 @@
 {% block extra_css %}
     {% include 'bundles/datatables-css.html' %}
 
-    <link rel="stylesheet" type="text/css" href="{% static 'afat/css/aa-bootstrap-fix.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'afat/css/allianceauth-afat.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/aa-bootstrap-fix.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/allianceauth-afat.min.css' %}">
 {% endblock %}
 
 {% block extra_javascript %}
