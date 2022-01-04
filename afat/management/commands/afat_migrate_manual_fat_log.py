@@ -2,8 +2,10 @@
 Migrate the old manual FAT log into the new log table
 """
 
+# Django
 from django.core.management.base import BaseCommand
 
+# Alliance Auth AFAT
 from afat.models import AFatLog, AFatLogEvent, ManualAFat
 
 

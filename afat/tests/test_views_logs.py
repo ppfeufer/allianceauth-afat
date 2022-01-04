@@ -2,18 +2,25 @@
 Test logs view
 """
 
+# Standard Library
 import datetime as dt
 
+# Third Party
 from pytz import utc
 
+# Django
 from django.test import TestCase
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import create_user_from_evecharacter
 
-from ..models import AFatLink
-from .fixtures.load_allianceauth import load_allianceauth
+# Alliance Auth AFAT
+from afat.models import AFatLink
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
 
 MODULE_PATH = "afat.views.logs"
 

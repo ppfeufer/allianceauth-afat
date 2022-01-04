@@ -2,15 +2,20 @@
 Logs related views
 """
 
+# Django
 from django.contrib.auth.decorators import login_required
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
+# Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.services.hooks import get_extension_logger
+
+# Alliance Auth (External Libs)
 from app_utils.logging import LoggerAddTag
 
+# Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
 from afat.helper.views_helper import convert_logs_to_dict

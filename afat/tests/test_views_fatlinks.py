@@ -2,23 +2,33 @@
 Test fatlinks views
 """
 
+# Standard Library
 import datetime as dt
 
-# import json
-from datetime import datetime
-
+# Third Party
 from pytz import utc
 
+# Django
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import create_user_from_evecharacter
 
-from ..models import AFat, AFatLink, AFatLinkType, ClickAFatDuration, get_hash_on_save
-from ..utils import get_main_character_from_user
-from .fixtures.load_allianceauth import load_allianceauth
+# Alliance Auth AFAT
+from afat.models import (
+    AFat,
+    AFatLink,
+    AFatLinkType,
+    ClickAFatDuration,
+    get_hash_on_save,
+)
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.utils import get_main_character_from_user
 
 MODULE_PATH = "afat.views.fatlinks"
 
@@ -256,7 +266,7 @@ class TestFatlinksView(TestCase):
 
     def test_ajax_get_fatlinks_by_year(self):
         # given
-        self.maxDiff = None
+        # self.maxDiff = None
         self.client.force_login(self.user_with_basic_access)
 
         fatlink_hash = get_hash_on_save()
@@ -284,7 +294,7 @@ class TestFatlinksView(TestCase):
 
         url_with_year = reverse(
             "afat:fatlinks_ajax_get_fatlinks_by_year",
-            kwargs={"year": datetime.now().year},
+            kwargs={"year": 2021},
         )
         result = self.client.get(url_with_year)
 

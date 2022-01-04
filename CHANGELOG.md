@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.3.1] - 2022-01-04
+
+### Removed
+
+- Unused `DEFAULT_TASK_PRIORITY` setting for tasks
+- Commented code that's no longer used
+
+### Fixed
+
+- Slugified links with unicode characters in `AFAT_APP_NAME`
+
+
 ## [2.3.0] - 2021-11-30
 
 ### Changed

@@ -2,9 +2,11 @@
 Admin pages configuration
 """
 
+# Django
 from django.contrib import admin, messages
 from django.db.models import Count
 
+# Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
 
 

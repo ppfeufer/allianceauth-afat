@@ -37,6 +37,10 @@ coverage:
 	coverage html && \
 	coverage report
 
+tox_tests:
+	tox && \
+	rm -rf .tox/
+
 build_test:
 	rm -rfv dist && \
 	rm -rfv build && \

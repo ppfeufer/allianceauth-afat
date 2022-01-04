@@ -2,13 +2,13 @@
 Fat links related views
 """
 
+# Standard Library
 from datetime import datetime, timedelta
 
+# Django
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.handlers.wsgi import WSGIRequest
-
-# from django.db.models import Count, F
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -16,21 +16,25 @@ from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 
+# Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.eveonline.models import EveCharacter
 from allianceauth.eveonline.providers import provider
 from allianceauth.services.hooks import get_extension_logger
-from app_utils.logging import LoggerAddTag
 from esi.decorators import token_required
 from esi.models import Token
 
+# Alliance Auth (External Libs)
+from app_utils.logging import LoggerAddTag
+
+# Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import (
     AFAT_DEFAULT_FATLINK_EXPIRY_TIME,
     AFAT_DEFAULT_FATLINK_REOPEN_DURATION,
     AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME,
 )
-from afat.forms import (  # ExtendFatLinkDuration,
+from afat.forms import (
     AFatClickFatForm,
     AFatEsiFatForm,
     AFatManualFatForm,
@@ -161,7 +165,6 @@ def create_clickable_fatlink(
 
         if form.is_valid():
             fatlink_hash = get_hash_on_save()
-            # fatlink_hash = get_random_string(length=30)
 
             fatlink = AFatLink()
             fatlink.fleet = form.cleaned_data["name"]
@@ -180,15 +183,16 @@ def create_clickable_fatlink(
             dur.save()
 
             # Writing DB log
-            fleet_type = ""
-            if fatlink.link_type:
-                fleet_type = f" (Fleet Type: {fatlink.link_type.name})"
+            fleet_type = (
+                f" (Fleet Type: {fatlink.link_type.name})" if fatlink.link_type else ""
+            )
 
             write_log(
                 request=request,
                 log_event=AFatLogEvent.CREATE_FATLINK,
                 log_text=(
-                    f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and a duration of {form.cleaned_data["duration"]} minutes was created'
+                    f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and '
+                    f'a duration of {form.cleaned_data["duration"]} minutes was created'
                 ),
                 fatlink_hash=fatlink.hash,
             )
@@ -294,7 +298,7 @@ def create_esi_fatlink_callback(
 
     fleet_already_registered = False
     character_has_registered_fleets = False
-    registered_fleets_to_close = list()
+    registered_fleets_to_close = []
 
     if registered_fleets_for_creator.count() > 0:
         character_has_registered_fleets = True
@@ -396,7 +400,8 @@ def create_esi_fatlink_callback(
         request=request,
         log_event=AFatLogEvent.CREATE_FATLINK,
         log_text=(
-            f'ESI FAT link with name "{request.session["fatlink_form__name"]}" {fleet_type} was created by {request.user}'
+            f'ESI FAT link with name "{request.session["fatlink_form__name"]}" '
+            f"{fleet_type} was created by {request.user}"
         ),
         fatlink_hash=fatlink.hash,
     )
@@ -448,7 +453,6 @@ def create_esi_fatlink(
 
     if fatlink_form.is_valid():
         fatlink_hash = get_hash_on_save()
-        # fatlink_hash = get_random_string(length=30)
 
         fatlink_type = None
         if fatlink_form.cleaned_data["type_esi"]:
@@ -596,7 +600,8 @@ def add_fat(
                     )
 
                     logger.info(
-                        f'Participation for fleet "{fleet_name}" registered for pilot {character.character_name}'
+                        f'Participation for fleet "{fleet_name}" registered for '
+                        f"pilot {character.character_name}"
                     )
 
                     return redirect("afat:dashboard")
@@ -1005,26 +1010,6 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
     :rtype:
     """
 
-    # if request.method == "POST":
-    #     fatlink_reopen_form = ExtendFatLinkDuration(request.POST)
-    #
-    #     if fatlink_reopen_form.is_valid():
-    #         duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
-    #         reopen_for = fatlink_reopen_form.cleaned_data["duration"]
-    #
-    #         # get minutes already passed since fatlink creation
-    #         created_at = duration.fleet.afattime
-    #         now = datetime.now()
-    #
-    #         time_difference_in_minutes = get_time_delta(created_at, now, "minutes")
-    #         new_duration = (
-    #             time_difference_in_minutes
-    #             + fatlink_reopen_form.cleaned_data["duration"]
-    #         )
-    #
-    #         duration.duration = new_duration
-    #         duration.save()
-
     try:
         fatlink_duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
 
@@ -1046,7 +1031,6 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
             # writing DB log
             write_log(
                 request=request,
-                # log_event=AFatLogEvent.REOPEN_FATLINK,
                 log_event=AFatLogEvent.REOPEN_FATLINK,
                 log_text=(
                     f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"

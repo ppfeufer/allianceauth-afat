@@ -1,23 +1,29 @@
 """
 Test afat helpers
 """
+# Standard Library
 from datetime import timedelta
 
+# Django
 from django.test import RequestFactory, TestCase
 from django.urls import reverse
 from django.utils import timezone
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
-from ..helper.fatlinks import get_esi_fleet_information_by_user
-from ..helper.time import get_time_delta
-from ..helper.views_helper import (
+# Alliance Auth AFAT
+from afat.helper.fatlinks import get_esi_fleet_information_by_user
+from afat.helper.time import get_time_delta
+from afat.helper.views_helper import (
     convert_fatlinks_to_dict,
     convert_fats_to_dict,
     convert_logs_to_dict,
 )
-from ..models import (
+from afat.models import (
     AFat,
     AFatLink,
     AFatLinkType,
@@ -26,8 +32,8 @@ from ..models import (
     ClickAFatDuration,
     get_hash_on_save,
 )
-from ..utils import get_main_character_from_user, write_log
-from .fixtures.load_allianceauth import load_allianceauth
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.utils import get_main_character_from_user, write_log
 
 MODULE_PATH = "afat.views.fatlinks"
 

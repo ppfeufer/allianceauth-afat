@@ -2,6 +2,7 @@
 The models
 """
 
+# Django
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, transaction
@@ -9,8 +10,10 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext as _
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
 
+# Alliance Auth AFAT
 from afat.managers import AFatLinkManager, AFatManager
 
 
@@ -117,8 +120,8 @@ class AFatLinkType(models.Model):
         verbose_name = "FAT Link Fleet Type"
         verbose_name_plural = "FAT Link Fleet Types"
 
-    def __str__(self):
-        return self.name
+    def __str__(self) -> str:
+        return str(self.name)
 
 
 # AFatLink Model
@@ -195,7 +198,7 @@ class AFatLink(models.Model):
         verbose_name = "FAT Link"
         verbose_name_plural = "FAT Links"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.fleet} - {self.hash}"
 
     @transaction.atomic()
@@ -287,7 +290,7 @@ class AFat(models.Model):
         verbose_name = "FAT"
         verbose_name_plural = "FATs"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.afatlink} - {self.character}"
 
 
@@ -318,7 +321,7 @@ class ManualAFat(models.Model):
         verbose_name_plural = "Manual FATs"
 
     # Add property for getting the user for a character.
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.afatlink} - {self.character} ({self.creator})"
 
 

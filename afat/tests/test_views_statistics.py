@@ -1,17 +1,24 @@
+# Standard Library
 import datetime as dt
 
+# Third Party
 from pytz import utc
 
+# Django
 from django.test import TestCase
 from django.urls import reverse
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
-from ..models import AFat, AFatLink
-from ..views.statistics import _calculate_year_stats
-from .fixtures.load_allianceauth import load_allianceauth
-from .fixtures.utils import RequestStub
+# Alliance Auth AFAT
+from afat.models import AFat, AFatLink
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.tests.fixtures.utils import RequestStub
+from afat.views.statistics import _calculate_year_stats
 
 MODULE_PATH = "afat.views.statistics"
 

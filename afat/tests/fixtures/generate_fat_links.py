@@ -4,6 +4,7 @@
 This script can be executed directly from shell.
 """
 
+# Standard Library
 import os
 import sys
 from pathlib import Path
@@ -11,23 +12,28 @@ from pathlib import Path
 myauth_dir = Path(__file__).parent.parent.parent.parent.parent / "myauth"
 sys.path.insert(0, str(myauth_dir))
 
+# Django
 import django
 
 # init and setup django project
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myauth.settings.local")
 django.setup()
 
-#################
-# SCRIPT
+# Standard Library
 import datetime as dt
 import random
 
+# Django
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.helpers import random_string
 
+# Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLinkType, AFatLogEvent
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log

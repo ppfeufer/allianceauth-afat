@@ -2,9 +2,14 @@
 Our app setting
 """
 
+# Third Party
+import unidecode
+
+# Django
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
+# Alliance Auth (External Libs)
 from app_utils.django import clean_setting
 
 # Set default expiry time in minutes
@@ -27,4 +32,4 @@ AFAT_APP_NAME = clean_setting(
     "AFAT_APP_NAME", _("Fleet Activity Tracking"), required_type=str
 )
 
-AFAT_BASE_URL = slugify(AFAT_APP_NAME, allow_unicode=True)
+AFAT_BASE_URL = slugify(unidecode.unidecode(AFAT_APP_NAME), allow_unicode=True)

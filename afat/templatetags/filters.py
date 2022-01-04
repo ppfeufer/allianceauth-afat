@@ -2,6 +2,7 @@
 Template tags
 """
 
+# Django
 from django.template.defaulttags import register
 from django.utils.translation import gettext as _
 

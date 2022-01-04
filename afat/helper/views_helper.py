@@ -2,17 +2,23 @@
 views helper
 """
 
+# Standard Library
 import random
 
+# Django
 from django.contrib.auth.models import Permission
 from django.core.handlers.wsgi import WSGIRequest
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+# Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+
+# Alliance Auth (External Libs)
 from app_utils.django import users_with_permission
 
+# Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLog, AFatLogEvent
 from afat.utils import get_main_character_from_user
 

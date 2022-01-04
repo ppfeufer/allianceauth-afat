@@ -2,10 +2,12 @@
 The forms we use
 """
 
+# Django
 from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
+# Alliance Auth AFAT
 from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
 from afat.models import AFatLinkType
 
@@ -109,11 +111,3 @@ class FatLinkEditForm(forms.Form):
         label=get_mandatory_form_label_text(_("Fleet Name")),
         max_length=255,
     )
-
-
-# class ExtendFatLinkDuration(forms.Form):
-#     """
-#     Extending the duration time of a fatlink
-#     """
-#
-#     duration = forms.IntegerField(label=_("Re-open for (in minutes)"), min_value=1)

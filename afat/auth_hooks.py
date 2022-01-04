@@ -2,9 +2,11 @@
 Auth hooks
 """
 
+# Alliance Auth
 from allianceauth import hooks
 from allianceauth.services.hooks import MenuItemHook, UrlHook
 
+# Alliance Auth AFAT
 from afat import urls
 from afat.app_settings import AFAT_APP_NAME, AFAT_BASE_URL
 
