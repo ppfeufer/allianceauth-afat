@@ -6,12 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [2.3.x] - Unreleased
+## [2.3.2] - Unreleased
 
 ### Changed
 
 - Code modernized
 - Cleanup for ImicusFAT migration moved to migration command and removed from README
+  (Meaning: No more manual preparation needed when migrating from ImicusFAT to AFAT)
 
 
 ## [2.3.1] - 2022-01-04
