@@ -162,6 +162,7 @@ python myauth/manage.py afat_import_from_allianceauth_fat
 
 Some preparations are needed here, since bFAT allowed fat links without fleet names.
 Login to your mysql database and run the following command.
+
 ```mysql
 UPDATE bfat_fatlink SET `fleet` = `hash` WHERE `fleet` IS NULL;
 ```
@@ -174,45 +175,7 @@ python myauth/manage.py afat_import_from_bfat
 
 ### Import from ImicusFAT
 
-First, you need to remove all "deleted" FAT links and FATs.
-
-This step needs to be done, because we cannot import entries marked as "deleted" due
-to the way Django is handling this, and some other entries might rely on them, so we
-need to meke sure the "deleted" data doesn't cause any trouble. You don't need to
-worry, you are not losing any data that is/was actively used besides what is already
-marked as "deleted" and ImicusFAT is no longer working with it anyways and never did.
-
-To do so, login to your mysql database and run the following commands:
-
-```mysql
-# de-activate foreign key checks
-SET FOREIGN_KEY_CHECKS=0;
-
-# Make sure there are no empty fleet names
-UPDATE imicusfat_ifatlink SET `fleet` = `hash` WHERE `fleet` IS NULL;
-
-# remove all "deleted" FATs
-delete from imicusfat_ifat where deleted_at is not null;
-
-# remove all "deleted" fat link types
-delete from imicusfat_ifatlinktype where deleted_at is not null;
-
-# get all fatlink IDs of "deleted" fatlinks as comma separated list and make sure
-# to have that in your notepad saved, you need this list for the next comamnds
-select group_concat(id) from imicusfat_ifatlink where deleted_at is not null;
-
-# now remove everything that is related to those IDs
-# make sure to replace "id_list" with the comma separated
-# list of IDs from the earlier command
-delete from imicusfat_clickifatduration where fleet_id in (id_list);
-delete from imicusfat_ifat where ifatlink_id in (id_list);
-delete from imicusfat_ifatlink where id in(id_list);
-
-# re-activate foreign key checks
-SET FOREIGN_KEY_CHECKS=1;
-```
-
-Once done, start the actual import script like this:
+To import from the ImicusFAT module, simply run the following command:
 
 ```shell
 python myauth/manage.py afat_import_from_imicusfat

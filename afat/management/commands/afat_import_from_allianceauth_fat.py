@@ -72,10 +72,8 @@ class Command(BaseCommand):
             aa_fatlinks = Fatlink.objects.all()
             for aa_fatlink in aa_fatlinks:
                 self.stdout.write(
-                    "Importing FAT link for fleet '{fleet}' with hash "
-                    "'{fatlink_hash}'.".format(
-                        fleet=aa_fatlink.fleet, fatlink_hash=aa_fatlink.hash
-                    )
+                    f"Importing FAT link for fleet '{aa_fatlink.fleet}' with hash "
+                    f"'{aa_fatlink.hash}'."
                 )
 
                 afatlink = AFatLink()
@@ -93,13 +91,7 @@ class Command(BaseCommand):
                 afatlink.save()
 
                 # Write to log table
-                log_text = (
-                    "FAT link {fatlink_hash} with name {name} was created by {user}"
-                ).format(
-                    fatlink_hash=aa_fatlink.hash,
-                    name=aa_fatlink.fleet,
-                    user=aa_fatlink.creator,
-                )
+                log_text = f"FAT link {aa_fatlink.hash} with name {aa_fatlink.fleet} was created by {aa_fatlink.creator}"
 
                 afatlog = AFatLog()
                 afatlog.log_time = aa_fatlink.fatdatetime
@@ -110,11 +102,7 @@ class Command(BaseCommand):
 
             aa_fats = Fat.objects.all()
             for aa_fat in aa_fats:
-                self.stdout.write(
-                    "Importing FATs for FAT link ID '{fatlink_id}'.".format(
-                        fatlink_id=aa_fat.id
-                    )
-                )
+                self.stdout.write(f"Importing FATs for FAT link ID '{aa_fat.id}'.")
 
                 afat = AFat()
 
