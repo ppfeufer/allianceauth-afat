@@ -5,9 +5,6 @@ Test fatlinks views
 # Standard Library
 import datetime as dt
 
-# import json
-from datetime import datetime
-
 # Third Party
 from pytz import utc
 
@@ -269,7 +266,7 @@ class TestFatlinksView(TestCase):
 
     def test_ajax_get_fatlinks_by_year(self):
         # given
-        self.maxDiff = None
+        # self.maxDiff = None
         self.client.force_login(self.user_with_basic_access)
 
         fatlink_hash = get_hash_on_save()
@@ -297,7 +294,7 @@ class TestFatlinksView(TestCase):
 
         url_with_year = reverse(
             "afat:fatlinks_ajax_get_fatlinks_by_year",
-            kwargs={"year": datetime.now().year},
+            kwargs={"year": 2021},
         )
         result = self.client.get(url_with_year)
 

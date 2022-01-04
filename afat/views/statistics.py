@@ -60,7 +60,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         characters_with_access = characters_with_permission(basic_access_permission)
 
         data = {"No Alliance": [1]}
-        sanity_check = dict()
+        sanity_check = {}
 
         # First create the alliance keys in our dict
         for character_with_access in characters_with_access:
@@ -115,7 +115,7 @@ def _calculate_year_stats(request, year) -> list:
     Calculate and return year statistics.
     """
 
-    months = list()
+    months = []
     characters = EveCharacter.objects.filter(character_ownership__user=request.user)
 
     for char in characters:
@@ -247,13 +247,10 @@ def character(
         "fats": fats,
     }
 
+    month_name = calendar.month_name[int(month)]
     logger.info(
-        "Character statistics for {character} ({month} {year}) called by {user}".format(
-            character=eve_character,
-            month=calendar.month_name[int(month)],
-            year=year,
-            user=request.user,
-        )
+        f"Character statistics for {eve_character} ({month_name} {year}) "
+        f"called by {request.user}"
     )
 
     return render(request, "afat/view/statistics/statistics_character.html", context)
@@ -370,7 +367,7 @@ def corporation(
     data_stacked = []
 
     for key, value in data.items():
-        stack = list()
+        stack = []
         stack.append(key)
         stack.append(get_random_rgba_color())
         stack.append([])
@@ -432,15 +429,10 @@ def corporation(
         "chars": chars,
     }
 
+    month_name = calendar.month_name[int(month)]
     logger.info(
-        (
-            "Corporation statistics for {corp_name} ({month} {year}) called by {user}"
-        ).format(
-            corp_name=corp_name,
-            month=calendar.month_name[int(month)],
-            year=year,
-            user=request.user,
-        )
+        f"Corporation statistics for {corp_name} ({month_name} {year}) "
+        f"called by {request.user}"
     )
 
     return render(request, "afat/view/statistics/statistics_corporation.html", context)
@@ -660,15 +652,10 @@ def alliance(
         "data_ship_type": data_ship_type,
     }
 
+    month_name = calendar.month_name[int(month)]
     logger.info(
-        (
-            "Alliance statistics for {alliance_name} ({month} {year}) called by {user}"
-        ).format(
-            alliance_name=alliance_name,
-            month=calendar.month_name[int(month)],
-            year=year,
-            user=request.user,
-        )
+        f"Alliance statistics for {alliance_name} ({month_name} {year}) "
+        f"called by {request.user}"
     )
 
     return render(request, "afat/view/statistics/statistics_alliance.html", context)

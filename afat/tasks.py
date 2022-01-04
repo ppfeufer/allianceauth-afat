@@ -130,14 +130,12 @@ def process_character(char, fatlink_hash):
         solar_system_name = solar_system["name"]
         ship_name = ship["name"]
 
+        character_name = character
+        system_name = solar_system_name
+
         logger.info(
-            "New Pilot: Adding {character_name} in {system_name} flying a {ship_name} "
-            'to FAT link "{fatlink_hash}"'.format(
-                character_name=character,
-                system_name=solar_system_name,
-                ship_name=ship_name,
-                fatlink_hash=fatlink_hash,
-            )
+            f"New Pilot: Adding {character_name} in {system_name} flying a {ship_name} "
+            f'to FAT link "{fatlink_hash}"'
         )
 
         AFat(
@@ -159,11 +157,7 @@ def close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
     :rtype:
     """
 
-    logger.info(
-        'Closing ESI FAT link with hash "{fatlink_hash}". Reason: {reason}'.format(
-            fatlink_hash=fatlink.hash, reason=reason
-        )
-    )
+    logger.info(f'Closing ESI FAT link with hash "{fatlink.hash}". Reason: {reason}')
 
     fatlink.is_registered_on_esi = False
     fatlink.save()
@@ -184,25 +178,20 @@ def esi_fatlinks_error_handling(
     :rtype:
     """
 
-    if int(cache.get(cache_key + fatlink.hash)) < CACHE_MAX_ERROR_COUNT:
-        error_count = int(cache.get(cache_key + fatlink.hash))
+    fatlink_hash = fatlink.hash
+
+    if int(cache.get(cache_key + fatlink_hash)) < CACHE_MAX_ERROR_COUNT:
+        error_count = int(cache.get(cache_key + fatlink_hash))
 
         error_count += 1
 
         logger.info(
-            (
-                'FAT link "{falink_hash}" Error: "{logger_message}" '
-                "({error_count} of {max_count})."
-            ).format(
-                falink_hash=fatlink.hash,
-                logger_message=logger_message,
-                error_count=error_count,
-                max_count=CACHE_MAX_ERROR_COUNT,
-            )
+            f'FAT link "{fatlink_hash}" Error: "{logger_message}" '
+            f"({error_count} of {CACHE_MAX_ERROR_COUNT})."
         )
 
         cache.set(
-            cache_key + fatlink.hash,
+            cache_key + fatlink_hash,
             str(error_count),
             75,
         )

@@ -183,15 +183,16 @@ def create_clickable_fatlink(
             dur.save()
 
             # Writing DB log
-            fleet_type = ""
-            if fatlink.link_type:
-                fleet_type = f" (Fleet Type: {fatlink.link_type.name})"
+            fleet_type = (
+                f" (Fleet Type: {fatlink.link_type.name})" if fatlink.link_type else ""
+            )
 
             write_log(
                 request=request,
                 log_event=AFatLogEvent.CREATE_FATLINK,
                 log_text=(
-                    f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and a duration of {form.cleaned_data["duration"]} minutes was created'
+                    f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and '
+                    f'a duration of {form.cleaned_data["duration"]} minutes was created'
                 ),
                 fatlink_hash=fatlink.hash,
             )
@@ -297,7 +298,7 @@ def create_esi_fatlink_callback(
 
     fleet_already_registered = False
     character_has_registered_fleets = False
-    registered_fleets_to_close = list()
+    registered_fleets_to_close = []
 
     if registered_fleets_for_creator.count() > 0:
         character_has_registered_fleets = True
@@ -399,7 +400,8 @@ def create_esi_fatlink_callback(
         request=request,
         log_event=AFatLogEvent.CREATE_FATLINK,
         log_text=(
-            f'ESI FAT link with name "{request.session["fatlink_form__name"]}" {fleet_type} was created by {request.user}'
+            f'ESI FAT link with name "{request.session["fatlink_form__name"]}" '
+            f"{fleet_type} was created by {request.user}"
         ),
         fatlink_hash=fatlink.hash,
     )
@@ -598,7 +600,8 @@ def add_fat(
                     )
 
                     logger.info(
-                        f'Participation for fleet "{fleet_name}" registered for pilot {character.character_name}'
+                        f'Participation for fleet "{fleet_name}" registered for '
+                        f"pilot {character.character_name}"
                     )
 
                     return redirect("afat:dashboard")
