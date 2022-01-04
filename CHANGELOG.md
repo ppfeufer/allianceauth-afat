@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [2.3.2] - Unreleased
+## [2.3.2] - 2022-01-04
+
+### Added
+
+- `afat_static` template tag to break browser cache for selected CSS and JS files on
+  app update
 
 ### Changed
 
