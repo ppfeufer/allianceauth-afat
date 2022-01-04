@@ -163,6 +163,10 @@ class Command(BaseCommand):
 
             return
 
+        # Before we do anything, remove all "deleted" FATlinks and FATs
+        IFatLink.all_objects.filter(deleted_at__isnull=False).hard_delete()
+        IFat.all_objects.filter(deleted_at__isnull=False).hard_delete()
+
         # Import fat link type
         imicusfat_fleettypes = IFatLinkType.objects.all()
         for imicusfat_fleettype in imicusfat_fleettypes:

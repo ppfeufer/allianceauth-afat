@@ -175,48 +175,7 @@ python myauth/manage.py afat_import_from_bfat
 
 ### Import from ImicusFAT
 
-First, you need to remove all "deleted" FAT links and FATs.
-
-This step needs to be done, because we cannot import entries marked as "deleted" due
-to the way Django is handling this, and some other entries might rely on them, so we
-need to meke sure the "deleted" data doesn't cause any trouble. You don't need to
-worry, you are not losing any data that is/was actively used besides what is already
-marked as "deleted" and ImicusFAT is no longer working with it anyways and never did.
-
-To do so, login to your Django console with:
-
-```shell
-python myauth/manage.py shell
-```
-
-Now enter the following commands:
-
-```python
-from imicusfat.models import IFat, IFatLink
-
-# Remove all "deleted" FATlinks and FATs
-IFatLink.all_objects.filter(deleted_at__isnull=False).hard_delete()
-IFat.all_objects.filter(deleted_at__isnull=False).hard_delete()
-
-# To additionally remove all FATlinks that have no registered FATs (number_of_fats == 0)
-from django.db.models import Count, Q
-
-empty_fatlinks = IFatLink.objects.all().annotate(
-    number_of_fats=Count("ifat", filter=Q(ifat__deleted_at__isnull=True))
-)
-
-for fatlink in empty_fatlinks:
-    if fatlink.number_of_fats == 0:
-        fatlink.hard_delete()  # You have to hit Return twice here
-```
-
-Exit the Django console with:
-
-```shell
-exit()
-```
-
-Once done, start the actual import script like this:
+To import from the ImicusFAT module, simply run the following command:
 
 ```shell
 python myauth/manage.py afat_import_from_imicusfat
