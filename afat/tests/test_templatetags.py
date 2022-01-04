@@ -16,6 +16,11 @@ class TestAfatFilters(TestCase):
     """
 
     def test_month_name_filter(self):
+        """
+        Test month_name
+        :return:
+        """
+
         context = Context({"month": 5})
         template_to_render = Template("{% load filters %} {{ month|month_name }}")
 
@@ -30,6 +35,11 @@ class TestAfatVersionedStatic(TestCase):
     """
 
     def test_versioned_static(self):
+        """
+        Test afat_versioned_static
+        :return:
+        """
+
         context = Context({"version": __version__})
         template_to_render = Template(
             "{% load afat_versioned_static %}"
