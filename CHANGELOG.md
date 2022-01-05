@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.3.3] - 2022-01-05
+
+### Changed
+
+- `update_esi_fatlinks` task chain improved, so the sub-task `process_character` is
+  only fired for new pilots in fleet, not for every pilot
+
 ## [2.3.2] - 2022-01-04
 
 ### Added

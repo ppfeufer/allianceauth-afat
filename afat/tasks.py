@@ -96,54 +96,58 @@ def process_fats(data_list, data_source, fatlink_hash):
         )
 
         for char in data_list:
-            process_character.delay(char, fatlink_hash)
+            # Only process if the character is not already registered for this FAT
+
+            if (
+                AFat.objects.filter(
+                    character__character_id=char["character_id"],
+                    afatlink__hash__exact=fatlink_hash,
+                ).exists()
+                is False
+            ):
+                process_character.delay(
+                    character_id=char["character_id"],
+                    solar_system_id=char["solar_system_id"],
+                    ship_type_id=char["ship_type_id"],
+                    fatlink_hash=fatlink_hash,
+                )
 
 
 @shared_task
-def process_character(char, fatlink_hash):
+def process_character(
+    character_id: int, solar_system_id: int, ship_type_id: int, fatlink_hash: str
+):
     """
     Process character
-    :param char:
-    :type char:
+    :param character:
+    :param solar_system_id:
+    :param ship_type_id:
     :param fatlink_hash:
-    :type fatlink_hash:
     :return:
-    :rtype:
     """
 
+    character = get_or_create_character(character_id=character_id)
     link = AFatLink.objects.get(hash=fatlink_hash)
-    char_id = char["character_id"]
-    character = get_or_create_character(character_id=char_id)
 
-    # Only process if the character is not already registered for this FAT
-    if AFat.objects.filter(character=character, afatlink_id=link.pk).exists() is False:
-        solar_system_id = char["solar_system_id"]
-        ship_type_id = char["ship_type_id"]
+    solar_system = esi.client.Universe.get_universe_systems_system_id(
+        system_id=solar_system_id
+    ).result()
+    ship = esi.client.Universe.get_universe_types_type_id(type_id=ship_type_id).result()
 
-        solar_system = esi.client.Universe.get_universe_systems_system_id(
-            system_id=solar_system_id
-        ).result()
-        ship = esi.client.Universe.get_universe_types_type_id(
-            type_id=ship_type_id
-        ).result()
+    solar_system_name = solar_system["name"]
+    ship_name = ship["name"]
 
-        solar_system_name = solar_system["name"]
-        ship_name = ship["name"]
+    logger.info(
+        f"New Pilot: Adding {character} in {solar_system_name} flying a {ship_name} "
+        f'to FAT link "{fatlink_hash}"'
+    )
 
-        character_name = character
-        system_name = solar_system_name
-
-        logger.info(
-            f"New Pilot: Adding {character_name} in {system_name} flying a {ship_name} "
-            f'to FAT link "{fatlink_hash}"'
-        )
-
-        AFat(
-            afatlink_id=link.pk,
-            character=character,
-            system=solar_system_name,
-            shiptype=ship_name,
-        ).save()
+    AFat(
+        afatlink_id=link.pk,
+        character=character,
+        system=solar_system_name,
+        shiptype=ship_name,
+    ).save()
 
 
 def close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
