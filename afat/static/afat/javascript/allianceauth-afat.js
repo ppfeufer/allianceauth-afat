@@ -6,7 +6,9 @@
 let convertStringToSlug = function (text) {
     'use strict';
 
-    return text.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
+    return text.toLowerCase()
+        .replace(/[^\w ]+/g, '')
+        .replace(/ +/g, '-');
 };
 
 /**
@@ -14,11 +16,11 @@ let convertStringToSlug = function (text) {
  * @param {element} table
  * @param {string} order
  */
-let sortTable = function (table, order) {
+const sortTable = function (table, order) {
     'use strict';
 
-    let asc = order === 'asc';
-    let tbody = table.find('tbody');
+    const asc = order === 'asc';
+    const tbody = table.find('tbody');
 
     tbody.find('tr').sort(function (a, b) {
         if (asc) {
@@ -33,17 +35,16 @@ let sortTable = function (table, order) {
  * Manage a modal window
  * @param {element} modalElement
  */
-let manageModal = function (modalElement) {
+const manageModal = function (modalElement) {
     'use strict';
 
     modalElement.on('show.bs.modal', function (event) {
-        let modal = $(this);
-        let button = $(event.relatedTarget); // Button that triggered the modal
-        let url = button.data('url'); // Extract info from data-* attributes
-        let cancelText = button.data('cancel-text');
-        let confirmText = button.data('confirm-text');
-        let bodyText = button.data('body-text');
-
+        const modal = $(this);
+        const button = $(event.relatedTarget); // Button that triggered the modal
+        const url = button.data('url'); // Extract info from data-* attributes
+        const cancelText = button.data('cancel-text');
+        const confirmText = button.data('confirm-text');
+        const bodyText = button.data('body-text');
         let cancelButtonText = modal.find('#cancelButtonDefaultText').text();
         let confirmButtonText = modal.find('#confirmButtonDefaultText').text();
 
@@ -61,7 +62,7 @@ let manageModal = function (modalElement) {
         modal.find('#confirm-action').attr('href', url);
         modal.find('.modal-body').html(bodyText);
     }).on('hide.bs.modal', function () {
-        let modal = $(this);
+        const modal = $(this);
 
         modal.find('.modal-body').html('');
         modal.find('#cancel-action').html('');

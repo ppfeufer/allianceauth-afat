@@ -3,7 +3,7 @@
 $(document).ready(function () {
     'use strict';
 
-    let fatListTable = $('#fleet-edit-fat-list').DataTable({
+    const fatListTable = $('#fleet-edit-fat-list').DataTable({
         ajax: {
             url: afatSettings.url,
             dataSrc: '',
@@ -28,9 +28,8 @@ $(document).ready(function () {
             [0, 'asc']
         ],
         createdRow: function (row, data, rowIndex) {
-            let shipTypeOverviewTable = $('#fleet-edit-ship-types');
-
-            let shipTypeSlug = convertStringToSlug(data.ship_type);
+            const shipTypeOverviewTable = $('#fleet-edit-ship-types');
+            const shipTypeSlug = convertStringToSlug(data.ship_type);
 
             if ($('tr.shiptype-' + shipTypeSlug).length) {
                 let currentCount = shipTypeOverviewTable.find(
@@ -60,15 +59,15 @@ $(document).ready(function () {
     /**
      * Refresh the datatable information every 15 seconds
      */
-    let intervalReloadDatatable = 15000; // ms
+    const intervalReloadDatatable = 15000; // ms
     let expectedReloadDatatable = Date.now() + intervalReloadDatatable;
 
     /**
      * reload datatable "linkListTable"
      */
-    let realoadDataTable = function () {
+    const realoadDataTable = function () {
         // the drift (positive for overshooting)
-        let dt = Date.now() - expectedReloadDatatable;
+        const dt = Date.now() - expectedReloadDatatable;
 
         if (dt > intervalReloadDatatable) {
             /**
@@ -82,17 +81,17 @@ $(document).ready(function () {
 
         fatListTable.ajax.reload(
             function (tableData) {
-                let shipTypeOverviewTable = $('#fleet-edit-ship-types');
+                const shipTypeOverviewTable = $('#fleet-edit-ship-types');
                 shipTypeOverviewTable.find('tbody').html('');
 
                 $.each(tableData, function (i, item) {
-                    let shipTypeSlug = convertStringToSlug(item.ship_type);
+                    const shipTypeSlug = convertStringToSlug(item.ship_type);
 
                     if ($('tr.shiptype-' + shipTypeSlug).length) {
-                        let currentCount = shipTypeOverviewTable.find(
+                        const currentCount = shipTypeOverviewTable.find(
                             'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
                         ).html();
-                        let newCount = parseInt(currentCount) + 1;
+                        const newCount = parseInt(currentCount) + 1;
 
                         shipTypeOverviewTable.find(
                             'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
@@ -128,8 +127,7 @@ $(document).ready(function () {
         );
     }
 
-    let clipboard = new ClipboardJS('.copy-btn');
-
+    const clipboard = new ClipboardJS('.copy-btn');
     clipboard.on('success', function () {
         $('.copy-btn').tooltip('show');
     });
@@ -137,18 +135,18 @@ $(document).ready(function () {
     /**
      * Modal :: Close ESI fleet
      */
-    let cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
+    const cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
     manageModal(cancelEsiFleetModal);
 
     /**
      * Modal :: Delete FAT from FAT link
      */
-    let deleteFatModal = $(afatSettings.modal.deleteFatModal.element);
+    const deleteFatModal = $(afatSettings.modal.deleteFatModal.element);
     manageModal(deleteFatModal);
 
     /**
      * Modal :: Delete FAT from FAT link
      */
-    let reopenFatLinkModal = $(afatSettings.modal.reopenFatLinkModal.element);
+    const reopenFatLinkModal = $(afatSettings.modal.reopenFatLinkModal.element);
     manageModal(reopenFatLinkModal);
 });

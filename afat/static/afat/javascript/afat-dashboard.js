@@ -9,7 +9,7 @@ $(document).ready(function () {
      * DataTable :: Recent FATs per character
      */
     if (characters.length > 0) {
-        let noFatsWarning = '<div class="alert alert-warning" role="alert">' +
+        const noFatsWarning = '<div class="alert alert-warning" role="alert">' +
             '<p>' + afatSettings.translation.dataTable.noFatsWarning + ' ###CHARACTER_NAME###</p>' +
             '</div>';
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
     /**
      * DataTable :: Recent FAT links
      */
-    let noFatlinksWarning = '<div class="alert alert-warning" role="alert">' +
+    const noFatlinksWarning = '<div class="alert alert-warning" role="alert">' +
         '<p>' + afatSettings.translation.dataTable.noFatlinksWarning + '</p>' +
         '</div>';
 
@@ -111,12 +111,12 @@ $(document).ready(function () {
     /**
      * Modal :: Close ESI fleet
      */
-    let cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
+    const cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
     manageModal(cancelEsiFleetModal);
 
     /**
      * Modal :: Delete FAT link
      */
-    let deleteFatLinkModal = $(afatSettings.modal.deleteFatLinkModal.element);
+    const deleteFatLinkModal = $(afatSettings.modal.deleteFatLinkModal.element);
     manageModal(deleteFatLinkModal);
 });

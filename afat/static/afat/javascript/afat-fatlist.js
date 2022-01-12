@@ -8,7 +8,7 @@ $(document).ready(function () {
     /**
      * DataTable :: FAT link list
      */
-    let linkListTable = $('#link-list').DataTable({
+    const linkListTable = $('#link-list').DataTable({
         ajax: {
             url: afatSettings.url.linkList,
             dataSrc: '',
@@ -84,14 +84,14 @@ $(document).ready(function () {
     /**
      * Refresh the datatable information every 60 seconds
      */
-    let intervalReloadDatatable = 60000; // ms
+    const intervalReloadDatatable = 60000; // ms
     let expectedReloadDatatable = Date.now() + intervalReloadDatatable;
 
     /**
      * Reload datatable "linkListTable"
      */
-    let realoadDataTable = function () {
-        let dt = Date.now() - expectedReloadDatatable; // the drift (positive for overshooting)
+    const realoadDataTable = function () {
+        const dt = Date.now() - expectedReloadDatatable; // the drift (positive for overshooting)
 
         if (dt > intervalReloadDatatable) {
             /**
@@ -122,12 +122,12 @@ $(document).ready(function () {
     /**
      * Modal :: Close ESI fleet
      */
-    let cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
+    const cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
     manageModal(cancelEsiFleetModal);
 
     /**
      * Modal :: Delete FAT link
      */
-    let deleteFatLinkModal = $(afatSettings.modal.deleteFatLinkModal.element);
+    const deleteFatLinkModal = $(afatSettings.modal.deleteFatLinkModal.element);
     manageModal(deleteFatLinkModal);
 });
