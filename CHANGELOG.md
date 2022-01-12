@@ -6,11 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [In Development] - Unreleased
+## [2.4.0] - 2022-01-12
 
 ### Changed
 
 - JavaScript: `const` instead of `let` where ever appropriate
+- Minimum requirements
+  - Alliance Auth v2.9.4
 
 
 ## [2.3.3] - 2022-01-05
