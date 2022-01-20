@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [In Development] - Unreleased
+
+### Changed
+
+- Improvements to try/except blocks
+
+
 ## [2.4.0] - 2022-01-12
 
 ### Changed

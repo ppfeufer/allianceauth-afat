@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.handlers.wsgi import WSGIRequest
+from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -513,143 +514,122 @@ def add_fat(
         return redirect("afat:dashboard")
 
     try:
-        try:
-            fleet = AFatLink.objects.get(hash=fatlink_hash)
-        except AFatLink.DoesNotExist:
-            messages.warning(
-                request,
-                mark_safe(_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")),
-            )
+        fleet = AFatLink.objects.get(hash=fatlink_hash, is_esilink=False)
+    except AFatLink.DoesNotExist:
+        messages.warning(
+            request,
+            mark_safe(_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")),
+        )
 
-            return redirect("afat:dashboard")
+        return redirect("afat:dashboard")
 
-        dur = ClickAFatDuration.objects.get(fleet=fleet)
-        now = timezone.now() - timedelta(minutes=dur.duration)
+    dur = ClickAFatDuration.objects.get(fleet=fleet)
+    now = timezone.now() - timedelta(minutes=dur.duration)
 
-        if now >= fleet.afattime:
-            messages.warning(
-                request,
-                mark_safe(
-                    _(
-                        "<h4>Warning!</h4>"
-                        "<p>Sorry, that FAT Link is expired. "
-                        "If you were on that fleet, contact your FC about "
-                        "having your FAT manually added.</p>"
-                    )
-                ),
-            )
-
-            return redirect("afat:dashboard")
-
-        character = EveCharacter.objects.get(character_id=token.character_id)
-
-        try:
-            required_scopes = [
-                "esi-location.read_location.v1",
-                "esi-location.read_online.v1",
-                "esi-location.read_ship_type.v1",
-            ]
-            esi_token = Token.get_token(token.character_id, required_scopes)
-
-            # Check if character is online
-            character_online = esi.client.Location.get_characters_character_id_online(
-                character_id=token.character_id, token=esi_token.valid_access_token()
-            ).result()
-
-            if character_online["online"] is True:
-                # Character location
-                location = esi.client.Location.get_characters_character_id_location(
-                    character_id=token.character_id,
-                    token=esi_token.valid_access_token(),
-                ).result()
-
-                # Current ship
-                ship = esi.client.Location.get_characters_character_id_ship(
-                    character_id=token.character_id,
-                    token=esi_token.valid_access_token(),
-                ).result()
-
-                # System information
-                system = esi.client.Universe.get_universe_systems_system_id(
-                    system_id=location["solar_system_id"]
-                ).result()["name"]
-
-                ship_name = provider.get_itemtype(ship["ship_type_id"]).name
-
-                try:
-                    fat = AFat(
-                        afatlink=fleet,
-                        character=character,
-                        system=system,
-                        shiptype=ship_name,
-                    )
-                    fat.save()
-
-                    if fleet.fleet is not None:
-                        fleet_name = fleet.fleet
-                    else:
-                        fleet_name = fleet.hash
-
-                    messages.success(
-                        request,
-                        mark_safe(
-                            _(
-                                f"<h4>Success!</h4><p>FAT registered for {character.character_name} at {fleet_name}</p>"
-                            )
-                        ),
-                    )
-
-                    logger.info(
-                        f'Participation for fleet "{fleet_name}" registered for '
-                        f"pilot {character.character_name}"
-                    )
-
-                    return redirect("afat:dashboard")
-                except Exception:
-                    messages.warning(
-                        request,
-                        mark_safe(
-                            _(
-                                f"<h4>Warning!</h4><p>A FAT already exists for the selected character ({character.character_name}) and fleet combination.</p>"
-                            )
-                        ),
-                    )
-
-                    return redirect("afat:dashboard")
-            else:
-                messages.warning(
-                    request,
-                    mark_safe(
-                        _(
-                            f"<h4>Warning!</h4><p>Cannot register the fleet participation for {character.character_name}. The character needs to be online.</p>"
-                        )
-                    ),
-                )
-
-                return redirect("afat:dashboard")
-        except Exception:
-            messages.warning(
-                request,
-                mark_safe(
-                    _(
-                        f"<h4>Warning!</h4><p>There was an issue with the ESI token for {character.character_name}. Please try again.</p>"
-                    )
-                ),
-            )
-
-            return redirect("afat:dashboard")
-    except Exception:
+    if now >= fleet.afattime:
         messages.warning(
             request,
             mark_safe(
                 _(
                     "<h4>Warning!</h4>"
-                    "<p>The hash provided is not for a clickable FAT Link.</p>"
+                    "<p>Sorry, that FAT Link is expired. "
+                    "If you were on that fleet, contact your FC about "
+                    "having your FAT manually added.</p>"
                 )
             ),
         )
 
         return redirect("afat:dashboard")
+
+    character = EveCharacter.objects.get(character_id=token.character_id)
+
+    try:
+        required_scopes = [
+            "esi-location.read_location.v1",
+            "esi-location.read_online.v1",
+            "esi-location.read_ship_type.v1",
+        ]
+        esi_token = Token.get_token(token.character_id, required_scopes)
+    except Exception:
+        messages.warning(
+            request,
+            mark_safe(
+                _(
+                    f"<h4>Warning!</h4><p>There was an issue with the ESI token for {character.character_name}. Please try again.</p>"
+                )
+            ),
+        )
+
+        return redirect("afat:dashboard")
+
+    # Check if character is online
+    character_online = esi.client.Location.get_characters_character_id_online(
+        character_id=token.character_id, token=esi_token.valid_access_token()
+    ).result()
+
+    if character_online["online"] is True:
+        # Character location
+        location = esi.client.Location.get_characters_character_id_location(
+            character_id=token.character_id,
+            token=esi_token.valid_access_token(),
+        ).result()
+
+        # Current ship
+        ship = esi.client.Location.get_characters_character_id_ship(
+            character_id=token.character_id,
+            token=esi_token.valid_access_token(),
+        ).result()
+
+        # System information
+        system = esi.client.Universe.get_universe_systems_system_id(
+            system_id=location["solar_system_id"]
+        ).result()["name"]
+
+        ship_name = provider.get_itemtype(ship["ship_type_id"]).name
+
+        try:
+            AFat(
+                afatlink=fleet, character=character, system=system, shiptype=ship_name
+            ).save()
+        except IntegrityError:
+            messages.warning(
+                request,
+                mark_safe(
+                    _(
+                        f"<h4>Warning!</h4><p>A FAT already exists for the selected character ({character.character_name}) and fleet combination.</p>"
+                    )
+                ),
+            )
+        else:
+            if fleet.fleet is not None:
+                fleet_name = fleet.fleet
+            else:
+                fleet_name = fleet.hash
+
+            messages.success(
+                request,
+                mark_safe(
+                    _(
+                        f"<h4>Success!</h4><p>FAT registered for {character.character_name} at {fleet_name}</p>"
+                    )
+                ),
+            )
+
+            logger.info(
+                f'Participation for fleet "{fleet_name}" registered for '
+                f"pilot {character.character_name}"
+            )
+    else:
+        messages.warning(
+            request,
+            mark_safe(
+                _(
+                    f"<h4>Warning!</h4><p>Cannot register the fleet participation for {character.character_name}. The character needs to be online.</p>"
+                )
+            ),
+        )
+
+    return redirect("afat:dashboard")
 
 
 @login_required()
@@ -767,6 +747,10 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
     # Time dependant settings
     try:
         dur = ClickAFatDuration.objects.get(fleet=link)
+    except ClickAFatDuration.DoesNotExist:
+        # ESI link
+        link_ongoing = False
+    else:
         link_expires = link.afattime + timedelta(minutes=dur.duration)
         now = timezone.now()
 
@@ -786,9 +770,6 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
         # and has been created within the last 24 hours
         if link.reopened is False and get_time_delta(link.afattime, now, "hours") < 24:
             manual_fat_can_be_added = True
-    except ClickAFatDuration.DoesNotExist:
-        # ESI link
-        link_ongoing = False
 
     is_clickable_link = False
     if link.is_esilink is False:
@@ -980,7 +961,9 @@ def close_esi_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRe
 
     try:
         fatlink = AFatLink.objects.get(hash=fatlink_hash)
-
+    except AFatLink.DoesNotExist:
+        logger.info(f'ESI FAT link with hash "{fatlink_hash}" does not exist')
+    else:
         logger.info(
             f'Closing ESI FAT link with hash "{fatlink_hash}". '
             f"Reason: Closed by manual request"
@@ -988,8 +971,6 @@ def close_esi_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRe
 
         fatlink.is_registered_on_esi = False
         fatlink.save()
-    except AFatLink.DoesNotExist:
-        logger.info(f'ESI FAT link with hash "{fatlink_hash}" does not exist')
 
     default_redirect = reverse("afat:dashboard")
     next_view = request.GET.get("next", default_redirect)
@@ -1012,58 +993,6 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
 
     try:
         fatlink_duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
-
-        if fatlink_duration.fleet.reopened is False:
-            created_at = fatlink_duration.fleet.afattime
-            now = datetime.now()
-
-            time_difference_in_minutes = get_time_delta(created_at, now, "minutes")
-            new_duration = (
-                time_difference_in_minutes + AFAT_DEFAULT_FATLINK_REOPEN_DURATION
-            )
-
-            fatlink_duration.duration = new_duration
-            fatlink_duration.save()
-
-            fatlink_duration.fleet.reopened = True
-            fatlink_duration.fleet.save()
-
-            # writing DB log
-            write_log(
-                request=request,
-                log_event=AFatLogEvent.REOPEN_FATLINK,
-                log_text=(
-                    f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
-                ),
-                fatlink_hash=fatlink_duration.fleet.hash,
-            )
-
-            logger.info(
-                f'FAT link with hash "{fatlink_hash}" '
-                f"re-opened by {request.user} for a "
-                f"duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
-            )
-
-            messages.success(
-                request,
-                mark_safe(
-                    _(
-                        "<h4>Success!</h4>"
-                        "<p>The FAT link has been successfully re-opened.</p>"
-                    )
-                ),
-            )
-        else:
-            messages.warning(
-                request,
-                mark_safe(
-                    _(
-                        "<h4>Warning!</h4>"
-                        "<p>This FAT link has already been re-opened. "
-                        "FAT links can be re-opened only once!</p>"
-                    )
-                ),
-            )
     except ClickAFatDuration.DoesNotExist:
         messages.error(
             request,
@@ -1071,6 +1000,58 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
                 _(
                     "<h4>Error!</h4>"
                     "<p>The hash you provided does not match with any FAT link.</p>"
+                )
+            ),
+        )
+
+        return redirect("afat:dashboard")
+
+    if fatlink_duration.fleet.reopened is False:
+        created_at = fatlink_duration.fleet.afattime
+        now = datetime.now()
+
+        time_difference_in_minutes = get_time_delta(created_at, now, "minutes")
+        new_duration = time_difference_in_minutes + AFAT_DEFAULT_FATLINK_REOPEN_DURATION
+
+        fatlink_duration.duration = new_duration
+        fatlink_duration.save()
+
+        fatlink_duration.fleet.reopened = True
+        fatlink_duration.fleet.save()
+
+        # writing DB log
+        write_log(
+            request=request,
+            log_event=AFatLogEvent.REOPEN_FATLINK,
+            log_text=(
+                f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
+            ),
+            fatlink_hash=fatlink_duration.fleet.hash,
+        )
+
+        logger.info(
+            f'FAT link with hash "{fatlink_hash}" '
+            f"re-opened by {request.user} for a "
+            f"duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
+        )
+
+        messages.success(
+            request,
+            mark_safe(
+                _(
+                    "<h4>Success!</h4>"
+                    "<p>The FAT link has been successfully re-opened.</p>"
+                )
+            ),
+        )
+    else:
+        messages.warning(
+            request,
+            mark_safe(
+                _(
+                    "<h4>Warning!</h4>"
+                    "<p>This FAT link has already been re-opened. "
+                    "FAT links can be re-opened only once!</p>"
                 )
             ),
         )

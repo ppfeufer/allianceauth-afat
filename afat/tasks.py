@@ -119,7 +119,7 @@ def process_character(
 ):
     """
     Process character
-    :param character:
+    :param character_id:
     :param solar_system_id:
     :param ship_type_id:
     :param fatlink_hash:
@@ -239,7 +239,11 @@ def update_esi_fatlinks() -> None:
         esi_fatlinks = AFatLink.objects.select_related_default().filter(
             is_esilink=True, is_registered_on_esi=True
         )
+    except AFatLink.DoesNotExist:
+        pass
 
+    # Work our way through the FAT links
+    else:
         for fatlink in esi_fatlinks:
             initialize_caches(fatlink=fatlink)
 
@@ -257,37 +261,6 @@ def update_esi_fatlinks() -> None:
                             token=esi_token.valid_access_token(),
                         ).result()
                     )
-
-                    if fatlink.esi_fleet_id == fleet_from_esi["fleet_id"]:
-                        # Check if we deal with the fleet boss here
-                        try:
-                            esi_fleet_member = (
-                                esi.client.Fleets.get_fleets_fleet_id_members(
-                                    fleet_id=fleet_from_esi["fleet_id"],
-                                    token=esi_token.valid_access_token(),
-                                ).result()
-                            )
-
-                            # Process fleet members
-                            process_fats.delay(
-                                data_list=esi_fleet_member,
-                                data_source="esi",
-                                fatlink_hash=fatlink.hash,
-                            )
-                        except Exception:
-                            esi_fatlinks_error_handling(
-                                cache_key=CACHE_KEY_NO_FLEETBOSS_ERROR,
-                                fatlink=fatlink,
-                                logger_message="FC is no longer the fleet boss.",
-                            )
-
-                    else:
-                        esi_fatlinks_error_handling(
-                            cache_key=CACHE_KEY_FLEET_CHANGED_ERROR,
-                            fatlink=fatlink,
-                            logger_message="FC switched to another fleet",
-                        )
-
                 except HTTPNotFound:
                     esi_fatlinks_error_handling(
                         cache_key=CACHE_KEY_NOT_IN_FLEET_ERROR,
@@ -297,7 +270,6 @@ def update_esi_fatlinks() -> None:
                             "fleet is no longer available."
                         ),
                     )
-
                 except Exception:
                     esi_fatlinks_error_handling(
                         cache_key=CACHE_KEY_NO_FLEET_ERROR,
@@ -305,11 +277,39 @@ def update_esi_fatlinks() -> None:
                         logger_message="Registered fleet is no longer available.",
                     )
 
+                # We have a valid fleet result from ESI
+                else:
+                    if fatlink.esi_fleet_id == fleet_from_esi["fleet_id"]:
+                        # Check if we deal with the fleet boss here
+                        try:
+                            esi_fleet_member = (
+                                esi.client.Fleets.get_fleets_fleet_id_members(
+                                    fleet_id=fleet_from_esi["fleet_id"],
+                                    token=esi_token.valid_access_token(),
+                                ).result()
+                            )
+                        except Exception:
+                            esi_fatlinks_error_handling(
+                                cache_key=CACHE_KEY_NO_FLEETBOSS_ERROR,
+                                fatlink=fatlink,
+                                logger_message="FC is no longer the fleet boss.",
+                            )
+
+                        # Process fleet members
+                        else:
+                            process_fats.delay(
+                                data_list=esi_fleet_member,
+                                data_source="esi",
+                                fatlink_hash=fatlink.hash,
+                            )
+                    else:
+                        esi_fatlinks_error_handling(
+                            cache_key=CACHE_KEY_FLEET_CHANGED_ERROR,
+                            fatlink=fatlink,
+                            logger_message="FC switched to another fleet",
+                        )
             else:
                 close_esi_fleet(fatlink=fatlink, reason="No fatlink creator available.")
-
-    except AFatLink.DoesNotExist:
-        pass
 
 
 @shared_task
