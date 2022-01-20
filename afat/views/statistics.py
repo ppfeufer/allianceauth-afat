@@ -119,7 +119,7 @@ def _calculate_year_stats(request, year) -> list:
     characters = EveCharacter.objects.filter(character_ownership__user=request.user)
 
     for char in characters:
-        fat_counts = (
+        character_fats_in_year = (
             AFat.objects.filter(afatlink__afattime__year=year)
             .filter(character=char)
             .values("afatlink__afattime__month")
@@ -127,16 +127,20 @@ def _calculate_year_stats(request, year) -> list:
         )
 
         # Only if there are FATs for this years for the character
-        if fat_counts:
-            fat_counts_2 = {
+        if character_fats_in_year:
+            character_fats_per_month = {
                 int(result["afatlink__afattime__month"]): result["fat_count"]
-                for result in fat_counts
+                for result in character_fats_in_year
             }
 
             # Sort by month
-            fat_counts_2 = dict(sorted(fat_counts_2.items(), key=lambda item: item[0]))
+            character_fats_per_month = dict(
+                sorted(character_fats_per_month.items(), key=lambda item: item[0])
+            )
 
-            months.append((char.character_name, fat_counts_2, char.character_id))
+            months.append(
+                (char.character_name, character_fats_per_month, char.character_id)
+            )
 
     # Return sorted by character name
     return sorted(months, key=lambda x: x[0])
