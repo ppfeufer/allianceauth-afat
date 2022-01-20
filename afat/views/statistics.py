@@ -74,7 +74,8 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
             corp_id = character_with_access.corporation_id
             corp_name = character_with_access.corporation_name
 
-            if corp_id not in sanity_check.keys():
+            # if corp_id not in sanity_check.keys():
+            if corp_id not in sanity_check:
                 if character_with_access.alliance_name is None:
                     data["No Alliance"].append((corp_id, corp_name))
                 else:
@@ -126,7 +127,7 @@ def _calculate_year_stats(request, year) -> list:
             .annotate(fat_count=Count("id"))
         )
 
-        # Only if there are FATs for this years for the character
+        # Only if there are FATs for this year for the character
         if character_fats_in_year:
             character_fats_per_month = {
                 int(result["afatlink__afattime__month"]): result["fat_count"]
@@ -206,20 +207,23 @@ def character(
     data_ship_type = {}
 
     for fat in fats:
-        if fat.shiptype in data_ship_type.keys():
+        # if fat.shiptype in data_ship_type.keys():
+        if fat.shiptype in data_ship_type:
             continue
 
         data_ship_type[fat.shiptype] = fats.filter(shiptype=fat.shiptype).count()
 
     colors = []
 
-    for _ in data_ship_type.keys():
+    # for _ in data_ship_type.keys():
+    for _ in data_ship_type:
         bg_color_str = get_random_rgba_color()
         colors.append(bg_color_str)
 
     data_ship_type = [
         # Ship type can be None, so we need to convert to string here
-        list(str(key) for key in data_ship_type.keys()),
+        # list(str(key) for key in data_ship_type.keys()),
+        list(str(key) for key in data_ship_type),
         list(data_ship_type.values()),
         colors,
     ]
@@ -348,7 +352,8 @@ def corporation(
     data = {}
 
     for fat in fats:
-        if fat.shiptype in data.keys():
+        # if fat.shiptype in data.keys():
+        if fat.shiptype in data:
             continue
 
         data[fat.shiptype] = {}
@@ -524,20 +529,23 @@ def alliance(
     data_ship_type = {}
 
     for fat in fats:
-        if fat.shiptype in data_ship_type.keys():
+        # if fat.shiptype in data_ship_type.keys():
+        if fat.shiptype in data_ship_type:
             continue
 
         data_ship_type[fat.shiptype] = fats.filter(shiptype=fat.shiptype).count()
 
     colors = []
 
-    for _ in data_ship_type.keys():
+    # for _ in data_ship_type.keys():
+    for _ in data_ship_type:
         bg_color_str = get_random_rgba_color()
         colors.append(bg_color_str)
 
     data_ship_type = [
         # Ship type can be None, so we need to convert to string here
-        list(str(key) for key in data_ship_type.keys()),
+        # list(str(key) for key in data_ship_type.keys()),
+        list(str(key) for key in data_ship_type),
         list(data_ship_type.values()),
         colors,
     ]
@@ -546,7 +554,8 @@ def alliance(
     data = {}
 
     for fat in fats:
-        if fat.shiptype in data.keys():
+        # if fat.shiptype in data.keys():
+        if fat.shiptype in data:
             continue
 
         data[fat.shiptype] = {}
@@ -566,14 +575,15 @@ def alliance(
     for fat in fats:
         data[fat.shiptype][fat.character.corporation_name] += 1
 
-    if None in data.keys():
+    # if None in data.keys():
+    if None in data:
         data["Unknown"] = data[None]
         data.pop(None)
 
     data_stacked = []
 
     for key, value in data.items():
-        stack = list()
+        stack = []
         stack.append(key)
         stack.append(get_random_rgba_color())
         stack.append([])
