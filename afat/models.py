@@ -21,7 +21,6 @@ def get_sentinel_user() -> User:
     """
     Get user or create one
     :return:
-    :rtype:
     """
 
     return User.objects.get_or_create(username="deleted")[0]
@@ -30,10 +29,7 @@ def get_sentinel_user() -> User:
 def get_hash_on_save() -> str:
     """
     Get the slug
-    :param subject:
-    :type subject:
     :return:
-    :rtype:
     """
 
     fatlink_hash = get_random_string(length=30)
