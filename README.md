@@ -24,7 +24,6 @@ An Improved FAT/PAP System for
 - [Updating](#updating)
 - [Data Migration](#data-migration)
     - [From Alliance Auth native FAT](#import-from-native-fat)
-    - [From bFAT](#import-from-bfat)
     - [From ImicusFAT](#import-from-imicusfat)
 - [Settings](#settings)
 - [Permissions](#permissions)
@@ -156,21 +155,6 @@ To import from the native FAT module, simply run the following command:
 
 ```shell
 python myauth/manage.py afat_import_from_allianceauth_fat
-```
-
-### Import from bFAT
-
-Some preparations are needed here, since bFAT allowed fat links without fleet names.
-Login to your mysql database and run the following command.
-
-```mysql
-UPDATE bfat_fatlink SET `fleet` = `hash` WHERE `fleet` IS NULL;
-```
-
-Now, to import from the bFAT module, simply run the following command:
-
-```shell
-python myauth/manage.py afat_import_from_bfat
 ```
 
 ### Import from ImicusFAT

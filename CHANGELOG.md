@@ -8,9 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.5.0] - 2022-01-26
+
 ### Changed
 
 - Improvements to try/except blocks
+
+### Removed
+
+- Import from bFAT. bFAT is deprecated since quite some time now and by now everyone
+  who was using it should have updated to a working and supported FAT module.
 
 
 ## [2.4.0] - 2022-01-12
