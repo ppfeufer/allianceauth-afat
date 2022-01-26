@@ -53,7 +53,7 @@ An Improved FAT/PAP System for
     - Manually add pilot to FAT link
     - Remove pilot from FAT link
 
-AFAT will work alongside the built-in native FAT System, bFAT and ImicusFAT.
+AFAT will work alongside the built-in native FAT System and ImicusFAT.
 However, data does not share, but you can migrate their data to AFAT, for more
 information see below.
 
@@ -146,8 +146,8 @@ more.
 ## Data Migration
 
 Right after the **initial** installation and running migrations,
-you can import the data from Alliance Auth's native FAT system,
-from bFAT or from ImicusFAT if you have used one of these until now.
+you can import the data from Alliance Auth's native FAT system or from ImicusFAT if
+you have used one of these until now.
 
 ### Import from native FAT
 
