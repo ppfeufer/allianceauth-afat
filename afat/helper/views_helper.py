@@ -19,7 +19,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.django import users_with_permission
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLog, AFatLogEvent
+from afat.models import AFat, AFatLink, AFatLog
 from afat.utils import get_main_character_from_user
 
 
@@ -245,7 +245,7 @@ def convert_logs_to_dict(log: AFatLog, fatlink_exists: bool = False) -> dict:
 
     summary = {
         "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-        "log_event": AFatLogEvent(log.log_event).label,
+        "log_event": AFatLog.Event(log.log_event).label,
         "user": user_main_character,
         "fatlink": fatlink,
         "description": log.log_text,

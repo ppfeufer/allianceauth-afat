@@ -28,7 +28,6 @@ from afat.models import (
     AFatLink,
     AFatLinkType,
     AFatLog,
-    AFatLogEvent,
     ClickAFatDuration,
     get_hash_on_save,
 )
@@ -366,7 +365,7 @@ class TestHelpers(TestCase):
 
         write_log(
             request=request,
-            log_event=AFatLogEvent.CREATE_FATLINK,
+            log_event=AFatLog.Event.CREATE_FATLINK,
             log_text=(
                 f'FAT link with name "{fatlink_created.fleet}"{fleet_type} and '
                 f"a duration of {duration.duration} minutes was created"
@@ -389,7 +388,7 @@ class TestHelpers(TestCase):
             result,
             {
                 "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-                "log_event": AFatLogEvent(log.log_event).label,
+                "log_event": AFatLog.Event(log.log_event).label,
                 "user": user_main_character,
                 "fatlink": {"html": fatlink_html, "hash": log.fatlink_hash},
                 "description": log.log_text,

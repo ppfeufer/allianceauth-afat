@@ -48,7 +48,7 @@ from afat.models import (
     AFat,
     AFatLink,
     AFatLinkType,
-    AFatLogEvent,
+    AFatLog,
     ClickAFatDuration,
     get_hash_on_save,
 )
@@ -190,7 +190,7 @@ def create_clickable_fatlink(
 
             write_log(
                 request=request,
-                log_event=AFatLogEvent.CREATE_FATLINK,
+                log_event=AFatLog.Event.CREATE_FATLINK,
                 log_text=(
                     f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and '
                     f'a duration of {form.cleaned_data["duration"]} minutes was created'
@@ -399,7 +399,7 @@ def create_esi_fatlink_callback(
 
     write_log(
         request=request,
-        log_event=AFatLogEvent.CREATE_FATLINK,
+        log_event=AFatLog.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{request.session["fatlink_form__name"]}" '
             f"{fleet_type} was created by {request.user}"
@@ -666,7 +666,7 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
             # Writing DB log
             write_log(
                 request=request,
-                log_event=AFatLogEvent.CHANGE_FATLINK,
+                log_event=AFatLog.Event.CHANGE_FATLINK,
                 log_text=f'FAT link changed. Fleet name was set to "{link.fleet}"',
                 fatlink_hash=link.hash,
             )
@@ -704,7 +704,7 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
                 # Writing DB log
                 write_log(
                     request=request,
-                    log_event=AFatLogEvent.MANUAL_FAT,
+                    log_event=AFatLog.Event.MANUAL_FAT,
                     log_text=(
                         f"Pilot {character.character_name} "
                         f"flying a {shiptype} was manually added"
@@ -858,7 +858,7 @@ def delete_fatlink(
 
     write_log(
         request=request,
-        log_event=AFatLogEvent.DELETE_FATLINK,
+        log_event=AFatLog.Event.DELETE_FATLINK,
         log_text="FAT link deleted.",
         fatlink_hash=link.hash,
     )
@@ -924,7 +924,7 @@ def delete_fat(request: WSGIRequest, fatlink_hash: str, fat) -> HttpResponseRedi
 
     write_log(
         request=request,
-        log_event=AFatLogEvent.DELETE_FAT,
+        log_event=AFatLog.Event.DELETE_FAT,
         log_text=f"The FAT for {fat_details.character.character_name} has been deleted",
         fatlink_hash=link.hash,
     )
@@ -1022,7 +1022,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         # writing DB log
         write_log(
             request=request,
-            log_event=AFatLogEvent.REOPEN_FATLINK,
+            log_event=AFatLog.Event.REOPEN_FATLINK,
             log_text=(
                 f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
             ),
