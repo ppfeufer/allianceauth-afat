@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.6.0] - 2022-02-02
+
 ### Changed
 
 - `models.TextChoices` refactored for better code readability
