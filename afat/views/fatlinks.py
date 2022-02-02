@@ -882,15 +882,17 @@ def delete_fatlink(
 
 @login_required()
 @permissions_required(("afat.manage_afat", "afat.delete_afat"))
-def delete_fat(request: WSGIRequest, fatlink_hash: str, fat) -> HttpResponseRedirect:
+def delete_fat(
+    request: WSGIRequest, fatlink_hash: str, fat_id: int
+) -> HttpResponseRedirect:
     """
     Delete fat helper
     :param request:
     :type request:
     :param fatlink_hash:
     :type fatlink_hash:
-    :param fat:
-    :type fat:
+    :param fat_id:
+    :type fat_id:
     :return:
     :rtype:
     """
@@ -911,7 +913,7 @@ def delete_fat(request: WSGIRequest, fatlink_hash: str, fat) -> HttpResponseRedi
         return redirect("afat:dashboard")
 
     try:
-        fat_details = AFat.objects.get(pk=fat, afatlink_id=link.pk)
+        fat_details = AFat.objects.get(pk=fat_id, afatlink_id=link.pk)
     except AFat.DoesNotExist:
         messages.error(
             request,
