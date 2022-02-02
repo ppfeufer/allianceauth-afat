@@ -40,20 +40,6 @@ def get_hash_on_save() -> str:
     return fatlink_hash
 
 
-class AFatLogEvent(models.TextChoices):
-    """
-    Choices for SRP Status
-    """
-
-    CREATE_FATLINK = "CR_FAT_LINK", _("FAT Link Created")
-    CHANGE_FATLINK = "CH_FAT_LINK", _("FAT Link Changed")
-    DELETE_FATLINK = "RM_FAT_LINK", _("FAT Link Removed")
-    REOPEN_FATLINK = "RO_FAT_LINK", _("FAT Link Re-Opened")
-    # CREATE_FAT = "CR_FAT", _("FAT Registered")
-    DELETE_FAT = "RM_FAT", _("FAT Removed")
-    MANUAL_FAT = "CR_FAT_MAN", _("Manual FAT Added")
-
-
 class AaAfat(models.Model):
     """
     Meta model for app permissions
@@ -327,6 +313,19 @@ class AFatLog(models.Model):
     AFatLog
     """
 
+    class Event(models.TextChoices):
+        """
+        Choices for SRP Status
+        """
+
+        CREATE_FATLINK = "CR_FAT_LINK", _("FAT Link Created")
+        CHANGE_FATLINK = "CH_FAT_LINK", _("FAT Link Changed")
+        DELETE_FATLINK = "RM_FAT_LINK", _("FAT Link Removed")
+        REOPEN_FATLINK = "RO_FAT_LINK", _("FAT Link Re-Opened")
+        # CREATE_FAT = "CR_FAT", _("FAT Registered")
+        DELETE_FAT = "RM_FAT", _("FAT Removed")
+        MANUAL_FAT = "CR_FAT_MAN", _("Manual FAT Added")
+
     log_time = models.DateTimeField(default=timezone.now, db_index=True)
     user = models.ForeignKey(
         User,
@@ -339,8 +338,8 @@ class AFatLog(models.Model):
     log_event = models.CharField(
         max_length=11,
         blank=False,
-        choices=AFatLogEvent.choices,
-        default=AFatLogEvent.CREATE_FATLINK,
+        choices=Event.choices,
+        default=Event.CREATE_FATLINK,
     )
     log_text = models.TextField()
     fatlink_hash = models.CharField(max_length=254)

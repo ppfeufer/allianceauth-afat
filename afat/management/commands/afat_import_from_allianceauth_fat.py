@@ -10,7 +10,7 @@ from django.core.management.base import BaseCommand
 from allianceauth.fleetactivitytracking.models import Fat, Fatlink
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLog, AFatLogEvent
+from afat.models import AFat, AFatLink, AFatLog
 
 
 def get_input(text) -> str:
@@ -95,7 +95,7 @@ class Command(BaseCommand):
 
                 afatlog = AFatLog()
                 afatlog.log_time = aa_fatlink.fatdatetime
-                afatlog.log_event = AFatLogEvent.CREATE_FATLINK
+                afatlog.log_event = AFatLog.Event.CREATE_FATLINK
                 afatlog.log_text = log_text
                 afatlog.user_id = aa_fatlink.creator_id
                 afatlog.save()

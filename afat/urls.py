@@ -3,7 +3,7 @@ URL configuration
 """
 
 # Django
-from django.conf.urls import url
+from django.urls import path
 
 # Alliance Auth AFAT
 from afat.views import dashboard, fatlinks, logs, statistics
@@ -12,148 +12,135 @@ app_name: str = "afat"
 
 urlpatterns = [
     # Dashboard
-    url(r"^$", dashboard.overview, name="dashboard"),
+    path("", dashboard.overview, name="dashboard"),
     # Stats main page
-    url(r"^statistics/$", statistics.overview, name="statistics_overview"),
-    url(
-        r"^statistics/(?P<year>[0-9]+)/$",
-        statistics.overview,
-        name="statistics_overview",
-    ),
+    path("statistics/", statistics.overview, name="statistics_overview"),
+    path("statistics/(<int:year>/", statistics.overview, name="statistics_overview"),
     # Stats corp
-    url(
-        r"^statistics/corporation/$",
+    path(
+        "statistics/corporation/",
         statistics.corporation,
         name="statistics_corporation",
     ),
-    url(
-        r"^statistics/corporation/(?P<corpid>[0-9]+)/$",
+    path(
+        "statistics/corporation/<int:corpid>/",
         statistics.corporation,
         name="statistics_corporation",
     ),
-    url(
-        r"^statistics/corporation/(?P<corpid>[0-9]+)/(?P<year>[0-9]+)/$",
+    path(
+        "statistics/corporation/<int:corpid>/<int:year>/",
         statistics.corporation,
         name="statistics_corporation",
     ),
-    url(
-        (
-            r"^statistics/corporation/"
-            r"(?P<corpid>[0-9]+)/(?P<year>[0-9]+)/(?P<month>[0-9]+)/$"
-        ),
+    path(
+        "statistics/corporation/<int:corpid>/<int:year>/<int:month>/",
         statistics.corporation,
         name="statistics_corporation",
     ),
     # Stats char
-    url(r"^statistics/character/$", statistics.character, name="statistics_character"),
-    url(
-        r"^statistics/character/(?P<charid>[0-9]+)/$",
+    path("statistics/character/", statistics.character, name="statistics_character"),
+    path(
+        "statistics/character/<int:charid>/",
         statistics.character,
         name="statistics_character",
     ),
-    url(
-        (
-            r"^statistics/character/"
-            r"(?P<charid>[0-9]+)/(?P<year>[0-9]+)/(?P<month>[0-9]+)/$"
-        ),
+    path(
+        "statistics/character/<int:charid>/<int:year>/<int:month>/",
         statistics.character,
         name="statistics_character",
     ),
     # Stats alliance
-    url(r"^statistics/alliance/$", statistics.alliance, name="statistics_alliance"),
-    url(
-        r"^statistics/alliance/(?P<allianceid>[0-9]+)/$",
+    path("statistics/alliance/", statistics.alliance, name="statistics_alliance"),
+    path(
+        "statistics/alliance/<int:allianceid>/",
         statistics.alliance,
         name="statistics_alliance",
     ),
-    url(
-        r"^statistics/alliance/(?P<allianceid>[0-9]+)/(?P<year>[0-9]+)/$",
+    path(
+        "statistics/alliance/<int:allianceid>/<int:year>/",
         statistics.alliance,
         name="statistics_alliance",
     ),
-    url(
-        (
-            r"^statistics/alliance/"
-            r"(?P<allianceid>[0-9]+)/(?P<year>[0-9]+)/(?P<month>[0-9]+)/$"
-        ),
+    path(
+        "statistics/alliance/<int:allianceid>/<int:year>/<int:month>/",
         statistics.alliance,
         name="statistics_alliance",
     ),
     # Fat links list actions
-    url(r"^fatlinks/$", fatlinks.overview, name="fatlinks_overview"),
-    url(r"^fatlinks/(?P<year>[0-9]+)/$", fatlinks.overview, name="fatlinks_overview"),
+    path("fatlinks/", fatlinks.overview, name="fatlinks_overview"),
+    path("fatlinks/<int:year>/", fatlinks.overview, name="fatlinks_overview"),
     # Fat link actions
-    url(r"^fatlink/add/$", fatlinks.add_fatlink, name="fatlinks_add_fatlink"),
-    url(
-        r"^fatlinks/link/create/esi-fatlink/$",
+    path("fatlink/add/", fatlinks.add_fatlink, name="fatlinks_add_fatlink"),
+    path(
+        "fatlinks/link/create/esi-fatlink/",
         fatlinks.create_esi_fatlink,
         name="fatlinks_create_esi_fatlink",
     ),
-    url(
-        r"^fatlink/create/esi-fatlink/callback/(?P<fatlink_hash>[a-zA-Z0-9]+)/$",
+    path(
+        "fatlink/create/esi-fatlink/callback/<str:fatlink_hash>/",
         fatlinks.create_esi_fatlink_callback,
         name="fatlinks_create_esi_fatlink_callback",
     ),
-    url(
-        r"^fatlink/create/clickable-fatlink/$",
+    path(
+        "fatlink/create/clickable-fatlink/",
         fatlinks.create_clickable_fatlink,
         name="fatlinks_create_clickable_fatlink",
     ),
-    url(
-        r"^fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/details/$",
+    path(
+        "fatlink/<str:fatlink_hash>/details/",
         fatlinks.details_fatlink,
         name="fatlinks_details_fatlink",
     ),
-    url(
-        r"^fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/delete/$",
+    path(
+        "fatlink/<str:fatlink_hash>/delete/",
         fatlinks.delete_fatlink,
         name="fatlinks_delete_fatlink",
     ),
-    url(
-        r"^fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/stop-esi-tracking/$",
+    path(
+        "fatlink/<str:fatlink_hash>/stop-esi-tracking/",
         fatlinks.close_esi_fatlink,
         name="fatlinks_close_esi_fatlink",
     ),
-    url(
-        r"^fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/re-open/$",
+    path(
+        "fatlink/<str:fatlink_hash>/re-open/",
         fatlinks.reopen_fatlink,
         name="fatlinks_reopen_fatlink",
     ),
     # Fat actions
-    url(
-        r"^fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/register/$",
+    path(
+        "fatlink/<str:fatlink_hash>/register/",
         fatlinks.add_fat,
         name="fatlinks_add_fat",
     ),
-    url(
-        r"^fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/fat/(?P<fat>[0-9]+)/delete/$",
+    path(
+        "fatlink/<str:fatlink_hash>/fat/<int:fat_id>/delete/",
         fatlinks.delete_fat,
         name="fatlinks_delete_fat",
     ),
     # Log actions
-    url(r"^logs/$", logs.overview, name="logs_overview"),
+    path("logs/", logs.overview, name="logs_overview"),
     # Ajax calls :: Dashboard
-    url(
-        r"^ajax/dashboard/fatlinks/recent/$",
+    path(
+        "ajax/dashboard/fatlinks/recent/",
         dashboard.ajax_get_recent_fatlinks,
         name="dashboard_ajax_get_recent_fatlinks",
     ),
-    url(
-        r"^ajax/dashboard/fats/recent/character/(?P<charid>[0-9]+)/$",
+    path(
+        "ajax/dashboard/fats/recent/character/<int:charid>/",
         dashboard.ajax_recent_get_fats_by_character,
         name="dashboard_ajax_get_recent_fats_by_character",
     ),
     # Ajax calls :: Fat links
-    url(
-        r"^ajax/fatlinks/fatlinks/year/(?P<year>[0-9]+)/$",
+    path(
+        "ajax/fatlinks/fatlinks/year/<int:year>/",
         fatlinks.ajax_get_fatlinks_by_year,
         name="fatlinks_ajax_get_fatlinks_by_year",
     ),
-    url(
-        r"^ajax/fatlinks/fatlink/(?P<fatlink_hash>[a-zA-Z0-9]+)/fats/$",
+    path(
+        "ajax/fatlinks/fatlink/<str:fatlink_hash>/fats/",
         fatlinks.ajax_get_fats_by_fatlink,
         name="fatlinks_ajax_get_fats_by_fatlink",
     ),
     # Ajax calls :: Logs
-    url(r"^ajax/logs/$", logs.ajax_get_logs, name="logs_ajax_get_logs"),
+    path("ajax/logs/", logs.ajax_get_logs, name="logs_ajax_get_logs"),
 ]

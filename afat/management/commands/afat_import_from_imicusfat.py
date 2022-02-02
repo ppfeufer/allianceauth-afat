@@ -8,14 +8,7 @@ from django.core.management.base import BaseCommand
 
 # Alliance Auth AFAT
 from afat import __version__ as afat_version_installed
-from afat.models import (
-    AFat,
-    AFatLink,
-    AFatLinkType,
-    AFatLog,
-    AFatLogEvent,
-    ClickAFatDuration,
-)
+from afat.models import AFat, AFatLink, AFatLinkType, AFatLog, ClickAFatDuration
 
 
 def get_input(text) -> str:
@@ -227,7 +220,7 @@ class Command(BaseCommand):
 
             afatlog = AFatLog()
             afatlog.log_time = imicusfat_fatlink.ifattime
-            afatlog.log_event = AFatLogEvent.CREATE_FATLINK
+            afatlog.log_event = AFatLog.Event.CREATE_FATLINK
             afatlog.log_text = log_text
             afatlog.user_id = imicusfat_fatlink.creator_id
             afatlog.save()
@@ -279,7 +272,7 @@ class Command(BaseCommand):
             if imicusfat_manualfat.created_at is not None:
                 afatlog = AFatLog()
                 afatlog.log_time = imicusfat_manualfat.created_at
-                afatlog.log_event = AFatLogEvent.MANUAL_FAT
+                afatlog.log_event = AFatLog.Event.MANUAL_FAT
                 afatlog.log_text = log_text
                 afatlog.user_id = imicusfat_manualfat.creator_id
                 afatlog.save()

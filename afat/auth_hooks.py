@@ -60,4 +60,4 @@ def register_url():
     :rtype:
     """
 
-    return UrlHook(urls, "afat", fr"^{AFAT_BASE_URL}/")
+    return UrlHook(urls, "afat", rf"^{AFAT_BASE_URL}/")

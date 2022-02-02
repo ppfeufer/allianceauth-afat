@@ -35,7 +35,7 @@ coverage:
 	rm -rfv htmlcov && \
 	coverage run ../myauth/manage.py test $(package) --keepdb --failfast && \
 	coverage html && \
-	coverage report
+	coverage report -m
 
 tox_tests:
 	tox && \
