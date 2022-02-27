@@ -7,7 +7,7 @@ import unidecode
 
 # Django
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth (External Libs)
 from app_utils.django import clean_setting
