@@ -1,3 +1,6 @@
+# Standard Library
+from unittest.mock import Mock
+
 # Django
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory, TestCase
@@ -52,7 +55,7 @@ class TestDashboard(TestCase):
         request = self.factory.get(reverse("afat:dashboard"))
         request.user = user
 
-        middleware = SessionMiddleware()
+        middleware = SessionMiddleware(Mock())
         middleware.process_request(request)
 
         return overview(request)
