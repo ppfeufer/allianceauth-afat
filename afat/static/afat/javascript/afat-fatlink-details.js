@@ -1,6 +1,6 @@
 /* global afatSettings, convertStringToSlug, sortTable, ClipboardJS, manageModal */
 
-$(document).ready(function () {
+$(document).ready(() => {
     'use strict';
 
     const fatListTable = $('#fleet-edit-fat-list').DataTable({
@@ -19,7 +19,7 @@ $(document).ready(function () {
             {
                 targets: [3],
                 orderable: false,
-                createdCell: function (td) {
+                createdCell: (td) => {
                     $(td).addClass('text-right');
                 }
             }
@@ -27,15 +27,15 @@ $(document).ready(function () {
         order: [
             [0, 'asc']
         ],
-        createdRow: function (row, data, rowIndex) {
+        createdRow: (row, data, rowIndex) => {
             const shipTypeOverviewTable = $('#fleet-edit-ship-types');
             const shipTypeSlug = convertStringToSlug(data.ship_type);
 
             if ($('tr.shiptype-' + shipTypeSlug).length) {
-                let currentCount = shipTypeOverviewTable.find(
+                const currentCount = shipTypeOverviewTable.find(
                     'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
                 ).html();
-                let newCount = parseInt(currentCount) + 1;
+                const newCount = parseInt(currentCount) + 1;
 
                 shipTypeOverviewTable.find(
                     'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
@@ -65,13 +65,13 @@ $(document).ready(function () {
     /**
      * reload datatable "linkListTable"
      */
-    const realoadDataTable = function () {
+    const realoadDataTable = () => {
         // the drift (positive for overshooting)
         const dt = Date.now() - expectedReloadDatatable;
 
         if (dt > intervalReloadDatatable) {
             /**
-             * Something really bad happened. Maybe the browser (tab) was inactive?
+             * Something awful happened. Maybe the browser (tab) was inactive?
              * Possibly special handling to avoid futile "catch up" run
              */
             window.location.replace(
@@ -80,11 +80,11 @@ $(document).ready(function () {
         }
 
         fatListTable.ajax.reload(
-            function (tableData) {
+            (tableData) => {
                 const shipTypeOverviewTable = $('#fleet-edit-ship-types');
                 shipTypeOverviewTable.find('tbody').html('');
 
-                $.each(tableData, function (i, item) {
+                $.each(tableData, (i, item) => {
                     const shipTypeSlug = convertStringToSlug(item.ship_type);
 
                     if ($('tr.shiptype-' + shipTypeSlug).length) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
     }
 
     const clipboard = new ClipboardJS('.copy-btn');
-    clipboard.on('success', function () {
+    clipboard.on('success', () => {
         $('.copy-btn').tooltip('show');
     });
 

@@ -1,6 +1,6 @@
 /* global afatSettings, moment, console, manageModal */
 
-$(document).ready(function () {
+$(document).ready(() => {
     'use strict';
 
     const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
@@ -18,7 +18,7 @@ $(document).ready(function () {
             {
                 data: 'log_time',
                 render: {
-                    display: function (data) {
+                    display: (data) => {
                         return moment(data.time).utc().format(DATETIME_FORMAT);
                     },
                     _: 'timestamp'
