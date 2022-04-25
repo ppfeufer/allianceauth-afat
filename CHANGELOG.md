@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - JavaScript modernized
 
+### Fixed
+
+- An issue where a user can't see other characters statistics despite having the
+  right permissions
+
 
 ## [2.8.0] - 2022-03-02
 

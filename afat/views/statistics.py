@@ -29,7 +29,11 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
-from afat.helper.views_helper import characters_with_permission, get_random_rgba_color
+from afat.helper.views_helper import (
+    characters_with_permission,
+    get_random_rgba_color,
+    user_has_any_perms,
+)
 from afat.models import AFat
 from afat.utils import get_or_create_alliance_info, get_or_create_corporation_info
 
@@ -171,8 +175,8 @@ def character(
         char.character for char in CharacterOwnership.objects.filter(user=request.user)
     ]
 
-    if eve_character not in valid and not request.user.has_perm(
-        "afat.stats_char_other"
+    if eve_character not in valid and not user_has_any_perms(
+        request.user, ["afat.stats_corporation_own", "afat.stats_corporation_other"]
     ):
         messages.warning(
             request,
