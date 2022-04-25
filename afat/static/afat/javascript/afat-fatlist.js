@@ -1,6 +1,6 @@
 /* global afatSettings, moment, console, manageModal */
 
-$(document).ready(function () {
+$(document).ready(() => {
     'use strict';
 
     const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
@@ -21,7 +21,7 @@ $(document).ready(function () {
             {
                 data: 'fleet_time',
                 render: {
-                    display: function (data, type, row) {
+                    display: (data, type, row) => {
                         return moment(data.time).utc().format(DATETIME_FORMAT);
                     },
                     _: 'timestamp'
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
             {
                 data: 'actions',
-                render: function (data, type, row) {
+                render: (data, type, row) => {
                     if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
                         return data;
                     } else {
@@ -49,7 +49,7 @@ $(document).ready(function () {
             {
                 targets: [5],
                 orderable: false,
-                createdCell: function (td) {
+                createdCell: (td) => {
                     $(td).addClass('text-right');
                 }
             },
@@ -90,7 +90,7 @@ $(document).ready(function () {
     /**
      * Reload datatable "linkListTable"
      */
-    const realoadDataTable = function () {
+    const realoadDataTable = () => {
         const dt = Date.now() - expectedReloadDatatable; // the drift (positive for overshooting)
 
         if (dt > intervalReloadDatatable) {

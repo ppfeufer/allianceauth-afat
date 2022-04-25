@@ -1,6 +1,6 @@
 /* global afatSettings, characters, moment, manageModal */
 
-$(document).ready(function () {
+$(document).ready(() => {
     'use strict';
 
     const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
@@ -13,7 +13,7 @@ $(document).ready(function () {
             '<p>' + afatSettings.translation.dataTable.noFatsWarning + ' ###CHARACTER_NAME###</p>' +
             '</div>';
 
-        characters.forEach(function (character) {
+        characters.forEach((character) => {
             $('#recent-fats-character-' + character.charId).DataTable({
                 ajax: {
                     url: afatSettings.url.characterFats.replace(
@@ -31,7 +31,7 @@ $(document).ready(function () {
                     {
                         data: 'fleet_time',
                         render: {
-                            display: function (data, type, row) {
+                            display: (data, type, row) => {
                                 return moment(data.time).utc().format(
                                     DATETIME_FORMAT
                                 );
@@ -74,7 +74,7 @@ $(document).ready(function () {
             {
                 data: 'fleet_time',
                 render: {
-                    display: function (data, type, row) {
+                    display: (data, type, row) => {
                         return moment(data.time).utc().format(DATETIME_FORMAT);
                     },
                     _: 'timestamp'
@@ -82,7 +82,7 @@ $(document).ready(function () {
             },
             {
                 data: 'actions',
-                render: function (data, type, row) {
+                render: (data, type, row) => {
                     if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
                         return data;
                     } else {
@@ -94,7 +94,7 @@ $(document).ready(function () {
         columnDefs: [
             {
                 targets: [4],
-                createdCell: function (td) {
+                createdCell: (td) => {
                     $(td).addClass('text-right');
                 }
             }

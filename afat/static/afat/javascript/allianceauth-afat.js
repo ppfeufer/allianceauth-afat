@@ -3,7 +3,7 @@
  * @param {string} text
  * @returns {string}
  */
-let convertStringToSlug = function (text) {
+let convertStringToSlug = (text) => {
     'use strict';
 
     return text.toLowerCase()
@@ -16,13 +16,13 @@ let convertStringToSlug = function (text) {
  * @param {element} table
  * @param {string} order
  */
-const sortTable = function (table, order) {
+const sortTable = (table, order) => {
     'use strict';
 
     const asc = order === 'asc';
     const tbody = table.find('tbody');
 
-    tbody.find('tr').sort(function (a, b) {
+    tbody.find('tr').sort((a, b) => {
         if (asc) {
             return $('td:first', a).text().localeCompare($('td:first', b).text());
         } else {
@@ -35,18 +35,17 @@ const sortTable = function (table, order) {
  * Manage a modal window
  * @param {element} modalElement
  */
-const manageModal = function (modalElement) {
+const manageModal = (modalElement) => {
     'use strict';
 
-    modalElement.on('show.bs.modal', function (event) {
-        const modal = $(this);
+    modalElement.on('show.bs.modal', (event) => {
         const button = $(event.relatedTarget); // Button that triggered the modal
         const url = button.data('url'); // Extract info from data-* attributes
         const cancelText = button.data('cancel-text');
         const confirmText = button.data('confirm-text');
         const bodyText = button.data('body-text');
-        let cancelButtonText = modal.find('#cancelButtonDefaultText').text();
-        let confirmButtonText = modal.find('#confirmButtonDefaultText').text();
+        let cancelButtonText = modalElement.find('#cancelButtonDefaultText').text();
+        let confirmButtonText = modalElement.find('#confirmButtonDefaultText').text();
 
         if (typeof cancelText !== 'undefined' && cancelText !== '') {
             cancelButtonText = cancelText;
@@ -56,18 +55,16 @@ const manageModal = function (modalElement) {
             confirmButtonText = confirmText;
         }
 
-        modal.find('#cancel-action').text(cancelButtonText);
-        modal.find('#confirm-action').text(confirmButtonText);
+        modalElement.find('#cancel-action').text(cancelButtonText);
+        modalElement.find('#confirm-action').text(confirmButtonText);
 
-        modal.find('#confirm-action').attr('href', url);
-        modal.find('.modal-body').html(bodyText);
-    }).on('hide.bs.modal', function () {
-        const modal = $(this);
-
-        modal.find('.modal-body').html('');
-        modal.find('#cancel-action').html('');
-        modal.find('#confirm-action').html('');
-        modal.find('#confirm-action').attr('href', '');
+        modalElement.find('#confirm-action').attr('href', url);
+        modalElement.find('.modal-body').html(bodyText);
+    }).on('hide.bs.modal', () => {
+        modalElement.find('.modal-body').html('');
+        modalElement.find('#cancel-action').html('');
+        modalElement.find('#confirm-action').html('');
+        modalElement.find('#confirm-action').attr('href', '');
     });
 };
 

@@ -6,7 +6,7 @@ views helper
 import random
 
 # Django
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, User
 from django.core.handlers.wsgi import WSGIRequest
 from django.db import models
 from django.urls import reverse
@@ -285,3 +285,16 @@ def characters_with_permission(permission: Permission) -> models.QuerySet:
     charater_qs = EveCharacter.objects.filter(character_ownership__user__in=users_qs)
 
     return charater_qs
+
+
+def user_has_any_perms(user: User, perm_list, obj=None):
+    """
+    Return True if the user has each of the specified permissions. If
+    object is passed, check if the user has all required perms for it.
+    """
+
+    # Active superusers have all permissions.
+    if user.is_active and user.is_superuser:
+        return True
+
+    return any(user.has_perm(perm, obj) for perm in perm_list)
