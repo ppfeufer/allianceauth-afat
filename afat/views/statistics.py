@@ -176,7 +176,12 @@ def character(
     ]
 
     if eve_character not in valid and not user_has_any_perms(
-        request.user, ["afat.stats_corporation_own", "afat.stats_corporation_other"]
+        request.user,
+        [
+            "afat.stats_corporation_own",
+            "afat.stats_corporation_other",
+            "afat.manage_afat",
+        ],
     ):
         messages.warning(
             request,
@@ -269,7 +274,9 @@ def character(
 
 
 @login_required()
-@permissions_required(("afat.stats_corporation_other", "afat.stats_corporation_own"))
+@permissions_required(
+    ("afat.stats_corporation_other", "afat.stats_corporation_own", "afat.manage_afat")
+)
 def corporation(
     request: WSGIRequest, corpid: int = 0000, year: int = None, month: int = None
 ) -> HttpResponse:
@@ -292,7 +299,10 @@ def corporation(
 
     # Check character has permission to view other corp stats
     if int(request.user.profile.main_character.corporation_id) != int(corpid):
-        if not request.user.has_perm("afat.stats_corporation_other"):
+        if not user_has_any_perms(
+            request.user,
+            ["afat.stats_corporation_other", "afat.manage_afat"],
+        ):
             messages.warning(
                 request,
                 mark_safe(
@@ -452,7 +462,7 @@ def corporation(
 
 
 @login_required()
-@permission_required("afat.stats_corporation_other")
+@permissions_required(("afat.stats_corporation_other", "afat.manage_afat"))
 def alliance(
     request: WSGIRequest, allianceid: int, year: int = None, month: int = None
 ) -> HttpResponse:

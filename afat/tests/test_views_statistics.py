@@ -221,7 +221,9 @@ class TestStatistics(TestCase):
         # then
         self.assertEqual(res.status_code, 200)
 
-    def test_should_show_character_stats_for_user_with_stats_corporation_own(self):
+    def test_should_show_other_character_stats_for_user_with_stats_corporation_own(
+        self,
+    ):
         # given
         self.client.force_login(self.user_with_stats_corporation_own)
 
@@ -239,9 +241,29 @@ class TestStatistics(TestCase):
         # then
         self.assertEqual(res.status_code, 200)
 
-    def test_should_show_character_stats_for_user_with_stats_corporation_other(self):
+    def test_should_show_other_character_stats_for_user_with_stats_corporation_other(
+        self,
+    ):
         # given
         self.client.force_login(self.user_with_stats_corporation_other)
+
+        # when
+        url = reverse(
+            "afat:statistics_character",
+            kwargs={
+                "charid": self.user_with_basic_access.profile.main_character.character_id,
+                "year": 2020,
+                "month": 4,
+            },
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 200)
+
+    def test_should_show_other_character_stats_for_user_with_manage_afat(self):
+        # given
+        self.client.force_login(self.user_with_manage_afat)
 
         # when
         url = reverse(
@@ -283,7 +305,7 @@ class TestStatistics(TestCase):
         url = reverse(
             "afat:statistics_corporation",
             kwargs={
-                "corpid": self.user_with_stats_corporation_other.profile.main_character.corporation_id
+                "corpid": self.user_with_stats_corporation_own.profile.main_character.corporation_id
             },
         )
         res = self.client.get(url)
@@ -291,7 +313,7 @@ class TestStatistics(TestCase):
         # then
         self.assertEqual(res.status_code, 200)
 
-    def test_should_show_own_corp_stats_for_user_with_stats_corporation_other(self):
+    def test_should_show_other_corp_stats_for_user_with_stats_corporation_other(self):
         # given
         self.client.force_login(self.user_with_stats_corporation_other)
 
@@ -299,7 +321,23 @@ class TestStatistics(TestCase):
         url = reverse(
             "afat:statistics_corporation",
             kwargs={
-                "corpid": self.user_with_stats_corporation_own.profile.main_character.corporation_id
+                "corpid": self.user_with_basic_access.profile.main_character.corporation_id
+            },
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 200)
+
+    def test_should_show_other_corp_stats_for_user_with_manage_afat(self):
+        # given
+        self.client.force_login(self.user_with_manage_afat)
+
+        # when
+        url = reverse(
+            "afat:statistics_corporation",
+            kwargs={
+                "corpid": self.user_with_basic_access.profile.main_character.corporation_id
             },
         )
         res = self.client.get(url)
@@ -315,7 +353,23 @@ class TestStatistics(TestCase):
         url = reverse(
             "afat:statistics_corporation",
             kwargs={
-                "corpid": self.user_with_stats_corporation_own.profile.main_character.corporation_id
+                "corpid": self.user_with_basic_access.profile.main_character.corporation_id
+            },
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 302)
+
+    def test_should_not_show_other_corp_stats_for_user(self):
+        # given
+        self.client.force_login(self.user_with_basic_access)
+
+        # when
+        url = reverse(
+            "afat:statistics_corporation",
+            kwargs={
+                "corpid": self.user_with_stats_corporation_other.profile.main_character.corporation_id
             },
         )
         res = self.client.get(url)
@@ -381,11 +435,43 @@ class TestStatistics(TestCase):
         # then
         self.assertEqual(res.status_code, 200)
 
+    def test_should_show_all_alliance_stats_with_for_user_with_manage_afat(
+        self,
+    ):
+        # given
+        self.client.force_login(self.user_with_manage_afat)
+
+        # when
+        url = reverse(
+            "afat:statistics_alliance",
+            kwargs={"allianceid": 3001},
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 200)
+
     def test_should_show_all_alliance_stats_with_year_for_user_with_stats_corporation_other(
         self,
     ):
         # given
         self.client.force_login(self.user_with_stats_corporation_other)
+
+        # when
+        url = reverse(
+            "afat:statistics_alliance",
+            kwargs={"allianceid": 3001, "year": 2020},
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 200)
+
+    def test_should_show_all_alliance_stats_with_year_for_user_with_manage_afat(
+        self,
+    ):
+        # given
+        self.client.force_login(self.user_with_manage_afat)
 
         # when
         url = reverse(
@@ -412,3 +498,35 @@ class TestStatistics(TestCase):
 
         # then
         self.assertEqual(res.status_code, 200)
+
+    def test_should_show_all_alliance_stats_with_month_for_user_with_manage_afat(
+        self,
+    ):
+        # given
+        self.client.force_login(self.user_with_manage_afat)
+
+        # when
+        url = reverse(
+            "afat:statistics_alliance",
+            kwargs={"allianceid": 3001, "year": 2020, "month": 4},
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 200)
+
+    def test_should_not_show_all_alliance_stats_for_user(
+        self,
+    ):
+        # given
+        self.client.force_login(self.user_with_basic_access)
+
+        # when
+        url = reverse(
+            "afat:statistics_alliance",
+            kwargs={"allianceid": 3001},
+        )
+        res = self.client.get(url)
+
+        # then
+        self.assertEqual(res.status_code, 302)
