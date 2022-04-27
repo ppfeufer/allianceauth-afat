@@ -56,7 +56,10 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     if year is None:
         year = datetime.now().year
 
-    if request.user.has_perm("afat.stats_corporation_other"):
+    if user_has_any_perms(
+        request.user,
+        ["afat.stats_corporation_other", "afat.manage_afat"],
+    ):
         basic_access_permission = Permission.objects.select_related("content_type").get(
             content_type__app_label="afat", codename="basic_access"
         )

@@ -25,7 +25,7 @@
     <div class="tab-content">
         {% include "afat/partials/statistics/overview/tabs/mine.html" %}
 
-        {% if perms.afat.stats_corporation_own or perms.afat.stats_corporation_other %}
+        {% if perms.afat.stats_corporation_own or perms.afat.stats_corporation_other or perms.afat.manage_afat %}
             {% include "afat/partials/statistics/overview/tabs/corps.html" %}
         {% endif %}
     </div>

@@ -6,7 +6,7 @@
         <h4>{% translate "Corporations <small>(Click on an alliance name to see their corporations)</small>" %}</h4>
 
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            {% if perms.afat.stats_corporation_other %}
+            {% if perms.afat.stats_corporation_other or perms.afat.manage_afat %}
                 {% for key, value in data.items|dictsort:0 %}
                     {% if value|length > 0 %}
                         <div class="panel panel-default">
