@@ -56,7 +56,10 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     if year is None:
         year = datetime.now().year
 
-    if request.user.has_perm("afat.stats_corporation_other"):
+    if user_has_any_perms(
+        request.user,
+        ["afat.stats_corporation_other", "afat.manage_afat"],
+    ):
         basic_access_permission = Permission.objects.select_related("content_type").get(
             content_type__app_label="afat", codename="basic_access"
         )
@@ -175,14 +178,30 @@ def character(
         char.character for char in CharacterOwnership.objects.filter(user=request.user)
     ]
 
+    can_view_character = True
+
+    # Check if the user can view other corporation's statistics or manage AFAT
     if eve_character not in valid and not user_has_any_perms(
         request.user,
         [
-            "afat.stats_corporation_own",
             "afat.stats_corporation_other",
             "afat.manage_afat",
         ],
     ):
+        can_view_character = False
+
+    # Check if the user if by any chance in the same corporation as the character
+    # and can view own corporation statistics
+    if (
+        eve_character not in valid
+        and eve_character.corporation_id
+        == request.user.profile.main_character.corporation_id
+        and request.user.has_perm("afat.stats_corporation_own")
+    ):
+        can_view_character = True
+
+    # If the user cannot view the character's statistics, send him home
+    if can_view_character is False:
         messages.warning(
             request,
             mark_safe(
@@ -216,7 +235,6 @@ def character(
     data_ship_type = {}
 
     for fat in fats:
-        # if fat.shiptype in data_ship_type.keys():
         if fat.shiptype in data_ship_type:
             continue
 
@@ -224,14 +242,12 @@ def character(
 
     colors = []
 
-    # for _ in data_ship_type.keys():
     for _ in data_ship_type:
         bg_color_str = get_random_rgba_color()
         colors.append(bg_color_str)
 
     data_ship_type = [
         # Ship type can be None, so we need to convert to string here
-        # list(str(key) for key in data_ship_type.keys()),
         list(str(key) for key in data_ship_type),
         list(data_ship_type.values()),
         colors,
@@ -543,7 +559,6 @@ def alliance(
     data_ship_type = {}
 
     for fat in fats:
-        # if fat.shiptype in data_ship_type.keys():
         if fat.shiptype in data_ship_type:
             continue
 
@@ -551,14 +566,12 @@ def alliance(
 
     colors = []
 
-    # for _ in data_ship_type.keys():
     for _ in data_ship_type:
         bg_color_str = get_random_rgba_color()
         colors.append(bg_color_str)
 
     data_ship_type = [
         # Ship type can be None, so we need to convert to string here
-        # list(str(key) for key in data_ship_type.keys()),
         list(str(key) for key in data_ship_type),
         list(data_ship_type.values()),
         colors,
@@ -568,7 +581,6 @@ def alliance(
     data = {}
 
     for fat in fats:
-        # if fat.shiptype in data.keys():
         if fat.shiptype in data:
             continue
 
@@ -589,7 +601,6 @@ def alliance(
     for fat in fats:
         data[fat.shiptype][fat.character.corporation_name] += 1
 
-    # if None in data.keys():
     if None in data:
         data["Unknown"] = data[None]
         data.pop(None)
