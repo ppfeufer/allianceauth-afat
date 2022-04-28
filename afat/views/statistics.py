@@ -178,14 +178,30 @@ def character(
         char.character for char in CharacterOwnership.objects.filter(user=request.user)
     ]
 
+    can_view_character = True
+
+    # Check if the user can view other corporation's statistics or manage AFAT
     if eve_character not in valid and not user_has_any_perms(
         request.user,
         [
-            "afat.stats_corporation_own",
             "afat.stats_corporation_other",
             "afat.manage_afat",
         ],
     ):
+        can_view_character = False
+
+    # Check if the user if by any chance in the same corporation as the character
+    # and can view own corporation statistics
+    if (
+        eve_character not in valid
+        and eve_character.corporation_id
+        == request.user.profile.main_character.corporation_id
+        and request.user.has_perm("afat.stats_corporation_own")
+    ):
+        can_view_character = True
+
+    # If the user cannot view the character's statistics, send him home
+    if can_view_character is False:
         messages.warning(
             request,
             mark_safe(
