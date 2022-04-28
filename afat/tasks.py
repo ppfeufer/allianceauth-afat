@@ -97,7 +97,6 @@ def process_fats(data_list, data_source, fatlink_hash):
 
         for char in data_list:
             # Only process if the character is not already registered for this FAT
-
             if (
                 AFat.objects.filter(
                     character__character_id=char["character_id"],

@@ -235,7 +235,6 @@ def character(
     data_ship_type = {}
 
     for fat in fats:
-        # if fat.shiptype in data_ship_type.keys():
         if fat.shiptype in data_ship_type:
             continue
 
@@ -243,14 +242,12 @@ def character(
 
     colors = []
 
-    # for _ in data_ship_type.keys():
     for _ in data_ship_type:
         bg_color_str = get_random_rgba_color()
         colors.append(bg_color_str)
 
     data_ship_type = [
         # Ship type can be None, so we need to convert to string here
-        # list(str(key) for key in data_ship_type.keys()),
         list(str(key) for key in data_ship_type),
         list(data_ship_type.values()),
         colors,
@@ -562,7 +559,6 @@ def alliance(
     data_ship_type = {}
 
     for fat in fats:
-        # if fat.shiptype in data_ship_type.keys():
         if fat.shiptype in data_ship_type:
             continue
 
@@ -570,14 +566,12 @@ def alliance(
 
     colors = []
 
-    # for _ in data_ship_type.keys():
     for _ in data_ship_type:
         bg_color_str = get_random_rgba_color()
         colors.append(bg_color_str)
 
     data_ship_type = [
         # Ship type can be None, so we need to convert to string here
-        # list(str(key) for key in data_ship_type.keys()),
         list(str(key) for key in data_ship_type),
         list(data_ship_type.values()),
         colors,
@@ -587,7 +581,6 @@ def alliance(
     data = {}
 
     for fat in fats:
-        # if fat.shiptype in data.keys():
         if fat.shiptype in data:
             continue
 
@@ -608,7 +601,6 @@ def alliance(
     for fat in fats:
         data[fat.shiptype][fat.character.corporation_name] += 1
 
-    # if None in data.keys():
     if None in data:
         data["Unknown"] = data[None]
         data.pop(None)
