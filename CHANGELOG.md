@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Fixed
+
+- Duplicate Key error by moving check if character exists to `process_character`
+  function instead of `process_fats` function
+
 
 ## [2.8.3] - 2022-04-28
 
