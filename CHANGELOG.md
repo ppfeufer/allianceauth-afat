@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.8.4] - 2022-05-02
+
 ### Fixed
 
 - Duplicate Key error by moving check if character exists to `process_character`
