@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Another attempt to fix the Duplicate Key Error that still happens from time to
-  time. This is - to my analysis - because ESI is not fast enough to to handle all
+  time. This is - to my analysis - because ESI is not fast enough to handle all
   the calls between the task runs. So we let Django handle it now, hopefully.
 
 
