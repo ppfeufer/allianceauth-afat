@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.8.5] - 2022-06-16
+
+### Fixed
+
+- Another attempt to fix the Duplicate Key Error that still happens from time to
+  time. This is - to my analysis - because ESI is not fast enough to handle all
+  the calls between the task runs. So we let Django handle it now, hopefully.
+
+
 ## [2.8.4] - 2022-05-02
 
 ### Fixed

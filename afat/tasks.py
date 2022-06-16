@@ -117,37 +117,28 @@ def process_character(
     :return:
     """
 
-    # Only process if the character is not already registered for this FAT
-    if (
-        AFat.objects.filter(
-            character__character_id=character_id, afatlink__hash__exact=fatlink_hash
-        ).exists()
-        is False
-    ):
-        character = get_or_create_character(character_id=character_id)
-        link = AFatLink.objects.get(hash=fatlink_hash)
+    character = get_or_create_character(character_id=character_id)
+    link = AFatLink.objects.get(hash=fatlink_hash)
 
-        solar_system = esi.client.Universe.get_universe_systems_system_id(
-            system_id=solar_system_id
-        ).result()
-        ship = esi.client.Universe.get_universe_types_type_id(
-            type_id=ship_type_id
-        ).result()
+    solar_system = esi.client.Universe.get_universe_systems_system_id(
+        system_id=solar_system_id
+    ).result()
+    ship = esi.client.Universe.get_universe_types_type_id(type_id=ship_type_id).result()
 
-        solar_system_name = solar_system["name"]
-        ship_name = ship["name"]
+    solar_system_name = solar_system["name"]
+    ship_name = ship["name"]
 
-        logger.info(
-            f"New Pilot: Adding {character} in {solar_system_name} flying "
-            f'a {ship_name} to FAT link "{fatlink_hash}"'
-        )
+    logger.info(
+        f"New Pilot: Adding {character} in {solar_system_name} flying "
+        f'a {ship_name} to FAT link "{fatlink_hash}"'
+    )
 
-        AFat(
-            afatlink_id=link.pk,
-            character=character,
-            system=solar_system_name,
-            shiptype=ship_name,
-        ).save()
+    AFat.objects.get_or_create(
+        afatlink_id=link.pk,
+        character=character,
+        system=solar_system_name,
+        shiptype=ship_name,
+    )
 
 
 def close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
