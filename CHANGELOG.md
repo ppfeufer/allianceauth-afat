@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.8.5] - 2022-06-16
+
 ### Fixed
 
 - Another attempt to fix the Duplicate Key Error that still happens from time to
