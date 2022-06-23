@@ -128,17 +128,23 @@ def process_character(
     solar_system_name = solar_system["name"]
     ship_name = ship["name"]
 
-    logger.info(
-        f"New Pilot: Adding {character} in {solar_system_name} flying "
-        f'a {ship_name} to FAT link "{fatlink_hash}"'
-    )
-
-    AFat.objects.get_or_create(
-        afatlink_id=link.pk,
+    fat, created = AFat.objects.get_or_create(
+        afatlink=link,
         character=character,
         system=solar_system_name,
         shiptype=ship_name,
     )
+
+    if created is True:
+        logger.info(
+            f"New Pilot: Adding {character} in {solar_system_name} flying "
+            f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
+        )
+    else:
+        logger.debug(
+            f"Pilot {character} already registered for FAT link {fatlink_hash} "
+            f"with FAT ID {fat.pk}"
+        )
 
 
 def close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
