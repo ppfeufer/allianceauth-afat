@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.8.6] - 2022-06-16
+
+### Fixed
+
+- Apparently I did it wrong and `get_or_create` was throwing errors. Should be fixed now
+
+
 ## [2.8.5] - 2022-06-16
 
 ### Fixed
