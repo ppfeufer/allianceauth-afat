@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Changed
+
+- Use bundled JS provided by AA
+
+### Removed
+
+- Unused JavaScript
+
 
 ## [2.8.6] - 2022-06-23
 
