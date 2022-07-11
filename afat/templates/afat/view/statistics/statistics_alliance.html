@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block afat_body %}
-    <script type="application/javascript" src="{% static 'afat/libs/Chart.js/2.7.2/Chart.min.js' %}"></script>
+    {% include 'afat/bundles/chartjs-js.html' %}
 
     {% if month == '1' %}
         {% url 'afat:statistics_alliance' ally.alliance_id year_prev 12 as url_previous_month %}
