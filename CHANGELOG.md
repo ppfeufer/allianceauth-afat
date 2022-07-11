@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Data migration from ImicusFAT: Workaround for ImicusFAT bug
   [!43](https://gitlab.com/evictus.iou/allianceauth-imicusfat/-/issues/43) added. It
-  is not a work of art, but should mitigate the issue. Thanks to @pvyParts or the idea.
+  is not a work of art but should mitigate the issue. Thanks to @pvyParts for the idea.
 
 
 ## [2.9.0] - 2022-07-11
