@@ -168,15 +168,28 @@ class Command(BaseCommand):
             afat_fleettype.save()
 
         # Import FAT links
+        fatlink_hash_set = set()
         imicusfat_fatlinks = IFatLink.objects.all()
         for imicusfat_fatlink in imicusfat_fatlinks:
-            fleet = imicusfat_fatlink.fleet
             fatlink_hash = imicusfat_fatlink.hash
             fatlink_name = imicusfat_fatlink.fleet
             fatlink_creator = imicusfat_fatlink.creator
 
+            if imicusfat_fatlink.hash in fatlink_hash_set:
+                self.stdout.write(
+                    f"Duplicate FAT link for fleet '{fatlink_name}' with "
+                    f"hash '{fatlink_hash}'. "
+                    "(See bug » https://gitlab.com/evictus.iou/allianceauth-imicusfat/-/issues/43) "
+                    "Skipping!"
+                )
+
+                continue
+
+            fatlink_hash_set.add(imicusfat_fatlink.hash)
+
             self.stdout.write(
-                f"Importing FAT link for fleet '{fleet}' with hash '{fatlink_hash}'."
+                f"Importing FAT link for fleet '{fatlink_name}' "
+                f"with hash '{fatlink_hash}'."
             )
 
             afatlink = AFatLink()
@@ -238,7 +251,12 @@ class Command(BaseCommand):
             afat.character_id = imicusfat_fat.character_id
             afat.afatlink_id = imicusfat_fat.ifatlink_id
 
-            afat.save()
+            try:
+                afat.save()
+            except:  # noqa: E722
+                self.stdout.write(
+                    f"FAILED Import of FATs for FAT link ID '{imicusfat_fat.id}'."
+                )
 
         # Import click FAT durations
         imicusfat_clickfatdurations = ClickIFatDuration.objects.all()
@@ -253,7 +271,13 @@ class Command(BaseCommand):
             afat_clickfatduration.duration = imicusfat_clickfatduration.duration
             afat_clickfatduration.fleet_id = imicusfat_clickfatduration.fleet_id
 
-            afat_clickfatduration.save()
+            try:
+                afat_clickfatduration.save()
+            except:  # noqa: E722
+                self.stdout.write(
+                    "FAILED Importing FAT duration "
+                    f"with ID '{imicusfat_clickfatduration.id}'."
+                )
 
         # Import manual fat to log table
         imicusfat_manualfats = ManualIFat.objects.all()
@@ -275,7 +299,11 @@ class Command(BaseCommand):
                 afatlog.log_event = AFatLog.Event.MANUAL_FAT
                 afatlog.log_text = log_text
                 afatlog.user_id = imicusfat_manualfat.creator_id
-                afatlog.save()
+
+                try:
+                    afatlog.save()
+                except:  # noqa: E722
+                    pass
 
         self.stdout.write(
             self.style.SUCCESS(
