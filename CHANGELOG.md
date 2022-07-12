@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Changed
+
+- Form for "Manual FAT" re-activated again
+
 
 ## [2.9.2] - 2022-07-11
 

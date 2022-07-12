@@ -35,7 +35,12 @@ from afat.app_settings import (
     AFAT_DEFAULT_FATLINK_REOPEN_DURATION,
     AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME,
 )
-from afat.forms import AFatClickFatForm, AFatEsiFatForm, FatLinkEditForm
+from afat.forms import (
+    AFatClickFatForm,
+    AFatEsiFatForm,
+    AFatManualFatForm,
+    FatLinkEditForm,
+)
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views_helper import convert_fatlinks_to_dict, convert_fats_to_dict
@@ -49,7 +54,7 @@ from afat.models import (
 )
 from afat.providers import esi
 from afat.tasks import process_fats
-from afat.utils import write_log
+from afat.utils import get_or_create_character, write_log
 
 logger = LoggerAddTag(get_extension_logger(__name__), __title__)
 
@@ -652,7 +657,7 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
 
     if request.method == "POST":
         fatlink_edit_form = FatLinkEditForm(request.POST)
-        # manual_fat_form = AFatManualFatForm(request.POST)
+        manual_fat_form = AFatManualFatForm(request.POST)
 
         if fatlink_edit_form.is_valid():
             link.fleet = fatlink_edit_form.cleaned_data["fleet"]
@@ -677,52 +682,68 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
                     _("<h4>Success!</h4><p>Fleet name successfully changed.</p>")
                 ),
             )
-        # elif manual_fat_form.is_valid():
-        #     character_name = manual_fat_form.cleaned_data["character"]
-        #     system = manual_fat_form.cleaned_data["system"]
-        #     shiptype = manual_fat_form.cleaned_data["shiptype"]
-        #     character = get_or_create_character(name=character_name)
-        #
-        #     if character is not None:
-        #         AFat(
-        #             afatlink_id=link.pk,
-        #             character=character,
-        #             system=system,
-        #             shiptype=shiptype,
-        #         ).save()
-        #
-        #         messages.success(
-        #             request,
-        #             mark_safe(_("<h4>Success!</h4><p>Manual FAT processed.</p>")),
-        #         )
-        #
-        #         # Writing DB log
-        #         write_log(
-        #             request=request,
-        #             log_event=AFatLog.Event.MANUAL_FAT,
-        #             log_text=(
-        #                 f"Pilot {character.character_name} "
-        #                 f"flying a {shiptype} was manually added"
-        #             ),
-        #             fatlink_hash=link.hash,
-        #         )
-        #
-        #         logger.info(
-        #             f"Pilot {character.character_name} flying a {shiptype} was"
-        #             f" manually added to FAT link with "
-        #             f'hash "{link.hash}" by {request.user}'
-        #         )
-        #     else:
-        #         messages.error(
-        #             request,
-        #             mark_safe(
-        #                 _(
-        #                     "<h4>Oh No!</h4>"
-        #                     "<p>Manual FAT processing failed! "
-        #                     "The character name you entered was not found.</p>"
-        #                 )
-        #             ),
-        #         )
+        elif manual_fat_form.is_valid():
+            character_name = manual_fat_form.cleaned_data["character"]
+            system = manual_fat_form.cleaned_data["system"]
+            shiptype = manual_fat_form.cleaned_data["shiptype"]
+            character = get_or_create_character(name=character_name)
+
+            if character is not None:
+                afat_object, created = AFat.objects.get_or_create(
+                    afatlink=link,
+                    character=character,
+                    defaults={
+                        "system": system,
+                        "shiptype": shiptype,
+                    },
+                )
+
+                if created is True:
+                    messages.success(
+                        request,
+                        mark_safe(
+                            _(
+                                f"<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} has been added flying a {shiptype} in {system}</p>"
+                            )
+                        ),
+                    )
+
+                    # Writing DB log
+                    write_log(
+                        request=request,
+                        log_event=AFatLog.Event.MANUAL_FAT,
+                        log_text=(
+                            f"Pilot {character.character_name} "
+                            f"flying a {shiptype} was manually added"
+                        ),
+                        fatlink_hash=link.hash,
+                    )
+
+                    logger.info(
+                        f"Pilot {character.character_name} flying a {shiptype} was "
+                        "manually added to FAT link with "
+                        f'hash "{link.hash}" by {request.user}'
+                    )
+                else:
+                    messages.info(
+                        request,
+                        mark_safe(
+                            _(
+                                f"<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character.character_name}<br>System: {afat_object.system}<br>Ship: {afat_object.shiptype}</p>"
+                            )
+                        ),
+                    )
+            else:
+                messages.error(
+                    request,
+                    mark_safe(
+                        _(
+                            "<h4>Oh No!</h4>"
+                            "<p>Manual FAT processing failed! "
+                            "The character name you entered was not found.</p>"
+                        )
+                    ),
+                )
         else:
             messages.error(
                 request,
