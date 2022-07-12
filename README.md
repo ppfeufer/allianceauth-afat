@@ -46,8 +46,7 @@ An Improved FAT/PAP System for
 - Re-open FAT link if the FAT link has expired and is within the defined grace time
   (only for clickable FAT links)
 - Manually add pilots to clickable FAT links, in case they missed to click the link
-  (for a period of 24 hours after the FAT links original expiry time) (Temporarily
-  disabled because #CCP)
+  (for a period of 24 hours after the FAT links original expiry time)
 - Log for the following actions (Logs are kept for a certain time, 60 days per default):
     - Create FAT link
     - Change FAT link

@@ -9,14 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.9.3] - 2022-07-12
+
+### Changed
+
+- Form for "Manual FAT" re-activated again
+
+
 ## [2.9.2] - 2022-07-11
 
 ### Changed
 
-- Form for "Manual FAT" temorarily deactivated since CCP just announced that the
-  `/search` ESI endpoint will be removed tomorrow (prbably during downtime) for good,
-  which was used for this feature. Alternatives which would make this feature work
-  as until now, are currently not available. Say "Thank You CCP" ...
+- Form for "Manual FAT" is temporarily deactivated since CCP just announced that the
+  `/search` ESI endpoint will be removed tomorrow (probably during downtime) for good,
+  which was used for this feature. Alternatives that would make this feature work
+  as it was until now are currently unavailable. Say "Thank You CCP" ...
 
 
 ## [2.9.1] - 2022-07-11

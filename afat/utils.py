@@ -89,14 +89,12 @@ def get_or_create_character(
 
     if name:
         # If a name is passed to this function, we have to check it on ESI
-        result = esi.client.Search.get_search(
-            categories=["character"], search=name, strict=True
-        ).result()
+        result = esi.client.Universe.post_universe_ids(names=[name]).results()
 
-        if "character" not in result:
+        if "characters" not in result or result["characters"] is None:
             return None
 
-        character_id = result["character"][0]
+        character_id = result["characters"][0]["id"]
         eve_character = EveCharacter.objects.filter(character_id=character_id)
     elif character_id:
         # If an ID is passed to this function, we can just check the db for it.
