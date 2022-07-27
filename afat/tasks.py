@@ -73,7 +73,7 @@ TASK_ESI_KWARGS = {
 }
 
 
-@shared_task
+@shared_task(**{**TASK_ESI_KWARGS}, **{"base": QueueOnce})
 def process_fats(data_list, data_source, fatlink_hash):
     """
     Due to the large possible size of fatlists,
@@ -89,10 +89,12 @@ def process_fats(data_list, data_source, fatlink_hash):
     :rtype:
     """
 
+    logger.debug(f"Data Source: {data_source}")
+
     if data_source == "esi":
         logger.info(
             f'Valid fleet for FAT link hash "{fatlink_hash}" found '
-            f"registered via ESI, checking for new pilots"
+            "registered via ESI, checking for new pilots"
         )
 
         for char in data_list:
@@ -131,8 +133,7 @@ def process_character(
     fat, created = AFat.objects.get_or_create(
         afatlink=link,
         character=character,
-        system=solar_system_name,
-        shiptype=ship_name,
+        defaults={"system": solar_system_name, "shiptype": ship_name},
     )
 
     if created is True:
@@ -263,8 +264,8 @@ def update_esi_fatlinks() -> None:
                         cache_key=CACHE_KEY_NOT_IN_FLEET_ERROR,
                         fatlink=fatlink,
                         logger_message=(
-                            "FC is not in the registered fleet anymore or "
-                            "fleet is no longer available."
+                            "FC is not in the registered fleet anymore or fleet is no "
+                            "longer available."
                         ),
                     )
                 except Exception:
@@ -294,6 +295,11 @@ def update_esi_fatlinks() -> None:
 
                         # Process fleet members
                         else:
+                            logger.debug(
+                                "Processing fleet members for ESI FAT link with "
+                                f'hash "{fatlink.hash}"'
+                            )
+
                             process_fats.delay(
                                 data_list=esi_fleet_member,
                                 data_source="esi",
