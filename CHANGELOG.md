@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.9.5] - 2022-07-29
+
+### Fixed
+
+- Duplicate Key Error during ESI fleet tracking (This time for good ... I hope :-P)
+
+### Removed
+
+- Explicit `django-esi` dependency from `setup.cfg` since it's already pulled in by
+  `allianceauth` itself
+- Deprecated `MANIFEST.in` file
+
+
 ## [2.9.4] - 2022-07-12
 
 ### Fixed

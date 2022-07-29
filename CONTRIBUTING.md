@@ -13,10 +13,13 @@ verify compliance with formatting rules. To use:
 3. You're all done! Code will be checked automatically using git hooks.
 
 You can check if your code to commit adheres to the given style by simply running:
+
 ```shell script
 pre-commit
 ```
-or to check all files:
+
+Or to check all files:
+
 ```shell script
 pre-commit run --all-files
 ```
@@ -40,6 +43,23 @@ branch will be considered.
 Please make sure you have signed the [License Agreement](https://developers.eveonline.com/resource/license-agreement)
 by logging in at https://developers.eveonline.com before submitting any pull requests.
 
+### Commits
+
+Commit headers should be short (not longer than 70 characters) and precise. Use the
+commit body for a more detailed explanation of the commit.
+
+Commit headers should be prefixed to state what kind of commit it is.
+
+- `[FEATURE] Foobar` When a new feature is introduced
+- `[ADDED] Foobar` When something is added to the code base to enhance existing
+  functions
+- `[REMOVED] Foobar` When something is removed, like deprecated or unused code
+- `[FIX] Foobar` For bug fixes or fixes in general. Ideally followed by an issue ID
+- `[CHANGE] Foobar` When Code or appearance has been changed that doesn't fit in any
+  of the other categories. Usually for changes in templates or optimisations in the
+  Python code itself
+- `[MISC] Foobar` When it doesn't fit in anything else
+
 ### Test Coverage
 
 Please make sure your contribution come with tests covering your additions and
@@ -47,11 +67,13 @@ changes. We aim to continuously raise our overall text coverage in this project.
 requests lowering the test coverage will not be considered for merging.
 
 You can run tests locally via:
+
 ```shell
 make coverage
 ```
 
 The full tox-test suite can be run via:
+
 ```shell
 tox
 ```
