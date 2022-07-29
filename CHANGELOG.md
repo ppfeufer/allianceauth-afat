@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Explicit `django-esi` dependency from `setup.cfg` since it's already pulled in by
   `allianceauth` itself
+- Deprecated `MANIFEST.in` file
 
 
 ## [2.9.4] - 2022-07-12
