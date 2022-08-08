@@ -8,11 +8,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Update Information
+
+Before you update to this version, make sure you have at least Alliance Auth v2.15.1
+installed, otherwise this update will pull in Alliance Auth 3.x unsupervised with
+breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/allianceauth/allianceauth/-/tags/v3.0.0))
+
 ### Changed
 
 - CSS modernized
 - CSS and JS moved to their own bundled HTML templates
 - Deprecated `type` attributes removed form `style` and `script` tags
+- Minimum requirements:
+  - `allianceauth>=2.15.1`
+  - `allianceauth-app-utils>=1.14.1`
+  - `unidecode>=1.3.4`
+  - `python>=3.8`
 
 
 ## [2.9.6] - 2022-07-29
