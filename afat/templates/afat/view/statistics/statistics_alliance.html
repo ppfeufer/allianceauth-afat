@@ -1,8 +1,6 @@
 {% extends 'afat/base.html' %}
 
 {% load evelinks %}
-{% load static %}
-{% load afat_versioned_static %}
 {% load i18n %}
 
 {% block page_title %}{{ alliance }} {% translate "Statistics" %}{% endblock %}
@@ -42,16 +40,14 @@
 
 {% block extra_css %}
     {% include 'bundles/datatables-css.html' %}
-
-    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/aa-bootstrap-fix.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/allianceauth-afat.min.css' %}">
+    {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
     {% include 'bundles/datatables-js.html' %}
     {% include 'bundles/moment-js.html' %}
 
-    <script type="application/javascript">
+    <script>
         /**
          * datetime formatting
          *

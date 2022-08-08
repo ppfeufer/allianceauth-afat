@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - CSS modernized
+- CSS and JS moved to their own bundled HTML templates
+- Deprecated `type` attributes removed form `style` and `script` tags
 
 
 ## [2.9.6] - 2022-07-29

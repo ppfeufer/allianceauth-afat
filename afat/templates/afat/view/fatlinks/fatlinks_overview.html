@@ -1,7 +1,5 @@
 {% extends 'afat/base.html' %}
 
-{% load static %}
-{% load afat_versioned_static %}
 {% load i18n %}
 
 {% block page_title %}{% translate 'Fleet Activity' %}{% endblock %}
@@ -55,19 +53,15 @@
 
 {% block extra_css %}
     {% include 'bundles/datatables-css.html' %}
-
-    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/aa-bootstrap-fix.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% afat_static 'afat/css/allianceauth-afat.min.css' %}">
+    {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
     {% include 'bundles/datatables-js.html' %}
     {% include 'bundles/moment-js.html' with locale=True %}
+    {% include "afat/bundles/afat-js.html" %}
 
-    <script type="application/javascript" src="{% static 'afat/libs/datatables/plugins/datetime.min.js' %}"></script>
-    <script type="application/javascript" src="{% afat_static 'afat/javascript/allianceauth-afat.min.js' %}"></script>
-
-    <script type="application/javascript">
+    <script>
         let afatSettings = {
             url: {
                 linkList: '{% url 'afat:fatlinks_ajax_get_fatlinks_by_year' year %}'
@@ -93,7 +87,7 @@
             }
         }
     </script>
-    <script type="application/javascript" src="{% afat_static 'afat/javascript/afat-fatlist.min.js' %}"></script>
 
+    {% include "afat/bundles/afat-fatlist-js.html" %}
     {% include 'bundles/filterdropdown-js.html' %}
 {% endblock %}
