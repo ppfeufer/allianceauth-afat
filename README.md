@@ -240,8 +240,10 @@ Please make sure to read the [contribution guidelines](https://github.com/ppfeuf
 
 ## Credits
 
-AFAT is maintained by @ppfeufer is based on
+AFAT is maintained by @ppfeufer and is based on
 [ImicusFAT](https://gitlab.com/evictus.iou/allianceauth-imicusfat)
-by @exiom with @Aproia and @ppfeufer (no longer maintained and deprecated) which is
-based on [allianceauth-bfat](https://gitlab.com/colcrunch/allianceauth-bfat) by
-@colcrunch
+by @exiom with @Aproia and @ppfeufer which is based on
+[allianceauth-bfat](https://gitlab.com/colcrunch/allianceauth-bfat) by @colcrunch
+
+Both of these modules are no longer maintained and are deprecated. Both modules will
+not run with the latest stable releases of Alliance Auth.
