@@ -8,10 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.9.7] - 2022-08-11
+
 ### Update Information
 
 Before you update to this version, make sure you have at least Alliance Auth v2.15.1
-installed, otherwise this update will pull in Alliance Auth 3.x unsupervised with
+installed, otherwise, this update will pull in Alliance Auth 3.x unsupervised with
 breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/allianceauth/allianceauth/-/tags/v3.0.0))
 
 ### Added
