@@ -14,6 +14,10 @@ Before you update to this version, make sure you have at least Alliance Auth v2.
 installed, otherwise this update will pull in Alliance Auth 3.x unsupervised with
 breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/allianceauth/allianceauth/-/tags/v3.0.0))
 
+### Added
+
+- Instructions on how to uninstall `ImicusFAT` after data migration to README
+
 ### Changed
 
 - CSS modernized

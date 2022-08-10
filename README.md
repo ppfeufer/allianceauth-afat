@@ -27,6 +27,7 @@ An Improved FAT/PAP System for
 - [Data Migration](#data-migration)
     - [From Alliance Auth native FAT](#import-from-native-fat)
     - [From ImicusFAT](#import-from-imicusfat)
+        - [Uninstall ImicusFAT](#uninstall-imicusfat)
 - [Settings](#settings)
 - [Permissions](#permissions)
 - [Changelog](#changelog)
@@ -166,6 +167,36 @@ To import from the ImicusFAT module, simply run the following command:
 ```shell
 python myauth/manage.py afat_import_from_imicusfat
 ```
+
+#### Uninstall ImicusFAT
+
+Now that you've migrated, you can uninstal `ImicusFAT`.
+
+First, remove all Django migrations for `ImicusFAT` with:
+
+```shell
+python manage.py migrate imicusfat zero
+```
+
+This will remove all migrations for `ImicusFAT` including its DB tables.
+
+Should this command throw an error, a bit of manual labor is needed, but nothing you
+can't handle, I'm sure.
+
+```shell
+python manage.py migrate imicusfat zero --fake
+```
+
+And remove all DB tables beginning with `imicusfat_` from your DB manually afterwards.
+
+Now that the DB is cleaned up, time to remove te app.
+
+```shell
+pip uninstall allianceauth-imicusfat
+```
+
+Now remove `imicusfat` from your `INSTALLED_APPS` in your `local.py`, restart
+supervisor and ... Done!
 
 
 ## Settings
