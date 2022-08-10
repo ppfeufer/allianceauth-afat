@@ -1,7 +1,7 @@
 {% load evelinks %}
 {% load i18n %}
 
-<script type="application/javascript">
+<script>
     let characters = [];
 </script>
 
@@ -15,7 +15,7 @@
             <ul class="nav nav-pills">
                 {% for character in characters %}
                     <li class="afat-character-tab{% if forloop.first %} active{% endif %}">
-                        <script type="application/javascript">
+                        <script>
                             characters.push({
                                 charId: {{ character.character_id }},
                                 charName: '{{ character.character_name }}'

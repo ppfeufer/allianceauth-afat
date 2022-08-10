@@ -6,13 +6,13 @@
     }
 
     .fatlink-list-legend {
-        border-top: 1px solid rgb(236, 240, 241);
+        border-top: 1px solid rgb(236 240 241);
         margin-top: 1rem;
         padding-top: 1rem;
     }
 
     .template-dark-mode .fatlink-list-legend {
-        border-top: 1px solid rgb(70, 69, 69);
+        border-top: 1px solid rgb(70 69 69);
     }
 }
 
@@ -29,15 +29,14 @@
         align-content: space-between;
         align-items: center;
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
+        flex-flow: row nowrap;
         justify-content: space-between;
         list-style: none;
         padding: 0.5rem 1rem;
     }
 
     .allianceauth-afat .esi-fleet-list-item:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: rgb(0 0 0 / 10%);
     }
 
     .allianceauth-afat .esi-fleet-list-item .eve-image-with-text {
@@ -69,13 +68,13 @@
 ------------------------------------------------------------------------------------- */
 @media all {
     .afat-label-via-esi {
-        background-color: rgb(192, 192, 192);
-        color: rgb(54, 54, 54);
+        background-color: rgb(192 192 192);
+        color: rgb(54 54 54);
         margin-left: 1rem;
     }
 
     .afat-label-active-esi-fleet {
-        background-color: rgb(98, 196, 98);
+        background-color: rgb(98 196 98);
     }
 
     .afat-label-statistics {
