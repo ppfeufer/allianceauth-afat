@@ -69,16 +69,16 @@
 
         {% if link_ongoing %}
             <div class="col-md-12">
-                <p>Link:
+                <p>{% translate "FAT Link:" %}
                     <i>
-                        {{ request.scheme }}://{{ request.get_host }}{% url 'afat:fatlinks_add_fat' link.hash %}
+                        {{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}
                         <a class="label label-success copy-link" href="{% url 'afat:fatlinks_add_fat' link.hash %}"></a>
                     </i>
 
                     <button class="copy-btn btn btn-success btn-sm"
                         data-toggle="tooltip"
                         data-html="true"
-                        data-clipboard-text="{{ request.scheme }}://{{ request.get_host }}{% url 'afat:fatlinks_add_fat' link.hash %}"
+                        data-clipboard-text="{{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}"
                         style="margin-left: 1rem;"
                     >
                         {% translate "Copy me!" %}

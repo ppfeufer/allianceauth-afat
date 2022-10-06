@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Changed
+
+- Using `SITE_URL` now in the templates instead of
+  `{{ request.scheme }}://{{ request.get_host }}`
+- Minimum requirements:
+  - `allianceauth>=3.2.0`
+
 
 ## [2.9.7] - 2022-08-11
 
