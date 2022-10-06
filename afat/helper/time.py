@@ -98,11 +98,11 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         duration_seconds = seconds(duration_minutes[1])
 
         return (
-            f"{duration_years[0]} years, "
-            f"{duration_days[0]} days, "
-            f"{duration_hours[0]} hours, "
-            f"{duration_minutes[0]} minutes and "
-            f"{duration_seconds[0]} seconds"
+            f"{int(duration_years[0])} years, "
+            f"{int(duration_days[0])} days, "
+            f"{int(duration_hours[0])} hours, "
+            f"{int(duration_minutes[0])} minutes and "
+            f"{int(duration_seconds[0])} seconds"
         )
 
     return {
