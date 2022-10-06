@@ -24,7 +24,7 @@ def get_esi_fleet_information_by_user(
     """
 
     has_open_esi_fleets = False
-    open_esi_fleets_list = list()
+    open_esi_fleets_list = []
     open_esi_fleets = (
         AFatLink.objects.select_related_default()
         .filter(creator=user, is_esilink=True, is_registered_on_esi=True)

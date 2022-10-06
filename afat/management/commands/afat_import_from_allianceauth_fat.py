@@ -91,7 +91,10 @@ class Command(BaseCommand):
                 afatlink.save()
 
                 # Write to log table
-                log_text = f"FAT link {aa_fatlink.hash} with name {aa_fatlink.fleet} was created by {aa_fatlink.creator}"
+                log_text = (
+                    f"FAT link {aa_fatlink.hash} with name {aa_fatlink.fleet} "
+                    f"was created by {aa_fatlink.creator}"
+                )
 
                 afatlog = AFatLog()
                 afatlog.log_time = aa_fatlink.fatdatetime

@@ -176,10 +176,13 @@ class Command(BaseCommand):
             fatlink_creator = imicusfat_fatlink.creator
 
             if imicusfat_fatlink.hash in fatlink_hash_set:
+                imicusfat_bug_link = (
+                    "https://gitlab.com/evictus.iou/allianceauth-imicusfat/-/issues/43"
+                )
                 self.stdout.write(
                     f"Duplicate FAT link for fleet '{fatlink_name}' with "
                     f"hash '{fatlink_hash}'. "
-                    "(See bug » https://gitlab.com/evictus.iou/allianceauth-imicusfat/-/issues/43) "
+                    f"(See bug » {imicusfat_bug_link}) "
                     "Skipping!"
                 )
 

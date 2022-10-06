@@ -69,7 +69,7 @@ class Command(BaseCommand):
 
         self.stdout.write(
             "This will migrate the old Manual FAT log into the new log table. "
-            "Migrated entires will be removed from the old Manual FAT log to "
+            "Migrated entries will be removed from the old Manual FAT log to "
             "prevent duplicates."
         )
 
