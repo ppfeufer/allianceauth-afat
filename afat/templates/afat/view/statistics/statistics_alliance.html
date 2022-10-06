@@ -1,4 +1,4 @@
-{% extends 'afat/base.html' %}
+{% extends "afat/base.html" %}
 
 {% load evelinks %}
 {% load i18n %}
@@ -7,45 +7,45 @@
 
 {% block afat_header %}
     <br>
-    {% include 'afat/partials/menu.html' %}
+    {% include "afat/partials/menu.html" %}
 
     <h2>{{ alliance }} {% translate "Statistics" %}</h2>
 {% endblock %}
 
 {% block afat_body %}
-    {% include 'afat/bundles/chartjs-js.html' %}
+    {% include "afat/bundles/chartjs-js.html" %}
 
-    {% if month == '1' %}
-        {% url 'afat:statistics_alliance' ally.alliance_id year_prev 12 as url_previous_month %}
+    {% if month == "1" %}
+        {% url "afat:statistics_alliance" ally.alliance_id year_prev 12 as url_previous_month %}
     {% else %}
-        {% url 'afat:statistics_alliance' ally.alliance_id year month_prev as url_previous_month %}
+        {% url "afat:statistics_alliance" ally.alliance_id year month_prev as url_previous_month %}
     {% endif %}
 
-    {% if month == '12' %}
-        {% url 'afat:statistics_alliance' ally.alliance_id year_next 1 as url_next_month %}
-        {% url 'afat:statistics_alliance' ally.alliance_id year_current month_current as url_current_month %}
+    {% if month == "12" %}
+        {% url "afat:statistics_alliance" ally.alliance_id year_next 1 as url_next_month %}
+        {% url "afat:statistics_alliance" ally.alliance_id year_current month_current as url_current_month %}
     {% else %}
-        {% url 'afat:statistics_alliance' ally.alliance_id year month_next as url_next_month %}
-        {% url 'afat:statistics_alliance' ally.alliance_id year_current month_current as url_current_month %}
+        {% url "afat:statistics_alliance" ally.alliance_id year month_next as url_next_month %}
+        {% url "afat:statistics_alliance" ally.alliance_id year_current month_current as url_current_month %}
     {% endif %}
     {% include "afat/partials/month_navigation.html" with url_previous_month=url_previous_month url_next_month=url_next_month url_current_month=url_current_month %}
 
-    {% include 'afat/partials/statistics/alliance/tabs_navigation.html' %}
+    {% include "afat/partials/statistics/alliance/tabs_navigation.html" %}
 
     <div class="tab-content">
-        {% include 'afat/partials/statistics/alliance/tabs/graphs.html' %}
-        {% include 'afat/partials/statistics/alliance/tabs/corporations.html' %}
+        {% include "afat/partials/statistics/alliance/tabs/graphs.html" %}
+        {% include "afat/partials/statistics/alliance/tabs/corporations.html" %}
     </div>
 {% endblock %}
 
 {% block extra_css %}
-    {% include 'bundles/datatables-css.html' %}
+    {% include "bundles/datatables-css.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include 'bundles/datatables-js.html' %}
-    {% include 'bundles/moment-js.html' %}
+    {% include "bundles/datatables-js.html" %}
+    {% include "bundles/moment-js.html" %}
 
     <script>
         /**

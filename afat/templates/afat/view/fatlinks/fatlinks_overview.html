@@ -1,8 +1,8 @@
-{% extends 'afat/base.html' %}
+{% extends "afat/base.html" %}
 
 {% load i18n %}
 
-{% block page_title %}{% translate 'Fleet Activity' %}{% endblock %}
+{% block page_title %}{% translate "Fleet Activity" %}{% endblock %}
 
 {% block afat_header %}
     <br>
@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block afat_body %}
-    {% url 'afat:fatlinks_overview' year_prev as url_previous_year %}
-    {% url 'afat:fatlinks_overview' year_next as url_next_year %}
-    {% url 'afat:fatlinks_overview' year_current as url_current_year %}
+    {% url "afat:fatlinks_overview" year_prev as url_previous_year %}
+    {% url "afat:fatlinks_overview" year_next as url_next_year %}
+    {% url "afat:fatlinks_overview" year_current as url_current_year %}
     {% include "afat/partials/year_navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
 
     <div class="panel panel-default">
@@ -45,26 +45,26 @@
     </div>
 
     {% translate "Delete FAT Link" as translated_title %}
-    {% include "afat/modals/general.html" with modal_name='deleteFatLink' modal_title=translated_title confirm_button_class='btn-danger' %}
+    {% include "afat/modals/general.html" with modal_name="deleteFatLink" modal_title=translated_title confirm_button_class="btn-danger" %}
 
     {% translate "Close ESI Fleet Tracking" as translated_title %}
-    {% include 'afat/modals/general.html' with modal_name='cancelEsiFleet' modal_title=translated_title confirm_button_class='btn-danger' %}
+    {% include "afat/modals/general.html" with modal_name="cancelEsiFleet" modal_title=translated_title confirm_button_class="btn-danger" %}
 {% endblock %}
 
 {% block extra_css %}
-    {% include 'bundles/datatables-css.html' %}
+    {% include "bundles/datatables-css.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include 'bundles/datatables-js.html' %}
-    {% include 'bundles/moment-js.html' with locale=True %}
+    {% include "bundles/datatables-js.html" %}
+    {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
 
     <script>
         let afatSettings = {
             url: {
-                linkList: '{% url 'afat:fatlinks_ajax_get_fatlinks_by_year' year %}'
+                linkList: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year %}'
             },
             permissions: {
                 addFatLink: {% if perms.afat.add_fatlink %}true{% else %}false{% endif %},
@@ -73,7 +73,7 @@
             translation: {
                 dataTable: {
                     filter: {
-                        viaEsi: '{% translate 'via ESI' %}'
+                        viaEsi: '{% translate "via ESI" %}'
                     }
                 },
             },
@@ -89,5 +89,5 @@
     </script>
 
     {% include "afat/bundles/afat-fatlist-js.html" %}
-    {% include 'bundles/filterdropdown-js.html' %}
+    {% include "bundles/filterdropdown-js.html" %}
 {% endblock %}

@@ -1,10 +1,10 @@
-{% extends 'afat/base.html' %}
+{% extends "afat/base.html" %}
 
 {% load i18n %}
 {% load evelinks %}
 {% load filters %}
 
-{% block page_title %}{% translate 'Fleet Activity' %}{% endblock %}
+{% block page_title %}{% translate "Fleet Activity" %}{% endblock %}
 
 {% block afat_header %}
     <br>
@@ -14,9 +14,9 @@
 {% endblock %}
 
 {% block afat_body %}
-    {% url 'afat:statistics_overview' year_prev as url_previous_year %}
-    {% url 'afat:statistics_overview' year_next as url_next_year %}
-    {% url 'afat:statistics_overview' year_current as url_current_year %}
+    {% url "afat:statistics_overview" year_prev as url_previous_year %}
+    {% url "afat:statistics_overview" year_next as url_next_year %}
+    {% url "afat:statistics_overview" year_current as url_current_year %}
     {% include "afat/partials/year_navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
 
     {% include "afat/partials/statistics/overview/tabs_navigation.html" %}
