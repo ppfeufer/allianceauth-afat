@@ -60,6 +60,14 @@ Commit headers should be prefixed to state what kind of commit it is.
   Python code itself
 - `[MISC] Foobar` When it doesn't fit in anything else
 
+### Model Changes
+
+In case you add changes to the models, please also update the model graph via:
+
+```shell
+make graph_models
+```
+
 ### Test Coverage
 
 Please make sure your contribution come with tests covering your additions and
@@ -75,5 +83,5 @@ make coverage
 The full tox-test suite can be run via:
 
 ```shell
-tox
+make tox_tests
 ```
