@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.10.0] - 2022-10-06
+
 ### Changed
 
 - Using `SITE_URL` now in the templates instead of
