@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="col-md-12">
+<div class="col-md-12" style="margin-bottom: 2rem;">
     <div class="row">
         <div class="col-md-6">
             {% translate "Creator:" %} {{ link.creator.profile.main_character.character_name }}
@@ -39,11 +39,11 @@
                                 data-confirm-text="{% translate 'Stop Tracking' %}"
                             >
                                 <i class="fas fa-times"></i>
-                                <!-- {% translate 'Stop Tracking' %} -->
+                                <!-- {% translate "Stop Tracking" %} -->
                             </button>
                         {% endif %}
                     {% else %}
-                        {% translate 'Participation has been tracked via ESI' %}
+                        {% translate "Participation has been tracked via ESI" %}
                     {% endif %}
                 {% endif %}
             </p>
@@ -61,7 +61,7 @@
                         data-body-text="{% blocktranslate with reopen_duration=reopen_duration %}<p>Are you sure you want to re-open this FAT link for another {{ reopen_duration }} minutes?<br>FAT links can be re-opened only once!<br><em>(Be aware, this action will be logged)</em></p>{% endblocktranslate %}"
                         data-confirm-text="{% translate 'Re-Open' %}"
                     >
-                        {% translate 'Re-Open FAT link' %}
+                        {% translate "Re-Open FAT link" %}
                     </button>
                 </p>
             {% endif %}
@@ -69,16 +69,16 @@
 
         {% if link_ongoing %}
             <div class="col-md-12">
-                <p>Link:
+                <p>{% translate "FAT Link:" %}
                     <i>
-                        {{ request.scheme }}://{{ request.get_host }}{% url 'afat:fatlinks_add_fat' link.hash %}
+                        {{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}
                         <a class="label label-success copy-link" href="{% url 'afat:fatlinks_add_fat' link.hash %}"></a>
                     </i>
 
                     <button class="copy-btn btn btn-success btn-sm"
                         data-toggle="tooltip"
                         data-html="true"
-                        data-clipboard-text="{{ request.scheme }}://{{ request.get_host }}{% url 'afat:fatlinks_add_fat' link.hash %}"
+                        data-clipboard-text="{{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}"
                         style="margin-left: 1rem;"
                     >
                         {% translate "Copy me!" %}
@@ -90,11 +90,11 @@
 
     {% if link.is_registered_on_esi and request.user == link.creator %}
         {% translate "Close ESI Fleet Tracking" as translated_title %}
-        {% include 'afat/modals/general.html' with modal_name='cancelEsiFleet' modal_title=translated_title confirm_button_class='btn-danger' %}
+        {% include "afat/modals/general.html" with modal_name="cancelEsiFleet" modal_title=translated_title confirm_button_class="btn-danger" %}
     {% endif %}
 
     {% if link_can_be_reopened and perms.afat.manage_afat %}
         {% translate "Re-Open Fat Link" as translated_title %}
-        {% include 'afat/modals/general.html' with modal_name='reopenFatLink' modal_title=translated_title confirm_button_class='btn-success' %}
+        {% include "afat/modals/general.html" with modal_name="reopenFatLink" modal_title=translated_title confirm_button_class="btn-success" %}
     {% endif %}
 </div>

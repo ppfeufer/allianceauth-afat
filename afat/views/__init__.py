@@ -1,3 +1,3 @@
 """
-initialize the views
+Initialize the views
 """

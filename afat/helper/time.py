@@ -91,14 +91,18 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         :rtype:
         """
 
-        y = years()
-        d = days(y[1])  # Use remainder to calculate next variable
-        h = hours(d[1])
-        m = minutes(h[1])
-        s = seconds(m[1])
+        duration_years = years()
+        duration_days = days(duration_years[1])
+        duration_hours = hours(duration_days[1])
+        duration_minutes = minutes(duration_hours[1])
+        duration_seconds = seconds(duration_minutes[1])
 
-        return "{} years, {} days, {} hours, {} minutes and {} seconds".format(
-            int(y[0]), int(d[0]), int(h[0]), int(m[0]), int(s[0])
+        return (
+            f"{int(duration_years[0])} years, "
+            f"{int(duration_days[0])} days, "
+            f"{int(duration_hours[0])} hours, "
+            f"{int(duration_minutes[0])} minutes and "
+            f"{int(duration_seconds[0])} seconds"
         )
 
     return {

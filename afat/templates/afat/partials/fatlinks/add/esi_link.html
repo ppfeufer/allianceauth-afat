@@ -21,10 +21,14 @@
             </p>
 
             <p>
-                {% translate 'This will start tracking your fleet automatically and add pilots to it as they join until the fleet is either closed ingame (meaning you leave the fleet), or you stop the tracking here. '%}
+                {% blocktranslate %}
+                    This will start tracking your fleet automatically and add pilots to
+                    it as they join until the fleet is either closed ingame
+                    (meaning you leave the fleet), or you stop the tracking here.
+                {% endblocktranslate %}
             </p>
 
-            {% include 'afat/partials/fatlinks/open_esi_fleets.html' %}
+            {% include "afat/partials/fatlinks/open_esi_fleets.html" %}
 
             <form class="form" role="form" action="{% url 'afat:fatlinks_create_esi_fatlink' %}" method="POST">
                 {% csrf_token %}
@@ -35,7 +39,7 @@
                     {{ esi_fatlink_form.type_esi|bootstrap }}
                 {% endif %}
 
-                {% include 'afat/partials/form/required_field_hint.html' %}
+                {% include "afat/partials/form/required_field_hint.html" %}
 
                 <div class="form-group text-right">
                     <button class="btn btn-primary" type="submit" name="submit_click">

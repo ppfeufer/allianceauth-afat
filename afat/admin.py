@@ -89,13 +89,29 @@ class AFatLinkAdmin(admin.ModelAdmin):
     )
 
     def get_queryset(self, request):
+        """
+        Get the queryset
+        :param request:
+        :type request:
+        :return:
+        :rtype:
+        """
         queryset = super().get_queryset(request)
         queryset = queryset.annotate(
             _number_of_fats=Count("afats", distinct=True),
         )
+
         return queryset
 
     def number_of_fats(self, obj):
+        """
+        Return the number of FATs per FAT Link
+        :param obj:
+        :type obj:
+        :return:
+        :rtype:
+        """
+
         return obj._number_of_fats
 
     number_of_fats.admin_order_field = "_number_of_fats"

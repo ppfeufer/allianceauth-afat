@@ -1,8 +1,8 @@
-{% extends 'afat/base.html' %}
+{% extends "afat/base.html" %}
 
 {% load i18n %}
 
-{% block page_title %}{% translate 'Fleet Activity Tracking Logs' %}{% endblock %}
+{% block page_title %}{% translate "Fleet Activity Tracking Logs" %}{% endblock %}
 
 {% block afat_header %}
     <br>
@@ -38,23 +38,23 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include 'bundles/datatables-css.html' %}
+    {% include "bundles/datatables-css.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include 'bundles/datatables-js.html' %}
-    {% include 'bundles/moment-js.html' with locale=True %}
+    {% include "bundles/datatables-js.html" %}
+    {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
 
     <script>
         let afatSettings = {
             url: {
-                logs: '{% url 'afat:logs_ajax_get_logs' %}'
+                logs: '{% url "afat:logs_ajax_get_logs" %}'
             },
         }
     </script>
 
     {% include "afat/bundles/afat-logs-js.html" %}
-    {% include 'bundles/filterdropdown-js.html' %}
+    {% include "bundles/filterdropdown-js.html" %}
 {% endblock %}

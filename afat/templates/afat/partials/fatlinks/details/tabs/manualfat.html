@@ -16,7 +16,14 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" name="character" placeholder='{% translate "Character Name" %}' required>
+                            <label class="control-label" for="character">
+                                <span class="form-field-required">
+                                    {% translate "Character Name" %}
+                                    <span aria-label="{% translate 'This field is mandatory' %}" class="form-required-marker">*</span>
+                                </span>
+                            </label>
+
+                            <input type="text" class="form-control" name="character" id="character" placeholder='{% translate "Character Name" %}' required>
                         </div>
                     </div>
                 </div>
@@ -24,11 +31,25 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="system" placeholder='{% translate "System" %}'>
+                            <label class="control-label" for="system">
+                                <span class="form-field-required">
+                                    {% translate "System" %}
+                                    <span aria-label="{% translate 'This field is mandatory' %}" class="form-required-marker">*</span>
+                                </span>
+                            </label>
+
+                            <input type="text" class="form-control" name="system" id="system" placeholder='{% translate "System" %}' required>
                         </div>
 
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="shiptype" placeholder='{% translate "Ship Type" %}'>
+                            <label class="control-label" for="shiptype">
+                                <span class="form-field-required">
+                                    {% translate "Ship Type" %}
+                                    <span aria-label="{% translate 'This field is mandatory' %}" class="form-required-marker">*</span>
+                                </span>
+                            </label>
+
+                            <input type="text" class="form-control" name="shiptype" id="shiptype" placeholder='{% translate "Ship Type" %}' required>
                         </div>
                     </div>
                 </div>

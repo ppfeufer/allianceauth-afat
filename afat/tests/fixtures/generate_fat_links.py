@@ -1,5 +1,6 @@
 # flake8: noqa
-"""scripts generates large amount of fat links for load testing
+"""
+Scripts generates large amount of fat links for load testing
 
 This script can be executed directly from shell.
 """
@@ -42,13 +43,16 @@ LINKS_NUMBER = 1000
 
 
 characters = list(EveCharacter.objects.all())
+
 print(
     f"Adding {LINKS_NUMBER:,} FAT links "
     f"with up to {len(characters)} characters each"
 )
+
 user = User.objects.first()
 creator = user.profile.main_character
 link_type, _ = AFatLinkType.objects.get_or_create(name="Generated Fleet")
+
 for _ in range(LINKS_NUMBER):
     fat_link = AFatLink.objects.create(
         fleet=f"Generated Fleet #{random.randint(1, 1000000000)}",
@@ -67,6 +71,7 @@ for _ in range(LINKS_NUMBER):
         ),
         fatlink_hash=fat_link.hash,
     )
+
     for character in random.sample(characters, k=random.randint(1, len(characters))):
         AFat.objects.create(
             character_id=character.id,
@@ -74,6 +79,7 @@ for _ in range(LINKS_NUMBER):
             system="Jita",
             shiptype="Ibis",
         )
+
     print(".", end="", flush=True)
 
 

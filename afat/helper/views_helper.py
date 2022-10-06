@@ -261,11 +261,12 @@ def get_random_rgba_color():
     :rtype:
     """
 
-    return "rgba({red}, {green}, {blue}, 1)".format(
-        red=random.randint(0, 255),
-        green=random.randint(0, 255),
-        blue=random.randint(0, 255),
-    )
+    red = random.randint(0, 255)
+    green = random.randint(0, 255)
+    blue = random.randint(0, 255)
+    alpha = 1
+
+    return f"rgba({red}, {green}, {blue}, {alpha})"
 
 
 def characters_with_permission(permission: Permission) -> models.QuerySet:

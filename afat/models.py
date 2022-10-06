@@ -103,6 +103,12 @@ class AFatLinkType(models.Model):
         verbose_name_plural = "FAT Link Fleet Types"
 
     def __str__(self) -> str:
+        """
+        Return the objects string name
+        :return:
+        :rtype:
+        """
+
         return str(self.name)
 
 
@@ -181,6 +187,12 @@ class AFatLink(models.Model):
         verbose_name_plural = "FAT Links"
 
     def __str__(self) -> str:
+        """
+        Return the objects string name
+        :return:
+        :rtype:
+        """
+
         return f"{self.fleet} - {self.hash}"
 
     @transaction.atomic()
@@ -273,6 +285,12 @@ class AFat(models.Model):
         verbose_name_plural = "FATs"
 
     def __str__(self) -> str:
+        """
+        Return the objects string name
+        :return:
+        :rtype:
+        """
+
         return f"{self.afatlink} - {self.character}"
 
 
@@ -304,6 +322,12 @@ class ManualAFat(models.Model):
 
     # Add property for getting the user for a character.
     def __str__(self) -> str:
+        """
+        Return the objects string name
+        :return:
+        :rtype:
+        """
+
         return f"{self.afatlink} - {self.character} ({self.creator})"
 
 

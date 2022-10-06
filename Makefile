@@ -37,10 +37,10 @@ coverage:
 	coverage html && \
 	coverage report -m
 
-tox_tests:
-	tox && \
-	rm -rf .tox/
-
 build_test:
 	rm -rfv dist && \
 	python3 -m build
+
+tox_tests:
+	export USE_MYSQL=False && \
+	tox

@@ -1,9 +1,9 @@
-{% extends 'afat/base.html' %}
+{% extends "afat/base.html" %}
 
 {% load evelinks %}
 {% load i18n %}
 
-{% block page_title %}{% translate 'Fleet Activity' %}{% endblock %}
+{% block page_title %}{% translate "Fleet Activity" %}{% endblock %}
 
 {% block afat_header %}
     <br>
@@ -21,20 +21,20 @@
     </div>
 
     {% translate "Delete FAT Link" as translated_title %}
-    {% include "afat/modals/general.html" with modal_name='deleteFatLink' modal_title=translated_title confirm_button_class='btn-danger' %}
+    {% include "afat/modals/general.html" with modal_name="deleteFatLink" modal_title=translated_title confirm_button_class="btn-danger" %}
 
     {% translate "Close ESI Fleet Tracking" as translated_title %}
-    {% include 'afat/modals/general.html' with modal_name='cancelEsiFleet' modal_title=translated_title confirm_button_class='btn-danger' %}
+    {% include "afat/modals/general.html" with modal_name="cancelEsiFleet" modal_title=translated_title confirm_button_class="btn-danger" %}
 {% endblock %}
 
 {% block extra_css %}
-    {% include 'bundles/datatables-css.html' %}
+    {% include "bundles/datatables-css.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include 'bundles/datatables-js.html' %}
-    {% include 'bundles/moment-js.html' with locale=True %}
+    {% include "bundles/datatables-js.html" %}
+    {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
 
     <script>
