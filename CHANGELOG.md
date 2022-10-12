@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.10.1] - 2022-10-06
+
 ### Fixed
 
 - Show FAT Link register link only for clickable FAT links
