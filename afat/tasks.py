@@ -6,12 +6,7 @@ Tasks
 from datetime import timedelta
 
 # Third Party
-from bravado.exception import (
-    HTTPBadGateway,
-    HTTPGatewayTimeout,
-    HTTPNotFound,
-    HTTPServiceUnavailable,
-)
+from bravado.exception import HTTPNotFound
 from celery import shared_task
 
 # Django
@@ -40,6 +35,8 @@ ESI_ERROR_LIMIT = 50
 ESI_TIMEOUT_ONCE_ERROR_LIMIT_REACHED = 60
 ESI_MAX_RETRIES = 3
 
+TASK_TIME_LIMIT = 120  # Stop after 2 minutes
+
 CACHE_KEY_FLEET_CHANGED_ERROR = (
     "afat_task_update_esi_fatlinks_error_counter_fleet_changed_"
 )
@@ -53,27 +50,10 @@ CACHE_KEY_NO_FLEETBOSS_ERROR = (
 CACHE_MAX_ERROR_COUNT = 3
 
 # Params for all tasks
-TASK_DEFAULT_KWARGS = {
-    "time_limit": 120,  # Stop after 2 minutes
-}
-
-# Params for tasks that make ESI calls
-TASK_ESI_KWARGS = {
-    **TASK_DEFAULT_KWARGS,
-    **{
-        "autoretry_for": (
-            OSError,
-            HTTPBadGateway,
-            HTTPGatewayTimeout,
-            HTTPServiceUnavailable,
-        ),
-        "retry_kwargs": {"max_retries": ESI_MAX_RETRIES},
-        "retry_backoff": True,
-    },
-}
+TASK_DEFAULT_KWARGS = {"time_limit": TASK_TIME_LIMIT, "max_retries": ESI_MAX_RETRIES}
 
 
-@shared_task(**{**TASK_ESI_KWARGS}, **{"base": QueueOnce})
+@shared_task(**{**TASK_DEFAULT_KWARGS}, **{"base": QueueOnce})
 def process_fats(data_list, data_source, fatlink_hash):
     """
     Due to the large possible size of fatlists,
@@ -223,7 +203,7 @@ def initialize_caches(fatlink: AFatLink) -> None:
         cache.set(CACHE_KEY_NOT_IN_FLEET_ERROR + fatlink.hash, "0", 75)
 
 
-@shared_task(**{**TASK_ESI_KWARGS}, **{"base": QueueOnce})
+@shared_task(**{**TASK_DEFAULT_KWARGS, **{"base": QueueOnce}})
 def update_esi_fatlinks() -> None:
     """
     Checking ESI fat links for changes

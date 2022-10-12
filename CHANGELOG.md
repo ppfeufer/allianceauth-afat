@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.10.1] - 2022-10-12
+
+### Fixed
+
+- Show FAT Link register link only for clickable FAT links
+
+### Removed
+
+- Auto retry for ESI and OS errors in tasks, since django-esi already retries all
+  relevant errors
+
+
 ## [2.10.0] - 2022-10-06
 
 ### Changed
