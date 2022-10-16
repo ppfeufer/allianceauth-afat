@@ -56,10 +56,13 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     if year is None:
         year = datetime.now().year
 
+    user_can_see_other_corps = False
+
     if user_has_any_perms(
         request.user,
         ["afat.stats_corporation_other", "afat.manage_afat"],
     ):
+        user_can_see_other_corps = True
         basic_access_permission = Permission.objects.select_related("content_type").get(
             content_type__app_label="afat", codename="basic_access"
         )
@@ -111,6 +114,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         "year_current": datetime.now().year,
         "year_prev": int(year) - 1,
         "year_next": int(year) + 1,
+        "user_can_see_other_corps": user_can_see_other_corps,
     }
 
     logger.info(f"Statistics overview called by {request.user}")
