@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Fixed
+
+- Hide hint text behind the permissions the users should have to see it
+
 
 ## [2.10.1] - 2022-10-12
 
