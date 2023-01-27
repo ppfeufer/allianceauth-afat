@@ -103,6 +103,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
 
         return queryset
 
+    @admin.display(ordering="_number_of_fats")
     def number_of_fats(self, obj):
         """
         Return the number of FATs per FAT Link
@@ -113,8 +114,6 @@ class AFatLinkAdmin(admin.ModelAdmin):
         """
 
         return obj._number_of_fats
-
-    number_of_fats.admin_order_field = "_number_of_fats"
 
 
 @admin.register(AFat)
@@ -145,6 +144,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     list_filter = ("is_enabled",)
     ordering = ("name",)
 
+    @admin.display(description="Fleet Type", ordering="name")
     def _name(self, obj):
         """
         Rewrite name
@@ -156,9 +156,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
         return obj.name
 
-    _name.short_description = "Fleet Type"
-    _name.admin_order_field = "name"
-
+    @admin.display(description="Is Enabled", boolean=True, ordering="is_enabled")
     def _is_enabled(self, obj):
         """
         Rewrite is_enabled
@@ -170,15 +168,12 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
         return obj.is_enabled
 
-    _is_enabled.boolean = True
-    _is_enabled.short_description = "Is Enabled"
-    _is_enabled.admin_order_field = "is_enabled"
-
     actions = (
         "activate",
         "deactivate",
     )
 
+    @admin.action(description="Activate selected fleet type(s)")
     def activate(self, request, queryset):
         """
         Mark fleet type as active
@@ -208,8 +203,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
         if queryset.count() - failed > 0:
             messages.success(request, f"Activated {notifications_count} fleet type(s)")
 
-    activate.short_description = "Activate selected fleet type(s)"
-
+    @admin.action(description="Deactivate selected fleet type(s)")
     def deactivate(self, request, queryset):
         """
         Mark fleet type as inactive
@@ -240,8 +234,6 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             messages.success(
                 request, f"Deactivated {notifications_count} fleet type(s)"
             )
-
-    deactivate.short_description = "Deactivate selected fleet type(s)"
 
 
 @admin.register(AFatLog)
