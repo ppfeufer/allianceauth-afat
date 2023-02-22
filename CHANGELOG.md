@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Added
+
+- Check if ESI is available (ESI is online and below error limit) before running
+  `update_esi_fatlinks` task
+
 
 ## [2.10.2] - 2022-10-16
 
