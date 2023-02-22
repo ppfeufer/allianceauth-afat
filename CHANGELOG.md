@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Check if ESI is available (ESI is online and below error limit) before running
   `update_esi_fatlinks` task
 
+### Changed
+
+- Russian translation updated
+- German translation updated
+
 
 ## [2.10.2] - 2022-10-16
 
