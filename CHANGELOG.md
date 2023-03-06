@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+
+## [2.11.0] - 2023-03-06
+
 ### Fixed
 
 - Only show active fleet types in FAT link form
