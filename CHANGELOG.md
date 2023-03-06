@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.11.0] - 2023-03-06
+
+### Fixed
+
+- Only show active fleet types in FAT link form
+- FATs by Weekday for Corp are off by one day ([#251])
+
+[#251]: https://github.com/ppfeufer/allianceauth-afat/issues/251 "FATs by Weekday for Corp are off by one day"
+
+
+### Added
+
+- Check if ESI is available (ESI is online and below error limit) before running
+  `update_esi_fatlinks` task
+
+### Changed
+
+- Russian translation updated
+- German translation updated
+
+
 ## [2.10.2] - 2022-10-16
 
 ### Fixed
