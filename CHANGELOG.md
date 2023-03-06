@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Fixed
+
+- Only show active fleet types in FAT link form
+
+
 ### Added
 
 - Check if ESI is available (ESI is online and below error limit) before running
