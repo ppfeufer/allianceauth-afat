@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Only show active fleet types in FAT link form
+- FATs by Weekday for Corp are off by one day ([#251])
+
+[#251]: https://github.com/ppfeufer/allianceauth-afat/issues/251 "FATs by Weekday for Corp are off by one day"
 
 
 ### Added
