@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.11.1] - 2023-03-06
+
+### Fixed
+
+- FATs by Weekday for Alliance are off by one day
+
+
 ## [2.11.0] - 2023-03-06
 
 ### Fixed
