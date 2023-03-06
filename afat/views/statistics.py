@@ -657,8 +657,8 @@ def alliance(
     # Fats by weekday
     data_weekday = []
 
-    for i in range(1, 8):
-        data_weekday.append(fats.filter(afatlink__afattime__week_day=i).count())
+    for i in range(1, 7):
+        data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
 
     data_weekday = [
         ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
