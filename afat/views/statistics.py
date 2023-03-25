@@ -440,7 +440,7 @@ def corporation(
     # Data for By Weekday
     data_weekday = []
 
-    for i in range(1, 7):
+    for i in range(1, 8):
         data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
 
     data_weekday = [
@@ -657,7 +657,7 @@ def alliance(
     # Fats by weekday
     data_weekday = []
 
-    for i in range(1, 7):
+    for i in range(1, 8):
         data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
 
     data_weekday = [
