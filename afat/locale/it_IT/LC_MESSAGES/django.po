@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-06 21:42+0200\n"
+"POT-Creation-Date: 2023-04-11 22:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -569,7 +569,7 @@ msgstr ""
 msgid "Character Stats"
 msgstr ""
 
-#: templates/afat/partials/statistics/overview/tabs/corps.html:6
+#: templates/afat/partials/statistics/overview/tabs/corps.html:7
 msgid ""
 "Corporations <small>(Click on an alliance name to see their corporations)</"
 "small>"
@@ -918,22 +918,22 @@ msgid ""
 "be re-opened only once!</p>"
 msgstr ""
 
-#: views/statistics.py:209
+#: views/statistics.py:213
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
 msgstr ""
 
-#: views/statistics.py:222
+#: views/statistics.py:226
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 msgstr ""
 
-#: views/statistics.py:326
+#: views/statistics.py:330
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
 msgstr ""
 
-#: views/statistics.py:545
+#: views/statistics.py:549
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
