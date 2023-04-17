@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-17 17:01+0200\n"
-"PO-Revision-Date: 2023-04-11 20:41+0000\n"
+"PO-Revision-Date: 2023-04-17 15:21+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -133,72 +133,71 @@ msgstr "{log.fatlink_hash} (Gelöscht)"
 
 #: models.py:57
 msgid "Can access the AFAT module"
-msgstr ""
+msgstr "Kann auf das AFAT Modul zugreifen"
 
 #: models.py:65
 msgid "Can manage the AFAT module"
-msgstr ""
+msgstr "Kann das AFAT Modul managen"
 
 #: models.py:67
-
 msgid "Can create FAT Links"
-msgstr ""
+msgstr "Can FAT Links erstellen"
 
 #: models.py:69
 msgid "Can see own corporation statistics"
-msgstr ""
+msgstr "Kann Statistiken der eigenen Corporation sehen"
 
 #: models.py:71
 msgid "Can see statistics of other corporations"
-msgstr ""
+msgstr "Kann Statistiken anderer Corporations sehen"
 
 #: models.py:73
 msgid "Can view the modules log"
-msgstr ""
+msgstr "Kann das Log des Moduls sehen"
 
 #: models.py:87
 msgid "Descriptive name of your fleet type"
-msgstr ""
+msgstr "Beschreibender Name für die Flottenart"
 
 #: models.py:93
 msgid "Whether this fleet type is active or not"
-msgstr ""
+msgstr "Ist diese Flottenart aktiv oder nicht"
 
 #: models.py:102
 msgid "FAT Link Fleet Type"
-msgstr ""
+msgstr "FAT Link Flottenart"
 
 #: models.py:103
 msgid "FAT Link Fleet Types"
-msgstr ""
+msgstr "FAT Link Flottenarten"
 
 #: models.py:124
 msgid "When was this FAT link created"
-msgstr ""
+msgstr "Wann wurde dieser FAT Link erstellt"
 
 #: models.py:131
 msgid "The FAT link fleet name"
-msgstr ""
+msgstr "FAT Link Flottenname"
 
 #: models.py:135
 msgid "The FAT link hash"
-msgstr ""
+msgstr "Fat Link Hash"
 
 #: models.py:142
 msgid "Who created the FAT link?"
-msgstr ""
+msgstr "Wer hat diesen FAT Link erstellt?"
 
 #: models.py:151
 msgid "Character this FAT link has been created with"
-msgstr ""
+msgstr "Der Charakter der diesen FAT Link erstellt hat"
 
 #: models.py:159
 msgid "The FAT link fleet type, if it's set"
-msgstr ""
+msgstr "FAT Link Flottenart, wenn gesetzt"
 
 #: models.py:163
 msgid "Whether this FAT link was created via ESI or not"
-msgstr ""
+msgstr "Wurde dieser FAT Link via ESI erstellt oder nicht"
 
 #: models.py:168
 msgid "Whether this is an ESI fat link is registered on ESI or not"
@@ -206,11 +205,11 @@ msgstr ""
 
 #: models.py:174
 msgid "Has this FAT link being re-opened?"
-msgstr ""
+msgstr "Wurde dieser FAT Link wieder geöffnet?"
 
 #: models.py:186
 msgid "FAT Link"
-msgstr ""
+msgstr "FAT Link"
 
 #: models.py:187 templates/afat/partials/dashboard/tabs_navigation.html:5
 #: templates/afat/partials/menu.html:24
@@ -219,31 +218,31 @@ msgstr "FAT Links"
 
 #: models.py:240
 msgid "FAT Duration"
-msgstr ""
+msgstr "FAT Laufzeit"
 
 #: models.py:241
 msgid "FAT Durations"
-msgstr ""
+msgstr "FAT Laufzeiten"
 
 #: models.py:254
 msgid "Character who registered this FAT"
-msgstr ""
+msgstr "Charakter welcher diesen FAT registriert hat"
 
 #: models.py:261
 msgid "The FAT link the character registered at"
-msgstr ""
+msgstr "Der FAT Link zu dem der Charakter registriert ist"
 
 #: models.py:265
 msgid "The system the character is in"
-msgstr ""
+msgstr "Das System in dem der Charakter ist"
 
 #: models.py:272
 msgid "The ship the character was flying"
-msgstr ""
+msgstr "Das Schiff welches der Charakter fliegt"
 
 #: models.py:284
 msgid "FAT"
-msgstr ""
+msgstr "FAT"
 
 #: models.py:285 templates/afat/partials/dashboard/tabs_navigation.html:4
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
@@ -256,7 +255,7 @@ msgstr "FATs"
 
 #: models.py:311
 msgid "Time this FAT has been added manually"
-msgstr ""
+msgstr "Die Zeit zu welcher der FAT manuell hinzugefügt wurde"
 
 #: models.py:320 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
@@ -265,7 +264,7 @@ msgstr "Manueller FAT"
 
 #: models.py:321
 msgid "Manual FATs"
-msgstr ""
+msgstr "Manuelle FATs"
 
 #: models.py:345
 msgid "FAT Link Created"
@@ -293,11 +292,11 @@ msgstr "Manueller FAT Eintrag hinzugefügt"
 
 #: models.py:377
 msgid "AFAT Log"
-msgstr ""
+msgstr "AFAT Log"
 
 #: models.py:378
 msgid "AFAT Logs"
-msgstr ""
+msgstr "AFAT Logs"
 
 #: templates/afat/base.html:5 templates/afat/view/dashboard/dashboard.html:6
 #: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:5
@@ -572,10 +571,7 @@ msgid "FATs have been automatically tracked via ESI"
 msgstr "FATs wurden automatisch via ESI verfolgt"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:7
-#, fuzzy, python-format
-#| msgid ""
-#| "You currently have (an) active ESI fleet(s) under the following "
-#| "character(s):"
+#, python-format
 msgid ""
 "\n"
 "                You currently have an active ESI fleet under the following "
@@ -587,11 +583,15 @@ msgid_plural ""
 "under the following characters:\n"
 "            "
 msgstr[0] ""
-"Du hast momentan eine oder mehrere aktive ESI Flotten mit den folgenden "
-"Charakteren:"
+"\n"
+"                Du hast aktuell eine aktive ESI Flotte mit dem folgenden "
+"Charaktere:\n"
+"            "
 msgstr[1] ""
-"Du hast momentan eine oder mehrere aktive ESI Flotten mit den folgenden "
-"Charakteren:"
+"\n"
+"                Du hast aktuell %(open_esi_fleets)s aktive ESI Flotten mit "
+"den folgenden Charakteren:\n"
+"            "
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 msgid "Fleet Name:"
