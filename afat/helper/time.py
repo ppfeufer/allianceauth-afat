@@ -5,6 +5,9 @@ Helper for time related functions
 # Standard Library
 from datetime import datetime
 
+# Django
+from django.utils.translation import gettext as _
+
 
 def get_time_delta(then, now=datetime.now(), interval="default"):
     """
@@ -97,12 +100,8 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         duration_minutes = minutes(duration_hours[1])
         duration_seconds = seconds(duration_minutes[1])
 
-        return (
-            f"{int(duration_years[0])} years, "
-            f"{int(duration_days[0])} days, "
-            f"{int(duration_hours[0])} hours, "
-            f"{int(duration_minutes[0])} minutes and "
-            f"{int(duration_seconds[0])} seconds"
+        return _(
+            f"{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"  # pylint: disable=line-too-long
         )
 
     return {

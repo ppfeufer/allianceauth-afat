@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-17 17:30+0200\n"
+"POT-Creation-Date: 2023-04-17 18:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,45 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: admin.py:146 templates/afat/partials/dashboard/tabs/fatlinks.html:13
+#: templates/afat/partials/dashboard/tabs/fats.html:41
+#: templates/afat/partials/statistics/character/tabs/raw_data.html:11
+#: templates/afat/view/fatlinks/fatlinks_overview.html:26
+msgid "Fleet Type"
+msgstr ""
+
+#: admin.py:158
+msgid "Is Enabled"
+msgstr ""
+
+#: admin.py:172
+msgid "Activate selected fleet type(s)"
+msgstr ""
+
+#: admin.py:197
+#, python-brace-format
+msgid "Failed to activate {failed} fleet types"
+msgstr ""
+
+#: admin.py:201
+#, python-brace-format
+msgid "Activated {notifications_count} fleet type(s)"
+msgstr ""
+
+#: admin.py:204
+msgid "Deactivate selected fleet type(s)"
+msgstr ""
+
+#: admin.py:229
+#, python-brace-format
+msgid "Failed to deactivate {failed} fleet types"
+msgstr ""
+
+#: admin.py:233
+#, python-brace-format
+msgid "Deactivated {notifications_count} fleet type(s)"
+msgstr ""
 
 #: app_settings.py:32 templates/afat/partials/menu.html:14
 msgid "Fleet Activity Tracking"
@@ -67,6 +106,13 @@ msgstr ""
 
 #: forms.py:99
 msgid "Expiry time in minutes"
+msgstr ""
+
+#: helper/time.py:103
+msgid ""
+"{int(duration_years[0])} years, {int(duration_days[0])} days, "
+"{int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and "
+"{int(duration_seconds[0])} seconds"
 msgstr ""
 
 #: helper/views_helper.py:56 helper/views_helper.py:175
@@ -309,13 +355,6 @@ msgstr ""
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:6
 msgid "Most Recent FAT Links <small>(latest 10)</small>"
-msgstr ""
-
-#: templates/afat/partials/dashboard/tabs/fatlinks.html:13
-#: templates/afat/partials/dashboard/tabs/fats.html:41
-#: templates/afat/partials/statistics/character/tabs/raw_data.html:11
-#: templates/afat/view/fatlinks/fatlinks_overview.html:26
-msgid "Fleet Type"
 msgstr ""
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:14
@@ -1042,11 +1081,11 @@ msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
 
-#: views/fatlinks.py:1060
+#: views/fatlinks.py:1061
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr ""
 
-#: views/fatlinks.py:1070
+#: views/fatlinks.py:1071
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
@@ -1068,6 +1107,34 @@ msgid ""
 "corporation.</p>"
 msgstr ""
 
-#: views/statistics.py:549
+#: views/statistics.py:448 views/statistics.py:673
+msgid "Monday"
+msgstr ""
+
+#: views/statistics.py:449 views/statistics.py:674
+msgid "Tuesday"
+msgstr ""
+
+#: views/statistics.py:450 views/statistics.py:675
+msgid "Wednesday"
+msgstr ""
+
+#: views/statistics.py:451 views/statistics.py:676
+msgid "Thursday"
+msgstr ""
+
+#: views/statistics.py:452 views/statistics.py:677
+msgid "Friday"
+msgstr ""
+
+#: views/statistics.py:453 views/statistics.py:678
+msgid "Saturday"
+msgstr ""
+
+#: views/statistics.py:454 views/statistics.py:679
+msgid "Sunday"
+msgstr ""
+
+#: views/statistics.py:557
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""

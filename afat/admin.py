@@ -5,6 +5,7 @@ Admin pages configuration
 # Django
 from django.contrib import admin, messages
 from django.db.models import Count
+from django.utils.translation import gettext as _
 
 # Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
@@ -97,9 +98,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         :rtype:
         """
         queryset = super().get_queryset(request)
-        queryset = queryset.annotate(
-            _number_of_fats=Count("afats", distinct=True),
-        )
+        queryset = queryset.annotate(_number_of_fats=Count("afats", distinct=True))
 
         return queryset
 
@@ -144,7 +143,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     list_filter = ("is_enabled",)
     ordering = ("name",)
 
-    @admin.display(description="Fleet Type", ordering="name")
+    @admin.display(description=_("Fleet Type"), ordering="name")
     def _name(self, obj):
         """
         Rewrite name
@@ -156,7 +155,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
         return obj.name
 
-    @admin.display(description="Is Enabled", boolean=True, ordering="is_enabled")
+    @admin.display(description=_("Is Enabled"), boolean=True, ordering="is_enabled")
     def _is_enabled(self, obj):
         """
         Rewrite is_enabled
@@ -168,12 +167,9 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
         return obj.is_enabled
 
-    actions = (
-        "activate",
-        "deactivate",
-    )
+    actions = ("activate", "deactivate")
 
-    @admin.action(description="Activate selected fleet type(s)")
+    @admin.action(description=_("Activate selected fleet type(s)"))
     def activate(self, request, queryset):
         """
         Mark fleet type as active
@@ -198,12 +194,14 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 failed += 1
 
         if failed:
-            messages.error(request, f"Failed to activate {failed} fleet types")
+            messages.error(request, _(f"Failed to activate {failed} fleet types"))
 
         if queryset.count() - failed > 0:
-            messages.success(request, f"Activated {notifications_count} fleet type(s)")
+            messages.success(
+                request, _(f"Activated {notifications_count} fleet type(s)")
+            )
 
-    @admin.action(description="Deactivate selected fleet type(s)")
+    @admin.action(description=_("Deactivate selected fleet type(s)"))
     def deactivate(self, request, queryset):
         """
         Mark fleet type as inactive
@@ -228,11 +226,11 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 failed += 1
 
         if failed:
-            messages.error(request, f"Failed to deactivate {failed} fleet types")
+            messages.error(request, _(f"Failed to deactivate {failed} fleet types"))
 
         if queryset.count() - failed > 0:
             messages.success(
-                request, f"Deactivated {notifications_count} fleet type(s)"
+                request, _(f"Deactivated {notifications_count} fleet type(s)")
             )
 
 
