@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 22:24+0200\n"
+"POT-Creation-Date: 2023-04-17 14:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,7 +78,7 @@ msgstr ""
 
 #: helper/views_helper.py:87
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:34
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:27
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:33
 msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
@@ -94,8 +94,8 @@ msgstr ""
 #: helper/views_helper.py:92
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:39
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:42
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:32
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:35
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:38
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:41
 msgid "Stop Tracking"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgid "Participation is being tracked via ESI"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:38
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:31
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:37
 #, python-format
 msgid ""
 "<p>Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from "
@@ -341,7 +341,7 @@ msgid "Copy me!"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:92
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:51
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:57
 #: templates/afat/view/dashboard/dashboard.html:26
 #: templates/afat/view/fatlinks/fatlinks_overview.html:50
 msgid "Close ESI Fleet Tracking"
@@ -411,25 +411,34 @@ msgid "FATs have been automatically tracked via ESI"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:7
+#, python-format
 msgid ""
-"You currently have (an) active ESI fleet(s) under the following character(s):"
-msgstr ""
+"\n"
+"                You currently have an active ESI fleet under the following "
+"character:\n"
+"            "
+msgid_plural ""
+"\n"
+"                You currently have %(open_esi_fleets)s active ESI fleets "
+"under the following characters:\n"
+"            "
+msgstr[0] ""
 
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:19
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 msgid "Fleet Name:"
 msgstr ""
 
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:19
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 msgid "ESI fleet ID:"
 msgstr ""
 
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:43
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:49
 msgid ""
 "These fleets are already automatically tracked. However, you can still open "
 "more fleets with other alts, if that&apos;s what you like to do."
 msgstr ""
 
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:47
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:53
 msgid ""
 "Note: Information about your registered fleets might be delayed by up to 5 "
 "minutes."

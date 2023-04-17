@@ -4,7 +4,13 @@
 {% if esi_fleet.has_open_esi_fleets %}
     <div class="alert alert-info">
         <p>
-            {% translate "You currently have (an) active ESI fleet(s) under the following character(s):" %}<sup>*</sup>
+            {% blocktrans count esi_fleet.open_esi_fleets_list|length as open_esi_fleets %}
+                You currently have an active ESI fleet under the following character:
+            {% plural %}
+                You currently have {{ open_esi_fleets }} active ESI fleets under the following characters:
+            {% endblocktrans %}
+
+            <sup>*</sup>
         </p>
 
         <ul class="esi-fleet-list">
