@@ -54,7 +54,7 @@ class AaAfat(models.Model):
         default_permissions = ()
         permissions = (
             # can access and register his own participation to a FAT link
-            ("basic_access", "Can access the AFAT module"),
+            ("basic_access", _("Can access the AFAT module")),
             # Can manage the FAT module
             # Has:
             #   » add_fatlink
@@ -62,15 +62,15 @@ class AaAfat(models.Model):
             #   » delete_fatlink
             #   » add_fat
             #   » delete_fat
-            ("manage_afat", "Can manage the AFAT module"),
+            ("manage_afat", _("Can manage the AFAT module")),
             # Can add a new FAT link
-            ("add_fatlink", "Can create FAT Links"),
+            ("add_fatlink", _("Can create FAT Links")),
             # Can see own corp stats
-            ("stats_corporation_own", "Can see own corporation statistics"),
+            ("stats_corporation_own", _("Can see own corporation statistics")),
             # Can see the stats of all corps
-            ("stats_corporation_other", "Can see statistics of other corporations"),
+            ("stats_corporation_other", _("Can see statistics of other corporations")),
             # Can view the modules log
-            ("log_view", "Can view the modules log"),
+            ("log_view", _("Can view the modules log")),
         )
         verbose_name = "Alliance Auth AFAT"
 
@@ -84,13 +84,13 @@ class AFatLinkType(models.Model):
     id = models.AutoField(primary_key=True)
 
     name = models.CharField(
-        max_length=254, help_text="Descriptive name of your fleet type"
+        max_length=254, help_text=_("Descriptive name of your fleet type")
     )
 
     is_enabled = models.BooleanField(
         default=True,
         db_index=True,
-        help_text="Whether this fleet type is active or not",
+        help_text=_("Whether this fleet type is active or not"),
     )
 
     class Meta:  # pylint: disable=too-few-public-methods
@@ -99,8 +99,8 @@ class AFatLinkType(models.Model):
         """
 
         default_permissions = ()
-        verbose_name = "FAT Link Fleet Type"
-        verbose_name_plural = "FAT Link Fleet Types"
+        verbose_name = _("FAT Link Fleet Type")
+        verbose_name_plural = _("FAT Link Fleet Types")
 
     def __str__(self) -> str:
         """
@@ -119,25 +119,27 @@ class AFatLink(models.Model):
     """
 
     afattime = models.DateTimeField(
-        default=timezone.now, db_index=True, help_text="When was this FAT link created"
+        default=timezone.now,
+        db_index=True,
+        help_text=_("When was this FAT link created"),
     )
 
     fleet = models.CharField(
         max_length=254,
         blank=False,
         default=None,
-        help_text="The FAT link fleet name",
+        help_text=_("The FAT link fleet name"),
     )
 
     hash = models.CharField(
-        max_length=254, db_index=True, unique=True, help_text="The FAT link hash"
+        max_length=254, db_index=True, unique=True, help_text=_("The FAT link hash")
     )
 
     creator = models.ForeignKey(
         User,
         related_name="+",
         on_delete=models.SET(get_sentinel_user),
-        help_text="Who created the FAT link?",
+        help_text=_("Who created the FAT link?"),
     )
 
     character = models.ForeignKey(
@@ -146,7 +148,7 @@ class AFatLink(models.Model):
         on_delete=models.CASCADE,
         default=None,
         null=True,
-        help_text="Character this FAT link has been created with",
+        help_text=_("Character this FAT link has been created with"),
     )
 
     link_type = models.ForeignKey(
@@ -154,24 +156,22 @@ class AFatLink(models.Model):
         related_name="+",
         on_delete=models.CASCADE,
         null=True,
-        help_text="The FAT link fleet type, if it's set",
+        help_text=_("The FAT link fleet type, if it's set"),
     )
 
     is_esilink = models.BooleanField(
-        default=False,
-        help_text="Whether this FAT link was created via ESI or not",
+        default=False, help_text=_("Whether this FAT link was created via ESI or not")
     )
 
     is_registered_on_esi = models.BooleanField(
         default=False,
-        help_text="Whether this is an ESI fat link is registered on ESI or not",
+        help_text=_("Whether this is an ESI fat link is registered on ESI or not"),
     )
 
     esi_fleet_id = models.BigIntegerField(blank=True, null=True)
 
     reopened = models.BooleanField(
-        default=False,
-        help_text="Has this FAT link being re-opened?",
+        default=False, help_text=_("Has this FAT link being re-opened?")
     )
 
     objects = AFatLinkManager()
@@ -183,8 +183,8 @@ class AFatLink(models.Model):
 
         default_permissions = ()
         ordering = ("-afattime",)
-        verbose_name = "FAT Link"
-        verbose_name_plural = "FAT Links"
+        verbose_name = _("FAT Link")
+        verbose_name_plural = _("FAT Links")
 
     def __str__(self) -> str:
         """
@@ -237,8 +237,8 @@ class ClickAFatDuration(models.Model):
         """
 
         default_permissions = ()
-        verbose_name = "FAT Duration"
-        verbose_name_plural = "FAT Durations"
+        verbose_name = _("FAT Duration")
+        verbose_name_plural = _("FAT Durations")
 
 
 # AFat Model
@@ -251,25 +251,25 @@ class AFat(models.Model):
         EveCharacter,
         related_name="afats",
         on_delete=models.CASCADE,
-        help_text="Character who registered this FAT",
+        help_text=_("Character who registered this FAT"),
     )
 
     afatlink = models.ForeignKey(
         AFatLink,
         related_name="afats",
         on_delete=models.CASCADE,
-        help_text="The FAT link the character registered at",
+        help_text=_("The FAT link the character registered at"),
     )
 
     system = models.CharField(
-        max_length=100, null=True, help_text="The system the character is in"
+        max_length=100, null=True, help_text=_("The system the character is in")
     )
 
     shiptype = models.CharField(
         max_length=100,
         null=True,
         db_index=True,
-        help_text="The ship the character was flying",
+        help_text=_("The ship the character was flying"),
     )
 
     objects = AFatManager()
@@ -281,8 +281,8 @@ class AFat(models.Model):
 
         default_permissions = ()
         unique_together = (("character", "afatlink"),)
-        verbose_name = "FAT"
-        verbose_name_plural = "FATs"
+        verbose_name = _("FAT")
+        verbose_name_plural = _("FATs")
 
     def __str__(self) -> str:
         """
@@ -308,7 +308,7 @@ class ManualAFat(models.Model):
         EveCharacter, related_name="+", on_delete=models.CASCADE
     )
     created_at = models.DateTimeField(
-        blank=True, null=True, help_text="Time this FAT has been added manually"
+        blank=True, null=True, help_text=_("Time this FAT has been added manually")
     )
 
     class Meta:  # pylint: disable=too-few-public-methods
@@ -317,8 +317,8 @@ class ManualAFat(models.Model):
         """
 
         default_permissions = ()
-        verbose_name = "Manual FAT"
-        verbose_name_plural = "Manual FATs"
+        verbose_name = _("Manual FAT")
+        verbose_name_plural = _("Manual FATs")
 
     # Add property for getting the user for a character.
     def __str__(self) -> str:
@@ -374,5 +374,5 @@ class AFatLog(models.Model):
         """
 
         default_permissions = ()
-        verbose_name = "AFAT Log"
-        verbose_name_plural = "AFAT Logs"
+        verbose_name = _("AFAT Log")
+        verbose_name_plural = _("AFAT Logs")

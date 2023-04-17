@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-17 14:31+0200\n"
+"POT-Creation-Date: 2023-04-17 17:01+0200\n"
 "PO-Revision-Date: 2023-04-17 12:21+0000\n"
 "Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -129,6 +129,141 @@ msgstr ""
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr "{log.fatlink_hash} (Удалено)"
 
+#: models.py:57
+msgid "Can access the AFAT module"
+msgstr ""
+
+#: models.py:65
+msgid "Can manage the AFAT module"
+msgstr ""
+
+#: models.py:67
+msgid "Can create FAT Links"
+msgstr ""
+
+#: models.py:69
+msgid "Can see own corporation statistics"
+msgstr ""
+
+#: models.py:71
+msgid "Can see statistics of other corporations"
+msgstr ""
+
+#: models.py:73
+msgid "Can view the modules log"
+msgstr ""
+
+#: models.py:87
+msgid "Descriptive name of your fleet type"
+msgstr ""
+
+#: models.py:93
+msgid "Whether this fleet type is active or not"
+msgstr ""
+
+#: models.py:102
+msgid "FAT Link Fleet Type"
+msgstr ""
+
+#: models.py:103
+msgid "FAT Link Fleet Types"
+msgstr ""
+
+#: models.py:124
+msgid "When was this FAT link created"
+msgstr ""
+
+#: models.py:131
+msgid "The FAT link fleet name"
+msgstr ""
+
+#: models.py:135
+msgid "The FAT link hash"
+msgstr ""
+
+#: models.py:142
+msgid "Who created the FAT link?"
+msgstr ""
+
+#: models.py:151
+msgid "Character this FAT link has been created with"
+msgstr ""
+
+#: models.py:159
+msgid "The FAT link fleet type, if it's set"
+msgstr ""
+
+#: models.py:163
+msgid "Whether this FAT link was created via ESI or not"
+msgstr ""
+
+#: models.py:168
+msgid "Whether this is an ESI fat link is registered on ESI or not"
+msgstr ""
+
+#: models.py:174
+msgid "Has this FAT link being re-opened?"
+msgstr ""
+
+#: models.py:186
+msgid "FAT Link"
+msgstr ""
+
+#: models.py:187 templates/afat/partials/dashboard/tabs_navigation.html:5
+#: templates/afat/partials/menu.html:24
+msgid "FAT Links"
+msgstr "Журнал флотов"
+
+#: models.py:240
+msgid "FAT Duration"
+msgstr ""
+
+#: models.py:241
+msgid "FAT Durations"
+msgstr ""
+
+#: models.py:254
+msgid "Character who registered this FAT"
+msgstr ""
+
+#: models.py:261
+msgid "The FAT link the character registered at"
+msgstr ""
+
+#: models.py:265
+msgid "The system the character is in"
+msgstr ""
+
+#: models.py:272
+msgid "The ship the character was flying"
+msgstr ""
+
+#: models.py:284
+msgid "FAT"
+msgstr ""
+
+#: models.py:285 templates/afat/partials/dashboard/tabs_navigation.html:4
+#: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
+#: templates/afat/partials/statistics/alliance/tabs/corporations.html:14
+#: templates/afat/partials/statistics/corporation/tabs/member.html:11
+#: templates/afat/view/statistics/statistics_alliance_year_overview.html:27
+#: templates/afat/view/statistics/statistics_corporation_year_overview.html:27
+msgid "FATs"
+msgstr "Боевые вылеты"
+
+#: models.py:311
+msgid "Time this FAT has been added manually"
+msgstr ""
+
+#: models.py:320 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
+#: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
+msgid "Manual FAT"
+msgstr "Особая Запись УБВ"
+
+#: models.py:321
+msgid "Manual FATs"
+msgstr ""
+
 #: models.py:345
 msgid "FAT Link Created"
 msgstr "Запись УБВ создана"
@@ -152,6 +287,14 @@ msgstr "Запись УБВ удалена"
 #: models.py:351
 msgid "Manual FAT Added"
 msgstr "Особая Запись УБВ добавлена"
+
+#: models.py:377
+msgid "AFAT Log"
+msgstr ""
+
+#: models.py:378
+msgid "AFAT Logs"
+msgstr ""
 
 #: templates/afat/base.html:5 templates/afat/view/dashboard/dashboard.html:6
 #: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:5
@@ -228,20 +371,6 @@ msgstr "Тип корабля"
 #: templates/afat/partials/dashboard/tabs/fats.html:65
 msgid "No recent FAT activity registered for any of your characters."
 msgstr "Для ваших пилотов Боевые Вылеты не найдены."
-
-#: templates/afat/partials/dashboard/tabs_navigation.html:4
-#: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
-#: templates/afat/partials/statistics/alliance/tabs/corporations.html:14
-#: templates/afat/partials/statistics/corporation/tabs/member.html:11
-#: templates/afat/view/statistics/statistics_alliance_year_overview.html:27
-#: templates/afat/view/statistics/statistics_corporation_year_overview.html:27
-msgid "FATs"
-msgstr "Боевые вылеты"
-
-#: templates/afat/partials/dashboard/tabs_navigation.html:5
-#: templates/afat/partials/menu.html:24
-msgid "FAT Links"
-msgstr "Журнал флотов"
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:8
 msgid "Create a clickable FAT Link"
@@ -406,11 +535,6 @@ msgstr "Статистика типов кораблей"
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:33
 msgid "Numbers"
 msgstr "Количество"
-
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
-#: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
-msgid "Manual FAT"
-msgstr "Особая Запись УБВ"
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:9
 msgid "Is someone missing from the list of FATs? Use this form to add them."

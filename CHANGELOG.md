@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [In Development] - Unreleased
 
+### Added
+
+- Models made translation-ready
+
 ### Changed
 
 - Translatable string properly pluralized
