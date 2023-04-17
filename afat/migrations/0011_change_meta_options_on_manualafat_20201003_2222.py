@@ -5,7 +5,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("afat", "0010_permissoins_update_20201002_1909"),
     ]
