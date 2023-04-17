@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-17 17:01+0200\n"
+"POT-Creation-Date: 2023-04-17 17:30+0200\n"
 "PO-Revision-Date: 2023-04-17 12:21+0000\n"
 "Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -198,7 +198,7 @@ msgid "Whether this FAT link was created via ESI or not"
 msgstr ""
 
 #: models.py:168
-msgid "Whether this is an ESI fat link is registered on ESI or not"
+msgid "Whether the fleet to this FAT link is available in ESI or not"
 msgstr ""
 
 #: models.py:174

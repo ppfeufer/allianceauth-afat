@@ -165,7 +165,7 @@ class AFatLink(models.Model):
 
     is_registered_on_esi = models.BooleanField(
         default=False,
-        help_text=_("Whether this is an ESI fat link is registered on ESI or not"),
+        help_text=_("Whether the fleet to this FAT link is available in ESI or not"),
     )
 
     esi_fleet_id = models.BigIntegerField(blank=True, null=True)
