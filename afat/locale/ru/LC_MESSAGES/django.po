@@ -201,11 +201,11 @@ msgstr ""
 
 #: models.py:87
 msgid "Descriptive name of your fleet type"
-msgstr ""
+msgstr "Характерное название данного типа флота"
 
 #: models.py:93
 msgid "Whether this fleet type is active or not"
-msgstr ""
+msgstr "Активен или нет данный тип флота"
 
 #: models.py:102
 msgid "FAT Link Fleet Type"
@@ -606,9 +606,6 @@ msgstr "пилоты автоматически отслеживались по�
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:7
 #, fuzzy, python-format
-#| msgid ""
-#| "You currently have (an) active ESI fleet(s) under the following "
-#| "character(s):"
 msgid ""
 "\n"
 "                You currently have an active ESI fleet under the following "
@@ -1173,11 +1170,11 @@ msgstr ""
 "<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакой Записи УБВ."
 "</p>"
 
-#: views/fatlinks.py:1061
+#: views/fatlinks.py:1061 views/fatlinks.py:1060
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>Успех!</h4><p>Запись УБВ успешно реактивирована.</p>"
 
-#: views/fatlinks.py:1071
+#: views/fatlinks.py:1071 views/fatlinks.py:1070
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
@@ -1233,6 +1230,6 @@ msgstr ""
 msgid "Sunday"
 msgstr ""
 
-#: views/statistics.py:557
+#: views/statistics.py:557 views/statistics.py:549
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Ошибка!</h4><p>Информация о дате неполная.</p>"
