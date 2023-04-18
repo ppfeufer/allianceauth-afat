@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "allianceauth-afat"
-dynamic = ["version"]
+version = "2.11.3"
 description = "Another Fleet Activity Tracking tool for Alliance Auth"
 readme = "README.md"
 license = "GPL-3.0"
@@ -46,9 +46,6 @@ Documentation = "https://github.com/ppfeufer/allianceauth-afat/blob/master/READM
 Source = "https://github.com/ppfeufer/allianceauth-afat.git"
 Changelog = "https://github.com/ppfeufer/allianceauth-afat/blob/master/CHANGELOG.md"
 Tracker = "https://github.com/ppfeufer/allianceauth-afat/issues"
-
-[tool.hatch.version]
-path = "afat/__init__.py"
 
 [tool.hatch.build]
 include = [
