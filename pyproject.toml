@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "allianceauth-afat"
-dynamic = ["version"]
+version = "2.11.3"
 description = "Another Fleet Activity Tracking tool for Alliance Auth"
 readme = "README.md"
 license = "GPL-3.0"
