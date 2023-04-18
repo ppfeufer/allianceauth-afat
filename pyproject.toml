@@ -43,7 +43,7 @@ dependencies = [
 ]
 
 [project.urls]
-Changelog = "https://github.com/ppfeufer/allianceauth-afat/blob/master/CHANGELOG.md"
+"Changelog" = "https://github.com/ppfeufer/allianceauth-afat/blob/master/CHANGELOG.md"
 "Issue / Bug Reports" = "https://github.com/ppfeufer/allianceauth-afat/issues"
 
 [tool.hatch.version]
