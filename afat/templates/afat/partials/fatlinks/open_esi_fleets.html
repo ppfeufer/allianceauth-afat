@@ -46,11 +46,11 @@
         </ul>
 
         <p>
-            {% if esi_fleet.open_esi_fleets_list|length == 1 %}
-                {% translate "This fleet is already automatically tracked." %}
-            {% elif esi_fleet.open_esi_fleets_list|length > 1 %}
-                {% translate "These fleets are already automatically tracked." %}
-            {% endif %}
+            {% blocktranslate count esi_fleet.open_esi_fleets_list|length as open_esi_fleets %}
+                This fleet is already automatically tracked.
+            {% plural %}
+                These fleets are already automatically tracked.
+            {% endblocktranslate %}
 
             {% translate "However, you can still open more fleets with other alts, if that&apos;s what you like to do." %}
         </p>
