@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 14:34+0200\n"
+"POT-Creation-Date: 2023-04-19 15:06+0200\n"
 "PO-Revision-Date: 2023-04-18 23:36+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -633,18 +633,17 @@ msgstr "Название флота:"
 msgid "ESI fleet ID:"
 msgstr "ESI ID флота:"
 
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:49
-msgid ""
-"\n"
-"                This fleet is already automatically tracked.\n"
-"            "
-msgid_plural ""
-"\n"
-"                These fleets are already automatically tracked.\n"
-"            "
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:50
+#, fuzzy
+#| msgid "FATs have been automatically tracked via ESI"
+msgid "This fleet is already automatically tracked."
+msgstr "пилоты автоматически отслеживались посредством ESI"
+
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:52
+#, fuzzy
+#| msgid "FATs have been automatically tracked via ESI"
+msgid "These fleets are already automatically tracked."
+msgstr "пилоты автоматически отслеживались посредством ESI"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:55
 #, fuzzy
