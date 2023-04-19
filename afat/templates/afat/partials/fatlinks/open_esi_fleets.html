@@ -5,7 +5,7 @@
     <div class="alert alert-info">
         <p>
             {% blocktrans count esi_fleet.open_esi_fleets_list|length as open_esi_fleets %}
-                You currently have an active ESI fleet under the following character:
+                You currently have {{ open_esi_fleets }} active ESI fleet under the following character:
             {% plural %}
                 You currently have {{ open_esi_fleets }} active ESI fleets under the following characters:
             {% endblocktrans %}
@@ -46,7 +46,13 @@
         </ul>
 
         <p>
-            {% translate "These fleets are already automatically tracked. However, you can still open more fleets with other alts, if that&apos;s what you like to do." %}
+            {% blocktrans count esi_fleet.open_esi_fleets_list|length as open_esi_fleets %}
+                This fleet is already automatically tracked.
+            {% plural %}
+                These fleets are already automatically tracked.
+            {% endblocktrans %}
+
+            {% translate "However, you can still open more fleets with other alts, if that&apos;s what you like to do." %}
         </p>
 
         <p>
