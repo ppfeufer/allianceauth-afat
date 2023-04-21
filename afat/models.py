@@ -186,12 +186,12 @@ class AFatLink(models.Model):
     )
 
     last_esi_error = models.CharField(
-        max_length=15, blank=True, null=True, default=None, choices=EsiError.choices
+        max_length=15, blank=True, default="", choices=EsiError.choices
     )
 
     last_esi_error_time = models.DateTimeField(null=True, blank=True, default=None)
 
-    esi_error_count = models.IntegerField(blank=False, default=0)
+    esi_error_count = models.IntegerField(default=0)
 
     objects = AFatLinkManager()
 
