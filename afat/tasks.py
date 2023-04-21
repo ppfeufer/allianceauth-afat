@@ -55,7 +55,7 @@ TASK_DEFAULT_KWARGS = {"time_limit": TASK_TIME_LIMIT, "max_retries": ESI_MAX_RET
 
 
 @shared_task(**{**TASK_DEFAULT_KWARGS}, **{"base": QueueOnce})
-def process_fats(data_list, data_source, fatlink_hash):
+def process_fats(data_list, data_source: str, fatlink_hash: str):
     """
     Due to the large possible size of fatlists,
     this process will be scheduled to process esi data
@@ -122,14 +122,16 @@ def process_character(
             f"New Pilot: Adding {character} in {solar_system_name} flying "
             f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
         )
-    else:
-        logger.debug(
-            f"Pilot {character} already registered for FAT link {fatlink_hash} "
-            f"with FAT ID {fat.pk}"
-        )
+
+        return
+
+    logger.debug(
+        f"Pilot {character} already registered for FAT link {fatlink_hash} "
+        f"with FAT ID {fat.pk}"
+    )
 
 
-def close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
+def _close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
     """
     Closing ESI fleet
     :param fatlink:
@@ -146,7 +148,7 @@ def close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
     fatlink.save()
 
 
-def esi_fatlinks_error_handling(
+def _esi_fatlinks_error_handling(
     cache_key: str, fatlink: AFatLink, logger_message: str
 ) -> None:
     """
@@ -163,26 +165,25 @@ def esi_fatlinks_error_handling(
 
     fatlink_hash = fatlink.hash
 
-    if int(cache.get(cache_key + fatlink_hash)) < CACHE_MAX_ERROR_COUNT:
-        error_count = int(cache.get(cache_key + fatlink_hash))
+    # Close ESI fleet if the consecutive error count is too high
+    if int(cache.get(cache_key + fatlink_hash)) >= CACHE_MAX_ERROR_COUNT:
+        _close_esi_fleet(fatlink=fatlink, reason=logger_message)
 
-        error_count += 1
+        return
 
-        logger.info(
-            f'FAT link "{fatlink_hash}" Error: "{logger_message}" '
-            f"({error_count} of {CACHE_MAX_ERROR_COUNT})."
-        )
+    error_count = int(cache.get(cache_key + fatlink_hash))
 
-        cache.set(
-            cache_key + fatlink_hash,
-            str(error_count),
-            75,
-        )
-    else:
-        close_esi_fleet(fatlink=fatlink, reason=logger_message)
+    error_count += 1
+
+    logger.info(
+        f'FAT link "{fatlink_hash}" Error: "{logger_message}" '
+        f"({error_count} of {CACHE_MAX_ERROR_COUNT})."
+    )
+
+    cache.set(cache_key + fatlink_hash, str(error_count), 75)
 
 
-def initialize_caches(fatlink: AFatLink) -> None:
+def _initialize_caches(fatlink: AFatLink) -> None:
     """
     Initializing caches
     :param fatlink:
@@ -204,6 +205,87 @@ def initialize_caches(fatlink: AFatLink) -> None:
         cache.set(CACHE_KEY_NOT_IN_FLEET_ERROR + fatlink.hash, "0", 75)
 
 
+def _check_for_esi_fleet(fatlink: AFatLink):
+    required_scopes = ["esi-fleets.read_fleet.v1"]
+
+    # Check if there is a fleet
+    try:
+        fleet_commander_id = fatlink.character.character_id
+        esi_token = Token.get_token(fleet_commander_id, required_scopes)
+
+        fleet_from_esi = esi.client.Fleets.get_characters_character_id_fleet(
+            character_id=fleet_commander_id,
+            token=esi_token.valid_access_token(),
+        ).result()
+
+        return {"fleet": fleet_from_esi, "token": esi_token}
+    except HTTPNotFound:
+        _esi_fatlinks_error_handling(
+            cache_key=CACHE_KEY_NOT_IN_FLEET_ERROR,
+            fatlink=fatlink,
+            logger_message=(
+                "FC is not in the registered fleet anymore or fleet is no "
+                "longer available."
+            ),
+        )
+    except Exception:
+        _esi_fatlinks_error_handling(
+            cache_key=CACHE_KEY_NO_FLEET_ERROR,
+            fatlink=fatlink,
+            logger_message="Registered fleet is no longer available.",
+        )
+
+    return False
+
+
+def _process_esi_fatlink(fatlink: AFatLink):
+    """
+    Processing ESI FAT Link
+    :param fatlink:
+    :type fatlink:
+    :return:
+    :rtype:
+    """
+
+    _initialize_caches(fatlink=fatlink)
+
+    logger.info(f'Processing ESI FAT link with hash "{fatlink.hash}"')
+
+    if fatlink.creator.profile.main_character is not None:
+        # Check if there is a fleet
+        esi_fleet = _check_for_esi_fleet(fatlink=fatlink)
+
+        # We have a valid fleet result from ESI
+        if esi_fleet and fatlink.esi_fleet_id == esi_fleet["fleet"]["fleet_id"]:
+            # Check if we deal with the fleet boss here
+            try:
+                esi_fleet_member = esi.client.Fleets.get_fleets_fleet_id_members(
+                    fleet_id=esi_fleet["fleet"]["fleet_id"],
+                    token=esi_fleet["token"].valid_access_token(),
+                ).result()
+            except Exception:
+                _esi_fatlinks_error_handling(
+                    cache_key=CACHE_KEY_NO_FLEETBOSS_ERROR,
+                    fatlink=fatlink,
+                    logger_message="FC is no longer the fleet boss.",
+                )
+
+            # Process fleet members
+            else:
+                logger.debug(
+                    "Processing fleet members for ESI FAT link with "
+                    f'hash "{fatlink.hash}"'
+                )
+
+                process_fats.delay(
+                    data_list=esi_fleet_member,
+                    data_source="esi",
+                    fatlink_hash=fatlink.hash,
+                )
+    else:
+        _close_esi_fleet(fatlink=fatlink, reason="No FAT Link creator available.")
+
+
 @shared_task(**{**TASK_DEFAULT_KWARGS, **{"base": QueueOnce}})
 def update_esi_fatlinks() -> None:
     """
@@ -211,8 +293,6 @@ def update_esi_fatlinks() -> None:
     :return:
     :rtype:
     """
-
-    required_scopes = ["esi-fleets.read_fleet.v1"]
 
     try:
         esi_fatlinks = AFatLink.objects.select_related_default().filter(
@@ -223,83 +303,14 @@ def update_esi_fatlinks() -> None:
 
     # Work our way through the FAT links
     else:
-        # Abort if ESI seems to be offline or above error limit
+        # Abort if ESI seems to be offline or above the error limit
         if not fetch_esi_status().is_ok:
             logger.warning("ESI doesn't seem to be available at this time. Aborting.")
 
             return
 
         for fatlink in esi_fatlinks:
-            initialize_caches(fatlink=fatlink)
-
-            logger.info(f'Processing ESI FAT link with hash "{fatlink.hash}"')
-
-            if fatlink.creator.profile.main_character is not None:
-                # Check if there is a fleet
-                try:
-                    fleet_commander_id = fatlink.character.character_id
-                    esi_token = Token.get_token(fleet_commander_id, required_scopes)
-
-                    fleet_from_esi = (
-                        esi.client.Fleets.get_characters_character_id_fleet(
-                            character_id=fleet_commander_id,
-                            token=esi_token.valid_access_token(),
-                        ).result()
-                    )
-                except HTTPNotFound:
-                    esi_fatlinks_error_handling(
-                        cache_key=CACHE_KEY_NOT_IN_FLEET_ERROR,
-                        fatlink=fatlink,
-                        logger_message=(
-                            "FC is not in the registered fleet anymore or fleet is no "
-                            "longer available."
-                        ),
-                    )
-                except Exception:
-                    esi_fatlinks_error_handling(
-                        cache_key=CACHE_KEY_NO_FLEET_ERROR,
-                        fatlink=fatlink,
-                        logger_message="Registered fleet is no longer available.",
-                    )
-
-                # We have a valid fleet result from ESI
-                else:
-                    if fatlink.esi_fleet_id == fleet_from_esi["fleet_id"]:
-                        # Check if we deal with the fleet boss here
-                        try:
-                            esi_fleet_member = (
-                                esi.client.Fleets.get_fleets_fleet_id_members(
-                                    fleet_id=fleet_from_esi["fleet_id"],
-                                    token=esi_token.valid_access_token(),
-                                ).result()
-                            )
-                        except Exception:
-                            esi_fatlinks_error_handling(
-                                cache_key=CACHE_KEY_NO_FLEETBOSS_ERROR,
-                                fatlink=fatlink,
-                                logger_message="FC is no longer the fleet boss.",
-                            )
-
-                        # Process fleet members
-                        else:
-                            logger.debug(
-                                "Processing fleet members for ESI FAT link with "
-                                f'hash "{fatlink.hash}"'
-                            )
-
-                            process_fats.delay(
-                                data_list=esi_fleet_member,
-                                data_source="esi",
-                                fatlink_hash=fatlink.hash,
-                            )
-                    else:
-                        esi_fatlinks_error_handling(
-                            cache_key=CACHE_KEY_FLEET_CHANGED_ERROR,
-                            fatlink=fatlink,
-                            logger_message="FC switched to another fleet",
-                        )
-            else:
-                close_esi_fleet(fatlink=fatlink, reason="No fatlink creator available.")
+            _process_esi_fatlink(fatlink=fatlink)
 
 
 @shared_task
