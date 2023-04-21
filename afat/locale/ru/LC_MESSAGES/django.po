@@ -12,15 +12,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-19 19:34+0200\n"
-"PO-Revision-Date: 2023-04-19 16:55+0000\n"
+"PO-Revision-Date: 2023-04-21 17:50+0000\n"
 "Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
-"Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ru/>\n"
+"Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural= n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 4.16.4\n"
 
@@ -108,7 +108,7 @@ msgstr "Тип корабля"
 
 #: forms.py:96
 msgid "FAT link expiry time in minutes"
-msgstr "Срок действия ссылки в минутах"
+msgstr "Срок действия ссылки РБВ в минутах"
 
 #: forms.py:99
 msgid "Expiry time in minutes"
@@ -137,8 +137,7 @@ msgstr "ESI"
 msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
-msgstr ""
-"Данная команда отменяет ESI отслеживание флота и закрывает Запись УБВ флота."
+msgstr "Остановить ESI отслеживание флота и аннулировать ссылку РБВ."
 
 #: helper/views_helper.py:90
 #, python-brace-format
@@ -146,8 +145,8 @@ msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
 "from {fatlink.character.character_name}?</p>"
 msgstr ""
-"<p>Действительно завершить ESI отслеживание флота с идентификатором {fatlink."
-"esi_fleet_id} пилота {fatlink.character.character_name}?</p>"
+"<p>Действительно остановить ESI отслеживание флота с идентификатором {fatlink"
+".esi_fleet_id} пилота {fatlink.character.character_name}?</p>"
 
 #: helper/views_helper.py:92
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:39
@@ -155,7 +154,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:38
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:41
 msgid "Stop Tracking"
-msgstr "Остановить учет"
+msgstr "Остановить отслеживание"
 
 #: helper/views_helper.py:116 helper/views_helper.py:186
 msgid "Delete"
@@ -164,7 +163,7 @@ msgstr "Удалить"
 #: helper/views_helper.py:118
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
-msgstr "<p>Действительно удалить Запись УБВ флота {fatlink_fleet}?</p>"
+msgstr "<p>Действительно удалить ссылку РБВ {fatlink_fleet}?</p>"
 
 #: helper/views_helper.py:188
 #, python-brace-format
@@ -172,8 +171,7 @@ msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
 "FAT link?</p>"
 msgstr ""
-"<p>Действительно удалить {fat.character.character_name} из этой Записи УБВ "
-"флота?</p>"
+"<p>Действительно удалить {fat.character.character_name} из этого БВ?</p>"
 
 #: helper/views_helper.py:239
 #, python-brace-format
@@ -186,11 +184,11 @@ msgstr "Имеет доступ к модулю AFAT"
 
 #: models.py:65
 msgid "Can manage the AFAT module"
-msgstr "Может управлять данными FAT"
+msgstr "Может управлять модулем АFAT (БВ и ссылки РБВ)"
 
 #: models.py:67
 msgid "Can create FAT Links"
-msgstr "Может создавать ссылки УБВ"
+msgstr "Может создавать ссылки РБВ"
 
 #: models.py:69
 msgid "Can see own corporation statistics"
@@ -214,76 +212,76 @@ msgstr "Активен или нет данный тип флота"
 
 #: models.py:102
 msgid "FAT Link Fleet Type"
-msgstr "Тип флота ссылки УБВ"
+msgstr "Тип флота БВ"
 
 #: models.py:103
 msgid "FAT Link Fleet Types"
-msgstr "Типы флота ссылки УБВ"
+msgstr "Типы флота БВ"
 
 #: models.py:124
 msgid "When was this FAT link created"
-msgstr "Дата создания ссылки УБВ"
+msgstr "Время БВ"
 
 #: models.py:131
 msgid "The FAT link fleet name"
-msgstr "Название флота ссылки УБВ"
+msgstr "Название флота БВ"
 
 #: models.py:135
 msgid "The FAT link hash"
-msgstr "Хэш ссылки УБВ"
+msgstr "Хэш БВ"
 
 #: models.py:142
 msgid "Who created the FAT link?"
-msgstr "Кто создал ссылку УБВ?"
+msgstr "Кто создал БВ?"
 
 #: models.py:151
 msgid "Character this FAT link has been created with"
-msgstr "Пилот, от имени которого создана эта ссылка"
+msgstr "Пилот, от имени которого создан БВ"
 
 #: models.py:159
 msgid "The FAT link fleet type, if it's set"
-msgstr "Тип флота ссылки УБВ, при наличии"
+msgstr "Тип флота БВ, при наличии"
 
 #: models.py:163
 msgid "Whether this FAT link was created via ESI or not"
-msgstr "Ссылка УБВ создана посредством ESI"
+msgstr "БВ создан с ESI отслеживанием или нет"
 
 #: models.py:168
 msgid "Whether the fleet to this FAT link is available in ESI or not"
-msgstr "Флот этой ссылки УБВ доступен посредством ESI"
+msgstr "Флот этого БВ все еще доступен посредством ESI или нет"
 
 #: models.py:174
 msgid "Has this FAT link being re-opened?"
-msgstr "Эта ссылка УБВ была реактивирована?"
+msgstr "Ссылка РБВ была реактивирована?"
 
 #: models.py:186
 msgid "FAT Link"
-msgstr "Ссылка УБВ"
+msgstr "Боевой Вылет"
 
 #: models.py:187 templates/afat/partials/dashboard/tabs_navigation.html:5
 #: templates/afat/partials/menu.html:24
 msgid "FAT Links"
-msgstr "Журнал флотов"
+msgstr "Боевые Вылеты"
 
 #: models.py:240
 msgid "FAT Duration"
-msgstr "Продолжительность УБВ"
+msgstr "Длительность БВ"
 
 #: models.py:241
 msgid "FAT Durations"
-msgstr "Продолжительности УБВ"
+msgstr "Длительности БВ"
 
 #: models.py:254
 msgid "Character who registered this FAT"
-msgstr "Пилот, зарегистрировавший запись УБВ"
+msgstr "Пилот - участник БВ"
 
 #: models.py:261
 msgid "The FAT link the character registered at"
-msgstr "Пилот, зарегистрировавший ссылка УБВ"
+msgstr "Использованная ссылка РБВ"
 
 #: models.py:265
 msgid "The system the character is in"
-msgstr "Система пилота"
+msgstr "Местонахождение пилота"
 
 #: models.py:272
 msgid "The ship the character was flying"
@@ -291,7 +289,7 @@ msgstr "Корабль пилота"
 
 #: models.py:284
 msgid "FAT"
-msgstr "УБВ"
+msgstr "БВП"
 
 #: models.py:285 templates/afat/partials/dashboard/tabs_navigation.html:4
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
@@ -300,44 +298,44 @@ msgstr "УБВ"
 #: templates/afat/view/statistics/statistics_alliance_year_overview.html:27
 #: templates/afat/view/statistics/statistics_corporation_year_overview.html:27
 msgid "FATs"
-msgstr "УБВы"
+msgstr "БВП"
 
 #: models.py:311
 msgid "Time this FAT has been added manually"
-msgstr "Время ручной регистрации записи УБВ"
+msgstr "Время особой регистрации БВП"
 
 #: models.py:320 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
 msgid "Manual FAT"
-msgstr "Особая Запись УБВ"
+msgstr "Особая регистрация БВ"
 
 #: models.py:321
 msgid "Manual FATs"
-msgstr "Особые Записи УБВ"
+msgstr "Особые регистрации БВ"
 
 #: models.py:345
 msgid "FAT Link Created"
-msgstr "Запись УБВ создана"
+msgstr "Ссылка РБВ создана"
 
 #: models.py:346
 msgid "FAT Link Changed"
-msgstr "Запись УБВ изменена"
+msgstr "Ссылка РБВ изменена"
 
 #: models.py:347
 msgid "FAT Link Removed"
-msgstr "Запись УБВ удалена"
+msgstr "Ссылка РБВ удалена"
 
 #: models.py:348
 msgid "FAT Link Re-Opened"
-msgstr "Запись УБВ реактивирована"
+msgstr "Ссылка РБВ реактивирована"
 
 #: models.py:350
 msgid "FAT Removed"
-msgstr "Запись УБВ удалена"
+msgstr "БВП аннулирован"
 
 #: models.py:351
 msgid "Manual FAT Added"
-msgstr "Особая Запись УБВ добавлена"
+msgstr "Особая регистрация БВП"
 
 #: models.py:377
 msgid "AFAT Log"
@@ -357,7 +355,7 @@ msgstr "Журналы AFAT"
 #: templates/afat/view/statistics/statistics_corporation_year_overview.html:12
 #: templates/afat/view/statistics/statistics_overview.html:7
 msgid "Fleet Activity"
-msgstr "Учет Боевых Вылетов"
+msgstr "Журнал Боевых Вылетов"
 
 #: templates/afat/modals/general.html:27
 msgid "Cancel"
@@ -391,15 +389,15 @@ msgstr "Действия"
 
 #: templates/afat/partials/dashboard/tabs/fats.html:10
 msgid "Your Most Recent FATs"
-msgstr "Недавние Боевые Вылеты"
+msgstr "Ваши недавние БВП"
 
 #: templates/afat/partials/dashboard/tabs/fats.html:12
 msgid ""
 "Only characters that have recent FATs are shown. <small>(latest 10 FATs per "
 "character)</small>"
 msgstr ""
-"Показаны пилоты, у которых недавно были Боевые Вылеты. <small>(последние 10 "
-"боевых вылетов для пилота)</small>"
+"Показаны пилоты, у которых недавно были БВП. <small>(последние 10 БВП для "
+"пилота)</small>"
 
 #: templates/afat/partials/dashboard/tabs/fats.html:42
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:16
@@ -410,22 +408,22 @@ msgstr "Местоположение"
 #: templates/afat/partials/dashboard/tabs/fats.html:43
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:13
 msgid "Ship"
-msgstr "Тип корабля"
+msgstr "Корабль"
 
 #: templates/afat/partials/dashboard/tabs/fats.html:65
 msgid "No recent FAT activity registered for any of your characters."
-msgstr "Для ваших пилотов Боевые Вылеты не найдены."
+msgstr "Для ваших пилотов БВП не найдены."
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:8
 msgid "Create a clickable FAT Link"
-msgstr "Зарегистрировать флот и создать ссылку"
+msgstr "Регистрация Боевого Вылета, учет пилотов по ссылке"
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:14
 msgid ""
 "This option will create a clickable link to share with your fleet members."
 msgstr ""
-"Эта опция регистрирует Запись УБВ флота и создает ссылку, предназначенную "
-"для регистрации пилотов флота."
+"Эта опция регистрирует БВ и формирует ссылку РБВ, предназначенную для учета "
+"пилотов."
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:35
 msgid "Create Link"
@@ -433,7 +431,7 @@ msgstr "Создать ссылку"
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:9
 msgid "Create link using ESI"
-msgstr "Зарегистрировать флот посредством ESI"
+msgstr "Регистрация Боевого Вылета, учет пилотов посредством ESI"
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:15
 msgid ""
@@ -448,10 +446,10 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"Эта опция регистрирует Запись УБВ флота и автоматически учитывает всех "
+"                    Эта опция регистрирует БВ и автоматически учитывает всех "
 "пилотов флота.<br>\n"
-"<b>Используйте данную опцию только если Вы являетесь командиром флота</b>, "
-"иначе используйте опцию регистрации флота и создания ссылки\n"
+"<b>Используйте данную опцию только если Вы являетесь командующим флота</b>, "
+"иначе используйте опцию регистрации БВ с учетом по ссылке\n"
 "                "
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:24
@@ -467,7 +465,8 @@ msgstr ""
 "\n"
 "                    Эта опция начинает автоматическое отслеживание всех\n"
 "                    пилотов флота до закрытия флота в игре (в том числе\n"
-"                    выхода ФК из флота) или остановки отслеживания здесь.\n"
+"                    выхода командующего из флота) или остановки отслеживания "
+"здесь.\n"
 "                "
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:48
@@ -480,15 +479,15 @@ msgstr "Создатель:"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:11
 msgid "Link Created (Eve Time):"
-msgstr "Ссылка создана (время EVE):"
+msgstr "Время создания (Время EVE):"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:17
 msgid "Link Expires (Eve Time):"
-msgstr "Срок действия (время EVE):"
+msgstr "Срок действия истекает (Время EVE):"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:19
 msgid "Link Expired (Eve Time):"
-msgstr "Срок действия (время EVE):"
+msgstr "Срок действия истек (Время EVE):"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
 msgid "Participation is being tracked via ESI"
@@ -534,15 +533,15 @@ msgstr "Реактивировать"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:64
 msgid "Re-Open FAT link"
-msgstr "Реактивировать ссылку"
+msgstr "Реактивировать ссылку РБВ"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:72
 msgid "FAT Link:"
-msgstr "Запись УБВ:"
+msgstr "Ссылка РБВ:"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:84
 msgid "Copy me!"
-msgstr "Скопировать в буфер обмена!"
+msgstr "Скопируй меня!"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:92
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:63
@@ -553,7 +552,7 @@ msgstr "Завершить ESI отслеживание"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:97
 msgid "Re-Open Fat Link"
-msgstr "Реактивировать Запись УБВ"
+msgstr "Реактивировать ссылку РБВ"
 
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:13
 msgid "Set Name"
@@ -574,7 +573,7 @@ msgstr "Пилот"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:27
 msgid "Ship Type Overview"
-msgstr "Статистика типов кораблей"
+msgstr "Обзор типов кораблей"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:33
 msgid "Numbers"
@@ -590,11 +589,11 @@ msgstr "Примечание:"
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "This action is logged!"
-msgstr "Действие занесено в журнал!"
+msgstr "Действие будет занесено в журнал!"
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:58
 msgid "Add Manual FAT"
-msgstr "Добавить особую Запись УБВ"
+msgstr "Зарегистрировать БВП"
 
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:4
 msgid "Legend"
@@ -607,20 +606,10 @@ msgstr "Флот активен и пилоты автоматически от�
 
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
 msgid "FATs have been automatically tracked via ESI"
-msgstr "пилоты автоматически отслеживались посредством ESI"
+msgstr "Пилоты автоматически отслеживались посредством ESI"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:7
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                You currently have %(open_esi_fleets)s active ESI fleet "
-#| "under the following character:\n"
-#| "            "
-#| msgid_plural ""
-#| "\n"
-#| "                You currently have %(open_esi_fleets)s active ESI fleets "
-#| "under the following characters:\n"
-#| "            "
+#, python-format
 msgid ""
 "\n"
 "                You currently have an active ESI fleet under the following "
@@ -648,8 +637,8 @@ msgstr[2] ""
 "            "
 msgstr[3] ""
 "\n"
-"                У Вас %(open_esi_fleets)s активных ESI флотов под "
-"управлением следующих пилотов:\n"
+"                У Вас один активный ESI флот под управлением следующего "
+"пилота:\n"
 "            "
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
@@ -661,8 +650,6 @@ msgid "ESI fleet ID:"
 msgstr "ESI ID флота:"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:49
-#, fuzzy
-#| msgid "This fleet is already automatically tracked."
 msgid ""
 "\n"
 "                This fleet is already automatically tracked.\n"
@@ -671,10 +658,22 @@ msgid_plural ""
 "\n"
 "                These fleets are already automatically tracked.\n"
 "            "
-msgstr[0] "Этот флот отслеживается автоматически."
-msgstr[1] "Этот флот отслеживается автоматически."
-msgstr[2] "Этот флот отслеживается автоматически."
-msgstr[3] "Этот флот отслеживается автоматически."
+msgstr[0] ""
+"\n"
+"                Эти флоты отслеживаются автоматически.\n"
+"            "
+msgstr[1] ""
+"\n"
+"                Эти флоты отслеживаются автоматически.\n"
+"            "
+msgstr[2] ""
+"\n"
+"                Эти флоты отслеживаются автоматически.\n"
+"            "
+msgstr[3] ""
+"\n"
+"                Этот флот отслеживается автоматически.\n"
+"            "
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:55
 msgid ""
@@ -742,7 +741,7 @@ msgstr "Корпорация"
 #: templates/afat/view/statistics/statistics_alliance_year_overview.html:30
 #: templates/afat/view/statistics/statistics_corporation_year_overview.html:30
 msgid "Avg FATs"
-msgstr "Боевые Вылеты (в среднем)"
+msgstr "БВП (в среднем)"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:16
 msgid "Corporation Stats"
@@ -751,7 +750,7 @@ msgstr "Статистика корпорации"
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:6
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:6
 msgid "FATs By Ship Type"
-msgstr "Боевые Вылеты по типам кораблей"
+msgstr "БВП по типам кораблей"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:7
 msgid "Corporation Performance"
@@ -761,31 +760,31 @@ msgstr "Показатели корпорации"
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:7
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:52
 msgid "FATs By Time"
-msgstr "Боевые Вылеты по времени"
+msgstr "БВП по времени"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:9
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:8
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:77
 msgid "FATs By Weekday"
-msgstr "Боевые Вылеты по дням недели"
+msgstr "БВП по дням недели"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:16
 #: templates/afat/partials/statistics/character/tabs/graphs.html:6
 #: templates/afat/partials/statistics/corporation/tabs/graphs.html:14
 msgid "FATs by Ship Type"
-msgstr "Боевые Вылеты по типам кораблей"
+msgstr "БВП по типам кораблей"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:42
 msgid "FATs by Time"
-msgstr "Боевые Вылеты по времени"
+msgstr "БВП по времени"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:69
 msgid "FATs by Weekday"
-msgstr "Боевые Вылеты по дням недели"
+msgstr "БВП по дням недели"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:96
 msgid "Average FATs by Corporation"
-msgstr "Среднее кол-во Боевых Вылетов по корпорациям"
+msgstr "Среднее кол-во БВП по корпорациям"
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:4
 #: templates/afat/partials/statistics/character/tabs_navigation.html:4
@@ -799,16 +798,16 @@ msgstr "Корпорации"
 
 #: templates/afat/partials/statistics/character/tabs/graphs.html:28
 msgid "FATs by Time of Day"
-msgstr "Боевые Вылеты по времени суток"
+msgstr "БВП по времени суток"
 
 #: templates/afat/partials/statistics/character/tabs/graphs.html:37
 #: templates/afat/view/fatlinks/fatlinks_overview.html:29
 msgid "# of FATs"
-msgstr "Кол-во регистраций"
+msgstr "кол-во БВП"
 
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:5
 msgid "FATs for"
-msgstr "Боевые Вылеты для"
+msgstr "БВП для"
 
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
@@ -841,11 +840,11 @@ msgstr "Ваша статистика за год"
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:9
 msgid "Only months with FAT data of the selected year are shown."
-msgstr "Показаны месяцы выбранного года, в которых были Боевые Вылеты."
+msgstr "Показаны месяцы выбранного года, в которых были БВП."
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:10
 msgid "Only characters that have FATs for the selected year are shown."
-msgstr "Показаны пилоты, у которых были Боевые Вылеты в выбранном году."
+msgstr "Показаны пилоты, у которых были БВП в выбранном году."
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:32
 #: templates/afat/view/statistics/statistics_alliance_year_overview.html:26
@@ -855,19 +854,19 @@ msgstr "Месяц"
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:33
 msgid "FAT Count"
-msgstr "Боевые Вылеты"
+msgstr "кол-во БВП"
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:54
 msgid "No FATs for"
-msgstr "Нет Боевых Вылетов для"
+msgstr "Нет БВП для"
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:62
 msgid "No FATs for this year at all"
-msgstr "Нет Боевых Вылетов за этот год"
+msgstr "Нет БВП за этот год"
 
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:4
 msgid "My Stats"
-msgstr "Пилоты"
+msgstr "Мои показатели"
 
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:7
 msgid "Corps"
@@ -892,31 +891,31 @@ msgstr "Недавняя активность"
 #: templates/afat/view/dashboard/dashboard.html:23
 #: templates/afat/view/fatlinks/fatlinks_overview.html:47
 msgid "Delete FAT Link"
-msgstr "Удалить Запись УБВ"
+msgstr "Завершение Боевого Вылета"
 
 #: templates/afat/view/dashboard/dashboard.html:52
 msgid "No recent FATs for"
-msgstr "Отсутствуют недавние Боевые Вылеты для"
+msgstr "Отсутствуют недавние БВП для"
 
 #: templates/afat/view/dashboard/dashboard.html:53
 msgid "No recent FAT links"
-msgstr "Отсутствуют недавние Боевые Вылеты"
+msgstr "Отсутствуют недавние БВП"
 
 #: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:11
 msgid "Create a FAT Link"
-msgstr "Создать Запись УБВ флота"
+msgstr "Регистрация Боевого Вылета"
 
 #: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:11
 msgid "FAT Link Details"
-msgstr "Запись УБВ флота"
+msgstr "Подробности Боевого Вылета"
 
 #: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:27
 msgid "Delete FAT"
-msgstr "Удалить Запись УБВ"
+msgstr "Завершение Боевого Вылета"
 
 #: templates/afat/view/fatlinks/fatlinks_overview.html:11
 msgid "All FAT Links"
-msgstr "Все флоты"
+msgstr "Все Боевые Вылеты"
 
 #: templates/afat/view/logs/logs_overview.html:5
 msgid "Fleet Activity Tracking Logs"
@@ -953,7 +952,7 @@ msgstr "Пользователь"
 
 #: templates/afat/view/logs/logs_overview.html:29
 msgid "FAT link"
-msgstr "Запись УБВ флота"
+msgstr "Ссылка РБВ"
 
 #: templates/afat/view/logs/logs_overview.html:30
 msgid "Description"
@@ -961,7 +960,7 @@ msgstr "Описание"
 
 #: templates/afat/view/statistics/statistics_character.html:5
 msgid "FAT Statistics"
-msgstr "Статистика УБВ"
+msgstr "Статистика БВП"
 
 #: templatetags/filters.py:20
 msgid "January"
@@ -1016,7 +1015,7 @@ msgid ""
 "<h4>Success!</h4><p>Clickable FAT Link Created!</p><p>Make sure to give your "
 "fleet members the link to click so that they get credit for this fleet.</p>"
 msgstr ""
-"<h4>Успех!</h4><p>УБВ ссылка создана!</p><p>Предоставьте данную ссылку "
+"<h4>Успех!</h4><p>Ссылка РБВ создана!</p><p>Предоставьте данную ссылку "
 "членам флота, чтобы они могли зарегистрировать свое участие.</p>"
 
 #: views/fatlinks.py:226
@@ -1024,7 +1023,7 @@ msgid ""
 "<h4>Error!</h4><p>Something went wrong when attempting to submit your "
 "clickable FAT Link.</p>"
 msgstr ""
-"<h4>Ошибка!</h4><p>Что-то пошло не так при попытке создания УБВ записи.</p>"
+"<h4>Ошибка!</h4><p>Что-то пошло не так при попытке создания ссылки РБВ.</p>"
 
 #: views/fatlinks.py:239
 msgid ""
@@ -1081,7 +1080,7 @@ msgstr ""
 
 #: views/fatlinks.py:511
 msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
-msgstr "<h4>Внимание!</h4><p>Не предоставлен hash Записи УБВ.</p>"
+msgstr "<h4>Внимание!</h4><p>Не предоставлен hash ссылки РБВ.</p>"
 
 #: views/fatlinks.py:521 views/fatlinks.py:653
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
@@ -1111,8 +1110,8 @@ msgid ""
 "<h4>Warning!</h4><p>A FAT already exists for the selected character "
 "({character.character_name}) and fleet combination.</p>"
 msgstr ""
-"<h4>Внимание!</h4><p>Боевой Вылет пилота ({character.character_name}) в "
-"выбранном флоте уже был учтен.</p>"
+"<h4>Внимание!</h4><p>БВП ({character.character_name}) в выбранном флоте уже "
+"был учтен.</p>"
 
 #: views/fatlinks.py:613
 #, python-brace-format
@@ -1120,8 +1119,8 @@ msgid ""
 "<h4>Success!</h4><p>FAT registered for {character.character_name} at "
 "{fleet_name}</p>"
 msgstr ""
-"<h4>Успех!</h4><p>Пилот {character.character_name} зарегистрирован в Боевом "
-"Вылете флота {fleet_name}</p>"
+"<h4>Успех!</h4><p>Пилот {character.character_name} зарегистрирован в "
+"{fleet_name}</p>"
 
 #: views/fatlinks.py:627
 #, python-brace-format
@@ -1142,7 +1141,7 @@ msgid ""
 "<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} has "
 "been added flying a {shiptype} in {system}</p>"
 msgstr ""
-"<h4>Успех!</h4><p>Запись УБВ обновлена.<br>{character.character_name} "
+"<h4>Успех!</h4><p>Ссылка РБВ обновлена.<br>{character.character_name} "
 "добавлен на {shiptype} в {system}</p>"
 
 #: views/fatlinks.py:732
@@ -1152,16 +1151,16 @@ msgid ""
 "p><p>Name: {character.character_name}<br>System: {afat_object.system}"
 "<br>Ship: {afat_object.shiptype}</p>"
 msgstr ""
-"<h4>Информация</h4><p>Пилот уже зарегистрирован для указанной Записи УБВ.</"
-"p><p>Имя: {character.character_name}<br>Система: {afat_object.system}"
-"<br>Корабль: {afat_object.shiptype}</p>"
+"<h4>Информация</h4><p>Пилот уже зарегистрирован в указанном БВ.</p><p>Имя: "
+"{character.character_name}<br>Система: {afat_object.system}<br>Корабль: "
+"{afat_object.shiptype}</p>"
 
 #: views/fatlinks.py:741
 msgid ""
 "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you "
 "entered was not found.</p>"
 msgstr ""
-"<h4>Упс!</h4><p>Ошибка редактирования УБВ! Пилот с введенным именем не "
+"<h4>Упс!</h4><p>Ошибка редактирования БВ! Пилот с введенным именем не "
 "найден.</p>"
 
 #: views/fatlinks.py:750
@@ -1170,7 +1169,7 @@ msgstr "<h4>Упс!</h4><p>Что-то пошло не так!</p>"
 
 #: views/fatlinks.py:850
 msgid "<h4>Warning!</h4><p>No FAT Link hash provided.</p>"
-msgstr "<h4>Внимание!</h4><p>Не предоставлен hash Записи УБВ.</p>"
+msgstr "<h4>Внимание!</h4><p>Не предоставлен hash ссылки РБВ.</p>"
 
 #: views/fatlinks.py:862
 msgid ""
@@ -1178,7 +1177,7 @@ msgid ""
 "has already been deleted.</p>"
 msgstr ""
 "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или относится к ранее "
-"удаленной Записи УБВ.</p>"
+"аннулированной ссылке РБВ.</p>"
 
 #: views/fatlinks.py:886
 #, python-brace-format
@@ -1186,8 +1185,8 @@ msgid ""
 "<h4>Success!</h4><p>The FAT Link \"{fatlink_hash}\" and all associated FATs "
 "have been successfully deleted.</p>"
 msgstr ""
-"<h4>Успех!</h4><p>Запись УБВ флота \"{fatlink_hash}\" и все "
-"зарегистрированные Боевые Вылеты были удалены.</p>"
+"<h4>Успех!</h4><p>Запись БВ флота \"{fatlink_hash}\" и все "
+"зарегистрированные БВП были удалены.</p>"
 
 #: views/fatlinks.py:923
 msgid ""
@@ -1199,7 +1198,7 @@ msgstr ""
 #: views/fatlinks.py:936
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
-"<h4>Ошибка!</h4><p>Значение hash и идентификатор Записи УБВ не соврадают.</p>"
+"<h4>Ошибка!</h4><p>Значение hash и идентификатор ссылки РБВ не совпадают.</p>"
 
 #: views/fatlinks.py:954
 #, python-brace-format
@@ -1207,27 +1206,27 @@ msgid ""
 "<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has "
 "been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
-"<h4>Успех!</h4><p>Регистрация Боевого Вылета пилота {fat_details.character."
-"character_name} удалена из Записи УБВ флота \"{fatlink_hash}\".</p>"
+"<h4>Успех!</h4><p>Регистрация БВП для {fat_details.character.character_name} "
+"удалена из БВ флота \"{fatlink_hash}\".</p>"
 
 #: views/fatlinks.py:1019
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
-"<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакой Записи УБВ."
-"</p>"
+"<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакому БВ "
+"флота.</p>"
 
 #: views/fatlinks.py:1061
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
-msgstr "<h4>Успех!</h4><p>Запись УБВ успешно реактивирована.</p>"
+msgstr "<h4>Успех!</h4><p>Ссылка РБВ успешно реактивирована.</p>"
 
 #: views/fatlinks.py:1071
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
 msgstr ""
-"<h4>Внимание!</h4><p>Данная Запись УБВ уже была реактивирована ранее. "
-"Возможна только одна реактивация Записи УБВ!</p>"
+"<h4>Внимание!</h4><p>Данная ссылка РБВ уже была реактивирована ранее. "
+"Возможна только одна реактивация ссылки РБВ!</p>"
 
 #: views/statistics.py:213
 msgid ""
@@ -1281,5 +1280,43 @@ msgstr "Воскресенье"
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Ошибка!</h4><p>Информация о дате неполная.</p>"
 
-#~ msgid "These fleets are already automatically tracked."
-#~ msgstr "Эти флоты отслеживаются автоматически."
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:52
+msgid "These fleets are already automatically tracked."
+msgstr "Эти флоты отслеживаются автоматически."
+
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:7
+#, python-format
+msgid ""
+"\n"
+"                You currently have %(open_esi_fleets)s active ESI fleet "
+"under the following character:\n"
+"            "
+msgid_plural ""
+"\n"
+"                You currently have %(open_esi_fleets)s active ESI fleets "
+"under the following characters:\n"
+"            "
+msgstr[0] ""
+"\n"
+"                У Вас %(open_esi_fleets)s активный ESI флот под управлением "
+"следующих пилотов:\n"
+"            "
+msgstr[1] ""
+"\n"
+"                У Вас %(open_esi_fleets)s активных ESI флота под управлением "
+"следующих пилотов:\n"
+"            "
+msgstr[2] ""
+"\n"
+"                У Вас %(open_esi_fleets)s активных ESI флотов под "
+"управлением следующих пилотов:\n"
+"            "
+msgstr[3] ""
+"\n"
+"                У Вас один активный ESI флот под управлением следующего "
+"пилота:\n"
+"            "
+
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:50
+msgid "This fleet is already automatically tracked."
+msgstr "Этот флот отслеживается автоматически."
