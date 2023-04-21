@@ -9,5 +9,4 @@ __version__ = metadata.version("allianceauth-afat")
 
 del metadata
 
-# __version__ = "2.11.3"
 __title__ = "Fleet Activity Tracking"
