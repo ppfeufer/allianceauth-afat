@@ -7,7 +7,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("eveonline", "0014_auto_20210105_1413"),
         ("afat", "0018_auto_20210420_2016"),

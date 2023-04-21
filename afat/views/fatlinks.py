@@ -154,7 +154,7 @@ def create_clickable_fatlink(
     request: WSGIRequest,
 ) -> HttpResponseRedirect:
     """
-    Create clickable fat link
+    Create a clickable fat link
     :param request:
     :type request:
     :return:
@@ -320,7 +320,7 @@ def create_esi_fatlink_callback(
             request,
             mark_safe(
                 _(
-                    f'<h4>Warning!</h4><p>Fleet with ID "{fleet_from_esi["fleet_id"]}" for your character {creator_character.character_name} has already been registered and pilots joining this fleet are automatically tracked.</p>'
+                    f'<h4>Warning!</h4><p>Fleet with ID "{fleet_from_esi["fleet_id"]}" for your character {creator_character.character_name} has already been registered and pilots joining this fleet are automatically tracked.</p>'  # pylint: disable=line-too-long
                 )
             ),
         )
@@ -385,7 +385,7 @@ def create_esi_fatlink_callback(
         esi_fleet_id=fleet_from_esi["fleet_id"],
     )
 
-    # Add fleet type, if there is any
+    # Add a fleet type if there is any
     if request.session["fatlink_form__type"] is not None:
         fatlink.link_type_id = request.session["fatlink_form__type"]
 
@@ -417,7 +417,7 @@ def create_esi_fatlink_callback(
     del request.session["fatlink_form__name"]
     del request.session["fatlink_form__type"]
 
-    # Process fleet members in background
+    # Process fleet members in the background
     process_fats.delay(
         data_list=esi_fleet_member, data_source="esi", fatlink_hash=fatlink_hash
     )
@@ -443,7 +443,7 @@ def create_esi_fatlink(
     request: WSGIRequest,
 ) -> HttpResponseRedirect:
     """
-    Create ESI fat link
+    Create an ESI fat link
     :param request:
     :type request:
     :return:
@@ -555,7 +555,7 @@ def add_fat(
             request,
             mark_safe(
                 _(
-                    f"<h4>Warning!</h4><p>There was an issue with the ESI token for {character.character_name}. Please try again.</p>"
+                    f"<h4>Warning!</h4><p>There was an issue with the ESI token for {character.character_name}. Please try again.</p>"  # pylint: disable=line-too-long
                 )
             ),
         )
@@ -596,7 +596,7 @@ def add_fat(
                 request,
                 mark_safe(
                     _(
-                        f"<h4>Warning!</h4><p>A FAT already exists for the selected character ({character.character_name}) and fleet combination.</p>"
+                        f"<h4>Warning!</h4><p>A FAT already exists for the selected character ({character.character_name}) and fleet combination.</p>"  # pylint: disable=line-too-long
                     )
                 ),
             )
@@ -610,7 +610,7 @@ def add_fat(
                 request,
                 mark_safe(
                     _(
-                        f"<h4>Success!</h4><p>FAT registered for {character.character_name} at {fleet_name}</p>"
+                        f"<h4>Success!</h4><p>FAT registered for {character.character_name} at {fleet_name}</p>"  # pylint: disable=line-too-long
                     )
                 ),
             )
@@ -624,7 +624,7 @@ def add_fat(
             request,
             mark_safe(
                 _(
-                    f"<h4>Warning!</h4><p>Cannot register the fleet participation for {character.character_name}. The character needs to be online.</p>"
+                    f"<h4>Warning!</h4><p>Cannot register the fleet participation for {character.character_name}. The character needs to be online.</p>"  # pylint: disable=line-too-long
                 )
             ),
         )
@@ -703,7 +703,7 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
                         request,
                         mark_safe(
                             _(
-                                f"<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} has been added flying a {shiptype} in {system}</p>"
+                                f"<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} has been added flying a {shiptype} in {system}</p>"  # pylint: disable=line-too-long
                             )
                         ),
                     )
@@ -729,7 +729,7 @@ def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
                         request,
                         mark_safe(
                             _(
-                                f"<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character.character_name}<br>System: {afat_object.system}<br>Ship: {afat_object.shiptype}</p>"
+                                f"<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character.character_name}<br>System: {afat_object.system}<br>Ship: {afat_object.shiptype}</p>"  # pylint: disable=line-too-long
                             )
                         ),
                     )
@@ -883,7 +883,7 @@ def delete_fatlink(
         request,
         mark_safe(
             _(
-                f'<h4>Success!</h4><p>The FAT Link "{fatlink_hash}" and all associated FATs have been successfully deleted.</p>'
+                f'<h4>Success!</h4><p>The FAT Link "{fatlink_hash}" and all associated FATs have been successfully deleted.</p>'  # pylint: disable=line-too-long
             )
         ),
     )
@@ -951,7 +951,7 @@ def delete_fat(
         request,
         mark_safe(
             _(
-                f'<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has been successfully deleted from FAT link "{fatlink_hash}".</p>'
+                f'<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has been successfully deleted from FAT link "{fatlink_hash}".</p>'  # pylint: disable=line-too-long
             )
         ),
     )
@@ -1042,7 +1042,8 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
             request=request,
             log_event=AFatLog.Event.REOPEN_FATLINK,
             log_text=(
-                f"FAT link re-opened for a duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
+                "FAT link re-opened for a duration of "
+                f"{AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
             ),
             fatlink_hash=fatlink_duration.fleet.hash,
         )

@@ -1,4 +1,4 @@
-# Alliance Auth AFAT - Another Fleet Activity Tracker
+# Alliance Auth AFAT — Another Fleet Activity Tracker
 
 [![Version](https://img.shields.io/pypi/v/allianceauth-afat?label=release)](https://pypi.org/project/allianceauth-afat/)
 [![License](https://img.shields.io/badge/license-GPLv3-green)](https://pypi.org/project/allianceauth-afat/)
@@ -18,24 +18,37 @@ An Improved FAT/PAP System for
 [Alliance Auth](https://gitlab.com/allianceauth/allianceauth).
 
 
-## Contents
+---
 
-- [Features and highlights](#features-and-highlights)
-- [Screenshots](#screenshots)
-- [Installation](#installation)
-- [Updating](#updating)
-- [Data Migration](#data-migration)
-    - [From Alliance Auth native FAT](#import-from-native-fat)
-    - [From ImicusFAT](#import-from-imicusfat)
-        - [Uninstall ImicusFAT](#uninstall-imicusfat)
-- [Settings](#settings)
-- [Permissions](#permissions)
-- [Changelog](#changelog)
-- [Credits](#credits)
-- [Contributing](#contributing)
+<!-- TOC -->
+* [Alliance Auth AFAT — Another Fleet Activity Tracker](#alliance-auth-afat--another-fleet-activity-tracker)
+  * [Features and Highlights](#features-and-highlights)
+  * [Screenshots](#screenshots)
+    * [Dashboard](#dashboard)
+    * [Fat Link List](#fat-link-list)
+    * [Fat Link Details](#fat-link-details)
+    * [Add Fat Link View for FCs](#add-fat-link-view-for-fcs)
+  * [Installation](#installation)
+    * [Important](#important)
+    * [Step 1: Install the App](#step-1-install-the-app)
+    * [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
+    * [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
+  * [Updating](#updating)
+  * [Data Migration](#data-migration)
+    * [Import From Native FAT](#import-from-native-fat)
+    * [Import From ImicusFAT](#import-from-imicusfat)
+      * [Uninstall ImicusFAT](#uninstall-imicusfat)
+  * [Settings](#settings)
+  * [Permissions](#permissions)
+  * [Changelog](#changelog)
+  * [Contributing](#contributing)
+  * [Credits](#credits)
+<!-- TOC -->
+
+---
 
 
-## Features and highlights
+## Features and Highlights
 
 - Automatic tracking of participation on FAT links created via ESI
 - Multiple ESI fleets (with your alts)
@@ -46,7 +59,7 @@ An Improved FAT/PAP System for
 - Custom module name
 - Re-open FAT link if the FAT link has expired and is within the defined grace time
   (only for clickable FAT links)
-- Manually add pilots to clickable FAT links, in case they missed to click the link
+- Manually add pilots to clickable FAT links, in case they missed clicking the link
   (for a period of 24 hours after the FAT links original expiry time)
 - Log for the following actions (Logs are kept for a certain time, 60 days per default):
     - Create FAT link
@@ -57,45 +70,50 @@ An Improved FAT/PAP System for
     - Remove pilot from FAT link
 
 AFAT will work alongside the built-in native FAT System and ImicusFAT.
-However, data does not share, but you can migrate their data to AFAT, for more
-information see below.
+However, data doesn't share, but you can migrate their data to AFAT, for more
+information, see below.
 
 ## Screenshots
 
 ### Dashboard
-![AFAT Dashboard](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/afat-dashboard.png)
 
-### FAT link list
-![AFAT FAT Link LIst](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/fatlink-list.png)
+![Dashboard](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/afat-dashboard.png "Dashboard")
 
-### FAT link details
-![AFAT FAT Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/ship-type-overview.png)
+### Fat Link List
 
-### Add FAT link view for FCs
-![AFAT Add FAT Link](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/add-fatlink.png)
+![Fat Link List](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/fatlink-list.png "Fat Link List")
+
+### Fat Link Details
+
+![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/ship-type-overview.png "Fat Link Details")
+
+### Add Fat Link View for FCs
+
+![Add Fat Link View for FCs](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/add-fatlink.png "Add Fat Link View for FCs")
 
 
 ## Installation
 
 ### Important
+
 This app is a plugin for Alliance Auth. If you don't have Alliance Auth running already,
-please install it first before proceeding. (see the official
+please install it first before proceeding. (See the official
 [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html)
 for details)
 
 **For users migrating from one of the other FAT systems, please read the specific
 instructions FIRST.**
 
-### Step 1 - Install the app
+### Step 1: Install the App
 
-Make sure you are in the virtual environment (venv) of your Alliance Auth installation.
+Make sure you're in the virtual environment (venv) of your Alliance Auth installation.
 Then install the latest version:
 
 ```bash
 pip install allianceauth-afat
 ```
 
-### Step 2 - Update your AA settings
+### Step 2: Update Your AA Settings
 
 Configure your AA settings in your `local.py` as follows:
 
@@ -115,7 +133,7 @@ CELERYBEAT_SCHEDULE["afat_logrotate"] = {
 }
 ```
 
-### Step 3 - Finalize the installation
+### Step 3: Finalizing the Installation
 
 Run migrations & copy static files
 
@@ -139,7 +157,7 @@ python manage.py collectstatic
 python manage.py migrate
 ```
 
-Finally restart your supervisor services for AA
+Finally, restart your supervisor services for AA
 
 It is possible that some versions need some more changes. Always read the
 [release notes](https://github.com/ppfeufer/allianceauth-afat/releases) to find out
@@ -152,7 +170,7 @@ Right after the **initial** installation and running migrations,
 you can import the data from Alliance Auth's native FAT system or from ImicusFAT if
 you have used one of these until now.
 
-### Import from native FAT
+### Import From Native FAT
 
 To import from the native FAT module, simply run the following command:
 
@@ -160,7 +178,7 @@ To import from the native FAT module, simply run the following command:
 python myauth/manage.py afat_import_from_allianceauth_fat
 ```
 
-### Import from ImicusFAT
+### Import From ImicusFAT
 
 To import from the ImicusFAT module, simply run the following command:
 
@@ -203,25 +221,25 @@ supervisor and ... Done!
 
 To customize the module, the following settings are available.
 
-| Name                             | Description                                                     | Default Value           |
-|:---------------------------------|:----------------------------------------------------------------|:------------------------|
-| AFAT_APP_NAME                    | Custom application name, in case you'd like a different name  | Fleet Activity Tracking |
-| AFAT_DEFAULT_FATLINK_EXPIRY_TIME | Default expiry time for clickable FAT links in Minutes | 60                      |
+| Name                                   | Description                                                      | Default Value           |
+|:---------------------------------------|:-----------------------------------------------------------------|:------------------------|
+| AFAT_APP_NAME                          | Custom application name, in case you'd like a different name     | Fleet Activity Tracking |
+| AFAT_DEFAULT_FATLINK_EXPIRY_TIME       | Default expiry time for clickable FAT links in Minutes           | 60                      |
 | AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME | Time in minutes a FAT link can be re-opened after it has expired | 60                      |
-| AFAT_DEFAULT_FATLINK_REOPEN_DURATION | Time in minutes a FAT link is re-opened | 60                      |
-| AFAT_DEFAULT_LOG_DURATION | Time in days before log entries are being removed from the DB | 60                      |
+| AFAT_DEFAULT_FATLINK_REOPEN_DURATION   | Time in minutes a FAT link is re-opened                          | 60                      |
+| AFAT_DEFAULT_LOG_DURATION              | Time in days before log entries are being removed from the DB    | 60                      |
 
 
 ## Permissions
 
-| Name | Description | Notes |
-|:-----|:------------|:-----|
-| basic_access | Can access the AFAT module | Your line member probably want this permission, so they can see the module and click the FAT links they are given. They also can see their own statistics with this permission. |
-| manage_afat | Can manage the AFAT module | Your Military lead probably should get this permission |
-| add_fatlink | Can create FAT Links | Your regular FC or who ever should be able to add FAT links should have this permission |
-| stats_corporation_own | Can see own corporation statistics |  |
-| stats_corporation_other | Can see statistics of other corporations |  |
-| logs_view | Can view the modules logs |  |
+| Name                    | Description                              | Notes                                                                                                                                                                           |
+|:------------------------|:-----------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| basic_access            | Can access the AFAT module               | Your line member probably want this permission, so they can see the module and click the FAT links they are given. They also can see their own statistics with this permission. |
+| manage_afat             | Can manage the AFAT module               | Your Military lead probably should get this permission                                                                                                                          |
+| add_fatlink             | Can create FAT Links                     | Your regular FC or who ever should be able to add FAT links should have this permission                                                                                         |
+| stats_corporation_own   | Can see own corporation statistics       |                                                                                                                                                                                 |
+| stats_corporation_other | Can see statistics of other corporations |                                                                                                                                                                                 |
+| logs_view               | Can view the modules logs                |                                                                                                                                                                                 |
 
 
 ## Changelog

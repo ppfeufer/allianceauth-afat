@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("eveonline", "0012_index_additions"),
         ("afat", "0014_auto_20201224_0930"),

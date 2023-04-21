@@ -10,7 +10,6 @@ import afat.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("eveonline", "0010_alliance_ticker"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

@@ -11,7 +11,6 @@ import afat.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("eveonline", "0014_auto_20210105_1413"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),

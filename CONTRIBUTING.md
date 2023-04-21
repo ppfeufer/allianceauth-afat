@@ -1,4 +1,18 @@
-# Contributing to Alliance Auth AFAT - Another Fleet Activity Tracker
+# Contributing to Alliance Auth AFAT — Another Fleet Activity Tracker
+
+---
+
+<!-- TOC -->
+* [Contributing to Alliance Auth AFAT — Another Fleet Activity Tracker](#contributing-to-alliance-auth-afat--another-fleet-activity-tracker)
+  * [Code Formatting](#code-formatting)
+  * [Contributing via Pull Requests](#contributing-via-pull-requests)
+    * [Commits](#commits)
+    * [Model Changes](#model-changes)
+    * [Test Coverage](#test-coverage)
+  * [Translation](#translation)
+<!-- TOC -->
+
+---
 
 ## Code Formatting
 
@@ -34,7 +48,7 @@ The following will be checked by `pre-commit`:
 - code conforms with flake8
 
 
-## Contributing via pull requests
+## Contributing via Pull Requests
 
 To contribute code via pull request, make sure that you fork the repository and branch
 your changes from the `development` branch. Only pull requests towards the development
@@ -70,7 +84,7 @@ make graph_models
 
 ### Test Coverage
 
-Please make sure your contribution come with tests covering your additions and
+Please make sure your contribution comes with tests covering your additions and
 changes. We aim to continuously raise our overall text coverage in this project. Pull
 requests lowering the test coverage will not be considered for merging.
 
@@ -91,7 +105,7 @@ make tox_tests
 
 This app is fully translation-ready and translations are handled via [Weblate]. If
 you like to contribute to the app's translation or simply improve it, feel free to
-register on my [Weblate] site and message me so I can add you to the right group.
+register on my [Weblate] site and message me, so I can add you to the right group.
 
 <!-- Links -->
 [Weblate]: https://weblate.ppfeufer.de/ "Weblate"

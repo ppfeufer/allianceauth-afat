@@ -2,5 +2,11 @@
 App config
 """
 
-__version__ = "2.11.3"
+# Standard Library
+from importlib import metadata
+
+__version__ = metadata.version("allianceauth-afat")
+
+del metadata
+
 __title__ = "Fleet Activity Tracking"

@@ -7,15 +7,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-21 21:03+0200\n"
-"PO-Revision-Date: 2023-04-19 08:19+0000\n"
+"PO-Revision-Date: 2023-04-21 20:53+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/es/>\n"
-"Language: es\n"
+"Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/uk/>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
+"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 4.16.4\n"
 
 #: admin.py:146 templates/afat/partials/dashboard/tabs/fatlinks.html:13
@@ -23,7 +24,7 @@ msgstr ""
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: templates/afat/view/fatlinks/fatlinks_overview.html:26
 msgid "Fleet Type"
-msgstr ""
+msgstr "Тип флоту"
 
 #: admin.py:158
 msgid "Is Enabled"
@@ -65,7 +66,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:37
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:48
 msgid "This field is mandatory"
-msgstr "Este campo es obligatorio"
+msgstr ""
 
 #: forms.py:42 forms.py:84 forms.py:111
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
@@ -73,7 +74,7 @@ msgstr "Este campo es obligatorio"
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:10
 #: templates/afat/view/fatlinks/fatlinks_overview.html:25
 msgid "Fleet Name"
-msgstr ""
+msgstr "Назва флоту"
 
 #: forms.py:44 forms.py:86
 msgid "Enter fleet name"
@@ -147,7 +148,7 @@ msgstr ""
 
 #: helper/views_helper.py:116 helper/views_helper.py:186
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 #: helper/views_helper.py:118
 #, python-brace-format
@@ -380,7 +381,7 @@ msgstr ""
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:14
 #: templates/afat/view/fatlinks/fatlinks_overview.html:28
 msgid "EVE Time"
-msgstr ""
+msgstr "Час за EVE"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:16
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:18
@@ -600,6 +601,8 @@ msgid_plural ""
 "            "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 msgid "Fleet Name:"
@@ -620,6 +623,8 @@ msgid_plural ""
 "            "
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:55
 msgid ""
@@ -635,7 +640,7 @@ msgstr ""
 
 #: templates/afat/partials/form/required_field_hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
-msgstr "Los campos marcados con un asterisco son obligatorios"
+msgstr ""
 
 #: templates/afat/partials/menu.html:8
 msgid "Toggle navigation"
@@ -900,51 +905,51 @@ msgstr ""
 
 #: templatetags/filters.py:20
 msgid "January"
-msgstr "Enero"
+msgstr "Січень"
 
 #: templatetags/filters.py:21
 msgid "February"
-msgstr "Febrero"
+msgstr "Лютий"
 
 #: templatetags/filters.py:22
 msgid "March"
-msgstr "Marzo"
+msgstr "Березень"
 
 #: templatetags/filters.py:23
 msgid "April"
-msgstr "Abril"
+msgstr "Квітень"
 
 #: templatetags/filters.py:24
 msgid "May"
-msgstr "Mayo"
+msgstr ""
 
 #: templatetags/filters.py:25
 msgid "June"
-msgstr "Junio"
+msgstr "Червень"
 
 #: templatetags/filters.py:26
 msgid "July"
-msgstr "Julio"
+msgstr "Липень"
 
 #: templatetags/filters.py:27
 msgid "August"
-msgstr "Agosto"
+msgstr "Серпень"
 
 #: templatetags/filters.py:28
 msgid "September"
-msgstr "Septiembre"
+msgstr "Вересень"
 
 #: templatetags/filters.py:29
 msgid "October"
-msgstr "Octubre"
+msgstr "Жовтень"
 
 #: templatetags/filters.py:30
 msgid "November"
-msgstr "Noviembre"
+msgstr "Листопад"
 
 #: templatetags/filters.py:31
 msgid "December"
-msgstr "Diciembre"
+msgstr "Грудень"
 
 #: views/fatlinks.py:212
 msgid ""
@@ -1135,31 +1140,31 @@ msgstr ""
 
 #: views/statistics.py:448 views/statistics.py:673
 msgid "Monday"
-msgstr "Lunes"
+msgstr ""
 
 #: views/statistics.py:449 views/statistics.py:674
 msgid "Tuesday"
-msgstr "Martes"
+msgstr ""
 
 #: views/statistics.py:450 views/statistics.py:675
 msgid "Wednesday"
-msgstr "Miércoles"
+msgstr "Середа"
 
 #: views/statistics.py:451 views/statistics.py:676
 msgid "Thursday"
-msgstr "Jueves"
+msgstr ""
 
 #: views/statistics.py:452 views/statistics.py:677
 msgid "Friday"
-msgstr "Viernes"
+msgstr "П'ятниця"
 
 #: views/statistics.py:453 views/statistics.py:678
 msgid "Saturday"
-msgstr "Sábado"
+msgstr "Субота"
 
 #: views/statistics.py:454 views/statistics.py:679
 msgid "Sunday"
-msgstr "Domingo"
+msgstr ""
 
 #: views/statistics.py:557
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"

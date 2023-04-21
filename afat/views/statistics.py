@@ -444,7 +444,15 @@ def corporation(
         data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
 
     data_weekday = [
-        ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        [
+            gettext("Monday"),
+            gettext("Tuesday"),
+            gettext("Wednesday"),
+            gettext("Thursday"),
+            gettext("Friday"),
+            gettext("Saturday"),
+            gettext("Sunday"),
+        ],
         data_weekday,
         [get_random_rgba_color()],
     ]
@@ -661,7 +669,15 @@ def alliance(
         data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
 
     data_weekday = [
-        ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        [
+            gettext("Monday"),
+            gettext("Tuesday"),
+            gettext("Wednesday"),
+            gettext("Thursday"),
+            gettext("Friday"),
+            gettext("Saturday"),
+            gettext("Sunday"),
+        ],
         data_weekday,
         [get_random_rgba_color()],
     ]

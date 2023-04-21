@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [In Development] - Unreleased
 
 
+## [2.12.0] - 2023-04-21
+
+### Added
+
+- Models made translation-ready
+
+### Changed
+
+- Translatable strings properly pluralized
+- Task code cleaned up
+- Error tracking for ESI fleets moved to the DB instead of being cached by Redis, as
+  Redis was too unreliable and there was a good chance the task stopped working
+  properly.
+- German translation updated
+- Russian translation updated
+
+
 ## [2.11.3] - 2023-04-13
 
 ### Changed

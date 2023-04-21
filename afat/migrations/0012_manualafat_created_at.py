@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("afat", "0011_change_meta_options_on_manualafat_20201003_2222"),
     ]
