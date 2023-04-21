@@ -1,30 +1,30 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# "H. Peter Pfeufer" <info@ppfeufer.de>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-19 19:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2023-04-21 17:50+0000\n"
+"Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
+"Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/uk/>\n"
+"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural= n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 4.16.4\n"
 
 #: admin.py:146 templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: templates/afat/partials/dashboard/tabs/fats.html:41
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: templates/afat/view/fatlinks/fatlinks_overview.html:26
 msgid "Fleet Type"
-msgstr ""
+msgstr "Тип флоту"
 
 #: admin.py:158
 msgid "Is Enabled"
@@ -74,7 +74,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:10
 #: templates/afat/view/fatlinks/fatlinks_overview.html:25
 msgid "Fleet Name"
-msgstr ""
+msgstr "Назва флоту"
 
 #: forms.py:44 forms.py:86
 msgid "Enter fleet name"
@@ -148,7 +148,7 @@ msgstr ""
 
 #: helper/views_helper.py:116 helper/views_helper.py:186
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 #: helper/views_helper.py:118
 #, python-brace-format
@@ -368,7 +368,7 @@ msgstr ""
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:14
 #: templates/afat/view/fatlinks/fatlinks_overview.html:28
 msgid "EVE Time"
-msgstr ""
+msgstr "Час за EVE"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:16
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:18
@@ -892,19 +892,19 @@ msgstr ""
 
 #: templatetags/filters.py:20
 msgid "January"
-msgstr ""
+msgstr "Січень"
 
 #: templatetags/filters.py:21
 msgid "February"
-msgstr ""
+msgstr "Лютий"
 
 #: templatetags/filters.py:22
 msgid "March"
-msgstr ""
+msgstr "Березень"
 
 #: templatetags/filters.py:23
 msgid "April"
-msgstr ""
+msgstr "Квітень"
 
 #: templatetags/filters.py:24
 msgid "May"
@@ -912,31 +912,31 @@ msgstr ""
 
 #: templatetags/filters.py:25
 msgid "June"
-msgstr ""
+msgstr "Червень"
 
 #: templatetags/filters.py:26
 msgid "July"
-msgstr ""
+msgstr "Липень"
 
 #: templatetags/filters.py:27
 msgid "August"
-msgstr ""
+msgstr "Серпень"
 
 #: templatetags/filters.py:28
 msgid "September"
-msgstr ""
+msgstr "Вересень"
 
 #: templatetags/filters.py:29
 msgid "October"
-msgstr ""
+msgstr "Жовтень"
 
 #: templatetags/filters.py:30
 msgid "November"
-msgstr ""
+msgstr "Листопад"
 
 #: templatetags/filters.py:31
 msgid "December"
-msgstr ""
+msgstr "Грудень"
 
 #: views/fatlinks.py:212
 msgid ""
