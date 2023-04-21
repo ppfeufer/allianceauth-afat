@@ -118,6 +118,17 @@ class AFatLink(models.Model):
     AFatLink
     """
 
+    class EsiError(models.TextChoices):
+        """
+        Choices for SRP Status
+        """
+
+        NOT_IN_FLEET = "NOT_IN_FLEET", _(
+            "FC is not in the registered fleet anymore or fleet is no longer available."
+        )
+        NO_FLEET = "NO_FLEET", _("Registered fleet seems to be no longer available.")
+        NOT_FLEETBOSS = "NOT_FLEETBOSS", _("FC is no longer the fleet boss.")
+
     afattime = models.DateTimeField(
         default=timezone.now,
         db_index=True,
@@ -173,6 +184,14 @@ class AFatLink(models.Model):
     reopened = models.BooleanField(
         default=False, help_text=_("Has this FAT link being re-opened?")
     )
+
+    last_esi_error = models.CharField(
+        max_length=15, blank=True, null=True, default=None, choices=EsiError.choices
+    )
+
+    last_esi_error_time = models.DateTimeField(null=True, blank=True, default=None)
+
+    esi_error_count = models.IntegerField(blank=False, default=0)
 
     objects = AFatLinkManager()
 

@@ -10,7 +10,6 @@ from bravado.exception import HTTPNotFound
 from celery import shared_task
 
 # Django
-from django.core.cache import cache
 from django.utils import timezone
 
 # Alliance Auth
@@ -35,20 +34,10 @@ logger = LoggerAddTag(get_extension_logger(__name__), __title__)
 ESI_ERROR_LIMIT = 50
 ESI_TIMEOUT_ONCE_ERROR_LIMIT_REACHED = 60
 ESI_MAX_RETRIES = 3
+ESI_MAX_ERROR_COUNT = 3
+ESI_ERROR_GRACE_TIME = 75
 
 TASK_TIME_LIMIT = 120  # Stop after 2 minutes
-
-CACHE_KEY_FLEET_CHANGED_ERROR = (
-    "afat_task_update_esi_fatlinks_error_counter_fleet_changed_"
-)
-CACHE_KEY_NOT_IN_FLEET_ERROR = (
-    "afat_task_update_esi_fatlinks_error_counter_not_in_fleet_"
-)
-CACHE_KEY_NO_FLEET_ERROR = "afat_task_update_esi_fatlinks_error_counter_no_fleet_"
-CACHE_KEY_NO_FLEETBOSS_ERROR = (
-    "afat_task_update_esi_fatlinks_error_counter_no_fleetboss_"
-)
-CACHE_MAX_ERROR_COUNT = 3
 
 # Params for all tasks
 TASK_DEFAULT_KWARGS = {"time_limit": TASK_TIME_LIMIT, "max_retries": ESI_MAX_RETRIES}
@@ -148,61 +137,47 @@ def _close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
     fatlink.save()
 
 
-def _esi_fatlinks_error_handling(
-    cache_key: str, fatlink: AFatLink, logger_message: str
-) -> None:
+def _esi_fatlinks_error_handling(error_key: str, fatlink: AFatLink) -> None:
     """
     ESI error handling
     :param cache_key:
     :type cache_key:
     :param fatlink:
     :type fatlink:
-    :param logger_message:
-    :type logger_message:
     :return:
     :rtype:
     """
 
-    fatlink_hash = fatlink.hash
+    time_now = timezone.now()
 
     # Close ESI fleet if the consecutive error count is too high
-    if int(cache.get(cache_key + fatlink_hash)) >= CACHE_MAX_ERROR_COUNT:
-        _close_esi_fleet(fatlink=fatlink, reason=logger_message)
+    if (
+        fatlink.last_esi_error == error_key
+        and fatlink.last_esi_error_time
+        >= (time_now - timedelta(seconds=ESI_ERROR_GRACE_TIME))
+        and fatlink.esi_error_count >= ESI_MAX_ERROR_COUNT
+    ):
+        _close_esi_fleet(fatlink=fatlink, reason=error_key.label)
 
         return
 
-    error_count = int(cache.get(cache_key + fatlink_hash))
-
-    error_count += 1
-
-    logger.info(
-        f'FAT link "{fatlink_hash}" Error: "{logger_message}" '
-        f"({error_count} of {CACHE_MAX_ERROR_COUNT})."
+    error_count = (
+        fatlink.esi_error_count + 1
+        if fatlink.last_esi_error == error_key
+        and fatlink.last_esi_error_time
+        >= (time_now - timedelta(seconds=ESI_ERROR_GRACE_TIME))
+        else 1
     )
 
-    cache.set(cache_key + fatlink_hash, str(error_count), 75)
+    logger.info(
+        f'FAT link "{fatlink.hash}" Error: "{error_key.label}" '
+        f"({error_count} of {ESI_MAX_ERROR_COUNT})."
+    )
 
-
-def _initialize_caches(fatlink: AFatLink) -> None:
-    """
-    Initializing caches
-    :param fatlink:
-    :type fatlink:
-    :return:
-    :rtype:
-    """
-
-    if cache.get(CACHE_KEY_FLEET_CHANGED_ERROR + fatlink.hash) is None:
-        cache.set(CACHE_KEY_FLEET_CHANGED_ERROR + fatlink.hash, "0", 75)
-
-    if cache.get(CACHE_KEY_NO_FLEETBOSS_ERROR + fatlink.hash) is None:
-        cache.set(CACHE_KEY_NO_FLEETBOSS_ERROR + fatlink.hash, "0", 75)
-
-    if cache.get(CACHE_KEY_NO_FLEET_ERROR + fatlink.hash) is None:
-        cache.set(CACHE_KEY_NO_FLEET_ERROR + fatlink.hash, "0", 75)
-
-    if cache.get(CACHE_KEY_NOT_IN_FLEET_ERROR + fatlink.hash) is None:
-        cache.set(CACHE_KEY_NOT_IN_FLEET_ERROR + fatlink.hash, "0", 75)
+    fatlink.esi_error_count = error_count
+    fatlink.last_esi_error = error_key
+    fatlink.last_esi_error_time = time_now
+    fatlink.save()
 
 
 def _check_for_esi_fleet(fatlink: AFatLink):
@@ -221,18 +196,11 @@ def _check_for_esi_fleet(fatlink: AFatLink):
         return {"fleet": fleet_from_esi, "token": esi_token}
     except HTTPNotFound:
         _esi_fatlinks_error_handling(
-            cache_key=CACHE_KEY_NOT_IN_FLEET_ERROR,
-            fatlink=fatlink,
-            logger_message=(
-                "FC is not in the registered fleet anymore or fleet is no "
-                "longer available."
-            ),
+            error_key=AFatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
         )
     except Exception:
         _esi_fatlinks_error_handling(
-            cache_key=CACHE_KEY_NO_FLEET_ERROR,
-            fatlink=fatlink,
-            logger_message="Registered fleet is no longer available.",
+            error_key=AFatLink.EsiError.NO_FLEET, fatlink=fatlink
         )
 
     return False
@@ -246,8 +214,6 @@ def _process_esi_fatlink(fatlink: AFatLink):
     :return:
     :rtype:
     """
-
-    _initialize_caches(fatlink=fatlink)
 
     logger.info(f'Processing ESI FAT link with hash "{fatlink.hash}"')
 
@@ -265,9 +231,7 @@ def _process_esi_fatlink(fatlink: AFatLink):
                 ).result()
             except Exception:
                 _esi_fatlinks_error_handling(
-                    cache_key=CACHE_KEY_NO_FLEETBOSS_ERROR,
-                    fatlink=fatlink,
-                    logger_message="FC is no longer the fleet boss.",
+                    error_key=AFatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
                 )
 
             # Process fleet members
