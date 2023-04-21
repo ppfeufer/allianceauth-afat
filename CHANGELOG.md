@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Translatable string properly pluralized
+- Task code cleaned up
+- Error tracking for ESI fleets moved to the DB instead of being cached by Redis, as
+  Redis was to unreliable and there was a good chance the task stopped working properly.
 
 
 ## [2.11.3] - 2023-04-13
