@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 19:34+0200\n"
+"POT-Creation-Date: 2023-04-21 21:03+0200\n"
 "PO-Revision-Date: 2023-04-21 17:50+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/"
-"alliance-auth-apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
+"apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -220,80 +220,93 @@ msgstr "FAT Link Flottenart"
 msgid "FAT Link Fleet Types"
 msgstr "FAT Link Flottenarten"
 
-#: models.py:124
+#: models.py:127
+msgid ""
+"FC is not in the registered fleet anymore or fleet is no longer available."
+msgstr ""
+
+#: models.py:129
+msgid "Registered fleet seems to be no longer available."
+msgstr ""
+
+#: models.py:130
+msgid "FC is no longer the fleet boss."
+msgstr ""
+
+#: models.py:135
 msgid "When was this FAT link created"
 msgstr "Wann wurde dieser FAT Link erstellt"
 
-#: models.py:131
+#: models.py:142
 msgid "The FAT link fleet name"
 msgstr "FAT Link Flottenname"
 
-#: models.py:135
+#: models.py:146
 msgid "The FAT link hash"
 msgstr "Fat Link Hash"
 
-#: models.py:142
+#: models.py:153
 msgid "Who created the FAT link?"
 msgstr "Wer hat diesen FAT Link erstellt?"
 
-#: models.py:151
+#: models.py:162
 msgid "Character this FAT link has been created with"
 msgstr "Der Charakter der diesen FAT Link erstellt hat"
 
-#: models.py:159
+#: models.py:170
 msgid "The FAT link fleet type, if it's set"
 msgstr "FAT Link Flottenart, wenn gesetzt"
 
-#: models.py:163
+#: models.py:174
 msgid "Whether this FAT link was created via ESI or not"
 msgstr "Wurde dieser FAT Link via ESI erstellt oder nicht"
 
-#: models.py:168
+#: models.py:179
 msgid "Whether the fleet to this FAT link is available in ESI or not"
 msgstr "Ist die Flotte zu diesem FAT Link in ESI verfügbar oder nicht"
 
-#: models.py:174
+#: models.py:185
 msgid "Has this FAT link being re-opened?"
 msgstr "Wurde dieser FAT Link wieder geöffnet?"
 
-#: models.py:186
+#: models.py:205
 msgid "FAT Link"
 msgstr "FAT Link"
 
-#: models.py:187 templates/afat/partials/dashboard/tabs_navigation.html:5
+#: models.py:206 templates/afat/partials/dashboard/tabs_navigation.html:5
 #: templates/afat/partials/menu.html:24
 msgid "FAT Links"
 msgstr "FAT Links"
 
-#: models.py:240
+#: models.py:259
 msgid "FAT Duration"
 msgstr "FAT Laufzeit"
 
-#: models.py:241
+#: models.py:260
 msgid "FAT Durations"
 msgstr "FAT Laufzeiten"
 
-#: models.py:254
+#: models.py:273
 msgid "Character who registered this FAT"
 msgstr "Charakter welcher diesen FAT registriert hat"
 
-#: models.py:261
+#: models.py:280
 msgid "The FAT link the character registered at"
 msgstr "Der FAT Link zu dem der Charakter registriert ist"
 
-#: models.py:265
+#: models.py:284
 msgid "The system the character is in"
 msgstr "Das System in dem der Charakter ist"
 
-#: models.py:272
+#: models.py:291
 msgid "The ship the character was flying"
 msgstr "Das Schiff welches der Charakter fliegt"
 
-#: models.py:284
+#: models.py:303
 msgid "FAT"
 msgstr "FAT"
 
-#: models.py:285 templates/afat/partials/dashboard/tabs_navigation.html:4
+#: models.py:304 templates/afat/partials/dashboard/tabs_navigation.html:4
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:14
 #: templates/afat/partials/statistics/corporation/tabs/member.html:11
@@ -302,48 +315,48 @@ msgstr "FAT"
 msgid "FATs"
 msgstr "FATs"
 
-#: models.py:311
+#: models.py:330
 msgid "Time this FAT has been added manually"
 msgstr "Die Zeit zu welcher der FAT manuell hinzugefügt wurde"
 
-#: models.py:320 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
+#: models.py:339 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
 msgid "Manual FAT"
 msgstr "Manueller FAT"
 
-#: models.py:321
+#: models.py:340
 msgid "Manual FATs"
 msgstr "Manuelle FATs"
 
-#: models.py:345
+#: models.py:364
 msgid "FAT Link Created"
 msgstr "Fat Link erstellt"
 
-#: models.py:346
+#: models.py:365
 msgid "FAT Link Changed"
 msgstr "Fat Link geändert"
 
-#: models.py:347
+#: models.py:366
 msgid "FAT Link Removed"
 msgstr "Fat Link gelöscht"
 
-#: models.py:348
+#: models.py:367
 msgid "FAT Link Re-Opened"
 msgstr "Fat Link wieder geöffnet"
 
-#: models.py:350
+#: models.py:369
 msgid "FAT Removed"
 msgstr "Fat gelöscht"
 
-#: models.py:351
+#: models.py:370
 msgid "Manual FAT Added"
 msgstr "Manueller FAT Eintrag hinzugefügt"
 
-#: models.py:377
+#: models.py:396
 msgid "AFAT Log"
 msgstr "AFAT Log"
 
-#: models.py:378
+#: models.py:397
 msgid "AFAT Logs"
 msgstr "AFAT Logs"
 
@@ -1269,9 +1282,3 @@ msgstr "Sonntag"
 #: views/statistics.py:557
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
-
-#~ msgid "This fleet is already automatically tracked."
-#~ msgstr "Diese Flotte wird bereits automatisch verfolgt."
-
-#~ msgid "These fleets are already automatically tracked."
-#~ msgstr "Diese Flotten werden bereits automatisch verfolgt."

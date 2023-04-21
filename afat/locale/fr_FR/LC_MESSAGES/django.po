@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-19 19:34+0200\n"
+"POT-Creation-Date: 2023-04-21 21:03+0200\n"
 "PO-Revision-Date: 2023-04-19 08:19+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
 "Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -206,80 +206,93 @@ msgstr ""
 msgid "FAT Link Fleet Types"
 msgstr ""
 
-#: models.py:124
-msgid "When was this FAT link created"
+#: models.py:127
+msgid ""
+"FC is not in the registered fleet anymore or fleet is no longer available."
 msgstr ""
 
-#: models.py:131
-msgid "The FAT link fleet name"
+#: models.py:129
+msgid "Registered fleet seems to be no longer available."
+msgstr ""
+
+#: models.py:130
+msgid "FC is no longer the fleet boss."
 msgstr ""
 
 #: models.py:135
-msgid "The FAT link hash"
+msgid "When was this FAT link created"
 msgstr ""
 
 #: models.py:142
+msgid "The FAT link fleet name"
+msgstr ""
+
+#: models.py:146
+msgid "The FAT link hash"
+msgstr ""
+
+#: models.py:153
 msgid "Who created the FAT link?"
 msgstr ""
 
-#: models.py:151
+#: models.py:162
 msgid "Character this FAT link has been created with"
 msgstr ""
 
-#: models.py:159
+#: models.py:170
 msgid "The FAT link fleet type, if it's set"
 msgstr ""
 
-#: models.py:163
+#: models.py:174
 msgid "Whether this FAT link was created via ESI or not"
 msgstr ""
 
-#: models.py:168
+#: models.py:179
 msgid "Whether the fleet to this FAT link is available in ESI or not"
 msgstr ""
 
-#: models.py:174
+#: models.py:185
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: models.py:186
+#: models.py:205
 msgid "FAT Link"
 msgstr ""
 
-#: models.py:187 templates/afat/partials/dashboard/tabs_navigation.html:5
+#: models.py:206 templates/afat/partials/dashboard/tabs_navigation.html:5
 #: templates/afat/partials/menu.html:24
 msgid "FAT Links"
 msgstr ""
 
-#: models.py:240
+#: models.py:259
 msgid "FAT Duration"
 msgstr ""
 
-#: models.py:241
+#: models.py:260
 msgid "FAT Durations"
 msgstr ""
 
-#: models.py:254
+#: models.py:273
 msgid "Character who registered this FAT"
 msgstr ""
 
-#: models.py:261
+#: models.py:280
 msgid "The FAT link the character registered at"
 msgstr ""
 
-#: models.py:265
+#: models.py:284
 msgid "The system the character is in"
 msgstr ""
 
-#: models.py:272
+#: models.py:291
 msgid "The ship the character was flying"
 msgstr ""
 
-#: models.py:284
+#: models.py:303
 msgid "FAT"
 msgstr ""
 
-#: models.py:285 templates/afat/partials/dashboard/tabs_navigation.html:4
+#: models.py:304 templates/afat/partials/dashboard/tabs_navigation.html:4
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:14
 #: templates/afat/partials/statistics/corporation/tabs/member.html:11
@@ -288,48 +301,48 @@ msgstr ""
 msgid "FATs"
 msgstr ""
 
-#: models.py:311
+#: models.py:330
 msgid "Time this FAT has been added manually"
 msgstr ""
 
-#: models.py:320 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
+#: models.py:339 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
 msgid "Manual FAT"
 msgstr ""
 
-#: models.py:321
+#: models.py:340
 msgid "Manual FATs"
 msgstr ""
 
-#: models.py:345
+#: models.py:364
 msgid "FAT Link Created"
 msgstr ""
 
-#: models.py:346
+#: models.py:365
 msgid "FAT Link Changed"
 msgstr ""
 
-#: models.py:347
+#: models.py:366
 msgid "FAT Link Removed"
 msgstr ""
 
-#: models.py:348
+#: models.py:367
 msgid "FAT Link Re-Opened"
 msgstr ""
 
-#: models.py:350
+#: models.py:369
 msgid "FAT Removed"
 msgstr ""
 
-#: models.py:351
+#: models.py:370
 msgid "Manual FAT Added"
 msgstr ""
 
-#: models.py:377
+#: models.py:396
 msgid "AFAT Log"
 msgstr ""
 
-#: models.py:378
+#: models.py:397
 msgid "AFAT Logs"
 msgstr ""
 
