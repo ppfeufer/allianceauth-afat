@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-21 21:03+0200\n"
-"PO-Revision-Date: 2023-04-21 17:50+0000\n"
+"PO-Revision-Date: 2023-04-21 20:53+0000\n"
 "Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
-"Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ru/>\n"
+"Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -221,15 +221,15 @@ msgstr "Типы флота БВ"
 #: models.py:127
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
-msgstr ""
+msgstr "ФК больше не состоит в зарегистрированном флоте или флот недоступен."
 
 #: models.py:129
 msgid "Registered fleet seems to be no longer available."
-msgstr ""
+msgstr "Похоже, зарегистрированный флот больше недоступен."
 
 #: models.py:130
 msgid "FC is no longer the fleet boss."
-msgstr ""
+msgstr "ФК больше не руководитель флота."
 
 #: models.py:135
 msgid "When was this FAT link created"
