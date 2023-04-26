@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 21:03+0200\n"
+"POT-Creation-Date: 2023-04-26 20:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,6 +71,7 @@ msgstr ""
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
 #: templates/afat/partials/dashboard/tabs/fats.html:40
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:10
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 #: templates/afat/view/fatlinks/fatlinks_overview.html:25
 msgid "Fleet Name"
 msgstr ""
@@ -255,7 +256,7 @@ msgstr ""
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: models.py:205
+#: models.py:205 templates/afat/partials/fatlinks/details/fatlink_info.html:72
 msgid "FAT Link"
 msgstr ""
 
@@ -371,6 +372,7 @@ msgid "Most Recent FAT Links <small>(latest 10)</small>"
 msgstr ""
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:14
+#: templates/afat/partials/fatlinks/details/fatlink_info.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:27
 msgid "Creator"
 msgstr ""
@@ -458,20 +460,16 @@ msgstr ""
 msgid "Add ESI Link"
 msgstr ""
 
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:6
-msgid "Creator:"
-msgstr ""
-
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:11
-msgid "Link Created (Eve Time):"
+msgid "Link Created (Eve Time)"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:17
-msgid "Link Expires (Eve Time):"
+msgid "Link Expires (Eve Time)"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:19
-msgid "Link Expired (Eve Time):"
+msgid "Link Expired (Eve Time)"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
@@ -511,10 +509,6 @@ msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:64
 msgid "Re-Open FAT link"
-msgstr ""
-
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:72
-msgid "FAT Link:"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:84
@@ -562,7 +556,7 @@ msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
-msgid "Note:"
+msgid "Note"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
@@ -601,11 +595,7 @@ msgid_plural ""
 msgstr[0] ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-msgid "Fleet Name:"
-msgstr ""
-
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-msgid "ESI fleet ID:"
+msgid "ESI fleet ID"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:49
