@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 20:43+0200\n"
+"POT-Creation-Date: 2023-04-26 20:52+0200\n"
 "PO-Revision-Date: 2023-04-21 20:53+0000\n"
 "Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -743,8 +743,10 @@ msgid "Current Month"
 msgstr "Текущий месяц"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-msgid "Member Corps"
-msgstr "Корпорации участники"
+#, fuzzy
+#| msgid "Corporations"
+msgid "Member Corporations"
+msgstr "Корпорации"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
 msgid "Corporation"
@@ -806,6 +808,7 @@ msgid "Graphs"
 msgstr "Графики"
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:5
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
 msgid "Corporations"
 msgstr "Корпорации"
 
@@ -880,10 +883,6 @@ msgstr "Нет БВП за этот год"
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:4
 msgid "My Stats"
 msgstr "Мои показатели"
-
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
-msgid "Corps"
-msgstr "Корпорации"
 
 #: templates/afat/partials/year_navigation.html:4
 msgid "Previous Year"

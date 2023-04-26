@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 20:43+0200\n"
+"POT-Creation-Date: 2023-04-26 20:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -661,7 +661,7 @@ msgid "Current Month"
 msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-msgid "Member Corps"
+msgid "Member Corporations"
 msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
@@ -724,6 +724,7 @@ msgid "Graphs"
 msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:5
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
 msgid "Corporations"
 msgstr ""
 
@@ -795,10 +796,6 @@ msgstr ""
 
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:4
 msgid "My Stats"
-msgstr ""
-
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
-msgid "Corps"
 msgstr ""
 
 #: templates/afat/partials/year_navigation.html:4

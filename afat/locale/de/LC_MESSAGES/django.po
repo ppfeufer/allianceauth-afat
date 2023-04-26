@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 20:43+0200\n"
+"POT-Creation-Date: 2023-04-26 20:52+0200\n"
 "PO-Revision-Date: 2023-04-26 18:50+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/"
-"alliance-auth-apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
+"apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -720,8 +720,10 @@ msgid "Current Month"
 msgstr "Aktueller Monat"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-msgid "Member Corps"
-msgstr "Mitglieder-Corporations"
+#, fuzzy
+#| msgid "Corporations"
+msgid "Member Corporations"
+msgstr "Corporations"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
 msgid "Corporation"
@@ -783,6 +785,7 @@ msgid "Graphs"
 msgstr "Grafiken"
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:5
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
 msgid "Corporations"
 msgstr "Corporations"
 
@@ -858,10 +861,6 @@ msgstr "Keine FATs für dieses Jahr"
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:4
 msgid "My Stats"
 msgstr "Meine Statistik"
-
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
-msgid "Corps"
-msgstr "Corps"
 
 #: templates/afat/partials/year_navigation.html:4
 msgid "Previous Year"
