@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-26 20:43+0200\n"
-"PO-Revision-Date: 2023-04-21 20:53+0000\n"
+"PO-Revision-Date: 2023-04-26 18:50+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Weblate 4.17\n"
 
 #: admin.py:146 templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: templates/afat/partials/dashboard/tabs/fats.html:41
@@ -128,7 +128,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:76
 msgid "via ESI"
-msgstr "via ESI"
+msgstr "mittels ESI"
 
 #: helper/views_helper.py:87
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:34
@@ -274,12 +274,12 @@ msgstr "Wurde dieser FAT Link wieder geöffnet?"
 
 #: models.py:205 templates/afat/partials/fatlinks/details/fatlink_info.html:72
 msgid "FAT Link"
-msgstr "FAT Link"
+msgstr "FAT-Link"
 
 #: models.py:206 templates/afat/partials/dashboard/tabs_navigation.html:5
 #: templates/afat/partials/menu.html:24
 msgid "FAT Links"
-msgstr "FAT Links"
+msgstr "FAT-Links"
 
 #: models.py:259
 msgid "FAT Duration"
@@ -361,7 +361,7 @@ msgstr "AFAT Log"
 
 #: models.py:397
 msgid "AFAT Logs"
-msgstr "AFAT Logs"
+msgstr "AFAT-Logs"
 
 #: templates/afat/base.html:5 templates/afat/view/dashboard/dashboard.html:6
 #: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:5
@@ -492,22 +492,16 @@ msgid "Add ESI Link"
 msgstr "ESI Link hinzufügen"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:11
-#, fuzzy
-#| msgid "Link Created (Eve Time):"
 msgid "Link Created (Eve Time)"
-msgstr "Link erstellt (Eve Zeit):"
+msgstr "Link erstellt (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:17
-#, fuzzy
-#| msgid "Link Expires (Eve Time):"
 msgid "Link Expires (Eve Time)"
-msgstr "Link läuft ab (Eve Zeit):"
+msgstr "Link läuft ab (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:19
-#, fuzzy
-#| msgid "Link Expired (Eve Time):"
 msgid "Link Expired (Eve Time)"
-msgstr "Link abgelaufen (Eve Zeit):"
+msgstr "Link abgelaufen (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
 msgid "Participation is being tracked via ESI"
@@ -603,10 +597,8 @@ msgstr ""
 "manuell hinzu zu fügen."
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
-#, fuzzy
-#| msgid "Note:"
 msgid "Note"
-msgstr "Hinweis:"
+msgstr "Hinweis"
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "This action is logged!"
@@ -653,10 +645,8 @@ msgstr[1] ""
 "            "
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-#, fuzzy
-#| msgid "ESI fleet ID:"
 msgid "ESI fleet ID"
-msgstr "ESI Flotten ID:"
+msgstr "ESI Flotten ID"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:49
 msgid ""
@@ -908,7 +898,7 @@ msgstr "FAT Link erstellen"
 
 #: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:11
 msgid "FAT Link Details"
-msgstr "FAT Link Details"
+msgstr "FAT-Link Details"
 
 #: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:27
 msgid "Delete FAT"
