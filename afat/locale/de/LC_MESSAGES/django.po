@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-26 20:52+0200\n"
-"PO-Revision-Date: 2023-04-26 18:50+0000\n"
+"PO-Revision-Date: 2023-04-27 19:50+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -720,10 +720,8 @@ msgid "Current Month"
 msgstr "Aktueller Monat"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-#, fuzzy
-#| msgid "Corporations"
 msgid "Member Corporations"
-msgstr "Corporations"
+msgstr "Mitglieder-Corporations"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
 msgid "Corporation"
