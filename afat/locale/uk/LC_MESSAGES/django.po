@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-13 13:15+0200\n"
-"PO-Revision-Date: 2023-05-12 20:50+0000\n"
-"Last-Translator: \"Andrii M.\" <elfleg0las88@gmail.com>\n"
-"Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/uk/>\n"
+"PO-Revision-Date: 2023-05-13 16:56+0000\n"
+"Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
+"Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -100,7 +100,7 @@ msgstr ""
 
 #: forms.py:48 forms.py:90
 msgid "Fleet Type (optional)"
-msgstr ""
+msgstr "Тип флоту (необов'язково)"
 
 #: forms.py:61 templates/afat/partials/fatlinks/details/tabs/manualfat.html:21
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:26
@@ -110,7 +110,7 @@ msgstr ""
 #: forms.py:66 templates/afat/partials/fatlinks/details/tabs/manualfat.html:36
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
-msgstr ""
+msgstr "Система"
 
 #: forms.py:71 templates/afat/partials/fatlinks/details/tabs/fats.html:17
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:32
@@ -766,7 +766,7 @@ msgstr ""
 
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
-msgstr ""
+msgstr "Назва"
 
 #: templates/afat/partials/statistics/character/tabs_navigation.html:5
 msgid "Raw Data"
@@ -925,7 +925,7 @@ msgstr "Квітень"
 
 #: templatetags/filters.py:24
 msgid "May"
-msgstr ""
+msgstr "Травень"
 
 #: templatetags/filters.py:25
 msgid "June"
