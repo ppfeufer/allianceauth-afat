@@ -121,23 +121,23 @@ urlpatterns = [
     path("logs/", logs.overview, name="logs_overview"),
     # Ajax calls :: Dashboard
     path(
-        "ajax/dashboard/fatlinks/recent/",
+        "ajax/dashboard/get-recent-fatlinks/",
         dashboard.ajax_get_recent_fatlinks,
         name="dashboard_ajax_get_recent_fatlinks",
     ),
     path(
-        "ajax/dashboard/fats/recent/character/<int:charid>/",
+        "ajax/dashboard/get-recent-fats-by-character/<int:charid>/",
         dashboard.ajax_recent_get_fats_by_character,
         name="dashboard_ajax_get_recent_fats_by_character",
     ),
     # Ajax calls :: Fat links
     path(
-        "ajax/fatlinks/fatlinks/year/<int:year>/",
+        "ajax/fatlinks/get-fatlinks-by-year/<int:year>/",
         fatlinks.ajax_get_fatlinks_by_year,
         name="fatlinks_ajax_get_fatlinks_by_year",
     ),
     path(
-        "ajax/fatlinks/fatlink/<str:fatlink_hash>/fats/",
+        "ajax/fatlinks/get-fats-by-fatlink/<str:fatlink_hash>/",
         fatlinks.ajax_get_fats_by_fatlink,
         name="fatlinks_ajax_get_fats_by_fatlink",
     ),
