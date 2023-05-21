@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-13 13:15+0200\n"
-"PO-Revision-Date: 2023-05-13 16:56+0000\n"
+"PO-Revision-Date: 2023-05-21 10:52+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/de/>\n"
@@ -115,7 +115,7 @@ msgstr "Schiffstyp"
 
 #: forms.py:96
 msgid "FAT link expiry time in minutes"
-msgstr "FAT Link Ablaufzeit in Minuten"
+msgstr "FAT-Link Ablaufzeit in Minuten"
 
 #: forms.py:99
 msgid "Expiry time in minutes"
@@ -145,8 +145,8 @@ msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
 msgstr ""
-"Klicke hier um das automatische Tracking via ESI für diese Flotte zu stoppen "
-"und den FAT Link zu schließen."
+"Klicke hier um das automatische Tracking mittels ESI für diese Flotte zu "
+"stoppen und den FAT-Link zu schließen."
 
 #: helper/views_helper.py:90
 #, python-brace-format
@@ -173,7 +173,7 @@ msgstr "Löschen"
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr ""
-"<p>Bist Du sicher das Du den FAT Link {fatlink_fleet} löschen möchtest?</p>"
+"<p>Bist Du sicher das Du den FAT-Link {fatlink_fleet} löschen möchtest?</p>"
 
 #: helper/views_helper.py:188
 #, python-brace-format
@@ -181,7 +181,7 @@ msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
 "FAT link?</p>"
 msgstr ""
-"<p>Bist Du sicher das Du {fat.character.character_name} von diesem FAT Link "
+"<p>Bist Du sicher das Du {fat.character.character_name} von diesem FAT-Link "
 "löschen möchtest?</p>"
 
 #: helper/views_helper.py:239
@@ -199,7 +199,7 @@ msgstr "Kann das AFAT Modul managen"
 
 #: models.py:67
 msgid "Can create FAT Links"
-msgstr "Can FAT Links erstellen"
+msgstr "Kann FAT-Links erstellen"
 
 #: models.py:69
 msgid "Can see own corporation statistics"
@@ -262,7 +262,7 @@ msgstr "Wer hat diesen FAT Link erstellt?"
 
 #: models.py:162
 msgid "Character this FAT link has been created with"
-msgstr "Der Charakter der diesen FAT Link erstellt hat"
+msgstr "Der Charakter durch den dieser FAT Link erstellt wurde"
 
 #: models.py:170
 msgid "The FAT link fleet type, if it's set"
@@ -270,7 +270,7 @@ msgstr "FAT Link Flottenart, wenn gesetzt"
 
 #: models.py:174
 msgid "Whether this FAT link was created via ESI or not"
-msgstr "Wurde dieser FAT Link via ESI erstellt oder nicht"
+msgstr "Wurde dieser FAT Link mittels ESI erstellt oder nicht"
 
 #: models.py:179
 msgid "Whether the fleet to this FAT link is available in ESI or not"
@@ -311,7 +311,7 @@ msgstr "Das System in dem der Charakter ist"
 
 #: models.py:291
 msgid "The ship the character was flying"
-msgstr "Das Schiff welches der Charakter fliegt"
+msgstr "Das Schiff welches der Charakter geflogen ist"
 
 #: models.py:303
 msgid "FAT"
@@ -349,7 +349,7 @@ msgstr "Fat Link geändert"
 
 #: models.py:366
 msgid "FAT Link Removed"
-msgstr "Fat Link gelöscht"
+msgstr "Fat Link entfernt"
 
 #: models.py:367
 msgid "FAT Link Re-Opened"
@@ -357,7 +357,7 @@ msgstr "Fat Link wieder geöffnet"
 
 #: models.py:369
 msgid "FAT Removed"
-msgstr "Fat gelöscht"
+msgstr "FAT entfernt"
 
 #: models.py:370
 msgid "Manual FAT Added"
@@ -430,7 +430,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:16
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:12
 msgid "Location"
-msgstr "System"
+msgstr "Ort"
 
 #: templates/afat/partials/dashboard/tabs/fats.html:43
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:13
@@ -513,7 +513,7 @@ msgstr "Link abgelaufen (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
 msgid "Participation is being tracked via ESI"
-msgstr "Teilnahme wird via ESI verfolgt"
+msgstr "Teilnahme wird mittels ESI verfolgt"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:38
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:37
@@ -527,7 +527,7 @@ msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:46
 msgid "Participation has been tracked via ESI"
-msgstr "Teilnahme wurde via ESI verfolgt"
+msgstr "Teilnahme wurde mittels ESI verfolgt"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:53
 #, python-format
@@ -578,8 +578,7 @@ msgstr "Name setzen"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:7
 msgid "FATs for this FAT Link <small>(updated every 15 seconds)</small>"
-msgstr ""
-"FATs für diesen FAT Link <small>(alle 15 Sekunden aktualisiert)</small>"
+msgstr "FATs für diesen FAT Link <small>(alle 15 Sekunden aktualisiert)</small>"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:9
 msgid "FATs for this FAT Link"
@@ -602,7 +601,7 @@ msgstr "Anzahl"
 msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr ""
 "Es fehlen Piloten in der Liste dieses FATs? Nutze dieses Formular um sie "
-"manuell hinzu zu fügen."
+"manuell hinzuzufügen."
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "Note"
@@ -623,11 +622,11 @@ msgstr "Legende"
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:5
 msgid ""
 "Fleet is currently active and FATs are automatically being tracked via ESI"
-msgstr "Flotte ist momentan aktiv und FATs werden via ESI hinzugefügt"
+msgstr "Flotte ist momentan aktiv und FATs werden mittels ESI hinzugefügt"
 
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
 msgid "FATs have been automatically tracked via ESI"
-msgstr "FATs wurden automatisch via ESI verfolgt"
+msgstr "FATs wurden automatisch mittels ESI verfolgt"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:7
 #, python-format
@@ -948,7 +947,7 @@ msgstr "Nutzer"
 
 #: templates/afat/view/logs/logs_overview.html:29
 msgid "FAT link"
-msgstr "FAT Link"
+msgstr "FAT-Link"
 
 #: templates/afat/view/logs/logs_overview.html:30
 msgid "Description"
@@ -1150,9 +1149,9 @@ msgid ""
 "p><p>Name: {character.character_name}<br>System: {afat_object.system}"
 "<br>Ship: {afat_object.shiptype}</p>"
 msgstr ""
-"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT Link registriert."
-"</p><p>Name: {character.character_name}<br>System: {afat_object.system}"
-"<br>Schiff: {afat_object.shiptype}</p>"
+"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT Link "
+"registriert.</p><p>Name: {character.character_name}<br>System: {afat_object."
+"system}<br>Schiff: {afat_object.shiptype}</p>"
 
 #: views/fatlinks.py:741
 msgid ""
@@ -1175,8 +1174,8 @@ msgid ""
 "<h4>Error!</h4><p>The fatlink hash provided is either invalid or the fatlink "
 "has already been deleted.</p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Der FAT Link Hash ist entweder ungültig oder der "
-"dazugehörige FAT Link wurde gelöscht.</p>"
+"<h4>Fehler!</h4><p>Der FAT-Link Hash ist entweder ungültig oder der "
+"dazugehörige FAT-Link wurde gelöscht.</p>"
 
 #: views/fatlinks.py:886
 #, python-brace-format
@@ -1207,25 +1206,25 @@ msgid ""
 "been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
 "<h4>Erfolg!</h4><p>Der FAT für {fat_details.character.character_name} wurde "
-"erfolgreich vom FAT LInk \"{fatlink_hash}\" gelöscht.</p>"
+"erfolgreich vom FAT-Link \"{fatlink_hash}\" gelöscht.</p>"
 
 #: views/fatlinks.py:1019
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT Link."
-"</p>"
+"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-"
+"Link.</p>"
 
 #: views/fatlinks.py:1061
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
-msgstr "<h4>Erfolg!</h4><p>Der FAT Link wurde erfolgreich wieder geöffnet.</p>"
+msgstr "<h4>Erfolg!</h4><p>Der FAT-Link wurde erfolgreich wieder geöffnet.</p>"
 
 #: views/fatlinks.py:1071
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Dieser FAT Link wurde bereits einmal wieder geöffnet. "
+"<h4>Warnung!</h4><p>Dieser FAT-Link wurde bereits einmal wieder geöffnet. "
 "Dies kann nur einmal getan werden.</p>"
 
 #: views/statistics.py:213
