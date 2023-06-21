@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-13 13:15+0200\n"
+"POT-Creation-Date: 2023-06-21 23:24+0200\n"
 "PO-Revision-Date: 2023-05-21 10:52+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/"
-"alliance-auth-apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
+"apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,50 +22,52 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.17\n"
 
-#: admin.py:147 templates/afat/partials/dashboard/tabs/fatlinks.html:13
+#: admin.py:148 templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: templates/afat/partials/dashboard/tabs/fats.html:41
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: templates/afat/view/fatlinks/fatlinks_overview.html:26
 msgid "Fleet Type"
 msgstr "Flottenart"
 
-#: admin.py:159
+#: admin.py:160
 msgid "Is Enabled"
 msgstr "Ist aktiviert"
 
-#: admin.py:173
+#: admin.py:174
 msgid "Activate selected fleet types"
 msgstr "Aktiviere ausgewählte Flottenarten"
 
-#: admin.py:201
+#: admin.py:202
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
 msgstr[0] "Aktivieren von {failed} Flottenart ist fehlgeschlagen"
 msgstr[1] "Aktivieren von {failed} Flottenarten ist fehlgeschlagen"
 
-#: admin.py:211
+#: admin.py:212
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
 msgstr[0] "{notifications_count} Flottenart aktiviert"
 msgstr[1] "{notifications_count} Flottenarten aktiviert"
 
-#: admin.py:217
+#: admin.py:218
 msgid "Deactivate selected fleet types"
 msgstr "Deaktiviere ausgewählte Flottenarten"
 
-#: admin.py:245
+#: admin.py:246
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
 msgstr[0] "Deaktivieren von {failed} Flottenart ist fehlgeschlagen"
 msgstr[1] "Deaktivieren von {failed} Flottenarten ist fehlgeschlagen"
 
-#: admin.py:255
-#, python-brace-format
+#: admin.py:256
+#, fuzzy, python-brace-format
+#| msgid "Deactivated {notifications_count} fleet type"
+#| msgid_plural "Deactivated {notifications_count} fleet type(s)"
 msgid "Deactivated {notifications_count} fleet type"
-msgid_plural "Deactivated {notifications_count} fleet type(s)"
+msgid_plural "Deactivated {notifications_count} fleet types"
 msgstr[0] "{notifications_count} Flottenart deaktiviert"
 msgstr[1] "{notifications_count} Flottenarten deaktiviert"
 
@@ -578,7 +580,8 @@ msgstr "Name setzen"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:7
 msgid "FATs for this FAT Link <small>(updated every 15 seconds)</small>"
-msgstr "FATs für diesen FAT Link <small>(alle 15 Sekunden aktualisiert)</small>"
+msgstr ""
+"FATs für diesen FAT Link <small>(alle 15 Sekunden aktualisiert)</small>"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:9
 msgid "FATs for this FAT Link"
@@ -1149,9 +1152,9 @@ msgid ""
 "p><p>Name: {character.character_name}<br>System: {afat_object.system}"
 "<br>Ship: {afat_object.shiptype}</p>"
 msgstr ""
-"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT Link "
-"registriert.</p><p>Name: {character.character_name}<br>System: {afat_object."
-"system}<br>Schiff: {afat_object.shiptype}</p>"
+"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT Link registriert."
+"</p><p>Name: {character.character_name}<br>System: {afat_object.system}"
+"<br>Schiff: {afat_object.shiptype}</p>"
 
 #: views/fatlinks.py:741
 msgid ""
@@ -1212,8 +1215,8 @@ msgstr ""
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-"
-"Link.</p>"
+"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-Link."
+"</p>"
 
 #: views/fatlinks.py:1061
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"

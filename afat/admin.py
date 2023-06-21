@@ -199,20 +199,20 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             messages.error(
                 request,
                 ngettext(
-                    f"Failed to activate {failed} fleet type",
-                    f"Failed to activate {failed} fleet types",
+                    "Failed to activate {failed} fleet type",
+                    "Failed to activate {failed} fleet types",
                     failed,
-                ),
+                ).format(failed=failed),
             )
 
         if queryset.count() - failed > 0:
             messages.success(
                 request,
                 ngettext(
-                    f"Activated {notifications_count} fleet type",
-                    f"Activated {notifications_count} fleet types",
+                    "Activated {notifications_count} fleet type",
+                    "Activated {notifications_count} fleet types",
                     notifications_count,
-                ),
+                ).format(notifications_count=notifications_count),
             )
 
     @admin.action(description=_("Deactivate selected fleet types"))
@@ -243,20 +243,20 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             messages.error(
                 request,
                 ngettext(
-                    f"Failed to deactivate {failed} fleet type",
-                    f"Failed to deactivate {failed} fleet types",
+                    "Failed to deactivate {failed} fleet type",
+                    "Failed to deactivate {failed} fleet types",
                     failed,
-                ),
+                ).format(failed=failed),
             )
 
         if queryset.count() - failed > 0:
             messages.success(
                 request,
                 ngettext(
-                    f"Deactivated {notifications_count} fleet type",
-                    f"Deactivated {notifications_count} fleet type(s)",
+                    "Deactivated {notifications_count} fleet type",
+                    "Deactivated {notifications_count} fleet types",
                     notifications_count,
-                ),
+                ).format(notifications_count=notifications_count),
             )
 
 
