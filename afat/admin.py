@@ -157,7 +157,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
         return obj.name
 
-    @admin.display(description=_("Is Enabled"), boolean=True, ordering="is_enabled")
+    @admin.display(description=_("Is enabled"), boolean=True, ordering="is_enabled")
     def _is_enabled(self, obj):
         """
         Rewrite is_enabled

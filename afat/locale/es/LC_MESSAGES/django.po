@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-21 23:24+0200\n"
+"POT-Creation-Date: 2023-07-23 22:15+0200\n"
 "PO-Revision-Date: 2023-04-19 08:19+0000\n"
 "Last-Translator: \"H. Peter Pfeufer\" <info@ppfeufer.de>\n"
 "Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -26,7 +26,7 @@ msgid "Fleet Type"
 msgstr ""
 
 #: admin.py:160
-msgid "Is Enabled"
+msgid "Is enabled"
 msgstr ""
 
 #: admin.py:174
