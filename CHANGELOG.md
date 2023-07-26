@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - German translation improved
+- Russian translation improved
+- Ukrainian translation improved
 
 
 ## [2.12.0] - 2023-04-21
