@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-28 00:29+0200\n"
-"PO-Revision-Date: 2023-07-27 15:39+0000\n"
+"PO-Revision-Date: 2023-07-28 22:39+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/uk/>\n"
+"Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,7 +83,7 @@ msgstr "Відстежування активності у флоті"
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:37
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:48
 msgid "This field is mandatory"
-msgstr ""
+msgstr "Це поле обовʼязкове"
 
 #: forms.py:42 forms.py:84 forms.py:111
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
@@ -229,14 +229,15 @@ msgstr ""
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
 msgstr ""
+"ФлітКом не знаходиться в зареєстрованому флоті або флот вже не доступний."
 
 #: models.py:129
 msgid "Registered fleet seems to be no longer available."
-msgstr ""
+msgstr "Зареєстрований флот, здається, більше не доступний."
 
 #: models.py:130
 msgid "FC is no longer the fleet boss."
-msgstr ""
+msgstr "ФлітКом більше не бос флоту."
 
 #: models.py:135
 msgid "When was this FAT link created"
@@ -393,7 +394,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:27
 msgid "Creator"
-msgstr ""
+msgstr "Автор"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:15
 #: templates/afat/partials/dashboard/tabs/fats.html:44
