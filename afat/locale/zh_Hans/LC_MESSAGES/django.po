@@ -1,65 +1,69 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Peter Pfeufer <info@ppfeufer.de>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 21:03+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2023-07-28 00:29+0200\n"
+"PO-Revision-Date: 2023-07-27 19:17+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
+"Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.18.2\n"
 
-#: admin.py:146 templates/afat/partials/dashboard/tabs/fatlinks.html:13
+#: admin.py:148 templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: templates/afat/partials/dashboard/tabs/fats.html:41
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: templates/afat/view/fatlinks/fatlinks_overview.html:26
 msgid "Fleet Type"
 msgstr ""
 
-#: admin.py:158
-msgid "Is Enabled"
+#: admin.py:160
+msgid "Is enabled"
 msgstr ""
 
-#: admin.py:172
-msgid "Activate selected fleet type(s)"
+#: admin.py:174
+msgid "Activate selected fleet types"
 msgstr ""
 
-#: admin.py:197
+#: admin.py:202
 #, python-brace-format
-msgid "Failed to activate {failed} fleet types"
-msgstr ""
+msgid "Failed to activate {failed} fleet type"
+msgid_plural "Failed to activate {failed} fleet types"
+msgstr[0] ""
 
-#: admin.py:201
+#: admin.py:212
 #, python-brace-format
-msgid "Activated {notifications_count} fleet type(s)"
+msgid "Activated {notifications_count} fleet type"
+msgid_plural "Activated {notifications_count} fleet types"
+msgstr[0] ""
+
+#: admin.py:218
+msgid "Deactivate selected fleet types"
 msgstr ""
 
-#: admin.py:204
-msgid "Deactivate selected fleet type(s)"
-msgstr ""
-
-#: admin.py:229
+#: admin.py:246
 #, python-brace-format
-msgid "Failed to deactivate {failed} fleet types"
-msgstr ""
+msgid "Failed to deactivate {failed} fleet type"
+msgid_plural "Failed to deactivate {failed} fleet types"
+msgstr[0] ""
 
-#: admin.py:233
+#: admin.py:256
 #, python-brace-format
-msgid "Deactivated {notifications_count} fleet type(s)"
-msgstr ""
+msgid "Deactivated {notifications_count} fleet type"
+msgid_plural "Deactivated {notifications_count} fleet types"
+msgstr[0] ""
 
 #: app_settings.py:32 templates/afat/partials/menu.html:14
 msgid "Fleet Activity Tracking"
-msgstr ""
+msgstr "舰队活动历史"
 
 #: forms.py:24 templates/afat/partials/fatlinks/details/tabs/manualfat.html:22
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:37
@@ -71,6 +75,7 @@ msgstr ""
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
 #: templates/afat/partials/dashboard/tabs/fats.html:40
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:10
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 #: templates/afat/view/fatlinks/fatlinks_overview.html:25
 msgid "Fleet Name"
 msgstr ""
@@ -255,7 +260,7 @@ msgstr ""
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: models.py:205
+#: models.py:205 templates/afat/partials/fatlinks/details/fatlink_info.html:72
 msgid "FAT Link"
 msgstr ""
 
@@ -371,6 +376,7 @@ msgid "Most Recent FAT Links <small>(latest 10)</small>"
 msgstr ""
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:14
+#: templates/afat/partials/fatlinks/details/fatlink_info.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:27
 msgid "Creator"
 msgstr ""
@@ -380,7 +386,7 @@ msgstr ""
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:14
 #: templates/afat/view/fatlinks/fatlinks_overview.html:28
 msgid "EVE Time"
-msgstr ""
+msgstr "EVE时间"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:16
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:18
@@ -458,20 +464,16 @@ msgstr ""
 msgid "Add ESI Link"
 msgstr ""
 
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:6
-msgid "Creator:"
-msgstr ""
-
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:11
-msgid "Link Created (Eve Time):"
+msgid "Link Created (Eve Time)"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:17
-msgid "Link Expires (Eve Time):"
+msgid "Link Expires (Eve Time)"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:19
-msgid "Link Expired (Eve Time):"
+msgid "Link Expired (Eve Time)"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
@@ -511,10 +513,6 @@ msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:64
 msgid "Re-Open FAT link"
-msgstr ""
-
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:72
-msgid "FAT Link:"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:84
@@ -562,7 +560,7 @@ msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
-msgid "Note:"
+msgid "Note"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
@@ -601,11 +599,7 @@ msgid_plural ""
 msgstr[0] ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-msgid "Fleet Name:"
-msgstr ""
-
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-msgid "ESI fleet ID:"
+msgid "ESI fleet ID"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:49
@@ -629,6 +623,19 @@ msgstr ""
 msgid ""
 "Note: Information about your registered fleets might be delayed by up to 5 "
 "minutes."
+msgstr ""
+
+#: templates/afat/partials/footer/app-translation-footer.html:4
+msgid "Join our team of translators!"
+msgstr ""
+
+#: templates/afat/partials/footer/app-translation-footer.html:7
+#, python-format
+msgid ""
+"\n"
+"            Do you want to help translate this app into your language or "
+"improve the existing translation? - %(weblate_link)s\n"
+"        "
 msgstr ""
 
 #: templates/afat/partials/form/required_field_hint.html:4
@@ -670,7 +677,7 @@ msgid "Current Month"
 msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-msgid "Member Corps"
+msgid "Member Corporations"
 msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
@@ -733,6 +740,7 @@ msgid "Graphs"
 msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:5
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
 msgid "Corporations"
 msgstr ""
 
@@ -788,7 +796,7 @@ msgstr ""
 #: templates/afat/view/statistics/statistics_alliance_year_overview.html:26
 #: templates/afat/view/statistics/statistics_corporation_year_overview.html:26
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #: templates/afat/partials/statistics/overview/tabs/mine.html:33
 msgid "FAT Count"
@@ -804,10 +812,6 @@ msgstr ""
 
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:4
 msgid "My Stats"
-msgstr ""
-
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
-msgid "Corps"
 msgstr ""
 
 #: templates/afat/partials/year_navigation.html:4
@@ -898,51 +902,51 @@ msgstr ""
 
 #: templatetags/filters.py:20
 msgid "January"
-msgstr ""
+msgstr "一月"
 
 #: templatetags/filters.py:21
 msgid "February"
-msgstr ""
+msgstr "二月"
 
 #: templatetags/filters.py:22
 msgid "March"
-msgstr ""
+msgstr "三月"
 
 #: templatetags/filters.py:23
 msgid "April"
-msgstr ""
+msgstr "四月"
 
 #: templatetags/filters.py:24
 msgid "May"
-msgstr ""
+msgstr "五月"
 
 #: templatetags/filters.py:25
 msgid "June"
-msgstr ""
+msgstr "六月"
 
 #: templatetags/filters.py:26
 msgid "July"
-msgstr ""
+msgstr "七月"
 
 #: templatetags/filters.py:27
 msgid "August"
-msgstr ""
+msgstr "八月"
 
 #: templatetags/filters.py:28
 msgid "September"
-msgstr ""
+msgstr "九月"
 
 #: templatetags/filters.py:29
 msgid "October"
-msgstr ""
+msgstr "十月"
 
 #: templatetags/filters.py:30
 msgid "November"
-msgstr ""
+msgstr "十一月"
 
 #: templatetags/filters.py:31
 msgid "December"
-msgstr ""
+msgstr "十二月"
 
 #: views/fatlinks.py:212
 msgid ""
@@ -1133,31 +1137,31 @@ msgstr ""
 
 #: views/statistics.py:448 views/statistics.py:673
 msgid "Monday"
-msgstr ""
+msgstr "周一"
 
 #: views/statistics.py:449 views/statistics.py:674
 msgid "Tuesday"
-msgstr ""
+msgstr "周二"
 
 #: views/statistics.py:450 views/statistics.py:675
 msgid "Wednesday"
-msgstr ""
+msgstr "周三"
 
 #: views/statistics.py:451 views/statistics.py:676
 msgid "Thursday"
-msgstr ""
+msgstr "周四"
 
 #: views/statistics.py:452 views/statistics.py:677
 msgid "Friday"
-msgstr ""
+msgstr "星期五"
 
 #: views/statistics.py:453 views/statistics.py:678
 msgid "Saturday"
-msgstr ""
+msgstr "周六"
 
 #: views/statistics.py:454 views/statistics.py:679
 msgid "Sunday"
-msgstr ""
+msgstr "星期日"
 
 #: views/statistics.py:557
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"

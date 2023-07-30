@@ -6,6 +6,7 @@ Admin pages configuration
 from django.contrib import admin, messages
 from django.db.models import Count
 from django.utils.translation import gettext as _
+from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
 from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
@@ -66,7 +67,7 @@ def custom_filter(title):
 @admin.register(AFatLink)
 class AFatLinkAdmin(admin.ModelAdmin):
     """
-    Config for fat link model
+    Config for the FAT link model
     """
 
     list_select_related = ("link_type",)
@@ -97,6 +98,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         :return:
         :rtype:
         """
+
         queryset = super().get_queryset(request)
         queryset = queryset.annotate(_number_of_fats=Count("afats", distinct=True))
 
@@ -136,7 +138,7 @@ class AFatAdmin(admin.ModelAdmin):
 @admin.register(AFatLinkType)
 class AFatLinkTypeAdmin(admin.ModelAdmin):
     """
-    Config for fatlinktype model
+    Config for the FAT link type model
     """
 
     list_display = ("id", "_name", "_is_enabled")
@@ -155,7 +157,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
         return obj.name
 
-    @admin.display(description=_("Is Enabled"), boolean=True, ordering="is_enabled")
+    @admin.display(description=_("Is enabled"), boolean=True, ordering="is_enabled")
     def _is_enabled(self, obj):
         """
         Rewrite is_enabled
@@ -169,7 +171,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
 
     actions = ("activate", "deactivate")
 
-    @admin.action(description=_("Activate selected fleet type(s)"))
+    @admin.action(description=_("Activate selected fleet types"))
     def activate(self, request, queryset):
         """
         Mark fleet type as active
@@ -194,14 +196,26 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 failed += 1
 
         if failed:
-            messages.error(request, _(f"Failed to activate {failed} fleet types"))
+            messages.error(
+                request,
+                ngettext(
+                    "Failed to activate {failed} fleet type",
+                    "Failed to activate {failed} fleet types",
+                    failed,
+                ).format(failed=failed),
+            )
 
         if queryset.count() - failed > 0:
             messages.success(
-                request, _(f"Activated {notifications_count} fleet type(s)")
+                request,
+                ngettext(
+                    "Activated {notifications_count} fleet type",
+                    "Activated {notifications_count} fleet types",
+                    notifications_count,
+                ).format(notifications_count=notifications_count),
             )
 
-    @admin.action(description=_("Deactivate selected fleet type(s)"))
+    @admin.action(description=_("Deactivate selected fleet types"))
     def deactivate(self, request, queryset):
         """
         Mark fleet type as inactive
@@ -226,18 +240,30 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 failed += 1
 
         if failed:
-            messages.error(request, _(f"Failed to deactivate {failed} fleet types"))
+            messages.error(
+                request,
+                ngettext(
+                    "Failed to deactivate {failed} fleet type",
+                    "Failed to deactivate {failed} fleet types",
+                    failed,
+                ).format(failed=failed),
+            )
 
         if queryset.count() - failed > 0:
             messages.success(
-                request, _(f"Deactivated {notifications_count} fleet type(s)")
+                request,
+                ngettext(
+                    "Deactivated {notifications_count} fleet type",
+                    "Deactivated {notifications_count} fleet types",
+                    notifications_count,
+                ).format(notifications_count=notifications_count),
             )
 
 
 @admin.register(AFatLog)
 class AFatLogAdmin(admin.ModelAdmin):
     """
-    Config for admin log
+    Config for the admin log model
     """
 
     list_display = ("log_time", "log_event", "user", "fatlink_hash", "log_text")

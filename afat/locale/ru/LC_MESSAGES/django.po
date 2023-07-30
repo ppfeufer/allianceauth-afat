@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-21 21:03+0200\n"
-"PO-Revision-Date: 2023-04-21 20:53+0000\n"
+"POT-Creation-Date: 2023-07-28 00:29+0200\n"
+"PO-Revision-Date: 2023-07-29 23:45+0000\n"
 "Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/ru/>\n"
@@ -22,46 +22,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Weblate 4.18.2\n"
 
-#: admin.py:146 templates/afat/partials/dashboard/tabs/fatlinks.html:13
+#: admin.py:148 templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: templates/afat/partials/dashboard/tabs/fats.html:41
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: templates/afat/view/fatlinks/fatlinks_overview.html:26
 msgid "Fleet Type"
 msgstr "Тип флота"
 
-#: admin.py:158
-msgid "Is Enabled"
+#: admin.py:160
+msgid "Is enabled"
 msgstr "Разрешен"
 
-#: admin.py:172
-msgid "Activate selected fleet type(s)"
-msgstr "Разрешить выбранные типы флотов"
+#: admin.py:174
+msgid "Activate selected fleet types"
+msgstr "Разрешить выбранные типы флота"
 
-#: admin.py:197
+#: admin.py:202
 #, python-brace-format
-msgid "Failed to activate {failed} fleet types"
-msgstr "Не удалось разрешить {failed} типов фота"
+msgid "Failed to activate {failed} fleet type"
+msgid_plural "Failed to activate {failed} fleet types"
+msgstr[0] "Не удалось активировать {failed} тип флота"
+msgstr[1] "Не удалось активировать {failed} типа флота"
+msgstr[2] "Не удалось активировать {failed} типов флота"
+msgstr[3] "Не удалось активировать {failed} тип флота"
 
-#: admin.py:201
+#: admin.py:212
 #, python-brace-format
-msgid "Activated {notifications_count} fleet type(s)"
-msgstr "Разрешены {notifications_count} типы флотов"
+msgid "Activated {notifications_count} fleet type"
+msgid_plural "Activated {notifications_count} fleet types"
+msgstr[0] "Активирован {notifications_count} тип флота"
+msgstr[1] "Активированы {notifications_count} типа флота"
+msgstr[2] "Активированы {notifications_count} типов флота"
+msgstr[3] "Активирован {notifications_count} тип флота"
 
-#: admin.py:204
-msgid "Deactivate selected fleet type(s)"
-msgstr "Запретить выбранные типы флотов"
+#: admin.py:218
+msgid "Deactivate selected fleet types"
+msgstr "Деактивировать выбранные типы флота"
 
-#: admin.py:229
+#: admin.py:246
 #, python-brace-format
-msgid "Failed to deactivate {failed} fleet types"
-msgstr "Не удалось запретить {failed} типов флота"
+msgid "Failed to deactivate {failed} fleet type"
+msgid_plural "Failed to deactivate {failed} fleet types"
+msgstr[0] "Не удалось деактивировать {failed} тип флота"
+msgstr[1] "Не удалось деактивировать {failed} типа флота"
+msgstr[2] "Не удалось деактивировать {failed} типов флота"
+msgstr[3] "Не удалось деактивировать {failed} тип флота"
 
-#: admin.py:233
+#: admin.py:256
 #, python-brace-format
-msgid "Deactivated {notifications_count} fleet type(s)"
-msgstr "Запрещены {notifications_count} типов флота"
+msgid "Deactivated {notifications_count} fleet type"
+msgid_plural "Deactivated {notifications_count} fleet types"
+msgstr[0] "Деактивировать {notifications_count} тип флота"
+msgstr[1] "Деактивировать {notifications_count} типа флота"
+msgstr[2] "Деактивировать {notifications_count} типов флота"
+msgstr[3] "Деактивировать {notifications_count} тип флота"
 
 #: app_settings.py:32 templates/afat/partials/menu.html:14
 msgid "Fleet Activity Tracking"
@@ -77,6 +93,7 @@ msgstr "Обязательное поле"
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
 #: templates/afat/partials/dashboard/tabs/fats.html:40
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:10
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 #: templates/afat/view/fatlinks/fatlinks_overview.html:25
 msgid "Fleet Name"
 msgstr "Название флота"
@@ -267,7 +284,7 @@ msgstr "Флот этого БВ все еще доступен посредст
 msgid "Has this FAT link being re-opened?"
 msgstr "Ссылка РБВ была реактивирована?"
 
-#: models.py:205
+#: models.py:205 templates/afat/partials/fatlinks/details/fatlink_info.html:72
 msgid "FAT Link"
 msgstr "Боевой Вылет"
 
@@ -383,6 +400,7 @@ msgid "Most Recent FAT Links <small>(latest 10)</small>"
 msgstr "Недавние Боевые Вылеты <small>(последние 10)</small>"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:14
+#: templates/afat/partials/fatlinks/details/fatlink_info.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:27
 msgid "Creator"
 msgstr "Создатель"
@@ -486,21 +504,17 @@ msgstr ""
 msgid "Add ESI Link"
 msgstr "Начать ESI отслеживание флота"
 
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:6
-msgid "Creator:"
-msgstr "Создатель:"
-
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:11
-msgid "Link Created (Eve Time):"
-msgstr "Время создания (Время EVE):"
+msgid "Link Created (Eve Time)"
+msgstr "Время создания (Время EVE)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:17
-msgid "Link Expires (Eve Time):"
-msgstr "Срок действия истекает (Время EVE):"
+msgid "Link Expires (Eve Time)"
+msgstr "Срок действия истекает (Время EVE)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:19
-msgid "Link Expired (Eve Time):"
-msgstr "Срок действия истек (Время EVE):"
+msgid "Link Expired (Eve Time)"
+msgstr "Срок действия истек (Время EVE)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
 msgid "Participation is being tracked via ESI"
@@ -548,10 +562,6 @@ msgstr "Реактивировать"
 msgid "Re-Open FAT link"
 msgstr "Реактивировать ссылку РБВ"
 
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:72
-msgid "FAT Link:"
-msgstr "Ссылка РБВ:"
-
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:84
 msgid "Copy me!"
 msgstr "Скопируй меня!"
@@ -597,8 +607,8 @@ msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr "Пилот отсутствует в списке? Используйте форму, чтобы добавить его."
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
-msgid "Note:"
-msgstr "Примечание:"
+msgid "Note"
+msgstr "Примечание"
 
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "This action is logged!"
@@ -655,12 +665,8 @@ msgstr[3] ""
 "            "
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-msgid "Fleet Name:"
-msgstr "Название флота:"
-
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-msgid "ESI fleet ID:"
-msgstr "ESI ID флота:"
+msgid "ESI fleet ID"
+msgstr "ESI ID флота"
 
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:49
 msgid ""
@@ -704,6 +710,23 @@ msgstr ""
 "Примечание: информация о Ваших зарегистрированных флотах может задерживаться "
 "до 5 минут."
 
+#: templates/afat/partials/footer/app-translation-footer.html:4
+msgid "Join our team of translators!"
+msgstr "Присоединяйтесь к нашей команде переводчиков!"
+
+#: templates/afat/partials/footer/app-translation-footer.html:7
+#, python-format
+msgid ""
+"\n"
+"            Do you want to help translate this app into your language or "
+"improve the existing translation? - %(weblate_link)s\n"
+"        "
+msgstr ""
+"\n"
+"            Вы хотите помочь перевести это приложение на ваш язык или "
+"улучшить текущий перевод? - %(weblate_link)s\n"
+"        "
+
 #: templates/afat/partials/form/required_field_hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
 msgstr "Поля, отмеченные (*) обязательны"
@@ -743,7 +766,7 @@ msgid "Current Month"
 msgstr "Текущий месяц"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-msgid "Member Corps"
+msgid "Member Corporations"
 msgstr "Корпорации участники"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
@@ -806,6 +829,7 @@ msgid "Graphs"
 msgstr "Графики"
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:5
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
 msgid "Corporations"
 msgstr "Корпорации"
 
@@ -880,10 +904,6 @@ msgstr "Нет БВП за этот год"
 #: templates/afat/partials/statistics/overview/tabs_navigation.html:4
 msgid "My Stats"
 msgstr "Мои показатели"
-
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
-msgid "Corps"
-msgstr "Корпорации"
 
 #: templates/afat/partials/year_navigation.html:4
 msgid "Previous Year"
