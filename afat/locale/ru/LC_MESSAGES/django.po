@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-28 00:29+0200\n"
-"PO-Revision-Date: 2023-07-24 21:39+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ru/>\n"
+"PO-Revision-Date: 2023-07-29 23:45+0000\n"
+"Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
+"Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -712,7 +712,7 @@ msgstr ""
 
 #: templates/afat/partials/footer/app-translation-footer.html:4
 msgid "Join our team of translators!"
-msgstr ""
+msgstr "Присоединяйтесь к нашей команде переводчиков!"
 
 #: templates/afat/partials/footer/app-translation-footer.html:7
 #, python-format
@@ -722,6 +722,10 @@ msgid ""
 "improve the existing translation? - %(weblate_link)s\n"
 "        "
 msgstr ""
+"\n"
+"            Вы хотите помочь перевести это приложение на ваш язык или "
+"улучшить текущий перевод? - %(weblate_link)s\n"
+"        "
 
 #: templates/afat/partials/form/required_field_hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
