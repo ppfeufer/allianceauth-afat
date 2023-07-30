@@ -1,4 +1,4 @@
-/* global afatSettings, moment, console, manageModal */
+/* global afatSettings, moment */
 
 $(document).ready(() => {
     'use strict';

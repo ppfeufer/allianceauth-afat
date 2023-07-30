@@ -1,4 +1,4 @@
-/* global afatSettings, moment, console, manageModal */
+/* global afatSettings, moment, manageModal */
 
 $(document).ready(() => {
     'use strict';
@@ -21,7 +21,7 @@ $(document).ready(() => {
             {
                 data: 'fleet_time',
                 render: {
-                    display: (data, type, row) => {
+                    display: (data) => {
                         return moment(data.time).utc().format(DATETIME_FORMAT);
                     },
                     _: 'timestamp'
@@ -31,7 +31,7 @@ $(document).ready(() => {
 
             {
                 data: 'actions',
-                render: (data, type, row) => {
+                render: (data) => {
                     if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
                         return data;
                     } else {

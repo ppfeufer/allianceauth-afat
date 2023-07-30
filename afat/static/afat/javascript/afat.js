@@ -3,7 +3,7 @@
  * @param {string} text
  * @returns {string}
  */
-let convertStringToSlug = (text) => {
+const convertStringToSlug = (text) => { // eslint-disable-line no-unused-vars
     'use strict';
 
     return text.toLowerCase()
@@ -16,7 +16,7 @@ let convertStringToSlug = (text) => {
  * @param {element} table
  * @param {string} order
  */
-const sortTable = (table, order) => {
+const sortTable = (table, order) => { // eslint-disable-line no-unused-vars
     'use strict';
 
     const asc = order === 'asc';
@@ -35,7 +35,7 @@ const sortTable = (table, order) => {
  * Manage a modal window
  * @param {element} modalElement
  */
-const manageModal = (modalElement) => {
+const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
     'use strict';
 
     modalElement.on('show.bs.modal', (event) => {

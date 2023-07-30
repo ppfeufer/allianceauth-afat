@@ -27,7 +27,7 @@ $(document).ready(() => {
         order: [
             [0, 'asc']
         ],
-        createdRow: (row, data, rowIndex) => {
+        createdRow: (row, data) => {
             const shipTypeOverviewTable = $('#fleet-edit-ship-types');
             const shipTypeSlug = convertStringToSlug(data.ship_type);
 
