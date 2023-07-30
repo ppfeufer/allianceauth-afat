@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-28 00:29+0200\n"
+"POT-Creation-Date: 2023-07-30 18:59+0200\n"
 "PO-Revision-Date: 2023-07-27 19:17+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -631,17 +631,14 @@ msgid ""
 "minutes."
 msgstr ""
 
-#: templates/afat/partials/footer/app-translation-footer.html:4
-msgid "Join our team of translators!"
+#: templates/afat/partials/footer/app-translation-footer.html:5
+msgid ""
+"Do you want to help translate this app into your language or improve the "
+"existing translation?"
 msgstr ""
 
-#: templates/afat/partials/footer/app-translation-footer.html:7
-#, python-format
-msgid ""
-"\n"
-"            Do you want to help translate this app into your language or "
-"improve the existing translation? - %(weblate_link)s\n"
-"        "
+#: templates/afat/partials/footer/app-translation-footer.html:8
+msgid "Join our team of translators!"
 msgstr ""
 
 #: templates/afat/partials/form/required_field_hint.html:4
