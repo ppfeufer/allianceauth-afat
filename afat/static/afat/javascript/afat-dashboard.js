@@ -31,7 +31,13 @@ $(document).ready(() => {
                     {
                         data: 'fleet_time',
                         render: {
-                            display: (data, type, row) => {
+                            /**
+                             * Render date
+                             *
+                             * @param data
+                             * @returns {*}
+                             */
+                            display: (data) => {
                                 return moment(data.time).utc().format(
                                     DATETIME_FORMAT
                                 );
@@ -74,7 +80,13 @@ $(document).ready(() => {
             {
                 data: 'fleet_time',
                 render: {
-                    display: (data, type, row) => {
+                    /**
+                     * Render timestamp
+                     *
+                     * @param data
+                     * @returns {*}
+                     */
+                    display: (data) => {
                         return moment(data.time).utc().format(DATETIME_FORMAT);
                     },
                     _: 'timestamp'
@@ -82,7 +94,13 @@ $(document).ready(() => {
             },
             {
                 data: 'actions',
-                render: (data, type, row) => {
+                /**
+                 * Render action buttons
+                 *
+                 * @param data
+                 * @returns {*|string}
+                 */
+                render: (data) => {
                     if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
                         return data;
                     } else {
