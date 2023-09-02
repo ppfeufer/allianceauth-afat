@@ -1,20 +1,22 @@
-# Contributing to Alliance Auth AFAT — Another Fleet Activity Tracker
+# Contributing to Alliance Auth AFAT — Another Fleet Activity Tracker<a name="contributing-to-alliance-auth-afat-%E2%80%94-another-fleet-activity-tracker"></a>
 
----
+______________________________________________________________________
 
-<!-- TOC -->
-* [Contributing to Alliance Auth AFAT — Another Fleet Activity Tracker](#contributing-to-alliance-auth-afat--another-fleet-activity-tracker)
-  * [Code Formatting](#code-formatting)
-  * [Contributing via Pull Requests](#contributing-via-pull-requests)
-    * [Commits](#commits)
-    * [Model Changes](#model-changes)
-    * [Test Coverage](#test-coverage)
-  * [Translation](#translation)
-<!-- TOC -->
+<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=1 -->
 
----
+- [Contributing to Alliance Auth AFAT — Another Fleet Activity Tracker](#contributing-to-alliance-auth-afat-%E2%80%94-another-fleet-activity-tracker)
+  - [Code Formatting](#code-formatting)
+  - [Contributing via Pull Requests](#contributing-via-pull-requests)
+    - [Commits](#commits)
+    - [Model Changes](#model-changes)
+    - [Test Coverage](#test-coverage)
+  - [Translation](#translation)
 
-## Code Formatting
+<!-- mdformat-toc end -->
+
+______________________________________________________________________
+
+## Code Formatting<a name="code-formatting"></a>
 
 This app is utilizing the [Black](https://black.readthedocs.io/en/stable/the_black_code_style.html)
 code style. Every commit has to adhere to it.
@@ -23,8 +25,8 @@ This repository uses [pre-commit](https://github.com/pre-commit/pre-commit) to
 verify compliance with formatting rules. To use:
 
 1. Install `pre-commit`.
-2. From inside the `allianceauth-afat` root directory, run `pre-commit install`.
-3. You're all done! Code will be checked automatically using git hooks.
+1. From inside the `allianceauth-afat` root directory, run `pre-commit install`.
+1. You're all done! Code will be checked automatically using git hooks.
 
 You can check if your code to commit adheres to the given style by simply running:
 
@@ -47,8 +49,7 @@ The following will be checked by `pre-commit`:
 - code formatted according to black code style
 - code conforms with flake8
 
-
-## Contributing via Pull Requests
+## Contributing via Pull Requests<a name="contributing-via-pull-requests"></a>
 
 To contribute code via pull request, make sure that you fork the repository and branch
 your changes from the `development` branch. Only pull requests towards the development
@@ -57,7 +58,7 @@ branch will be considered.
 Please make sure you have signed the [License Agreement](https://developers.eveonline.com/resource/license-agreement)
 by logging in at https://developers.eveonline.com before submitting any pull requests.
 
-### Commits
+### Commits<a name="commits"></a>
 
 Commit headers should be short (not longer than 70 characters) and precise. Use the
 commit body for a more detailed explanation of the commit.
@@ -74,7 +75,7 @@ Commit headers should be prefixed to state what kind of commit it is.
   Python code itself
 - `[MISC] Foobar` When it doesn't fit in anything else
 
-### Model Changes
+### Model Changes<a name="model-changes"></a>
 
 In case you add changes to the models, please also update the model graph via:
 
@@ -82,7 +83,7 @@ In case you add changes to the models, please also update the model graph via:
 make graph_models
 ```
 
-### Test Coverage
+### Test Coverage<a name="test-coverage"></a>
 
 Please make sure your contribution comes with tests covering your additions and
 changes. We aim to continuously raise our overall text coverage in this project. Pull
@@ -100,12 +101,12 @@ The full tox-test suite can be run via:
 make tox_tests
 ```
 
-
-## Translation
+## Translation<a name="translation"></a>
 
 This app is fully translation-ready and translations are handled via [Weblate]. If
 you like to contribute to the app's translation or simply improve it, feel free to
 register on my [Weblate] site and message me, so I can add you to the right group.
 
 <!-- Links -->
-[Weblate]: https://weblate.ppfeufer.de/ "Weblate"
+
+[weblate]: https://weblate.ppfeufer.de/ "Weblate"
