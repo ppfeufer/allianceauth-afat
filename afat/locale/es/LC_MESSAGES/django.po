@@ -2,15 +2,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # "H. Peter Pfeufer" <info@ppfeufer.de>, 2023.
+# Zigor Fernandez Moreno <sietehierros@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-30 18:59+0200\n"
-"PO-Revision-Date: 2023-07-27 19:17+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/es/>\n"
+"PO-Revision-Date: 2023-08-30 17:40+0000\n"
+"Last-Translator: Zigor Fernandez Moreno <sietehierros@gmail.com>\n"
+"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,40 +24,40 @@ msgstr ""
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: templates/afat/view/fatlinks/fatlinks_overview.html:26
 msgid "Fleet Type"
-msgstr ""
+msgstr "Tipo de Flota"
 
 #: admin.py:160
 msgid "Is enabled"
-msgstr ""
+msgstr "Está habilitado"
 
 #: admin.py:174
 msgid "Activate selected fleet types"
-msgstr ""
+msgstr "Activar tipos de flota seleccionados"
 
 #: admin.py:202
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Error al activar tipo de flota {failed}"
+msgstr[1] "Error al activar tipos de flotas {failed}"
 
 #: admin.py:212
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tipo de flota activa {notifications_count}"
+msgstr[1] "Tipo de flotas activas {notifications_count}"
 
 #: admin.py:218
 msgid "Deactivate selected fleet types"
-msgstr ""
+msgstr "Desactivar tipos de flota seleccionados"
 
 #: admin.py:246
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Error al desactivar el tipo de flota {failed}"
+msgstr[1] "Error al desactivar los tipos de flota {failed}"
 
 #: admin.py:256
 #, python-brace-format
@@ -67,7 +68,7 @@ msgstr[1] ""
 
 #: app_settings.py:32 templates/afat/partials/menu.html:14
 msgid "Fleet Activity Tracking"
-msgstr ""
+msgstr "Seguimiento de la Actividad de Flota"
 
 #: forms.py:24 templates/afat/partials/fatlinks/details/tabs/manualfat.html:22
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:37
@@ -82,7 +83,7 @@ msgstr "Este campo es obligatorio"
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
 #: templates/afat/view/fatlinks/fatlinks_overview.html:25
 msgid "Fleet Name"
-msgstr ""
+msgstr "Nombre de la flota"
 
 #: forms.py:44 forms.py:86
 msgid "Enter fleet name"
@@ -100,22 +101,22 @@ msgstr ""
 #: forms.py:66 templates/afat/partials/fatlinks/details/tabs/manualfat.html:36
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: forms.py:71 templates/afat/partials/fatlinks/details/tabs/fats.html:17
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:32
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:47
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:52
 msgid "Ship Type"
-msgstr ""
+msgstr "Tipo de Nave"
 
 #: forms.py:96
 msgid "FAT link expiry time in minutes"
-msgstr ""
+msgstr "Tiempo de vencimiento del enlace FAT en minutos"
 
 #: forms.py:99
 msgid "Expiry time in minutes"
-msgstr ""
+msgstr "Tiempo de caducidad en minutos"
 
 #: helper/time.py:104
 msgid ""
@@ -123,13 +124,16 @@ msgid ""
 "{int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and "
 "{int(duration_seconds[0])} seconds"
 msgstr ""
+"{int(duration_years[0])} años, {int(duration_days[0])} días, "
+"{int(duration_hours[0])} horas, {int(duration_minutos[0])} minutos y "
+"{int(duration_segundos[0 ])} segundos"
 
 #: helper/views_helper.py:56 helper/views_helper.py:175
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:5
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
 #: templates/afat/view/fatlinks/fatlinks_overview.html:76
 msgid "via ESI"
-msgstr ""
+msgstr "vía ESI"
 
 #: helper/views_helper.py:87
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:34
@@ -138,6 +142,8 @@ msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
 msgstr ""
+"Al hacer clic aquí se detendrá el seguimiento automático a través de ESI "
+"para esta flota y se cerrará el enlace FAT asociado."
 
 #: helper/views_helper.py:90
 #, python-brace-format
@@ -145,6 +151,8 @@ msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
 "from {fatlink.character.character_name}?</p>"
 msgstr ""
+"<p>¿Está seguro de que desea cerrar la flota ESI con ID {fatlink."
+"esi_fleet_id} de {fatlink.character.character_name}?</p>"
 
 #: helper/views_helper.py:92
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:39
@@ -152,7 +160,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:38
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:41
 msgid "Stop Tracking"
-msgstr ""
+msgstr "Dejar de Rastrear"
 
 #: helper/views_helper.py:116 helper/views_helper.py:186
 msgid "Delete"
