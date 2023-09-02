@@ -6,7 +6,7 @@ requires = [
 
 [project]
 name = "allianceauth-afat"
-version = "2.12.2"
+version = "2.12.3"
 description = "Another Fleet Activity Tracking tool for Alliance Auth"
 readme = "README.md"
 keywords = [

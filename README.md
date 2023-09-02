@@ -9,6 +9,7 @@
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](http://black.readthedocs.io/en/latest/)
 [![Automated Checks](https://github.com/ppfeufer/allianceauth-afat/actions/workflows/automated-checks.yml/badge.svg)](https://github.com/ppfeufer/allianceauth-afat/actions/workflows/automated-checks.yml)
 [![codecov](https://codecov.io/gh/ppfeufer/allianceauth-afat/branch/master/graph/badge.svg?token=GNE88NUAKK)](https://codecov.io/gh/ppfeufer/allianceauth-afat)
+[![Translation status](https://weblate.ppfeufer.de/widget/alliance-auth-apps/allianceauth-afat/svg-badge.svg)](https://weblate.ppfeufer.de/engage/alliance-auth-apps/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/ppfeufer/aa-forum/blob/master/CODE_OF_CONDUCT.md)
 [![Discord](https://img.shields.io/discord/790364535294132234?label=discord)](https://discord.gg/zmh52wnfvM)
 
@@ -41,6 +42,7 @@ ______________________________________________________________________
   - [Settings](#settings)
   - [Permissions](#permissions)
   - [Changelog](#changelog)
+  - [Translation Status](#translation-status)
   - [Contributing](#contributing)
   - [Credits](#credits)
 
@@ -241,11 +243,18 @@ To customize the module, the following settings are available.
 To keep track of all changes, please read the
 [Changelog](https://github.com/ppfeufer/allianceauth-afat/blob/master/CHANGELOG.md).
 
+## Translation Status<a name="translation-status"></a>
+
+[![Translation status](https://weblate.ppfeufer.de/widget/alliance-auth-apps/allianceauth-afat/multi-auto.svg)](https://weblate.ppfeufer.de/engage/alliance-auth-apps/)
+
+Do you want to help translate this app into your language or improve the existing
+translation? - [Join our team of translators][weblate engage]!
+
 ## Contributing<a name="contributing"></a>
 
 You want to contribute to this project? That's cool!
 
-Please make sure to read the [contribution guidelines](https://github.com/ppfeufer/allianceauth-afat/blob/master/CONTRIBUTING.md)
+Please make sure to read the [contribution guidelines](https://github.com/ppfeufer/allianceauth-afat/blob/master/CONTRIBUTING.md).\
 (I promise, it's not much, just some basics)
 
 ## Credits<a name="credits"></a>
@@ -257,3 +266,7 @@ by @exiom with @Aproia and @ppfeufer which is based on
 
 Both of these modules are no longer maintained and are deprecated. Both modules will
 not run with the latest stable releases of Alliance Auth.
+
+<!-- Inline Links -->
+
+[weblate engage]: https://weblate.ppfeufer.de/engage/alliance-auth-apps/ "Weblate Translations"
