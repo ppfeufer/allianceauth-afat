@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## \[In Development\] - Unreleased
 
+### Changed
+
+- Korean translation improved
+- Spanish translation improved
+
 ## \[2.12.3\] - 2023-09-02
 
 ### Changed
