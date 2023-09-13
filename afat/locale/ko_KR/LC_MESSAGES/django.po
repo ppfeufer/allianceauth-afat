@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-30 18:59+0200\n"
-"PO-Revision-Date: 2023-09-02 14:40+0000\n"
+"PO-Revision-Date: 2023-09-05 12:12+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/ko/>\n"
@@ -74,7 +74,7 @@ msgstr ""
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:37
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:48
 msgid "This field is mandatory"
-msgstr ""
+msgstr "필수 항목입니다"
 
 #: forms.py:42 forms.py:84 forms.py:111
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
@@ -157,7 +157,7 @@ msgstr ""
 
 #: helper/views_helper.py:116 helper/views_helper.py:186
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 #: helper/views_helper.py:118
 #, python-brace-format
@@ -219,11 +219,11 @@ msgstr ""
 #: models.py:127
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
-msgstr ""
+msgstr "함대 지휘관이 지정된 함대에 없거나 함대 참가가 더 이상 불가능합니다."
 
 #: models.py:129
 msgid "Registered fleet seems to be no longer available."
-msgstr ""
+msgstr "지정된 함대가 참가가 더 이상 불가능합니다."
 
 #: models.py:130
 msgid "FC is no longer the fleet boss."
@@ -644,7 +644,7 @@ msgstr "번역가 팀에 참여하세요!"
 
 #: templates/afat/partials/form/required_field_hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
-msgstr ""
+msgstr "별표 (*) 표시된 항목은 필수 항목입니다"
 
 #: templates/afat/partials/menu.html:8
 msgid "Toggle navigation"
@@ -686,7 +686,7 @@ msgstr ""
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
 msgid "Corporation"
-msgstr ""
+msgstr "코퍼레이션"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:15
 #: templates/afat/view/statistics/statistics_alliance_year_overview.html:30
@@ -890,7 +890,7 @@ msgstr ""
 
 #: templates/afat/view/logs/logs_overview.html:28
 msgid "User"
-msgstr ""
+msgstr "사용자"
 
 #: templates/afat/view/logs/logs_overview.html:29
 msgid "FAT link"
