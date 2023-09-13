@@ -219,13 +219,13 @@ supervisor and ... Done!
 
 To customize the module, the following settings are available.
 
-| Name                                   | Description                                                      | Default Value           |
-| :------------------------------------- | :--------------------------------------------------------------- | :---------------------- |
-| AFAT_APP_NAME                          | Custom application name, in case you'd like a different name     | Fleet Activity Tracking |
-| AFAT_DEFAULT_FATLINK_EXPIRY_TIME       | Default expiry time for clickable FAT links in Minutes           | 60                      |
-| AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME | Time in minutes a FAT link can be re-opened after it has expired | 60                      |
-| AFAT_DEFAULT_FATLINK_REOPEN_DURATION   | Time in minutes a FAT link is re-opened                          | 60                      |
-| AFAT_DEFAULT_LOG_DURATION              | Time in days before log entries are being removed from the DB    | 60                      |
+| Name                                   | Description                                                      | Default Value           | Value Type |
+| :------------------------------------- | :--------------------------------------------------------------- | :---------------------- | :--------- |
+| AFAT_APP_NAME                          | Custom application name, in case you'd like a different name     | Fleet Activity Tracking | string     |
+| AFAT_DEFAULT_FATLINK_EXPIRY_TIME       | Default expiry time for clickable FAT links in Minutes           | 60                      | int        |
+| AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME | Time in minutes a FAT link can be re-opened after it has expired | 60                      | int        |
+| AFAT_DEFAULT_FATLINK_REOPEN_DURATION   | Time in minutes a FAT link is re-opened                          | 60                      | int        |
+| AFAT_DEFAULT_LOG_DURATION              | Time in days before log entries are being removed from the DB    | 60                      | int        |
 
 ## Permissions<a name="permissions"></a>
 
