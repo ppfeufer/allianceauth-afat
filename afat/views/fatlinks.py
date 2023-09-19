@@ -1045,7 +1045,7 @@ def close_esi_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRe
         logger.info(
             msg=(
                 f'Closing ESI FAT link with hash "{fatlink_hash}". '
-                f"Reason: Closed by manual request"
+                "Reason: Closed by manual request"
             )
         )
 
