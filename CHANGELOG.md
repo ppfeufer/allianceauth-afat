@@ -25,6 +25,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Russian translation improved
 - Spanish translation improved
 
+### Removed
+
+- Import from ImicusFAT (ImicusFAT is gone since quite a while now and doesn't work
+  with Alliance Auth >= 3.0.0. Who ever is still using it, should feel bad and
+  immediately update their systems.)
+
 ## \[2.12.2\] - 2023-08-13
 
 ### Fixed
