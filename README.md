@@ -78,19 +78,19 @@ information, see below.
 
 ### Dashboard<a name="dashboard"></a>
 
-![Dashboard](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/afat-dashboard.png "Dashboard")
+![Dashboard](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/afat-dashboard.png "Dashboard")
 
 ### Fat Link List<a name="fat-link-list"></a>
 
-![Fat Link List](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/fatlink-list.png "Fat Link List")
+![Fat Link List](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/fatlink-list.png "Fat Link List")
 
 ### Fat Link Details<a name="fat-link-details"></a>
 
-![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/ship-type-overview.png "Fat Link Details")
+![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/ship-type-overview.png "Fat Link Details")
 
 ### Add Fat Link View for FCs<a name="add-fat-link-view-for-fcs"></a>
 
-![Add Fat Link View for FCs](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/add-fatlink.png "Add Fat Link View for FCs")
+![Add Fat Link View for FCs](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/add-fatlink.png "Add Fat Link View for FCs")
 
 ## Installation<a name="installation"></a>
 
