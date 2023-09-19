@@ -361,7 +361,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
             logger.info(
                 msg=(
-                    f"Closing ESI FAT link with hash "
+                    "Closing ESI FAT link with hash "
                     f'"{registered_fleet_to_close["registered_fleet"].hash}". '
                     f"Reason: {reason}"
                 )
