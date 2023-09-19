@@ -700,7 +700,7 @@ that were previously "deleted" as active again.
 
 - Ship type overview to FAT link detail page (#72)
 
-  ![Ship Type Overview](docs/images/ship-type-overview.png "Ship Type Overview")
+  ![Ship Type Overview](docs/images/changelog/1.9.0/ship-type-overview.png "Ship Type Overview")
 
 ## \[1.8.0\] - 2021-03-07
 
