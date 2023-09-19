@@ -12,135 +12,145 @@ app_name: str = "afat"
 
 urlpatterns = [
     # Dashboard
-    path("", dashboard.overview, name="dashboard"),
+    path(route="", view=dashboard.overview, name="dashboard"),
     # Stats main page
-    path("statistics/", statistics.overview, name="statistics_overview"),
+    path(route="statistics/", view=statistics.overview, name="statistics_overview"),
     path("statistics/(<int:year>/", statistics.overview, name="statistics_overview"),
     # Stats corp
     path(
-        "statistics/corporation/",
-        statistics.corporation,
+        route="statistics/corporation/",
+        view=statistics.corporation,
         name="statistics_corporation",
     ),
     path(
-        "statistics/corporation/<int:corpid>/",
-        statistics.corporation,
+        route="statistics/corporation/<int:corpid>/",
+        view=statistics.corporation,
         name="statistics_corporation",
     ),
     path(
-        "statistics/corporation/<int:corpid>/<int:year>/",
-        statistics.corporation,
+        route="statistics/corporation/<int:corpid>/<int:year>/",
+        view=statistics.corporation,
         name="statistics_corporation",
     ),
     path(
-        "statistics/corporation/<int:corpid>/<int:year>/<int:month>/",
-        statistics.corporation,
+        route="statistics/corporation/<int:corpid>/<int:year>/<int:month>/",
+        view=statistics.corporation,
         name="statistics_corporation",
     ),
     # Stats char
-    path("statistics/character/", statistics.character, name="statistics_character"),
     path(
-        "statistics/character/<int:charid>/",
-        statistics.character,
+        route="statistics/character/",
+        view=statistics.character,
         name="statistics_character",
     ),
     path(
-        "statistics/character/<int:charid>/<int:year>/<int:month>/",
-        statistics.character,
+        route="statistics/character/<int:charid>/",
+        view=statistics.character,
+        name="statistics_character",
+    ),
+    path(
+        route="statistics/character/<int:charid>/<int:year>/<int:month>/",
+        view=statistics.character,
         name="statistics_character",
     ),
     # Stats alliance
-    path("statistics/alliance/", statistics.alliance, name="statistics_alliance"),
     path(
-        "statistics/alliance/<int:allianceid>/",
-        statistics.alliance,
+        route="statistics/alliance/",
+        view=statistics.alliance,
         name="statistics_alliance",
     ),
     path(
-        "statistics/alliance/<int:allianceid>/<int:year>/",
-        statistics.alliance,
+        route="statistics/alliance/<int:allianceid>/",
+        view=statistics.alliance,
         name="statistics_alliance",
     ),
     path(
-        "statistics/alliance/<int:allianceid>/<int:year>/<int:month>/",
-        statistics.alliance,
+        route="statistics/alliance/<int:allianceid>/<int:year>/",
+        view=statistics.alliance,
+        name="statistics_alliance",
+    ),
+    path(
+        route="statistics/alliance/<int:allianceid>/<int:year>/<int:month>/",
+        view=statistics.alliance,
         name="statistics_alliance",
     ),
     # Fat links list actions
-    path("fatlinks/", fatlinks.overview, name="fatlinks_overview"),
-    path("fatlinks/<int:year>/", fatlinks.overview, name="fatlinks_overview"),
-    # Fat link actions
-    path("fatlink/add/", fatlinks.add_fatlink, name="fatlinks_add_fatlink"),
+    path(route="fatlinks/", view=fatlinks.overview, name="fatlinks_overview"),
     path(
-        "fatlinks/link/create/esi-fatlink/",
-        fatlinks.create_esi_fatlink,
+        route="fatlinks/<int:year>/", view=fatlinks.overview, name="fatlinks_overview"
+    ),
+    # Fat link actions
+    path(route="fatlink/add/", view=fatlinks.add_fatlink, name="fatlinks_add_fatlink"),
+    path(
+        route="fatlinks/link/create/esi-fatlink/",
+        view=fatlinks.create_esi_fatlink,
         name="fatlinks_create_esi_fatlink",
     ),
     path(
-        "fatlink/create/esi-fatlink/callback/<str:fatlink_hash>/",
-        fatlinks.create_esi_fatlink_callback,
+        route="fatlink/create/esi-fatlink/callback/<str:fatlink_hash>/",
+        view=fatlinks.create_esi_fatlink_callback,
         name="fatlinks_create_esi_fatlink_callback",
     ),
     path(
-        "fatlink/create/clickable-fatlink/",
-        fatlinks.create_clickable_fatlink,
+        route="fatlink/create/clickable-fatlink/",
+        view=fatlinks.create_clickable_fatlink,
         name="fatlinks_create_clickable_fatlink",
     ),
     path(
-        "fatlink/<str:fatlink_hash>/details/",
-        fatlinks.details_fatlink,
+        route="fatlink/<str:fatlink_hash>/details/",
+        view=fatlinks.details_fatlink,
         name="fatlinks_details_fatlink",
     ),
     path(
-        "fatlink/<str:fatlink_hash>/delete/",
-        fatlinks.delete_fatlink,
+        route="fatlink/<str:fatlink_hash>/delete/",
+        view=fatlinks.delete_fatlink,
         name="fatlinks_delete_fatlink",
     ),
     path(
-        "fatlink/<str:fatlink_hash>/stop-esi-tracking/",
-        fatlinks.close_esi_fatlink,
+        route="fatlink/<str:fatlink_hash>/stop-esi-tracking/",
+        view=fatlinks.close_esi_fatlink,
         name="fatlinks_close_esi_fatlink",
     ),
     path(
-        "fatlink/<str:fatlink_hash>/re-open/",
-        fatlinks.reopen_fatlink,
+        route="fatlink/<str:fatlink_hash>/re-open/",
+        view=fatlinks.reopen_fatlink,
         name="fatlinks_reopen_fatlink",
     ),
     # Fat actions
     path(
-        "fatlink/<str:fatlink_hash>/register/",
-        fatlinks.add_fat,
+        route="fatlink/<str:fatlink_hash>/register/",
+        view=fatlinks.add_fat,
         name="fatlinks_add_fat",
     ),
     path(
-        "fatlink/<str:fatlink_hash>/fat/<int:fat_id>/delete/",
-        fatlinks.delete_fat,
+        route="fatlink/<str:fatlink_hash>/fat/<int:fat_id>/delete/",
+        view=fatlinks.delete_fat,
         name="fatlinks_delete_fat",
     ),
     # Log actions
-    path("logs/", logs.overview, name="logs_overview"),
+    path(route="logs/", view=logs.overview, name="logs_overview"),
     # Ajax calls :: Dashboard
     path(
-        "ajax/dashboard/get-recent-fatlinks/",
-        dashboard.ajax_get_recent_fatlinks,
+        route="ajax/dashboard/get-recent-fatlinks/",
+        view=dashboard.ajax_get_recent_fatlinks,
         name="dashboard_ajax_get_recent_fatlinks",
     ),
     path(
-        "ajax/dashboard/get-recent-fats-by-character/<int:charid>/",
-        dashboard.ajax_recent_get_fats_by_character,
+        route="ajax/dashboard/get-recent-fats-by-character/<int:charid>/",
+        view=dashboard.ajax_recent_get_fats_by_character,
         name="dashboard_ajax_get_recent_fats_by_character",
     ),
     # Ajax calls :: Fat links
     path(
-        "ajax/fatlinks/get-fatlinks-by-year/<int:year>/",
-        fatlinks.ajax_get_fatlinks_by_year,
+        route="ajax/fatlinks/get-fatlinks-by-year/<int:year>/",
+        view=fatlinks.ajax_get_fatlinks_by_year,
         name="fatlinks_ajax_get_fatlinks_by_year",
     ),
     path(
-        "ajax/fatlinks/get-fats-by-fatlink/<str:fatlink_hash>/",
-        fatlinks.ajax_get_fats_by_fatlink,
+        route="ajax/fatlinks/get-fats-by-fatlink/<str:fatlink_hash>/",
+        view=fatlinks.ajax_get_fats_by_fatlink,
         name="fatlinks_ajax_get_fats_by_fatlink",
     ),
     # Ajax calls :: Logs
-    path("ajax/logs/", logs.ajax_get_logs, name="logs_ajax_get_logs"),
+    path(route="ajax/logs/", view=logs.ajax_get_logs, name="logs_ajax_get_logs"),
 ]

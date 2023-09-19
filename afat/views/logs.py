@@ -18,35 +18,43 @@ from app_utils.logging import LoggerAddTag
 # Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
-from afat.helper.views_helper import convert_logs_to_dict
+from afat.helper.views import convert_logs_to_dict
 from afat.models import AFatLink, AFatLog
 
-logger = LoggerAddTag(get_extension_logger(__name__), __title__)
+logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()
-@permissions_required(("afat.manage_afat", "afat.log_view"))
+@permissions_required(perm=("afat.manage_afat", "afat.log_view"))
 def overview(request: WSGIRequest) -> HttpResponse:
     """
     Logs view
+
     :param request:
     :type request:
     :return:
     :rtype:
     """
 
-    logger.info(f"Log view called by {request.user}")
+    logger.info(msg=f"Log view called by {request.user}")
 
     context = {"log_duration": AFAT_DEFAULT_LOG_DURATION}
 
-    return render(request, "afat/view/logs/logs_overview.html", context=context)
+    return render(
+        request=request,
+        template_name="afat/view/logs/logs_overview.html",
+        context=context,
+    )
 
 
 @login_required()
-@permissions_required(("afat.manage_afat", "afat.log_view"))
-def ajax_get_logs(request: WSGIRequest) -> JsonResponse:
+@permissions_required(perm=("afat.manage_afat", "afat.log_view"))
+def ajax_get_logs(
+    request: WSGIRequest,  # pylint: disable=unused-argument
+) -> JsonResponse:
     """
     Ajax call :: get all log entries
+
     :param request:
     :type request:
     :return:
@@ -61,4 +69,4 @@ def ajax_get_logs(request: WSGIRequest) -> JsonResponse:
         for log in logs
     ]
 
-    return JsonResponse(log_rows, safe=False)
+    return JsonResponse(data=log_rows, safe=False)

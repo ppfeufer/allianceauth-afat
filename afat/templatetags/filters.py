@@ -12,6 +12,7 @@ def month_name(month_number):
     """
     Template tag :: get month name from month number
     example: {{ event.month|month_name }}
+
     :param month_number:
     :return:
     """

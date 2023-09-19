@@ -18,17 +18,18 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
-from afat.helper.views_helper import convert_fatlinks_to_dict, convert_fats_to_dict
+from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import AFat, AFatLink
 
-logger = LoggerAddTag(get_extension_logger(__name__), __title__)
+logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()
-@permission_required("afat.basic_access")
+@permission_required(perm="afat.basic_access")
 def overview(request: WSGIRequest) -> HttpResponse:
     """
     Dashboard view
+
     :param request:
     :type request:
     :return:
@@ -43,18 +44,23 @@ def overview(request: WSGIRequest) -> HttpResponse:
 
     context = {"characters": characters}
 
-    logger.info(f"Module called by {request.user}")
+    logger.info(msg=f"Module called by {request.user}")
 
-    return render(request, "afat/view/dashboard/dashboard.html", context)
+    return render(
+        request=request,
+        template_name="afat/view/dashboard/dashboard.html",
+        context=context,
+    )
 
 
 @login_required
-@permission_required("afat.basic_access")
+@permission_required(perm="afat.basic_access")
 def ajax_recent_get_fats_by_character(
     request: WSGIRequest, charid: int
 ) -> JsonResponse:
     """
     Ajax call :: get all FATs for a given character
+
     :param request:
     :type request:
     :param charid:
@@ -76,14 +82,15 @@ def ajax_recent_get_fats_by_character(
         convert_fats_to_dict(request=request, fat=fat) for fat in fats
     ]
 
-    return JsonResponse(character_fat_rows, safe=False)
+    return JsonResponse(data=character_fat_rows, safe=False)
 
 
 @login_required
-@permission_required("afat.basic_access")
+@permission_required(perm="afat.basic_access")
 def ajax_get_recent_fatlinks(request: WSGIRequest) -> JsonResponse:
     """
     Ajax call :: get recent fat links for the dashboard datatable
+
     :param request:
     :type request:
     :return:
@@ -100,9 +107,9 @@ def ajax_get_recent_fatlinks(request: WSGIRequest) -> JsonResponse:
         convert_fatlinks_to_dict(
             request=request,
             fatlink=fatlink,
-            close_esi_redirect=reverse("afat:dashboard"),
+            close_esi_redirect=reverse(viewname="afat:dashboard"),
         )
         for fatlink in fatlinks
     ]
 
-    return JsonResponse(fatlink_rows, safe=False)
+    return JsonResponse(data=fatlink_rows, safe=False)

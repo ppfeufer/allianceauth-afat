@@ -16,6 +16,7 @@ from afat.models import AFat, AFatLink, AFatLog
 def get_input(text) -> str:
     """
     Wrapped input to enable import
+
     :param text:
     :type text:
     :return:
@@ -28,11 +29,12 @@ def get_input(text) -> str:
 def aa_fat_installed() -> bool:
     """
     Check if native fat is installed
+
     :return:
     :rtype:
     """
 
-    return apps.is_installed("allianceauth.fleetactivitytracking")
+    return apps.is_installed(app_name="allianceauth.fleetactivitytracking")
 
 
 class Command(BaseCommand):
@@ -45,6 +47,7 @@ class Command(BaseCommand):
     def _import_from_aa_fat(self) -> None:
         """
         Start the import
+
         :return:
         :rtype:
         """
@@ -52,7 +55,7 @@ class Command(BaseCommand):
         # Check if AA FAT is active
         if aa_fat_installed():
             self.stdout.write(
-                self.style.SUCCESS("Alliance Auth FAT module is active, let's go!")
+                msg=self.style.SUCCESS("Alliance Auth FAT module is active, let's go!")
             )
 
             # First, we check if the target tables are empty ...
@@ -61,7 +64,7 @@ class Command(BaseCommand):
 
             if current_afat_count > 0 or current_afat_links_count > 0:
                 self.stdout.write(
-                    self.style.WARNING(
+                    msg=self.style.WARNING(
                         "You already have FAT data with the AFAT module. "
                         "Import cannot be continued."
                     )
@@ -70,10 +73,13 @@ class Command(BaseCommand):
                 return
 
             aa_fatlinks = Fatlink.objects.all()
+
             for aa_fatlink in aa_fatlinks:
                 self.stdout.write(
-                    f"Importing FAT link for fleet '{aa_fatlink.fleet}' with hash "
-                    f"'{aa_fatlink.hash}'."
+                    msg=(
+                        f"Importing FAT link for fleet '{aa_fatlink.fleet}' with hash "
+                        f"'{aa_fatlink.hash}'."
+                    )
                 )
 
                 afatlink = AFatLink()
@@ -104,8 +110,9 @@ class Command(BaseCommand):
                 afatlog.save()
 
             aa_fats = Fat.objects.all()
+
             for aa_fat in aa_fats:
-                self.stdout.write(f"Importing FATs for FAT link ID '{aa_fat.id}'.")
+                self.stdout.write(msg=f"Importing FATs for FAT link ID '{aa_fat.id}'.")
 
                 afat = AFat()
 
@@ -118,7 +125,7 @@ class Command(BaseCommand):
                 afat.save()
 
             self.stdout.write(
-                self.style.SUCCESS(
+                msg=self.style.SUCCESS(
                     "Import complete! "
                     "You can now deactivate the Alliance Auth FAT "
                     "module in your local.py"
@@ -126,16 +133,17 @@ class Command(BaseCommand):
             )
         else:
             self.stdout.write(
-                self.style.WARNING(
+                msg=self.style.WARNING(
                     "Alliance Auth FAT module is not active. "
                     "Please make sure you have it in your "
                     "INSTALLED_APPS in your local.py!"
                 )
             )
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options):  # pylint: disable=unused-argument
         """
-        Ask before running ...
+        Ask before running …
+
         :param args:
         :type args:
         :param options:
@@ -145,16 +153,18 @@ class Command(BaseCommand):
         """
 
         self.stdout.write(
-            "Importing all FAT/FAT link data from Alliance Auth's built in FAT module. "
-            "This can only be done once during the very first installation. "
-            "As soon as you have data collected with your AFAT module, "
-            "this import will fail!"
+            msg=(
+                "Importing all FAT/FAT link data from Alliance Auth's built in "
+                "FAT module. This can only be done once during the very first "
+                "installation. As soon as you have data collected with your AFAT "
+                "module, this import will fail!"
+            )
         )
 
-        user_input = get_input("Are you sure you want to proceed? (yes/no)?")
+        user_input = get_input(text="Are you sure you want to proceed? (yes/no)?")
 
         if user_input == "yes":
-            self.stdout.write("Starting import. Please stand by.")
+            self.stdout.write(msg="Starting import. Please stand by.")
             self._import_from_aa_fat()
         else:
-            self.stdout.write(self.style.WARNING("Aborted."))
+            self.stdout.write(msg=self.style.WARNING("Aborted."))

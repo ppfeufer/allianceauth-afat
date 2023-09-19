@@ -15,11 +15,12 @@ class AFatLinkQuerySet(models.QuerySet):
     def annotate_afats_count(self):
         """
         Annotate the amount fats per fat link
+
         :return:
         :rtype:
         """
 
-        return self.annotate(afats_count=Count(F("afats")))
+        return self.annotate(afats_count=Count(expression=F("afats")))
 
 
 class AFatLinkManager(models.Manager):

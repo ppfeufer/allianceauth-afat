@@ -15,6 +15,7 @@ from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
 def custom_filter(title):
     """
     Defining custom filter titles
+
     :param title:
     :type title:
     :return:
@@ -29,26 +30,29 @@ def custom_filter(title):
         def expected_parameters(self):
             """
             Expected parameters
+
             :return:
             :rtype:
             """
 
-            pass
+            pass  # pylint: disable=unnecessary-pass
 
         def choices(self, changelist):
             """
             Choices
+
             :param changelist:
             :type changelist:
             :return:
             :rtype:
             """
 
-            pass
+            pass  # pylint: disable=unnecessary-pass
 
         def __new__(cls, *args, **kwargs):
             """
             __new__
+
             :param args:
             :type args:
             :param kwargs:
@@ -93,6 +97,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         """
         Get the queryset
+
         :param request:
         :type request:
         :return:
@@ -100,7 +105,9 @@ class AFatLinkAdmin(admin.ModelAdmin):
         """
 
         queryset = super().get_queryset(request)
-        queryset = queryset.annotate(_number_of_fats=Count("afats", distinct=True))
+        queryset = queryset.annotate(
+            _number_of_fats=Count(expression="afats", distinct=True)
+        )
 
         return queryset
 
@@ -108,6 +115,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
     def number_of_fats(self, obj):
         """
         Return the number of FATs per FAT Link
+
         :param obj:
         :type obj:
         :return:
@@ -149,6 +157,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     def _name(self, obj):
         """
         Rewrite name
+
         :param obj:
         :type obj:
         :return:
@@ -161,6 +170,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     def _is_enabled(self, obj):
         """
         Rewrite is_enabled
+
         :param obj:
         :type obj:
         :return:
@@ -175,6 +185,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     def activate(self, request, queryset):
         """
         Mark fleet type as active
+
         :param request:
         :type request:
         :param queryset:
@@ -192,16 +203,16 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 obj.save()
 
                 notifications_count += 1
-            except:  # noqa: E722
+            except Exception:  # pylint: disable=broad-exception-caught
                 failed += 1
 
         if failed:
             messages.error(
                 request,
                 ngettext(
-                    "Failed to activate {failed} fleet type",
-                    "Failed to activate {failed} fleet types",
-                    failed,
+                    singular="Failed to activate {failed} fleet type",
+                    plural="Failed to activate {failed} fleet types",
+                    number=failed,
                 ).format(failed=failed),
             )
 
@@ -209,9 +220,9 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             messages.success(
                 request,
                 ngettext(
-                    "Activated {notifications_count} fleet type",
-                    "Activated {notifications_count} fleet types",
-                    notifications_count,
+                    singular="Activated {notifications_count} fleet type",
+                    plural="Activated {notifications_count} fleet types",
+                    number=notifications_count,
                 ).format(notifications_count=notifications_count),
             )
 
@@ -219,6 +230,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     def deactivate(self, request, queryset):
         """
         Mark fleet type as inactive
+
         :param request:
         :type request:
         :param queryset:
@@ -236,16 +248,16 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 obj.save()
 
                 notifications_count += 1
-            except:  # noqa: E722
+            except Exception:  # pylint: disable=broad-exception-caught
                 failed += 1
 
         if failed:
             messages.error(
                 request,
                 ngettext(
-                    "Failed to deactivate {failed} fleet type",
-                    "Failed to deactivate {failed} fleet types",
-                    failed,
+                    singular="Failed to deactivate {failed} fleet type",
+                    plural="Failed to deactivate {failed} fleet types",
+                    number=failed,
                 ).format(failed=failed),
             )
 
@@ -253,9 +265,9 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             messages.success(
                 request,
                 ngettext(
-                    "Deactivated {notifications_count} fleet type",
-                    "Deactivated {notifications_count} fleet types",
-                    notifications_count,
+                    singular="Deactivated {notifications_count} fleet type",
+                    plural="Deactivated {notifications_count} fleet types",
+                    number=notifications_count,
                 ).format(notifications_count=notifications_count),
             )
 

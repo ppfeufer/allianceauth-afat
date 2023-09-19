@@ -19,7 +19,8 @@ from afat.managers import AFatLinkManager, AFatManager
 
 def get_sentinel_user() -> User:
     """
-    Get user or create one
+    Get user or create the sentinel user
+
     :return:
     """
 
@@ -28,7 +29,8 @@ def get_sentinel_user() -> User:
 
 def get_hash_on_save() -> str:
     """
-    Get the slug
+    Get the hash
+
     :return:
     """
 
@@ -72,7 +74,7 @@ class AaAfat(models.Model):
             # Can view the modules log
             ("log_view", _("Can view the modules log")),
         )
-        verbose_name = "Alliance Auth AFAT"
+        verbose_name = _("Alliance Auth AFAT")
 
 
 # AFatLinkType Model (StratOp, ADM, HD etc)
@@ -105,6 +107,7 @@ class AFatLinkType(models.Model):
     def __str__(self) -> str:
         """
         Return the objects string name
+
         :return:
         :rtype:
         """
@@ -147,14 +150,14 @@ class AFatLink(models.Model):
     )
 
     creator = models.ForeignKey(
-        User,
+        to=User,
         related_name="+",
         on_delete=models.SET(get_sentinel_user),
         help_text=_("Who created the FAT link?"),
     )
 
     character = models.ForeignKey(
-        EveCharacter,
+        to=EveCharacter,
         related_name="+",
         on_delete=models.CASCADE,
         default=None,
@@ -163,7 +166,7 @@ class AFatLink(models.Model):
     )
 
     link_type = models.ForeignKey(
-        AFatLinkType,
+        to=AFatLinkType,
         related_name="+",
         on_delete=models.CASCADE,
         null=True,
@@ -208,6 +211,7 @@ class AFatLink(models.Model):
     def __str__(self) -> str:
         """
         Return the objects string name
+
         :return:
         :rtype:
         """
@@ -218,6 +222,7 @@ class AFatLink(models.Model):
     def save(self, *args, **kwargs):
         """
         Add the hash on save
+
         :param args:
         :type args:
         :param kwargs:
@@ -234,6 +239,7 @@ class AFatLink(models.Model):
     def number_of_fats(self):
         """
         Returns the number of registered FATs
+
         :return:
         :rtype:
         """
@@ -248,7 +254,7 @@ class ClickAFatDuration(models.Model):
     """
 
     duration = models.PositiveIntegerField()
-    fleet = models.ForeignKey(AFatLink, on_delete=models.CASCADE)
+    fleet = models.ForeignKey(to=AFatLink, on_delete=models.CASCADE)
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
@@ -267,14 +273,14 @@ class AFat(models.Model):
     """
 
     character = models.ForeignKey(
-        EveCharacter,
+        to=EveCharacter,
         related_name="afats",
         on_delete=models.CASCADE,
         help_text=_("Character who registered this FAT"),
     )
 
     afatlink = models.ForeignKey(
-        AFatLink,
+        to=AFatLink,
         related_name="afats",
         on_delete=models.CASCADE,
         help_text=_("The FAT link the character registered at"),
@@ -306,6 +312,7 @@ class AFat(models.Model):
     def __str__(self) -> str:
         """
         Return the objects string name
+
         :return:
         :rtype:
         """
@@ -320,11 +327,13 @@ class ManualAFat(models.Model):
     """
 
     creator = models.ForeignKey(
-        User, related_name="+", on_delete=models.SET(get_sentinel_user)
+        to=User, related_name="+", on_delete=models.SET(value=get_sentinel_user)
     )
-    afatlink = models.ForeignKey(AFatLink, related_name="+", on_delete=models.CASCADE)
+    afatlink = models.ForeignKey(
+        to=AFatLink, related_name="+", on_delete=models.CASCADE
+    )
     character = models.ForeignKey(
-        EveCharacter, related_name="+", on_delete=models.CASCADE
+        to=EveCharacter, related_name="+", on_delete=models.CASCADE
     )
     created_at = models.DateTimeField(
         blank=True, null=True, help_text=_("Time this FAT has been added manually")
@@ -343,6 +352,7 @@ class ManualAFat(models.Model):
     def __str__(self) -> str:
         """
         Return the objects string name
+
         :return:
         :rtype:
         """
@@ -371,12 +381,12 @@ class AFatLog(models.Model):
 
     log_time = models.DateTimeField(default=timezone.now, db_index=True)
     user = models.ForeignKey(
-        User,
+        to=User,
         related_name="+",
         null=True,
         blank=True,
         default=None,
-        on_delete=models.SET(get_sentinel_user),
+        on_delete=models.SET(value=get_sentinel_user),
     )
     log_event = models.CharField(
         max_length=11,
