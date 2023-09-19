@@ -1,6 +1,7 @@
 """
-Test afat helpers
+Test AFAT helpers
 """
+
 # Standard Library
 from datetime import timedelta
 
@@ -18,7 +19,7 @@ from app_utils.testing import add_character_to_user, create_user_from_evecharact
 # Alliance Auth AFAT
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
-from afat.helper.views_helper import (
+from afat.helper.views import (
     convert_fatlinks_to_dict,
     convert_fats_to_dict,
     convert_logs_to_dict,
@@ -38,8 +39,19 @@ MODULE_PATH = "afat.views.fatlinks"
 
 
 class TestHelpers(TestCase):
+    """
+    Test Helpers
+    """
+
     @classmethod
     def setUpClass(cls):
+        """
+        Setup
+
+        :return:
+        :rtype:
+        """
+
         super().setUpClass()
         load_allianceauth()
 
@@ -54,18 +66,22 @@ class TestHelpers(TestCase):
         cls.character_1101 = EveCharacter.objects.get(character_id=1101)
 
         cls.user_with_add_fatlink, _ = create_user_from_evecharacter(
-            cls.character_1001.character_id,
+            character_id=cls.character_1001.character_id,
             permissions=["afat.basic_access", "afat.add_fatlink"],
         )
 
-        add_character_to_user(cls.user_with_add_fatlink, cls.character_1101)
+        add_character_to_user(
+            user=cls.user_with_add_fatlink, character=cls.character_1101
+        )
 
         cls.user_with_manage_afat, _ = create_user_from_evecharacter(
-            cls.character_1002.character_id,
+            character_id=cls.character_1002.character_id,
             permissions=["afat.basic_access", "afat.manage_afat"],
         )
 
-        add_character_to_user(cls.user_with_add_fatlink, cls.character_1003)
+        add_character_to_user(
+            user=cls.user_with_add_fatlink, character=cls.character_1003
+        )
 
     def test_helper_get_esi_fleet_information_by_user(self):
         # given
@@ -93,15 +109,15 @@ class TestHelpers(TestCase):
             esi_fleet_id="372645827",
         )
 
-        self.client.force_login(self.user_with_add_fatlink)
+        self.client.force_login(user=self.user_with_add_fatlink)
 
         # when
         response = get_esi_fleet_information_by_user(user=self.user_with_add_fatlink)
 
         # then
         self.assertDictEqual(
-            response,
-            {
+            d1=response,
+            d2={
                 "has_open_esi_fleets": True,
                 "open_esi_fleets_list": [fatlink_1, fatlink_2],
             },
@@ -113,28 +129,30 @@ class TestHelpers(TestCase):
         now = timezone.now()
         expires = timedelta(minutes=duration) + now
 
-        self.client.force_login(self.user_with_add_fatlink)
+        self.client.force_login(user=self.user_with_add_fatlink)
 
         # when
-        total = get_time_delta(now, expires)
-        years = get_time_delta(now, expires, "years")
-        days = get_time_delta(now, expires, "days")
-        hours = get_time_delta(now, expires, "hours")
-        minutes = get_time_delta(now, expires, "minutes")
-        seconds = get_time_delta(now, expires, "seconds")
+        total = get_time_delta(then=now, now=expires)
+        years = get_time_delta(then=now, now=expires, interval="years")
+        days = get_time_delta(then=now, now=expires, interval="days")
+        hours = get_time_delta(then=now, now=expires, interval="hours")
+        minutes = get_time_delta(then=now, now=expires, interval="minutes")
+        seconds = get_time_delta(then=now, now=expires, interval="seconds")
 
         # then
-        self.assertEqual(total, "3 years, 163 days, 13 hours, 45 minutes and 0 seconds")
-        self.assertEqual(years, 3)
-        self.assertEqual(days, 1258)
-        self.assertEqual(hours, 30205)
-        self.assertEqual(minutes, 1812345)
-        self.assertEqual(seconds, 108740700)
+        self.assertEqual(
+            first=total, second="3 years, 163 days, 13 hours, 45 minutes and 0 seconds"
+        )
+        self.assertEqual(first=years, second=3)
+        self.assertEqual(first=days, second=1258)
+        self.assertEqual(first=hours, second=30205)
+        self.assertEqual(first=minutes, second=1812345)
+        self.assertEqual(first=seconds, second=108740700)
 
     def test_helper_convert_fatlinks_to_dict(self):
         # given
-        self.client.force_login(self.user_with_manage_afat)
-        request = self.factory.get(reverse("afat:dashboard"))
+        self.client.force_login(user=self.user_with_manage_afat)
+        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
         request.user = self.user_with_manage_afat
 
         fatlink_hash_fleet_1 = get_hash_on_save()
@@ -173,18 +191,26 @@ class TestHelpers(TestCase):
             .get(hash=fatlink_hash_fleet_1)
         )
         close_esi_tracking_url = reverse(
-            "afat:fatlinks_close_esi_fatlink", args=[fatlink_1.hash]
+            viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink_1.hash]
         )
-        edit_url_1 = reverse("afat:fatlinks_details_fatlink", args=[fatlink_1.hash])
-        delete_url_1 = reverse("afat:fatlinks_delete_fatlink", args=[fatlink_1.hash])
+        edit_url_1 = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[fatlink_1.hash]
+        )
+        delete_url_1 = reverse(
+            viewname="afat:fatlinks_delete_fatlink", args=[fatlink_1.hash]
+        )
 
         fatlink_2 = (
             AFatLink.objects.select_related_default()
             .annotate_afats_count()
             .get(hash=fatlink_hash_fleet_2)
         )
-        edit_url_2 = reverse("afat:fatlinks_details_fatlink", args=[fatlink_2.hash])
-        delete_url_2 = reverse("afat:fatlinks_delete_fatlink", args=[fatlink_2.hash])
+        edit_url_2 = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[fatlink_2.hash]
+        )
+        delete_url_2 = reverse(
+            viewname="afat:fatlinks_delete_fatlink", args=[fatlink_2.hash]
+        )
 
         result_1 = convert_fatlinks_to_dict(request=request, fatlink=fatlink_1)
         result_2 = convert_fatlinks_to_dict(request=request, fatlink=fatlink_2)
@@ -194,8 +220,8 @@ class TestHelpers(TestCase):
         fleet_time_timestamp_1 = fleet_time_1.timestamp()
         creator_main_character_1 = get_main_character_from_user(user=fatlink_1.creator)
         self.assertDictEqual(
-            result_1,
-            {
+            d1=result_1,
+            d2={
                 "pk": fatlink_1.pk,
                 "fleet_name": (
                     'April Fleet 1<span class="label label-default '
@@ -242,8 +268,8 @@ class TestHelpers(TestCase):
         fleet_time_timestamp_2 = fleet_time_2.timestamp()
         creator_main_character_2 = get_main_character_from_user(user=fatlink_2.creator)
         self.assertDictEqual(
-            result_2,
-            {
+            d1=result_2,
+            d2={
                 "pk": fatlink_2.pk,
                 "fleet_name": "April Fleet 2",
                 "creator_name": creator_main_character_2,
@@ -275,8 +301,8 @@ class TestHelpers(TestCase):
 
     def test_helper_convert_fats_to_dict(self):
         # given
-        self.client.force_login(self.user_with_manage_afat)
-        request = self.factory.get(reverse("afat:dashboard"))
+        self.client.force_login(user=self.user_with_manage_afat)
+        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
@@ -307,7 +333,7 @@ class TestHelpers(TestCase):
         fleet_time_timestamp = fleet_time.timestamp()
 
         button_delete_fat = reverse(
-            "afat:fatlinks_delete_fat", args=[fat.afatlink.hash, fat.id]
+            viewname="afat:fatlinks_delete_fat", args=[fat.afatlink.hash, fat.id]
         )
         button_delete_text = "Delete"
         modal_body_text = (
@@ -317,8 +343,8 @@ class TestHelpers(TestCase):
 
         # then
         self.assertDictEqual(
-            result,
-            {
+            d1=result,
+            d2={
                 "system": fat.system,
                 "ship_type": fat.shiptype,
                 "character_name": fat.character.character_name,
@@ -341,8 +367,8 @@ class TestHelpers(TestCase):
 
     def test_helper_convert_logs_to_dict(self):
         # given
-        self.client.force_login(self.user_with_manage_afat)
-        request = self.factory.get(reverse("afat:dashboard"))
+        self.client.force_login(user=self.user_with_manage_afat)
+        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
@@ -378,15 +404,17 @@ class TestHelpers(TestCase):
         log_time = log.log_time
         log_time_timestamp = log_time.timestamp()
         user_main_character = get_main_character_from_user(user=log.user)
-        fatlink_link = reverse("afat:fatlinks_details_fatlink", args=[log.fatlink_hash])
+        fatlink_link = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[log.fatlink_hash]
+        )
         fatlink_html = f'<a href="{fatlink_link}">{log.fatlink_hash}</a>'
 
         result = convert_logs_to_dict(log=log, fatlink_exists=True)
 
         # then
         self.assertDictEqual(
-            result,
-            {
+            d1=result,
+            d2={
                 "log_time": {"time": log_time, "timestamp": log_time_timestamp},
                 "log_event": AFatLog.Event(log.log_event).label,
                 "user": user_main_character,

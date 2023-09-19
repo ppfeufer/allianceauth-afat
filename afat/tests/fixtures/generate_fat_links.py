@@ -1,9 +1,11 @@
 # flake8: noqa
+
 """
 Scripts generates large amount of fat links for load testing
 
 This script can be executed directly from shell.
 """
+
 
 # Standard Library
 import os
@@ -17,7 +19,7 @@ sys.path.insert(0, str(myauth_dir))
 import django
 
 # init and setup django project
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myauth.settings.local")
+os.environ.setdefault(key="DJANGO_SETTINGS_MODULE", value="myauth.settings.local")
 django.setup()
 
 # Standard Library
@@ -55,15 +57,16 @@ link_type, _ = AFatLinkType.objects.get_or_create(name="Generated Fleet")
 
 for _ in range(LINKS_NUMBER):
     fat_link = AFatLink.objects.create(
-        fleet=f"Generated Fleet #{random.randint(1, 1000000000)}",
-        hash=random_string(20),
+        fleet=f"Generated Fleet #{random.randint(a=1, b=1000000000)}",
+        hash=random_string(char_count=20),
         creator=user,
         character=creator,
         link_type=link_type,
-        afattime=now() - dt.timedelta(days=random.randint(0, 180)),
+        afattime=now() - dt.timedelta(days=random.randint(a=0, b=180)),
     )
+
     write_log(
-        request=RequestStub(user),
+        request=RequestStub(user=user),
         log_event=AFatLog.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{fat_link.fleet}"'
@@ -72,7 +75,9 @@ for _ in range(LINKS_NUMBER):
         fatlink_hash=fat_link.hash,
     )
 
-    for character in random.sample(characters, k=random.randint(1, len(characters))):
+    for character in random.sample(
+        characters, k=random.randint(a=1, b=len(characters))
+    ):
         AFat.objects.create(
             character_id=character.id,
             afatlink=fat_link,

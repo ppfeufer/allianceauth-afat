@@ -17,6 +17,7 @@ def get_esi_fleet_information_by_user(
 ) -> Dict[str, Union[bool, List[Dict[int, AFatLink]]]]:
     """
     Get ESI fleet information by a given FC (user)
+
     :param user:
     :type user:
     :return:

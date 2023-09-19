@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Korean translation improved
 - Spanish translation improved
+- Use keyword arguments wherever possible
 
 ## \[2.12.3\] - 2023-09-02
 

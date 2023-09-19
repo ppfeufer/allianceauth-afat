@@ -18,15 +18,18 @@ class TestAfatFilters(TestCase):
     def test_month_name_filter(self):
         """
         Test month_name
+
         :return:
         """
 
-        context = Context({"month": 5})
-        template_to_render = Template("{% load filters %} {{ month|month_name }}")
+        context = Context(dict_={"month": 5})
+        template_to_render = Template(
+            template_string="{% load filters %} {{ month|month_name }}"
+        )
 
-        rendered_template = template_to_render.render(context)
+        rendered_template = template_to_render.render(context=context)
 
-        self.assertInHTML("May", rendered_template)
+        self.assertInHTML(needle="May", haystack=rendered_template)
 
 
 class TestAfatVersionedStatic(TestCase):
@@ -37,18 +40,21 @@ class TestAfatVersionedStatic(TestCase):
     def test_versioned_static(self):
         """
         Test afat_versioned_static
+
         :return:
         """
 
-        context = Context({"version": __version__})
+        context = Context(dict_={"version": __version__})
         template_to_render = Template(
-            "{% load afat_versioned_static %}"
-            "{% afat_static 'afat/css/allianceauth-afat.min.css' %}"
+            template_string=(
+                "{% load afat_versioned_static %}"
+                "{% afat_static 'afat/css/allianceauth-afat.min.css' %}"
+            )
         )
 
-        rendered_template = template_to_render.render(context)
+        rendered_template = template_to_render.render(context=context)
 
         self.assertInHTML(
-            f'/static/afat/css/allianceauth-afat.min.css?v={context["version"]}',
-            rendered_template,
+            needle=f'/static/afat/css/allianceauth-afat.min.css?v={context["version"]}',
+            haystack=rendered_template,
         )

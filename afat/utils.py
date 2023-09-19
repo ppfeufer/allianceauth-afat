@@ -26,7 +26,7 @@ from app_utils.logging import LoggerAddTag
 from afat import __title__
 from afat.providers import esi
 
-logger = LoggerAddTag(get_extension_logger(__name__), __title__)
+logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 # Format for output of datetime for this app
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
@@ -46,6 +46,7 @@ class NoDataError(Exception):
 def write_log(request: WSGIRequest, log_event: str, fatlink_hash: str, log_text: str):
     """
     Write the log
+
     :param request:
     :type request:
     :param log_event:
@@ -77,6 +78,7 @@ def get_or_create_character(
     to see if the character already exists.
     If the character does not already exist, it will create the
     character object, and if needed the corp/alliance objects as well.
+
     :param name:
     :type name:
     :param character_id:
@@ -100,14 +102,14 @@ def get_or_create_character(
         # If an ID is passed to this function, we can just check the db for it.
         eve_character = EveCharacter.objects.filter(character_id=character_id)
     elif not name and not character_id:
-        raise NoDataError("No character name or character id provided.")
+        raise NoDataError(msg="No character name or character id provided.")
 
     if eve_character is not None and len(eve_character) == 0:
         # Create character
-        character = EveCharacter.objects.create_character(character_id)
+        character = EveCharacter.objects.create_character(character_id=character_id)
         character = EveCharacter.objects.get(pk=character.pk)
 
-        logger.info(f"EveCharacter Object created: {character.character_name}")
+        logger.info(msg=f"EveCharacter Object created: {character.character_name}")
 
         # Create alliance and corporation info objects if not already exists for
         # future sanity
@@ -116,13 +118,17 @@ def get_or_create_character(
             if not EveAllianceInfo.objects.filter(
                 alliance_id=character.alliance_id
             ).exists():
-                EveAllianceInfo.objects.create_alliance(character.alliance_id)
+                EveAllianceInfo.objects.create_alliance(
+                    alliance_id=character.alliance_id
+                )
         else:
             # Create corporation info object if not already exists
             if not EveCorporationInfo.objects.filter(
                 corporation_id=character.corporation_id
             ).exists():
-                EveCorporationInfo.objects.create_corporation(character.corporation_id)
+                EveCorporationInfo.objects.create_corporation(
+                    corp_id=character.corporation_id
+                )
     else:
         character = eve_character[0]
 
@@ -132,6 +138,7 @@ def get_or_create_character(
 def get_or_create_corporation_info(corporation_id: int) -> EveCorporationInfo:
     """
     Get or create corporation info
+
     :param corporation_id:
     :type corporation_id:
     :return:
@@ -148,7 +155,7 @@ def get_or_create_corporation_info(corporation_id: int) -> EveCorporationInfo:
         )
 
         logger.info(
-            f"EveCorporationInfo Object created: {eve_corporation_info.corporation_name}"
+            msg=f"EveCorporationInfo Object created: {eve_corporation_info.corporation_name}"
         )
 
     return eve_corporation_info
@@ -157,6 +164,7 @@ def get_or_create_corporation_info(corporation_id: int) -> EveCorporationInfo:
 def get_or_create_alliance_info(alliance_id: int) -> EveAllianceInfo:
     """
     Get or create alliance info
+
     :param alliance_id:
     :type alliance_id:
     :return:
@@ -171,7 +179,7 @@ def get_or_create_alliance_info(alliance_id: int) -> EveAllianceInfo:
         )
 
         logger.info(
-            f"EveAllianceInfo Object created: {eve_alliance_info.alliance_name}"
+            msg=f"EveAllianceInfo Object created: {eve_alliance_info.alliance_name}"
         )
 
     return eve_alliance_info
@@ -180,6 +188,7 @@ def get_or_create_alliance_info(alliance_id: int) -> EveAllianceInfo:
 def get_main_character_from_user(user: User) -> str:
     """
     Get the main character from a user
+
     :param user:
     :type user:
     :return:

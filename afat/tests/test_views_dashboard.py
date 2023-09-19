@@ -1,4 +1,5 @@
 # Standard Library
+from http import HTTPStatus
 from unittest.mock import Mock
 
 # Django
@@ -37,12 +38,13 @@ class TestDashboard(TestCase):
         cls.character_1101 = EveCharacter.objects.get(character_id=1101)
 
         cls.user, _ = create_user_from_evecharacter(
-            cls.character_1001.character_id, permissions=["afat.basic_access"]
+            character_id=cls.character_1001.character_id,
+            permissions=["afat.basic_access"],
         )
 
-        add_character_to_user(cls.user, cls.character_1101)
+        add_character_to_user(user=cls.user, character=cls.character_1101)
 
-        create_user_from_evecharacter(cls.character_1002.character_id)
+        create_user_from_evecharacter(character_id=cls.character_1002.character_id)
 
         cls.afat_link = AFatLink.objects.create(
             fleet="Demo Fleet",
@@ -52,20 +54,13 @@ class TestDashboard(TestCase):
         )
 
     def _page_overview_request(self, user):
-        request = self.factory.get(reverse("afat:dashboard"))
+        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
         request.user = user
 
-        middleware = SessionMiddleware(Mock())
-        middleware.process_request(request)
+        middleware = SessionMiddleware(get_response=Mock())
+        middleware.process_request(request=request)
 
         return overview(request)
-
-    # def test_should_open_page_normally(self):
-    #     # when
-    #     response = self._page_request(self.user)
-    #
-    #     # then
-    #     self.assertEqual(response.status_code, 200)
 
     def test_should_only_show_my_chars_and_only_those_with_fat_links(self):
         # given
@@ -73,21 +68,21 @@ class TestDashboard(TestCase):
         AFat.objects.create(character=self.character_1002, afatlink=self.afat_link)
 
         # when
-        response = self._page_overview_request(self.user)
+        response = self._page_overview_request(user=self.user)
 
         # then
-        content = response_content_to_str(response)
+        content = response_content_to_str(response=response)
 
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertIn(
-            f'<span id="afat-eve-character-id-{self.character_1101.character_id}">{self.character_1101.character_name}</span>',
-            content,
+            member=f'<span id="afat-eve-character-id-{self.character_1101.character_id}">{self.character_1101.character_name}</span>',
+            container=content,
         )
         self.assertNotIn(
-            f'<span id="afat-eve-character-id-{self.character_1001.character_id}">{self.character_1001.character_name}</span>',
-            content,
+            member=f'<span id="afat-eve-character-id-{self.character_1001.character_id}">{self.character_1001.character_name}</span>',
+            container=content,
         )
         self.assertNotIn(
-            f'<span id="afat-eve-character-id-{self.character_1002.character_id}">{self.character_1002.character_name}</span>',
-            content,
+            member=f'<span id="afat-eve-character-id-{self.character_1002.character_id}">{self.character_1002.character_name}</span>',
+            container=content,
         )

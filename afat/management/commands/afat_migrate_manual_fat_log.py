@@ -12,6 +12,7 @@ from afat.models import AFatLog, ManualAFat
 def get_input(text) -> str:
     """
     Wrapped input to enable import
+
     :param text:
     :type text:
     :return:
@@ -31,6 +32,7 @@ class Command(BaseCommand):
     def _migrate_manual_fat_log(self) -> None:
         """
         Start the migration
+
         :return:
         :rtype:
         """
@@ -54,11 +56,12 @@ class Command(BaseCommand):
 
                 manual_log.delete()
 
-        self.stdout.write(self.style.SUCCESS("Migration complete!"))
+        self.stdout.write(msg=self.style.SUCCESS("Migration complete!"))
 
     def handle(self, *args, **options):  # pylint: disable=unused-argument
         """
-        Ask before running ...
+        Ask before running …
+
         :param args:
         :type args:
         :param options:
@@ -68,15 +71,17 @@ class Command(BaseCommand):
         """
 
         self.stdout.write(
-            "This will migrate the old Manual FAT log into the new log table. "
-            "Migrated entries will be removed from the old Manual FAT log to "
-            "prevent duplicates."
+            msg=(
+                "This will migrate the old Manual FAT log into the new log table. "
+                "Migrated entries will be removed from the old Manual FAT log to "
+                "prevent duplicates."
+            )
         )
 
-        user_input = get_input("Are you sure you want to proceed? (yes/no)?")
+        user_input = get_input(text="Are you sure you want to proceed? (yes/no)?")
 
         if user_input == "yes":
-            self.stdout.write("Starting import. Please stand by.")
+            self.stdout.write(msg="Starting import. Please stand by.")
             self._migrate_manual_fat_log()
         else:
-            self.stdout.write(self.style.WARNING("Aborted."))
+            self.stdout.write(msg=self.style.WARNING("Aborted."))
