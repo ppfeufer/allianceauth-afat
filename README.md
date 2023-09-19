@@ -86,7 +86,7 @@ information, see below.
 
 ### Fat Link Details<a name="fat-link-details"></a>
 
-![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/ship-type-overview.png "Fat Link Details")
+![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/changelog/1.9.0/ship-type-overview.png "Fat Link Details")
 
 ### Add Fat Link View for FCs<a name="add-fat-link-view-for-fcs"></a>
 
