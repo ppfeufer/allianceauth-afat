@@ -160,7 +160,7 @@ def _calculate_year_stats(request, year) -> list:
 
 @login_required()
 @permission_required("afat.basic_access")
-def character(
+def character(  # pylint: disable=too-many-locals
     request: WSGIRequest, charid: int, year: int = None, month: int = None
 ) -> HttpResponse:
     """
@@ -297,7 +297,7 @@ def character(
 @permissions_required(
     ("afat.stats_corporation_other", "afat.stats_corporation_own", "afat.manage_afat")
 )
-def corporation(
+def corporation(  # pylint: disable=too-many-statements too-many-branches too-many-locals
     request: WSGIRequest, corpid: int = 0000, year: int = None, month: int = None
 ) -> HttpResponse:
     """
@@ -491,7 +491,7 @@ def corporation(
 
 @login_required()
 @permissions_required(("afat.stats_corporation_other", "afat.manage_afat"))
-def alliance(
+def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-locals
     request: WSGIRequest, allianceid: int, year: int = None, month: int = None
 ) -> HttpResponse:
     """

@@ -33,7 +33,7 @@ def custom_filter(title):
             :rtype:
             """
 
-            pass
+            pass  # pylint: disable=unnecessary-pass
 
         def choices(self, changelist):
             """
@@ -44,7 +44,7 @@ def custom_filter(title):
             :rtype:
             """
 
-            pass
+            pass  # pylint: disable=unnecessary-pass
 
         def __new__(cls, *args, **kwargs):
             """
@@ -192,7 +192,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 obj.save()
 
                 notifications_count += 1
-            except:  # noqa: E722
+            except Exception:  # pylint: disable=broad-exception-caught
                 failed += 1
 
         if failed:
@@ -236,7 +236,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
                 obj.save()
 
                 notifications_count += 1
-            except:  # noqa: E722
+            except Exception:  # pylint: disable=broad-exception-caught
                 failed += 1
 
         if failed:

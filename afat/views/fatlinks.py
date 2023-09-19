@@ -249,7 +249,7 @@ def create_clickable_fatlink(
 @login_required()
 @permissions_required(("afat.manage_afat", "afat.add_fatlink"))
 @token_required(scopes=["esi-fleets.read_fleet.v1"])
-def create_esi_fatlink_callback(
+def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     request: WSGIRequest, token, fatlink_hash: str
 ) -> HttpResponseRedirect:
     """
@@ -272,7 +272,7 @@ def create_esi_fatlink_callback(
         fleet_from_esi = esi.client.Fleets.get_characters_character_id_fleet(
             character_id=token.character_id, token=esi_token.valid_access_token()
         ).result()
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         # Not in a fleet
         messages.warning(
             request,
@@ -355,7 +355,7 @@ def create_esi_fatlink_callback(
             fleet_id=fleet_from_esi["fleet_id"],
             token=esi_token.valid_access_token(),
         ).result()
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         messages.warning(
             request,
             mark_safe(
@@ -550,7 +550,7 @@ def add_fat(
             "esi-location.read_ship_type.v1",
         ]
         esi_token = Token.get_token(token.character_id, required_scopes)
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         messages.warning(
             request,
             mark_safe(
@@ -634,7 +634,9 @@ def add_fat(
 
 @login_required()
 @permissions_required(("afat.manage_afat", "afat.add_fatlink"))
-def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
+def details_fatlink(  # pylint: disable=too-many-statements too-many-branches too-many-locals
+    request: WSGIRequest, fatlink_hash: str
+) -> HttpResponse:
     """
     Fat link view
     :param request:

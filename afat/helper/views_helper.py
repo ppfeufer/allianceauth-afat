@@ -23,7 +23,7 @@ from afat.models import AFat, AFatLink, AFatLog
 from afat.utils import get_main_character_from_user
 
 
-def convert_fatlinks_to_dict(
+def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     request: WSGIRequest, fatlink: AFatLink, close_esi_redirect: str = None
 ) -> dict:
     """
@@ -127,7 +127,7 @@ def convert_fatlinks_to_dict(
             "</span></a>"
         )
 
-    summary = {
+    return {
         "pk": fatlink.pk,
         "fleet_name": fatlink_fleet + esi_fleet_marker,
         "creator_name": creator_main_character,
@@ -141,8 +141,6 @@ def convert_fatlinks_to_dict(
         "actions": actions,
         "via_esi": via_esi,
     }
-
-    return summary
 
 
 def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:

@@ -56,7 +56,7 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("Migration complete!"))
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options):  # pylint: disable=unused-argument
         """
         Ask before running ...
         :param args:

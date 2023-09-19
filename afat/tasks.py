@@ -198,7 +198,7 @@ def _check_for_esi_fleet(fatlink: AFatLink):
         _esi_fatlinks_error_handling(
             error_key=AFatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
         )
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         _esi_fatlinks_error_handling(
             error_key=AFatLink.EsiError.NO_FLEET, fatlink=fatlink
         )
@@ -229,7 +229,7 @@ def _process_esi_fatlink(fatlink: AFatLink):
                     fleet_id=esi_fleet["fleet"]["fleet_id"],
                     token=esi_fleet["token"].valid_access_token(),
                 ).result()
-            except Exception:
+            except Exception:  # pylint: disable=broad-exception-caught
                 _esi_fatlinks_error_handling(
                     error_key=AFatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
                 )

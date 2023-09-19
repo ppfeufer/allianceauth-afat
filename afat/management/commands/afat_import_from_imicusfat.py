@@ -2,6 +2,8 @@
 Import FAT data from ImicusFAT module
 """
 
+# pylint: disable=all
+
 # Django
 from django.apps import apps
 from django.core.management.base import BaseCommand

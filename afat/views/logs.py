@@ -44,7 +44,9 @@ def overview(request: WSGIRequest) -> HttpResponse:
 
 @login_required()
 @permissions_required(("afat.manage_afat", "afat.log_view"))
-def ajax_get_logs(request: WSGIRequest) -> JsonResponse:
+def ajax_get_logs(
+    request: WSGIRequest,  # pylint: disable=unused-argument
+) -> JsonResponse:
     """
     Ajax call :: get all log entries
     :param request:
