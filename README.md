@@ -5,6 +5,7 @@
 [![Python](https://img.shields.io/pypi/pyversions/allianceauth-afat)](https://pypi.org/project/allianceauth-afat/)
 [![Django](https://img.shields.io/pypi/djversions/allianceauth-afat?label=django)](https://pypi.org/project/allianceauth-afat/)
 ![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ppfeufer/allianceauth-afat/master.svg)](https://results.pre-commit.ci/latest/github/ppfeufer/allianceauth-afat/master)
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](http://black.readthedocs.io/en/latest/)
 [![Automated Checks](https://github.com/ppfeufer/allianceauth-afat/actions/workflows/automated-checks.yml/badge.svg)](https://github.com/ppfeufer/allianceauth-afat/actions/workflows/automated-checks.yml)
 [![codecov](https://codecov.io/gh/ppfeufer/allianceauth-afat/branch/master/graph/badge.svg?token=GNE88NUAKK)](https://codecov.io/gh/ppfeufer/allianceauth-afat)
