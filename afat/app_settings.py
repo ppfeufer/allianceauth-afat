@@ -10,7 +10,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth (External Libs)
-from app_utils.django import clean_setting
+from app_utils.app_settings import clean_setting
 
 # Set default expiry time in minutes
 AFAT_DEFAULT_FATLINK_EXPIRY_TIME = clean_setting(
