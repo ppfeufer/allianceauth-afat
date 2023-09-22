@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-22 16:01+0200\n"
-"PO-Revision-Date: 2023-09-22 11:36+0000\n"
-"Last-Translator: Nikolay <nick.postnikov@gmail.com>\n"
-"Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ru/>\n"
+"PO-Revision-Date: 2023-09-22 15:47+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -127,8 +127,6 @@ msgstr "Система"
 #: forms.py:72 templates/afat/partials/fatlinks/details/tabs/fats.html:19
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:37
 #: templates/afat/partials/fatlinks/details/tabs/manualfat.html:51
-#, fuzzy
-#| msgid "Ship Type"
 msgid "Ship type"
 msgstr "Тип корабля"
 
