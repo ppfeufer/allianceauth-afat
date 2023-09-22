@@ -77,16 +77,21 @@ class AaAfat(models.Model):
         verbose_name = _("Alliance Auth AFAT")
 
 
-# AFatLinkType Model (StratOp, ADM, HD etc)
-class AFatLinkType(models.Model):
+class FleetType(models.Model):
     """
-    AFatLinkType
+    FAT link fleet type
+
+    Example:
+        - CTA
+        - Home Defense
+        - StratOP
+        - and so on …
     """
 
     id = models.AutoField(primary_key=True)
 
     name = models.CharField(
-        max_length=254, help_text=_("Descriptive name of your fleet type")
+        max_length=254, help_text=_("Descriptive name of the fleet type")
     )
 
     is_enabled = models.BooleanField(
@@ -97,12 +102,12 @@ class AFatLinkType(models.Model):
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
-        AFatLinkType :: Meta
+        Meta definitions
         """
 
         default_permissions = ()
-        verbose_name = _("FAT Link Fleet Type")
-        verbose_name_plural = _("FAT Link Fleet Types")
+        verbose_name = _("Fleet type")
+        verbose_name_plural = _("Fleet types")
 
     def __str__(self) -> str:
         """
@@ -166,7 +171,7 @@ class AFatLink(models.Model):
     )
 
     link_type = models.ForeignKey(
-        to=AFatLinkType,
+        to=FleetType,
         related_name="+",
         on_delete=models.CASCADE,
         null=True,

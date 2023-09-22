@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth AFAT
 from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
-from afat.models import AFatLinkType
+from afat.models import FleetType
 
 
 def get_mandatory_form_label_text(text):
@@ -47,7 +47,7 @@ class AFatEsiFatForm(forms.Form):
     type_esi = forms.ModelChoiceField(
         required=False,
         label=_("Fleet Type (optional)"),
-        queryset=AFatLinkType.objects.filter(is_enabled=True),
+        queryset=FleetType.objects.filter(is_enabled=True),
         # empty_label=_("Please select a fleet type"),
     )
 
@@ -89,7 +89,7 @@ class AFatClickFatForm(forms.Form):
     type = forms.ModelChoiceField(
         required=False,
         label=_("Fleet Type (optional)"),
-        queryset=AFatLinkType.objects.filter(is_enabled=True),
+        queryset=FleetType.objects.filter(is_enabled=True),
         # empty_label=_("Please select a fleet type"),
     )
     duration = forms.IntegerField(

@@ -37,7 +37,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.helpers import random_string
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, AFatLinkType, AFatLog, Fat
+from afat.models import AFatLink, AFatLog, Fat, FleetType
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log
 
@@ -53,7 +53,7 @@ print(
 
 user = User.objects.first()
 creator = user.profile.main_character
-link_type, _ = AFatLinkType.objects.get_or_create(name="Generated Fleet")
+link_type, _ = FleetType.objects.get_or_create(name="Generated Fleet")
 
 for _ in range(LINKS_NUMBER):
     fat_link = AFatLink.objects.create(

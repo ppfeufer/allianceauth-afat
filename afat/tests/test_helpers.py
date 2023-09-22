@@ -26,10 +26,10 @@ from afat.helper.views import (
 )
 from afat.models import (
     AFatLink,
-    AFatLinkType,
     AFatLog,
     ClickAFatDuration,
     Fat,
+    FleetType,
     get_hash_on_save,
 )
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
@@ -170,7 +170,7 @@ class TestHelpers(TestCase):
             character=self.character_1101, afatlink=fatlink_1_created, shiptype="Omen"
         )
 
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_hash_fleet_2 = get_hash_on_save()
         fatlink_2_created = AFatLink.objects.create(
             afattime=timezone.now(),
@@ -306,7 +306,7 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = AFatLink.objects.create(
             afattime=timezone.now(),
             fleet="April Fleet 1",
@@ -372,7 +372,7 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = AFatLink.objects.create(
             afattime=timezone.now(),
             fleet="April Fleet 1",

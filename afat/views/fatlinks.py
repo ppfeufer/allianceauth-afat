@@ -46,10 +46,10 @@ from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import (
     AFatLink,
-    AFatLinkType,
     AFatLog,
     ClickAFatDuration,
     Fat,
+    FleetType,
     get_hash_on_save,
 )
 from afat.providers import esi
@@ -137,7 +137,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
     """
 
     link_types_configured = False
-    link_types_count = AFatLinkType.objects.all().count()
+    link_types_count = FleetType.objects.all().count()
 
     if link_types_count > 0:
         link_types_configured = True

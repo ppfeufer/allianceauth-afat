@@ -21,7 +21,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, AFatLinkType, ClickAFatDuration, Fat, get_hash_on_save
+from afat.models import AFatLink, ClickAFatDuration, Fat, FleetType, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user
 
@@ -183,7 +183,7 @@ class TestFatlinksView(TestCase):
 
     def test_should_show_add_fatlink_for_user_with_manage_afat(self):
         # given
-        AFatLinkType.objects.create(name="CTA")
+        FleetType.objects.create(name="CTA")
 
         self.client.force_login(user=self.user_with_manage_afat)
 
@@ -263,7 +263,7 @@ class TestFatlinksView(TestCase):
         self.client.force_login(user=self.user_with_basic_access)
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = AFatLink.objects.create(
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
