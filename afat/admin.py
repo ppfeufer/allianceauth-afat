@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, Fat, FleetType, Log
+from afat.models import Fat, FatLink, FleetType, Log
 
 
 def custom_filter(title):
@@ -68,7 +68,7 @@ def custom_filter(title):
 
 
 # Register your models here.
-@admin.register(AFatLink)
+@admin.register(FatLink)
 class AFatLinkAdmin(admin.ModelAdmin):
     """
     Config for the FAT link model
@@ -131,15 +131,15 @@ class AFatAdmin(admin.ModelAdmin):
     Config for fat model
     """
 
-    list_display = ("character", "system", "shiptype", "afatlink")
+    list_display = ("character", "system", "shiptype", "fatlink")
     list_filter = ("character", "system", "shiptype")
     ordering = ("-character",)
     search_fields = (
         "character__character_name",
         "system",
         "shiptype",
-        "afatlink__fleet",
-        "afatlink__hash",
+        "fatlink__fleet",
+        "fatlink__hash",
     )
 
 

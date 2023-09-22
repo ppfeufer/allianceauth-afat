@@ -19,24 +19,24 @@
                 {% for fat in fats %}
                     <tr>
                         <td>
-                            {% if fat.afatlink.fleet %}
-                                {{ fat.afatlink.fleet }}
+                            {% if fat.fatlink.fleet %}
+                                {{ fat.fatlink.fleet }}
                             {% else %}
-                                {{ fat.afatlink.hash }}
+                                {{ fat.fatlink.hash }}
                             {% endif %}
 
-                            {% if fat.afatlink.is_esilink %}
+                            {% if fat.fatlink.is_esilink %}
                                 <span class="label label-success afat-label afat-label-via-esi">via ESI</span>
                             {% endif %}
                         </td>
                         <td>
-                            {% if fat.afatlink.link_type %}
-                                {{ fat.afatlink.link_type.name }}
+                            {% if fat.fatlink.link_type %}
+                                {{ fat.fatlink.link_type.name }}
                             {% endif %}
                         </td>
                         <td>{{ fat.system }}</td>
                         <td>{{ fat.shiptype }}</td>
-                        <td data-sort='{{ fat.afatlink.afattime|date:"Y-m-d H:i" }}'>{{ fat.afatlink.afattime|date:"Y-M-d, H:i" }}</td>
+                        <td data-sort='{{ fat.fatlink.afattime|date:"Y-m-d H:i" }}'>{{ fat.fatlink.afattime|date:"Y-M-d, H:i" }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

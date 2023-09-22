@@ -44,7 +44,7 @@ from afat.forms import (
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
-from afat.models import AFatLink, Duration, Fat, FleetType, Log, get_hash_on_save
+from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
 from afat.providers import esi
 from afat.tasks import process_fats
 from afat.utils import get_or_create_character, write_log
@@ -100,7 +100,7 @@ def ajax_get_fatlinks_by_year(request: WSGIRequest, year: int) -> JsonResponse:
     """
 
     fatlinks = (
-        AFatLink.objects.select_related_default()
+        FatLink.objects.select_related_default()
         .filter(afattime__year=year)
         .annotate_fats_count()
     )
@@ -172,7 +172,7 @@ def create_clickable_fatlink(
         if form.is_valid():
             fatlink_hash = get_hash_on_save()
 
-            fatlink = AFatLink()
+            fatlink = FatLink()
             fatlink.fleet = form.cleaned_data["name"]
 
             if form.cleaned_data["type"] is not None:
@@ -184,7 +184,7 @@ def create_clickable_fatlink(
             fatlink.save()
 
             dur = Duration()
-            dur.fleet = AFatLink.objects.get(hash=fatlink_hash)
+            dur.fleet = FatLink.objects.get(hash=fatlink_hash)
             dur.duration = form.cleaned_data["duration"]
             dur.save()
 
@@ -303,7 +303,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
     # check if this character already has a fleet
     creator_character = EveCharacter.objects.get(character_id=token.character_id)
-    registered_fleets_for_creator = AFatLink.objects.select_related_default().filter(
+    registered_fleets_for_creator = FatLink.objects.select_related_default().filter(
         is_esilink=True,
         is_registered_on_esi=True,
         character__character_name=creator_character.character_name,
@@ -388,7 +388,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     creator_character = EveCharacter.objects.get(character_id=token.character_id)
 
     # Create the fat link
-    fatlink = AFatLink(
+    fatlink = FatLink(
         afattime=timezone.now(),
         fleet=request.session["fatlink_form__name"],
         creator=request.user,
@@ -533,8 +533,8 @@ def add_fat(
         return redirect(to="afat:dashboard")
 
     try:
-        fleet = AFatLink.objects.get(hash=fatlink_hash, is_esilink=False)
-    except AFatLink.DoesNotExist:
+        fleet = FatLink.objects.get(hash=fatlink_hash, is_esilink=False)
+    except FatLink.DoesNotExist:
         messages.warning(
             request=request,
             message=mark_safe(
@@ -612,7 +612,7 @@ def add_fat(
 
         try:
             Fat(
-                afatlink=fleet, character=character, system=system, shiptype=ship_name
+                fatlink=fleet, character=character, system=system, shiptype=ship_name
             ).save()
         except IntegrityError:
             messages.warning(
@@ -674,8 +674,8 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
     """
 
     try:
-        link = AFatLink.objects.select_related_default().get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        link = FatLink.objects.select_related_default().get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         messages.warning(
             request=request,
             message=mark_safe(
@@ -722,7 +722,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
 
             if character is not None:
                 afat_object, created = Fat.objects.get_or_create(
-                    afatlink=link,
+                    fatlink=link,
                     character=character,
                     defaults={
                         "system": system,
@@ -864,7 +864,7 @@ def ajax_get_fats_by_fatlink(request: WSGIRequest, fatlink_hash) -> JsonResponse
     :rtype:
     """
 
-    fats = Fat.objects.select_related_default().filter(afatlink__hash=fatlink_hash)
+    fats = Fat.objects.select_related_default().filter(fatlink__hash=fatlink_hash)
 
     fat_rows = [convert_fats_to_dict(request=request, fat=fat) for fat in fats]
 
@@ -898,8 +898,8 @@ def delete_fatlink(
         return redirect(to="afat:dashboard")
 
     try:
-        link = AFatLink.objects.get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        link = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
@@ -913,7 +913,7 @@ def delete_fatlink(
 
         return redirect(to="afat:dashboard")
 
-    Fat.objects.filter(afatlink_id=link.pk).delete()
+    Fat.objects.filter(fatlink_id=link.pk).delete()
 
     link.delete()
 
@@ -962,8 +962,8 @@ def delete_fat(
     """
 
     try:
-        link = AFatLink.objects.get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        link = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
@@ -977,7 +977,7 @@ def delete_fat(
         return redirect(to="afat:dashboard")
 
     try:
-        fat_details = Fat.objects.get(pk=fat_id, afatlink_id=link.pk)
+        fat_details = Fat.objects.get(pk=fat_id, fatlink_id=link.pk)
     except Fat.DoesNotExist:
         messages.error(
             request=request,
@@ -1031,8 +1031,8 @@ def close_esi_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRe
     """
 
     try:
-        fatlink = AFatLink.objects.get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        fatlink = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         logger.info(msg=f'ESI FAT link with hash "{fatlink_hash}" does not exist')
     else:
         logger.info(

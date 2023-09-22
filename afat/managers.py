@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models import Count, F
 
 
-class AFatLinkQuerySet(models.QuerySet):
+class FatLinkQuerySet(models.QuerySet):
     """
     FAT link queryset
     """
@@ -23,7 +23,7 @@ class AFatLinkQuerySet(models.QuerySet):
         return self.annotate(fats_count=Count(expression=F("afat_fats")))
 
 
-class AFatLinkManager(models.Manager):
+class FatLinkManager(models.Manager):
     """
     FAT link manager
     """
@@ -33,7 +33,7 @@ class AFatLinkManager(models.Manager):
         Integrate custom QuerySet methods.
         """
 
-        return AFatLinkQuerySet(self.model, using=self._db)
+        return FatLinkQuerySet(self.model, using=self._db)
 
     def select_related_default(self):
         """
@@ -55,4 +55,4 @@ class FatManager(models.Manager):
         Apply select_related for default query optimizations.
         """
 
-        return self.select_related("afatlink", "afatlink__link_type", "character")
+        return self.select_related("fatlink", "fatlink__link_type", "character")

@@ -19,15 +19,15 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.django import users_with_permission
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, Fat, Log
+from afat.models import Fat, FatLink, Log
 from afat.utils import get_main_character_from_user
 
 
 def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
-    request: WSGIRequest, fatlink: AFatLink, close_esi_redirect: str = None
+    request: WSGIRequest, fatlink: FatLink, close_esi_redirect: str = None
 ) -> dict:
     """
-    Converts an AFatLink object into a dictionary
+    Converts an FatLink object into a dictionary
 
     :param request:
     :type request:
@@ -161,19 +161,17 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     """
 
     # fleet type
-    fleet_type = (
-        fat.afatlink.link_type.name if fat.afatlink.link_type is not None else ""
-    )
+    fleet_type = fat.fatlink.link_type.name if fat.fatlink.link_type is not None else ""
 
     # esi marker
     via_esi = "No"
     esi_fleet_marker = ""
 
-    if fat.afatlink.is_esilink:
+    if fat.fatlink.is_esilink:
         via_esi = "Yes"
         esi_fleet_marker_classes = "label label-default afat-label afat-label-via-esi"
 
-        if fat.afatlink.is_registered_on_esi:
+        if fat.fatlink.is_registered_on_esi:
             esi_fleet_marker_classes += " afat-label-active-esi-fleet"
 
         marker_text = _("via ESI")
@@ -185,7 +183,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     actions = ""
     if request.user.has_perm(perm="afat.manage_afat"):
         button_delete_fat = reverse(
-            viewname="afat:fatlinks_delete_fat", args=[fat.afatlink.hash, fat.id]
+            viewname="afat:fatlinks_delete_fat", args=[fat.fatlink.hash, fat.id]
         )
         button_delete_text = _("Delete")
         modal_body_text = _(
@@ -203,10 +201,10 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
             "</a>"
         )
 
-    fleet_time = fat.afatlink.afattime
+    fleet_time = fat.fatlink.afattime
     fleet_time_timestamp = fleet_time.timestamp()
     fleet_name = (
-        fat.afatlink.fleet if fat.afatlink.fleet is not None else fat.afatlink.hash
+        fat.fatlink.fleet if fat.fatlink.fleet is not None else fat.fatlink.hash
     )
 
     summary = {

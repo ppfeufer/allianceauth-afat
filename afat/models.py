@@ -14,7 +14,7 @@ from django.utils.translation import gettext as _
 from allianceauth.eveonline.models import EveCharacter
 
 # Alliance Auth AFAT
-from afat.managers import AFatLinkManager, FatManager
+from afat.managers import FatLinkManager, FatManager
 
 
 def get_sentinel_user() -> User:
@@ -36,7 +36,7 @@ def get_hash_on_save() -> str:
 
     fatlink_hash = get_random_string(length=30)
 
-    while AFatLink.objects.filter(hash=fatlink_hash).exists():
+    while FatLink.objects.filter(hash=fatlink_hash).exists():
         fatlink_hash = get_random_string(length=30)
 
     return fatlink_hash
@@ -120,10 +120,9 @@ class FleetType(models.Model):
         return str(self.name)
 
 
-# AFatLink Model
-class AFatLink(models.Model):
+class FatLink(models.Model):
     """
-    AFatLink
+    FAT link
     """
 
     class EsiError(models.TextChoices):
@@ -201,11 +200,11 @@ class AFatLink(models.Model):
 
     esi_error_count = models.IntegerField(default=0)
 
-    objects = AFatLinkManager()
+    objects = FatLinkManager()
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
-        AFatLink :: Meta
+        Meta definitions
         """
 
         default_permissions = ()
@@ -249,7 +248,7 @@ class AFatLink(models.Model):
         :rtype:
         """
 
-        return Fat.objects.filter(afatlink=self).count()
+        return Fat.objects.filter(fatlink=self).count()
 
 
 class Duration(models.Model):
@@ -260,7 +259,7 @@ class Duration(models.Model):
 
     duration = models.PositiveIntegerField()
     fleet = models.ForeignKey(
-        to=AFatLink, related_name="duration", on_delete=models.CASCADE
+        to=FatLink, related_name="duration", on_delete=models.CASCADE
     )
 
     class Meta:  # pylint: disable=too-few-public-methods
@@ -286,8 +285,8 @@ class Fat(models.Model):
         help_text=_("Character who registered this FAT"),
     )
 
-    afatlink = models.ForeignKey(
-        to=AFatLink,
+    fatlink = models.ForeignKey(
+        to=FatLink,
         related_name="afat_fats",
         on_delete=models.CASCADE,
         help_text=_("The FAT link the character registered at"),
@@ -312,7 +311,7 @@ class Fat(models.Model):
         """
 
         default_permissions = ()
-        unique_together = (("character", "afatlink"),)
+        unique_together = (("character", "fatlink"),)
         verbose_name = _("FAT")
         verbose_name_plural = _("FATs")
 
@@ -324,7 +323,7 @@ class Fat(models.Model):
         :rtype:
         """
 
-        return f"{self.afatlink} - {self.character}"
+        return f"{self.fatlink} - {self.character}"
 
 
 # AFat Log Model

@@ -20,7 +20,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFatLink
+from afat.models import FatLink
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 
 MODULE_PATH = "afat.views.logs"
@@ -60,14 +60,14 @@ class TestLogsView(TestCase):
         )
 
         # Generate some FAT links and FATs
-        cls.afat_link_april_1 = AFatLink.objects.create(
+        cls.afat_link_april_1 = FatLink.objects.create(
             fleet="April Fleet 1",
             hash="1231",
             creator=cls.user_with_manage_afat,
             character=cls.character_1001,
             afattime=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
-        cls.afat_link_april_2 = AFatLink.objects.create(
+        cls.afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_manage_afat,
