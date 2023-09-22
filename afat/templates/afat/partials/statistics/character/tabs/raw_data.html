@@ -36,7 +36,7 @@
                         </td>
                         <td>{{ fat.system }}</td>
                         <td>{{ fat.shiptype }}</td>
-                        <td data-sort='{{ fat.fatlink.afattime|date:"Y-m-d H:i" }}'>{{ fat.fatlink.afattime|date:"Y-M-d, H:i" }}</td>
+                        <td data-sort='{{ fat.fatlink.created|date:"Y-m-d H:i" }}'>{{ fat.fatlink.created|date:"Y-M-d, H:i" }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

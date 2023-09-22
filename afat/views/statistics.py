@@ -139,16 +139,16 @@ def _calculate_year_stats(request, year) -> list:
 
     for char in characters:
         character_fats_in_year = (
-            Fat.objects.filter(fatlink__afattime__year=year)
+            Fat.objects.filter(fatlink__created__year=year)
             .filter(character=char)
-            .values("fatlink__afattime__month")
+            .values("fatlink__created__month")
             .annotate(fat_count=Count("id"))
         )
 
         # Only if there are FATs for this year for the character
         if character_fats_in_year:
             character_fats_per_month = {
-                int(result["fatlink__afattime__month"]): result["fat_count"]
+                int(result["fatlink__created__month"]): result["fat_count"]
                 for result in character_fats_in_year
             }
 
@@ -239,8 +239,8 @@ def character(  # pylint: disable=too-many-locals
 
     fats = Fat.objects.filter(
         character__character_id=charid,
-        fatlink__afattime__month=month,
-        fatlink__afattime__year=year,
+        fatlink__created__month=month,
+        fatlink__created__year=year,
     )
 
     # Data for Ship Type Pie Chart
@@ -269,7 +269,7 @@ def character(  # pylint: disable=too-many-locals
     data_time = {}
 
     for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__afattime__hour=i).count()
+        data_time[i] = fats.filter(fatlink__created__hour=i).count()
 
     data_time = [
         list(data_time.keys()),
@@ -364,8 +364,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         for i in range(1, 13):
             corp_fats = Fat.objects.filter(
                 character__corporation_id=corpid,
-                fatlink__afattime__month=i,
-                fatlink__afattime__year=year,
+                fatlink__created__month=i,
+                fatlink__created__year=year,
             ).count()
 
             avg_fats = 0
@@ -393,8 +393,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         )
 
     fats = Fat.objects.filter(
-        fatlink__afattime__month=month,
-        fatlink__afattime__year=year,
+        fatlink__created__month=month,
+        fatlink__created__year=year,
         character__corporation_id=corpid,
     )
 
@@ -448,7 +448,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_time = {}
 
     for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__afattime__hour=i).count()
+        data_time[i] = fats.filter(fatlink__created__hour=i).count()
 
     data_time = [
         list(data_time.keys()),
@@ -460,7 +460,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_weekday = []
 
     for i in range(1, 8):
-        data_weekday.append(fats.filter(fatlink__afattime__iso_week_day=i).count())
+        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
 
     data_weekday = [
         [
@@ -553,8 +553,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
         for i in range(1, 13):
             ally_fats = Fat.objects.filter(
                 character__alliance_id=allianceid,
-                fatlink__afattime__month=i,
-                fatlink__afattime__year=year,
+                fatlink__created__month=i,
+                fatlink__created__year=year,
             ).count()
 
             if ally_fats > 0:
@@ -589,8 +589,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
     fats = Fat.objects.filter(
         character__alliance_id=allianceid,
-        fatlink__afattime__month=month,
-        fatlink__afattime__year=year,
+        fatlink__created__month=month,
+        fatlink__created__year=year,
     )
 
     corporations = EveCorporationInfo.objects.filter(alliance=ally)
@@ -682,7 +682,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     data_time = {}
 
     for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__afattime__hour=i).count()
+        data_time[i] = fats.filter(fatlink__created__hour=i).count()
 
     data_time = [
         list(data_time.keys()),
@@ -694,7 +694,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     data_weekday = []
 
     for i in range(1, 8):
-        data_weekday.append(fats.filter(fatlink__afattime__iso_week_day=i).count())
+        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
 
     data_weekday = [
         [

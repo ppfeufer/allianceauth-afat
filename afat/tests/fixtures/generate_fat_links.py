@@ -62,7 +62,7 @@ for _ in range(LINKS_NUMBER):
         creator=user,
         character=creator,
         link_type=link_type,
-        afattime=now() - dt.timedelta(days=random.randint(a=0, b=180)),
+        created=now() - dt.timedelta(days=random.randint(a=0, b=180)),
     )
 
     write_log(

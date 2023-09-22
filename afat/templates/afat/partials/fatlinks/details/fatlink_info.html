@@ -8,7 +8,7 @@
 
         <div class="col-md-6 text-right">
             <p>
-                {% translate "Link Created (Eve Time)" %}: {{ link.afattime|date:"d. F Y H:i" }}
+                {% translate "Link Created (Eve Time)" %}: {{ link.created|date:"d. F Y H:i" }}
 
                 {% if link_expires %}
                     <br>

@@ -67,28 +67,28 @@ class TestFatlinksView(TestCase):
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
         cls.afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
         cls.afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
         cls.afat_link_september_no_fats = FatLink.objects.create(
             fleet="September Fleet 2",
             hash="1234",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
         Fat.objects.create(
@@ -273,7 +273,7 @@ class TestFatlinksView(TestCase):
             is_registered_on_esi=True,
             esi_fleet_id=3726458287,
             link_type=fatlink_type_cta,
-            afattime="2021-11-05T13:19:49.676Z",
+            created="2021-11-05T13:19:49.676Z",
         )
 
         Duration.objects.create(fleet=fatlink_created, duration=120)
@@ -295,7 +295,7 @@ class TestFatlinksView(TestCase):
         self.assertEqual(first=result.status_code, second=HTTPStatus.OK)
 
         creator_main_character = get_main_character_from_user(user=fatlink.creator)
-        fleet_time = fatlink.afattime
+        fleet_time = fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
         esi_marker = (
             '<span class="label label-default afat-label afat-label-via-esi '

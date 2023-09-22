@@ -80,7 +80,7 @@ class TestHelpers(TestCase):
         # given
         fatlink_hash_fleet_1 = get_hash_on_save()
         fatlink_1 = FatLink.objects.create(
-            afattime=timezone.now(),
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_add_fatlink,
             character=self.character_1001,
@@ -92,7 +92,7 @@ class TestHelpers(TestCase):
 
         fatlink_hash_fleet_2 = get_hash_on_save()
         fatlink_2 = FatLink.objects.create(
-            afattime=timezone.now(),
+            created=timezone.now(),
             fleet="April Fleet 2",
             creator=self.user_with_add_fatlink,
             character=self.character_1101,
@@ -150,7 +150,7 @@ class TestHelpers(TestCase):
 
         fatlink_hash_fleet_1 = get_hash_on_save()
         fatlink_1_created = FatLink.objects.create(
-            afattime=timezone.now(),
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,
@@ -166,7 +166,7 @@ class TestHelpers(TestCase):
         fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_hash_fleet_2 = get_hash_on_save()
         fatlink_2_created = FatLink.objects.create(
-            afattime=timezone.now(),
+            created=timezone.now(),
             fleet="April Fleet 2",
             creator=self.user_with_add_fatlink,
             character=self.character_1101,
@@ -209,7 +209,7 @@ class TestHelpers(TestCase):
         result_2 = convert_fatlinks_to_dict(request=request, fatlink=fatlink_2)
 
         # then
-        fleet_time_1 = fatlink_1.afattime
+        fleet_time_1 = fatlink_1.created
         fleet_time_timestamp_1 = fleet_time_1.timestamp()
         creator_main_character_1 = get_main_character_from_user(user=fatlink_1.creator)
         self.assertDictEqual(
@@ -257,7 +257,7 @@ class TestHelpers(TestCase):
             },
         )
 
-        fleet_time_2 = fatlink_2.afattime
+        fleet_time_2 = fatlink_2.created
         fleet_time_timestamp_2 = fleet_time_2.timestamp()
         creator_main_character_2 = get_main_character_from_user(user=fatlink_2.creator)
         self.assertDictEqual(
@@ -301,7 +301,7 @@ class TestHelpers(TestCase):
         fatlink_hash = get_hash_on_save()
         fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = FatLink.objects.create(
-            afattime=timezone.now(),
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,
@@ -322,7 +322,7 @@ class TestHelpers(TestCase):
             '<span class="label label-default afat-label afat-label-via-esi '
             'afat-label-active-esi-fleet">via ESI</span>'
         )
-        fleet_time = fat.fatlink.afattime
+        fleet_time = fat.fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
 
         button_delete_fat = reverse(
@@ -367,7 +367,7 @@ class TestHelpers(TestCase):
         fatlink_hash = get_hash_on_save()
         fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = FatLink.objects.create(
-            afattime=timezone.now(),
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,

@@ -101,7 +101,7 @@ def ajax_get_fatlinks_by_year(request: WSGIRequest, year: int) -> JsonResponse:
 
     fatlinks = (
         FatLink.objects.select_related_default()
-        .filter(afattime__year=year)
+        .filter(created__year=year)
         .annotate_fats_count()
     )
 
@@ -180,7 +180,7 @@ def create_clickable_fatlink(
 
             fatlink.creator = request.user
             fatlink.hash = fatlink_hash
-            fatlink.afattime = timezone.now()
+            fatlink.created = timezone.now()
             fatlink.save()
 
             dur = Duration()
@@ -389,7 +389,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
     # Create the fat link
     fatlink = FatLink(
-        afattime=timezone.now(),
+        created=timezone.now(),
         fleet=request.session["fatlink_form__name"],
         creator=request.user,
         character=creator_character,
@@ -547,7 +547,7 @@ def add_fat(
     dur = Duration.objects.get(fleet=fleet)
     now = timezone.now() - timedelta(minutes=dur.duration)
 
-    if now >= fleet.afattime:
+    if now >= fleet.created:
         messages.warning(
             request=request,
             message=mark_safe(
@@ -801,7 +801,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
         # ESI link
         link_ongoing = False
     else:
-        link_expires = link.afattime + timedelta(minutes=dur.duration)
+        link_expires = link.created + timedelta(minutes=dur.duration)
         now = timezone.now()
 
         if link_expires <= now:
@@ -820,7 +820,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
         # and has been created within the last 24 hours
         if (
             link.reopened is False
-            and get_time_delta(then=link.afattime, now=now, interval="hours") < 24
+            and get_time_delta(then=link.created, now=now, interval="hours") < 24
         ):
             manual_fat_can_be_added = True
 
@@ -1081,7 +1081,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         return redirect(to="afat:dashboard")
 
     if fatlink_duration.fleet.reopened is False:
-        created_at = fatlink_duration.fleet.afattime
+        created_at = fatlink_duration.fleet.created
         now = datetime.now()
 
         time_difference_in_minutes = get_time_delta(

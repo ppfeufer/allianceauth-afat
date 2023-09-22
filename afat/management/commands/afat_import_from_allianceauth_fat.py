@@ -87,7 +87,7 @@ class Command(BaseCommand):
                 afat_fatlink = AFatLink()
 
                 afat_fatlink.id = aa_fatlink.id
-                afat_fatlink.afattime = aa_fatlink.fatdatetime
+                afat_fatlink.created = aa_fatlink.fatdatetime
                 afat_fatlink.fleet = (
                     aa_fatlink.fleet
                     if aa_fatlink.fleet is not None

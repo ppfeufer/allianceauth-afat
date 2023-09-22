@@ -74,7 +74,7 @@ def ajax_recent_get_fats_by_character(
     fats = (
         Fat.objects.select_related_default()
         .filter(character=character)
-        .order_by("fatlink__afattime")
+        .order_by("fatlink__created")
         .reverse()[:10]
     )
 
@@ -100,7 +100,7 @@ def ajax_get_recent_fatlinks(request: WSGIRequest) -> JsonResponse:
     fatlinks = (
         FatLink.objects.select_related_default()
         .annotate_fats_count()
-        .order_by("-afattime")[:10]
+        .order_by("-created")[:10]
     )
 
     fatlink_rows = [

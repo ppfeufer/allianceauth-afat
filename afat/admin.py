@@ -76,7 +76,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
 
     list_select_related = ("link_type",)
     list_display = (
-        "afattime",
+        "created",
         "creator",
         "fleet",
         "link_type",
@@ -85,7 +85,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         "number_of_fats",
     )
     list_filter = ("is_esilink", ("link_type__name", custom_filter(title="fleet type")))
-    ordering = ("-afattime",)
+    ordering = ("-created",)
     search_fields = (
         "link_type__name",
         "hash",

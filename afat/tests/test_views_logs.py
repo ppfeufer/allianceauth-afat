@@ -65,14 +65,14 @@ class TestLogsView(TestCase):
             hash="1231",
             creator=cls.user_with_manage_afat,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
         cls.afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_manage_afat,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
 
     def test_should_not_show_log_view_for_user_without_access(self):

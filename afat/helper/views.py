@@ -66,7 +66,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     creator_main_character = get_main_character_from_user(user=fatlink.creator)
 
     # Fleet time
-    fleet_time = fatlink.afattime
+    fleet_time = fatlink.created
     fleet_time_timestamp = fleet_time.timestamp()
 
     # Action buttons
@@ -201,7 +201,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
             "</a>"
         )
 
-    fleet_time = fat.fatlink.afattime
+    fleet_time = fat.fatlink.created
     fleet_time_timestamp = fleet_time.timestamp()
     fleet_name = (
         fat.fatlink.fleet if fat.fatlink.fleet is not None else fat.fatlink.hash

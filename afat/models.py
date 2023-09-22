@@ -136,7 +136,7 @@ class FatLink(models.Model):
         NO_FLEET = "NO_FLEET", _("Registered fleet seems to be no longer available.")
         NOT_FLEETBOSS = "NOT_FLEETBOSS", _("FC is no longer the fleet boss.")
 
-    afattime = models.DateTimeField(
+    created = models.DateTimeField(
         default=timezone.now,
         db_index=True,
         help_text=_("When was this FAT link created"),
@@ -208,7 +208,7 @@ class FatLink(models.Model):
         """
 
         default_permissions = ()
-        ordering = ("-afattime",)
+        ordering = ("-created",)
         verbose_name = _("FAT Link")
         verbose_name_plural = _("FAT Links")
 
