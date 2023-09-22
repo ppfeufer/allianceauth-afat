@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Pylint issues
 - Import from `app_utils`
+- Capitalization for translatable strings
 
 ### Changed
 
