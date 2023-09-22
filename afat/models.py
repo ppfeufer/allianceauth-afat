@@ -66,7 +66,7 @@ class General(models.Model):
             #   » delete_fat
             ("manage_afat", _("Can manage the AFAT module")),
             # Can add a new FAT link
-            ("add_fatlink", _("Can create FAT Links")),
+            ("add_fatlink", _("Can create FAT links")),
             # Can see own corp stats
             ("stats_corporation_own", _("Can see own corporation statistics")),
             # Can see the stats of all corps
@@ -209,8 +209,8 @@ class FatLink(models.Model):
 
         default_permissions = ()
         ordering = ("-created",)
-        verbose_name = _("FAT Link")
-        verbose_name_plural = _("FAT Links")
+        verbose_name = _("FAT link")
+        verbose_name_plural = _("FAT links")
 
     def __str__(self) -> str:
         """

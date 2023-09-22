@@ -90,7 +90,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         modal_body_text = _(
             f"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"  # pylint: disable=line-too-long
         )
-        modal_confirm_text = _("Stop Tracking")
+        modal_confirm_text = _("Stop tracking")
 
         actions += (
             '<a class="btn btn-afat-action btn-primary btn-sm" '

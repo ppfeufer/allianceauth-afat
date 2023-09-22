@@ -117,7 +117,7 @@ class Migration(migrations.Migration):
                 "permissions": (
                     ("basic_access", "Can access the AFAT module"),
                     ("manage_afat", "Can manage the AFAT module"),
-                    ("add_fatlink", "Can create FAT Links"),
+                    ("add_fatlink", "Can create FAT links"),
                     ("stats_corporation_own", "Can see own corporation statistics"),
                     (
                         "stats_corporation_other",
@@ -165,8 +165,8 @@ class Migration(migrations.Migration):
             options={
                 "default_permissions": (),
                 "ordering": ("-created",),
-                "verbose_name": "FAT Link",
-                "verbose_name_plural": "FAT Links",
+                "verbose_name": "FAT link",
+                "verbose_name_plural": "FAT links",
             },
         ),
         migrations.RenameField(

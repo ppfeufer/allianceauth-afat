@@ -243,7 +243,7 @@ def character(  # pylint: disable=too-many-locals
         fatlink__created__year=year,
     )
 
-    # Data for Ship Type Pie Chart
+    # Data for ship type pie chart
     data_ship_type = {}
 
     for fat in fats:
@@ -595,7 +595,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
     corporations = EveCorporationInfo.objects.filter(alliance=ally)
 
-    # Data for Ship Type Pie Chart
+    # Data for ship type pie chart
     data_ship_type = {}
 
     for fat in fats:

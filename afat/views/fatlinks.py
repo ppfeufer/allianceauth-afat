@@ -217,7 +217,7 @@ def create_clickable_fatlink(
                 message=mark_safe(
                     s=_(
                         "<h4>Success!</h4>"
-                        "<p>Clickable FAT Link Created!</p>"
+                        "<p>Clickable FAT link created!</p>"
                         "<p>Make sure to give your fleet members the link to "
                         "click so that they get credit for this fleet.</p>"
                     )
@@ -234,7 +234,7 @@ def create_clickable_fatlink(
                 s=_(
                     "<h4>Error!</h4>"
                     "<p>Something went wrong when attempting "
-                    "to submit your clickable FAT Link.</p>"
+                    "to submit your clickable FAT link.</p>"
                 )
             ),
         )
@@ -246,8 +246,8 @@ def create_clickable_fatlink(
         message=mark_safe(
             s=_(
                 "<h4>Warning!</h4>"
-                '<p>You must fill out the form on the "Add FAT Link" '
-                "page to create a clickable FAT Link</p>"
+                '<p>You must fill out the form on the "Add FAT link" '
+                "page to create a clickable FAT link</p>"
             )
         ),
     )
@@ -298,7 +298,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
             ),
         )
 
-        # Return to "Add FAT Link" view
+        # Return to "Add FAT link" view
         return redirect(to="afat:fatlinks_add_fatlink")
 
     # check if this character already has a fleet
@@ -337,7 +337,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
             ),
         )
 
-        # Return to "Add FAT Link" view
+        # Return to "Add FAT link" view
         return redirect(to="afat:fatlinks_add_fatlink")
 
     # If it's a new fleet, remove all former registered fleets, if there are any
@@ -382,7 +382,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
             ),
         )
 
-        # Return to "Add FAT Link" view
+        # Return to "Add FAT link" view
         return redirect(to="afat:fatlinks_add_fatlink")
 
     creator_character = EveCharacter.objects.get(character_id=token.character_id)
@@ -443,8 +443,8 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         message=mark_safe(
             s=_(
                 "<h4>Success!</h4>"
-                "<p>FAT Link Created!</p>"
-                "<p>FATs have been queued, they may take a few mins to show up.</p>"
+                "<p>FAT link Created!</p>"
+                "<p>FATs have been queued, they may take a few minutes to show up.</p>"
                 "<p>Pilots who join later will be automatically added until you "
                 "close or leave the fleet in-game.</p>"
             )
@@ -490,7 +490,7 @@ def create_esi_fatlink(
             s=_(
                 "<h4>Error!</h4>"
                 "<p>Something went wrong when attempting to "
-                "submit your ESI FAT Link.</p>"
+                "submit your ESI FAT link.</p>"
             )
         ),
     )
@@ -553,7 +553,7 @@ def add_fat(
             message=mark_safe(
                 s=_(
                     "<h4>Warning!</h4>"
-                    "<p>Sorry, that FAT Link is expired. "
+                    "<p>Sorry, that FAT link is expired. "
                     "If you were on that fleet, contact your FC about "
                     "having your FAT manually added.</p>"
                 )
@@ -891,7 +891,7 @@ def delete_fatlink(
         messages.warning(
             request=request,
             message=mark_safe(
-                s=_("<h4>Warning!</h4><p>No FAT Link hash provided.</p>")
+                s=_("<h4>Warning!</h4><p>No FAT link hash provided.</p>")
             ),
         )
 
@@ -905,8 +905,8 @@ def delete_fatlink(
             message=mark_safe(
                 s=_(
                     "<h4>Error!</h4>"
-                    "<p>The fatlink hash provided is either invalid "
-                    "or the fatlink has already been deleted.</p>"
+                    "<p>The FAT link hash provided is either invalid "
+                    "or the FAT link has already been deleted.</p>"
                 )
             ),
         )
@@ -928,7 +928,7 @@ def delete_fatlink(
         request=request,
         message=mark_safe(
             s=_(
-                f'<h4>Success!</h4><p>The FAT Link "{fatlink_hash}" and all associated FATs have been successfully deleted.</p>'  # pylint: disable=line-too-long
+                f'<h4>Success!</h4><p>The FAT link "{fatlink_hash}" and all associated FATs have been successfully deleted.</p>'  # pylint: disable=line-too-long
             )
         ),
     )

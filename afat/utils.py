@@ -155,7 +155,7 @@ def get_or_create_corporation_info(corporation_id: int) -> EveCorporationInfo:
         )
 
         logger.info(
-            msg=f"EveCorporationInfo Object created: {eve_corporation_info.corporation_name}"
+            msg=f"EveCorporationInfo object created: {eve_corporation_info.corporation_name}"
         )
 
     return eve_corporation_info
@@ -179,7 +179,7 @@ def get_or_create_alliance_info(alliance_id: int) -> EveAllianceInfo:
         )
 
         logger.info(
-            msg=f"EveAllianceInfo Object created: {eve_alliance_info.alliance_name}"
+            msg=f"EveAllianceInfo object created: {eve_alliance_info.alliance_name}"
         )
 
     return eve_alliance_info

@@ -21,18 +21,20 @@
                 </li>
 
                 <li class="{% navactive request 'afat:fatlinks_overview afat:fatlinks_details_fatlink' %}">
-                    <a href="{% url 'afat:fatlinks_overview' %}">{% translate "FAT Links" %}</a>
+                    <a href="{% url 'afat:fatlinks_overview' %}">
+                        {% translate "FAT links" %}
+                    </a>
                 </li>
 
                 {% if perms.afat.add_fatlink or perms.afat.manage_afat %}
                     <li class="{% navactive request 'afat:fatlinks_add_fatlink' %}">
-                        <a href="{% url 'afat:fatlinks_add_fatlink' %}">{% translate "Add FAT Link" %}</a>
+                        <a href="{% url 'afat:fatlinks_add_fatlink' %}">{% translate "Add FAT link" %}</a>
                     </li>
                 {% endif %}
 
                 {% if perms.afat.log_view %}
                     <li class="{% navactive request 'afat:logs_overview' %}">
-                        <a href="{% url 'afat:logs_overview' %}">{% translate "View Log" %}</a>
+                        <a href="{% url 'afat:logs_overview' %}">{% translate "View log" %}</a>
                     </li>
                 {% endif %}
             </ul>

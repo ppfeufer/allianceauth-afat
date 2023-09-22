@@ -8,18 +8,18 @@
 
         <div class="col-md-6 text-right">
             <p>
-                {% translate "Link Created (Eve Time)" %}: {{ link.created|date:"d. F Y H:i" }}
+                {% translate "Link created (Eve Time)" %}: {{ link.created|date:"d. F Y H:i" }}
 
                 {% if link_expires %}
                     <br>
 
                     {% if link_ongoing %}
-                        {% translate "Link Expires (Eve Time)" %}:
+                        {% translate "Link expires (Eve Time)" as line_title %}
                     {% else %}
-                        {% translate "Link Expired (Eve Time)" %}:
+                        {% translate "Link expired (Eve Time)" as line_title %}
                     {% endif %}
 
-                    {{ link_expires|date:"d. F Y H:i" }}
+                    {{ line_title }}: {{ link_expires|date:"d. F Y H:i" }}
                 {% endif %}
 
                 {% if link.is_esilink %}
@@ -36,10 +36,10 @@
                                 data-target="#cancelEsiFleetModal"
                                 data-url="{% url 'afat:fatlinks_close_esi_fatlink' link.hash %}?next={% url 'afat:fatlinks_details_fatlink' link.hash %}"
                                 data-body-text="{% blocktranslate with esi_fleet_id=link.esi_fleet_id character_name=link.character.character_name %}<p>Are you sure you want to close ESI fleet with ID {{ esi_fleet_id }} from {{ character_name }}</p>{% endblocktranslate %}"
-                                data-confirm-text="{% translate 'Stop Tracking' %}"
+                                data-confirm-text="{% translate 'Stop tracking' %}"
                             >
                                 <i class="fas fa-times"></i>
-                                <!-- {% translate "Stop Tracking" %} -->
+                                <!-- {% translate "Stop tracking" %} -->
                             </button>
                         {% endif %}
                     {% else %}
@@ -61,7 +61,7 @@
                         data-body-text="{% blocktranslate with reopen_duration=reopen_duration %}<p>Are you sure you want to re-open this FAT link for another {{ reopen_duration }} minutes?<br>FAT links can be re-opened only once!<br><em>(Be aware, this action will be logged)</em></p>{% endblocktranslate %}"
                         data-confirm-text="{% translate 'Re-Open' %}"
                     >
-                        {% translate "Re-Open FAT link" %}
+                        {% translate "Re-open FAT link" %}
                     </button>
                 </p>
             {% endif %}

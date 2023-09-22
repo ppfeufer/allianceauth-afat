@@ -224,7 +224,7 @@ def _check_for_esi_fleet(fatlink: FatLink):
 
 def _process_esi_fatlink(fatlink: FatLink):
     """
-    Processing ESI FAT Link
+    Processing ESI FAT link
 
     :param fatlink:
     :type fatlink:
@@ -266,7 +266,7 @@ def _process_esi_fatlink(fatlink: FatLink):
                     fatlink_hash=fatlink.hash,
                 )
     else:
-        _close_esi_fleet(fatlink=fatlink, reason="No FAT Link creator available.")
+        _close_esi_fleet(fatlink=fatlink, reason="No FAT link creator available.")
 
 
 @shared_task(**{**TASK_DEFAULT_KWARGS, **{"base": QueueOnce}})

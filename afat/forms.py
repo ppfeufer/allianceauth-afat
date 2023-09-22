@@ -40,13 +40,13 @@ class AFatEsiFatForm(forms.Form):
 
     name_esi = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(text=_("Fleet Name")),
+        label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
         widget=forms.TextInput(attrs={"placeholder": _("Enter fleet name")}),
     )
     type_esi = forms.ModelChoiceField(
         required=False,
-        label=_("Fleet Type (optional)"),
+        label=_("Fleet type (optional)"),
         queryset=FleetType.objects.filter(is_enabled=True),
         # empty_label=_("Please select a fleet type"),
     )
@@ -69,7 +69,7 @@ class AFatManualFatForm(forms.Form):
     )
     shiptype = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(text=_("Ship Type")),
+        label=get_mandatory_form_label_text(text=_("Ship type")),
         max_length=100,
     )
 
@@ -82,13 +82,13 @@ class AFatClickFatForm(forms.Form):
 
     name = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(text=_("Fleet Name")),
+        label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
         widget=forms.TextInput(attrs={"placeholder": _("Enter fleet name")}),
     )
     type = forms.ModelChoiceField(
         required=False,
-        label=_("Fleet Type (optional)"),
+        label=_("Fleet type (optional)"),
         queryset=FleetType.objects.filter(is_enabled=True),
         # empty_label=_("Please select a fleet type"),
     )
@@ -109,6 +109,6 @@ class FatLinkEditForm(forms.Form):
 
     fleet = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(text=_("Fleet Name")),
+        label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
     )

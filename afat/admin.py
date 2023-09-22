@@ -114,7 +114,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
     @admin.display(ordering="_number_of_fats")
     def number_of_fats(self, obj):
         """
-        Return the number of FATs per FAT Link
+        Return the number of FATs per FAT link
 
         :param obj:
         :type obj:
@@ -153,7 +153,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
     list_filter = ("is_enabled",)
     ordering = ("name",)
 
-    @admin.display(description=_("Fleet Type"), ordering="name")
+    @admin.display(description=_("Fleet type"), ordering="name")
     def _name(self, obj):
         """
         Rewrite name
