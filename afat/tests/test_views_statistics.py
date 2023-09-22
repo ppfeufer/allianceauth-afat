@@ -16,7 +16,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink
+from afat.models import Fat, FatLink
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import RequestStub
 from afat.views.statistics import _calculate_year_stats
@@ -71,70 +71,70 @@ class TestStatistics(TestCase):
         )
 
         # Generate some FAT links and FATs
-        afat_link_april_1 = AFatLink.objects.create(
+        afat_link_april_1 = FatLink.objects.create(
             fleet="April Fleet 1",
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
-        afat_link_april_2 = AFatLink.objects.create(
+        afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
-        afat_link_september = AFatLink.objects.create(
+        afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
-        AFat.objects.create(
-            character=cls.character_1101, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1101, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1001, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1001, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1002, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1002, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1003, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1003, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1004, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1004, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1005, afatlink=afat_link_april_1, shiptype="Omen"
-        )
-
-        AFat.objects.create(
-            character=cls.character_1101, afatlink=afat_link_april_2, shiptype="Omen"
-        )
-        AFat.objects.create(
-            character=cls.character_1004, afatlink=afat_link_april_2, shiptype="Thorax"
-        )
-        AFat.objects.create(
-            character=cls.character_1002, afatlink=afat_link_april_2, shiptype="Thorax"
-        )
-        AFat.objects.create(
-            character=cls.character_1003, afatlink=afat_link_april_2, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1005, fatlink=afat_link_april_1, shiptype="Omen"
         )
 
-        AFat.objects.create(
-            character=cls.character_1001, afatlink=afat_link_september, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1101, fatlink=afat_link_april_2, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
+            character=cls.character_1004, fatlink=afat_link_april_2, shiptype="Thorax"
+        )
+        Fat.objects.create(
+            character=cls.character_1002, fatlink=afat_link_april_2, shiptype="Thorax"
+        )
+        Fat.objects.create(
+            character=cls.character_1003, fatlink=afat_link_april_2, shiptype="Omen"
+        )
+
+        Fat.objects.create(
+            character=cls.character_1001, fatlink=afat_link_september, shiptype="Omen"
+        )
+        Fat.objects.create(
             character=cls.character_1004,
-            afatlink=afat_link_september,
+            fatlink=afat_link_september,
             shiptype="Guardian",
         )
-        AFat.objects.create(
-            character=cls.character_1005, afatlink=afat_link_september, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1005, fatlink=afat_link_september, shiptype="Omen"
         )
 
     def test_should_only_show_my_chars_and_only_those_with_fat_links(self):

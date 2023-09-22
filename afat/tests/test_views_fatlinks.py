@@ -21,13 +21,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import (
-    AFat,
-    AFatLink,
-    AFatLinkType,
-    ClickAFatDuration,
-    get_hash_on_save,
-)
+from afat.models import Duration, Fat, FatLink, FleetType, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user
 
@@ -68,100 +62,100 @@ class TestFatlinksView(TestCase):
         )
 
         # Generate some FAT links and FATs
-        cls.afat_link_april_1 = AFatLink.objects.create(
+        cls.afat_link_april_1 = FatLink.objects.create(
             fleet="April Fleet 1",
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
-        cls.afat_link_april_2 = AFatLink.objects.create(
+        cls.afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
-        cls.afat_link_september = AFatLink.objects.create(
+        cls.afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
-        cls.afat_link_september_no_fats = AFatLink.objects.create(
+        cls.afat_link_september_no_fats = FatLink.objects.create(
             fleet="September Fleet 2",
             hash="1234",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1101,
-            afatlink=cls.afat_link_april_1,
+            fatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001,
-            afatlink=cls.afat_link_april_1,
+            fatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002,
-            afatlink=cls.afat_link_april_1,
+            fatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1003,
-            afatlink=cls.afat_link_april_1,
+            fatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
-            afatlink=cls.afat_link_april_1,
+            fatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1005,
-            afatlink=cls.afat_link_april_1,
+            fatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001,
-            afatlink=cls.afat_link_april_2,
+            fatlink=cls.afat_link_april_2,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
-            afatlink=cls.afat_link_april_2,
+            fatlink=cls.afat_link_april_2,
             shiptype="Thorax",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002,
-            afatlink=cls.afat_link_april_2,
+            fatlink=cls.afat_link_april_2,
             shiptype="Thorax",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1003,
-            afatlink=cls.afat_link_april_2,
+            fatlink=cls.afat_link_april_2,
             shiptype="Omen",
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001,
-            afatlink=cls.afat_link_september,
+            fatlink=cls.afat_link_september,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
-            afatlink=cls.afat_link_september,
+            fatlink=cls.afat_link_september,
             shiptype="Guardian",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002,
-            afatlink=cls.afat_link_september,
+            fatlink=cls.afat_link_september,
             shiptype="Omen",
         )
 
@@ -189,7 +183,7 @@ class TestFatlinksView(TestCase):
 
     def test_should_show_add_fatlink_for_user_with_manage_afat(self):
         # given
-        AFatLinkType.objects.create(name="CTA")
+        FleetType.objects.create(name="CTA")
 
         self.client.force_login(user=self.user_with_manage_afat)
 
@@ -256,7 +250,7 @@ class TestFatlinksView(TestCase):
 
         messages = list(get_messages(request=res.wsgi_request))
 
-        self.assertRaises(expected_exception=AFatLink.DoesNotExist)
+        self.assertRaises(expected_exception=FatLink.DoesNotExist)
         self.assertEqual(first=len(messages), second=1)
         self.assertEqual(
             first=str(messages[0]),
@@ -269,8 +263,8 @@ class TestFatlinksView(TestCase):
         self.client.force_login(user=self.user_with_basic_access)
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
-        fatlink_created = AFatLink.objects.create(
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
+        fatlink_created = FatLink.objects.create(
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,
@@ -279,15 +273,15 @@ class TestFatlinksView(TestCase):
             is_registered_on_esi=True,
             esi_fleet_id=3726458287,
             link_type=fatlink_type_cta,
-            afattime="2021-11-05T13:19:49.676Z",
+            created="2021-11-05T13:19:49.676Z",
         )
 
-        ClickAFatDuration.objects.create(fleet=fatlink_created, duration=120)
+        Duration.objects.create(fleet=fatlink_created, duration=120)
 
         # when
         fatlink = (
-            AFatLink.objects.select_related_default()
-            .annotate_afats_count()
+            FatLink.objects.select_related_default()
+            .annotate_fats_count()
             .get(hash=fatlink_hash)
         )
 
@@ -301,7 +295,7 @@ class TestFatlinksView(TestCase):
         self.assertEqual(first=result.status_code, second=HTTPStatus.OK)
 
         creator_main_character = get_main_character_from_user(user=fatlink.creator)
-        fleet_time = fatlink.afattime
+        fleet_time = fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
         esi_marker = (
             '<span class="label label-default afat-label afat-label-via-esi '

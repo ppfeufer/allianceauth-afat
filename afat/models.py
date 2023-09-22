@@ -14,7 +14,7 @@ from django.utils.translation import gettext as _
 from allianceauth.eveonline.models import EveCharacter
 
 # Alliance Auth AFAT
-from afat.managers import AFatLinkManager, AFatManager
+from afat.managers import FatLinkManager, FatManager
 
 
 def get_sentinel_user() -> User:
@@ -36,13 +36,13 @@ def get_hash_on_save() -> str:
 
     fatlink_hash = get_random_string(length=30)
 
-    while AFatLink.objects.filter(hash=fatlink_hash).exists():
+    while FatLink.objects.filter(hash=fatlink_hash).exists():
         fatlink_hash = get_random_string(length=30)
 
     return fatlink_hash
 
 
-class AaAfat(models.Model):
+class General(models.Model):
     """
     Meta model for app permissions
     """
@@ -74,19 +74,24 @@ class AaAfat(models.Model):
             # Can view the modules log
             ("log_view", _("Can view the modules log")),
         )
-        verbose_name = _("Alliance Auth AFAT")
+        verbose_name = _("AFAT")
 
 
-# AFatLinkType Model (StratOp, ADM, HD etc)
-class AFatLinkType(models.Model):
+class FleetType(models.Model):
     """
-    AFatLinkType
+    FAT link fleet type
+
+    Example:
+        - CTA
+        - Home Defense
+        - StratOP
+        - and so on …
     """
 
     id = models.AutoField(primary_key=True)
 
     name = models.CharField(
-        max_length=254, help_text=_("Descriptive name of your fleet type")
+        max_length=254, help_text=_("Descriptive name of the fleet type")
     )
 
     is_enabled = models.BooleanField(
@@ -97,12 +102,12 @@ class AFatLinkType(models.Model):
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
-        AFatLinkType :: Meta
+        Meta definitions
         """
 
         default_permissions = ()
-        verbose_name = _("FAT Link Fleet Type")
-        verbose_name_plural = _("FAT Link Fleet Types")
+        verbose_name = _("Fleet type")
+        verbose_name_plural = _("Fleet types")
 
     def __str__(self) -> str:
         """
@@ -115,10 +120,9 @@ class AFatLinkType(models.Model):
         return str(self.name)
 
 
-# AFatLink Model
-class AFatLink(models.Model):
+class FatLink(models.Model):
     """
-    AFatLink
+    FAT link
     """
 
     class EsiError(models.TextChoices):
@@ -132,7 +136,7 @@ class AFatLink(models.Model):
         NO_FLEET = "NO_FLEET", _("Registered fleet seems to be no longer available.")
         NOT_FLEETBOSS = "NOT_FLEETBOSS", _("FC is no longer the fleet boss.")
 
-    afattime = models.DateTimeField(
+    created = models.DateTimeField(
         default=timezone.now,
         db_index=True,
         help_text=_("When was this FAT link created"),
@@ -166,7 +170,7 @@ class AFatLink(models.Model):
     )
 
     link_type = models.ForeignKey(
-        to=AFatLinkType,
+        to=FleetType,
         related_name="+",
         on_delete=models.CASCADE,
         null=True,
@@ -196,15 +200,15 @@ class AFatLink(models.Model):
 
     esi_error_count = models.IntegerField(default=0)
 
-    objects = AFatLinkManager()
+    objects = FatLinkManager()
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
-        AFatLink :: Meta
+        Meta definitions
         """
 
         default_permissions = ()
-        ordering = ("-afattime",)
+        ordering = ("-created",)
         verbose_name = _("FAT Link")
         verbose_name_plural = _("FAT Links")
 
@@ -244,44 +248,46 @@ class AFatLink(models.Model):
         :rtype:
         """
 
-        return AFat.objects.filter(afatlink=self).count()
+        return Fat.objects.filter(fatlink=self).count()
 
 
-# ClickAFatDuration Model
-class ClickAFatDuration(models.Model):
+class Duration(models.Model):
     """
-    ClickAFatDuration
+    FAT link duration
+    FAT link expiry time in minutes
     """
 
     duration = models.PositiveIntegerField()
-    fleet = models.ForeignKey(to=AFatLink, on_delete=models.CASCADE)
+    fleet = models.ForeignKey(
+        to=FatLink, related_name="duration", on_delete=models.CASCADE
+    )
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
-        ClickAFatDuration :: Meta
+        Meta definitions
         """
 
         default_permissions = ()
-        verbose_name = _("FAT Duration")
-        verbose_name_plural = _("FAT Durations")
+        verbose_name = _("FAT link duration")
+        verbose_name_plural = _("FAT link durations")
 
 
 # AFat Model
-class AFat(models.Model):
+class Fat(models.Model):
     """
     AFat
     """
 
     character = models.ForeignKey(
         to=EveCharacter,
-        related_name="afats",
+        related_name="afat_fats",
         on_delete=models.CASCADE,
         help_text=_("Character who registered this FAT"),
     )
 
-    afatlink = models.ForeignKey(
-        to=AFatLink,
-        related_name="afats",
+    fatlink = models.ForeignKey(
+        to=FatLink,
+        related_name="afat_fats",
         on_delete=models.CASCADE,
         help_text=_("The FAT link the character registered at"),
     )
@@ -297,7 +303,7 @@ class AFat(models.Model):
         help_text=_("The ship the character was flying"),
     )
 
-    objects = AFatManager()
+    objects = FatManager()
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
@@ -305,7 +311,7 @@ class AFat(models.Model):
         """
 
         default_permissions = ()
-        unique_together = (("character", "afatlink"),)
+        unique_together = (("character", "fatlink"),)
         verbose_name = _("FAT")
         verbose_name_plural = _("FATs")
 
@@ -317,53 +323,13 @@ class AFat(models.Model):
         :rtype:
         """
 
-        return f"{self.afatlink} - {self.character}"
-
-
-# ManualAFat Model
-class ManualAFat(models.Model):
-    """
-    ManualAFat
-    """
-
-    creator = models.ForeignKey(
-        to=User, related_name="+", on_delete=models.SET(value=get_sentinel_user)
-    )
-    afatlink = models.ForeignKey(
-        to=AFatLink, related_name="+", on_delete=models.CASCADE
-    )
-    character = models.ForeignKey(
-        to=EveCharacter, related_name="+", on_delete=models.CASCADE
-    )
-    created_at = models.DateTimeField(
-        blank=True, null=True, help_text=_("Time this FAT has been added manually")
-    )
-
-    class Meta:  # pylint: disable=too-few-public-methods
-        """
-        ManualAFat :: Meta
-        """
-
-        default_permissions = ()
-        verbose_name = _("Manual FAT")
-        verbose_name_plural = _("Manual FATs")
-
-    # Add property for getting the user for a character.
-    def __str__(self) -> str:
-        """
-        Return the objects string name
-
-        :return:
-        :rtype:
-        """
-
-        return f"{self.afatlink} - {self.character} ({self.creator})"
+        return f"{self.fatlink} - {self.character}"
 
 
 # AFat Log Model
-class AFatLog(models.Model):
+class Log(models.Model):
     """
-    AFatLog
+    The log
     """
 
     class Event(models.TextChoices):
@@ -371,18 +337,18 @@ class AFatLog(models.Model):
         Choices for SRP Status
         """
 
-        CREATE_FATLINK = "CR_FAT_LINK", _("FAT Link Created")
-        CHANGE_FATLINK = "CH_FAT_LINK", _("FAT Link Changed")
-        DELETE_FATLINK = "RM_FAT_LINK", _("FAT Link Removed")
-        REOPEN_FATLINK = "RO_FAT_LINK", _("FAT Link Re-Opened")
-        # CREATE_FAT = "CR_FAT", _("FAT Registered")
-        DELETE_FAT = "RM_FAT", _("FAT Removed")
-        MANUAL_FAT = "CR_FAT_MAN", _("Manual FAT Added")
+        CREATE_FATLINK = "CR_FAT_LINK", _("FAT link created")
+        CHANGE_FATLINK = "CH_FAT_LINK", _("FAT link changed")
+        DELETE_FATLINK = "RM_FAT_LINK", _("FAT link removed")
+        REOPEN_FATLINK = "RO_FAT_LINK", _("FAT link re-opened")
+        # CREATE_FAT = "CR_FAT", _("FAT registered")
+        DELETE_FAT = "RM_FAT", _("FAT removed")
+        MANUAL_FAT = "CR_FAT_MAN", _("Manual FAT added")
 
     log_time = models.DateTimeField(default=timezone.now, db_index=True)
     user = models.ForeignKey(
         to=User,
-        related_name="+",
+        related_name="afat_log",
         null=True,
         blank=True,
         default=None,
@@ -403,5 +369,5 @@ class AFatLog(models.Model):
         """
 
         default_permissions = ()
-        verbose_name = _("AFAT Log")
-        verbose_name_plural = _("AFAT Logs")
+        verbose_name = _("Log")
+        verbose_name_plural = _("Logs")

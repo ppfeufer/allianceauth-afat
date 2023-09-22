@@ -44,14 +44,7 @@ from afat.forms import (
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
-from afat.models import (
-    AFat,
-    AFatLink,
-    AFatLinkType,
-    AFatLog,
-    ClickAFatDuration,
-    get_hash_on_save,
-)
+from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
 from afat.providers import esi
 from afat.tasks import process_fats
 from afat.utils import get_or_create_character, write_log
@@ -107,9 +100,9 @@ def ajax_get_fatlinks_by_year(request: WSGIRequest, year: int) -> JsonResponse:
     """
 
     fatlinks = (
-        AFatLink.objects.select_related_default()
-        .filter(afattime__year=year)
-        .annotate_afats_count()
+        FatLink.objects.select_related_default()
+        .filter(created__year=year)
+        .annotate_fats_count()
     )
 
     fatlink_rows = [
@@ -137,7 +130,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
     """
 
     link_types_configured = False
-    link_types_count = AFatLinkType.objects.all().count()
+    link_types_count = FleetType.objects.all().count()
 
     if link_types_count > 0:
         link_types_configured = True
@@ -179,7 +172,7 @@ def create_clickable_fatlink(
         if form.is_valid():
             fatlink_hash = get_hash_on_save()
 
-            fatlink = AFatLink()
+            fatlink = FatLink()
             fatlink.fleet = form.cleaned_data["name"]
 
             if form.cleaned_data["type"] is not None:
@@ -187,22 +180,22 @@ def create_clickable_fatlink(
 
             fatlink.creator = request.user
             fatlink.hash = fatlink_hash
-            fatlink.afattime = timezone.now()
+            fatlink.created = timezone.now()
             fatlink.save()
 
-            dur = ClickAFatDuration()
-            dur.fleet = AFatLink.objects.get(hash=fatlink_hash)
+            dur = Duration()
+            dur.fleet = FatLink.objects.get(hash=fatlink_hash)
             dur.duration = form.cleaned_data["duration"]
             dur.save()
 
             # Writing DB log
             fleet_type = (
-                f" (Fleet Type: {fatlink.link_type.name})" if fatlink.link_type else ""
+                f" (Fleet type: {fatlink.link_type.name})" if fatlink.link_type else ""
             )
 
             write_log(
                 request=request,
-                log_event=AFatLog.Event.CREATE_FATLINK,
+                log_event=Log.Event.CREATE_FATLINK,
                 log_text=(
                     f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and '
                     f'a duration of {form.cleaned_data["duration"]} minutes was created'
@@ -310,7 +303,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
     # check if this character already has a fleet
     creator_character = EveCharacter.objects.get(character_id=token.character_id)
-    registered_fleets_for_creator = AFatLink.objects.select_related_default().filter(
+    registered_fleets_for_creator = FatLink.objects.select_related_default().filter(
         is_esilink=True,
         is_registered_on_esi=True,
         character__character_name=creator_character.character_name,
@@ -395,8 +388,8 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     creator_character = EveCharacter.objects.get(character_id=token.character_id)
 
     # Create the fat link
-    fatlink = AFatLink(
-        afattime=timezone.now(),
+    fatlink = FatLink(
+        created=timezone.now(),
         fleet=request.session["fatlink_form__name"],
         creator=request.user,
         character=creator_character,
@@ -416,11 +409,11 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     # Writing DB log
     fleet_type = ""
     if fatlink.link_type:
-        fleet_type = f"(Fleet Type: {fatlink.link_type.name})"
+        fleet_type = f"(Fleet type: {fatlink.link_type.name})"
 
     write_log(
         request=request,
-        log_event=AFatLog.Event.CREATE_FATLINK,
+        log_event=Log.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{request.session["fatlink_form__name"]}" '
             f"{fleet_type} was created by {request.user}"
@@ -540,8 +533,8 @@ def add_fat(
         return redirect(to="afat:dashboard")
 
     try:
-        fleet = AFatLink.objects.get(hash=fatlink_hash, is_esilink=False)
-    except AFatLink.DoesNotExist:
+        fleet = FatLink.objects.get(hash=fatlink_hash, is_esilink=False)
+    except FatLink.DoesNotExist:
         messages.warning(
             request=request,
             message=mark_safe(
@@ -551,10 +544,10 @@ def add_fat(
 
         return redirect(to="afat:dashboard")
 
-    dur = ClickAFatDuration.objects.get(fleet=fleet)
+    dur = Duration.objects.get(fleet=fleet)
     now = timezone.now() - timedelta(minutes=dur.duration)
 
-    if now >= fleet.afattime:
+    if now >= fleet.created:
         messages.warning(
             request=request,
             message=mark_safe(
@@ -618,8 +611,8 @@ def add_fat(
         ship_name = provider.get_itemtype(type_id=ship["ship_type_id"]).name
 
         try:
-            AFat(
-                afatlink=fleet, character=character, system=system, shiptype=ship_name
+            Fat(
+                fatlink=fleet, character=character, system=system, shiptype=ship_name
             ).save()
         except IntegrityError:
             messages.warning(
@@ -681,8 +674,8 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
     """
 
     try:
-        link = AFatLink.objects.select_related_default().get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        link = FatLink.objects.select_related_default().get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         messages.warning(
             request=request,
             message=mark_safe(
@@ -703,7 +696,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
             # Writing DB log
             write_log(
                 request=request,
-                log_event=AFatLog.Event.CHANGE_FATLINK,
+                log_event=Log.Event.CHANGE_FATLINK,
                 log_text=f'FAT link changed. Fleet name was set to "{link.fleet}"',
                 fatlink_hash=link.hash,
             )
@@ -728,8 +721,8 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
             character = get_or_create_character(name=character_name)
 
             if character is not None:
-                afat_object, created = AFat.objects.get_or_create(
-                    afatlink=link,
+                afat_object, created = Fat.objects.get_or_create(
+                    fatlink=link,
                     character=character,
                     defaults={
                         "system": system,
@@ -750,7 +743,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
                     # Writing DB log
                     write_log(
                         request=request,
-                        log_event=AFatLog.Event.MANUAL_FAT,
+                        log_event=Log.Event.MANUAL_FAT,
                         log_text=(
                             f"Pilot {character.character_name} "
                             f"flying a {shiptype} was manually added"
@@ -803,12 +796,12 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
 
     # Time dependant settings
     try:
-        dur = ClickAFatDuration.objects.get(fleet=link)
-    except ClickAFatDuration.DoesNotExist:
+        dur = Duration.objects.get(fleet=link)
+    except Duration.DoesNotExist:
         # ESI link
         link_ongoing = False
     else:
-        link_expires = link.afattime + timedelta(minutes=dur.duration)
+        link_expires = link.created + timedelta(minutes=dur.duration)
         now = timezone.now()
 
         if link_expires <= now:
@@ -827,7 +820,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
         # and has been created within the last 24 hours
         if (
             link.reopened is False
-            and get_time_delta(then=link.afattime, now=now, interval="hours") < 24
+            and get_time_delta(then=link.created, now=now, interval="hours") < 24
         ):
             manual_fat_can_be_added = True
 
@@ -871,7 +864,7 @@ def ajax_get_fats_by_fatlink(request: WSGIRequest, fatlink_hash) -> JsonResponse
     :rtype:
     """
 
-    fats = AFat.objects.select_related_default().filter(afatlink__hash=fatlink_hash)
+    fats = Fat.objects.select_related_default().filter(fatlink__hash=fatlink_hash)
 
     fat_rows = [convert_fats_to_dict(request=request, fat=fat) for fat in fats]
 
@@ -905,8 +898,8 @@ def delete_fatlink(
         return redirect(to="afat:dashboard")
 
     try:
-        link = AFatLink.objects.get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        link = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
@@ -920,13 +913,13 @@ def delete_fatlink(
 
         return redirect(to="afat:dashboard")
 
-    AFat.objects.filter(afatlink_id=link.pk).delete()
+    Fat.objects.filter(fatlink_id=link.pk).delete()
 
     link.delete()
 
     write_log(
         request=request,
-        log_event=AFatLog.Event.DELETE_FATLINK,
+        log_event=Log.Event.DELETE_FATLINK,
         log_text="FAT link deleted.",
         fatlink_hash=link.hash,
     )
@@ -969,8 +962,8 @@ def delete_fat(
     """
 
     try:
-        link = AFatLink.objects.get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        link = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
@@ -984,8 +977,8 @@ def delete_fat(
         return redirect(to="afat:dashboard")
 
     try:
-        fat_details = AFat.objects.get(pk=fat_id, afatlink_id=link.pk)
-    except AFat.DoesNotExist:
+        fat_details = Fat.objects.get(pk=fat_id, fatlink_id=link.pk)
+    except Fat.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
@@ -999,7 +992,7 @@ def delete_fat(
 
     write_log(
         request=request,
-        log_event=AFatLog.Event.DELETE_FAT,
+        log_event=Log.Event.DELETE_FAT,
         log_text=f"The FAT for {fat_details.character.character_name} has been deleted",
         fatlink_hash=link.hash,
     )
@@ -1038,8 +1031,8 @@ def close_esi_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRe
     """
 
     try:
-        fatlink = AFatLink.objects.get(hash=fatlink_hash)
-    except AFatLink.DoesNotExist:
+        fatlink = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
         logger.info(msg=f'ESI FAT link with hash "{fatlink_hash}" does not exist')
     else:
         logger.info(
@@ -1073,8 +1066,8 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
     """
 
     try:
-        fatlink_duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
-    except ClickAFatDuration.DoesNotExist:
+        fatlink_duration = Duration.objects.get(fleet__hash=fatlink_hash)
+    except Duration.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
@@ -1088,7 +1081,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         return redirect(to="afat:dashboard")
 
     if fatlink_duration.fleet.reopened is False:
-        created_at = fatlink_duration.fleet.afattime
+        created_at = fatlink_duration.fleet.created
         now = datetime.now()
 
         time_difference_in_minutes = get_time_delta(
@@ -1105,7 +1098,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         # writing DB log
         write_log(
             request=request,
-            log_event=AFatLog.Event.REOPEN_FATLINK,
+            log_event=Log.Event.REOPEN_FATLINK,
             log_text=(
                 "FAT link re-opened for a duration of "
                 f"{AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"

@@ -10,7 +10,9 @@ from django.core.management.base import BaseCommand
 from allianceauth.fleetactivitytracking.models import Fat, Fatlink
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import Fat as AFat
+from afat.models import FatLink as AFatLink
+from afat.models import Log
 
 
 def get_input(text) -> str:
@@ -82,19 +84,19 @@ class Command(BaseCommand):
                     )
                 )
 
-                afatlink = AFatLink()
+                afat_fatlink = AFatLink()
 
-                afatlink.id = aa_fatlink.id
-                afatlink.afattime = aa_fatlink.fatdatetime
-                afatlink.fleet = (
+                afat_fatlink.id = aa_fatlink.id
+                afat_fatlink.created = aa_fatlink.fatdatetime
+                afat_fatlink.fleet = (
                     aa_fatlink.fleet
                     if aa_fatlink.fleet is not None
                     else aa_fatlink.hash
                 )
-                afatlink.hash = aa_fatlink.hash
-                afatlink.creator_id = aa_fatlink.creator_id
+                afat_fatlink.hash = aa_fatlink.hash
+                afat_fatlink.creator_id = aa_fatlink.creator_id
 
-                afatlink.save()
+                afat_fatlink.save()
 
                 # Write to log table
                 log_text = (
@@ -102,9 +104,9 @@ class Command(BaseCommand):
                     f"was created by {aa_fatlink.creator}"
                 )
 
-                afatlog = AFatLog()
+                afatlog = Log()
                 afatlog.log_time = aa_fatlink.fatdatetime
-                afatlog.log_event = AFatLog.Event.CREATE_FATLINK
+                afatlog.log_event = Log.Event.CREATE_FATLINK
                 afatlog.log_text = log_text
                 afatlog.user_id = aa_fatlink.creator_id
                 afatlog.save()
@@ -114,15 +116,15 @@ class Command(BaseCommand):
             for aa_fat in aa_fats:
                 self.stdout.write(msg=f"Importing FATs for FAT link ID '{aa_fat.id}'.")
 
-                afat = AFat()
+                afat_fat = AFat()
 
-                afat.id = aa_fat.id
-                afat.system = aa_fat.system
-                afat.shiptype = aa_fat.shiptype
-                afat.character_id = aa_fat.character_id
-                afat.afatlink_id = aa_fat.fatlink_id
+                afat_fat.id = aa_fat.id
+                afat_fat.system = aa_fat.system
+                afat_fat.shiptype = aa_fat.shiptype
+                afat_fat.character_id = aa_fat.character_id
+                afat_fat.fatlink_id = aa_fat.fatlink_id
 
-                afat.save()
+                afat_fat.save()
 
             self.stdout.write(
                 msg=self.style.SUCCESS(

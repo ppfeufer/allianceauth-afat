@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
+from afat.models import Fat, FatLink, FleetType, Log
 
 
 def custom_filter(title):
@@ -68,7 +68,7 @@ def custom_filter(title):
 
 
 # Register your models here.
-@admin.register(AFatLink)
+@admin.register(FatLink)
 class AFatLinkAdmin(admin.ModelAdmin):
     """
     Config for the FAT link model
@@ -76,7 +76,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
 
     list_select_related = ("link_type",)
     list_display = (
-        "afattime",
+        "created",
         "creator",
         "fleet",
         "link_type",
@@ -85,7 +85,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         "number_of_fats",
     )
     list_filter = ("is_esilink", ("link_type__name", custom_filter(title="fleet type")))
-    ordering = ("-afattime",)
+    ordering = ("-created",)
     search_fields = (
         "link_type__name",
         "hash",
@@ -106,7 +106,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
 
         queryset = super().get_queryset(request)
         queryset = queryset.annotate(
-            _number_of_fats=Count(expression="afats", distinct=True)
+            _number_of_fats=Count(expression="afat_fats", distinct=True)
         )
 
         return queryset
@@ -125,25 +125,25 @@ class AFatLinkAdmin(admin.ModelAdmin):
         return obj._number_of_fats
 
 
-@admin.register(AFat)
+@admin.register(Fat)
 class AFatAdmin(admin.ModelAdmin):
     """
     Config for fat model
     """
 
-    list_display = ("character", "system", "shiptype", "afatlink")
+    list_display = ("character", "system", "shiptype", "fatlink")
     list_filter = ("character", "system", "shiptype")
     ordering = ("-character",)
     search_fields = (
         "character__character_name",
         "system",
         "shiptype",
-        "afatlink__fleet",
-        "afatlink__hash",
+        "fatlink__fleet",
+        "fatlink__hash",
     )
 
 
-@admin.register(AFatLinkType)
+@admin.register(FleetType)
 class AFatLinkTypeAdmin(admin.ModelAdmin):
     """
     Config for the FAT link type model
@@ -272,7 +272,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             )
 
 
-@admin.register(AFatLog)
+@admin.register(Log)
 class AFatLogAdmin(admin.ModelAdmin):
     """
     Config for the admin log model

@@ -24,7 +24,7 @@ from app_utils.logging import LoggerAddTag
 # Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import Fat, FatLink, Log
 from afat.providers import esi
 from afat.utils import get_or_create_character
 
@@ -94,7 +94,7 @@ def process_character(
     """
 
     character = get_or_create_character(character_id=character_id)
-    link = AFatLink.objects.get(hash=fatlink_hash)
+    link = FatLink.objects.get(hash=fatlink_hash)
 
     solar_system = esi.client.Universe.get_universe_systems_system_id(
         system_id=solar_system_id
@@ -104,8 +104,8 @@ def process_character(
     solar_system_name = solar_system["name"]
     ship_name = ship["name"]
 
-    fat, created = AFat.objects.get_or_create(
-        afatlink=link,
+    fat, created = Fat.objects.get_or_create(
+        fatlink=link,
         character=character,
         defaults={"system": solar_system_name, "shiptype": ship_name},
     )
@@ -128,7 +128,7 @@ def process_character(
     )
 
 
-def _close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
+def _close_esi_fleet(fatlink: FatLink, reason: str) -> None:
     """
     Closing ESI fleet
 
@@ -148,7 +148,7 @@ def _close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
     fatlink.save()
 
 
-def _esi_fatlinks_error_handling(error_key: str, fatlink: AFatLink) -> None:
+def _esi_fatlinks_error_handling(error_key: str, fatlink: FatLink) -> None:
     """
     ESI error handling
 
@@ -194,7 +194,7 @@ def _esi_fatlinks_error_handling(error_key: str, fatlink: AFatLink) -> None:
     fatlink.save()
 
 
-def _check_for_esi_fleet(fatlink: AFatLink):
+def _check_for_esi_fleet(fatlink: FatLink):
     required_scopes = ["esi-fleets.read_fleet.v1"]
 
     # Check if there is a fleet
@@ -212,17 +212,17 @@ def _check_for_esi_fleet(fatlink: AFatLink):
         return {"fleet": fleet_from_esi, "token": esi_token}
     except HTTPNotFound:
         _esi_fatlinks_error_handling(
-            error_key=AFatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
+            error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
         )
     except Exception:  # pylint: disable=broad-exception-caught
         _esi_fatlinks_error_handling(
-            error_key=AFatLink.EsiError.NO_FLEET, fatlink=fatlink
+            error_key=FatLink.EsiError.NO_FLEET, fatlink=fatlink
         )
 
     return False
 
 
-def _process_esi_fatlink(fatlink: AFatLink):
+def _process_esi_fatlink(fatlink: FatLink):
     """
     Processing ESI FAT Link
 
@@ -248,7 +248,7 @@ def _process_esi_fatlink(fatlink: AFatLink):
                 ).result()
             except Exception:  # pylint: disable=broad-exception-caught
                 _esi_fatlinks_error_handling(
-                    error_key=AFatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
+                    error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
                 )
 
             # Process fleet members
@@ -279,10 +279,10 @@ def update_esi_fatlinks() -> None:
     """
 
     try:
-        esi_fatlinks = AFatLink.objects.select_related_default().filter(
+        esi_fatlinks = FatLink.objects.select_related_default().filter(
             is_esilink=True, is_registered_on_esi=True
         )
-    except AFatLink.DoesNotExist:
+    except FatLink.DoesNotExist:
         pass
 
     # Work our way through the FAT links
@@ -310,6 +310,6 @@ def logrotate():
 
     logger.info(msg=f"Cleaning up logs older than {AFAT_DEFAULT_LOG_DURATION} days")
 
-    AFatLog.objects.filter(
+    Log.objects.filter(
         log_time__lte=timezone.now() - timedelta(days=AFAT_DEFAULT_LOG_DURATION)
     ).delete()

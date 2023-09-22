@@ -24,14 +24,7 @@ from afat.helper.views import (
     convert_fats_to_dict,
     convert_logs_to_dict,
 )
-from afat.models import (
-    AFat,
-    AFatLink,
-    AFatLinkType,
-    AFatLog,
-    ClickAFatDuration,
-    get_hash_on_save,
-)
+from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user, write_log
 
@@ -86,8 +79,8 @@ class TestHelpers(TestCase):
     def test_helper_get_esi_fleet_information_by_user(self):
         # given
         fatlink_hash_fleet_1 = get_hash_on_save()
-        fatlink_1 = AFatLink.objects.create(
-            afattime=timezone.now(),
+        fatlink_1 = FatLink.objects.create(
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_add_fatlink,
             character=self.character_1001,
@@ -98,8 +91,8 @@ class TestHelpers(TestCase):
         )
 
         fatlink_hash_fleet_2 = get_hash_on_save()
-        fatlink_2 = AFatLink.objects.create(
-            afattime=timezone.now(),
+        fatlink_2 = FatLink.objects.create(
+            created=timezone.now(),
             fleet="April Fleet 2",
             creator=self.user_with_add_fatlink,
             character=self.character_1101,
@@ -156,8 +149,8 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash_fleet_1 = get_hash_on_save()
-        fatlink_1_created = AFatLink.objects.create(
-            afattime=timezone.now(),
+        fatlink_1_created = FatLink.objects.create(
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,
@@ -166,28 +159,28 @@ class TestHelpers(TestCase):
             is_registered_on_esi=True,
             esi_fleet_id="3726458287",
         )
-        AFat.objects.create(
-            character=self.character_1101, afatlink=fatlink_1_created, shiptype="Omen"
+        Fat.objects.create(
+            character=self.character_1101, fatlink=fatlink_1_created, shiptype="Omen"
         )
 
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_hash_fleet_2 = get_hash_on_save()
-        fatlink_2_created = AFatLink.objects.create(
-            afattime=timezone.now(),
+        fatlink_2_created = FatLink.objects.create(
+            created=timezone.now(),
             fleet="April Fleet 2",
             creator=self.user_with_add_fatlink,
             character=self.character_1101,
             hash=fatlink_hash_fleet_2,
             link_type=fatlink_type_cta,
         )
-        AFat.objects.create(
-            character=self.character_1001, afatlink=fatlink_2_created, shiptype="Omen"
+        Fat.objects.create(
+            character=self.character_1001, fatlink=fatlink_2_created, shiptype="Omen"
         )
 
         # when
         fatlink_1 = (
-            AFatLink.objects.select_related_default()
-            .annotate_afats_count()
+            FatLink.objects.select_related_default()
+            .annotate_fats_count()
             .get(hash=fatlink_hash_fleet_1)
         )
         close_esi_tracking_url = reverse(
@@ -201,8 +194,8 @@ class TestHelpers(TestCase):
         )
 
         fatlink_2 = (
-            AFatLink.objects.select_related_default()
-            .annotate_afats_count()
+            FatLink.objects.select_related_default()
+            .annotate_fats_count()
             .get(hash=fatlink_hash_fleet_2)
         )
         edit_url_2 = reverse(
@@ -216,7 +209,7 @@ class TestHelpers(TestCase):
         result_2 = convert_fatlinks_to_dict(request=request, fatlink=fatlink_2)
 
         # then
-        fleet_time_1 = fatlink_1.afattime
+        fleet_time_1 = fatlink_1.created
         fleet_time_timestamp_1 = fleet_time_1.timestamp()
         creator_main_character_1 = get_main_character_from_user(user=fatlink_1.creator)
         self.assertDictEqual(
@@ -234,7 +227,7 @@ class TestHelpers(TestCase):
                     "time": fleet_time_1,
                     "timestamp": fleet_time_timestamp_1,
                 },
-                "fats_number": fatlink_1.afats_count,
+                "fats_number": fatlink_1.fats_count,
                 "hash": fatlink_1.hash,
                 "is_esilink": True,
                 "esi_fleet_id": 3726458287,
@@ -264,7 +257,7 @@ class TestHelpers(TestCase):
             },
         )
 
-        fleet_time_2 = fatlink_2.afattime
+        fleet_time_2 = fatlink_2.created
         fleet_time_timestamp_2 = fleet_time_2.timestamp()
         creator_main_character_2 = get_main_character_from_user(user=fatlink_2.creator)
         self.assertDictEqual(
@@ -278,7 +271,7 @@ class TestHelpers(TestCase):
                     "time": fleet_time_2,
                     "timestamp": fleet_time_timestamp_2,
                 },
-                "fats_number": fatlink_2.afats_count,
+                "fats_number": fatlink_2.fats_count,
                 "hash": fatlink_2.hash,
                 "is_esilink": False,
                 "esi_fleet_id": None,
@@ -306,9 +299,9 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
-        fatlink_created = AFatLink.objects.create(
-            afattime=timezone.now(),
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
+        fatlink_created = FatLink.objects.create(
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,
@@ -318,8 +311,8 @@ class TestHelpers(TestCase):
             esi_fleet_id="3726458287",
             link_type=fatlink_type_cta,
         )
-        fat = AFat.objects.create(
-            character=self.character_1101, afatlink=fatlink_created, shiptype="Omen"
+        fat = Fat.objects.create(
+            character=self.character_1101, fatlink=fatlink_created, shiptype="Omen"
         )
 
         # when
@@ -329,11 +322,11 @@ class TestHelpers(TestCase):
             '<span class="label label-default afat-label afat-label-via-esi '
             'afat-label-active-esi-fleet">via ESI</span>'
         )
-        fleet_time = fat.afatlink.afattime
+        fleet_time = fat.fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
 
         button_delete_fat = reverse(
-            viewname="afat:fatlinks_delete_fat", args=[fat.afatlink.hash, fat.id]
+            viewname="afat:fatlinks_delete_fat", args=[fat.fatlink.hash, fat.id]
         )
         button_delete_text = "Delete"
         modal_body_text = (
@@ -348,7 +341,7 @@ class TestHelpers(TestCase):
                 "system": fat.system,
                 "ship_type": fat.shiptype,
                 "character_name": fat.character.character_name,
-                "fleet_name": fat.afatlink.fleet + esi_marker,
+                "fleet_name": fat.fatlink.fleet + esi_marker,
                 "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
                 "fleet_type": "CTA",
                 "via_esi": "Yes",
@@ -372,9 +365,9 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = AFatLinkType.objects.create(name="CTA")
-        fatlink_created = AFatLink.objects.create(
-            afattime=timezone.now(),
+        fatlink_type_cta = FleetType.objects.create(name="CTA")
+        fatlink_created = FatLink.objects.create(
+            created=timezone.now(),
             fleet="April Fleet 1",
             creator=self.user_with_manage_afat,
             character=self.character_1001,
@@ -385,13 +378,13 @@ class TestHelpers(TestCase):
             link_type=fatlink_type_cta,
         )
 
-        duration = ClickAFatDuration.objects.create(fleet=fatlink_created, duration=120)
+        duration = Duration.objects.create(fleet=fatlink_created, duration=120)
 
-        fleet_type = f" (Fleet Type: {fatlink_created.link_type.name})"
+        fleet_type = f" (Fleet type: {fatlink_created.link_type.name})"
 
         write_log(
             request=request,
-            log_event=AFatLog.Event.CREATE_FATLINK,
+            log_event=Log.Event.CREATE_FATLINK,
             log_text=(
                 f'FAT link with name "{fatlink_created.fleet}"{fleet_type} and '
                 f"a duration of {duration.duration} minutes was created"
@@ -400,7 +393,7 @@ class TestHelpers(TestCase):
         )
 
         # when
-        log = AFatLog.objects.get(fatlink_hash=fatlink_hash)
+        log = Log.objects.get(fatlink_hash=fatlink_hash)
         log_time = log.log_time
         log_time_timestamp = log_time.timestamp()
         user_main_character = get_main_character_from_user(user=log.user)
@@ -416,7 +409,7 @@ class TestHelpers(TestCase):
             d1=result,
             d2={
                 "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-                "log_event": AFatLog.Event(log.log_event).label,
+                "log_event": Log.Event(log.log_event).label,
                 "user": user_main_character,
                 "fatlink": {"html": fatlink_html, "hash": log.fatlink_hash},
                 "description": log.log_text,
