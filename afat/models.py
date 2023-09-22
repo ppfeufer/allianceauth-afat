@@ -252,23 +252,25 @@ class AFatLink(models.Model):
         return Fat.objects.filter(afatlink=self).count()
 
 
-# ClickAFatDuration Model
-class ClickAFatDuration(models.Model):
+class Duration(models.Model):
     """
-    ClickAFatDuration
+    FAT link duration
+    FAT link expiry time in minutes
     """
 
     duration = models.PositiveIntegerField()
-    fleet = models.ForeignKey(to=AFatLink, on_delete=models.CASCADE)
+    fleet = models.ForeignKey(
+        to=AFatLink, related_name="duration", on_delete=models.CASCADE
+    )
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
-        ClickAFatDuration :: Meta
+        Meta definitions
         """
 
         default_permissions = ()
-        verbose_name = _("FAT Duration")
-        verbose_name_plural = _("FAT Durations")
+        verbose_name = _("FAT link duration")
+        verbose_name_plural = _("FAT link durations")
 
 
 # AFat Model

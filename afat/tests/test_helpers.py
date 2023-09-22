@@ -24,14 +24,7 @@ from afat.helper.views import (
     convert_fats_to_dict,
     convert_logs_to_dict,
 )
-from afat.models import (
-    AFatLink,
-    ClickAFatDuration,
-    Fat,
-    FleetType,
-    Log,
-    get_hash_on_save,
-)
+from afat.models import AFatLink, Duration, Fat, FleetType, Log, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user, write_log
 
@@ -385,7 +378,7 @@ class TestHelpers(TestCase):
             link_type=fatlink_type_cta,
         )
 
-        duration = ClickAFatDuration.objects.create(fleet=fatlink_created, duration=120)
+        duration = Duration.objects.create(fleet=fatlink_created, duration=120)
 
         fleet_type = f" (Fleet type: {fatlink_created.link_type.name})"
 

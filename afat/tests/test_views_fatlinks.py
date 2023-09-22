@@ -21,7 +21,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, ClickAFatDuration, Fat, FleetType, get_hash_on_save
+from afat.models import AFatLink, Duration, Fat, FleetType, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user
 
@@ -276,7 +276,7 @@ class TestFatlinksView(TestCase):
             afattime="2021-11-05T13:19:49.676Z",
         )
 
-        ClickAFatDuration.objects.create(fleet=fatlink_created, duration=120)
+        Duration.objects.create(fleet=fatlink_created, duration=120)
 
         # when
         fatlink = (

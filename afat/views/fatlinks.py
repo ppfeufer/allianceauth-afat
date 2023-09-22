@@ -44,14 +44,7 @@ from afat.forms import (
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
-from afat.models import (
-    AFatLink,
-    ClickAFatDuration,
-    Fat,
-    FleetType,
-    Log,
-    get_hash_on_save,
-)
+from afat.models import AFatLink, Duration, Fat, FleetType, Log, get_hash_on_save
 from afat.providers import esi
 from afat.tasks import process_fats
 from afat.utils import get_or_create_character, write_log
@@ -190,7 +183,7 @@ def create_clickable_fatlink(
             fatlink.afattime = timezone.now()
             fatlink.save()
 
-            dur = ClickAFatDuration()
+            dur = Duration()
             dur.fleet = AFatLink.objects.get(hash=fatlink_hash)
             dur.duration = form.cleaned_data["duration"]
             dur.save()
@@ -551,7 +544,7 @@ def add_fat(
 
         return redirect(to="afat:dashboard")
 
-    dur = ClickAFatDuration.objects.get(fleet=fleet)
+    dur = Duration.objects.get(fleet=fleet)
     now = timezone.now() - timedelta(minutes=dur.duration)
 
     if now >= fleet.afattime:
@@ -803,8 +796,8 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
 
     # Time dependant settings
     try:
-        dur = ClickAFatDuration.objects.get(fleet=link)
-    except ClickAFatDuration.DoesNotExist:
+        dur = Duration.objects.get(fleet=link)
+    except Duration.DoesNotExist:
         # ESI link
         link_ongoing = False
     else:
@@ -1073,8 +1066,8 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
     """
 
     try:
-        fatlink_duration = ClickAFatDuration.objects.get(fleet__hash=fatlink_hash)
-    except ClickAFatDuration.DoesNotExist:
+        fatlink_duration = Duration.objects.get(fleet__hash=fatlink_hash)
+    except Duration.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(
