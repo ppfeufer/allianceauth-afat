@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-22 16:01+0200\n"
+"POT-Creation-Date: 2023-09-22 17:57+0200\n"
 "PO-Revision-Date: 2023-07-27 19:17+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
@@ -498,6 +498,7 @@ msgid "Re-Open"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:64
+#: templates/afat/partials/fatlinks/details/fatlink_info.html:97
 msgid "Re-open FAT link"
 msgstr ""
 
@@ -510,12 +511,9 @@ msgid "Copy me!"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:92
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:63
-msgid "Close ESI Fleet Tracking"
-msgstr ""
-
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:97
-msgid "Re-Open Fat Link"
+#: templates/afat/view/dashboard/dashboard.html:32
+#: templates/afat/view/fatlinks/fatlinks_overview.html:57
+msgid "Close ESI fleet tracking"
 msgstr ""
 
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:14
@@ -620,6 +618,10 @@ msgstr ""
 msgid ""
 "Note: Information about your registered fleets might be delayed by up to 5 "
 "minutes."
+msgstr ""
+
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:63
+msgid "Close ESI Fleet Tracking"
 msgstr ""
 
 #: templates/afat/partials/footer/app-translation-footer.html:5
@@ -816,11 +818,6 @@ msgstr ""
 #: templates/afat/view/dashboard/dashboard.html:29
 #: templates/afat/view/fatlinks/fatlinks_overview.html:54
 msgid "Delete FAT link"
-msgstr ""
-
-#: templates/afat/view/dashboard/dashboard.html:32
-#: templates/afat/view/fatlinks/fatlinks_overview.html:57
-msgid "Close ESI fleet tracking"
 msgstr ""
 
 #: templates/afat/view/dashboard/dashboard.html:58
