@@ -42,7 +42,7 @@ def get_hash_on_save() -> str:
     return fatlink_hash
 
 
-class AaAfat(models.Model):
+class General(models.Model):
     """
     Meta model for app permissions
     """
@@ -74,7 +74,7 @@ class AaAfat(models.Model):
             # Can view the modules log
             ("log_view", _("Can view the modules log")),
         )
-        verbose_name = _("Alliance Auth AFAT")
+        verbose_name = _("AFAT")
 
 
 class FleetType(models.Model):
