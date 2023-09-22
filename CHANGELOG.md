@@ -14,15 +14,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 
+- German translation improved
 - Korean translation improved
+- Russian translation improved
 - Spanish translation improved
 - Use keyword arguments wherever possible
+- Model names
+- Some model field names
 
 ### Removed
 
 - Import from ImicusFAT (ImicusFAT has been gone for a while now and doesn't work
   with Alliance Auth >= 3.0.0. Whoever is still using it, should feel bad and
   immediately update their systems.)
+- Manual FAT model. This has been deprecated back in April 2021, so it's time to
+  remove it.
 
 ## \[2.12.3\] - 2023-09-02
 
