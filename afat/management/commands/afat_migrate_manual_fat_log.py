@@ -6,7 +6,7 @@ Migrate the old manual FAT log into the new log table
 from django.core.management.base import BaseCommand
 
 # Alliance Auth AFAT
-from afat.models import AFatLog, ManualAFat
+from afat.models import Log, ManualAFat
 
 
 def get_input(text) -> str:
@@ -42,11 +42,11 @@ class Command(BaseCommand):
         if manual_fat_logs.count() > 0:
             for manual_log in manual_fat_logs:
                 if manual_log.created_at is not None:
-                    afat_log = AFatLog()
+                    afat_log = Log()
 
                     afat_log.user_id = manual_log.creator_id
                     afat_log.log_time = manual_log.created_at
-                    afat_log.log_event = AFatLog.Event.MANUAL_FAT
+                    afat_log.log_event = Log.Event.MANUAL_FAT
                     afat_log.log_text = (
                         f"Pilot {manual_log.character} manually added. "
                         f"(Migrated from old Manual FAT log)"

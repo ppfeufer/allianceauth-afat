@@ -37,7 +37,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.helpers import random_string
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, AFatLog, Fat, FleetType
+from afat.models import AFatLink, Fat, FleetType, Log
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log
 
@@ -67,7 +67,7 @@ for _ in range(LINKS_NUMBER):
 
     write_log(
         request=RequestStub(user=user),
-        log_event=AFatLog.Event.CREATE_FATLINK,
+        log_event=Log.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{fat_link.fleet}"'
             f"{link_type} was created by {user}"

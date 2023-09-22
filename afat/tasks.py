@@ -24,7 +24,7 @@ from app_utils.logging import LoggerAddTag
 # Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
-from afat.models import AFatLink, AFatLog, Fat
+from afat.models import AFatLink, Fat, Log
 from afat.providers import esi
 from afat.utils import get_or_create_character
 
@@ -310,6 +310,6 @@ def logrotate():
 
     logger.info(msg=f"Cleaning up logs older than {AFAT_DEFAULT_LOG_DURATION} days")
 
-    AFatLog.objects.filter(
+    Log.objects.filter(
         log_time__lte=timezone.now() - timedelta(days=AFAT_DEFAULT_LOG_DURATION)
     ).delete()

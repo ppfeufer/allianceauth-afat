@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
-from afat.models import AFatLink, AFatLog, Fat, FleetType
+from afat.models import AFatLink, Fat, FleetType, Log
 
 
 def custom_filter(title):
@@ -272,7 +272,7 @@ class AFatLinkTypeAdmin(admin.ModelAdmin):
             )
 
 
-@admin.register(AFatLog)
+@admin.register(Log)
 class AFatLogAdmin(admin.ModelAdmin):
     """
     Config for the admin log model

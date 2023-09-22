@@ -26,10 +26,10 @@ from afat.helper.views import (
 )
 from afat.models import (
     AFatLink,
-    AFatLog,
     ClickAFatDuration,
     Fat,
     FleetType,
+    Log,
     get_hash_on_save,
 )
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
@@ -387,11 +387,11 @@ class TestHelpers(TestCase):
 
         duration = ClickAFatDuration.objects.create(fleet=fatlink_created, duration=120)
 
-        fleet_type = f" (Fleet Type: {fatlink_created.link_type.name})"
+        fleet_type = f" (Fleet type: {fatlink_created.link_type.name})"
 
         write_log(
             request=request,
-            log_event=AFatLog.Event.CREATE_FATLINK,
+            log_event=Log.Event.CREATE_FATLINK,
             log_text=(
                 f'FAT link with name "{fatlink_created.fleet}"{fleet_type} and '
                 f"a duration of {duration.duration} minutes was created"
@@ -400,7 +400,7 @@ class TestHelpers(TestCase):
         )
 
         # when
-        log = AFatLog.objects.get(fatlink_hash=fatlink_hash)
+        log = Log.objects.get(fatlink_hash=fatlink_hash)
         log_time = log.log_time
         log_time_timestamp = log_time.timestamp()
         user_main_character = get_main_character_from_user(user=log.user)
@@ -416,7 +416,7 @@ class TestHelpers(TestCase):
             d1=result,
             d2={
                 "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-                "log_event": AFatLog.Event(log.log_event).label,
+                "log_event": Log.Event(log.log_event).label,
                 "user": user_main_character,
                 "fatlink": {"html": fatlink_html, "hash": log.fatlink_hash},
                 "description": log.log_text,

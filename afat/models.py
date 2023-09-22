@@ -366,9 +366,9 @@ class ManualAFat(models.Model):
 
 
 # AFat Log Model
-class AFatLog(models.Model):
+class Log(models.Model):
     """
-    AFatLog
+    The log
     """
 
     class Event(models.TextChoices):
@@ -376,18 +376,18 @@ class AFatLog(models.Model):
         Choices for SRP Status
         """
 
-        CREATE_FATLINK = "CR_FAT_LINK", _("FAT Link Created")
-        CHANGE_FATLINK = "CH_FAT_LINK", _("FAT Link Changed")
-        DELETE_FATLINK = "RM_FAT_LINK", _("FAT Link Removed")
-        REOPEN_FATLINK = "RO_FAT_LINK", _("FAT Link Re-Opened")
-        # CREATE_FAT = "CR_FAT", _("FAT Registered")
-        DELETE_FAT = "RM_FAT", _("FAT Removed")
-        MANUAL_FAT = "CR_FAT_MAN", _("Manual FAT Added")
+        CREATE_FATLINK = "CR_FAT_LINK", _("FAT link created")
+        CHANGE_FATLINK = "CH_FAT_LINK", _("FAT link changed")
+        DELETE_FATLINK = "RM_FAT_LINK", _("FAT link removed")
+        REOPEN_FATLINK = "RO_FAT_LINK", _("FAT link re-opened")
+        # CREATE_FAT = "CR_FAT", _("FAT registered")
+        DELETE_FAT = "RM_FAT", _("FAT removed")
+        MANUAL_FAT = "CR_FAT_MAN", _("Manual FAT added")
 
     log_time = models.DateTimeField(default=timezone.now, db_index=True)
     user = models.ForeignKey(
         to=User,
-        related_name="+",
+        related_name="afat_log",
         null=True,
         blank=True,
         default=None,
@@ -408,5 +408,5 @@ class AFatLog(models.Model):
         """
 
         default_permissions = ()
-        verbose_name = _("AFAT Log")
-        verbose_name_plural = _("AFAT Logs")
+        verbose_name = _("Log")
+        verbose_name_plural = _("Logs")

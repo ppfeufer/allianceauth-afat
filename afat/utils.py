@@ -60,9 +60,9 @@ def write_log(request: WSGIRequest, log_event: str, fatlink_hash: str, log_text:
     """
 
     # Alliance Auth AFAT
-    from afat.models import AFatLog  # pylint: disable=import-outside-toplevel
+    from afat.models import Log  # pylint: disable=import-outside-toplevel
 
-    afat_log = AFatLog()
+    afat_log = Log()
     afat_log.user = request.user
     afat_log.log_event = log_event
     afat_log.log_text = log_text

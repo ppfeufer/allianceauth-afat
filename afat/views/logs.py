@@ -19,7 +19,7 @@ from app_utils.logging import LoggerAddTag
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
 from afat.helper.views import convert_logs_to_dict
-from afat.models import AFatLink, AFatLog
+from afat.models import AFatLink, Log
 
 logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
@@ -61,7 +61,7 @@ def ajax_get_logs(
     :rtype:
     """
 
-    logs = AFatLog.objects.select_related("user", "user__profile__main_character").all()
+    logs = Log.objects.select_related("user", "user__profile__main_character").all()
     fatlink_hashes = set(AFatLink.objects.values_list("hash", flat=True))
 
     log_rows = [

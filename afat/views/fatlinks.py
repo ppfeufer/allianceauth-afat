@@ -46,10 +46,10 @@ from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import (
     AFatLink,
-    AFatLog,
     ClickAFatDuration,
     Fat,
     FleetType,
+    Log,
     get_hash_on_save,
 )
 from afat.providers import esi
@@ -197,12 +197,12 @@ def create_clickable_fatlink(
 
             # Writing DB log
             fleet_type = (
-                f" (Fleet Type: {fatlink.link_type.name})" if fatlink.link_type else ""
+                f" (Fleet type: {fatlink.link_type.name})" if fatlink.link_type else ""
             )
 
             write_log(
                 request=request,
-                log_event=AFatLog.Event.CREATE_FATLINK,
+                log_event=Log.Event.CREATE_FATLINK,
                 log_text=(
                     f'FAT link with name "{form.cleaned_data["name"]}"{fleet_type} and '
                     f'a duration of {form.cleaned_data["duration"]} minutes was created'
@@ -416,11 +416,11 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     # Writing DB log
     fleet_type = ""
     if fatlink.link_type:
-        fleet_type = f"(Fleet Type: {fatlink.link_type.name})"
+        fleet_type = f"(Fleet type: {fatlink.link_type.name})"
 
     write_log(
         request=request,
-        log_event=AFatLog.Event.CREATE_FATLINK,
+        log_event=Log.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{request.session["fatlink_form__name"]}" '
             f"{fleet_type} was created by {request.user}"
@@ -703,7 +703,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
             # Writing DB log
             write_log(
                 request=request,
-                log_event=AFatLog.Event.CHANGE_FATLINK,
+                log_event=Log.Event.CHANGE_FATLINK,
                 log_text=f'FAT link changed. Fleet name was set to "{link.fleet}"',
                 fatlink_hash=link.hash,
             )
@@ -750,7 +750,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
                     # Writing DB log
                     write_log(
                         request=request,
-                        log_event=AFatLog.Event.MANUAL_FAT,
+                        log_event=Log.Event.MANUAL_FAT,
                         log_text=(
                             f"Pilot {character.character_name} "
                             f"flying a {shiptype} was manually added"
@@ -926,7 +926,7 @@ def delete_fatlink(
 
     write_log(
         request=request,
-        log_event=AFatLog.Event.DELETE_FATLINK,
+        log_event=Log.Event.DELETE_FATLINK,
         log_text="FAT link deleted.",
         fatlink_hash=link.hash,
     )
@@ -999,7 +999,7 @@ def delete_fat(
 
     write_log(
         request=request,
-        log_event=AFatLog.Event.DELETE_FAT,
+        log_event=Log.Event.DELETE_FAT,
         log_text=f"The FAT for {fat_details.character.character_name} has been deleted",
         fatlink_hash=link.hash,
     )
@@ -1105,7 +1105,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         # writing DB log
         write_log(
             request=request,
-            log_event=AFatLog.Event.REOPEN_FATLINK,
+            log_event=Log.Event.REOPEN_FATLINK,
             log_text=(
                 "FAT link re-opened for a duration of "
                 f"{AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
