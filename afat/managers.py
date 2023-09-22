@@ -9,10 +9,10 @@ from django.db.models import Count, F
 
 class AFatLinkQuerySet(models.QuerySet):
     """
-    AFatLinkQuerySet
+    FAT link queryset
     """
 
-    def annotate_afats_count(self):
+    def annotate_fats_count(self):
         """
         Annotate the amount fats per fat link
 
@@ -20,12 +20,12 @@ class AFatLinkQuerySet(models.QuerySet):
         :rtype:
         """
 
-        return self.annotate(afats_count=Count(expression=F("afats")))
+        return self.annotate(fats_count=Count(expression=F("afat_fats")))
 
 
 class AFatLinkManager(models.Manager):
     """
-    AFatLinkManager
+    FAT link manager
     """
 
     def get_queryset(self) -> models.QuerySet:
@@ -45,9 +45,9 @@ class AFatLinkManager(models.Manager):
         )
 
 
-class AFatManager(models.Manager):
+class FatManager(models.Manager):
     """
-    AFatManager
+    FAT manager
     """
 
     def select_related_default(self):

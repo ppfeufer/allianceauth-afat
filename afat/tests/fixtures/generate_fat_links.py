@@ -37,7 +37,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.helpers import random_string
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
+from afat.models import AFatLink, AFatLinkType, AFatLog, Fat
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log
 
@@ -78,7 +78,7 @@ for _ in range(LINKS_NUMBER):
     for character in random.sample(
         characters, k=random.randint(a=1, b=len(characters))
     ):
-        AFat.objects.create(
+        Fat.objects.create(
             character_id=character.id,
             afatlink=fat_link,
             system="Jita",

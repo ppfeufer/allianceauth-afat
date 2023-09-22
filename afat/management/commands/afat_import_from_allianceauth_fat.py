@@ -10,7 +10,8 @@ from django.core.management.base import BaseCommand
 from allianceauth.fleetactivitytracking.models import Fat, Fatlink
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import AFatLink, AFatLog
+from afat.models import Fat as AFat
 
 
 def get_input(text) -> str:

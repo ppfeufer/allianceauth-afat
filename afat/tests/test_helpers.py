@@ -25,11 +25,11 @@ from afat.helper.views import (
     convert_logs_to_dict,
 )
 from afat.models import (
-    AFat,
     AFatLink,
     AFatLinkType,
     AFatLog,
     ClickAFatDuration,
+    Fat,
     get_hash_on_save,
 )
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
@@ -166,7 +166,7 @@ class TestHelpers(TestCase):
             is_registered_on_esi=True,
             esi_fleet_id="3726458287",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=self.character_1101, afatlink=fatlink_1_created, shiptype="Omen"
         )
 
@@ -180,14 +180,14 @@ class TestHelpers(TestCase):
             hash=fatlink_hash_fleet_2,
             link_type=fatlink_type_cta,
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=self.character_1001, afatlink=fatlink_2_created, shiptype="Omen"
         )
 
         # when
         fatlink_1 = (
             AFatLink.objects.select_related_default()
-            .annotate_afats_count()
+            .annotate_fats_count()
             .get(hash=fatlink_hash_fleet_1)
         )
         close_esi_tracking_url = reverse(
@@ -202,7 +202,7 @@ class TestHelpers(TestCase):
 
         fatlink_2 = (
             AFatLink.objects.select_related_default()
-            .annotate_afats_count()
+            .annotate_fats_count()
             .get(hash=fatlink_hash_fleet_2)
         )
         edit_url_2 = reverse(
@@ -234,7 +234,7 @@ class TestHelpers(TestCase):
                     "time": fleet_time_1,
                     "timestamp": fleet_time_timestamp_1,
                 },
-                "fats_number": fatlink_1.afats_count,
+                "fats_number": fatlink_1.fats_count,
                 "hash": fatlink_1.hash,
                 "is_esilink": True,
                 "esi_fleet_id": 3726458287,
@@ -278,7 +278,7 @@ class TestHelpers(TestCase):
                     "time": fleet_time_2,
                     "timestamp": fleet_time_timestamp_2,
                 },
-                "fats_number": fatlink_2.afats_count,
+                "fats_number": fatlink_2.fats_count,
                 "hash": fatlink_2.hash,
                 "is_esilink": False,
                 "esi_fleet_id": None,
@@ -318,7 +318,7 @@ class TestHelpers(TestCase):
             esi_fleet_id="3726458287",
             link_type=fatlink_type_cta,
         )
-        fat = AFat.objects.create(
+        fat = Fat.objects.create(
             character=self.character_1101, afatlink=fatlink_created, shiptype="Omen"
         )
 

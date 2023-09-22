@@ -21,13 +21,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import (
-    AFat,
-    AFatLink,
-    AFatLinkType,
-    ClickAFatDuration,
-    get_hash_on_save,
-)
+from afat.models import AFatLink, AFatLinkType, ClickAFatDuration, Fat, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user
 
@@ -97,69 +91,69 @@ class TestFatlinksView(TestCase):
             afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1101,
             afatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001,
             afatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002,
             afatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1003,
             afatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
             afatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1005,
             afatlink=cls.afat_link_april_1,
             shiptype="Omen",
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001,
             afatlink=cls.afat_link_april_2,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
             afatlink=cls.afat_link_april_2,
             shiptype="Thorax",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002,
             afatlink=cls.afat_link_april_2,
             shiptype="Thorax",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1003,
             afatlink=cls.afat_link_april_2,
             shiptype="Omen",
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001,
             afatlink=cls.afat_link_september,
             shiptype="Omen",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
             afatlink=cls.afat_link_september,
             shiptype="Guardian",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002,
             afatlink=cls.afat_link_september,
             shiptype="Omen",
@@ -287,7 +281,7 @@ class TestFatlinksView(TestCase):
         # when
         fatlink = (
             AFatLink.objects.select_related_default()
-            .annotate_afats_count()
+            .annotate_fats_count()
             .get(hash=fatlink_hash)
         )
 

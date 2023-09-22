@@ -14,7 +14,7 @@ from django.utils.translation import gettext as _
 from allianceauth.eveonline.models import EveCharacter
 
 # Alliance Auth AFAT
-from afat.managers import AFatLinkManager, AFatManager
+from afat.managers import AFatLinkManager, FatManager
 
 
 def get_sentinel_user() -> User:
@@ -244,7 +244,7 @@ class AFatLink(models.Model):
         :rtype:
         """
 
-        return AFat.objects.filter(afatlink=self).count()
+        return Fat.objects.filter(afatlink=self).count()
 
 
 # ClickAFatDuration Model
@@ -267,21 +267,21 @@ class ClickAFatDuration(models.Model):
 
 
 # AFat Model
-class AFat(models.Model):
+class Fat(models.Model):
     """
     AFat
     """
 
     character = models.ForeignKey(
         to=EveCharacter,
-        related_name="afats",
+        related_name="afat_fats",
         on_delete=models.CASCADE,
         help_text=_("Character who registered this FAT"),
     )
 
     afatlink = models.ForeignKey(
         to=AFatLink,
-        related_name="afats",
+        related_name="afat_fats",
         on_delete=models.CASCADE,
         help_text=_("The FAT link the character registered at"),
     )
@@ -297,7 +297,7 @@ class AFat(models.Model):
         help_text=_("The ship the character was flying"),
     )
 
-    objects = AFatManager()
+    objects = FatManager()
 
     class Meta:  # pylint: disable=too-few-public-methods
         """

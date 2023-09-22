@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
+from afat.models import AFatLink, AFatLinkType, AFatLog, Fat
 
 
 def custom_filter(title):
@@ -106,7 +106,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
 
         queryset = super().get_queryset(request)
         queryset = queryset.annotate(
-            _number_of_fats=Count(expression="afats", distinct=True)
+            _number_of_fats=Count(expression="afat_fats", distinct=True)
         )
 
         return queryset
@@ -125,7 +125,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         return obj._number_of_fats
 
 
-@admin.register(AFat)
+@admin.register(Fat)
 class AFatAdmin(admin.ModelAdmin):
     """
     Config for fat model

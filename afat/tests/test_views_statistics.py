@@ -16,7 +16,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink
+from afat.models import AFatLink, Fat
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import RequestStub
 from afat.views.statistics import _calculate_year_stats
@@ -93,47 +93,47 @@ class TestStatistics(TestCase):
             afattime=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1101, afatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001, afatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002, afatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1003, afatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004, afatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1005, afatlink=afat_link_april_1, shiptype="Omen"
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1101, afatlink=afat_link_april_2, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004, afatlink=afat_link_april_2, shiptype="Thorax"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1002, afatlink=afat_link_april_2, shiptype="Thorax"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1003, afatlink=afat_link_april_2, shiptype="Omen"
         )
 
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1001, afatlink=afat_link_september, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1004,
             afatlink=afat_link_september,
             shiptype="Guardian",
         )
-        AFat.objects.create(
+        Fat.objects.create(
             character=cls.character_1005, afatlink=afat_link_september, shiptype="Omen"
         )
 

@@ -19,7 +19,7 @@ from app_utils.logging import LoggerAddTag
 # Alliance Auth AFAT
 from afat import __title__
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
-from afat.models import AFat, AFatLink
+from afat.models import AFatLink, Fat
 
 logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
@@ -38,7 +38,7 @@ def overview(request: WSGIRequest) -> HttpResponse:
 
     characters = (
         EveCharacter.objects.select_related("character_ownership")
-        .filter(character_ownership__user=request.user, afats__isnull=False)
+        .filter(character_ownership__user=request.user, afat_fats__isnull=False)
         .distinct()
     )
 
@@ -72,7 +72,7 @@ def ajax_recent_get_fats_by_character(
     character = EveCharacter.objects.get(character_id=charid)
 
     fats = (
-        AFat.objects.select_related_default()
+        Fat.objects.select_related_default()
         .filter(character=character)
         .order_by("afatlink__afattime")
         .reverse()[:10]
@@ -99,7 +99,7 @@ def ajax_get_recent_fatlinks(request: WSGIRequest) -> JsonResponse:
 
     fatlinks = (
         AFatLink.objects.select_related_default()
-        .annotate_afats_count()
+        .annotate_fats_count()
         .order_by("-afattime")[:10]
     )
 

@@ -34,7 +34,7 @@ from afat.helper.views import (
     get_random_rgba_color,
     user_has_any_perms,
 )
-from afat.models import AFat
+from afat.models import Fat
 from afat.utils import get_or_create_alliance_info, get_or_create_corporation_info
 
 logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
@@ -139,7 +139,7 @@ def _calculate_year_stats(request, year) -> list:
 
     for char in characters:
         character_fats_in_year = (
-            AFat.objects.filter(afatlink__afattime__year=year)
+            Fat.objects.filter(afatlink__afattime__year=year)
             .filter(character=char)
             .values("afatlink__afattime__month")
             .annotate(fat_count=Count("id"))
@@ -237,7 +237,7 @@ def character(  # pylint: disable=too-many-locals
 
         return redirect(to="afat:dashboard")
 
-    fats = AFat.objects.filter(
+    fats = Fat.objects.filter(
         character__character_id=charid,
         afatlink__afattime__month=month,
         afatlink__afattime__year=year,
@@ -362,7 +362,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         months = []
 
         for i in range(1, 13):
-            corp_fats = AFat.objects.filter(
+            corp_fats = Fat.objects.filter(
                 character__corporation_id=corpid,
                 afatlink__afattime__month=i,
                 afatlink__afattime__year=year,
@@ -392,7 +392,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
             context=context,
         )
 
-    fats = AFat.objects.filter(
+    fats = Fat.objects.filter(
         afatlink__afattime__month=month,
         afatlink__afattime__year=year,
         character__corporation_id=corpid,
@@ -551,7 +551,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
         months = []
 
         for i in range(1, 13):
-            ally_fats = AFat.objects.filter(
+            ally_fats = Fat.objects.filter(
                 character__alliance_id=allianceid,
                 afatlink__afattime__month=i,
                 afatlink__afattime__year=year,
@@ -587,7 +587,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
         return redirect(to="afat:dashboard")
 
-    fats = AFat.objects.filter(
+    fats = Fat.objects.filter(
         character__alliance_id=allianceid,
         afatlink__afattime__month=month,
         afatlink__afattime__year=year,

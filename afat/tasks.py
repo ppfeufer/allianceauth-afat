@@ -24,7 +24,7 @@ from app_utils.logging import LoggerAddTag
 # Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import AFatLink, AFatLog, Fat
 from afat.providers import esi
 from afat.utils import get_or_create_character
 
@@ -104,7 +104,7 @@ def process_character(
     solar_system_name = solar_system["name"]
     ship_name = ship["name"]
 
-    fat, created = AFat.objects.get_or_create(
+    fat, created = Fat.objects.get_or_create(
         afatlink=link,
         character=character,
         defaults={"system": solar_system_name, "shiptype": ship_name},

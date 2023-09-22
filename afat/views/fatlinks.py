@@ -45,11 +45,11 @@ from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import (
-    AFat,
     AFatLink,
     AFatLinkType,
     AFatLog,
     ClickAFatDuration,
+    Fat,
     get_hash_on_save,
 )
 from afat.providers import esi
@@ -109,7 +109,7 @@ def ajax_get_fatlinks_by_year(request: WSGIRequest, year: int) -> JsonResponse:
     fatlinks = (
         AFatLink.objects.select_related_default()
         .filter(afattime__year=year)
-        .annotate_afats_count()
+        .annotate_fats_count()
     )
 
     fatlink_rows = [
@@ -618,7 +618,7 @@ def add_fat(
         ship_name = provider.get_itemtype(type_id=ship["ship_type_id"]).name
 
         try:
-            AFat(
+            Fat(
                 afatlink=fleet, character=character, system=system, shiptype=ship_name
             ).save()
         except IntegrityError:
@@ -728,7 +728,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
             character = get_or_create_character(name=character_name)
 
             if character is not None:
-                afat_object, created = AFat.objects.get_or_create(
+                afat_object, created = Fat.objects.get_or_create(
                     afatlink=link,
                     character=character,
                     defaults={
@@ -871,7 +871,7 @@ def ajax_get_fats_by_fatlink(request: WSGIRequest, fatlink_hash) -> JsonResponse
     :rtype:
     """
 
-    fats = AFat.objects.select_related_default().filter(afatlink__hash=fatlink_hash)
+    fats = Fat.objects.select_related_default().filter(afatlink__hash=fatlink_hash)
 
     fat_rows = [convert_fats_to_dict(request=request, fat=fat) for fat in fats]
 
@@ -920,7 +920,7 @@ def delete_fatlink(
 
         return redirect(to="afat:dashboard")
 
-    AFat.objects.filter(afatlink_id=link.pk).delete()
+    Fat.objects.filter(afatlink_id=link.pk).delete()
 
     link.delete()
 
@@ -984,8 +984,8 @@ def delete_fat(
         return redirect(to="afat:dashboard")
 
     try:
-        fat_details = AFat.objects.get(pk=fat_id, afatlink_id=link.pk)
-    except AFat.DoesNotExist:
+        fat_details = Fat.objects.get(pk=fat_id, afatlink_id=link.pk)
+    except Fat.DoesNotExist:
         messages.error(
             request=request,
             message=mark_safe(

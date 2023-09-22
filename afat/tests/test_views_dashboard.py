@@ -14,7 +14,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink
+from afat.models import AFatLink, Fat
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.views.dashboard import overview
 
@@ -64,8 +64,8 @@ class TestDashboard(TestCase):
 
     def test_should_only_show_my_chars_and_only_those_with_fat_links(self):
         # given
-        AFat.objects.create(character=self.character_1101, afatlink=self.afat_link)
-        AFat.objects.create(character=self.character_1002, afatlink=self.afat_link)
+        Fat.objects.create(character=self.character_1101, afatlink=self.afat_link)
+        Fat.objects.create(character=self.character_1002, afatlink=self.afat_link)
 
         # when
         response = self._page_overview_request(user=self.user)

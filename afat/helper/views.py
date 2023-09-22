@@ -19,7 +19,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.django import users_with_permission
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import AFatLink, AFatLog, Fat
 from afat.utils import get_main_character_from_user
 
 
@@ -138,7 +138,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         "creator_name": creator_main_character,
         "fleet_type": fatlink_type,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
-        "fats_number": fatlink.afats_count,
+        "fats_number": fatlink.fats_count,
         "hash": fatlink.hash,
         "is_esilink": fatlink.is_esilink,
         "esi_fleet_id": fatlink.esi_fleet_id,
@@ -148,7 +148,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     }
 
 
-def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
+def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     """
     Converts an AFat object into a dictionary
 
