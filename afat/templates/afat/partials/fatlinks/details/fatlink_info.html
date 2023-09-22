@@ -89,12 +89,12 @@
     </div>
 
     {% if link.is_registered_on_esi and request.user == link.creator %}
-        {% translate "Close ESI Fleet Tracking" as translated_title %}
+        {% translate "Close ESI fleet tracking" as translated_title %}
         {% include "afat/modals/general.html" with modal_name="cancelEsiFleet" modal_title=translated_title confirm_button_class="btn-danger" %}
     {% endif %}
 
     {% if link_can_be_reopened and perms.afat.manage_afat %}
-        {% translate "Re-Open Fat Link" as translated_title %}
+        {% translate "Re-open FAT link" as translated_title %}
         {% include "afat/modals/general.html" with modal_name="reopenFatLink" modal_title=translated_title confirm_button_class="btn-success" %}
     {% endif %}
 </div>
