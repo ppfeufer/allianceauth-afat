@@ -327,46 +327,6 @@ class Fat(models.Model):
         return f"{self.afatlink} - {self.character}"
 
 
-# ManualAFat Model
-class ManualAFat(models.Model):
-    """
-    ManualAFat
-    """
-
-    creator = models.ForeignKey(
-        to=User, related_name="+", on_delete=models.SET(value=get_sentinel_user)
-    )
-    afatlink = models.ForeignKey(
-        to=AFatLink, related_name="+", on_delete=models.CASCADE
-    )
-    character = models.ForeignKey(
-        to=EveCharacter, related_name="+", on_delete=models.CASCADE
-    )
-    created_at = models.DateTimeField(
-        blank=True, null=True, help_text=_("Time this FAT has been added manually")
-    )
-
-    class Meta:  # pylint: disable=too-few-public-methods
-        """
-        ManualAFat :: Meta
-        """
-
-        default_permissions = ()
-        verbose_name = _("Manual FAT")
-        verbose_name_plural = _("Manual FATs")
-
-    # Add property for getting the user for a character.
-    def __str__(self) -> str:
-        """
-        Return the objects string name
-
-        :return:
-        :rtype:
-        """
-
-        return f"{self.afatlink} - {self.character} ({self.creator})"
-
-
 # AFat Log Model
 class Log(models.Model):
     """
