@@ -19,15 +19,16 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.django import users_with_permission
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import Fat, FatLink, Log
 from afat.utils import get_main_character_from_user
 
 
-def convert_fatlinks_to_dict(
-    request: WSGIRequest, fatlink: AFatLink, close_esi_redirect: str = None
+def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
+    request: WSGIRequest, fatlink: FatLink, close_esi_redirect: str = None
 ) -> dict:
     """
-    Converts an AFatLink object into a dictionary
+    Converts an FatLink object into a dictionary
+
     :param request:
     :type request:
     :param fatlink:
@@ -65,7 +66,7 @@ def convert_fatlinks_to_dict(
     creator_main_character = get_main_character_from_user(user=fatlink.creator)
 
     # Fleet time
-    fleet_time = fatlink.afattime
+    fleet_time = fatlink.created
     fleet_time_timestamp = fleet_time.timestamp()
 
     # Action buttons
@@ -76,7 +77,7 @@ def convert_fatlinks_to_dict(
         and fatlink.creator == request.user
     ):
         button_close_esi_tracking_url = reverse(
-            "afat:fatlinks_close_esi_fatlink", args=[fatlink.hash]
+            viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink.hash]
         )
 
         close_esi_redirect_parameter = (
@@ -84,12 +85,12 @@ def convert_fatlinks_to_dict(
         )
 
         button_title = _(
-            "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
+            "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."  # pylint: disable=line-too-long
         )
         modal_body_text = _(
-            f"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
+            f"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"  # pylint: disable=line-too-long
         )
-        modal_confirm_text = _("Stop Tracking")
+        modal_confirm_text = _("Stop tracking")
 
         actions += (
             '<a class="btn btn-afat-action btn-primary btn-sm" '
@@ -102,17 +103,21 @@ def convert_fatlinks_to_dict(
         )
 
     if request.user.has_perm("afat.manage_afat") or request.user.has_perm(
-        "afat.add_fatlink"
+        perm="afat.add_fatlink"
     ):
-        button_edit_url = reverse("afat:fatlinks_details_fatlink", args=[fatlink.hash])
+        button_edit_url = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[fatlink.hash]
+        )
 
         actions += (
             '<a class="btn btn-afat-action btn-info btn-sm" '
             f'href="{button_edit_url}"><span class="fas fa-eye"></span></a>'
         )
 
-    if request.user.has_perm("afat.manage_afat"):
-        button_delete_url = reverse("afat:fatlinks_delete_fatlink", args=[fatlink.hash])
+    if request.user.has_perm(perm="afat.manage_afat"):
+        button_delete_url = reverse(
+            viewname="afat:fatlinks_delete_fatlink", args=[fatlink.hash]
+        )
         button_delete_text = _("Delete")
         modal_body_text = _(
             f"<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
@@ -127,13 +132,13 @@ def convert_fatlinks_to_dict(
             "</span></a>"
         )
 
-    summary = {
+    return {
         "pk": fatlink.pk,
         "fleet_name": fatlink_fleet + esi_fleet_marker,
         "creator_name": creator_main_character,
         "fleet_type": fatlink_type,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
-        "fats_number": fatlink.afats_count,
+        "fats_number": fatlink.fats_count,
         "hash": fatlink.hash,
         "is_esilink": fatlink.is_esilink,
         "esi_fleet_id": fatlink.esi_fleet_id,
@@ -142,12 +147,11 @@ def convert_fatlinks_to_dict(
         "via_esi": via_esi,
     }
 
-    return summary
 
-
-def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
+def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     """
     Converts an AFat object into a dictionary
+
     :param request:
     :type request:
     :param fat:
@@ -157,19 +161,17 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
     """
 
     # fleet type
-    fleet_type = (
-        fat.afatlink.link_type.name if fat.afatlink.link_type is not None else ""
-    )
+    fleet_type = fat.fatlink.link_type.name if fat.fatlink.link_type is not None else ""
 
     # esi marker
     via_esi = "No"
     esi_fleet_marker = ""
 
-    if fat.afatlink.is_esilink:
+    if fat.fatlink.is_esilink:
         via_esi = "Yes"
         esi_fleet_marker_classes = "label label-default afat-label afat-label-via-esi"
 
-        if fat.afatlink.is_registered_on_esi:
+        if fat.fatlink.is_registered_on_esi:
             esi_fleet_marker_classes += " afat-label-active-esi-fleet"
 
         marker_text = _("via ESI")
@@ -179,13 +181,13 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
 
     # actions
     actions = ""
-    if request.user.has_perm("afat.manage_afat"):
+    if request.user.has_perm(perm="afat.manage_afat"):
         button_delete_fat = reverse(
-            "afat:fatlinks_delete_fat", args=[fat.afatlink.hash, fat.id]
+            viewname="afat:fatlinks_delete_fat", args=[fat.fatlink.hash, fat.id]
         )
         button_delete_text = _("Delete")
         modal_body_text = _(
-            f"<p>Are you sure you want to remove {fat.character.character_name} from this FAT link?</p>"
+            f"<p>Are you sure you want to remove {fat.character.character_name} from this FAT link?</p>"  # pylint: disable=line-too-long
         )
 
         actions += (
@@ -199,10 +201,10 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
             "</a>"
         )
 
-    fleet_time = fat.afatlink.afattime
+    fleet_time = fat.fatlink.created
     fleet_time_timestamp = fleet_time.timestamp()
     fleet_name = (
-        fat.afatlink.fleet if fat.afatlink.fleet is not None else fat.afatlink.hash
+        fat.fatlink.fleet if fat.fatlink.fleet is not None else fat.fatlink.hash
     )
 
     summary = {
@@ -219,9 +221,10 @@ def convert_fats_to_dict(request: WSGIRequest, fat: AFat) -> dict:
     return summary
 
 
-def convert_logs_to_dict(log: AFatLog, fatlink_exists: bool = False) -> dict:
+def convert_logs_to_dict(log: Log, fatlink_exists: bool = False) -> dict:
     """
     Convert AFatLog to dict
+
     :param log:
     :type log:
     :param fatlink_exists:
@@ -238,14 +241,16 @@ def convert_logs_to_dict(log: AFatLog, fatlink_exists: bool = False) -> dict:
 
     fatlink_html = _(f"{log.fatlink_hash} (Deleted)")
     if fatlink_exists is True:
-        fatlink_link = reverse("afat:fatlinks_details_fatlink", args=[log.fatlink_hash])
+        fatlink_link = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[log.fatlink_hash]
+        )
         fatlink_html = f'<a href="{fatlink_link}">{log.fatlink_hash}</a>'
 
     fatlink = {"html": fatlink_html, "hash": log.fatlink_hash}
 
     summary = {
         "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-        "log_event": AFatLog.Event(log.log_event).label,
+        "log_event": Log.Event(log.log_event).label,
         "user": user_main_character,
         "fatlink": fatlink,
         "description": log.log_text,
@@ -257,13 +262,14 @@ def convert_logs_to_dict(log: AFatLog, fatlink_exists: bool = False) -> dict:
 def get_random_rgba_color():
     """
     Get a random RGB(a) color
+
     :return:
     :rtype:
     """
 
-    red = random.randint(0, 255)
-    green = random.randint(0, 255)
-    blue = random.randint(0, 255)
+    red = random.randint(a=0, b=255)
+    green = random.randint(a=0, b=255)
+    blue = random.randint(a=0, b=255)
     alpha = 1
 
     return f"rgba({red}, {green}, {blue}, {alpha})"
@@ -273,6 +279,7 @@ def characters_with_permission(permission: Permission) -> models.QuerySet:
     """
     Returns queryset of characters that have the given permission
     in Auth through due to their associated user
+
     :param permission:
     :type permission:
     :return:
@@ -280,7 +287,7 @@ def characters_with_permission(permission: Permission) -> models.QuerySet:
     """
 
     # First we need the users that have the permission
-    users_qs = users_with_permission(permission)
+    users_qs = users_with_permission(permission=permission)
 
     # Now get their characters ...
     charater_qs = EveCharacter.objects.filter(character_ownership__user__in=users_qs)
@@ -298,4 +305,4 @@ def user_has_any_perms(user: User, perm_list, obj=None):
     if user.is_active and user.is_superuser:
         return True
 
-    return any(user.has_perm(perm, obj) for perm in perm_list)
+    return any(user.has_perm(perm=perm, obj=obj) for perm in perm_list)

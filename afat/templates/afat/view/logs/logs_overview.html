@@ -2,7 +2,10 @@
 
 {% load i18n %}
 
-{% block page_title %}{% translate "Fleet Activity Tracking Logs" %}{% endblock %}
+{% block page_title %}
+    {% translate "Fleet activity tracking logs" as page_title %}
+    {{ page_title|title }}
+{% endblock %}
 
 {% block afat_header %}
     <br>

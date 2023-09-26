@@ -1,5 +1,6 @@
 # Standard Library
 import datetime as dt
+from http import HTTPStatus
 
 # Third Party
 from pytz import utc
@@ -15,7 +16,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import add_character_to_user, create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink
+from afat.models import Fat, FatLink
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import RequestStub
 from afat.views.statistics import _calculate_year_stats
@@ -42,491 +43,498 @@ class TestStatistics(TestCase):
         cls.character_1101 = EveCharacter.objects.get(character_id=1101)
 
         cls.user_without_access, _ = create_user_from_evecharacter(
-            cls.character_1001.character_id
+            character_id=cls.character_1001.character_id
         )
 
         cls.user_with_basic_access, _ = create_user_from_evecharacter(
-            cls.character_1002.character_id, permissions=["afat.basic_access"]
+            character_id=cls.character_1002.character_id,
+            permissions=["afat.basic_access"],
         )
 
-        add_character_to_user(cls.user_with_basic_access, cls.character_1101)
+        add_character_to_user(
+            user=cls.user_with_basic_access, character=cls.character_1101
+        )
 
         cls.user_with_manage_afat, _ = create_user_from_evecharacter(
-            cls.character_1003.character_id,
+            character_id=cls.character_1003.character_id,
             permissions=["afat.basic_access", "afat.manage_afat"],
         )
 
         cls.user_with_stats_corporation_other, _ = create_user_from_evecharacter(
-            cls.character_1004.character_id,
+            character_id=cls.character_1004.character_id,
             permissions=["afat.basic_access", "afat.stats_corporation_other"],
         )
 
         cls.user_with_stats_corporation_own, _ = create_user_from_evecharacter(
-            cls.character_1005.character_id,
+            character_id=cls.character_1005.character_id,
             permissions=["afat.basic_access", "afat.stats_corporation_own"],
         )
 
         # Generate some FAT links and FATs
-        afat_link_april_1 = AFatLink.objects.create(
+        afat_link_april_1 = FatLink.objects.create(
             fleet="April Fleet 1",
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(2020, 4, 1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
-        afat_link_april_2 = AFatLink.objects.create(
+        afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(2020, 4, 15, tzinfo=utc),
+            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
-        afat_link_september = AFatLink.objects.create(
+        afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            afattime=dt.datetime(2020, 9, 1, tzinfo=utc),
+            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
-        AFat.objects.create(
-            character=cls.character_1101, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1101, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1001, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1001, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1002, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1002, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1003, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1003, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1004, afatlink=afat_link_april_1, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1004, fatlink=afat_link_april_1, shiptype="Omen"
         )
-        AFat.objects.create(
-            character=cls.character_1005, afatlink=afat_link_april_1, shiptype="Omen"
-        )
-
-        AFat.objects.create(
-            character=cls.character_1101, afatlink=afat_link_april_2, shiptype="Omen"
-        )
-        AFat.objects.create(
-            character=cls.character_1004, afatlink=afat_link_april_2, shiptype="Thorax"
-        )
-        AFat.objects.create(
-            character=cls.character_1002, afatlink=afat_link_april_2, shiptype="Thorax"
-        )
-        AFat.objects.create(
-            character=cls.character_1003, afatlink=afat_link_april_2, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1005, fatlink=afat_link_april_1, shiptype="Omen"
         )
 
-        AFat.objects.create(
-            character=cls.character_1001, afatlink=afat_link_september, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1101, fatlink=afat_link_april_2, shiptype="Omen"
         )
-        AFat.objects.create(
+        Fat.objects.create(
+            character=cls.character_1004, fatlink=afat_link_april_2, shiptype="Thorax"
+        )
+        Fat.objects.create(
+            character=cls.character_1002, fatlink=afat_link_april_2, shiptype="Thorax"
+        )
+        Fat.objects.create(
+            character=cls.character_1003, fatlink=afat_link_april_2, shiptype="Omen"
+        )
+
+        Fat.objects.create(
+            character=cls.character_1001, fatlink=afat_link_september, shiptype="Omen"
+        )
+        Fat.objects.create(
             character=cls.character_1004,
-            afatlink=afat_link_september,
+            fatlink=afat_link_september,
             shiptype="Guardian",
         )
-        AFat.objects.create(
-            character=cls.character_1005, afatlink=afat_link_september, shiptype="Omen"
+        Fat.objects.create(
+            character=cls.character_1005, fatlink=afat_link_september, shiptype="Omen"
         )
 
     def test_should_only_show_my_chars_and_only_those_with_fat_links(self):
         # when
-        result = _calculate_year_stats(RequestStub(self.user_with_basic_access), 2020)
+        result = _calculate_year_stats(
+            request=RequestStub(user=self.user_with_basic_access), year=2020
+        )
 
         # then
         self.assertListEqual(
-            result, [("Clark Kent", {4: 2}, 1002), ("Lex Luther", {4: 2}, 1101)]
+            list1=result,
+            list2=[("Clark Kent", {4: 2}, 1002), ("Lex Luther", {4: 2}, 1101)],
         )
 
     def test_should_show_statistics_dashboard(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
-        url = reverse("afat:statistics_overview")
-        res = self.client.get(url)
+        url = reverse(viewname="afat:statistics_overview")
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_statistics_dashboard_for_year(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
-        url = reverse("afat:statistics_overview", kwargs={"year": 2020})
-        res = self.client.get(url)
+        url = reverse(viewname="afat:statistics_overview", kwargs={"year": 2020})
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_statistics_dashboard_for_user_with_stats_corporation_other(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
-        url = reverse("afat:statistics_overview")
-        res = self.client.get(url)
+        url = reverse(viewname="afat:statistics_overview")
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_statistics_dashboard_for_user_with_stats_corporation_own(self):
         # given
-        self.client.force_login(self.user_with_stats_corporation_own)
+        self.client.force_login(user=self.user_with_stats_corporation_own)
 
         # when
-        url = reverse("afat:statistics_overview")
-        res = self.client.get(url)
+        url = reverse(viewname="afat:statistics_overview")
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_statistics_dashboard_for_user_without_access(self):
         # given
-        self.client.force_login(self.user_without_access)
+        self.client.force_login(user=self.user_without_access)
 
         # when
-        url = reverse("afat:statistics_overview")
-        res = self.client.get(url)
+        url = reverse(viewname="afat:statistics_overview")
+        res = self.client.get(path=url)
 
         # then
-        self.assertNotEqual(res.status_code, 200)
-        self.assertEqual(res.status_code, 302)
+        self.assertNotEqual(first=res.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
         self.assertEqual(
-            res.url, "/account/login/?next=/fleet-activity-tracking/statistics/"
+            first=res.url,
+            second="/account/login/?next=/fleet-activity-tracking/statistics/",
         )
 
     def test_should_show_own_character_stats(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
         url = reverse(
-            "afat:statistics_character",
+            viewname="afat:statistics_character",
             kwargs={
                 "charid": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_other_character_stats_for_user_with_stats_corporation_own(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_own)
+        self.client.force_login(user=self.user_with_stats_corporation_own)
 
         # when
         url = reverse(
-            "afat:statistics_character",
+            viewname="afat:statistics_character",
             kwargs={
                 "charid": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_other_character_stats_for_user_with_stats_corporation_other(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_character",
+            viewname="afat:statistics_character",
             kwargs={
                 "charid": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_other_character_stats_for_user_with_manage_afat(self):
         # given
-        self.client.force_login(self.user_with_manage_afat)
+        self.client.force_login(user=self.user_with_manage_afat)
 
         # when
         url = reverse(
-            "afat:statistics_character",
+            viewname="afat:statistics_character",
             kwargs={
                 "charid": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_other_character_stats_for_user(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
         url = reverse(
-            "afat:statistics_character",
+            viewname="afat:statistics_character",
             kwargs={
                 "charid": self.user_with_stats_corporation_other.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
 
     def test_should_show_own_corp_stats_for_user_with_stats_corporation_own(self):
         # given
-        self.client.force_login(self.user_with_stats_corporation_own)
+        self.client.force_login(user=self.user_with_stats_corporation_own)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={
                 "corpid": self.user_with_stats_corporation_own.profile.main_character.corporation_id
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_other_corp_stats_for_user_with_stats_corporation_other(self):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={
                 "corpid": self.user_with_basic_access.profile.main_character.corporation_id
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_other_corp_stats_for_user_with_manage_afat(self):
         # given
-        self.client.force_login(self.user_with_manage_afat)
+        self.client.force_login(user=self.user_with_manage_afat)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={
                 "corpid": self.user_with_basic_access.profile.main_character.corporation_id
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_own_corp_stats_for_user(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={
                 "corpid": self.user_with_basic_access.profile.main_character.corporation_id
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
 
     def test_should_not_show_other_corp_stats_for_user(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={
                 "corpid": self.user_with_stats_corporation_other.profile.main_character.corporation_id
             },
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
 
     def test_should_show_all_corp_stats_for_user_with_stats_corporation_other(self):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={"corpid": 2002, "year": 2020},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_all_corp_stats_with_month_for_user_with_stats_corporation_other(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_corporation",
+            viewname="afat:statistics_corporation",
             kwargs={"corpid": 2002, "year": 2020, "month": 4},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_all_corp_stats_for_user_with_stats_corporation_own(self):
         # given
-        self.client.force_login(self.user_with_stats_corporation_own)
+        self.client.force_login(user=self.user_with_stats_corporation_own)
 
         # when
-        url = reverse("afat:statistics_corporation", kwargs={"corpid": 2002})
-        res = self.client.get(url)
+        url = reverse(viewname="afat:statistics_corporation", kwargs={"corpid": 2002})
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 302)
-        self.assertEqual(res.url, "/fleet-activity-tracking/")
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
+        self.assertEqual(first=res.url, second="/fleet-activity-tracking/")
 
     def test_should_show_all_alliance_stats_with_for_user_with_stats_corporation_other(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_all_alliance_stats_with_for_user_with_manage_afat(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_manage_afat)
+        self.client.force_login(user=self.user_with_manage_afat)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_all_alliance_stats_with_year_for_user_with_stats_corporation_other(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001, "year": 2020},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_all_alliance_stats_with_year_for_user_with_manage_afat(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_manage_afat)
+        self.client.force_login(user=self.user_with_manage_afat)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001, "year": 2020},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_all_alliance_stats_with_month_for_user_with_stats_corporation_other(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_stats_corporation_other)
+        self.client.force_login(user=self.user_with_stats_corporation_other)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001, "year": 2020, "month": 4},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_all_alliance_stats_with_month_for_user_with_manage_afat(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_manage_afat)
+        self.client.force_login(user=self.user_with_manage_afat)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001, "year": 2020, "month": 4},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_all_alliance_stats_for_user(
         self,
     ):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
         url = reverse(
-            "afat:statistics_alliance",
+            viewname="afat:statistics_alliance",
             kwargs={"allianceid": 3001},
         )
-        res = self.client.get(url)
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 302)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)

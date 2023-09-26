@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/pypi/pyversions/allianceauth-afat)](https://pypi.org/project/allianceauth-afat/)
 [![Django](https://img.shields.io/pypi/djversions/allianceauth-afat?label=django)](https://pypi.org/project/allianceauth-afat/)
 ![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/allianceauth-afat)](https://pypi.org/project/allianceauth-afat/)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ppfeufer/allianceauth-afat/master.svg)](https://results.pre-commit.ci/latest/github/ppfeufer/allianceauth-afat/master)
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](http://black.readthedocs.io/en/latest/)
 [![Automated Checks](https://github.com/ppfeufer/allianceauth-afat/actions/workflows/automated-checks.yml/badge.svg)](https://github.com/ppfeufer/allianceauth-afat/actions/workflows/automated-checks.yml)
 [![codecov](https://codecov.io/gh/ppfeufer/allianceauth-afat/branch/master/graph/badge.svg?token=GNE88NUAKK)](https://codecov.io/gh/ppfeufer/allianceauth-afat)
@@ -79,19 +79,19 @@ information, see below.
 
 ### Dashboard<a name="dashboard"></a>
 
-![Dashboard](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/afat-dashboard.png "Dashboard")
+![Dashboard](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/afat-dashboard.png "Dashboard")
 
 ### Fat Link List<a name="fat-link-list"></a>
 
-![Fat Link List](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/fatlink-list.png "Fat Link List")
+![Fat Link List](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/fatlink-list.png "Fat Link List")
 
 ### Fat Link Details<a name="fat-link-details"></a>
 
-![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/ship-type-overview.png "Fat Link Details")
+![Fat Link Details](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/changelog/1.9.0/ship-type-overview.png "Fat Link Details")
 
 ### Add Fat Link View for FCs<a name="add-fat-link-view-for-fcs"></a>
 
-![Add Fat Link View for FCs](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/afat/docs/images/add-fatlink.png "Add Fat Link View for FCs")
+![Add Fat Link View for FCs](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/add-fatlink.png "Add Fat Link View for FCs")
 
 ## Installation<a name="installation"></a>
 
@@ -219,13 +219,13 @@ supervisor and ... Done!
 
 To customize the module, the following settings are available.
 
-| Name                                   | Description                                                      | Default Value           |
-| :------------------------------------- | :--------------------------------------------------------------- | :---------------------- |
-| AFAT_APP_NAME                          | Custom application name, in case you'd like a different name     | Fleet Activity Tracking |
-| AFAT_DEFAULT_FATLINK_EXPIRY_TIME       | Default expiry time for clickable FAT links in Minutes           | 60                      |
-| AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME | Time in minutes a FAT link can be re-opened after it has expired | 60                      |
-| AFAT_DEFAULT_FATLINK_REOPEN_DURATION   | Time in minutes a FAT link is re-opened                          | 60                      |
-| AFAT_DEFAULT_LOG_DURATION              | Time in days before log entries are being removed from the DB    | 60                      |
+| Name                                   | Description                                                      | Default Value           | Value Type |
+| :------------------------------------- | :--------------------------------------------------------------- | :---------------------- | :--------- |
+| AFAT_APP_NAME                          | Custom application name, in case you'd like a different name     | Fleet Activity Tracking | string     |
+| AFAT_DEFAULT_FATLINK_EXPIRY_TIME       | Default expiry time for clickable FAT links in Minutes           | 60                      | int        |
+| AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME | Time in minutes a FAT link can be re-opened after it has expired | 60                      | int        |
+| AFAT_DEFAULT_FATLINK_REOPEN_DURATION   | Time in minutes a FAT link is re-opened                          | 60                      | int        |
+| AFAT_DEFAULT_LOG_DURATION              | Time in days before log entries are being removed from the DB    | 60                      | int        |
 
 ## Permissions<a name="permissions"></a>
 

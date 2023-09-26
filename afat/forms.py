@@ -9,12 +9,13 @@ from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth AFAT
 from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
-from afat.models import AFatLinkType
+from afat.models import FleetType
 
 
 def get_mandatory_form_label_text(text):
     """
     Label text for mandatory form fields
+
     :param text:
     :type text:
     :return:
@@ -34,19 +35,19 @@ def get_mandatory_form_label_text(text):
 class AFatEsiFatForm(forms.Form):
     """
     Fat link form
-    used to create ESI fatlinks
+    Used to create ESI fatlinks
     """
 
     name_esi = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(_("Fleet Name")),
+        label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
         widget=forms.TextInput(attrs={"placeholder": _("Enter fleet name")}),
     )
     type_esi = forms.ModelChoiceField(
         required=False,
-        label=_("Fleet Type (optional)"),
-        queryset=AFatLinkType.objects.filter(is_enabled=True),
+        label=_("Fleet type (optional)"),
+        queryset=FleetType.objects.filter(is_enabled=True),
         # empty_label=_("Please select a fleet type"),
     )
 
@@ -58,17 +59,17 @@ class AFatManualFatForm(forms.Form):
 
     character = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(_("Character Name")),
+        label=get_mandatory_form_label_text(text=_("Character Name")),
         max_length=255,
     )
     system = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(_("System")),
+        label=get_mandatory_form_label_text(text=_("System")),
         max_length=100,
     )
     shiptype = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(_("Ship Type")),
+        label=get_mandatory_form_label_text(text=_("Ship type")),
         max_length=100,
     )
 
@@ -76,24 +77,24 @@ class AFatManualFatForm(forms.Form):
 class AFatClickFatForm(forms.Form):
     """
     Fat link form
-    used to create clickable fatlinks
+    Used to create clickable fatlinks
     """
 
     name = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(_("Fleet Name")),
+        label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
         widget=forms.TextInput(attrs={"placeholder": _("Enter fleet name")}),
     )
     type = forms.ModelChoiceField(
         required=False,
-        label=_("Fleet Type (optional)"),
-        queryset=AFatLinkType.objects.filter(is_enabled=True),
+        label=_("Fleet type (optional)"),
+        queryset=FleetType.objects.filter(is_enabled=True),
         # empty_label=_("Please select a fleet type"),
     )
     duration = forms.IntegerField(
         required=True,
-        label=get_mandatory_form_label_text(_("FAT link expiry time in minutes")),
+        label=get_mandatory_form_label_text(text=_("FAT link expiry time in minutes")),
         min_value=1,
         initial=AFAT_DEFAULT_FATLINK_EXPIRY_TIME,
         widget=forms.TextInput(attrs={"placeholder": _("Expiry time in minutes")}),
@@ -108,6 +109,6 @@ class FatLinkEditForm(forms.Form):
 
     fleet = forms.CharField(
         required=True,
-        label=get_mandatory_form_label_text(_("Fleet Name")),
+        label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
     )

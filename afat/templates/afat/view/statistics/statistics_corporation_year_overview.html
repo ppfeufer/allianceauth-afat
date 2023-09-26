@@ -3,13 +3,19 @@
 {% load i18n %}
 {% load filters %}
 
-{% block page_title %}{{ corporation }} {% translate "Fleet Activity" %}{% endblock %}
+{% block page_title %}
+    {% translate "Fleet activity tracking statistics" as page_title %}
+    {{ corporation }} {{ page_title|title }}
+{% endblock %}
 
 {% block afat_header %}
     <br>
     {% include "afat/partials/menu.html" %}
 
-    <h2>{{ corporation }} {% translate "Fleet Activity" %}</h2>
+    <h2>
+        {% translate "Fleet activity" as site_title %}
+        {{ corporation }} {{ site_title|title }}
+    </h2>
 {% endblock %}
 
 {% block afat_body %}

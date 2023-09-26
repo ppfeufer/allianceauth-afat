@@ -20,31 +20,33 @@ class AaAfatMenuItem(MenuItemHook):  # pylint: disable=too-few-public-methods
         # Setup menu entry for sidebar
         MenuItemHook.__init__(
             self,
-            AFAT_APP_NAME,
-            "fas fa-space-shuttle fa-fw",
-            "afat:dashboard",
+            text=AFAT_APP_NAME,
+            classes="fas fa-space-shuttle fa-fw",
+            url_name="afat:dashboard",
             navactive=["afat:"],
         )
 
     def render(self, request):
         """
         Only if the user has access to this app
+
         :param request:
         :type request:
         :return:
         :rtype:
         """
 
-        if request.user.has_perm("afat.basic_access"):
-            return MenuItemHook.render(self, request)
+        if request.user.has_perm(perm="afat.basic_access"):
+            return MenuItemHook.render(self, request=request)
 
         return ""
 
 
-@hooks.register("menu_item_hook")
+@hooks.register(name="menu_item_hook")
 def register_menu():
     """
     Register our menu
+
     :return:
     :rtype:
     """
@@ -52,12 +54,13 @@ def register_menu():
     return AaAfatMenuItem()
 
 
-@hooks.register("url_hook")
+@hooks.register(name="url_hook")
 def register_url():
     """
     Register our menu link
+
     :return:
     :rtype:
     """
 
-    return UrlHook(urls, "afat", rf"^{AFAT_BASE_URL}/")
+    return UrlHook(urls=urls, namespace="afat", base_url=rf"^{AFAT_BASE_URL}/")

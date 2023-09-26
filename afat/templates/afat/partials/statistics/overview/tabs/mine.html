@@ -6,8 +6,10 @@
     <div class="panel-body">
         <h4>{% translate "Your monthly stats" %}</h4>
 
-        <p>{% translate "Only months with FAT data of the selected year are shown." %}</p>
-        <p>{% translate "Only characters that have FATs for the selected year are shown." %}</p>
+        <p>
+            {% translate "Only months with FAT data of the selected year are shown." %}<br>
+            {% translate "Only characters that have FATs for the selected year are shown." %}
+        </p>
 
         <ul class="nav nav-pills">
             {% for char in charstats %}
@@ -30,7 +32,7 @@
                                     <thead>
                                         <tr>
                                             <th>{% translate "Month" %}</th>
-                                            <th>{% translate "FAT Count" %}</th>
+                                            <th>{% translate "FAT count" %}</th>
                                             <th></th>
                                         </tr>
                                     </thead>
