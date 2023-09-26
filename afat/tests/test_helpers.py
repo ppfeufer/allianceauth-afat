@@ -233,25 +233,25 @@ class TestHelpers(TestCase):
                 "esi_fleet_id": 3726458287,
                 "is_registered_on_esi": True,
                 "actions": (
-                    f'<a class="btn btn-afat-action btn-primary btn-sm" '
-                    f'style="margin-left: 0.25rem;" title="Clicking here will '
-                    f"stop the automatic tracking through ESI for this fleet "
-                    f'and close the associated FAT link." data-toggle="modal" '
-                    f'data-target="#cancelEsiFleetModal" '
+                    '<a class="btn btn-afat-action btn-primary btn-sm" '
+                    'style="margin-left: 0.25rem;" title="Clicking here will '
+                    "stop the automatic tracking through ESI for this fleet "
+                    'and close the associated FAT link." data-toggle="modal" '
+                    'data-target="#cancelEsiFleetModal" '
                     f'data-url="{close_esi_tracking_url}" '
-                    f'data-body-text="<p>Are you sure you want to close ESI '
-                    f'fleet with ID 3726458287 from Bruce Wayne?</p>" '
+                    'data-body-text="<p>Are you sure you want to close ESI '
+                    'fleet with ID 3726458287 from Bruce Wayne?</p>" '
                     'data-confirm-text="Stop tracking"><i class="fas '
-                    f'fa-times"></i></a><a class="btn btn-afat-action btn-info '
+                    'fa-times"></i></a><a class="btn btn-afat-action btn-info '
                     f'btn-sm" href="{edit_url_1}"><span class="fas '
-                    f'fa-eye"></span></a><a class="btn btn-afat-action '
-                    f'btn-danger btn-sm" data-toggle="modal" '
-                    f'data-target="#deleteFatLinkModal" '
+                    'fa-eye"></span></a><a class="btn btn-afat-action '
+                    'btn-danger btn-sm" data-toggle="modal" '
+                    'data-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_1}" '
-                    f'data-confirm-text="Delete"data-body-text="<p>Are you '
-                    f"sure you want to delete FAT link April Fleet "
-                    f'1?</p>"><span class="glyphicon '
-                    f'glyphicon-trash"></span></a>'
+                    'data-confirm-text="Delete"data-body-text="<p>Are you '
+                    "sure you want to delete FAT link April Fleet "
+                    '1?</p>"><span class="glyphicon '
+                    'glyphicon-trash"></span></a>'
                 ),
                 "via_esi": "Yes",
             },
@@ -277,16 +277,16 @@ class TestHelpers(TestCase):
                 "esi_fleet_id": None,
                 "is_registered_on_esi": False,
                 "actions": (
-                    f'<a class="btn btn-afat-action btn-info btn-sm" '
+                    '<a class="btn btn-afat-action btn-info btn-sm" '
                     f'href="{edit_url_2}"><span class="fas '
-                    f'fa-eye"></span></a><a class="btn btn-afat-action '
-                    f'btn-danger btn-sm" data-toggle="modal" '
-                    f'data-target="#deleteFatLinkModal" '
+                    'fa-eye"></span></a><a class="btn btn-afat-action '
+                    'btn-danger btn-sm" data-toggle="modal" '
+                    'data-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_2}" '
-                    f'data-confirm-text="Delete"data-body-text="<p>Are you '
-                    f"sure you want to delete FAT link April Fleet "
-                    f'2?</p>"><span class="glyphicon '
-                    f'glyphicon-trash"></span></a>'
+                    'data-confirm-text="Delete"data-body-text="<p>Are you '
+                    "sure you want to delete FAT link April Fleet "
+                    '2?</p>"><span class="glyphicon '
+                    'glyphicon-trash"></span></a>'
                 ),
                 "via_esi": "No",
             },
