@@ -241,7 +241,7 @@ class TestHelpers(TestCase):
                     f'data-url="{close_esi_tracking_url}" '
                     f'data-body-text="<p>Are you sure you want to close ESI '
                     f'fleet with ID 3726458287 from Bruce Wayne?</p>" '
-                    f'data-confirm-text="Stop tracking"><i class="fas '
+                    'data-confirm-text="Stop tracking"><i class="fas '
                     f'fa-times"></i></a><a class="btn btn-afat-action btn-info '
                     f'btn-sm" href="{edit_url_1}"><span class="fas '
                     f'fa-eye"></span></a><a class="btn btn-afat-action '
