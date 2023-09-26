@@ -13,6 +13,7 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
     """
     Returns a duration as specified by variable interval
     functions, except total_duration, returns [quotient, remainder]
+
     :param then:
     :type then:
     :param now:
@@ -29,6 +30,7 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
     def years():
         """
         Return years
+
         :return:
         :rtype:
         """
@@ -38,6 +40,7 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
     def days(from_seconds=None):
         """
         Return days
+
         :param from_seconds:
         :type from_seconds:
         :return:
@@ -45,12 +48,14 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         """
 
         return divmod(
-            from_seconds if from_seconds is not None else duration_in_seconds, 86400
-        )  # Seconds in a day = 86400
+            from_seconds if from_seconds is not None else duration_in_seconds,
+            86400,  # Seconds in a day = 86400
+        )
 
     def hours(from_seconds=None):
         """
         Return hours
+
         :param from_seconds:
         :type from_seconds:
         :return:
@@ -58,12 +63,14 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         """
 
         return divmod(
-            from_seconds if from_seconds is not None else duration_in_seconds, 3600
-        )  # Seconds in an hour = 3600
+            from_seconds if from_seconds is not None else duration_in_seconds,
+            3600,  # Seconds in an hour = 3600
+        )
 
     def minutes(from_seconds=None):
         """
         Return minutes
+
         :param from_seconds:
         :type from_seconds:
         :return:
@@ -71,12 +78,14 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         """
 
         return divmod(
-            from_seconds if from_seconds is not None else duration_in_seconds, 60
-        )  # Seconds in a minute = 60
+            from_seconds if from_seconds is not None else duration_in_seconds,
+            60,  # Seconds in a minute = 60
+        )
 
     def seconds(from_seconds=None):
         """
         Return seconds
+
         :param from_seconds:
         :type from_seconds:
         :return:
@@ -85,20 +94,22 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
 
         if from_seconds is not None:
             return divmod(from_seconds, 1)
+
         return duration_in_seconds
 
     def total_duration():
         """
         Return total time difference
+
         :return:
         :rtype:
         """
 
         duration_years = years()
-        duration_days = days(duration_years[1])
-        duration_hours = hours(duration_days[1])
-        duration_minutes = minutes(duration_hours[1])
-        duration_seconds = seconds(duration_minutes[1])
+        duration_days = days(from_seconds=duration_years[1])
+        duration_hours = hours(from_seconds=duration_days[1])
+        duration_minutes = minutes(from_seconds=duration_hours[1])
+        duration_seconds = seconds(from_seconds=duration_minutes[1])
 
         return _(
             f"{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"  # pylint: disable=line-too-long

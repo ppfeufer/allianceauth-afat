@@ -1,6 +1,8 @@
 {% load i18n %}
 
 {% if perms.afat.manage_afat and is_clickable_link and manual_fat_can_be_added %}
+    {% translate 'This field is mandatory' as mandatory_info %}
+
     <div id="manualfat" class="tab-pane fade in panel panel-default">
         <div class="panel-body">
             <h4>{% translate "Manual FAT" %}</h4>
@@ -16,14 +18,16 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
+                            {% translate "Character name" as field_label %}
+
                             <label class="control-label" for="character">
                                 <span class="form-field-required">
-                                    {% translate "Character Name" %}
-                                    <span aria-label="{% translate 'This field is mandatory' %}" class="form-required-marker">*</span>
+                                    {{ field_label }}
+                                    <span aria-label="{{ mandatory_info }}" class="form-required-marker">*</span>
                                 </span>
                             </label>
 
-                            <input type="text" class="form-control" name="character" id="character" placeholder='{% translate "Character Name" %}' required>
+                            <input type="text" class="form-control" name="character" id="character" placeholder="{{ field_label }}" required>
                         </div>
                     </div>
                 </div>
@@ -31,31 +35,37 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6">
+                            {% translate "System" as field_label %}
+
                             <label class="control-label" for="system">
                                 <span class="form-field-required">
-                                    {% translate "System" %}
-                                    <span aria-label="{% translate 'This field is mandatory' %}" class="form-required-marker">*</span>
+                                    {{ field_label }}
+                                    <span aria-label="{{ mandatory_info }}" class="form-required-marker">*</span>
                                 </span>
                             </label>
 
-                            <input type="text" class="form-control" name="system" id="system" placeholder='{% translate "System" %}' required>
+                            <input type="text" class="form-control" name="system" id="system" placeholder="{{ field_label }}" required>
                         </div>
 
                         <div class="col-md-6">
+                            {% translate "Ship type" as field_label %}
+
                             <label class="control-label" for="shiptype">
                                 <span class="form-field-required">
-                                    {% translate "Ship Type" %}
-                                    <span aria-label="{% translate 'This field is mandatory' %}" class="form-required-marker">*</span>
+                                    {{ field_label }}
+                                    <span aria-label="{{ mandatory_info }}" class="form-required-marker">*</span>
                                 </span>
                             </label>
 
-                            <input type="text" class="form-control" name="shiptype" id="shiptype" placeholder='{% translate "Ship Type" %}' required>
+                            <input type="text" class="form-control" name="shiptype" id="shiptype" placeholder="{{ field_label }}" required>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group text-right">
-                    <button class="btn btn-primary" type="submit" name="manual_fat">{% translate "Add Manual FAT" %}</button>
+                    <button class="btn btn-primary" type="submit" name="manual_fat">
+                        {% translate "Add manual FAT" %}
+                    </button>
                 </div>
             </form>
         </div>

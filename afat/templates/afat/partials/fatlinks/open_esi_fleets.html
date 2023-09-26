@@ -22,7 +22,7 @@
                         </div>
                         <div class="eve-image-text">
                             {{ open_esi_fleet.character.character_name }}<br>
-                            <small>({% translate "Fleet Name" %}: {{ open_esi_fleet.fleet }} // {% translate "ESI fleet ID" %}: {{ open_esi_fleet.esi_fleet_id }})</small>
+                            <small>({% translate "Fleet name" %}: {{ open_esi_fleet.fleet }} // {% translate "ESI fleet ID" %}: {{ open_esi_fleet.esi_fleet_id }})</small>
                         </div>
                     </div>
 
@@ -35,10 +35,10 @@
                             data-target="#cancelEsiFleetModal"
                             data-url="{% url 'afat:fatlinks_close_esi_fatlink' open_esi_fleet.hash %}?next={% url 'afat:fatlinks_add_fatlink' %}"
                             data-body-text="{% blocktranslate with esi_fleet_id=open_esi_fleet.esi_fleet_id character_name=open_esi_fleet.character.character_name %}<p>Are you sure you want to close ESI fleet with ID {{ esi_fleet_id }} from {{ character_name }}</p>{% endblocktranslate %}"
-                            data-confirm-text="{% translate 'Stop Tracking' %}"
+                            data-confirm-text="{% translate 'Stop tracking' %}"
                         >
                             <i class="fas fa-times"></i>
-                            <!-- {% translate "Stop Tracking" %} -->
+                            <!-- {% translate "Stop tracking" %} -->
                         </button>
                     </div>
                 </li>

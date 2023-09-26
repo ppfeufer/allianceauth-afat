@@ -4,7 +4,10 @@
 {% load evelinks %}
 {% load filters %}
 
-{% block page_title %}{% translate "Fleet Activity" %}{% endblock %}
+{% block page_title %}
+    {% translate "Fleet activity tracking" as page_title %}
+    {{ page_title|title }}
+{% endblock %}
 
 {% block afat_header %}
     <br>

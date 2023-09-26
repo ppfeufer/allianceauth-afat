@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## \[In Development\] - Unreleased
 
+### Fixed
+
+- Pylint issues
+- Import from `app_utils`
+- Capitalization for translatable strings
+
+### Changed
+
+- German translation improved
+- Korean translation improved
+- Russian translation improved
+- Spanish translation improved
+- Use keyword arguments wherever possible
+- Model names
+- Some model field names
+
+### Removed
+
+- Import from ImicusFAT (ImicusFAT has been gone for a while now and doesn't work
+  with Alliance Auth >= 3.0.0. Whoever is still using it, should feel bad and
+  immediately update their systems.)
+- Manual FAT model. This has been deprecated back in April 2021, so it's time to
+  remove it.
+
 ## \[2.12.3\] - 2023-09-02
 
 ### Changed
@@ -684,7 +708,7 @@ that were previously "deleted" as active again.
 
 - Ship type overview to FAT link detail page (#72)
 
-  ![Example](afat/docs/images/ship-type-overview.png)
+  ![Ship Type Overview](docs/images/changelog/1.9.0/ship-type-overview.png "Ship Type Overview")
 
 ## \[1.8.0\] - 2021-03-07
 
@@ -693,7 +717,7 @@ that were previously "deleted" as active again.
 - Ability to "close" ESI fat links manually. (Only the FC creating the link has this
   ability when creating new ESI fat links when he still has registered fleets.)
 
-  ![Example](afat/docs/images/manually-close-esi-links.png)
+  ![Manually close ESI links](docs/images/changelog/1.8.0/manually-close-esi-links.png "Manually close ESI links")
 
 ## \[1.7.0\] - 2021-03-02
 

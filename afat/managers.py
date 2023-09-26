@@ -7,24 +7,25 @@ from django.db import models
 from django.db.models import Count, F
 
 
-class AFatLinkQuerySet(models.QuerySet):
+class FatLinkQuerySet(models.QuerySet):
     """
-    AFatLinkQuerySet
+    FAT link queryset
     """
 
-    def annotate_afats_count(self):
+    def annotate_fats_count(self):
         """
         Annotate the amount fats per fat link
+
         :return:
         :rtype:
         """
 
-        return self.annotate(afats_count=Count(F("afats")))
+        return self.annotate(fats_count=Count(expression=F("afat_fats")))
 
 
-class AFatLinkManager(models.Manager):
+class FatLinkManager(models.Manager):
     """
-    AFatLinkManager
+    FAT link manager
     """
 
     def get_queryset(self) -> models.QuerySet:
@@ -32,7 +33,7 @@ class AFatLinkManager(models.Manager):
         Integrate custom QuerySet methods.
         """
 
-        return AFatLinkQuerySet(self.model, using=self._db)
+        return FatLinkQuerySet(self.model, using=self._db)
 
     def select_related_default(self):
         """
@@ -44,9 +45,9 @@ class AFatLinkManager(models.Manager):
         )
 
 
-class AFatManager(models.Manager):
+class FatManager(models.Manager):
     """
-    AFatManager
+    FAT manager
     """
 
     def select_related_default(self):
@@ -54,4 +55,4 @@ class AFatManager(models.Manager):
         Apply select_related for default query optimizations.
         """
 
-        return self.select_related("afatlink", "afatlink__link_type", "character")
+        return self.select_related("fatlink", "fatlink__link_type", "character")

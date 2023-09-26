@@ -24,11 +24,11 @@ from app_utils.logging import LoggerAddTag
 # Alliance Auth AFAT
 from afat import __title__
 from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
-from afat.models import AFat, AFatLink, AFatLog
+from afat.models import Fat, FatLink, Log
 from afat.providers import esi
 from afat.utils import get_or_create_character
 
-logger = LoggerAddTag(get_extension_logger(__name__), __title__)
+logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 ESI_ERROR_LIMIT = 50
@@ -49,6 +49,7 @@ def process_fats(data_list, data_source: str, fatlink_hash: str):
     Due to the large possible size of fatlists,
     this process will be scheduled to process esi data
     and possible other sources in the future.
+
     :param data_list:
     :type data_list:
     :param data_source:
@@ -63,8 +64,10 @@ def process_fats(data_list, data_source: str, fatlink_hash: str):
 
     if data_source == "esi":
         logger.info(
-            f'Valid fleet for FAT link hash "{fatlink_hash}" found '
-            "registered via ESI, checking for new pilots"
+            msg=(
+                f'Valid fleet for FAT link hash "{fatlink_hash}" found '
+                "registered via ESI, checking for new pilots"
+            )
         )
 
         for char in data_list:
@@ -82,6 +85,7 @@ def process_character(
 ):
     """
     Process character
+
     :param character_id:
     :param solar_system_id:
     :param ship_type_id:
@@ -90,7 +94,7 @@ def process_character(
     """
 
     character = get_or_create_character(character_id=character_id)
-    link = AFatLink.objects.get(hash=fatlink_hash)
+    link = FatLink.objects.get(hash=fatlink_hash)
 
     solar_system = esi.client.Universe.get_universe_systems_system_id(
         system_id=solar_system_id
@@ -100,29 +104,34 @@ def process_character(
     solar_system_name = solar_system["name"]
     ship_name = ship["name"]
 
-    fat, created = AFat.objects.get_or_create(
-        afatlink=link,
+    fat, created = Fat.objects.get_or_create(
+        fatlink=link,
         character=character,
         defaults={"system": solar_system_name, "shiptype": ship_name},
     )
 
     if created is True:
         logger.info(
-            f"New Pilot: Adding {character} in {solar_system_name} flying "
-            f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
+            msg=(
+                f"New Pilot: Adding {character} in {solar_system_name} flying "
+                f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
+            )
         )
 
         return
 
     logger.debug(
-        f"Pilot {character} already registered for FAT link {fatlink_hash} "
-        f"with FAT ID {fat.pk}"
+        msg=(
+            f"Pilot {character} already registered for FAT link {fatlink_hash} "
+            f"with FAT ID {fat.pk}"
+        )
     )
 
 
-def _close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
+def _close_esi_fleet(fatlink: FatLink, reason: str) -> None:
     """
     Closing ESI fleet
+
     :param fatlink:
     :type fatlink:
     :param reason:
@@ -131,15 +140,18 @@ def _close_esi_fleet(fatlink: AFatLink, reason: str) -> None:
     :rtype:
     """
 
-    logger.info(f'Closing ESI FAT link with hash "{fatlink.hash}". Reason: {reason}')
+    logger.info(
+        msg=f'Closing ESI FAT link with hash "{fatlink.hash}". Reason: {reason}'
+    )
 
     fatlink.is_registered_on_esi = False
     fatlink.save()
 
 
-def _esi_fatlinks_error_handling(error_key: str, fatlink: AFatLink) -> None:
+def _esi_fatlinks_error_handling(error_key: str, fatlink: FatLink) -> None:
     """
     ESI error handling
+
     :param cache_key:
     :type cache_key:
     :param fatlink:
@@ -170,8 +182,10 @@ def _esi_fatlinks_error_handling(error_key: str, fatlink: AFatLink) -> None:
     )
 
     logger.info(
-        f'FAT link "{fatlink.hash}" Error: "{error_key.label}" '
-        f"({error_count} of {ESI_MAX_ERROR_COUNT})."
+        msg=(
+            f'FAT link "{fatlink.hash}" Error: "{error_key.label}" '
+            f"({error_count} of {ESI_MAX_ERROR_COUNT})."
+        )
     )
 
     fatlink.esi_error_count = error_count
@@ -180,13 +194,15 @@ def _esi_fatlinks_error_handling(error_key: str, fatlink: AFatLink) -> None:
     fatlink.save()
 
 
-def _check_for_esi_fleet(fatlink: AFatLink):
+def _check_for_esi_fleet(fatlink: FatLink):
     required_scopes = ["esi-fleets.read_fleet.v1"]
 
     # Check if there is a fleet
     try:
         fleet_commander_id = fatlink.character.character_id
-        esi_token = Token.get_token(fleet_commander_id, required_scopes)
+        esi_token = Token.get_token(
+            character_id=fleet_commander_id, scopes=required_scopes
+        )
 
         fleet_from_esi = esi.client.Fleets.get_characters_character_id_fleet(
             character_id=fleet_commander_id,
@@ -196,26 +212,27 @@ def _check_for_esi_fleet(fatlink: AFatLink):
         return {"fleet": fleet_from_esi, "token": esi_token}
     except HTTPNotFound:
         _esi_fatlinks_error_handling(
-            error_key=AFatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
+            error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
         )
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         _esi_fatlinks_error_handling(
-            error_key=AFatLink.EsiError.NO_FLEET, fatlink=fatlink
+            error_key=FatLink.EsiError.NO_FLEET, fatlink=fatlink
         )
 
     return False
 
 
-def _process_esi_fatlink(fatlink: AFatLink):
+def _process_esi_fatlink(fatlink: FatLink):
     """
-    Processing ESI FAT Link
+    Processing ESI FAT link
+
     :param fatlink:
     :type fatlink:
     :return:
     :rtype:
     """
 
-    logger.info(f'Processing ESI FAT link with hash "{fatlink.hash}"')
+    logger.info(msg=f'Processing ESI FAT link with hash "{fatlink.hash}"')
 
     if fatlink.creator.profile.main_character is not None:
         # Check if there is a fleet
@@ -229,16 +246,18 @@ def _process_esi_fatlink(fatlink: AFatLink):
                     fleet_id=esi_fleet["fleet"]["fleet_id"],
                     token=esi_fleet["token"].valid_access_token(),
                 ).result()
-            except Exception:
+            except Exception:  # pylint: disable=broad-exception-caught
                 _esi_fatlinks_error_handling(
-                    error_key=AFatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
+                    error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
                 )
 
             # Process fleet members
             else:
                 logger.debug(
-                    "Processing fleet members for ESI FAT link with "
-                    f'hash "{fatlink.hash}"'
+                    msg=(
+                        "Processing fleet members for ESI FAT link with "
+                        f'hash "{fatlink.hash}"'
+                    )
                 )
 
                 process_fats.delay(
@@ -247,29 +266,32 @@ def _process_esi_fatlink(fatlink: AFatLink):
                     fatlink_hash=fatlink.hash,
                 )
     else:
-        _close_esi_fleet(fatlink=fatlink, reason="No FAT Link creator available.")
+        _close_esi_fleet(fatlink=fatlink, reason="No FAT link creator available.")
 
 
 @shared_task(**{**TASK_DEFAULT_KWARGS, **{"base": QueueOnce}})
 def update_esi_fatlinks() -> None:
     """
     Checking ESI fat links for changes
+
     :return:
     :rtype:
     """
 
     try:
-        esi_fatlinks = AFatLink.objects.select_related_default().filter(
+        esi_fatlinks = FatLink.objects.select_related_default().filter(
             is_esilink=True, is_registered_on_esi=True
         )
-    except AFatLink.DoesNotExist:
+    except FatLink.DoesNotExist:
         pass
 
     # Work our way through the FAT links
     else:
         # Abort if ESI seems to be offline or above the error limit
         if not fetch_esi_status().is_ok:
-            logger.warning("ESI doesn't seem to be available at this time. Aborting.")
+            logger.warning(
+                msg="ESI doesn't seem to be available at this time. Aborting."
+            )
 
             return
 
@@ -281,12 +303,13 @@ def update_esi_fatlinks() -> None:
 def logrotate():
     """
     Remove logs older than AFAT_DEFAULT_LOG_DURATION
+
     :return:
     :rtype:
     """
 
-    logger.info(f"Cleaning up logs older than {AFAT_DEFAULT_LOG_DURATION} days")
+    logger.info(msg=f"Cleaning up logs older than {AFAT_DEFAULT_LOG_DURATION} days")
 
-    AFatLog.objects.filter(
+    Log.objects.filter(
         log_time__lte=timezone.now() - timedelta(days=AFAT_DEFAULT_LOG_DURATION)
     ).delete()

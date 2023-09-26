@@ -3,15 +3,27 @@
 <div id="graphs" class="tab-pane fade in active panel panel-default">
     <div class="panel-body">
         <ul class="nav nav-pills">
-            <li class="active"><a data-toggle="tab" href="#fatsbyship">{% translate "FATs By Ship Type" %}</a></li>
-            <li><a data-toggle="tab" href="#fatsbytime">{% translate "FATs By Time" %}</a></li>
-            <li><a data-toggle="tab" href="#fatsbyweek">{% translate "FATs By Weekday" %}</a></li>
+            <li class="active">
+                <a data-toggle="tab" href="#fatsbyship">
+                    {% translate "FATs by ship type" %}
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#fatsbytime">
+                    {% translate "FATs by time" %}
+                </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#fatsbyweek">
+                    {% translate "FATs by weekday" %}
+                </a>
+            </li>
         </ul>
 
         <div class="tab-content">
             <div class="tab-pane fade in active panel-default" id="fatsbyship">
                 <div class="panel-body">
-                    <h3>{% translate "FATs by Ship Type" %}</h3>
+                    <h4>{% translate "FATs by ship type" %}</h4>
 
                     <canvas id="ship-bar-stacked" width="800" height="500"></canvas>
 
@@ -49,7 +61,7 @@
 
             <div id="fatsbytime" class="tab-pane fade in panel-default">
                 <div class="panel-body">
-                    <h3>{% translate "FATs By Time" %}</h3>
+                    <h4>{% translate "FATs by time" %}</h4>
 
                     <canvas id="time-line" width="800" height="500"></canvas>
 
@@ -74,7 +86,7 @@
 
             <div class="tab-pane fade in panel-default" id="fatsbyweek">
                 <div class="panel-body">
-                    <h3>{% translate "FATs By Weekday" %}</h3>
+                    <h4>{% translate "FATs by weekday" %}</h4>
 
                     <canvas id="weekday-line" width="800" height="500"></canvas>
 

@@ -1,6 +1,8 @@
 """
-Test access to the afat module
+Test access to the AFAT module
 """
+# Standard Library
+from http import HTTPStatus
 
 # Django
 from django.test import TestCase
@@ -21,6 +23,13 @@ MODULE_PATH = "afat.views.statistics"
 class TestAccesss(TestCase):
     @classmethod
     def setUpClass(cls):
+        """
+        Setup
+
+        :return:
+        :rtype:
+        """
+
         super().setUpClass()
         load_allianceauth()
 
@@ -29,33 +38,36 @@ class TestAccesss(TestCase):
         cls.character_1002 = EveCharacter.objects.get(character_id=1002)
 
         cls.user_without_access, _ = create_user_from_evecharacter(
-            cls.character_1001.character_id
+            character_id=cls.character_1001.character_id
         )
 
         cls.user_with_basic_access, _ = create_user_from_evecharacter(
-            cls.character_1002.character_id, permissions=["afat.basic_access"]
+            character_id=cls.character_1002.character_id,
+            permissions=["afat.basic_access"],
         )
 
     def test_should_show_afat_dashboard_for_user_with_basic_access(self):
         # given
-        self.client.force_login(self.user_with_basic_access)
+        self.client.force_login(user=self.user_with_basic_access)
 
         # when
-        url = reverse("afat:dashboard")
-        res = self.client.get(url)
+        url = reverse(viewname="afat:dashboard")
+        res = self.client.get(path=url)
 
         # then
-        self.assertEqual(res.status_code, 200)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_afat_dashboard_for_user_without_access(self):
         # given
-        self.client.force_login(self.user_without_access)
+        self.client.force_login(user=self.user_without_access)
 
         # when
-        url = reverse("afat:dashboard")
-        res = self.client.get(url)
+        url = reverse(viewname="afat:dashboard")
+        res = self.client.get(path=url)
 
         # then
-        self.assertNotEqual(res.status_code, 200)
-        self.assertEqual(res.status_code, 302)
-        self.assertEqual(res.url, "/account/login/?next=/fleet-activity-tracking/")
+        self.assertNotEqual(first=res.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
+        self.assertEqual(
+            first=res.url, second="/account/login/?next=/fleet-activity-tracking/"
+        )

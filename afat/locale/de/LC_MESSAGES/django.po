@@ -10,118 +10,119 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-30 18:59+0200\n"
-"PO-Revision-Date: 2023-07-31 17:39+0000\n"
+"POT-Creation-Date: 2023-09-24 15:57+0200\n"
+"PO-Revision-Date: 2023-09-24 13:12+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/"
-"alliance-auth-apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
+"apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.2\n"
+"X-Generator: Weblate 5.0.2\n"
 
-#: admin.py:148 templates/afat/partials/dashboard/tabs/fatlinks.html:13
-#: templates/afat/partials/dashboard/tabs/fats.html:41
+#: __init__.py:15 app_settings.py:36 templates/afat/partials/menu.html:14
+msgid "Fleet Activity Tracking"
+msgstr "Flottenaktivitäts-Tracking"
+
+#: admin.py:156 models.py:109
+#: templates/afat/partials/dashboard/tabs/fatlinks.html:13
+#: templates/afat/partials/dashboard/tabs/fats.html:43
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:11
-#: templates/afat/view/fatlinks/fatlinks_overview.html:26
-msgid "Fleet Type"
+#: templates/afat/view/fatlinks/fatlinks_overview.html:33
+msgid "Fleet type"
 msgstr "Flottenart"
 
-#: admin.py:160
+#: admin.py:169
 msgid "Is enabled"
 msgstr "Ist aktiviert"
 
-#: admin.py:174
+#: admin.py:184
 msgid "Activate selected fleet types"
 msgstr "Aktiviere ausgewählte Flottenarten"
 
-#: admin.py:202
+#: admin.py:213
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
 msgstr[0] "Aktivieren von {failed} Flottenart ist fehlgeschlagen"
 msgstr[1] "Aktivieren von {failed} Flottenarten ist fehlgeschlagen"
 
-#: admin.py:212
+#: admin.py:223
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
 msgstr[0] "{notifications_count} Flottenart aktiviert"
 msgstr[1] "{notifications_count} Flottenarten aktiviert"
 
-#: admin.py:218
+#: admin.py:229
 msgid "Deactivate selected fleet types"
 msgstr "Deaktiviere ausgewählte Flottenarten"
 
-#: admin.py:246
+#: admin.py:258
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
 msgstr[0] "Deaktivieren von {failed} Flottenart ist fehlgeschlagen"
 msgstr[1] "Deaktivieren von {failed} Flottenarten ist fehlgeschlagen"
 
-#: admin.py:256
+#: admin.py:268
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
 msgstr[0] "{notifications_count} Flottenart deaktiviert"
 msgstr[1] "{notifications_count} Flottenarten deaktiviert"
 
-#: app_settings.py:32 templates/afat/partials/menu.html:14
-msgid "Fleet Activity Tracking"
-msgstr "Flottenaktivitäts-Tracking"
+#: apps.py:20
+#, python-brace-format
+msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
+msgstr "AFAT - Another Fleet Activity Tracker v{__version__}"
 
-#: forms.py:24 templates/afat/partials/fatlinks/details/tabs/manualfat.html:22
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:37
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:48
+#: forms.py:25 templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
 msgstr "Dies ist ein Pflichtfeld"
 
-#: forms.py:42 forms.py:84 forms.py:111
+#: forms.py:43 forms.py:85 forms.py:112
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:12
-#: templates/afat/partials/dashboard/tabs/fats.html:40
+#: templates/afat/partials/dashboard/tabs/fats.html:42
 #: templates/afat/partials/fatlinks/details/fatlink_name_form.html:10
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:25
-#: templates/afat/view/fatlinks/fatlinks_overview.html:25
-msgid "Fleet Name"
+#: templates/afat/view/fatlinks/fatlinks_overview.html:32
+msgid "Fleet name"
 msgstr "Flottenname"
 
-#: forms.py:44 forms.py:86
+#: forms.py:45 forms.py:87
 msgid "Enter fleet name"
 msgstr "Flottenname hier eintragen"
 
-#: forms.py:48 forms.py:90
-msgid "Fleet Type (optional)"
+#: forms.py:49 forms.py:91
+msgid "Fleet type (optional)"
 msgstr "Flottenart (optional)"
 
-#: forms.py:61 templates/afat/partials/fatlinks/details/tabs/manualfat.html:21
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:26
+#: forms.py:62
 msgid "Character Name"
 msgstr "Charaktername"
 
-#: forms.py:66 templates/afat/partials/fatlinks/details/tabs/manualfat.html:36
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
+#: forms.py:67 templates/afat/partials/fatlinks/details/tabs/manualfat.html:38
 msgid "System"
 msgstr "System"
 
-#: forms.py:71 templates/afat/partials/fatlinks/details/tabs/fats.html:17
-#: templates/afat/partials/fatlinks/details/tabs/fats.html:32
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:47
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:52
-msgid "Ship Type"
+#: forms.py:72 templates/afat/partials/fatlinks/details/tabs/fats.html:19
+#: templates/afat/partials/fatlinks/details/tabs/fats.html:37
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:51
+msgid "Ship type"
 msgstr "Schiffstyp"
 
-#: forms.py:96
+#: forms.py:97
 msgid "FAT link expiry time in minutes"
 msgstr "FAT-Link Ablaufzeit in Minuten"
 
-#: forms.py:99
+#: forms.py:100
 msgid "Expiry time in minutes"
 msgstr "Ablaufzeit in Minuten"
 
-#: helper/time.py:104
+#: helper/time.py:115
 msgid ""
 "{int(duration_years[0])} years, {int(duration_days[0])} days, "
 "{int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and "
@@ -131,14 +132,14 @@ msgstr ""
 "{int(duration_hours[0])} Stunden, {int(duration_minutes[0])} Minuten und "
 "{int(duration_seconds[0])} Sekunden"
 
-#: helper/views_helper.py:56 helper/views_helper.py:175
+#: helper/views.py:57 helper/views.py:177
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:5
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:6
-#: templates/afat/view/fatlinks/fatlinks_overview.html:76
+#: templates/afat/view/fatlinks/fatlinks_overview.html:83
 msgid "via ESI"
 msgstr "mittels ESI"
 
-#: helper/views_helper.py:87
+#: helper/views.py:88
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:34
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:33
 msgid ""
@@ -148,7 +149,7 @@ msgstr ""
 "Klicke hier um das automatische Tracking mittels ESI für diese Flotte zu "
 "stoppen und den FAT-Link zu schließen."
 
-#: helper/views_helper.py:90
+#: helper/views.py:91
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
@@ -157,25 +158,25 @@ msgstr ""
 "<p>Bist Du sicher das Du die ESI Flotte mit ID {fatlink.esi_fleet_id} von "
 "{fatlink.character.character_name} schließen möchtest?</p>"
 
-#: helper/views_helper.py:92
+#: helper/views.py:93
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:39
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:42
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:38
 #: templates/afat/partials/fatlinks/open_esi_fleets.html:41
-msgid "Stop Tracking"
+msgid "Stop tracking"
 msgstr "Tracking stoppen"
 
-#: helper/views_helper.py:116 helper/views_helper.py:186
+#: helper/views.py:121 helper/views.py:188
 msgid "Delete"
 msgstr "Löschen"
 
-#: helper/views_helper.py:118
+#: helper/views.py:123
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr ""
 "<p>Bist Du sicher das Du den FAT-Link {fatlink_fleet} löschen möchtest?</p>"
 
-#: helper/views_helper.py:188
+#: helper/views.py:190
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
@@ -184,204 +185,187 @@ msgstr ""
 "<p>Bist Du sicher das Du {fat.character.character_name} von diesem FAT-Link "
 "löschen möchtest?</p>"
 
-#: helper/views_helper.py:239
+#: helper/views.py:242
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr "{log.fatlink_hash} (Gelöscht)"
 
-#: models.py:57
+#: models.py:59
 msgid "Can access the AFAT module"
 msgstr "Kann auf das AFAT Modul zugreifen"
 
-#: models.py:65
+#: models.py:67
 msgid "Can manage the AFAT module"
 msgstr "Kann das AFAT Modul managen"
 
-#: models.py:67
-msgid "Can create FAT Links"
+#: models.py:69
+msgid "Can create FAT links"
 msgstr "Kann FAT-Links erstellen"
 
-#: models.py:69
+#: models.py:71
 msgid "Can see own corporation statistics"
 msgstr "Kann Statistiken der eigenen Corporation sehen"
 
-#: models.py:71
+#: models.py:73
 msgid "Can see statistics of other corporations"
 msgstr "Kann Statistiken anderer Corporations sehen"
 
-#: models.py:73
+#: models.py:75
 msgid "Can view the modules log"
 msgstr "Kann das Log des Moduls sehen"
 
-#: models.py:87
-msgid "Descriptive name of your fleet type"
+#: models.py:77
+msgid "AFAT"
+msgstr "AFAT"
+
+#: models.py:94
+msgid "Descriptive name of the fleet type"
 msgstr "Beschreibender Name für die Flottenart"
 
-#: models.py:93
+#: models.py:100
 msgid "Whether this fleet type is active or not"
 msgstr "Ist diese Flottenart aktiv oder nicht"
 
-#: models.py:102
-msgid "FAT Link Fleet Type"
-msgstr "FAT Link Flottenart"
+#: models.py:110
+msgid "Fleet types"
+msgstr "Flottenarten"
 
-#: models.py:103
-msgid "FAT Link Fleet Types"
-msgstr "FAT Link Flottenarten"
-
-#: models.py:127
+#: models.py:134
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
 msgstr ""
 "Der FC ist nicht mehr in der registrierten Flotte oder die Flotte ist nicht "
 "länger verfügbar."
 
-#: models.py:129
+#: models.py:136
 msgid "Registered fleet seems to be no longer available."
 msgstr "Die registrierte Flotte scheint nicht mehr verfügbar zu sein."
 
-#: models.py:130
+#: models.py:137
 msgid "FC is no longer the fleet boss."
 msgstr "Der FC ist nicht länger Flottenchef."
 
-#: models.py:135
-msgid "When was this FAT link created"
-msgstr "Wann wurde dieser FAT Link erstellt"
-
 #: models.py:142
-msgid "The FAT link fleet name"
-msgstr "FAT Link Flottenname"
+msgid "When was this FAT link created"
+msgstr "Wann wurde dieser FAT-Link erstellt"
 
-#: models.py:146
-msgid "The FAT link hash"
-msgstr "Fat Link Hash"
+#: models.py:149
+msgid "The FAT link fleet name"
+msgstr "FAT-Link Flottenname"
 
 #: models.py:153
+msgid "The FAT link hash"
+msgstr "Fat-Link Hash"
+
+#: models.py:160
 msgid "Who created the FAT link?"
-msgstr "Wer hat diesen FAT Link erstellt?"
+msgstr "Wer hat diesen FAT-Link erstellt?"
 
-#: models.py:162
+#: models.py:169
 msgid "Character this FAT link has been created with"
-msgstr "Der Charakter durch den dieser FAT Link erstellt wurde"
+msgstr "Der Charakter durch den dieser FAT-Link erstellt wurde"
 
-#: models.py:170
+#: models.py:177
 msgid "The FAT link fleet type, if it's set"
-msgstr "FAT Link Flottenart, wenn gesetzt"
+msgstr "FAT-Link Flottenart, wenn gesetzt"
 
-#: models.py:174
+#: models.py:181
 msgid "Whether this FAT link was created via ESI or not"
-msgstr "Wurde dieser FAT Link mittels ESI erstellt oder nicht"
+msgstr "Wurde dieser FAT-Link mittels ESI erstellt oder nicht"
 
-#: models.py:179
+#: models.py:186
 msgid "Whether the fleet to this FAT link is available in ESI or not"
-msgstr "Ist die Flotte zu diesem FAT Link in ESI verfügbar oder nicht"
+msgstr "Ist die Flotte zu diesem FAT-Link in ESI verfügbar oder nicht"
 
-#: models.py:185
+#: models.py:192
 msgid "Has this FAT link being re-opened?"
-msgstr "Wurde dieser FAT Link wieder geöffnet?"
+msgstr "Wurde dieser FAT-Link wieder geöffnet?"
 
-#: models.py:205 templates/afat/partials/fatlinks/details/fatlink_info.html:72
-msgid "FAT Link"
+#: models.py:212 templates/afat/view/logs/logs_overview.html:32
+msgid "FAT link"
 msgstr "FAT-Link"
 
-#: models.py:206 templates/afat/partials/dashboard/tabs_navigation.html:5
-#: templates/afat/partials/menu.html:24
-msgid "FAT Links"
+#: models.py:213 templates/afat/partials/dashboard/tabs_navigation.html:7
+#: templates/afat/partials/menu.html:25
+msgid "FAT links"
 msgstr "FAT-Links"
 
-#: models.py:259
-msgid "FAT Duration"
-msgstr "FAT Laufzeit"
+#: models.py:271
+msgid "FAT link duration"
+msgstr "FAT-Link Laufzeit"
 
-#: models.py:260
-msgid "FAT Durations"
-msgstr "FAT Laufzeiten"
+#: models.py:272
+msgid "FAT link durations"
+msgstr "FAT-Link Laufzeiten"
 
-#: models.py:273
+#: models.py:285
 msgid "Character who registered this FAT"
 msgstr "Charakter welcher diesen FAT registriert hat"
 
-#: models.py:280
+#: models.py:292
 msgid "The FAT link the character registered at"
-msgstr "Der FAT Link zu dem der Charakter registriert ist"
+msgstr "Der FAT-Link zu dem der Charakter registriert ist"
 
-#: models.py:284
+#: models.py:296
 msgid "The system the character is in"
 msgstr "Das System in dem der Charakter ist"
 
-#: models.py:291
+#: models.py:303
 msgid "The ship the character was flying"
 msgstr "Das Schiff welches der Charakter geflogen ist"
 
-#: models.py:303
+#: models.py:315
 msgid "FAT"
 msgstr "FAT"
 
-#: models.py:304 templates/afat/partials/dashboard/tabs_navigation.html:4
+#: models.py:316 templates/afat/partials/dashboard/tabs_navigation.html:4
 #: templates/afat/partials/fatlinks/details/tabs_navigation.html:6
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:14
 #: templates/afat/partials/statistics/corporation/tabs/member.html:11
-#: templates/afat/view/statistics/statistics_alliance_year_overview.html:27
-#: templates/afat/view/statistics/statistics_corporation_year_overview.html:27
+#: templates/afat/view/statistics/statistics_alliance_year_overview.html:34
+#: templates/afat/view/statistics/statistics_corporation_year_overview.html:33
 msgid "FATs"
 msgstr "FATs"
 
-#: models.py:330
-msgid "Time this FAT has been added manually"
-msgstr "Die Zeit zu welcher der FAT manuell hinzugefügt wurde"
-
-#: models.py:339 templates/afat/partials/fatlinks/details/tabs/manualfat.html:6
-#: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
-msgid "Manual FAT"
-msgstr "Manueller FAT"
-
 #: models.py:340
-msgid "Manual FATs"
-msgstr "Manuelle FATs"
+msgid "FAT link created"
+msgstr "Fat-Link erstellt"
 
-#: models.py:364
-msgid "FAT Link Created"
-msgstr "Fat Link erstellt"
+#: models.py:341
+msgid "FAT link changed"
+msgstr "Fat-Link geändert"
 
-#: models.py:365
-msgid "FAT Link Changed"
-msgstr "Fat Link geändert"
+#: models.py:342
+msgid "FAT link removed"
+msgstr "Fat-Link entfernt"
 
-#: models.py:366
-msgid "FAT Link Removed"
-msgstr "Fat Link entfernt"
+#: models.py:343
+msgid "FAT link re-opened"
+msgstr "Fat-Link wieder geöffnet"
 
-#: models.py:367
-msgid "FAT Link Re-Opened"
-msgstr "Fat Link wieder geöffnet"
-
-#: models.py:369
-msgid "FAT Removed"
+#: models.py:345
+msgid "FAT removed"
 msgstr "FAT entfernt"
 
-#: models.py:370
-msgid "Manual FAT Added"
+#: models.py:346
+msgid "Manual FAT added"
 msgstr "Manueller FAT Eintrag hinzugefügt"
 
-#: models.py:396
-msgid "AFAT Log"
-msgstr "AFAT Log"
+#: models.py:372
+msgid "Log"
+msgstr "Log"
 
-#: models.py:397
-msgid "AFAT Logs"
-msgstr "AFAT-Logs"
+#: models.py:373 templates/afat/view/logs/logs_overview.html:14
+msgid "Logs"
+msgstr "Logs"
 
-#: templates/afat/base.html:5 templates/afat/view/dashboard/dashboard.html:6
-#: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:5
-#: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:5
-#: templates/afat/view/fatlinks/fatlinks_overview.html:5
-#: templates/afat/view/statistics/statistics_alliance_year_overview.html:6
-#: templates/afat/view/statistics/statistics_alliance_year_overview.html:12
-#: templates/afat/view/statistics/statistics_corporation_year_overview.html:6
-#: templates/afat/view/statistics/statistics_corporation_year_overview.html:12
-#: templates/afat/view/statistics/statistics_overview.html:7
-msgid "Fleet Activity"
-msgstr "Flottenaktivität"
+#: templates/afat/base.html:6 templates/afat/view/dashboard/dashboard.html:7
+#: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:6
+#: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:6
+#: templates/afat/view/fatlinks/fatlinks_overview.html:6
+#: templates/afat/view/statistics/statistics_overview.html:8
+msgid "Fleet activity tracking"
+msgstr "Flottenaktivitäts-Tracking"
 
 #: templates/afat/modals/general.html:27
 msgid "Cancel"
@@ -392,33 +376,33 @@ msgid "Confirm"
 msgstr "Bestätigen"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:6
-msgid "Most Recent FAT Links <small>(latest 10)</small>"
-msgstr "Neueste FAT Links <small>(letzten 10)</small>"
+msgid "Most recent FAT links <small>(latest 10)</small>"
+msgstr "Neueste FAT-Links <small>(letzten 10)</small>"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:14
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:6
-#: templates/afat/view/fatlinks/fatlinks_overview.html:27
+#: templates/afat/view/fatlinks/fatlinks_overview.html:34
 msgid "Creator"
 msgstr "Ersteller"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:15
-#: templates/afat/partials/dashboard/tabs/fats.html:44
+#: templates/afat/partials/dashboard/tabs/fats.html:46
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:14
-#: templates/afat/view/fatlinks/fatlinks_overview.html:28
-msgid "EVE Time"
+#: templates/afat/view/fatlinks/fatlinks_overview.html:35
+msgid "Eve time"
 msgstr "EVE Zeit"
 
 #: templates/afat/partials/dashboard/tabs/fatlinks.html:16
-#: templates/afat/partials/fatlinks/details/tabs/fats.html:18
-#: templates/afat/view/fatlinks/fatlinks_overview.html:30
+#: templates/afat/partials/fatlinks/details/tabs/fats.html:20
+#: templates/afat/view/fatlinks/fatlinks_overview.html:37
 msgid "Actions"
 msgstr "Aktionen"
 
-#: templates/afat/partials/dashboard/tabs/fats.html:10
-msgid "Your Most Recent FATs"
-msgstr "Deine neuesten FAT Links"
+#: templates/afat/partials/dashboard/tabs/fats.html:11
+msgid "Your most recent FATs"
+msgstr "Deine neuesten FAT-Links"
 
-#: templates/afat/partials/dashboard/tabs/fats.html:12
+#: templates/afat/partials/dashboard/tabs/fats.html:14
 msgid ""
 "Only characters that have recent FATs are shown. <small>(latest 10 FATs per "
 "character)</small>"
@@ -426,24 +410,24 @@ msgstr ""
 "Nur Charaktere mit kürzlichen FATs werden angezeigt. <small>(Letzte 10 FATs "
 "je Charakter)</small>"
 
-#: templates/afat/partials/dashboard/tabs/fats.html:42
-#: templates/afat/partials/fatlinks/details/tabs/fats.html:16
+#: templates/afat/partials/dashboard/tabs/fats.html:44
+#: templates/afat/partials/fatlinks/details/tabs/fats.html:18
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:12
 msgid "Location"
 msgstr "Ort"
 
-#: templates/afat/partials/dashboard/tabs/fats.html:43
+#: templates/afat/partials/dashboard/tabs/fats.html:45
 #: templates/afat/partials/statistics/character/tabs/raw_data.html:13
 msgid "Ship"
 msgstr "Schiff"
 
-#: templates/afat/partials/dashboard/tabs/fats.html:65
+#: templates/afat/partials/dashboard/tabs/fats.html:67
 msgid "No recent FAT activity registered for any of your characters."
 msgstr "Keine Aktivität für Deine Charaktere registriert."
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:8
-msgid "Create a clickable FAT Link"
-msgstr "Klickbaren FAT Link erstellen"
+msgid "Create a clickable FAT link"
+msgstr "Klickbaren FAT-Link erstellen"
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:14
 msgid ""
@@ -453,12 +437,12 @@ msgstr ""
 "kannst."
 
 #: templates/afat/partials/fatlinks/add/clickable_link.html:35
-msgid "Create Link"
+msgid "Create link"
 msgstr "Link erstellen"
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:9
-msgid "Create link using ESI"
-msgstr "ESI Link erstellen"
+msgid "Create FAT link using ESI"
+msgstr "ESI-Link erstellen"
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:15
 msgid ""
@@ -476,7 +460,7 @@ msgstr ""
 "                    Diese Option wird die Flotte automatisch registrieren "
 "und tracken. Es muss kein Link in der Flotte geteilt werden.<br><b>Nutze "
 "diese Option wenn Du der Flottenkommandant bist</b>, ansonsten nutze die "
-"Option für klickbare Links.\n"
+"Option für klickbare FAT-Links.\n"
 "                "
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:24
@@ -491,24 +475,24 @@ msgid ""
 msgstr ""
 "\n"
 "                    Piloten die Deiner Flotte beitreten werden automatisch "
-"zu diesem FAT Link hinzugefügt bis die Flotte geschlossen in Eve wird (Du "
+"zu diesem FAT-Link hinzugefügt bis die Flotte geschlossen in Eve wird (Du "
 "verlässt die Flotte ingame) oder Du das Tracking hier stoppst.\n"
 "                "
 
 #: templates/afat/partials/fatlinks/add/esi_link.html:48
-msgid "Add ESI Link"
-msgstr "ESI Link hinzufügen"
+msgid "Add ESI link"
+msgstr "ESI-Link hinzufügen"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:11
-msgid "Link Created (Eve Time)"
+msgid "Link created (Eve Time)"
 msgstr "Link erstellt (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:17
-msgid "Link Expires (Eve Time)"
+msgid "Link expires (Eve Time)"
 msgstr "Link läuft ab (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:19
-msgid "Link Expired (Eve Time)"
+msgid "Link expired (Eve Time)"
 msgstr "Link abgelaufen (Eve Zeit)"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:29
@@ -545,8 +529,8 @@ msgid ""
 "%(reopen_duration)s minutes?<br>FAT links can be re-opened only once!"
 "<br><em>(Be aware, this action will be logged)</em></p>"
 msgstr ""
-"<p>Bist Du sicher das Du diesen FAT Link für weitere %(reopen_duration)s "
-"Minuten wieder öffnen willst?<br>FAT Links können nur einmal wieder geöffnet "
+"<p>Bist Du sicher das Du diesen FAT-Link für weitere %(reopen_duration)s "
+"Minuten wieder öffnen willst?<br>FAT-Links können nur einmal wieder geöffnet "
 "werden!<br><em>(Diese Aktion wird geloggt)</em></p>"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:62
@@ -554,66 +538,75 @@ msgid "Re-Open"
 msgstr "Wieder öffnen"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:64
-msgid "Re-Open FAT link"
-msgstr "FAT Link wieder öffnen"
+#: templates/afat/partials/fatlinks/details/fatlink_info.html:97
+msgid "Re-open FAT link"
+msgstr "FAT-Link wieder öffnen"
+
+#: templates/afat/partials/fatlinks/details/fatlink_info.html:72
+msgid "FAT Link"
+msgstr "FAT-Link"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:84
 msgid "Copy me!"
 msgstr "Kopier mich!"
 
 #: templates/afat/partials/fatlinks/details/fatlink_info.html:92
-#: templates/afat/partials/fatlinks/open_esi_fleets.html:63
-#: templates/afat/view/dashboard/dashboard.html:26
-#: templates/afat/view/fatlinks/fatlinks_overview.html:50
-msgid "Close ESI Fleet Tracking"
-msgstr "ESI Tracking beenden"
+#: templates/afat/view/dashboard/dashboard.html:32
+#: templates/afat/view/fatlinks/fatlinks_overview.html:57
+msgid "Close ESI fleet tracking"
+msgstr "ESI-Tracking beenden"
 
-#: templates/afat/partials/fatlinks/details/fatlink_info.html:97
-msgid "Re-Open Fat Link"
-msgstr "FAT Link wieder öffnen"
-
-#: templates/afat/partials/fatlinks/details/fatlink_name_form.html:13
-msgid "Set Name"
+#: templates/afat/partials/fatlinks/details/fatlink_name_form.html:14
+msgid "Set name"
 msgstr "Name setzen"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:7
-msgid "FATs for this FAT Link <small>(updated every 15 seconds)</small>"
+msgid "FATs for this FAT link <small>(updated every 15 seconds)</small>"
 msgstr ""
-"FATs für diesen FAT Link <small>(alle 15 Sekunden aktualisiert)</small>"
+"FATs für diesen FAT-Link <small>(alle 15 Sekunden aktualisiert)</small>"
 
 #: templates/afat/partials/fatlinks/details/tabs/fats.html:9
-msgid "FATs for this FAT Link"
-msgstr "FATs für diesen FAT Link"
+msgid "FATs for this FAT link"
+msgstr "FATs für diesen FAT-Link"
 
-#: templates/afat/partials/fatlinks/details/tabs/fats.html:15
+#: templates/afat/partials/fatlinks/details/tabs/fats.html:17
 #: templates/afat/partials/statistics/corporation/tabs/member.html:10
 msgid "Character"
 msgstr "Charakter"
 
-#: templates/afat/partials/fatlinks/details/tabs/fats.html:27
-msgid "Ship Type Overview"
+#: templates/afat/partials/fatlinks/details/tabs/fats.html:30
+msgid "Ship type overview"
 msgstr "Schiffsübersicht"
 
-#: templates/afat/partials/fatlinks/details/tabs/fats.html:33
-msgid "Numbers"
+#: templates/afat/partials/fatlinks/details/tabs/fats.html:39
+msgid "Count"
 msgstr "Anzahl"
 
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:9
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:8
+#: templates/afat/partials/fatlinks/details/tabs_navigation.html:7
+msgid "Manual FAT"
+msgstr "Manueller FAT"
+
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr ""
 "Es fehlen Piloten in der Liste dieses FATs? Nutze dieses Formular um sie "
 "manuell hinzuzufügen."
 
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:13
 msgid "Note"
 msgstr "Hinweis"
 
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:13
 msgid "This action is logged!"
 msgstr "Diese Aktion wird geloggt!"
 
-#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:58
-msgid "Add Manual FAT"
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:21
+msgid "Character name"
+msgstr "Charaktername"
+
+#: templates/afat/partials/fatlinks/details/tabs/manualfat.html:67
+msgid "Add manual FAT"
 msgstr "Manuellen FAT hinzufügen"
 
 #: templates/afat/partials/fatlinks/fatlink_list_legend.html:4
@@ -689,6 +682,10 @@ msgstr ""
 "Hinweis: Informationen über registrierte Flotten können bis zu 5 Minuten "
 "verzögert sein."
 
+#: templates/afat/partials/fatlinks/open_esi_fleets.html:63
+msgid "Close ESI Fleet Tracking"
+msgstr "ESI Tracking beenden"
+
 #: templates/afat/partials/footer/app-translation-footer.html:5
 msgid ""
 "Do you want to help translate this app into your language or improve the "
@@ -710,37 +707,35 @@ msgid "Toggle navigation"
 msgstr "Navigation umschalten"
 
 #: templates/afat/partials/menu.html:20
-#: templates/afat/view/statistics/statistics_alliance.html:6
-#: templates/afat/view/statistics/statistics_alliance.html:12
-#: templates/afat/view/statistics/statistics_character.html:11
-#: templates/afat/view/statistics/statistics_corporation.html:5
-#: templates/afat/view/statistics/statistics_corporation.html:11
-#: templates/afat/view/statistics/statistics_overview.html:13
+#: templates/afat/view/statistics/statistics_alliance.html:15
+#: templates/afat/view/statistics/statistics_character.html:14
+#: templates/afat/view/statistics/statistics_corporation.html:14
+#: templates/afat/view/statistics/statistics_overview.html:16
 msgid "Statistics"
 msgstr "Statistik"
 
-#: templates/afat/partials/menu.html:29
-msgid "Add FAT Link"
-msgstr "FAT Link hinzufügen"
+#: templates/afat/partials/menu.html:31
+msgid "Add FAT link"
+msgstr "FAT-Link hinzufügen"
 
-#: templates/afat/partials/menu.html:35
-msgid "View Log"
+#: templates/afat/partials/menu.html:37
+msgid "View log"
 msgstr "Log ansehen"
 
 #: templates/afat/partials/month_navigation.html:5
-msgid "Previous Month"
+msgid "Previous month"
 msgstr "Vorheriger Monat"
 
 #: templates/afat/partials/month_navigation.html:10
-msgid "Next Month"
+msgid "Next month"
 msgstr "Nächster Monat"
 
 #: templates/afat/partials/month_navigation.html:11
-msgid "Current Month"
+msgid "Current month"
 msgstr "Aktueller Monat"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:7
-msgid "Member Corporations"
+msgid "Member corporations"
 msgstr "Mitglieder-Corporations"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:13
@@ -748,52 +743,43 @@ msgid "Corporation"
 msgstr "Corporation"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:15
-#: templates/afat/view/statistics/statistics_alliance_year_overview.html:30
-#: templates/afat/view/statistics/statistics_corporation_year_overview.html:30
+#: templates/afat/view/statistics/statistics_alliance_year_overview.html:37
+#: templates/afat/view/statistics/statistics_corporation_year_overview.html:36
 msgid "Avg FATs"
 msgstr "Durschn. FATs"
 
 #: templates/afat/partials/statistics/alliance/tabs/corporations.html:16
-msgid "Corporation Stats"
-msgstr "Corporation Statistik"
-
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:6
-#: templates/afat/partials/statistics/corporation/tabs/graphs.html:6
-msgid "FATs By Ship Type"
-msgstr "FATs nach Schiffsart"
-
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:7
-msgid "Corporation Performance"
-msgstr "Corporation Performance"
+msgid "Corporation statistics"
+msgstr "Corporation-Statistik"
 
 #: templates/afat/partials/statistics/alliance/tabs/graphs.html:8
-#: templates/afat/partials/statistics/corporation/tabs/graphs.html:7
-#: templates/afat/partials/statistics/corporation/tabs/graphs.html:52
-msgid "FATs By Time"
-msgstr "FATs nach Zeit"
-
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:9
-#: templates/afat/partials/statistics/corporation/tabs/graphs.html:8
-#: templates/afat/partials/statistics/corporation/tabs/graphs.html:77
-msgid "FATs By Weekday"
-msgstr "FATs nach Wochentag"
-
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:16
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:31
 #: templates/afat/partials/statistics/character/tabs/graphs.html:6
-#: templates/afat/partials/statistics/corporation/tabs/graphs.html:14
-msgid "FATs by Ship Type"
+#: templates/afat/partials/statistics/corporation/tabs/graphs.html:8
+#: templates/afat/partials/statistics/corporation/tabs/graphs.html:26
+msgid "FATs by ship type"
 msgstr "FATs nach Schiffsart"
 
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:42
-msgid "FATs by Time"
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:13
+msgid "Corporation performance"
+msgstr "Corporation-Performance"
+
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:18
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:55
+#: templates/afat/partials/statistics/corporation/tabs/graphs.html:13
+#: templates/afat/partials/statistics/corporation/tabs/graphs.html:64
+msgid "FATs by time"
 msgstr "FATs nach Zeit"
 
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:69
-msgid "FATs by Weekday"
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:23
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:80
+#: templates/afat/partials/statistics/corporation/tabs/graphs.html:18
+#: templates/afat/partials/statistics/corporation/tabs/graphs.html:89
+msgid "FATs by weekday"
 msgstr "FATs nach Wochentag"
 
-#: templates/afat/partials/statistics/alliance/tabs/graphs.html:96
-msgid "Average FATs by Corporation"
+#: templates/afat/partials/statistics/alliance/tabs/graphs.html:105
+msgid "Average FATs by corporation"
 msgstr "Durchschnittliche FATs nach Corporation"
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:4
@@ -803,16 +789,16 @@ msgid "Graphs"
 msgstr "Grafiken"
 
 #: templates/afat/partials/statistics/alliance/tabs_navigation.html:5
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:7
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:11
 msgid "Corporations"
 msgstr "Corporations"
 
 #: templates/afat/partials/statistics/character/tabs/graphs.html:28
-msgid "FATs by Time of Day"
+msgid "FATs by time of day"
 msgstr "FATs nach Tageszeit"
 
 #: templates/afat/partials/statistics/character/tabs/graphs.html:37
-#: templates/afat/view/fatlinks/fatlinks_overview.html:29
+#: templates/afat/view/fatlinks/fatlinks_overview.html:36
 msgid "# of FATs"
 msgstr "Anz. FATs"
 
@@ -824,8 +810,8 @@ msgstr "FATs für"
 msgid "Name"
 msgstr "Name"
 
-#: templates/afat/partials/statistics/character/tabs_navigation.html:5
-msgid "Raw Data"
+#: templates/afat/partials/statistics/character/tabs_navigation.html:7
+msgid "Raw data"
 msgstr "Rohdaten"
 
 #: templates/afat/partials/statistics/corporation/tabs/member.html:5
@@ -834,7 +820,7 @@ msgid "Members"
 msgstr "Mitglieder"
 
 #: templates/afat/partials/statistics/corporation/tabs/member.html:12
-msgid "Character Stats"
+msgid "Character statistics"
 msgstr "Charakterstatistik"
 
 #: templates/afat/partials/statistics/overview/tabs/corps.html:7
@@ -849,91 +835,87 @@ msgstr ""
 msgid "Your monthly stats"
 msgstr "Deine monatliche Statistik"
 
-#: templates/afat/partials/statistics/overview/tabs/mine.html:9
-msgid "Only months with FAT data of the selected year are shown."
-msgstr "Nur Monate in denen auch FAT Links registriert sind werden angezeigt."
-
 #: templates/afat/partials/statistics/overview/tabs/mine.html:10
+msgid "Only months with FAT data of the selected year are shown."
+msgstr "Nur Monate in denen auch FAT-Links registriert sind werden angezeigt."
+
+#: templates/afat/partials/statistics/overview/tabs/mine.html:11
 msgid "Only characters that have FATs for the selected year are shown."
 msgstr ""
-"Nur Charaktere für die auch FAT Links registriert sind werden angezeigt."
+"Nur Charaktere für die auch FAT-Links registriert sind werden angezeigt."
 
-#: templates/afat/partials/statistics/overview/tabs/mine.html:32
-#: templates/afat/view/statistics/statistics_alliance_year_overview.html:26
-#: templates/afat/view/statistics/statistics_corporation_year_overview.html:26
+#: templates/afat/partials/statistics/overview/tabs/mine.html:34
+#: templates/afat/view/statistics/statistics_alliance_year_overview.html:33
+#: templates/afat/view/statistics/statistics_corporation_year_overview.html:32
 msgid "Month"
 msgstr "Monat"
 
-#: templates/afat/partials/statistics/overview/tabs/mine.html:33
-msgid "FAT Count"
+#: templates/afat/partials/statistics/overview/tabs/mine.html:35
+msgid "FAT count"
 msgstr "FAT Anzahl"
 
-#: templates/afat/partials/statistics/overview/tabs/mine.html:54
+#: templates/afat/partials/statistics/overview/tabs/mine.html:56
 msgid "No FATs for"
 msgstr "Keine FATs für"
 
-#: templates/afat/partials/statistics/overview/tabs/mine.html:62
+#: templates/afat/partials/statistics/overview/tabs/mine.html:64
 msgid "No FATs for this year at all"
 msgstr "Keine FATs für dieses Jahr"
 
-#: templates/afat/partials/statistics/overview/tabs_navigation.html:4
+#: templates/afat/partials/statistics/overview/tabs_navigation.html:6
 msgid "My Stats"
 msgstr "Meine Statistik"
 
 #: templates/afat/partials/year_navigation.html:4
-msgid "Previous Year"
+msgid "Previous year"
 msgstr "Vorheriger Monat"
 
 #: templates/afat/partials/year_navigation.html:9
-msgid "Next Year"
+msgid "Next year"
 msgstr "Nächstes Jahr"
 
 #: templates/afat/partials/year_navigation.html:10
-msgid "Current Year"
+msgid "Current year"
 msgstr "Aktuelles Jahr"
 
-#: templates/afat/view/dashboard/dashboard.html:12
-msgid "Recent Activity"
+#: templates/afat/view/dashboard/dashboard.html:16
+msgid "Recent activity"
 msgstr "Kürzliche Aktivität"
 
-#: templates/afat/view/dashboard/dashboard.html:23
-#: templates/afat/view/fatlinks/fatlinks_overview.html:47
-msgid "Delete FAT Link"
-msgstr "FAT Link löschen"
+#: templates/afat/view/dashboard/dashboard.html:29
+#: templates/afat/view/fatlinks/fatlinks_overview.html:54
+msgid "Delete FAT link"
+msgstr "FAT-Link löschen"
 
-#: templates/afat/view/dashboard/dashboard.html:52
+#: templates/afat/view/dashboard/dashboard.html:58
 msgid "No recent FATs for"
 msgstr "Keine FATs für"
 
-#: templates/afat/view/dashboard/dashboard.html:53
+#: templates/afat/view/dashboard/dashboard.html:59
 msgid "No recent FAT links"
-msgstr "Keine FAT Links"
+msgstr "Keine FAT-Links"
 
-#: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:11
-msgid "Create a FAT Link"
-msgstr "FAT Link erstellen"
+#: templates/afat/view/fatlinks/fatlinks_add_fatlink.html:15
+msgid "Create a FAT link"
+msgstr "FAT-Link erstellen"
 
-#: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:11
-msgid "FAT Link Details"
+#: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:15
+msgid "FAT link details"
 msgstr "FAT-Link Details"
 
-#: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:27
+#: templates/afat/view/fatlinks/fatlinks_details_fatlink.html:34
 msgid "Delete FAT"
 msgstr "FAT löschen"
 
-#: templates/afat/view/fatlinks/fatlinks_overview.html:11
-msgid "All FAT Links"
-msgstr "Alle FAT Links"
+#: templates/afat/view/fatlinks/fatlinks_overview.html:15
+msgid "All FAT links"
+msgstr "Alle FAT-Links"
 
-#: templates/afat/view/logs/logs_overview.html:5
-msgid "Fleet Activity Tracking Logs"
+#: templates/afat/view/logs/logs_overview.html:6
+msgid "Fleet activity tracking logs"
 msgstr "Flottenaktivitäts-Tracking Logs"
 
-#: templates/afat/view/logs/logs_overview.html:11
-msgid "Logs"
-msgstr "Logs"
-
-#: templates/afat/view/logs/logs_overview.html:14
+#: templates/afat/view/logs/logs_overview.html:17
 #, python-format
 msgid ""
 "\n"
@@ -946,103 +928,108 @@ msgstr ""
 "werden sie automatisch gelöscht.\n"
 "        "
 
-#: templates/afat/view/logs/logs_overview.html:26
+#: templates/afat/view/logs/logs_overview.html:29
 msgid "Time"
 msgstr "Zeit"
 
-#: templates/afat/view/logs/logs_overview.html:27
+#: templates/afat/view/logs/logs_overview.html:30
 msgid "Event"
 msgstr "Ereignis"
 
-#: templates/afat/view/logs/logs_overview.html:28
+#: templates/afat/view/logs/logs_overview.html:31
 msgid "User"
 msgstr "Nutzer"
 
-#: templates/afat/view/logs/logs_overview.html:29
-msgid "FAT link"
-msgstr "FAT-Link"
-
-#: templates/afat/view/logs/logs_overview.html:30
+#: templates/afat/view/logs/logs_overview.html:33
 msgid "Description"
 msgstr "Beschreibung"
 
-#: templates/afat/view/statistics/statistics_character.html:5
-msgid "FAT Statistics"
-msgstr "FAT Statistik"
+#: templates/afat/view/statistics/statistics_alliance.html:7
+#: templates/afat/view/statistics/statistics_alliance_year_overview.html:7
+#: templates/afat/view/statistics/statistics_character.html:6
+#: templates/afat/view/statistics/statistics_corporation.html:6
+#: templates/afat/view/statistics/statistics_corporation_year_overview.html:7
+msgid "Fleet activity tracking statistics"
+msgstr "Flottenaktivitäts-Tracking Statistik"
 
-#: templatetags/filters.py:20
+#: templates/afat/view/statistics/statistics_alliance_year_overview.html:16
+#: templates/afat/view/statistics/statistics_corporation_year_overview.html:16
+msgid "Fleet activity"
+msgstr "Flottenaktivität"
+
+#: templatetags/filters.py:21
 msgid "January"
 msgstr "Januar"
 
-#: templatetags/filters.py:21
+#: templatetags/filters.py:22
 msgid "February"
 msgstr "Februar"
 
-#: templatetags/filters.py:22
+#: templatetags/filters.py:23
 msgid "March"
 msgstr "März"
 
-#: templatetags/filters.py:23
+#: templatetags/filters.py:24
 msgid "April"
 msgstr "April"
 
-#: templatetags/filters.py:24
+#: templatetags/filters.py:25
 msgid "May"
 msgstr "Mai"
 
-#: templatetags/filters.py:25
+#: templatetags/filters.py:26
 msgid "June"
 msgstr "Juni"
 
-#: templatetags/filters.py:26
+#: templatetags/filters.py:27
 msgid "July"
 msgstr "Juli"
 
-#: templatetags/filters.py:27
+#: templatetags/filters.py:28
 msgid "August"
 msgstr "August"
 
-#: templatetags/filters.py:28
+#: templatetags/filters.py:29
 msgid "September"
 msgstr "September"
 
-#: templatetags/filters.py:29
+#: templatetags/filters.py:30
 msgid "October"
 msgstr "Oktober"
 
-#: templatetags/filters.py:30
+#: templatetags/filters.py:31
 msgid "November"
 msgstr "November"
 
-#: templatetags/filters.py:31
+#: templatetags/filters.py:32
 msgid "December"
 msgstr "Dezember"
 
-#: views/fatlinks.py:212
+#: views/fatlinks.py:219
 msgid ""
-"<h4>Success!</h4><p>Clickable FAT Link Created!</p><p>Make sure to give your "
+"<h4>Success!</h4><p>Clickable FAT link created!</p><p>Make sure to give your "
 "fleet members the link to click so that they get credit for this fleet.</p>"
 msgstr ""
-"<h4>Erfolg!</h4><p>Klickbarer FAT Link erstellt!</p><p>Bitte stelle sicher "
+"<h4>Erfolg!</h4><p>Klickbarer FAT-Link erstellt!</p><p>Bitte stelle sicher "
 "diesen Link in Deiner Flotte zu teilen.</p>"
 
-#: views/fatlinks.py:226
+#: views/fatlinks.py:235
 msgid ""
 "<h4>Error!</h4><p>Something went wrong when attempting to submit your "
-"clickable FAT Link.</p>"
+"clickable FAT link.</p>"
 msgstr ""
 "<h4>Fehler!</h4><p>Es ist etwas schief gelaufen beid er Erstellung Deines "
-"FAT Links.</p>"
+"FAT-Links.</p>"
 
-#: views/fatlinks.py:239
+#: views/fatlinks.py:248
 msgid ""
-"<h4>Warning!</h4><p>You must fill out the form on the \"Add FAT Link\" page "
-"to create a clickable FAT Link</p>"
+"<h4>Warning!</h4><p>You must fill out the form on the \"Add FAT link\" page "
+"to create a clickable FAT link</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Du musst das Formular auf der \"FAT Link hinzufügen\" "
-"Seite ausfüllen um einen FAT Link zu erstellen.</p>"
+"<h4>Warnung!</h4><p>Du musst das Formular auf der \"FAT-Link hinzufügen\" "
+"Seite ausfüllen um einen FAT-Link zu erstellen.</p>"
 
-#: views/fatlinks.py:281
+#: views/fatlinks.py:293
 msgid ""
 "<h4>Warning!</h4><p>To use the ESI function, you need to be in fleet and you "
 "need to be the fleet boss! You can create a clickable FAT link and share it, "
@@ -1050,9 +1037,9 @@ msgid ""
 msgstr ""
 "<h4>Warnung!</h4><p>Um die ESI Funktion zu nutzen musst Du in einer Flotte "
 "sein und Du musst der Flottenkommandant sein. Du kannst allerdings auch "
-"einen klickbaren FAT Link erstellen, wenn Du magst.</p>"
+"einen klickbaren FAT-Link erstellen, wenn Du magst.</p>"
 
-#: views/fatlinks.py:323
+#: views/fatlinks.py:335
 msgid ""
 "<h4>Warning!</h4><p>Fleet with ID \"{fleet_from_esi[\"fleet_id\"]}\" for "
 "your character {creator_character.character_name} has already been "
@@ -1062,51 +1049,53 @@ msgstr ""
 "für Deinen Charakter {creator_character.character_name} wurde bereits "
 "registriert und Piloten werden automatisch erfasst.</p>"
 
-#: views/fatlinks.py:363
+#: views/fatlinks.py:377
 msgid ""
 "<h4>Warning!</h4><p>Not Fleet Boss! Only the fleet boss can utilize the ESI "
 "function. You can create a clickable FAT link and share it, if you like.</p>"
 msgstr ""
 "<h4>Warnung!</h4><p>Du bist nicht der Flottenkommandant! Nur der "
 "Flottenkommandant kann die ESI Funktion nutzen. Du kannst einen klickbaren "
-"FAT Link erstellen, wenn Du magst.</p>"
+"FAT-Link erstellen, wenn Du magst.</p>"
 
-#: views/fatlinks.py:429
+#: views/fatlinks.py:445
 msgid ""
-"<h4>Success!</h4><p>FAT Link Created!</p><p>FATs have been queued, they may "
-"take a few mins to show up.</p><p>Pilots who join later will be "
+"<h4>Success!</h4><p>FAT link Created!</p><p>FATs have been queued, they may "
+"take a few minutes to show up.</p><p>Pilots who join later will be "
 "automatically added until you close or leave the fleet in-game.</p>"
 msgstr ""
-"<h4>Erfolg!</h4><p>FAT Link erstellt!</p><p>FATs werden eingelesen. Dies mag "
+"<h4>Erfolg!</h4><p>FAT-Link erstellt!</p><p>FATs werden eingelesen. Dies mag "
 "einen Moment dauern</p><p>Piloten welche später der Flotte beitreten werden "
 "automatisch hinzugefügt bis Du die Flotte schließt oder verlässt.</p>"
 
-#: views/fatlinks.py:474
+#: views/fatlinks.py:491
 msgid ""
 "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI "
-"FAT Link.</p>"
-msgstr "<h4>Fehler!</h4><p>Irgendetwas ist schief gelaufen.</p>"
+"FAT link.</p>"
+msgstr ""
+"<h4>Fehler!</h4><p>Es ist etwas schief gelaufen beid er Erstellung Deines "
+"ESI-FAT-Links.</p>"
 
-#: views/fatlinks.py:511
+#: views/fatlinks.py:529 views/fatlinks.py:894
 msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
-msgstr "<h4>Warnung!</h4><p>Keinen FAT Link Hash zur Verfügung gestellt.</p>"
+msgstr "<h4>Warnung!</h4><p>Keinen FAT-Link Hash zur Verfügung gestellt.</p>"
 
-#: views/fatlinks.py:521 views/fatlinks.py:653
+#: views/fatlinks.py:541 views/fatlinks.py:682
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Der zur Verfügung gestellte FAT Link Hash ist nicht "
+"<h4>Warnung!</h4><p>Der zur Verfügung gestellte FAT-Link Hash ist nicht "
 "gültig.</p>"
 
-#: views/fatlinks.py:534
+#: views/fatlinks.py:555
 msgid ""
-"<h4>Warning!</h4><p>Sorry, that FAT Link is expired. If you were on that "
+"<h4>Warning!</h4><p>Sorry, that FAT link is expired. If you were on that "
 "fleet, contact your FC about having your FAT manually added.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Dieser FAT Link ist bereits abgelaufen. Wenn Du in der "
+"<h4>Warnung!</h4><p>Dieser FAT-Link ist bereits abgelaufen. Wenn Du in der "
 "Flotte warst kontaktiere bitte Deinen FC damit dieser Dich manuell "
 "hinzufügen kann.</p>"
 
-#: views/fatlinks.py:558
+#: views/fatlinks.py:581
 #, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>There was an issue with the ESI token for {character."
@@ -1115,7 +1104,7 @@ msgstr ""
 "<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character."
 "character_name}. Bitte versuche es noch einmal.</p>"
 
-#: views/fatlinks.py:599
+#: views/fatlinks.py:622
 #, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>A FAT already exists for the selected character "
@@ -1124,7 +1113,7 @@ msgstr ""
 "<h4>Warnung!</h4><p>Der ausgewählte Charakter ({character.character_name}) "
 "wurde bereits für diese Flotte registriert.</p>"
 
-#: views/fatlinks.py:613
+#: views/fatlinks.py:636
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>FAT registered for {character.character_name} at "
@@ -1133,7 +1122,7 @@ msgstr ""
 "<h4>Erfolg!</h4><p>Teilnahme für {character.character_name} in Flotte "
 "{fleet_name} registriert.</p>"
 
-#: views/fatlinks.py:627
+#: views/fatlinks.py:652
 #, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>Cannot register the fleet participation for {character."
@@ -1142,11 +1131,11 @@ msgstr ""
 "<h4>Warnung!</h4><p>Der Charakter {character.character_name} kann nicht "
 "registriert werden. Charakter ist nicht online.</p>"
 
-#: views/fatlinks.py:682
+#: views/fatlinks.py:714
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Erfolg!</h4><p>Flottennname erfolgreich geändert.</p>"
 
-#: views/fatlinks.py:706
+#: views/fatlinks.py:738
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} has "
@@ -1155,18 +1144,18 @@ msgstr ""
 "<h4>Erfolg!</h4><p>Manueller FAT Eintrag verarbeitet.<br>{character."
 "character_name} wurde in einer {shiptype} im System {system} hinzugefügt</p>"
 
-#: views/fatlinks.py:732
+#: views/fatlinks.py:766
 #, python-brace-format
 msgid ""
 "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
 "p><p>Name: {character.character_name}<br>System: {afat_object.system}"
 "<br>Ship: {afat_object.shiptype}</p>"
 msgstr ""
-"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT Link registriert."
+"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link registriert."
 "</p><p>Name: {character.character_name}<br>System: {afat_object.system}"
 "<br>Schiff: {afat_object.shiptype}</p>"
 
-#: views/fatlinks.py:741
+#: views/fatlinks.py:775
 msgid ""
 "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you "
 "entered was not found.</p>"
@@ -1174,45 +1163,41 @@ msgstr ""
 "<h4>Oh Nein!</h4><p>Manueller FAT Eintrag fehlgeschlagen. Der Charakter "
 "konnte nicht gefunden werden.</p>"
 
-#: views/fatlinks.py:750
+#: views/fatlinks.py:784
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr "<h4>Oh Nein!</h4><p>Irgendetwas ist schief gelaufen!</p>"
 
-#: views/fatlinks.py:850
-msgid "<h4>Warning!</h4><p>No FAT Link hash provided.</p>"
-msgstr "<h4>Warnung!</h4><p>Keinen FAT Link Hash zur Verfügung gestellt.</p>"
-
-#: views/fatlinks.py:862
+#: views/fatlinks.py:907
 msgid ""
-"<h4>Error!</h4><p>The fatlink hash provided is either invalid or the fatlink "
-"has already been deleted.</p>"
+"<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT "
+"link has already been deleted.</p>"
 msgstr ""
 "<h4>Fehler!</h4><p>Der FAT-Link Hash ist entweder ungültig oder der "
 "dazugehörige FAT-Link wurde gelöscht.</p>"
 
-#: views/fatlinks.py:886
+#: views/fatlinks.py:931
 #, python-brace-format
 msgid ""
-"<h4>Success!</h4><p>The FAT Link \"{fatlink_hash}\" and all associated FATs "
+"<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs "
 "have been successfully deleted.</p>"
 msgstr ""
-"<h4>Erfolg!</h4><p>Der FAT Link \"{fatlink_hash}\" und alle assoziierten "
+"<h4>Erfolg!</h4><p>Der FAT-Link \"{fatlink_hash}\" und alle assoziierten "
 "FATs wurden erfolgreich gelöscht.</p>"
 
-#: views/fatlinks.py:923
+#: views/fatlinks.py:971
 msgid ""
 "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</"
 "p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Der FAT Link Hash ist entweder ungültig oder der "
+"<h4>Fehler!</h4><p>Der FAT-Link Hash ist entweder ungültig oder der "
 "dazugehörige FAT Link wurde bereits gelöscht.</p>"
 
-#: views/fatlinks.py:936
+#: views/fatlinks.py:985
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Fat Link Hash und FAT Link ID passen nicht zusammen.</p>"
+"<h4>Fehler!</h4><p>Fat-Link Hash und FAT-Link ID passen nicht zusammen.</p>"
 
-#: views/fatlinks.py:954
+#: views/fatlinks.py:1004
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has "
@@ -1221,18 +1206,18 @@ msgstr ""
 "<h4>Erfolg!</h4><p>Der FAT für {fat_details.character.character_name} wurde "
 "erfolgreich vom FAT-Link \"{fatlink_hash}\" gelöscht.</p>"
 
-#: views/fatlinks.py:1019
+#: views/fatlinks.py:1075
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
 "<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-Link."
 "</p>"
 
-#: views/fatlinks.py:1061
+#: views/fatlinks.py:1121
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>Erfolg!</h4><p>Der FAT-Link wurde erfolgreich wieder geöffnet.</p>"
 
-#: views/fatlinks.py:1071
+#: views/fatlinks.py:1131
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
@@ -1240,7 +1225,7 @@ msgstr ""
 "<h4>Warnung!</h4><p>Dieser FAT-Link wurde bereits einmal wieder geöffnet. "
 "Dies kann nur einmal getan werden.</p>"
 
-#: views/statistics.py:213
+#: views/statistics.py:221
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
@@ -1248,11 +1233,11 @@ msgstr ""
 "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für "
 "diesen Charakter zu sehen.</p>"
 
-#: views/statistics.py:226
+#: views/statistics.py:234
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 msgstr "<h4>Warnung!</h4><p>Datumsinformationen nicht komplett!</p>"
 
-#: views/statistics.py:330
+#: views/statistics.py:349
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
@@ -1260,34 +1245,34 @@ msgstr ""
 "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diese "
 "Corporation zu sehen.</p>"
 
-#: views/statistics.py:448 views/statistics.py:673
+#: views/statistics.py:467 views/statistics.py:701
 msgid "Monday"
 msgstr "Montag"
 
-#: views/statistics.py:449 views/statistics.py:674
+#: views/statistics.py:468 views/statistics.py:702
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: views/statistics.py:450 views/statistics.py:675
+#: views/statistics.py:469 views/statistics.py:703
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: views/statistics.py:451 views/statistics.py:676
+#: views/statistics.py:470 views/statistics.py:704
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: views/statistics.py:452 views/statistics.py:677
+#: views/statistics.py:471 views/statistics.py:705
 msgid "Friday"
 msgstr "Freitag"
 
-#: views/statistics.py:453 views/statistics.py:678
+#: views/statistics.py:472 views/statistics.py:706
 msgid "Saturday"
 msgstr "Samstag"
 
-#: views/statistics.py:454 views/statistics.py:679
+#: views/statistics.py:473 views/statistics.py:707
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: views/statistics.py:557
+#: views/statistics.py:584
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"

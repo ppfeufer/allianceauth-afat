@@ -1,9 +1,11 @@
 # flake8: noqa
+
 """
 Scripts generates large amount of fat links for load testing
 
 This script can be executed directly from shell.
 """
+
 
 # Standard Library
 import os
@@ -17,7 +19,7 @@ sys.path.insert(0, str(myauth_dir))
 import django
 
 # init and setup django project
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myauth.settings.local")
+os.environ.setdefault(key="DJANGO_SETTINGS_MODULE", value="myauth.settings.local")
 django.setup()
 
 # Standard Library
@@ -35,7 +37,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.helpers import random_string
 
 # Alliance Auth AFAT
-from afat.models import AFat, AFatLink, AFatLinkType, AFatLog
+from afat.models import Fat, FatLink, FleetType, Log
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log
 
@@ -51,20 +53,21 @@ print(
 
 user = User.objects.first()
 creator = user.profile.main_character
-link_type, _ = AFatLinkType.objects.get_or_create(name="Generated Fleet")
+link_type, _ = FleetType.objects.get_or_create(name="Generated Fleet")
 
 for _ in range(LINKS_NUMBER):
-    fat_link = AFatLink.objects.create(
-        fleet=f"Generated Fleet #{random.randint(1, 1000000000)}",
-        hash=random_string(20),
+    fat_link = FatLink.objects.create(
+        fleet=f"Generated Fleet #{random.randint(a=1, b=1000000000)}",
+        hash=random_string(char_count=20),
         creator=user,
         character=creator,
         link_type=link_type,
-        afattime=now() - dt.timedelta(days=random.randint(0, 180)),
+        created=now() - dt.timedelta(days=random.randint(a=0, b=180)),
     )
+
     write_log(
-        request=RequestStub(user),
-        log_event=AFatLog.Event.CREATE_FATLINK,
+        request=RequestStub(user=user),
+        log_event=Log.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{fat_link.fleet}"'
             f"{link_type} was created by {user}"
@@ -72,10 +75,12 @@ for _ in range(LINKS_NUMBER):
         fatlink_hash=fat_link.hash,
     )
 
-    for character in random.sample(characters, k=random.randint(1, len(characters))):
-        AFat.objects.create(
+    for character in random.sample(
+        characters, k=random.randint(a=1, b=len(characters))
+    ):
+        Fat.objects.create(
             character_id=character.id,
-            afatlink=fat_link,
+            fatlink=fat_link,
             system="Jita",
             shiptype="Ibis",
         )

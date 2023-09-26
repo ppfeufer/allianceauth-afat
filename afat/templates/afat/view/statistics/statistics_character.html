@@ -2,7 +2,10 @@
 
 {% load i18n %}
 
-{% block page_title %}{{ character.character_name }} {% translate "FAT Statistics" %}{% endblock %}
+{% block page_title %}
+    {% translate "Fleet activity tracking statistics" as page_title %}
+    {{ character.character_name }} {{ page_title|title }}
+{% endblock %}
 
 {% block afat_header %}
     <br>

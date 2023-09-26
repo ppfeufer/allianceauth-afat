@@ -10,7 +10,7 @@ from afat import __version__
 
 VERBOSE_NAME = "AFAT Fleet Activity Tracking for Alliance Auth"
 
-verbose_name_slugified: str = slugify(VERBOSE_NAME, allow_unicode=True)
+verbose_name_slugified: str = slugify(value=VERBOSE_NAME, allow_unicode=True)
 github_url: str = "https://github.com/ppfeufer/allianceauth-afat"
 
 USER_AGENT = f"{verbose_name_slugified} v{__version__} {github_url}"

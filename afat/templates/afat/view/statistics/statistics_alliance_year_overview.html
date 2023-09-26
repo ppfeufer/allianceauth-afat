@@ -3,19 +3,26 @@
 {% load i18n %}
 {% load filters %}
 
-{% block page_title %}{{ alliance }} {% translate "Fleet Activity" %}{% endblock %}
+{% block page_title %}
+    {% translate "Fleet activity tracking statistics" as page_title %}
+    {{ alliance }} {{ page_title|title }}
+{% endblock %}
 
 {% block afat_header %}
     <br>
     {% include "afat/partials/menu.html" %}
 
-    <h2>{{ alliance }} {% translate "Fleet Activity" %}</h2>
+    <h2>
+        {% translate "Fleet activity" as site_title %}
+        {{ alliance }} {{ site_title|title }}
+    </h2>
 {% endblock %}
 
 {% block afat_body %}
     {% url "afat:statistics_alliance" allianceid year_prev as url_previous_year %}
     {% url "afat:statistics_alliance" allianceid year_next as url_next_year %}
     {% url "afat:statistics_alliance" allianceid year_current as url_current_year %}
+
     {% include "afat/partials/year_navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
 
     <div class="panel panel-default">

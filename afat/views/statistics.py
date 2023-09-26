@@ -29,22 +29,23 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
-from afat.helper.views_helper import (
+from afat.helper.views import (
     characters_with_permission,
     get_random_rgba_color,
     user_has_any_perms,
 )
-from afat.models import AFat
+from afat.models import Fat
 from afat.utils import get_or_create_alliance_info, get_or_create_corporation_info
 
-logger = LoggerAddTag(get_extension_logger(__name__), __title__)
+logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()
-@permission_required("afat.basic_access")
+@permission_required(perm="afat.basic_access")
 def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     """
     Statistics main view
+
     :param request:
     :type request:
     :param year:
@@ -59,15 +60,17 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     user_can_see_other_corps = False
 
     if user_has_any_perms(
-        request.user,
-        ["afat.stats_corporation_other", "afat.manage_afat"],
+        user=request.user,
+        perm_list=["afat.stats_corporation_other", "afat.manage_afat"],
     ):
         user_can_see_other_corps = True
         basic_access_permission = Permission.objects.select_related("content_type").get(
             content_type__app_label="afat", codename="basic_access"
         )
 
-        characters_with_access = characters_with_permission(basic_access_permission)
+        characters_with_access = characters_with_permission(
+            permission=basic_access_permission
+        )
 
         data = {"No Alliance": [1]}
         sanity_check = {}
@@ -95,7 +98,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
 
             sanity_check[corp_id] = corp_id
 
-    elif request.user.has_perm("afat.stats_corporation_own"):
+    elif request.user.has_perm(perm="afat.stats_corporation_own"):
         data = [
             (
                 request.user.profile.main_character.corporation_id,
@@ -105,7 +108,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     else:
         data = None
 
-    months = _calculate_year_stats(request, year)
+    months = _calculate_year_stats(request=request, year=year)
 
     context = {
         "data": data,
@@ -117,9 +120,13 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         "user_can_see_other_corps": user_can_see_other_corps,
     }
 
-    logger.info(f"Statistics overview called by {request.user}")
+    logger.info(msg=f"Statistics overview called by {request.user}")
 
-    return render(request, "afat/view/statistics/statistics_overview.html", context)
+    return render(
+        request=request,
+        template_name="afat/view/statistics/statistics_overview.html",
+        context=context,
+    )
 
 
 def _calculate_year_stats(request, year) -> list:
@@ -132,16 +139,16 @@ def _calculate_year_stats(request, year) -> list:
 
     for char in characters:
         character_fats_in_year = (
-            AFat.objects.filter(afatlink__afattime__year=year)
+            Fat.objects.filter(fatlink__created__year=year)
             .filter(character=char)
-            .values("afatlink__afattime__month")
+            .values("fatlink__created__month")
             .annotate(fat_count=Count("id"))
         )
 
         # Only if there are FATs for this year for the character
         if character_fats_in_year:
             character_fats_per_month = {
-                int(result["afatlink__afattime__month"]): result["fat_count"]
+                int(result["fatlink__created__month"]): result["fat_count"]
                 for result in character_fats_in_year
             }
 
@@ -159,12 +166,13 @@ def _calculate_year_stats(request, year) -> list:
 
 
 @login_required()
-@permission_required("afat.basic_access")
-def character(
+@permission_required(perm="afat.basic_access")
+def character(  # pylint: disable=too-many-locals
     request: WSGIRequest, charid: int, year: int = None, month: int = None
 ) -> HttpResponse:
     """
     Character statistics view
+
     :param request:
     :type request:
     :param charid:
@@ -186,8 +194,8 @@ def character(
 
     # Check if the user can view other corporation's statistics or manage AFAT
     if eve_character not in valid and not user_has_any_perms(
-        request.user,
-        [
+        user=request.user,
+        perm_list=[
             "afat.stats_corporation_other",
             "afat.manage_afat",
         ],
@@ -200,16 +208,16 @@ def character(
         eve_character not in valid
         and eve_character.corporation_id
         == request.user.profile.main_character.corporation_id
-        and request.user.has_perm("afat.stats_corporation_own")
+        and request.user.has_perm(perm="afat.stats_corporation_own")
     ):
         can_view_character = True
 
     # If the user cannot view the character's statistics, send him home
     if can_view_character is False:
         messages.warning(
-            request,
-            mark_safe(
-                gettext(
+            request=request,
+            message=mark_safe(
+                s=gettext(
                     "<h4>Warning!</h4>"
                     "<p>You do not have permission to view "
                     "statistics for this character.</p>"
@@ -217,25 +225,25 @@ def character(
             ),
         )
 
-        return redirect("afat:dashboard")
+        return redirect(to="afat:dashboard")
 
     if not month or not year:
         messages.error(
-            request,
-            mark_safe(
-                gettext("<h4>Warning!</h4><p>Date information not complete!</p>")
+            request=request,
+            message=mark_safe(
+                s=gettext("<h4>Warning!</h4><p>Date information not complete!</p>")
             ),
         )
 
-        return redirect("afat:dashboard")
+        return redirect(to="afat:dashboard")
 
-    fats = AFat.objects.filter(
+    fats = Fat.objects.filter(
         character__character_id=charid,
-        afatlink__afattime__month=month,
-        afatlink__afattime__year=year,
+        fatlink__created__month=month,
+        fatlink__created__year=year,
     )
 
-    # Data for Ship Type Pie Chart
+    # Data for ship type pie chart
     data_ship_type = {}
 
     for fat in fats:
@@ -261,7 +269,7 @@ def character(
     data_time = {}
 
     for i in range(0, 24):
-        data_time[i] = fats.filter(afatlink__afattime__hour=i).count()
+        data_time[i] = fats.filter(fatlink__created__hour=i).count()
 
     data_time = [
         list(data_time.keys()),
@@ -286,22 +294,33 @@ def character(
 
     month_name = calendar.month_name[int(month)]
     logger.info(
-        f"Character statistics for {eve_character} ({month_name} {year}) "
-        f"called by {request.user}"
+        msg=(
+            f"Character statistics for {eve_character} ({month_name} {year}) "
+            f"called by {request.user}"
+        )
     )
 
-    return render(request, "afat/view/statistics/statistics_character.html", context)
+    return render(
+        request=request,
+        template_name="afat/view/statistics/statistics_character.html",
+        context=context,
+    )
 
 
 @login_required()
 @permissions_required(
-    ("afat.stats_corporation_other", "afat.stats_corporation_own", "afat.manage_afat")
+    perm=(
+        "afat.stats_corporation_other",
+        "afat.stats_corporation_own",
+        "afat.manage_afat",
+    )
 )
-def corporation(
+def corporation(  # pylint: disable=too-many-statements too-many-branches too-many-locals
     request: WSGIRequest, corpid: int = 0000, year: int = None, month: int = None
 ) -> HttpResponse:
     """
     Corp statistics view
+
     :param request:
     :type request:
     :param corpid:
@@ -320,13 +339,13 @@ def corporation(
     # Check character has permission to view other corp stats
     if int(request.user.profile.main_character.corporation_id) != int(corpid):
         if not user_has_any_perms(
-            request.user,
-            ["afat.stats_corporation_other", "afat.manage_afat"],
+            user=request.user,
+            perm_list=["afat.stats_corporation_other", "afat.manage_afat"],
         ):
             messages.warning(
-                request,
-                mark_safe(
-                    gettext(
+                request=request,
+                message=mark_safe(
+                    s=gettext(
                         "<h4>Warning!</h4>"
                         "<p>You do not have permission to view statistics "
                         "for that corporation.</p>"
@@ -334,7 +353,7 @@ def corporation(
                 ),
             )
 
-            return redirect("afat:dashboard")
+            return redirect(to="afat:dashboard")
 
     corp = get_or_create_corporation_info(corporation_id=corpid)
     corp_name = corp.corporation_name
@@ -343,10 +362,10 @@ def corporation(
         months = []
 
         for i in range(1, 13):
-            corp_fats = AFat.objects.filter(
+            corp_fats = Fat.objects.filter(
                 character__corporation_id=corpid,
-                afatlink__afattime__month=i,
-                afatlink__afattime__year=year,
+                fatlink__created__month=i,
+                fatlink__created__year=year,
             ).count()
 
             avg_fats = 0
@@ -368,14 +387,14 @@ def corporation(
         }
 
         return render(
-            request,
-            "afat/view/statistics/statistics_corporation_year_overview.html",
-            context,
+            request=request,
+            template_name="afat/view/statistics/statistics_corporation_year_overview.html",
+            context=context,
         )
 
-    fats = AFat.objects.filter(
-        afatlink__afattime__month=month,
-        afatlink__afattime__year=year,
+    fats = Fat.objects.filter(
+        fatlink__created__month=month,
+        fatlink__created__year=year,
         character__corporation_id=corpid,
     )
 
@@ -429,7 +448,7 @@ def corporation(
     data_time = {}
 
     for i in range(0, 24):
-        data_time[i] = fats.filter(afatlink__afattime__hour=i).count()
+        data_time[i] = fats.filter(fatlink__created__hour=i).count()
 
     data_time = [
         list(data_time.keys()),
@@ -441,7 +460,7 @@ def corporation(
     data_weekday = []
 
     for i in range(1, 8):
-        data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
+        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
 
     data_weekday = [
         [
@@ -482,20 +501,27 @@ def corporation(
 
     month_name = calendar.month_name[int(month)]
     logger.info(
-        f"Corporation statistics for {corp_name} ({month_name} {year}) "
-        f"called by {request.user}"
+        msg=(
+            f"Corporation statistics for {corp_name} ({month_name} {year}) "
+            f"called by {request.user}"
+        )
     )
 
-    return render(request, "afat/view/statistics/statistics_corporation.html", context)
+    return render(
+        request=request,
+        template_name="afat/view/statistics/statistics_corporation.html",
+        context=context,
+    )
 
 
 @login_required()
-@permissions_required(("afat.stats_corporation_other", "afat.manage_afat"))
-def alliance(
+@permissions_required(perm=("afat.stats_corporation_other", "afat.manage_afat"))
+def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-locals
     request: WSGIRequest, allianceid: int, year: int = None, month: int = None
 ) -> HttpResponse:
     """
     Alliance statistics view
+
     :param request:
     :type request:
     :param allianceid:
@@ -525,10 +551,10 @@ def alliance(
         months = []
 
         for i in range(1, 13):
-            ally_fats = AFat.objects.filter(
+            ally_fats = Fat.objects.filter(
                 character__alliance_id=allianceid,
-                afatlink__afattime__month=i,
-                afatlink__afattime__year=year,
+                fatlink__created__month=i,
+                fatlink__created__year=year,
             ).count()
 
             if ally_fats > 0:
@@ -546,28 +572,30 @@ def alliance(
         }
 
         return render(
-            request,
-            "afat/view/statistics/statistics_alliance_year_overview.html",
-            context,
+            request=request,
+            template_name="afat/view/statistics/statistics_alliance_year_overview.html",
+            context=context,
         )
 
     if not month or not year:
         messages.error(
-            request,
-            mark_safe(gettext("<h4>Error!</h4><p>Date information incomplete.</p>")),
+            request=request,
+            message=mark_safe(
+                s=gettext("<h4>Error!</h4><p>Date information incomplete.</p>")
+            ),
         )
 
-        return redirect("afat:dashboard")
+        return redirect(to="afat:dashboard")
 
-    fats = AFat.objects.filter(
+    fats = Fat.objects.filter(
         character__alliance_id=allianceid,
-        afatlink__afattime__month=month,
-        afatlink__afattime__year=year,
+        fatlink__created__month=month,
+        fatlink__created__year=year,
     )
 
     corporations = EveCorporationInfo.objects.filter(alliance=ally)
 
-    # Data for Ship Type Pie Chart
+    # Data for ship type pie chart
     data_ship_type = {}
 
     for fat in fats:
@@ -654,7 +682,7 @@ def alliance(
     data_time = {}
 
     for i in range(0, 24):
-        data_time[i] = fats.filter(afatlink__afattime__hour=i).count()
+        data_time[i] = fats.filter(fatlink__created__hour=i).count()
 
     data_time = [
         list(data_time.keys()),
@@ -666,7 +694,7 @@ def alliance(
     data_weekday = []
 
     for i in range(1, 8):
-        data_weekday.append(fats.filter(afatlink__afattime__iso_week_day=i).count())
+        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
 
     data_weekday = [
         [
@@ -713,8 +741,14 @@ def alliance(
 
     month_name = calendar.month_name[int(month)]
     logger.info(
-        f"Alliance statistics for {alliance_name} ({month_name} {year}) "
-        f"called by {request.user}"
+        msg=(
+            f"Alliance statistics for {alliance_name} ({month_name} {year}) "
+            f"called by {request.user}"
+        )
     )
 
-    return render(request, "afat/view/statistics/statistics_alliance.html", context)
+    return render(
+        request=request,
+        template_name="afat/view/statistics/statistics_alliance.html",
+        context=context,
+    )
