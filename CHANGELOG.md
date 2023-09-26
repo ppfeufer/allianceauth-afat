@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Use keyword arguments wherever possible
 - Model names
 - Some model field names
+- Test suite updated
 
 ### Removed
 
