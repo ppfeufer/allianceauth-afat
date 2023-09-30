@@ -15,7 +15,8 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext as _
+from django.utils.text import format_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
@@ -331,9 +332,16 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         messages.warning(
             request=request,
             message=mark_safe(
-                s=_(
-                    f'<h4>Warning!</h4><p>Fleet with ID "{fleet_from_esi["fleet_id"]}" for your character {creator_character.character_name} has already been registered and pilots joining this fleet are automatically tracked.</p>'  # pylint: disable=line-too-long
-                )
+                s=format_lazy(
+                    _(
+                        "<h4>Warning!</h4>"
+                        '<p>Fleet with ID "{fleet_id}" for your character '
+                        "{creator__character_name} has already been registered and "
+                        "pilots joining this fleet are automatically tracked.</p>"
+                    ),
+                    fleet_id=fleet_from_esi["fleet_id"],
+                    creator__character_name=creator_character.character_name,
+                ),
             ),
         )
 
@@ -577,8 +585,13 @@ def add_fat(
         messages.warning(
             request=request,
             message=mark_safe(
-                s=_(
-                    f"<h4>Warning!</h4><p>There was an issue with the ESI token for {character.character_name}. Please try again.</p>"  # pylint: disable=line-too-long
+                s=format_lazy(
+                    _(
+                        "<h4>Warning!</h4>"
+                        "<p>There was an issue with the ESI token for {character_name}. "
+                        "Please try again.</p>"
+                    ),
+                    character_name=character.character_name,
                 )
             ),
         )
@@ -618,8 +631,13 @@ def add_fat(
             messages.warning(
                 request=request,
                 message=mark_safe(
-                    s=_(
-                        f"<h4>Warning!</h4><p>A FAT already exists for the selected character ({character.character_name}) and fleet combination.</p>"  # pylint: disable=line-too-long
+                    s=format_lazy(
+                        _(
+                            "<h4>Warning!</h4>"
+                            "<p>The selected charcter ({character_name}) is already "
+                            "registered for this FAT link.</p>"
+                        ),
+                        character_name=character.character_name,
                     )
                 ),
             )
@@ -632,8 +650,13 @@ def add_fat(
             messages.success(
                 request=request,
                 message=mark_safe(
-                    s=_(
-                        f"<h4>Success!</h4><p>FAT registered for {character.character_name} at {fleet_name}</p>"  # pylint: disable=line-too-long
+                    s=format_lazy(
+                        _(
+                            "<h4>Success!</h4>"
+                            '<p>FAT registered for {character_name} at "{fleet_name}"</p>'
+                        ),
+                        character_name=character.character_name,
+                        fleet_name=fleet_name,
                     )
                 ),
             )
@@ -648,8 +671,13 @@ def add_fat(
         messages.warning(
             request=request,
             message=mark_safe(
-                s=_(
-                    f"<h4>Warning!</h4><p>Cannot register the fleet participation for {character.character_name}. The character needs to be online.</p>"  # pylint: disable=line-too-long
+                s=format_lazy(
+                    _(
+                        "<h4>Warning!</h4>"
+                        "<p>Cannot register the fleet participation for "
+                        "{character_name}. The character needs to be online.</p>"
+                    ),
+                    character_name=character.character_name,
                 )
             ),
         )
@@ -734,8 +762,15 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
                     messages.success(
                         request=request,
                         message=mark_safe(
-                            s=_(
-                                f"<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} has been added flying a {shiptype} in {system}</p>"  # pylint: disable=line-too-long
+                            s=format_lazy(
+                                _(
+                                    "<h4>Success!</h4><p>Manual FAT processed.<br>"
+                                    "{character_name} has been added flying a {shiptype} "
+                                    "in {system}</p>"
+                                ),
+                                character_name=character.character_name,
+                                shiptype=shiptype,
+                                system=system,
                             )
                         ),
                     )
@@ -762,8 +797,15 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
                     messages.info(
                         request=request,
                         message=mark_safe(
-                            s=_(
-                                f"<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character.character_name}<br>System: {afat_object.system}<br>Ship: {afat_object.shiptype}</p>"  # pylint: disable=line-too-long
+                            s=format_lazy(
+                                _(
+                                    "<h4>Information</h4>"
+                                    "<p>Pilot is already registered for this FAT link.</p>"
+                                    "<p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
+                                ),
+                                character_name=character.character_name,
+                                system=afat_object.system,
+                                shiptype=afat_object.shiptype,
                             )
                         ),
                     )
@@ -927,8 +969,13 @@ def delete_fatlink(
     messages.success(
         request=request,
         message=mark_safe(
-            s=_(
-                f'<h4>Success!</h4><p>The FAT link "{fatlink_hash}" and all associated FATs have been successfully deleted.</p>'  # pylint: disable=line-too-long
+            s=format_lazy(
+                _(
+                    "<h4>Success!</h4>"
+                    '<p>The FAT link "{fatlink_hash}" and all associated FATs have '
+                    "been successfully deleted.</p>"
+                ),
+                fatlink_hash=fatlink_hash,
             )
         ),
     )
@@ -1000,8 +1047,14 @@ def delete_fat(
     messages.success(
         request=request,
         message=mark_safe(
-            s=_(
-                f'<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} has been successfully deleted from FAT link "{fatlink_hash}".</p>'  # pylint: disable=line-too-long
+            s=format_lazy(
+                _(
+                    "<h4>Success!</h4>"
+                    "<p>The FAT for {character_name} has been successfully deleted "
+                    'from FAT link "{fatlink_hash}".</p>'
+                ),
+                character_name=fat_details.character.character_name,
+                fatlink_hash=fatlink_hash,
             )
         ),
     )
