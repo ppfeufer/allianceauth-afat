@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## \[In Development\] - Unreleased
 
+### Fixed
+
+- Some issues with the translations in the Python code
+
 ## \[2.13.0\] - 2023-09-26
 
 ### Fixed
