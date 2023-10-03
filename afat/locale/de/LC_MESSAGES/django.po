@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-30 15:53+0200\n"
-"PO-Revision-Date: 2023-09-30 12:06+0000\n"
+"PO-Revision-Date: 2023-10-02 09:50+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1047,19 +1047,15 @@ msgstr ""
 "einen klickbaren FAT-Link erstellen, wenn Du magst.</p>"
 
 #: afat/views/fatlinks.py:337
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Warning!</h4><p>Fleet with ID \"{fleet_from_esi[\"fleet_id\"]}\" for "
-#| "your character {creator_character.character_name} has already been "
-#| "registered and pilots joining this fleet are automatically tracked.</p>"
+#, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>Fleet with ID \"{fleet_id}\" for your character "
 "{creator__character_name} has already been registered and pilots joining "
 "this fleet are automatically tracked.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Die Flotte mit der ID „{fleet_from_esi[\"fleet_id\"]}“ "
-"für Deinen Charakter {creator_character.character_name} wurde bereits "
-"registriert und Piloten werden automatisch erfasst.</p>"
+"<h4>Warnung!</h4><p>Die Flotte mit der ID „{fleet_id}“ für Deinen Charakter "
+"{creator__character_name} wurde bereits registriert und Piloten werden "
+"automatisch erfasst.</p>"
 
 #: afat/views/fatlinks.py:385
 msgid ""
@@ -1108,82 +1104,63 @@ msgstr ""
 "hinzufügen kann.</p>"
 
 #: afat/views/fatlinks.py:590
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Warning!</h4><p>There was an issue with the ESI token for {character."
-#| "character_name}. Please try again.</p>"
+#, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>There was an issue with the ESI token for "
 "{character_name}. Please try again.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character."
-"character_name}. Bitte versuche es noch einmal.</p>"
+"<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character_name}"
+". Bitte versuche es noch einmal.</p>"
 
 #: afat/views/fatlinks.py:636
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Warning!</h4><p>A FAT already exists for the selected character "
-#| "({character.character_name}) and fleet combination.</p>"
+#, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already "
 "registered for this FAT link.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Der ausgewählte Charakter ({character.character_name}) "
-"wurde bereits für diese Flotte registriert.</p>"
+"<h4>Warnung!</h4><p>Der ausgewählte Charakter ({character_name}) wurde "
+"bereits für diese Flotte registriert.</p>"
 
 #: afat/views/fatlinks.py:655
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Success!</h4><p>FAT registered for {character.character_name} at "
-#| "{fleet_name}</p>"
+#, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</"
 "p>"
 msgstr ""
-"<h4>Erfolg!</h4><p>Teilnahme für {character.character_name} in Flotte "
-"{fleet_name} registriert.</p>"
+"<h4>Erfolg!</h4><p>Teilnahme für {character_name} in Flotte „{fleet_name}“ "
+"registriert.</p>"
 
 #: afat/views/fatlinks.py:676
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Warning!</h4><p>Cannot register the fleet participation for "
-#| "{character.character_name}. The character needs to be online.</p>"
+#, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>Cannot register the fleet participation for "
 "{character_name}. The character needs to be online.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Der Charakter {character.character_name} kann nicht "
-"registriert werden. Charakter ist nicht online.</p>"
+"<h4>Warnung!</h4><p>Der Charakter {character_name} kann nicht registriert "
+"werden. Charakter ist nicht online.</p>"
 
 #: afat/views/fatlinks.py:742
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Erfolg!</h4><p>Flottennname erfolgreich geändert.</p>"
 
 #: afat/views/fatlinks.py:767
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Success!</h4><p>Manual FAT processed.<br>{character.character_name} "
-#| "has been added flying a {shiptype} in {system}</p>"
+#, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added "
 "flying a {shiptype} in {system}</p>"
 msgstr ""
-"<h4>Erfolg!</h4><p>Manueller FAT Eintrag verarbeitet.<br>{character."
-"character_name} wurde in einer {shiptype} im System {system} hinzugefügt</p>"
+"<h4>Erfolg!</h4><p>Manueller FAT Eintrag verarbeitet.<br>{character_name} "
+"wurde in einer {shiptype} im System {system} hinzugefügt</p>"
 
 #: afat/views/fatlinks.py:802
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
-#| "p><p>Name: {character.character_name}<br>System: {afat_object.system}"
-#| "<br>Ship: {afat_object.shiptype}</p>"
+#, python-brace-format
 msgid ""
 "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
 "p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr ""
-"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link registriert."
-"</p><p>Name: {character.character_name}<br>System: {afat_object.system}"
-"<br>Schiff: {afat_object.shiptype}</p>"
+"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link "
+"registriert.</p><p>Name: {character_name}<br>System: {system}<br>Schiff: "
+"{shiptype}</p>"
 
 #: afat/views/fatlinks.py:817
 msgid ""
@@ -1228,16 +1205,13 @@ msgstr ""
 "<h4>Fehler!</h4><p>Fat-Link Hash und FAT-Link ID passen nicht zusammen.</p>"
 
 #: afat/views/fatlinks.py:1052
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "<h4>Success!</h4><p>The FAT for {fat_details.character.character_name} "
-#| "has been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
+#, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT for {character_name} has been successfully "
 "deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
-"<h4>Erfolg!</h4><p>Der FAT für {fat_details.character.character_name} wurde "
-"erfolgreich vom FAT-Link „{fatlink_hash}“ gelöscht.</p>"
+"<h4>Erfolg!</h4><p>Der FAT für {character_name} wurde erfolgreich vom FAT-"
+"Link „{fatlink_hash}“ gelöscht.</p>"
 
 #: afat/views/fatlinks.py:1128
 msgid ""
