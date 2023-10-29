@@ -5,7 +5,7 @@ Admin pages configuration
 # Django
 from django.contrib import admin, messages
 from django.db.models import Count
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
