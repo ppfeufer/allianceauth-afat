@@ -26,13 +26,12 @@
     }
 
     .allianceauth-afat .esi-fleet-list-item {
-        align-content: space-between;
         align-items: center;
         display: flex;
         flex-flow: row nowrap;
-        justify-content: space-between;
         list-style: none;
         padding: 0.5rem 1rem;
+        place-content: space-between space-between;
     }
 
     .allianceauth-afat .esi-fleet-list-item:hover {
