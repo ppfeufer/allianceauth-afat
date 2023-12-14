@@ -248,13 +248,12 @@ class FatLink(models.Model):
         :rtype:
         """
 
-        return Fat.objects.filter(fatlink=self).count()
+        return self.afat_fats.count()
 
 
 class Duration(models.Model):
     """
-    FAT link duration
-    FAT link expiry time in minutes
+    FAT link duration (expiry time in minutes)
     """
 
     duration = models.PositiveIntegerField()

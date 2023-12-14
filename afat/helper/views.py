@@ -1,5 +1,5 @@
 """
-views helper
+Views helper
 """
 
 # Standard Library
@@ -27,7 +27,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     request: WSGIRequest, fatlink: FatLink, close_esi_redirect: str = None
 ) -> dict:
     """
-    Converts an FatLink object into a dictionary
+    Converts a FatLink object into a dictionary
 
     :param request:
     :type request:
@@ -160,10 +160,10 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     :rtype:
     """
 
-    # fleet type
+    # Fleet type
     fleet_type = fat.fatlink.link_type.name if fat.fatlink.link_type is not None else ""
 
-    # esi marker
+    # ESI marker
     via_esi = "No"
     esi_fleet_marker = ""
 
@@ -179,7 +179,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
             f'<span class="{esi_fleet_marker_classes}">{marker_text}</span>'
         )
 
-    # actions
+    # Actions
     actions = ""
     if request.user.has_perm(perm="afat.manage_afat"):
         button_delete_fat = reverse(
@@ -286,7 +286,7 @@ def characters_with_permission(permission: Permission) -> models.QuerySet:
     :rtype:
     """
 
-    # First we need the users that have the permission
+    # First, we need the users that have the permission
     users_qs = users_with_permission(permission=permission)
 
     # Now get their characters ...
@@ -298,7 +298,7 @@ def characters_with_permission(permission: Permission) -> models.QuerySet:
 def user_has_any_perms(user: User, perm_list, obj=None):
     """
     Return True if the user has each of the specified permissions. If
-    object is passed, check if the user has all required perms for it.
+    an object is passed, check if the user has all required perms for it.
     """
 
     # Active superusers have all permissions.
