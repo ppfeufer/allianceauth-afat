@@ -8,21 +8,21 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-30 15:53+0200\n"
-"PO-Revision-Date: 2023-09-25 14:42+0000\n"
+"PO-Revision-Date: 2023-12-29 09:04+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ko/>\n"
+"Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ko/>\n"
 "Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.3.1\n"
 
 #: afat/__init__.py:15 afat/app_settings.py:36
 #: afat/templates/afat/partials/menu.html:14
 msgid "Fleet Activity Tracking"
-msgstr ""
+msgstr "플릿 활동 기록"
 
 #: afat/admin.py:156 afat/models.py:109
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
