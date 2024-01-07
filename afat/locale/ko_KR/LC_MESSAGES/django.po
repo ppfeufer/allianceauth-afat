@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Peter Pfeufer <info@ppfeufer.de>, 2023.
+# Peter Pfeufer <info@ppfeufer.de>, 2023, 2024.
 # Author50CO <tkddlschry@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-30 15:53+0200\n"
-"PO-Revision-Date: 2023-12-29 09:04+0000\n"
+"PO-Revision-Date: 2024-01-07 20:04+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/ko/>\n"
@@ -373,7 +373,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/details/fatlink_info.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks_overview.html:34
 msgid "Creator"
-msgstr ""
+msgstr "생성자"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:15
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:46
