@@ -1,43 +1,51 @@
 {% load i18n %}
 {% load navactive %}
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">{% translate "Toggle navigation" %}</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<li class="nav-item">
+    <a
+        class="nav-link {% navactive request 'afat:dashboard' %}"
+        href="{% url 'afat:dashboard' %}"
+    >
+        {% translate "Dashboard" %}
+    </a>
+</li>
 
-            <a class="navbar-brand" href="{% url 'afat:dashboard' %}">{% translate "Fleet Activity Tracking" %}</a>
-        </div>
+<li class="nav-item">
+    <a
+        class="nav-link {% navactive request 'afat:statistics_overview afat:statistics_corporation afat:statistics_character afat:stats_ally' %}"
+        href="{% url 'afat:statistics_overview' %}"
+    >
+        {% translate "Statistics" %}
+    </a>
+</li>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="{% navactive request 'afat:statistics_overview afat:statistics_corporation afat:statistics_character afat:stats_ally' %}">
-                    <a href="{% url 'afat:statistics_overview' %}">{% translate "Statistics" %}</a>
-                </li>
+<li class="nav-item">
+    <a
+        class="nav-link {% navactive request 'afat:fatlinks_overview afat:fatlinks_details_fatlink' %}"
+        href="{% url 'afat:fatlinks_overview' %}"
+    >
+        {% translate "FAT links" %}
+    </a>
+</li>
 
-                <li class="{% navactive request 'afat:fatlinks_overview afat:fatlinks_details_fatlink' %}">
-                    <a href="{% url 'afat:fatlinks_overview' %}">
-                        {% translate "FAT links" %}
-                    </a>
-                </li>
+{% if perms.afat.add_fatlink or perms.afat.manage_afat %}
+    <li class="nav-item">
+        <a
+            class="nav-link {% navactive request 'afat:fatlinks_add_fatlink' %}"
+            href="{% url 'afat:fatlinks_add_fatlink' %}"
+        >
+            {% translate "Add FAT link" %}
+        </a>
+    </li>
+{% endif %}
 
-                {% if perms.afat.add_fatlink or perms.afat.manage_afat %}
-                    <li class="{% navactive request 'afat:fatlinks_add_fatlink' %}">
-                        <a href="{% url 'afat:fatlinks_add_fatlink' %}">{% translate "Add FAT link" %}</a>
-                    </li>
-                {% endif %}
-
-                {% if perms.afat.log_view %}
-                    <li class="{% navactive request 'afat:logs_overview' %}">
-                        <a href="{% url 'afat:logs_overview' %}">{% translate "View log" %}</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
+{% if perms.afat.log_view %}
+    <li class="nav-item">
+        <a
+            class="nav-link {% navactive request 'afat:logs_overview' %}"
+            href="{% url 'afat:logs_overview' %}"
+        >
+            {% translate "View log" %}
+        </a>
+    </li>
+{% endif %}
