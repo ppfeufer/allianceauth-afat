@@ -8,16 +8,17 @@
 {% endblock %}
 
 {% block afat_header %}
-    <h2>{% translate "Logs" %}</h2>
+    {% translate "Logs" as site_title %}
+    {% include "framework/header/page-header.html" with title=site_title %}
+{% endblock %}
 
+{% block afat_body %}
     <p class="text-muted">
         {% blocktranslate %}
             Logs are only kept for {{ log_duration }} days. Logs older than that are removed automatically.
         {% endblocktranslate %}
     </p>
-{% endblock %}
 
-{% block afat_body %}
     <div class="card card-default">
         <div class="card-body">
             <table class="table table-striped table-hover w-100" id="afat-logs">

@@ -9,10 +9,8 @@
 {% endblock %}
 
 {% block afat_header %}
-    <h2>
-        {% translate "Recent activity" as site_title %}
-        {{ site_title|title }}
-    </h2>
+    {% translate "Recent activity" as site_title %}
+    {% include "framework/header/page-header.html" with title=site_title %}
 {% endblock %}
 
 {% block afat_body %}

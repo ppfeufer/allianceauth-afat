@@ -8,7 +8,8 @@
 {% endblock %}
 
 {% block afat_header %}
-    <h2>{{ character.character_name }} {% translate "Statistics" %}</h2>
+    {% translate "Statistics" as site_title %}
+    {% include "framework/header/page-header.html" with title=site_title sub_title=character.name %}
 {% endblock %}
 
 {% block afat_body %}

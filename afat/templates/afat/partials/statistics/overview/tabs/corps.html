@@ -13,7 +13,7 @@
                     {% if value|length > 0 %}
                         <div class="card card-default">
                             <div class="card-header" role="tab" id="heading{{ value.0 }}">
-                                <h4 class="card-title mb-0">
+                                <div class="card-title mb-0">
                                     <img src="{{ value.0|alliance_logo_url:32 }}" alt="{{ key }}" style="margin-right: 0.25rem;">
 
                                     <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ value.0 }}" aria-expanded="false" aria-controls="{{ value.0 }}">
@@ -25,7 +25,7 @@
                                             <span class="glyphicon glyphicon-eye-open" style="color: rgb(255 255 255);"></span>
                                         </a>
                                     {% endif %}
-                                </h4>
+                                </div>
                             </div>
 
                             <div id="{{ value.0 }}" class="card-collapse collapse" role="tabpanel" aria-labelledby="heading{{ value.0 }}">

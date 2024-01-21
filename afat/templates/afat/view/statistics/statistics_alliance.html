@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block afat_header %}
-    <h2>{{ alliance }} {% translate "Statistics" %}</h2>
+    {% translate "Statistics" as site_title %}
+    {% include "framework/header/page-header.html" with title=site_title sub_title=alliance %}
 {% endblock %}
 
 {% block afat_body %}
