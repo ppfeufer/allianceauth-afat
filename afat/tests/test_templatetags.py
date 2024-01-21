@@ -24,7 +24,7 @@ class TestAfatFilters(TestCase):
 
         context = Context(dict_={"month": 5})
         template_to_render = Template(
-            template_string="{% load filters %} {{ month|month_name }}"
+            template_string="{% load afat %} {{ month|month_name }}"
         )
 
         rendered_template = template_to_render.render(context=context)
@@ -32,14 +32,14 @@ class TestAfatFilters(TestCase):
         self.assertInHTML(needle="May", haystack=rendered_template)
 
 
-class TestAfatVersionedStatic(TestCase):
+class TestAfatStatic(TestCase):
     """
     Test versioned static template tag
     """
 
-    def test_versioned_static(self):
+    def test_afat_static(self):
         """
-        Test afat_versioned_static
+        Test afat_static
 
         :return:
         """
@@ -47,7 +47,7 @@ class TestAfatVersionedStatic(TestCase):
         context = Context(dict_={"version": __version__})
         template_to_render = Template(
             template_string=(
-                "{% load afat_versioned_static %}"
+                "{% load afat %}"
                 "{% afat_static 'afat/css/allianceauth-afat.min.css' %}"
             )
         )
