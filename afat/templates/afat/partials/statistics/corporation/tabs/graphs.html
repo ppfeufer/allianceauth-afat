@@ -1,7 +1,7 @@
 {% load i18n %}
 
-<div id="graphs" class="tab-pane fade in active panel panel-default">
-    <div class="panel-body">
+<div id="graphs" class="tab-pane fade in active card card-default">
+    <div class="card-body">
         <ul class="nav nav-pills">
             <li class="active">
                 <a data-toggle="tab" href="#fatsbyship">
@@ -21,8 +21,8 @@
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane fade in active panel-default" id="fatsbyship">
-                <div class="panel-body">
+            <div class="tab-pane fade in active card-default" id="fatsbyship">
+                <div class="card-body">
                     <h4>{% translate "FATs by ship type" %}</h4>
 
                     <canvas id="ship-bar-stacked" width="800" height="500"></canvas>
@@ -59,8 +59,8 @@
                 </div>
             </div>
 
-            <div id="fatsbytime" class="tab-pane fade in panel-default">
-                <div class="panel-body">
+            <div id="fatsbytime" class="tab-pane fade in card-default">
+                <div class="card-body">
                     <h4>{% translate "FATs by time" %}</h4>
 
                     <canvas id="time-line" width="800" height="500"></canvas>
@@ -84,8 +84,8 @@
                 </div>
             </div>
 
-            <div class="tab-pane fade in panel-default" id="fatsbyweek">
-                <div class="panel-body">
+            <div class="tab-pane fade in card-default" id="fatsbyweek">
+                <div class="card-body">
                     <h4>{% translate "FATs by weekday" %}</h4>
 
                     <canvas id="weekday-line" width="800" height="500"></canvas>

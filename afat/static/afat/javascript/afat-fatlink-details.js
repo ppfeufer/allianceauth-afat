@@ -20,7 +20,7 @@ $(document).ready(() => {
                 targets: [3],
                 orderable: false,
                 createdCell: (td) => {
-                    $(td).addClass('text-right');
+                    $(td).addClass('text-end');
                 }
             }
         ],
@@ -44,7 +44,7 @@ $(document).ready(() => {
                 shipTypeOverviewTable.append(
                     '<tr class="shiptype-' + shipTypeSlug + '">' +
                     '<td class="ship-type">' + data.ship_type + '</td>' +
-                    '<td class="ship-type-count text-right">1</td>' +
+                    '<td class="ship-type-count text-end">1</td>' +
                     '</tr>'
                 );
             }
@@ -100,7 +100,7 @@ $(document).ready(() => {
                         shipTypeOverviewTable.append(
                             '<tr class="shiptype-' + shipTypeSlug + '">' +
                             '<td class="ship-type">' + item.ship_type + '</td>' +
-                            '<td class="ship-type-count text-right">1</td>' +
+                            '<td class="ship-type-count text-end">1</td>' +
                             '</tr>'
                         );
                     }

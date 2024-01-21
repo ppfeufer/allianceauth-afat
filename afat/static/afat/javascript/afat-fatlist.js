@@ -50,7 +50,7 @@ $(document).ready(() => {
                 targets: [5],
                 orderable: false,
                 createdCell: (td) => {
-                    $(td).addClass('text-right');
+                    $(td).addClass('text-end');
                 }
             },
             {

@@ -24,8 +24,8 @@
     {% url "afat:statistics_corporation" corpid year_current as url_current_year %}
     {% include "afat/partials/year_navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
 
-    <div class="panel panel-default">
-        <div class="panel-body">
+    <div class="card card-default">
+        <div class="card-body">
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
@@ -50,7 +50,7 @@
                                 <td>{{ month.2 }}</td>
                             {% endif %}
 
-                            <td class="text-right">
+                            <td class="text-end">
                                 {% if corporation != "No Alliance" %}
                                     <a href="{% url 'afat:statistics_corporation' corpid year month.0 %}" class="btn btn-primary btn-sm">
                                         <span class="glyphicon glyphicon-eye-open"></span>

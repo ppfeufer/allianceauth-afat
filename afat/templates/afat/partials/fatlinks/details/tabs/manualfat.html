@@ -3,8 +3,8 @@
 {% if perms.afat.manage_afat and is_clickable_link and manual_fat_can_be_added %}
     {% translate 'This field is mandatory' as mandatory_info %}
 
-    <div id="manualfat" class="tab-pane fade in panel panel-default">
-        <div class="panel-body">
+    <div id="manualfat" class="tab-pane fade in card card-default">
+        <div class="card-body">
             <h4>{% translate "Manual FAT" %}</h4>
 
             <p>
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="form-group text-right">
+                <div class="form-group text-end">
                     <button class="btn btn-primary" type="submit" name="manual_fat">
                         {% translate "Add manual FAT" %}
                     </button>

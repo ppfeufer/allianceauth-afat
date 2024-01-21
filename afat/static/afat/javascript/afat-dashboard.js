@@ -113,7 +113,7 @@ $(document).ready(() => {
             {
                 targets: [4],
                 createdCell: (td) => {
-                    $(td).addClass('text-right');
+                    $(td).addClass('text-end');
                 }
             }
         ],

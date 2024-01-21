@@ -2,14 +2,14 @@
 {% load i18n %}
 
 <div class="col-md-6 ml-md-2">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title mb-0">
                 {% translate "Create a clickable FAT link" %}
             </h3>
         </div>
 
-        <div class="panel-body">
+        <div class="card-body">
             <p>
                 {% translate "This option will create a clickable link to share with your fleet members." %}
             </p>
@@ -28,7 +28,7 @@
 
                 {% include "afat/partials/form/required_field_hint.html" %}
 
-                <div class="form-group text-right">
+                <div class="form-group text-end">
                     <button class="btn btn-primary" type="submit" name="submit_click">
                         <span class="fa fa-plus fa-fw"></span>
 

@@ -3,14 +3,14 @@
 {% load evelinks %}
 
 <div class="col-md-6 mr-md-1">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title mb-0">
                 {% translate "Create FAT link using ESI" %}
             </h3>
         </div>
 
-        <div class="panel-body">
+        <div class="card-body">
             <p>
                 {% blocktranslate %}
                     This option will automatically register and track the entire fleet
@@ -41,7 +41,7 @@
 
                 {% include "afat/partials/form/required_field_hint.html" %}
 
-                <div class="form-group text-right">
+                <div class="form-group text-end">
                     <button class="btn btn-primary" type="submit" name="submit_click">
                         <span class="fa fa-plus fa-fw"></span>
 
