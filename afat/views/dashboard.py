@@ -39,6 +39,7 @@ def overview(request: WSGIRequest) -> HttpResponse:
     characters = (
         EveCharacter.objects.select_related("character_ownership")
         .filter(character_ownership__user=request.user, afat_fats__isnull=False)
+        .order_by("-state__userprofile__main_character", "character_name")
         .distinct()
     )
 
