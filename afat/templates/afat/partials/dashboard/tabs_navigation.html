@@ -1,9 +1,30 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#fats">{% translate "FATs" %}</a></li>
+    <li class="nav-item" role="presentation">
+        <a
+            class="nav-link active"
+            id="fats"
+            data-bs-toggle="tab"
+            href="#tab-fats"
+            role="tab"
+            aria-controls="tab-fats"
+            aria-selected="true"
+        >
+            {% translate "FATs" %}
+        </a>
+    </li>
+
     <li>
-        <a data-toggle="tab" href="#fatlinks">
+        <a
+            class="nav-link"
+            id="fatlinks"
+            data-bs-toggle="tab"
+            href="#tab-fatlinks"
+            role="tab"
+            aria-controls="tab-fatlinks"
+            aria-selected="true"
+        >
             {% translate "FAT links" %}
         </a>
     </li>
