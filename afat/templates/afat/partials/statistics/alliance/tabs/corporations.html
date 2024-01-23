@@ -20,12 +20,12 @@
             <tbody>
                 {% for key, value in corps.items %}
                     <tr>
-                        <td><img src="{{ value.0|corporation_logo_url:32 }}" style="margin-right: 1rem;" alt="{{ key }}">{{ key }}</td>
+                        <td><img class="rounded" src="{{ value.0|corporation_logo_url:32 }}" style="margin-right: 1rem;" alt="{{ key }}">{{ key }}</td>
                         <td>{{ value.1 }}</td>
                         <td>{{ value.2 }}</td>
                         <td class="text-end">
                             <a class="btn btn-primary btn-sm" href="{% url 'afat:statistics_corporation' value.0 year month %}">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <i class="fa-solid fa-eye"></i>
                             </a>
                         </td>
                     </tr>

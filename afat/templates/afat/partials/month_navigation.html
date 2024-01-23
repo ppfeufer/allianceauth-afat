@@ -2,12 +2,12 @@
 {% load i18n %}
 
 <div class="afat-select-time-period afat-select-month">
-    <a class="btn btn-primary btn-sm" href="{{ url_previous_month }}" title='{% translate "Previous month" %}'><i class="fas fa-backward"></i></a>
+    <a class="btn btn-primary btn-sm" href="{{ url_previous_month }}" title='{% translate "Previous month" %}'><i class="fa-solid fa-backward"></i></a>
 
     <span class="afat-label-statistics">{{ month|month_name }} {{ year }}</span>
 
     {% if month_next <= month_current %}
-        <a class="btn btn-primary btn-sm" href="{{ url_next_month }}" title='{% translate "Next month" %}'><i class="fas fa-forward"></i></a>
-        <a class="btn btn-primary btn-sm" href="{{ url_current_month }}" title='{% translate "Current month" %}'><i class="fas fa-fast-forward"></i></a>
+        <a class="btn btn-primary btn-sm" href="{{ url_next_month }}" title='{% translate "Next month" %}'><i class="fa-solid fa-forward"></i></a>
+        <a class="btn btn-primary btn-sm" href="{{ url_current_month }}" title='{% translate "Current month" %}'><i class="fa-solid fa-fast-forward"></i></a>
     {% endif %}
 </div>

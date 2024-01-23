@@ -18,7 +18,7 @@
                 <li class="esi-fleet-list-item">
                     <div class="eve-image-with-text">
                         <div class="eve-image" style="">
-                            <img class="eve-character-portrait img-circle" src="{{ open_esi_fleet.character|character_portrait_url:32 }}" alt="{{ open_esi_fleet.character.character_name }}">
+                            <img class="eve-character-portrait rounded" src="{{ open_esi_fleet.character|character_portrait_url:32 }}" alt="{{ open_esi_fleet.character.character_name }}">
                         </div>
                         <div class="eve-image-text">
                             {{ open_esi_fleet.character.character_name }}<br>
@@ -37,7 +37,7 @@
                             data-body-text="{% blocktranslate with esi_fleet_id=open_esi_fleet.esi_fleet_id character_name=open_esi_fleet.character.character_name %}<p>Are you sure you want to close ESI fleet with ID {{ esi_fleet_id }} from {{ character_name }}</p>{% endblocktranslate %}"
                             data-confirm-text="{% translate 'Stop tracking' %}"
                         >
-                            <i class="fas fa-times"></i>
+                            <i class="fa-solid fa-times"></i>
                             <!-- {% translate "Stop tracking" %} -->
                         </button>
                     </div>

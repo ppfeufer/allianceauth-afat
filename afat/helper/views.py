@@ -49,12 +49,12 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     # Check for ESI link
     if fatlink.is_esilink:
         via_esi = "Yes"
-        esi_fleet_marker_classes = "label label-default afat-label afat-label-via-esi"
+        esi_fleet_marker_classes = "badge bg-secondary afat-label ms-2"
 
         if fatlink.is_registered_on_esi:
-            esi_fleet_marker_classes += " afat-label-active-esi-fleet"
+            esi_fleet_marker_classes = "badge bg-success afat-label ms-2"
 
-        marker_text = _("via ESI")
+        marker_text = _("ESI")
         esi_fleet_marker += (
             f'<span class="{esi_fleet_marker_classes}">{marker_text}</span>'
         )
@@ -99,7 +99,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
             f'data-url="{button_close_esi_tracking_url}{close_esi_redirect_parameter}" '
             f'data-body-text="{modal_body_text}" '
             f'data-confirm-text="{modal_confirm_text}">'
-            '<i class="fas fa-times"></i></a>'
+            '<i class="fa-solid fa-times"></i></a>'
         )
 
     if request.user.has_perm("afat.manage_afat") or request.user.has_perm(
@@ -110,8 +110,8 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         )
 
         actions += (
-            '<a class="btn btn-afat-action btn-info btn-sm" '
-            f'href="{button_edit_url}"><span class="fas fa-eye"></span></a>'
+            '<a class="btn btn-info btn-sm m-1" '
+            f'href="{button_edit_url}"><span class="fa-solid fa-eye"></span></a>'
         )
 
     if request.user.has_perm(perm="afat.manage_afat"):
@@ -124,12 +124,11 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         )
 
         actions += (
-            '<a class="btn btn-afat-action btn-danger btn-sm" data-toggle="modal" '
+            '<a class="btn btn-danger btn-sm" data-toggle="modal" '
             f'data-target="#deleteFatLinkModal" data-url="{button_delete_url}" '
             f'data-confirm-text="{button_delete_text}"'
             f'data-body-text="{modal_body_text}">'
-            '<span class="glyphicon glyphicon-trash">'
-            "</span></a>"
+            '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
         )
 
     return {
@@ -169,12 +168,12 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
 
     if fat.fatlink.is_esilink:
         via_esi = "Yes"
-        esi_fleet_marker_classes = "label label-default afat-label afat-label-via-esi"
+        esi_fleet_marker_classes = "badge bg-secondary afat-label ms-2"
 
         if fat.fatlink.is_registered_on_esi:
-            esi_fleet_marker_classes += " afat-label-active-esi-fleet"
+            esi_fleet_marker_classes = "badge bg-success afat-label ms-2"
 
-        marker_text = _("via ESI")
+        marker_text = _("ESI")
         esi_fleet_marker += (
             f'<span class="{esi_fleet_marker_classes}">{marker_text}</span>'
         )
@@ -197,7 +196,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
             f'data-url="{button_delete_fat}" '
             f'data-confirm-text="{button_delete_text}"'
             f'data-body-text="{modal_body_text}">'
-            '<span class="glyphicon glyphicon-trash"></span>'
+            '<i class="fa-solid fa-eye"></i>'
             "</a>"
         )
 

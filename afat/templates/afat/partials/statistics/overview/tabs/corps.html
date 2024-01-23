@@ -14,7 +14,7 @@
                         <div class="card card-default">
                             <div class="card-header" role="tab" id="heading{{ value.0 }}">
                                 <div class="card-title mb-0">
-                                    <img src="{{ value.0|alliance_logo_url:32 }}" alt="{{ key }}" style="margin-right: 0.25rem;">
+                                    <img class="rounded" src="{{ value.0|alliance_logo_url:32 }}" alt="{{ key }}" style="margin-right: 0.25rem;">
 
                                     <a role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#{{ value.0 }}" aria-expanded="false" aria-controls="{{ value.0 }}">
                                         {{ key }}
@@ -22,7 +22,7 @@
 
                                     {% if key != 'No Alliance' %}
                                         <a class="btn btn-primary btn-sm pull-right" href="{% url 'afat:statistics_alliance' value.0 year %}" role="button">
-                                            <span class="glyphicon glyphicon-eye-open" style="color: rgb(255 255 255);"></span>
+                                            <i class="fa-solid fa-eye" style="color: rgb(255 255 255);"></i>
                                         </a>
                                     {% endif %}
                                 </div>
@@ -37,13 +37,13 @@
                                                 {% else %}
                                                     <tr>
                                                         <td>
-                                                            <img src="{{ corp.0|corporation_logo_url:32 }}" alt="{{ corp.1 }}" style="margin-right: 0.25rem;">
+                                                            <img class="rounded" src="{{ corp.0|corporation_logo_url:32 }}" alt="{{ corp.1 }}" style="margin-right: 0.25rem;">
                                                             {{ corp.1 }}
                                                         </td>
 
                                                         <td class="text-end">
                                                             <a class="btn btn-primary btn-sm" href="{% url 'afat:statistics_corporation' corp.0 year %}">
-                                                                <span class="glyphicon glyphicon-eye-open"></span>
+                                                                <i class="fa-solid fa-eye"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
@@ -61,13 +61,13 @@
                     <tbody>
                         <tr>
                             <td>
-                                <img src="{{ data.0.0|corporation_logo_url:32 }}" alt="{{ data.0.1 }}" style="margin-right: 0.25rem;">
+                                <img class="rounded" src="{{ data.0.0|corporation_logo_url:32 }}" alt="{{ data.0.1 }}" style="margin-right: 0.25rem;">
                                 {{ data.0.1 }}
                             </td>
 
                             <td class="text-end">
                                 <a class="btn btn-primary btn-sm" href="{% url 'afat:statistics_corporation' data.0.0 year %}">
-                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    <i class="fa-solid fa-eye"></i>
                                 </a>
                             </td>
                         </tr>

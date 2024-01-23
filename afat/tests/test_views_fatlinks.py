@@ -297,10 +297,7 @@ class TestFatlinksView(TestCase):
         creator_main_character = get_main_character_from_user(user=fatlink.creator)
         fleet_time = fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
-        esi_marker = (
-            '<span class="label label-default afat-label afat-label-via-esi '
-            'afat-label-active-esi-fleet">via ESI</span>'
-        )
+        esi_marker = '<span class="badge bg-success afat-label ms-2>ESI</span>'
 
         self.assertJSONEqual(
             raw=str(result.content, encoding="utf8"),
@@ -319,7 +316,7 @@ class TestFatlinksView(TestCase):
                     "is_esilink": True,
                     "esi_fleet_id": fatlink.esi_fleet_id,
                     "is_registered_on_esi": True,
-                    # "actions": '<a class="btn btn-afat-action btn-info btn-sm" href="/fleet-activity-tracking/fatlink/ncOsHjnjmYZd9k6hI4us8QShRlqJ17/details/"><span class="fas fa-eye"></span></a><a class="btn btn-afat-action btn-danger btn-sm" data-toggle="modal" data-target="#deleteFatLinkModal" data-url="/fleet-activity-tracking/fatlink/ncOsHjnjmYZd9k6hI4us8QShRlqJ17/delete/" data-confirm-text="Delete"data-body-text="<p>Are you sure you want to delete FAT link M2-XFE Keepstar Kill?</p>"><span class="glyphicon glyphicon-trash"></span></a>',
+                    # "actions": '<a class="btn btn-afat-action btn-info btn-sm" href="/fleet-activity-tracking/fatlink/ncOsHjnjmYZd9k6hI4us8QShRlqJ17/details/"><span class="fa-solid fa-eye"></span></a><a class="btn btn-afat-action btn-danger btn-sm" data-toggle="modal" data-target="#deleteFatLinkModal" data-url="/fleet-activity-tracking/fatlink/ncOsHjnjmYZd9k6hI4us8QShRlqJ17/delete/" data-confirm-text="Delete"data-body-text="<p>Are you sure you want to delete FAT link M2-XFE Keepstar Kill?</p>"><i class="fa-solid fa-trash-can"></i></a>',
                     "actions": "",
                     "via_esi": "Yes",
                 }

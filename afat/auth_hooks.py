@@ -21,7 +21,7 @@ class AaAfatMenuItem(MenuItemHook):  # pylint: disable=too-few-public-methods
         MenuItemHook.__init__(
             self,
             text=AFAT_APP_NAME,
-            classes="fas fa-space-shuttle fa-fw",
+            classes="fa-solid fa-space-shuttle",
             url_name="afat:dashboard",
             navactive=["afat:"],
         )

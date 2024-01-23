@@ -1,18 +1,8 @@
 @media all {
-    .btn-afat-action {
-        height: 35px;
-        margin: 0 0.25rem;
-        width: 35px;
-    }
-
     .fatlink-list-legend {
         border-top: 1px solid rgb(236 240 241);
         margin-top: 1rem;
         padding-top: 1rem;
-    }
-
-    .template-dark-mode .fatlink-list-legend {
-        border-top: 1px solid rgb(70 69 69);
     }
 }
 
