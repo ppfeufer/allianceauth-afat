@@ -13,14 +13,14 @@
             <sup>*</sup>
         </p>
 
-        <ul class="esi-fleet-list">
+        <ul class="esi-fleet-list my-3 p-0">
             {% for open_esi_fleet in esi_fleet.open_esi_fleets_list %}
-                <li class="esi-fleet-list-item">
+                <li class="esi-fleet-list-item py-2 px-3">
                     <div class="eve-image-with-text">
                         <div class="eve-image" style="">
-                            <img class="eve-character-portrait rounded" src="{{ open_esi_fleet.character|character_portrait_url:32 }}" alt="{{ open_esi_fleet.character.character_name }}">
+                            <img class="eve-character-portrait rounded me-2" src="{{ open_esi_fleet.character|character_portrait_url:64 }}" alt="{{ open_esi_fleet.character.character_name }}" width="48px" height="48px">
                         </div>
-                        <div class="eve-image-text">
+                        <div class="eve-image-text small">
                             {{ open_esi_fleet.character.character_name }}<br>
                             <small>({% translate "Fleet name" %}: {{ open_esi_fleet.fleet }} // {% translate "ESI fleet ID" %}: {{ open_esi_fleet.esi_fleet_id }})</small>
                         </div>
@@ -28,8 +28,7 @@
 
                     <div>
                         <button
-                            class="btn btn-primary btn-xs"
-                            style="margin-left: 0.25rem;"
+                            class="btn btn-primary btn-sm ms-1"
                             title="{% translate 'Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link.' %}"
                             data-bs-toggle="modal"
                             data-bs-target="#cancelEsiFleetModal"

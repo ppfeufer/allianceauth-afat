@@ -1,26 +1,11 @@
-@media all {
-    .fatlink-list-legend {
-        border-top: 1px solid rgb(236 240 241);
-        margin-top: 1rem;
-        padding-top: 1rem;
-    }
-}
-
-/* esi fleet list (add fatlink view)
+/* ESI fleet list (add fatlink view)
 ------------------------------------------------------------------------------------- */
 @media all {
-    .allianceauth-afat .esi-fleet-list {
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-        padding: 0;
-    }
-
     .allianceauth-afat .esi-fleet-list-item {
         align-items: center;
         display: flex;
         flex-flow: row nowrap;
         list-style: none;
-        padding: 0.5rem 1rem;
         place-content: space-between space-between;
     }
 
@@ -35,13 +20,9 @@
     .allianceauth-afat .esi-fleet-list-item .eve-image-with-text .eve-image {
         margin: auto;
     }
-
-    .allianceauth-afat .esi-fleet-list-item .eve-character-portrait {
-        margin-right: 0.5rem;
-    }
 }
 
-/* tables
+/* Tables
 ------------------------------------------------------------------------------------- */
 @media all {
     .allianceauth-afat .table > tbody > tr > td,
@@ -53,22 +34,14 @@
     }
 }
 
-/* labels
+/* Labels
 ------------------------------------------------------------------------------------- */
 @media all {
-    .afat-label-via-esi {
-        background-color: rgb(192 192 192);
-        color: rgb(54 54 54);
-        margin-left: 1rem;
-    }
-
     .afat-label-active-esi-fleet {
         background-color: rgb(98 196 98);
     }
 
     .afat-label-statistics {
-        margin-left: 1rem;
-        margin-right: 1rem;
         position: relative;
         top: 0.2rem;
     }
@@ -81,6 +54,5 @@
         font-size: 19px;
         font-weight: 400;
         line-height: 1.1;
-        margin: 10.5px 0;
     }
 }
