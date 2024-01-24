@@ -31,7 +31,7 @@
                             href="#content-{{ character.character_id }}"
                             role="tab"
                             aria-controls="content-{{ character.character_id }}"
-                            aria-selected="true"
+                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
                         >
                             <img class="rounded" src="{{ character.character_id|character_portrait_url:64 }}" alt="{{ character.character_name }}" width="48px" height="48px"><br>
                             <span id="afat-eve-character-id-{{ character.character_id }}">{{ character.character_name }}</span>

@@ -30,4 +30,12 @@
             {% include "afat/partials/footer/app-translation-footer.html" %}
         </div>
     </div>
+
 {% endblock %}
+
+{% block extra_script %}
+    (() => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    })();
+{% endblock extra_script %}

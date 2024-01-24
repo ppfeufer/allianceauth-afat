@@ -1,13 +1,33 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs">
-    <li class="active">
-        <a data-toggle="tab" href="#mine">
+    <li class="nav-item" role="presentation">
+        <a
+            class="nav-link active"
+            id="mine"
+            data-bs-toggle="tab"
+            href="#tab-mine"
+            role="tab"
+            aria-controls="tab-mine"
+            aria-selected="true"
+        >
             {% translate "My Stats" %}
         </a>
     </li>
 
     {% if perms.afat.stats_corporation_own or perms.afat.stats_corporation_other or perms.afat.manage_afat %}
-        <li><a data-toggle="tab" href="#corps">{% translate "Corporations" %}</a></li>
+        <li>
+            <a
+                class="nav-link"
+                id="corps"
+                data-bs-toggle="tab"
+                href="#tab-corps"
+                role="tab"
+                aria-controls="tab-corps"
+                aria-selected="false"
+            >
+                {% translate "Corporations" %}
+            </a>
+        </li>
     {% endif %}
 </ul>
