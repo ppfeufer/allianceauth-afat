@@ -4,16 +4,15 @@
     <div class="row">
         <form class="form" role="form" action="" method="POST" style="margin-bottom: 2rem;">
             {% csrf_token %}
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder='{% translate "Fleet name" %}' name="fleet" {% if link.fleet %}value="{{ link.fleet }}" {% endif %}>
 
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit" name="set_name">
-                                {% translate "Set name" %}
-                            </button>
-                        </span>
+                        <button class="btn btn-primary" type="submit" name="set_name">
+                            {% translate "Set name" %}
+                        </button>
                     </div>
                 </div>
             </div>

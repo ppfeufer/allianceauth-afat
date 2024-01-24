@@ -1,4 +1,4 @@
-{% load bootstrap %}
+{% load django_bootstrap5 %}
 {% load i18n %}
 {% load evelinks %}
 
@@ -33,10 +33,10 @@
             <form class="form" role="form" action="{% url 'afat:fatlinks_create_esi_fatlink' %}" method="POST">
                 {% csrf_token %}
 
-                {{ esi_fatlink_form.name_esi|bootstrap }}
+                {% bootstrap_field esi_fatlink_form.name_esi %}
 
                 {% if link_types_configured %}
-                    {{ esi_fatlink_form.type_esi|bootstrap }}
+                    {% bootstrap_field esi_fatlink_form.type_esi %}
                 {% endif %}
 
                 {% include "afat/partials/form/required_field_hint.html" %}

@@ -1,4 +1,4 @@
-{% load bootstrap %}
+{% load django_bootstrap5 %}
 {% load i18n %}
 
 <div class="col-md-6 ml-md-2">
@@ -18,13 +18,13 @@
             <form class="form" role="form" action="{% url 'afat:fatlinks_create_clickable_fatlink' %}" method="POST">
                 {% csrf_token %}
 
-                {{ manual_fatlink_form.name|bootstrap }}
+                {% bootstrap_field manual_fatlink_form.name %}
 
                 {% if link_types_configured %}
-                    {{ manual_fatlink_form.type|bootstrap }}
+                    {% bootstrap_field manual_fatlink_form.type %}
                 {% endif %}
 
-                {{ manual_fatlink_form.duration|bootstrap }}
+                {% bootstrap_field manual_fatlink_form.duration %}
 
                 {% include "afat/partials/form/required_field_hint.html" %}
 
