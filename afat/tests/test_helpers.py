@@ -234,8 +234,8 @@ class TestHelpers(TestCase):
                     '<a class="btn btn-afat-action btn-primary btn-sm" '
                     'style="margin-left: 0.25rem;" title="Clicking here will '
                     "stop the automatic tracking through ESI for this fleet "
-                    'and close the associated FAT link." data-toggle="modal" '
-                    'data-target="#cancelEsiFleetModal" '
+                    'and close the associated FAT link." data-bs-toggle="modal" '
+                    'data-bs-target="#cancelEsiFleetModal" '
                     f'data-url="{close_esi_tracking_url}" '
                     'data-body-text="<p>Are you sure you want to close ESI '
                     'fleet with ID 3726458287 from Bruce Wayne?</p>" '
@@ -243,8 +243,8 @@ class TestHelpers(TestCase):
                     'fa-times"></i></a><a class="btn btn-afat-action btn-info '
                     f'btn-sm" href="{edit_url_1}"><span class="fa-solid '
                     'fa-eye"></span></a><a class="btn btn-afat-action '
-                    'btn-danger btn-sm" data-toggle="modal" '
-                    'data-target="#deleteFatLinkModal" '
+                    'btn-danger btn-sm" data-bs-toggle="modal" '
+                    'data-bs-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_1}" '
                     'data-confirm-text="Delete"data-body-text="<p>Are you '
                     "sure you want to delete FAT link April Fleet "
@@ -277,8 +277,8 @@ class TestHelpers(TestCase):
                     '<a class="btn btn-info btn-sm m-1" '
                     f'href="{edit_url_2}"><span class="fa-solid '
                     'fa-eye"></span></a><a class="btn btn-afat-action '
-                    'btn-danger btn-sm" data-toggle="modal" '
-                    'data-target="#deleteFatLinkModal" '
+                    'btn-danger btn-sm" data-bs-toggle="modal" '
+                    'data-bs-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_2}" '
                     'data-confirm-text="Delete"data-body-text="<p>Are you '
                     "sure you want to delete FAT link April Fleet "
@@ -340,8 +340,8 @@ class TestHelpers(TestCase):
                 "via_esi": "Yes",
                 "actions": (
                     '<a class="btn btn-danger btn-sm" '
-                    'data-toggle="modal" '
-                    'data-target="#deleteFatModal" '
+                    'data-bs-toggle="modal" '
+                    'data-bs-target="#deleteFatModal" '
                     f'data-url="{button_delete_fat}" '
                     f'data-confirm-text="{button_delete_text}"'
                     f'data-body-text="{modal_body_text}">'

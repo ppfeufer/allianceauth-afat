@@ -94,8 +94,8 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
 
         actions += (
             '<a class="btn btn-afat-action btn-primary btn-sm" '
-            f'style="margin-left: 0.25rem;" title="{button_title}" data-toggle="modal" '
-            'data-target="#cancelEsiFleetModal" '
+            f'style="margin-left: 0.25rem;" title="{button_title}" data-bs-toggle="modal" '
+            'data-bs-target="#cancelEsiFleetModal" '
             f'data-url="{button_close_esi_tracking_url}{close_esi_redirect_parameter}" '
             f'data-body-text="{modal_body_text}" '
             f'data-confirm-text="{modal_confirm_text}">'
@@ -124,8 +124,8 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         )
 
         actions += (
-            '<a class="btn btn-danger btn-sm" data-toggle="modal" '
-            f'data-target="#deleteFatLinkModal" data-url="{button_delete_url}" '
+            '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
+            f'data-bs-target="#deleteFatLinkModal" data-url="{button_delete_url}" '
             f'data-confirm-text="{button_delete_text}"'
             f'data-body-text="{modal_body_text}">'
             '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
@@ -191,8 +191,8 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
 
         actions += (
             '<a class="btn btn-danger btn-sm" '
-            'data-toggle="modal" '
-            'data-target="#deleteFatModal" '
+            'data-bs-toggle="modal" '
+            'data-bs-target="#deleteFatModal" '
             f'data-url="{button_delete_fat}" '
             f'data-confirm-text="{button_delete_text}"'
             f'data-body-text="{modal_body_text}">'

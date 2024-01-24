@@ -32,8 +32,8 @@
                             <button class="btn btn-primary btn-xs"
                                 style="margin-left: 0.25rem;"
                                 title="{% translate 'Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link.' %}"
-                                data-toggle="modal"
-                                data-target="#cancelEsiFleetModal"
+                                data-bs-toggle="modal"
+                                data-bs-target="#cancelEsiFleetModal"
                                 data-url="{% url 'afat:fatlinks_close_esi_fatlink' link.hash %}?next={% url 'afat:fatlinks_details_fatlink' link.hash %}"
                                 data-body-text="{% blocktranslate with esi_fleet_id=link.esi_fleet_id character_name=link.character.character_name %}<p>Are you sure you want to close ESI fleet with ID {{ esi_fleet_id }} from {{ character_name }}</p>{% endblocktranslate %}"
                                 data-confirm-text="{% translate 'Stop tracking' %}"
@@ -55,8 +55,8 @@
 
                 <p>
                     <button class="btn btn-default btn-sm"
-                        data-toggle="modal"
-                        data-target="#reopenFatLinkModal"
+                        data-bs-toggle="modal"
+                        data-bs-target="#reopenFatLinkModal"
                         data-url="{% url 'afat:fatlinks_reopen_fatlink' link.hash %}"
                         data-body-text="{% blocktranslate with reopen_duration=reopen_duration %}<p>Are you sure you want to re-open this FAT link for another {{ reopen_duration }} minutes?<br>FAT links can be re-opened only once!<br><em>(Be aware, this action will be logged)</em></p>{% endblocktranslate %}"
                         data-confirm-text="{% translate 'Re-Open' %}"
