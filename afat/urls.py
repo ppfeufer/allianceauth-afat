@@ -15,7 +15,7 @@ urlpatterns = [
     path(route="", view=dashboard.overview, name="dashboard"),
     # Stats main page
     path(route="statistics/", view=statistics.overview, name="statistics_overview"),
-    path("statistics/(<int:year>/", statistics.overview, name="statistics_overview"),
+    path("statistics/<int:year>/", statistics.overview, name="statistics_overview"),
     # Stats corp
     path(
         route="statistics/corporation/",
