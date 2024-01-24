@@ -1,9 +1,7 @@
-/* global afatSettings, characters, moment, manageModal */
+/* global afatSettings, characters, moment, manageModal, AFAT_DATETIME_FORMAT */
 
 $(document).ready(() => {
     'use strict';
-
-    const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
 
     /**
      * DataTable :: Recent FATs per character
@@ -39,7 +37,7 @@ $(document).ready(() => {
                              */
                             display: (data) => {
                                 return moment(data.time).utc().format(
-                                    DATETIME_FORMAT
+                                    AFAT_DATETIME_FORMAT
                                 );
                             },
                             _: 'timestamp'
@@ -87,7 +85,7 @@ $(document).ready(() => {
                      * @returns {*}
                      */
                     display: (data) => {
-                        return moment(data.time).utc().format(DATETIME_FORMAT);
+                        return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
                     },
                     _: 'timestamp'
                 }

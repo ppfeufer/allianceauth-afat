@@ -1,9 +1,7 @@
-/* global afatSettings, moment, manageModal */
+/* global afatSettings, moment, manageModal, AFAT_DATETIME_FORMAT */
 
 $(document).ready(() => {
     'use strict';
-
-    const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
 
     /**
      * DataTable :: FAT link list
@@ -22,7 +20,7 @@ $(document).ready(() => {
                 data: 'fleet_time',
                 render: {
                     display: (data) => {
-                        return moment(data.time).utc().format(DATETIME_FORMAT);
+                        return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
                     },
                     _: 'timestamp'
                 }
