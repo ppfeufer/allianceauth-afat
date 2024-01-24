@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="col-md-12" style="margin-bottom: 2rem;">
+<div class="col-md-12 mb-3">
     <div class="row">
         <div class="col-md-6">
             {% translate "Creator" %}: {{ link.creator.profile.main_character.character_name }}
@@ -74,11 +74,10 @@
                         <a class="label label-success copy-link" href="{% url 'afat:fatlinks_add_fat' link.hash %}"></a>
                     </i>
 
-                    <button class="copy-btn btn btn-success btn-sm"
+                    <button class="copy-btn btn btn-success btn-sm ms-3"
                         data-toggle="tooltip"
                         data-html="true"
                         data-clipboard-text="{{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}"
-                        style="margin-left: 1rem;"
                     >
                         {% translate "Copy me!" %}
                     </button>

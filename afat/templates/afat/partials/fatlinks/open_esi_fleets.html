@@ -17,7 +17,7 @@
             {% for open_esi_fleet in esi_fleet.open_esi_fleets_list %}
                 <li class="esi-fleet-list-item py-2 px-3">
                     <div class="eve-image-with-text">
-                        <div class="eve-image" style="">
+                        <div class="eve-image">
                             <img class="eve-character-portrait rounded me-2" src="{{ open_esi_fleet.character|character_portrait_url:64 }}" alt="{{ open_esi_fleet.character.character_name }}" width="48px" height="48px">
                         </div>
                         <div class="eve-image-text small">

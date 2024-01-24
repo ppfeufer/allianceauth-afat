@@ -20,7 +20,7 @@
             <tbody>
                 {% for key, value in corps.items %}
                     <tr>
-                        <td><img class="rounded" src="{{ value.0|corporation_logo_url:32 }}" style="margin-right: 1rem;" alt="{{ key }}">{{ key }}</td>
+                        <td><img class="rounded me-3" src="{{ value.0|corporation_logo_url:32 }}" alt="{{ key }}">{{ key }}</td>
                         <td>{{ value.1 }}</td>
                         <td>{{ value.2 }}</td>
                         <td class="text-end">
