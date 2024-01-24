@@ -48,7 +48,8 @@ $(document).ready(() => {
                 }
             ],
             autoSize: false,
-            bootstrap: true
+            bootstrap: true,
+            bootstrap_version: 5
         },
 
         stateSave: true,
