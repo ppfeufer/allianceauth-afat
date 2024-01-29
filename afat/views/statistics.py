@@ -192,7 +192,7 @@ def character(  # pylint: disable=too-many-locals
 
     can_view_character = True
 
-    # Check if the user can view other corporation's statistics or manage AFAT
+    # Check if the user can view another corporation's statistics or manage AFAT
     if eve_character not in valid and not user_has_any_perms(
         user=request.user,
         perm_list=[
