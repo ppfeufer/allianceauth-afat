@@ -1,6 +1,7 @@
 """
 Test access to the AFAT module
 """
+
 # Standard Library
 from http import HTTPStatus
 
