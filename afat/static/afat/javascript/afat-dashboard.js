@@ -7,7 +7,7 @@ $(document).ready(() => {
      * DataTable :: Recent FATs per character
      */
     if (characters.length > 0) {
-        const noFatsWarning = '<div class="alert alert-warning" role="alert">' +
+        const noFatsWarning = '<div class="aa-callout aa-callout-warning" role="alert">' +
             '<p>' + afatSettings.translation.dataTable.noFatsWarning + ' ###CHARACTER_NAME###</p>' +
             '</div>';
 
@@ -61,7 +61,7 @@ $(document).ready(() => {
     /**
      * DataTable :: Recent FAT links
      */
-    const noFatlinksWarning = '<div class="alert alert-warning" role="alert">' +
+    const noFatlinksWarning = '<div class="aa-callout aa-callout-warning" role="alert">' +
         '<p>' + afatSettings.translation.dataTable.noFatlinksWarning + '</p>' +
         '</div>';
 
