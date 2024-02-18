@@ -37,12 +37,12 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
 ]
 dependencies = [
-    "allianceauth>=3.2",
+    "allianceauth>=4.0.0b1",
     "allianceauth-app-utils>=1.14.1",
     "unidecode>=1.3.4",
 ]
 [project.optional-dependencies]
-tests-allianceauth-stable = [
+tests-allianceauth-latest = [
     "coverage",
     "django-webtest",
 ]
