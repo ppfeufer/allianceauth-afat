@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block afat_body %}
-    {% include "afat/bundles/chartjs-js.html" %}
 
     {% if month == "1" %}
         {% url "afat:statistics_alliance" ally.alliance_id year_prev 12 as url_previous_month %}
@@ -45,34 +44,29 @@
 {% endblock %}
 
 {% block extra_javascript %}
+    {% include "afat/bundles/chartjs-js.html" %}
+    {% include "afat/bundles/afat-statistics-js.html" %}
     {% include "bundles/datatables-js-bs5.html" %}
     {% include "bundles/moment-js.html" %}
 
     <script>
-        /**
-         * datetime formatting
-         *
-         * @param format
-         * @param locale
-         */
-        $.fn.dataTable.moment = function(format, locale) {
-            let types = $.fn.dataTable.ext.type;
+        $(document).ready(() => {
+            // DataTables datetime formatting
+            {#$.fn.dataTable.moment('YYYY-MMM-DD, HH:mm');#}
 
-            // Add type detection
-            types.detect.unshift(function(d) {
-                return moment(d, format, locale, true).isValid() ? 'moment-' + format : null;
-            });
-
-            // Add sorting method - use an integer for the sorting
-            types.order['moment-' + format + '-pre'] = function(d) {
-                return moment(d, format, locale, true).unix();
-            };
-        };
-
-        $(document).ready(function() {
-            $.fn.dataTable.moment('YYYY-MMM-DD, HH:mm');
-
+            // DataTables
             $('#member-corps').DataTable();
+
+            // Chart rendering
+            if (chartInfo.length > 0) {
+                chartInfo.forEach((chart) => {
+                    new Chart(chart.element, {
+                        type: chart.type,
+                        data: chart.data,
+                        options: chart.options
+                    });
+                });
+            }
         });
     </script>
 {% endblock %}

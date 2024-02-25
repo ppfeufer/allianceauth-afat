@@ -68,23 +68,20 @@
                     <canvas id="ship-pie" width="800" height="500"></canvas>
 
                     <script>
-                        const element = document.querySelector('body')
-                        const style = getComputedStyle(element);
-                        console.log(style.color);
+                        const chartInfo = [];
 
-                        Chart.defaults.color = style.color;
-
-                        const shipPieChart = new Chart(document.getElementById("ship-pie"), {
-                            type: "pie",
-                            data: {
+                        chartInfo.push({
+                            element: document.getElementById("ship-pie"), // Element to render the chart
+                            type: 'pie', // Chart type
+                            data: { // Chart data
                                 datasets: [{
-                                    label: 'Ship Types',
+                                    label: '{% translate "Ship Types" %}',
                                     data: {{ data_ship_type.1|safe }},
-                                    backgroundColor: {{ data_ship_type.2|safe }}
+                                    {#backgroundColor: {{ data_ship_type.2|safe }}#}
                                 }],
                                 labels: {{ data_ship_type.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: false
                             }
                         });
@@ -99,17 +96,18 @@
                     <canvas id="avgs" width="1000" height="700"></canvas>
 
                     <script>
-                        const averagesHorizontalBarChart = new Chart(document.getElementById('avgs'), {
-                            type: 'bar',
-                            data:{
+                        chartInfo.push({
+                            element: document.getElementById("avgs"), // Element to render the chart
+                            type: 'bar', // Chart type
+                            data: { // Chart data
                                 datasets: [{
-                                    label: 'Average # of FATs',
-                                    backgroundColor: '{{ data_avgs.2|safe }}',
-                                    data: {{ data_avgs.1 }}
+                                    label: '{% translate "Average # of FATs" %}',
+                                    data: {{ data_avgs.1 }},
+                                    {#backgroundColor: '{{ data_avgs.2|safe }}'#}
                                 }],
                                 labels: {{ data_avgs.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: true,
                                 indexAxis: 'y'
                             }
@@ -125,17 +123,18 @@
                     <canvas id="time-line" width="800" height="200vh"></canvas>
 
                     <script>
-                        const timeLineChart = new Chart(document.getElementById("time-line"), {
-                            type: 'bar',
-                            data: {
+                        chartInfo.push({
+                            element: document.getElementById("time-line"), // Element to render the chart
+                            type: 'bar', // Chart type
+                            data: { // Chart data
                                 datasets: [{
-                                    label: '# of FATs',
-                                    backgroundColor: {{ data_time.2|safe }},
-                                    data: {{ data_time.1 }}
+                                    label: '{% translate "# of FATs" %}',
+                                    data: {{ data_time.1 }},
+                                    {#backgroundColor: {{ data_time.2|safe }}#}
                                 }],
                                 labels: {{ data_time.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: true
                             }
                         });
@@ -150,17 +149,18 @@
                     <canvas id="weekday-line" width="800" height="200vh"></canvas>
 
                     <script>
-                        const weekdayLineChart = new Chart(document.getElementById('weekday-line'), {
-                            type: 'bar',
-                            data:{
+                        chartInfo.push({
+                            element: document.getElementById("weekday-line"), // Element to render the chart
+                            type: 'bar', // Chart type
+                            data: { // Chart data
                                 datasets: [{
-                                    label: '# of FATs',
-                                    backgroundColor: {{ data_weekday.2|safe }},
-                                    data: {{ data_weekday.1 }}
+                                    label: '{% translate "# of FATs" %}',
+                                    data: {{ data_weekday.1 }},
+                                    {#backgroundColor: {{ data_weekday.2|safe }}#}
                                 }],
                                 labels: {{ data_weekday.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: true
                             }
                         });
