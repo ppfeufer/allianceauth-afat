@@ -35,9 +35,11 @@ Section Order:
 ### Security
 -->
 
+## \[3.0.0-beta.1\] - 2024-02-25
+
 > \[!NOTE\]
 >
-> **This version needs at least Alliance Auth v4.0.0b1!**
+> **This version needs at least Alliance Auth v4.0.0b2!**
 >
 > Please make sure to update your Alliance Auth instance **before**
 > you install this version, otherwise, an update to Alliance Auth will
