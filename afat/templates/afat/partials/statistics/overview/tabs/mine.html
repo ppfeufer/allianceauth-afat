@@ -12,32 +12,17 @@
         </p>
 
         <ul class="nav nav-pills">
-            {% for char in charstats %}
-                <li class="afat-stats-character-tab text-center">
-                    <a
-                        data-toggle="tab"
-
-                        class="nav-link{% if forloop.first %} active{% endif %}"
-                        id="tab-{{ char.2 }}"
-                        data-bs-toggle="tab"
-                        href="#content-{{ char.2 }}"
-                        role="tab"
-                        aria-controls="content-{{ char.2 }}"
-                        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                    >
-                        <img class="rounded" src="{{ char.2|character_portrait_url:64 }}" alt="{{ char.0 }}" width="48px" height="48px"><br>
-                        <span id="afat-eve-character-id-{{ char.2 }}">{{ char.0 }}</span>
-                    </a>
-                </li>
+            {% for character in charstats %}
+                {% include "afat/partials/character_tab.html" with forloop=forloop character_id=character.2 character_name=character.0 %}
             {% endfor %}
         </ul>
 
         <div class="tab-content">
             {% if charstats %}
-                {% for char in charstats %}
-                    <div id="content-{{ char.2 }}" class="tab-pane fade card-default{% if forloop.first %} show active{% endif %}">
+                {% for character in charstats %}
+                    <div id="content-{{ character.2 }}" class="tab-pane fade card-default{% if forloop.first %} show active{% endif %}">
                         <div class="card-body">
-                            {% if char.1|length > 0 %}
+                            {% if character.1|length > 0 %}
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
@@ -48,12 +33,12 @@
                                     </thead>
 
                                     <tbody>
-                                        {% for month, fatcount in char.1.items %}
+                                        {% for month, fatcount in character.1.items %}
                                             <tr>
                                                 <td>{{ month|month_name }}</td>
                                                 <td>{{ fatcount }}</td>
                                                 <td class="text-end">
-                                                    <a href="{% url 'afat:statistics_character' char.2 year month %}" class="btn btn-primary btn-sm">
+                                                    <a href="{% url 'afat:statistics_character' character.2 year month %}" class="btn btn-primary btn-sm">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
                                                 </td>
@@ -63,7 +48,7 @@
                                 </table>
                             {% else %}
                                 <div class="aa-callout aa-callout-warning" role="alert">
-                                    <p>{% translate "No FATs for" %} {{ char.0 }}</p>
+                                    <p>{% translate "No FATs for" %} {{ character.0 }}</p>
                                 </div>
                             {% endif %}
                         </div>

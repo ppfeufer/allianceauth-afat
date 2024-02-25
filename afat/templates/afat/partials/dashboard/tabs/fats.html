@@ -16,27 +16,14 @@
         {% if characters %}
             <ul class="nav nav-pills">
                 {% for character in characters %}
-                    <li class="nav-item afat-character-tab text-center">
-                        <script>
-                            characters.push({
-                                charId: {{ character.character_id }},
-                                charName: '{{ character.character_name }}'
-                            });
-                        </script>
+                    {% include "afat/partials/character_tab.html" with forloop=forloop character_id=character.character_id character_name=character.character_name %}
 
-                        <a
-                            class="nav-link{% if forloop.first %} active{% endif %}"
-                            id="tab-{{ character.character_id }}"
-                            data-bs-toggle="tab"
-                            href="#content-{{ character.character_id }}"
-                            role="tab"
-                            aria-controls="content-{{ character.character_id }}"
-                            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                        >
-                            <img class="rounded" src="{{ character.character_id|character_portrait_url:64 }}" alt="{{ character.character_name }}" width="48px" height="48px"><br>
-                            <span id="afat-eve-character-id-{{ character.character_id }}">{{ character.character_name }}</span>
-                        </a>
-                    </li>
+                    <script>
+                        characters.push({
+                            charId: {{ character.character_id }},
+                            charName: '{{ character.character_name }}'
+                        });
+                    </script>
                 {% endfor %}
             </ul>
 
