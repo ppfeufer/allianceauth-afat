@@ -30,11 +30,12 @@
                             element: document.getElementById("ship-pie"), // Element to render the chart
                             type: 'pie', // Chart type
                             data: { // Chart data
-                                datasets: [{
-                                    label: '{% translate "Ship Types" %}',
-                                    data: {{ data_ship_type.1|safe }},
-                                    {#backgroundColor: {{ data_ship_type.2|safe }}#}
-                                }],
+                                datasets: [
+                                    {
+                                        label: '{% translate "Ship Types" %}',
+                                        data: {{ data_ship_type.1|safe }},
+                                    }
+                                ],
                                 labels: {{ data_ship_type.0|safe }}
                             },
                             options: { // Chart options
@@ -56,11 +57,12 @@
                             element: document.getElementById("avgs"), // Element to render the chart
                             type: 'bar', // Chart type
                             data: { // Chart data
-                                datasets: [{
-                                    label: '{% translate "Average # of FATs" %}',
-                                    data: {{ data_avgs.1 }},
-                                    {#backgroundColor: '{{ data_avgs.2|safe }}'#}
-                                }],
+                                datasets: [
+                                    {
+                                        label: '{% translate "Average # of FATs" %}',
+                                        data: {{ data_avgs.1 }},
+                                    }
+                                ],
                                 labels: {{ data_avgs.0|safe }}
                             },
                             options: { // Chart options
@@ -83,11 +85,12 @@
                             element: document.getElementById("time-line"), // Element to render the chart
                             type: 'bar', // Chart type
                             data: { // Chart data
-                                datasets: [{
-                                    label: '{% translate "# of FATs" %}',
-                                    data: {{ data_time.1 }},
-                                    {#backgroundColor: {{ data_time.2|safe }}#}
-                                }],
+                                datasets: [
+                                    {
+                                        label: '{% translate "# of FATs" %}',
+                                        data: {{ data_time.1 }},
+                                    }
+                                ],
                                 labels: {{ data_time.0|safe }}
                             },
                             options: { // Chart options
@@ -109,11 +112,12 @@
                             element: document.getElementById("weekday-line"), // Element to render the chart
                             type: 'bar', // Chart type
                             data: { // Chart data
-                                datasets: [{
-                                    label: '{% translate "# of FATs" %}',
-                                    data: {{ data_weekday.1 }},
-                                    {#backgroundColor: {{ data_weekday.2|safe }}#}
-                                }],
+                                datasets: [
+                                    {
+                                        label: '{% translate "# of FATs" %}',
+                                        data: {{ data_weekday.1 }},
+                                    }
+                                ],
                                 labels: {{ data_weekday.0|safe }}
                             },
                             options: { // Chart options

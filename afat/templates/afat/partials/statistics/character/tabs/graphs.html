@@ -15,10 +15,11 @@
                         element: document.getElementById("pie-ship"), // Element to render the chart
                         type: "pie", // Chart type
                         data: { // Chart data
-                            datasets: [{
-                                data: {{ data_ship_type.1|safe }},
-                                {#backgroundColor: {{ data_ship_type.2|safe }}#}
-                            }],
+                            datasets: [
+                                {
+                                    data: {{ data_ship_type.1|safe }},
+                                }
+                            ],
                             labels: {{ data_ship_type.0|safe }}
                         },
                         options: { // Chart options
@@ -38,11 +39,12 @@
                         element: document.getElementById("line-time"), // Element to render the chart
                         type: "line", // Chart type
                         data: { // Chart data
-                            datasets: [{
-                                label: '{% translate "# of FATs" %}',
-                                data: {{ data_time.1|safe }},
-                                {#backgroundColor: {{ data_time.2|safe }}#}
-                            }],
+                            datasets: [
+                                {
+                                    label: '{% translate "# of FATs" %}',
+                                    data: {{ data_time.1|safe }},
+                                }
+                            ],
                             labels: {{ data_time.0|safe }}
                         },
                         options: { // Chart options

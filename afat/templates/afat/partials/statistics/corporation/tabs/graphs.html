@@ -24,9 +24,9 @@
                         const chartInfo = [];
 
                         chartInfo.push({
-                            element: document.getElementById("ship-bar-stacked"),
-                            type: "bar",
-                            data: {
+                            element: document.getElementById("ship-bar-stacked"), // Element to render the chart
+                            type: "bar", // Chart type
+                            data: { // Chart data
                                 datasets: [
                                     {% for set in data_stacked.1 %}
                                         {
@@ -37,7 +37,7 @@
                                 ],
                                 labels: {{ data_stacked.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: false,
                                 indexAxis: 'x',
                                 scales: {
@@ -65,16 +65,18 @@
 
                     <script>
                         chartInfo.push({
-                            element: document.getElementById("time-line"),
-                            type: 'line',
-                            data: {
-                                datasets: [{
-                                    label: '# of FATs',
-                                    data: {{ data_time.1 }}
-                                }],
+                            element: document.getElementById("time-line"), // Element to render the chart
+                            type: 'line', // Chart type
+                            data: { // Chart data
+                                datasets: [
+                                    {
+                                        label: '{% translate "# of FATs" %}',
+                                        data: {{ data_time.1 }}
+                                    }
+                                ],
                                 labels: {{ data_time.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: false
                             }
                         });
@@ -90,16 +92,18 @@
 
                     <script>
                         chartInfo.push({
-                            element: document.getElementById("weekday-line"),
-                            type: 'bar',
-                            data: {
-                                datasets: [{
-                                    label: '# of FATs',
-                                    data: {{ data_weekday.1 }},
-                                }],
+                            element: document.getElementById("weekday-line"), // Element to render the chart
+                            type: 'bar', // Chart type
+                            data: { // Chart data
+                                datasets: [
+                                    {
+                                        label: '{% translate "# of FATs" %}',
+                                        data: {{ data_weekday.1 }},
+                                    }
+                                ],
                                 labels: {{ data_weekday.0|safe }}
                             },
-                            options: {
+                            options: { // Chart options
                                 responsive: false
                             }
                         });
