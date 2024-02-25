@@ -51,20 +51,13 @@
 
     <script>
         $(document).ready(() => {
-            // DataTables datetime formatting
-            {#$.fn.dataTable.moment('YYYY-MMM-DD, HH:mm');#}
-
             // DataTables
             $('#member-corps').DataTable();
 
             // Chart rendering
             if (chartInfo.length > 0) {
                 chartInfo.forEach((chart) => {
-                    new Chart(chart.element, {
-                        type: chart.type,
-                        data: chart.data,
-                        options: chart.options
-                    });
+                    drawChart(chart.element, chart.type, chart.data, chart.options);
                 });
             }
         });
