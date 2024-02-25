@@ -288,8 +288,10 @@ def characters_with_permission(permission: Permission) -> models.QuerySet:
     # First, we need the users that have the permission
     users_qs = users_with_permission(permission=permission)
 
-    # Now get their characters ...
-    charater_qs = EveCharacter.objects.filter(character_ownership__user__in=users_qs)
+    # Now get their characters ... and sort them by userprofile and character name
+    charater_qs = EveCharacter.objects.filter(
+        character_ownership__user__in=users_qs
+    ).order_by("-userprofile", "character_name")
 
     return charater_qs
 

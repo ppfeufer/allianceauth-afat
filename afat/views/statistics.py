@@ -131,11 +131,22 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
 
 def _calculate_year_stats(request, year) -> list:
     """
-    Calculate and return year statistics.
+    Calculate statistics for the year
+
+    :param request:
+    :type request:
+    :param year:
+    :type year:
+    :return:
+    :rtype:
     """
 
     months = []
-    characters = EveCharacter.objects.filter(character_ownership__user=request.user)
+
+    # Get all characters for the user and order by userprofile and character name
+    characters = EveCharacter.objects.filter(
+        character_ownership__user=request.user
+    ).order_by("-userprofile", "character_name")
 
     for char in characters:
         character_fats_in_year = (
@@ -162,7 +173,8 @@ def _calculate_year_stats(request, year) -> list:
             )
 
     # Return sorted by character name
-    return sorted(months, key=lambda x: x[0])
+    # return sorted(months, key=lambda x: x[0])
+    return months
 
 
 @login_required()
