@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div id="graphs" class="tab-pane fade in active card card-default">
+<div id="tab-graphs" class="tab-pane fade show active card card-default border-0" role="tabpanel" aria-labelledby="tab-graphs">
     <div class="card-body">
         <ul class="nav nav-pills">
             {% translate "FATs by ship type" as tab_title %}
@@ -14,37 +14,42 @@
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane fade in active card-default" id="fatsbyship">
+            <div id="tab-fatsbyship" class="tab-pane fade show active card card-default border-0" role="tabpanel" aria-labelledby="tab-fatsbyship">
                 <div class="card-body">
                     <h4>{% translate "FATs by ship type" %}</h4>
 
                     <canvas id="ship-bar-stacked" width="800" height="500"></canvas>
 
                     <script>
-                        let corpShipTypeBarChart = new Chart(document.getElementById('ship-bar-stacked'), {
+                        const chartInfo = [];
+
+                        chartInfo.push({
+                            element: document.getElementById("ship-bar-stacked"),
                             type: "bar",
                             data: {
-                                datasets: [{% for set in data_stacked.1 %}
-                                    {
-                                        label: '{{ set.0|escapejs }}',
-                                        backgroundColor: '{{ set.1|safe }}',
-                                        data: {{ set.2 }}
-                                    },
-                                {% endfor %}],
+                                datasets: [
+                                    {% for set in data_stacked.1 %}
+                                        {
+                                            label: '{{ set.0|escapejs }}',
+                                            data: {{ set.2 }}
+                                        },
+                                    {% endfor %}
+                                ],
                                 labels: {{ data_stacked.0|safe }}
                             },
                             options: {
                                 responsive: false,
+                                indexAxis: 'x',
                                 scales: {
-                                    xAxes: [{
+                                    x: {
                                         stacked: true,
                                         ticks: {
                                             autoSkip: false
                                         }
-                                    }],
-                                    yAxes: [{
+                                    },
+                                    y: {
                                         stacked: true
-                                    }]
+                                    }
                                 }
                             }
                         });
@@ -59,12 +64,12 @@
                     <canvas id="time-line" width="800" height="500"></canvas>
 
                     <script>
-                        let timeLineChart = new Chart(document.getElementById("time-line"), {
+                        chartInfo.push({
+                            element: document.getElementById("time-line"),
                             type: 'line',
                             data: {
                                 datasets: [{
                                     label: '# of FATs',
-                                    backgroundColor: {{ data_time.2|safe }},
                                     data: {{ data_time.1 }}
                                 }],
                                 labels: {{ data_time.0|safe }}
@@ -84,13 +89,13 @@
                     <canvas id="weekday-line" width="800" height="500"></canvas>
 
                     <script>
-                        let weekdayLineChart = new Chart(document.getElementById('weekday-line'), {
-                            type: 'line',
-                            data:{
+                        chartInfo.push({
+                            element: document.getElementById("weekday-line"),
+                            type: 'bar',
+                            data: {
                                 datasets: [{
                                     label: '# of FATs',
-                                    backgroundColor: {{ data_weekday.2|safe }},
-                                    data: {{ data_weekday.1 }}
+                                    data: {{ data_weekday.1 }},
                                 }],
                                 labels: {{ data_weekday.0|safe }}
                             },

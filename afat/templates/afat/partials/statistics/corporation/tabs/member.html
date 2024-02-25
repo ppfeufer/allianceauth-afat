@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="tab-pane fade in card card-default" id="members">
+<div id="tab-members" class="tab-pane fade card card-default border-0" role="tabpanel" aria-labelledby="tab-members">
     <div class="card-body">
         <h3>{{ corporation }} {% translate "Members" %}</h3>
 
@@ -20,7 +20,7 @@
                         <td>{{ value.0 }}</td>
                         <td class="text-end">
                             <a class="btn btn-primary btn-sm" href="{% url 'afat:statistics_character' value.1 year month %}">
-                                <i class="fa-solid fa-eye"></i></span>
+                                <i class="fa-solid fa-eye"></i>
                             </a>
                         </td>
                     </tr>
