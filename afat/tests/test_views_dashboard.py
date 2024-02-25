@@ -73,16 +73,16 @@ class TestDashboard(TestCase):
         # then
         content = response_content_to_str(response=response)
 
-        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertEqual(first=response.status_code, second=HTTPStatus.OK)
         self.assertIn(
-            member=f'<span id="afat-eve-character-id-{self.character_1101.character_id}">{self.character_1101.character_name}</span>',
+            member=f'<span class="d-block" id="afat-eve-character-id-{self.character_1101.character_id}">{self.character_1101.character_name}</span>',
             container=content,
         )
         self.assertNotIn(
-            member=f'<span id="afat-eve-character-id-{self.character_1001.character_id}">{self.character_1001.character_name}</span>',
+            member=f'<span class="d-block" id="afat-eve-character-id-{self.character_1001.character_id}">{self.character_1001.character_name}</span>',
             container=content,
         )
         self.assertNotIn(
-            member=f'<span id="afat-eve-character-id-{self.character_1002.character_id}">{self.character_1002.character_name}</span>',
+            member=f'<span class="d-block" id="afat-eve-character-id-{self.character_1002.character_id}">{self.character_1002.character_name}</span>',
             container=content,
         )
