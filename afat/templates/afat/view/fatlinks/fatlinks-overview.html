@@ -17,7 +17,7 @@
     {% url "afat:fatlinks_overview" year_next as url_next_year %}
     {% url "afat:fatlinks_overview" year_current as url_current_year %}
 
-    {% include "afat/partials/year_navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
+    {% include "afat/partials/common/navigation/year-navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
 
     <div class="card card-default">
         <div class="card-body">
@@ -38,7 +38,7 @@
                 <tfoot>
                     <tr>
                         <td colspan="{% if perms.afat.manage_afat %}6{% else %}5{% endif %}">
-                            {% include "afat/partials/fatlinks/fatlink_list_legend.html" %}
+                            {% include "afat/partials/fatlinks/fatlink-list-legend.html" %}
                         </td>
                     </tr>
                 </tfoot>

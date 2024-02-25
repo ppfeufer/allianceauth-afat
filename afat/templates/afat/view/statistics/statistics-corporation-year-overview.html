@@ -17,7 +17,8 @@
     {% url "afat:statistics_corporation" corpid year_prev as url_previous_year %}
     {% url "afat:statistics_corporation" corpid year_next as url_next_year %}
     {% url "afat:statistics_corporation" corpid year_current as url_current_year %}
-    {% include "afat/partials/year_navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
+
+    {% include "afat/partials/common/navigation/year-navigation.html" with url_previous_year=url_previous_year url_next_year=url_next_year url_current_year=url_current_year %}
 
     <div class="card card-default">
         <div class="card-body">

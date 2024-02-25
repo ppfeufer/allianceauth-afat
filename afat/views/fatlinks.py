@@ -81,7 +81,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
 
     return render(
         request=request,
-        template_name="afat/view/fatlinks/fatlinks_overview.html",
+        template_name="afat/view/fatlinks/fatlinks-overview.html",
         context=context,
     )
 
@@ -148,7 +148,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
 
     return render(
         request=request,
-        template_name="afat/view/fatlinks/fatlinks_add_fatlink.html",
+        template_name="afat/view/fatlinks/fatlinks-add-fatlink.html",
         context=context,
     )
 
@@ -887,7 +887,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
 
     return render(
         request=request,
-        template_name="afat/view/fatlinks/fatlinks_details_fatlink.html",
+        template_name="afat/view/fatlinks/fatlinks-details-fatlink.html",
         context=context,
     )
 

@@ -28,9 +28,9 @@
         {% url "afat:statistics_alliance" ally.alliance_id year month_next as url_next_month %}
         {% url "afat:statistics_alliance" ally.alliance_id year_current month_current as url_current_month %}
     {% endif %}
-    {% include "afat/partials/month_navigation.html" with url_previous_month=url_previous_month url_next_month=url_next_month url_current_month=url_current_month %}
 
-    {% include "afat/partials/statistics/alliance/tabs_navigation.html" %}
+    {% include "afat/partials/common/navigation/month-navigation.html" with url_previous_month=url_previous_month url_next_month=url_next_month url_current_month=url_current_month %}
+    {% include "afat/partials/statistics/alliance/tabs-navigation.html" %}
 
     <div class="tab-content">
         {% include "afat/partials/statistics/alliance/tabs/graphs.html" %}

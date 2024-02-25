@@ -124,7 +124,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_overview.html",
+        template_name="afat/view/statistics/statistics-overview.html",
         context=context,
     )
 
@@ -314,7 +314,7 @@ def character(  # pylint: disable=too-many-locals
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_character.html",
+        template_name="afat/view/statistics/statistics-character.html",
         context=context,
     )
 
@@ -400,7 +400,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
         return render(
             request=request,
-            template_name="afat/view/statistics/statistics_corporation_year_overview.html",
+            template_name="afat/view/statistics/statistics-corporation-year-overview.html",
             context=context,
         )
 
@@ -521,7 +521,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_corporation.html",
+        template_name="afat/view/statistics/statistics-corporation.html",
         context=context,
     )
 
@@ -585,7 +585,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
         return render(
             request=request,
-            template_name="afat/view/statistics/statistics_alliance_year_overview.html",
+            template_name="afat/view/statistics/statistics-alliance-year-overview.html",
             context=context,
         )
 
@@ -761,6 +761,6 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_alliance.html",
+        template_name="afat/view/statistics/statistics-alliance.html",
         context=context,
     )
