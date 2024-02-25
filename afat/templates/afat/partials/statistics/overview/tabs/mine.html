@@ -13,7 +13,7 @@
 
         <ul class="nav nav-pills">
             {% for character in charstats %}
-                {% include "afat/partials/common/navigation/character-tab.html" with forloop=forloop character_id=character.2 character_name=character.0 %}
+                {% include "afat/partials/common/navigation/tab-character.html" with forloop=forloop character_id=character.2 character_name=character.0 %}
             {% endfor %}
         </ul>
 

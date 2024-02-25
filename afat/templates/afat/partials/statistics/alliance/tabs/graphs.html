@@ -3,61 +3,17 @@
 <div id="tab-graphs" class="tab-pane fade show active card card-default border-0" role="tabpanel" aria-labelledby="tab-graphs">
     <div class="card-body">
         <ul class="nav nav-pills">
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link active"
-                    id="fatsbyship"
-                    data-bs-toggle="tab"
-                    href="#tab-fatsbyship"
-                    role="tab"
-                    aria-controls="tab-fatsbyship"
-                    aria-selected="true"
-                >
-                    {% translate "FATs by ship type" %}
-                </a>
-            </li>
+            {% translate "FATs by ship type" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=True tab_id="fatsbyship" tab_title=tab_title %}
 
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="avgfats"
-                    data-bs-toggle="tab"
-                    href="#tab-avgfats"
-                    role="tab"
-                    aria-controls="tab-avgfats"
-                    aria-selected="true"
-                >
-                    {% translate "Corporation performance" %}
-                </a>
-            </li>
+            {% translate "Corporation performance" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="avgfats" tab_title=tab_title %}
 
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="fatsbytime"
-                    data-bs-toggle="tab"
-                    href="#tab-fatsbytime"
-                    role="tab"
-                    aria-controls="tab-fatsbytime"
-                    aria-selected="true"
-                >
-                    {% translate "FATs by time" %}
-                </a>
-            </li>
+            {% translate "FATs by time" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="fatsbytime" tab_title=tab_title %}
 
-            <li class="nav-item" role="presentation">
-                <a
-                    class="nav-link"
-                    id="fatsbyweek"
-                    data-bs-toggle="tab"
-                    href="#tab-fatsbyweek"
-                    role="tab"
-                    aria-controls="tab-fatsbyweek"
-                    aria-selected="true"
-                >
-                    {% translate "FATs by weekday" %}
-                </a>
-            </li>
+            {% translate "FATs by weekday" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="fatsbyweek" tab_title=tab_title %}
         </ul>
 
         <div class="tab-content">

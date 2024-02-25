@@ -3,21 +3,14 @@
 <div id="graphs" class="tab-pane fade in active card card-default">
     <div class="card-body">
         <ul class="nav nav-pills">
-            <li class="active">
-                <a data-toggle="tab" href="#fatsbyship">
-                    {% translate "FATs by ship type" %}
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#fatsbytime">
-                    {% translate "FATs by time" %}
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#fatsbyweek">
-                    {% translate "FATs by weekday" %}
-                </a>
-            </li>
+            {% translate "FATs by ship type" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=True tab_id="fatsbyship" tab_title=tab_title %}
+
+            {% translate "FATs by time" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="fatsbytime" tab_title=tab_title %}
+
+            {% translate "FATs by weekday" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="fatsbyweek" tab_title=tab_title %}
         </ul>
 
         <div class="tab-content">

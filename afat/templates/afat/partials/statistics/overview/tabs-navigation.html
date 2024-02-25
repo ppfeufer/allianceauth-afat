@@ -1,33 +1,11 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs">
-    <li class="nav-item" role="presentation">
-        <a
-            class="nav-link active"
-            id="mine"
-            data-bs-toggle="tab"
-            href="#tab-mine"
-            role="tab"
-            aria-controls="tab-mine"
-            aria-selected="true"
-        >
-            {% translate "My Stats" %}
-        </a>
-    </li>
+    {% translate "My Stats" as tab_title %}
+    {% include "afat/partials/common/navigation/tab.html" with is_active_tab=True tab_id="mine" tab_title=tab_title %}
 
     {% if perms.afat.stats_corporation_own or perms.afat.stats_corporation_other or perms.afat.manage_afat %}
-        <li>
-            <a
-                class="nav-link"
-                id="corps"
-                data-bs-toggle="tab"
-                href="#tab-corps"
-                role="tab"
-                aria-controls="tab-corps"
-                aria-selected="false"
-            >
-                {% translate "Corporations" %}
-            </a>
-        </li>
+        {% translate "Corporations" as tab_title %}
+        {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="corps" tab_title=tab_title %}
     {% endif %}
 </ul>

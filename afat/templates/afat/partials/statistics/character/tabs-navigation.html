@@ -1,10 +1,9 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#graphs">{% translate "Graphs" %}</a></li>
-    <li>
-        <a data-toggle="tab" href="#rawdata">
-            {% translate "Raw data" %}
-        </a>
-    </li>
+    {% translate "Graphs" as tab_title %}
+    {% include "afat/partials/common/navigation/tab.html" with is_active_tab=True tab_id="graphs" tab_title=tab_title %}
+
+    {% translate "Raw data" as tab_title %}
+    {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="rawdata" tab_title=tab_title %}
 </ul>

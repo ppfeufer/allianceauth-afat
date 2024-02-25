@@ -1,31 +1,9 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs">
-    <li class="nav-item" role="presentation">
-        <a
-            class="nav-link active"
-            id="graphs"
-            data-bs-toggle="tab"
-            href="#tab-graphs"
-            role="tab"
-            aria-controls="tab-graphs"
-            aria-selected="true"
-        >
-            {% translate "Graphs" %}
-        </a>
-    </li>
+    {% translate "Graphs" as tab_title %}
+    {% include "afat/partials/common/navigation/tab.html" with is_active_tab=True tab_id="graphs" tab_title=tab_title %}
 
-    <li class="nav-item" role="presentation">
-        <a
-            class="nav-link"
-            id="members"
-            data-bs-toggle="tab"
-            href="#tab-members"
-            role="tab"
-            aria-controls="tab-members"
-            aria-selected="true"
-        >
-            {% translate "Corporations" %}
-        </a>
-    </li>
+    {% translate "Corporations" as tab_title %}
+    {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="members" tab_title=tab_title %}
 </ul>
