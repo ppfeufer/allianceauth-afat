@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Stats graph appearance
+
 ## \[3.0.0-beta.1\] - 2024-02-25
 
 > \[!NOTE\]

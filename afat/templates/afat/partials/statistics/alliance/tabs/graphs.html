@@ -78,12 +78,12 @@
                 <div class="card-body">
                     <h4>{% translate "FATs by time" %}</h4>
 
-                    <canvas id="time-line" width="800" height="200vh"></canvas>
+                    <canvas id="time-line" width="800" height="250vh"></canvas>
 
                     <script>
                         chartInfo.push({
                             element: document.getElementById("time-line"), // Element to render the chart
-                            type: 'bar', // Chart type
+                            type: 'line', // Chart type
                             data: { // Chart data
                                 datasets: [
                                     {
@@ -105,7 +105,7 @@
                 <div class="card-body">
                     <h4>{% translate "FATs by weekday" %}</h4>
 
-                    <canvas id="weekday-line" width="800" height="200vh"></canvas>
+                    <canvas id="weekday-line" width="800" height="250vh"></canvas>
 
                     <script>
                         chartInfo.push({
