@@ -35,6 +35,16 @@ Section Order:
 ### Security
 -->
 
+## \[3.0.0-beta.2\] - 2024-03-04
+
+> \[!NOTE\]
+>
+> **This version needs at least Alliance Auth v4.0.0b2!**
+>
+> Please make sure to update your Alliance Auth instance **before**
+> you install this version, otherwise, an update to Alliance Auth will
+> be pulled in unsupervised.
+
 ### Fixed
 
 - Stats graph appearance
