@@ -4,6 +4,8 @@ Views helper
 
 # Standard Library
 import random
+from datetime import datetime
+from typing import Tuple
 
 # Django
 from django.contrib.auth.models import Permission, User
@@ -307,3 +309,17 @@ def user_has_any_perms(user: User, perm_list, obj=None):
         return True
 
     return any(user.has_perm(perm=perm, obj=obj) for perm in perm_list)
+
+
+def current_month_and_year() -> Tuple[int, int]:
+    """
+    Return the current month and year
+
+    :return: Month and year
+    :rtype: Tuple[(int) Current Month, (int) Current Year]
+    """
+
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+
+    return current_month, current_year

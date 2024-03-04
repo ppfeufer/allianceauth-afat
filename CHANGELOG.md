@@ -38,6 +38,8 @@ Section Order:
 ### Fixed
 
 - Stats graph appearance
+- A bug where the previous or next month number wasn't calculated correctly in the statistics detail view
+- A bug where the next month button in the statistics detail view was not displayed correctly
 
 ## \[3.0.0-beta.1\] - 2024-02-25
 
