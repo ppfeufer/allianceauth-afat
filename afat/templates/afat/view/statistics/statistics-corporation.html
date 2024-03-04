@@ -13,13 +13,13 @@
 {% endblock %}
 
 {% block afat_body %}
-    {% if month == "1" %}
+    {% if month == 1 %}
         {% url "afat:statistics_corporation" corp.corporation_id year_prev 12 as url_previous_month %}
     {% else %}
         {% url "afat:statistics_corporation" corp.corporation_id year month_prev as url_previous_month %}
     {% endif %}
 
-    {% if month == "12" %}
+    {% if month == 12 %}
         {% url "afat:statistics_corporation" corp.corporation_id year_next 1 as url_next_month %}
         {% url "afat:statistics_corporation" corp.corporation_id year_current month_current as url_current_month %}
     {% else %}
