@@ -39,6 +39,7 @@ def overview(request: WSGIRequest) -> HttpResponse:
     characters = (
         EveCharacter.objects.select_related("character_ownership")
         .filter(character_ownership__user=request.user, afat_fats__isnull=False)
+        .order_by("-userprofile", "character_name")
         .distinct()
     )
 
@@ -97,10 +98,16 @@ def ajax_get_recent_fatlinks(request: WSGIRequest) -> JsonResponse:
     :rtype:
     """
 
-    fatlinks = (
+    fatlink_ids = list(
         FatLink.objects.select_related_default()
-        .annotate_fats_count()
         .order_by("-created")[:10]
+        .values_list("id", flat=True)
+    )
+
+    fatlinks = (
+        FatLink.objects.filter(id__in=fatlink_ids)
+        .order_by("-created")
+        .annotate_fats_count()  # pylint: disable=duplicate-code
     )
 
     fatlink_rows = [

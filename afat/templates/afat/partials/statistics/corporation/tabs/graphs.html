@@ -1,57 +1,55 @@
 {% load i18n %}
 
-<div id="graphs" class="tab-pane fade in active panel panel-default">
-    <div class="panel-body">
+<div id="tab-graphs" class="tab-pane fade show active card card-default border-0" role="tabpanel" aria-labelledby="tab-graphs">
+    <div class="card-body">
         <ul class="nav nav-pills">
-            <li class="active">
-                <a data-toggle="tab" href="#fatsbyship">
-                    {% translate "FATs by ship type" %}
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#fatsbytime">
-                    {% translate "FATs by time" %}
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#fatsbyweek">
-                    {% translate "FATs by weekday" %}
-                </a>
-            </li>
+            {% translate "FATs by ship type" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=True tab_id="fatsbyship" tab_title=tab_title %}
+
+            {% translate "FATs by time" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="fatsbytime" tab_title=tab_title %}
+
+            {% translate "FATs by weekday" as tab_title %}
+            {% include "afat/partials/common/navigation/tab.html" with is_active_tab=False tab_id="fatsbyweek" tab_title=tab_title %}
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane fade in active panel-default" id="fatsbyship">
-                <div class="panel-body">
+            <div id="tab-fatsbyship" class="tab-pane fade show active card card-default border-0" role="tabpanel" aria-labelledby="tab-fatsbyship">
+                <div class="card-body">
                     <h4>{% translate "FATs by ship type" %}</h4>
 
-                    <canvas id="ship-bar-stacked" width="800" height="500"></canvas>
+                    <canvas id="ship-bar-stacked" width="800" height="250vh"></canvas>
 
                     <script>
-                        let corpShipTypeBarChart = new Chart(document.getElementById('ship-bar-stacked'), {
-                            type: "bar",
-                            data: {
-                                datasets: [{% for set in data_stacked.1 %}
-                                    {
-                                        label: '{{ set.0|escapejs }}',
-                                        backgroundColor: '{{ set.1|safe }}',
-                                        data: {{ set.2 }}
-                                    },
-                                {% endfor %}],
+                        const chartInfo = [];
+
+                        chartInfo.push({
+                            element: document.getElementById("ship-bar-stacked"), // Element to render the chart
+                            type: "bar", // Chart type
+                            data: { // Chart data
+                                datasets: [
+                                    {% for set in data_stacked.1 %}
+                                        {
+                                            label: '{{ set.0|escapejs }}',
+                                            data: {{ set.2 }}
+                                        },
+                                    {% endfor %}
+                                ],
                                 labels: {{ data_stacked.0|safe }}
                             },
-                            options: {
-                                responsive: false,
+                            options: { // Chart options
+                                responsive: true,
+                                indexAxis: 'x',
                                 scales: {
-                                    xAxes: [{
+                                    x: {
                                         stacked: true,
                                         ticks: {
                                             autoSkip: false
                                         }
-                                    }],
-                                    yAxes: [{
+                                    },
+                                    y: {
                                         stacked: true
-                                    }]
+                                    }
                                 }
                             }
                         });
@@ -59,52 +57,56 @@
                 </div>
             </div>
 
-            <div id="fatsbytime" class="tab-pane fade in panel-default">
-                <div class="panel-body">
+            <div id="tab-fatsbytime" class="tab-pane fade card card-default border-0" role="tabpanel" aria-labelledby="tab-fatsbytime">
+                <div class="card-body">
                     <h4>{% translate "FATs by time" %}</h4>
 
-                    <canvas id="time-line" width="800" height="500"></canvas>
+                    <canvas id="time-line" width="800" height="250vh"></canvas>
 
                     <script>
-                        let timeLineChart = new Chart(document.getElementById("time-line"), {
-                            type: 'line',
-                            data: {
-                                datasets: [{
-                                    label: '# of FATs',
-                                    backgroundColor: {{ data_time.2|safe }},
-                                    data: {{ data_time.1 }}
-                                }],
+                        chartInfo.push({
+                            element: document.getElementById("time-line"), // Element to render the chart
+                            type: 'line', // Chart type
+                            data: { // Chart data
+                                datasets: [
+                                    {
+                                        label: '{% translate "# of FATs" %}',
+                                        data: {{ data_time.1 }}
+                                    }
+                                ],
                                 labels: {{ data_time.0|safe }}
                             },
-                            options: {
-                                responsive: false
+                            options: { // Chart options
+                                responsive: true
                             }
-                        })
+                        });
                     </script>
                 </div>
             </div>
 
-            <div class="tab-pane fade in panel-default" id="fatsbyweek">
-                <div class="panel-body">
+            <div id="tab-fatsbyweek" class="tab-pane fade card card-default border-0" role="tabpanel" aria-labelledby="tab-fatsbyweek">
+                <div class="card-body">
                     <h4>{% translate "FATs by weekday" %}</h4>
 
-                    <canvas id="weekday-line" width="800" height="500"></canvas>
+                    <canvas id="weekday-line" width="800" height="250vh"></canvas>
 
                     <script>
-                        let weekdayLineChart = new Chart(document.getElementById('weekday-line'), {
-                            type: 'line',
-                            data:{
-                                datasets: [{
-                                    label: '# of FATs',
-                                    backgroundColor: {{ data_weekday.2|safe }},
-                                    data: {{ data_weekday.1 }}
-                                }],
+                        chartInfo.push({
+                            element: document.getElementById("weekday-line"), // Element to render the chart
+                            type: 'bar', // Chart type
+                            data: { // Chart data
+                                datasets: [
+                                    {
+                                        label: '{% translate "# of FATs" %}',
+                                        data: {{ data_weekday.1 }},
+                                    }
+                                ],
                                 labels: {{ data_weekday.0|safe }}
                             },
-                            options: {
-                                responsive: false
+                            options: { // Chart options
+                                responsive: true
                             }
-                        })
+                        });
                     </script>
                 </div>
             </div>

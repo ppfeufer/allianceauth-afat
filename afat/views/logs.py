@@ -42,7 +42,7 @@ def overview(request: WSGIRequest) -> HttpResponse:
 
     return render(
         request=request,
-        template_name="afat/view/logs/logs_overview.html",
+        template_name="afat/view/logs/logs-overview.html",
         context=context,
     )
 

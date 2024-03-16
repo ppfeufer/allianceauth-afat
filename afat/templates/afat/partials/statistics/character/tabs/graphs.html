@@ -1,50 +1,58 @@
 {% load i18n %}
 
-<div id="graphs" class="tab-pane fade in active panel panel-default">
-    <div class="panel-body">
-        <div class="col-md-4">
-            <h4>{% translate "FATs by ship type" %}</h4>
+<div id="tab-graphs" class="tab-pane fade show active card card-default border-0" role="tabpanel" aria-labelledby="tab-graphs">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>{% translate "FATs by ship type" %}</h4>
 
-            <canvas style="width: 400px; max-width: 100%; height: 400px;" id="pie-ship"></canvas>
+                <canvas style="width: 400px; max-width: 100%; height: 400px;" id="pie-ship"></canvas>
 
-            <script>
-                let shipPieChart = new Chart(document.getElementById("pie-ship"), {
-                    type: "pie",
-                    data: {
-                        datasets: [{
-                            data: {{ data_ship_type.1|safe }},
-                            backgroundColor: {{ data_ship_type.2|safe }}
-                        }],
-                        labels: {{ data_ship_type.0|safe }}
-                    },
-                    options: {
-                        responsive: false
-                    }
-                });
-            </script>
-        </div>
+                <script>
+                    const chartInfo = [];
 
-        <div class="col-md-8">
-            <h4>{% translate "FATs by time of day" %}</h4>
+                    chartInfo.push({
+                        element: document.getElementById("pie-ship"), // Element to render the chart
+                        type: "pie", // Chart type
+                        data: { // Chart data
+                            datasets: [
+                                {
+                                    data: {{ data_ship_type.1|safe }},
+                                }
+                            ],
+                            labels: {{ data_ship_type.0|safe }}
+                        },
+                        options: { // Chart options
+                            responsive: true
+                        }
+                    });
+                </script>
+            </div>
 
-            <canvas style="width: 100%; height: 400px;" id="line-time"></canvas>
+            <div class="col-md-8">
+                <h4>{% translate "FATs by time of day" %}</h4>
 
-            <script>
-                let FATLineChart = new Chart(document.getElementById("line-time"), {
-                    type: "line",
-                    data: {
-                        datasets: [{
-                            label: '{% translate "# of FATs" %}',
-                            data: {{ data_time.1|safe }},
-                            backgroundColor: {{ data_time.2|safe }}
-                        }],
-                        labels: {{ data_time.0|safe }}
-                    },
-                    options: {
-                        responsive: false
-                    }
-                });
-            </script>
+                <canvas class="w-100" style="height: 400px;" id="line-time"></canvas>
+
+                <script>
+                    chartInfo.push({
+                        element: document.getElementById("line-time"), // Element to render the chart
+                        type: "line", // Chart type
+                        data: { // Chart data
+                            datasets: [
+                                {
+                                    label: '{% translate "# of FATs" %}',
+                                    data: {{ data_time.1|safe }},
+                                }
+                            ],
+                            labels: {{ data_time.0|safe }}
+                        },
+                        options: { // Chart options
+                            responsive: true
+                        }
+                    });
+                </script>
+            </div>
         </div>
     </div>
 </div>

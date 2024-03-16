@@ -31,6 +31,7 @@ from app_utils.logging import LoggerAddTag
 from afat import __title__
 from afat.helper.views import (
     characters_with_permission,
+    current_month_and_year,
     get_random_rgba_color,
     user_has_any_perms,
 )
@@ -124,18 +125,29 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_overview.html",
+        template_name="afat/view/statistics/statistics-overview.html",
         context=context,
     )
 
 
 def _calculate_year_stats(request, year) -> list:
     """
-    Calculate and return year statistics.
+    Calculate statistics for the year
+
+    :param request:
+    :type request:
+    :param year:
+    :type year:
+    :return:
+    :rtype:
     """
 
     months = []
-    characters = EveCharacter.objects.filter(character_ownership__user=request.user)
+
+    # Get all characters for the user and order by userprofile and character name
+    characters = EveCharacter.objects.filter(
+        character_ownership__user=request.user
+    ).order_by("-userprofile", "character_name")
 
     for char in characters:
         character_fats_in_year = (
@@ -162,7 +174,8 @@ def _calculate_year_stats(request, year) -> list:
             )
 
     # Return sorted by character name
-    return sorted(months, key=lambda x: x[0])
+    # return sorted(months, key=lambda x: x[0])
+    return months
 
 
 @login_required()
@@ -185,6 +198,7 @@ def character(  # pylint: disable=too-many-locals
     :rtype:
     """
 
+    current_month, current_year = current_month_and_year()
     eve_character = EveCharacter.objects.get(character_id=charid)
     valid = [
         char.character for char in CharacterOwnership.objects.filter(user=request.user)
@@ -192,7 +206,7 @@ def character(  # pylint: disable=too-many-locals
 
     can_view_character = True
 
-    # Check if the user can view other corporation's statistics or manage AFAT
+    # Check if the user can view another corporation's statistics or manage AFAT
     if eve_character not in valid and not user_has_any_perms(
         user=request.user,
         perm_list=[
@@ -280,11 +294,15 @@ def character(  # pylint: disable=too-many-locals
     context = {
         "character": eve_character,
         "month": month,
-        "month_current": datetime.now().month,
+        "month_current": current_month,
         "month_prev": int(month) - 1,
         "month_next": int(month) + 1,
+        "month_with_year": f"{year}{month:02d}",
+        "month_current_with_year": f"{current_year}{current_month:02d}",
+        "month_next_with_year": f"{year}{int(month) + 1:02d}",
+        "month_prev_with_year": f"{year}{int(month) - 1:02d}",
         "year": year,
-        "year_current": datetime.now().year,
+        "year_current": current_year,
         "year_prev": int(year) - 1,
         "year_next": int(year) + 1,
         "data_ship_type": data_ship_type,
@@ -302,7 +320,7 @@ def character(  # pylint: disable=too-many-locals
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_character.html",
+        template_name="afat/view/statistics/statistics-character.html",
         context=context,
     )
 
@@ -335,6 +353,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     if not year:
         year = datetime.now().year
+
+    current_month, current_year = current_month_and_year()
 
     # Check character has permission to view other corp stats
     if int(request.user.profile.main_character.corporation_id) != int(corpid):
@@ -380,7 +400,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
             "months": months,
             "corpid": corpid,
             "year": year,
-            "year_current": datetime.now().year,
+            "year_current": current_year,
             "year_prev": int(year) - 1,
             "year_next": int(year) + 1,
             "type": 0,
@@ -388,7 +408,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
         return render(
             request=request,
-            template_name="afat/view/statistics/statistics_corporation_year_overview.html",
+            template_name="afat/view/statistics/statistics-corporation-year-overview.html",
             context=context,
         )
 
@@ -489,6 +509,10 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         "month_current": datetime.now().month,
         "month_prev": int(month) - 1,
         "month_next": int(month) + 1,
+        "month_with_year": f"{year}{month:02d}",
+        "month_current_with_year": f"{current_year}{current_month:02d}",
+        "month_next_with_year": f"{year}{int(month) + 1:02d}",
+        "month_prev_with_year": f"{year}{int(month) - 1:02d}",
         "year": year,
         "year_current": datetime.now().year,
         "year_prev": int(year) - 1,
@@ -509,7 +533,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_corporation.html",
+        template_name="afat/view/statistics/statistics-corporation.html",
         context=context,
     )
 
@@ -547,6 +571,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
         ally = None
         alliance_name = "No Alliance"
 
+    current_month, current_year = current_month_and_year()
+
     if not month:
         months = []
 
@@ -565,7 +591,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
             "months": months,
             "allianceid": allianceid,
             "year": year,
-            "year_current": datetime.now().year,
+            "year_current": current_year,
             "year_prev": int(year) - 1,
             "year_next": int(year) + 1,
             "type": 1,
@@ -573,7 +599,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
         return render(
             request=request,
-            template_name="afat/view/statistics/statistics_alliance_year_overview.html",
+            template_name="afat/view/statistics/statistics-alliance-year-overview.html",
             context=context,
         )
 
@@ -724,11 +750,15 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
         "alliance": alliance_name,
         "ally": ally,
         "month": month,
-        "month_current": datetime.now().month,
+        "month_current": current_month,
         "month_prev": int(month) - 1,
         "month_next": int(month) + 1,
+        "month_with_year": f"{year}{month:02d}",
+        "month_current_with_year": f"{current_year}{current_month:02d}",
+        "month_next_with_year": f"{year}{int(month) + 1:02d}",
+        "month_prev_with_year": f"{year}{int(month) - 1:02d}",
         "year": year,
-        "year_current": datetime.now().year,
+        "year_current": current_year,
         "year_prev": int(year) - 1,
         "year_next": int(year) + 1,
         "data_stacked": data_stacked,
@@ -749,6 +779,6 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
     return render(
         request=request,
-        template_name="afat/view/statistics/statistics_alliance.html",
+        template_name="afat/view/statistics/statistics-alliance.html",
         context=context,
     )

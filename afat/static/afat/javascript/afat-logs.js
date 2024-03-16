@@ -1,9 +1,7 @@
-/* global afatSettings, moment */
+/* global afatSettings, moment, AFAT_DATETIME_FORMAT */
 
 $(document).ready(() => {
     'use strict';
-
-    const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
 
     /**
      * DataTable :: FAT link list
@@ -19,7 +17,7 @@ $(document).ready(() => {
                 data: 'log_time',
                 render: {
                     display: (data) => {
-                        return moment(data.time).utc().format(DATETIME_FORMAT);
+                        return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
                     },
                     _: 'timestamp'
                 }
@@ -50,7 +48,8 @@ $(document).ready(() => {
                 }
             ],
             autoSize: false,
-            bootstrap: true
+            bootstrap: true,
+            bootstrap_version: 5
         },
 
         stateSave: true,

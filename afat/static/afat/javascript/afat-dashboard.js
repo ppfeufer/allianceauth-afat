@@ -1,15 +1,13 @@
-/* global afatSettings, characters, moment, manageModal */
+/* global afatSettings, characters, moment, manageModal, AFAT_DATETIME_FORMAT */
 
 $(document).ready(() => {
     'use strict';
-
-    const DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm';
 
     /**
      * DataTable :: Recent FATs per character
      */
     if (characters.length > 0) {
-        const noFatsWarning = '<div class="alert alert-warning" role="alert">' +
+        const noFatsWarning = '<div class="aa-callout aa-callout-warning" role="alert">' +
             '<p>' + afatSettings.translation.dataTable.noFatsWarning + ' ###CHARACTER_NAME###</p>' +
             '</div>';
 
@@ -39,7 +37,7 @@ $(document).ready(() => {
                              */
                             display: (data) => {
                                 return moment(data.time).utc().format(
-                                    DATETIME_FORMAT
+                                    AFAT_DATETIME_FORMAT
                                 );
                             },
                             _: 'timestamp'
@@ -63,7 +61,7 @@ $(document).ready(() => {
     /**
      * DataTable :: Recent FAT links
      */
-    const noFatlinksWarning = '<div class="alert alert-warning" role="alert">' +
+    const noFatlinksWarning = '<div class="aa-callout aa-callout-warning" role="alert">' +
         '<p>' + afatSettings.translation.dataTable.noFatlinksWarning + '</p>' +
         '</div>';
 
@@ -87,7 +85,7 @@ $(document).ready(() => {
                      * @returns {*}
                      */
                     display: (data) => {
-                        return moment(data.time).utc().format(DATETIME_FORMAT);
+                        return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
                     },
                     _: 'timestamp'
                 }
@@ -113,7 +111,7 @@ $(document).ready(() => {
             {
                 targets: [4],
                 createdCell: (td) => {
-                    $(td).addClass('text-right');
+                    $(td).addClass('text-end');
                 }
             }
         ],

@@ -9,17 +9,12 @@
 {% endblock %}
 
 {% block afat_header %}
-    <br>
-    {% include "afat/partials/menu.html" %}
-
-    <h2>
-        {% translate "Recent activity" as site_title %}
-        {{ site_title|title }}
-    </h2>
+    {% translate "Recent activity" as site_title %}
+    {% include "framework/header/page-header.html" with title=site_title %}
 {% endblock %}
 
 {% block afat_body %}
-    {% include "afat/partials/dashboard/tabs_navigation.html" %}
+    {% include "afat/partials/dashboard/tabs-navigation.html" %}
 
     <div class="tab-content">
         {% include "afat/partials/dashboard/tabs/fats.html" %}
@@ -34,12 +29,12 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "bundles/datatables-css.html" %}
+    {% include "bundles/datatables-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include "bundles/datatables-js.html" %}
+    {% include "bundles/datatables-js-bs5.html" %}
     {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
 
@@ -67,7 +62,7 @@
                     element: '#cancelEsiFleetModal'
                 }
             }
-        }
+        };
     </script>
 
     {% include "afat/bundles/afat-dashboard-js.html" %}

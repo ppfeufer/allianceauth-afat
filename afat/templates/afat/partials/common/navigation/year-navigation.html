@@ -1,0 +1,12 @@
+{% load i18n %}
+
+<div class="afat-select-time-period afat-select-year my-3">
+    <a class="btn btn-primary btn-sm" href="{{ url_previous_year }}" title='{% translate "Previous year" %}'><i class="fa-solid fa-backward"></i></a>
+
+    <span class="afat-label-statistics mx-3">{{ year }}</span>
+
+    {% if year_next <= year_current %}
+        <a class="btn btn-primary btn-sm" href="{{ url_next_year }}" title='{% translate "Next year" %}'><i class="fa-solid fa-forward"></i></a>
+        <a class="btn btn-primary btn-sm" href="{{ url_current_year }}" title='{% translate "Current year" %}'><i class="fa-solid fa-fast-forward"></i></a>
+    {% endif %}
+</div>

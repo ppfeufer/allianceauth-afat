@@ -35,10 +35,67 @@ Section Order:
 ### Security
 -->
 
+## \[3.0.0-beta.3\] - 2024-03-05
+
+> \[!NOTE\]
+>
+> **This version needs at least Alliance Auth v4.0.0b2!**
+>
+> Please make sure to update your Alliance Auth instance **before**
+> you install this version, otherwise, an update to Alliance Auth will
+> be pulled in unsupervised.
+
+### Fixed
+
+- A potential performance issue with an ajax call in the dashboard view (thx to @pvyParts)
+
+## \[3.0.0-beta.2\] - 2024-03-04
+
+> \[!NOTE\]
+>
+> **This version needs at least Alliance Auth v4.0.0b2!**
+>
+> Please make sure to update your Alliance Auth instance **before**
+> you install this version, otherwise, an update to Alliance Auth will
+> be pulled in unsupervised.
+
+### Fixed
+
+- Stats graph appearance
+- A bug where the previous or next month number wasn't calculated correctly in the statistics detail view
+- A bug where the next month button in the statistics detail view was not displayed correctly
+
+## \[3.0.0-beta.1\] - 2024-02-25
+
+> \[!NOTE\]
+>
+> **This version needs at least Alliance Auth v4.0.0b2!**
+>
+> Please make sure to update your Alliance Auth instance **before**
+> you install this version, otherwise, an update to Alliance Auth will
+> be pulled in unsupervised.
+
+### Added
+
+- Compatibility to Alliance Auth v4
+  - Bootstrap 5
+  - Django 4.2
+- Show the main character first on the dashboard page
+
 ### Fixed
 
 - Some issues with the translations in the Python code
 - Issues with translations in the Django admin backend
+
+### Changed
+
+- JS modernized
+- CSS modernizes
+- Templates changed to Bootstrap 5
+
+### Removed
+
+- Support for Alliance Auth 3
 
 ## \[2.13.0\] - 2023-09-26
 

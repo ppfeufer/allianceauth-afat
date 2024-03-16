@@ -1,10 +1,19 @@
-{% extends "allianceauth/base.html" %}
+{% extends "allianceauth/base-bs5.html" %}
 
 {% load i18n %}
 
 {% block page_title %}
     {% translate "Fleet activity tracking" as page_title %}
     {{ page_title|title }}
+{% endblock %}
+
+{% block header_nav_brand %}
+    {% translate "Fleet activity tracking" as page_title %}
+    {{ page_title|title }}
+{% endblock %}
+
+{% block header_nav_collapse_left %}
+    {% include "afat/partials/common/navigation/top-menu.html" %}
 {% endblock %}
 
 {% block content %}
@@ -17,8 +26,16 @@
             {% block afat_body %}{% endblock %}
         </div>
 
-        <div class="allianceauth-afat-footer">
+        <div class="allianceauth-afat-footer mt-3 pt-3 border-top border-light">
             {% include "afat/partials/footer/app-translation-footer.html" %}
         </div>
     </div>
+
 {% endblock %}
+
+{% block extra_script %}
+    (() => {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+    })();
+{% endblock extra_script %}

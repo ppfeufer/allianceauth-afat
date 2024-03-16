@@ -1,4 +1,11 @@
 /**
+ * Datetime format for AFAT
+ *
+ * @type {string}
+ */
+const AFAT_DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm'; // eslint-disable-line no-unused-vars
+
+/**
  * Convert a string to a slug
  * @param {string} text
  * @returns {string}

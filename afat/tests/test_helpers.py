@@ -212,14 +212,15 @@ class TestHelpers(TestCase):
         fleet_time_1 = fatlink_1.created
         fleet_time_timestamp_1 = fleet_time_1.timestamp()
         creator_main_character_1 = get_main_character_from_user(user=fatlink_1.creator)
+
+        self.maxDiff = None
+
         self.assertDictEqual(
             d1=result_1,
             d2={
                 "pk": fatlink_1.pk,
                 "fleet_name": (
-                    'April Fleet 1<span class="label label-default '
-                    "afat-label afat-label-via-esi "
-                    'afat-label-active-esi-fleet">via ESI</span>'
+                    'April Fleet 1<span class="badge bg-success afat-label ms-2">ESI</span>'
                 ),
                 "creator_name": creator_main_character_1,
                 "fleet_type": "",
@@ -236,22 +237,20 @@ class TestHelpers(TestCase):
                     '<a class="btn btn-afat-action btn-primary btn-sm" '
                     'style="margin-left: 0.25rem;" title="Clicking here will '
                     "stop the automatic tracking through ESI for this fleet "
-                    'and close the associated FAT link." data-toggle="modal" '
-                    'data-target="#cancelEsiFleetModal" '
+                    'and close the associated FAT link." data-bs-toggle="modal" '
+                    'data-bs-target="#cancelEsiFleetModal" '
                     f'data-url="{close_esi_tracking_url}" '
                     'data-body-text="<p>Are you sure you want to close ESI '
                     'fleet with ID 3726458287 from Bruce Wayne?</p>" '
-                    'data-confirm-text="Stop tracking"><i class="fas '
-                    'fa-times"></i></a><a class="btn btn-afat-action btn-info '
-                    f'btn-sm" href="{edit_url_1}"><span class="fas '
-                    'fa-eye"></span></a><a class="btn btn-afat-action '
-                    'btn-danger btn-sm" data-toggle="modal" '
-                    'data-target="#deleteFatLinkModal" '
+                    'data-confirm-text="Stop tracking"><i class="fa-solid '
+                    'fa-times"></i></a><a class="btn btn-info btn-sm m-1" '
+                    f'href="{edit_url_1}"><span class="fa-solid '
+                    'fa-eye"></span></a><a class="btn btn-danger btn-sm" '
+                    'data-bs-toggle="modal" data-bs-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_1}" '
                     'data-confirm-text="Delete"data-body-text="<p>Are you '
                     "sure you want to delete FAT link April Fleet "
-                    '1?</p>"><span class="glyphicon '
-                    'glyphicon-trash"></span></a>'
+                    '1?</p>"><i class="fa-solid fa-trash-can fa-fw"></i></a>'
                 ),
                 "via_esi": "Yes",
             },
@@ -260,6 +259,7 @@ class TestHelpers(TestCase):
         fleet_time_2 = fatlink_2.created
         fleet_time_timestamp_2 = fleet_time_2.timestamp()
         creator_main_character_2 = get_main_character_from_user(user=fatlink_2.creator)
+
         self.assertDictEqual(
             d1=result_2,
             d2={
@@ -277,16 +277,14 @@ class TestHelpers(TestCase):
                 "esi_fleet_id": None,
                 "is_registered_on_esi": False,
                 "actions": (
-                    '<a class="btn btn-afat-action btn-info btn-sm" '
-                    f'href="{edit_url_2}"><span class="fas '
-                    'fa-eye"></span></a><a class="btn btn-afat-action '
-                    'btn-danger btn-sm" data-toggle="modal" '
-                    'data-target="#deleteFatLinkModal" '
+                    '<a class="btn btn-info btn-sm m-1" '
+                    f'href="{edit_url_2}"><span class="fa-solid '
+                    'fa-eye"></span></a><a class="btn btn-danger btn-sm" '
+                    'data-bs-toggle="modal" data-bs-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_2}" '
                     'data-confirm-text="Delete"data-body-text="<p>Are you '
                     "sure you want to delete FAT link April Fleet "
-                    '2?</p>"><span class="glyphicon '
-                    'glyphicon-trash"></span></a>'
+                    '2?</p>"><i class="fa-solid fa-trash-can fa-fw"></i></a>'
                 ),
                 "via_esi": "No",
             },
@@ -318,10 +316,7 @@ class TestHelpers(TestCase):
         # when
         result = convert_fats_to_dict(request=request, fat=fat)
 
-        esi_marker = (
-            '<span class="label label-default afat-label afat-label-via-esi '
-            'afat-label-active-esi-fleet">via ESI</span>'
-        )
+        esi_marker = '<span class="badge bg-success afat-label ms-2">ESI</span>'
         fleet_time = fat.fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
 
@@ -347,12 +342,12 @@ class TestHelpers(TestCase):
                 "via_esi": "Yes",
                 "actions": (
                     '<a class="btn btn-danger btn-sm" '
-                    'data-toggle="modal" '
-                    'data-target="#deleteFatModal" '
+                    'data-bs-toggle="modal" '
+                    'data-bs-target="#deleteFatModal" '
                     f'data-url="{button_delete_fat}" '
                     f'data-confirm-text="{button_delete_text}"'
                     f'data-body-text="{modal_body_text}">'
-                    '<span class="glyphicon glyphicon-trash"></span>'
+                    '<i class="fa-solid fa-eye"></i>'
                     "</a>"
                 ),
             },
