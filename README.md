@@ -95,6 +95,16 @@ information, see below.
 
 ## Installation<a name="installation"></a>
 
+> \[!NOTE\]
+>
+> **Alliance Auth AFAT >= 3.0.0 needs at least Alliance Auth v4.0.0!**
+>
+> Please make sure to update your Alliance Auth instance _before_ you install this
+> module or update to the latest version, otherwise an update to Alliance Auth will
+> be pulled in unsupervised.
+>
+> The last version compatible with Alliance Auth v3 is `2.13.0`.
+
 ### Important<a name="important"></a>
 
 This app is a plugin for Alliance Auth. If you don't have Alliance Auth running already,
