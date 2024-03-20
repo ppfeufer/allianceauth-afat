@@ -25,6 +25,7 @@ translationfiles:
 		-l it_IT \
 		-l ja \
 		-l ko_KR \
+		-l pl_PL \
 		-l ru \
 		-l uk \
 		-l zh_Hans \
