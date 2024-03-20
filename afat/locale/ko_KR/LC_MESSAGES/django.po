@@ -3,21 +3,23 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Peter Pfeufer <info@ppfeufer.de>, 2023, 2024.
 # Author50CO <tkddlschry@gmail.com>, 2023.
+# Mind of the Raven <okanieva@gmail.com>, 2024.
+# Hue Radient <seataoji@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-01-07 20:04+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ko/>\n"
+"PO-Revision-Date: 2024-03-20 05:11+0000\n"
+"Last-Translator: Hue Radient <seataoji@gmail.com>\n"
+"Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ko/>\n"
 "Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.3.1\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -37,7 +39,7 @@ msgstr "활성화"
 
 #: afat/admin.py:184
 msgid "Activate selected fleet types"
-msgstr ""
+msgstr "선택된 플릿유형 활성화"
 
 #: afat/admin.py:213
 #, python-brace-format
@@ -90,7 +92,7 @@ msgstr "함대 이름"
 
 #: afat/forms.py:45 afat/forms.py:87
 msgid "Enter fleet name"
-msgstr ""
+msgstr "함대 이름 입력"
 
 #: afat/forms.py:49 afat/forms.py:91
 msgid "Fleet type (optional)"
@@ -98,7 +100,7 @@ msgstr ""
 
 #: afat/forms.py:62
 msgid "Character Name"
-msgstr ""
+msgstr "캐릭터 이름"
 
 #: afat/forms.py:67
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
@@ -118,7 +120,7 @@ msgstr ""
 
 #: afat/forms.py:100
 msgid "Expiry time in minutes"
-msgstr ""
+msgstr "만료 시간"
 
 #: afat/helper/time.py:115
 msgid ""
@@ -140,7 +142,7 @@ msgstr ""
 msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
-msgstr ""
+msgstr "이곳을 클릭하면 ESI를 통한 플릿 추적이 중단되고 FAT 링크가 만료됩니다."
 
 #: afat/helper/views.py:93
 #, python-brace-format
@@ -155,7 +157,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:40
 msgid "Stop tracking"
-msgstr ""
+msgstr "함대 종료"
 
 #: afat/helper/views.py:123 afat/helper/views.py:189
 msgid "Delete"
