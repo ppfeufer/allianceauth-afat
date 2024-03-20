@@ -19,6 +19,7 @@ help:
 translationfiles:
 	#cd $(package); \
 	django-admin makemessages \
+		-l cs \
 		-l de \
 		-l es \
 		-l fr_FR \
