@@ -26,6 +26,7 @@ translationfiles:
 		-l it_IT \
 		-l ja \
 		-l ko_KR \
+		-l nl \
 		-l pl_PL \
 		-l ru \
 		-l sk \
