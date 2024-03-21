@@ -2,25 +2,26 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024.
+# erka Ekanon <M6musicT@hotmail.fr>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-02-06 07:10+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/fr/>\n"
+"PO-Revision-Date: 2024-03-21 17:11+0000\n"
+"Last-Translator: erka Ekanon <M6musicT@hotmail.fr>\n"
+"Language-Team: French <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.3.1\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
-msgstr ""
+msgstr "Suivi d'activité des flottes"
 
 #: afat/admin.py:156 afat/models.py:109
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
@@ -28,15 +29,15 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:28
 msgid "Fleet type"
-msgstr ""
+msgstr "Type de flotte"
 
 #: afat/admin.py:169
 msgid "Is enabled"
-msgstr ""
+msgstr "Est activé"
 
 #: afat/admin.py:184
 msgid "Activate selected fleet types"
-msgstr ""
+msgstr "Activer les types de flotte sélectionnés"
 
 #: afat/admin.py:213
 #, python-brace-format
@@ -49,31 +50,31 @@ msgstr[1] ""
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{notifications_count} type de flotte activé"
+msgstr[1] "{notifications_count} types de flottes activé"
 
 #: afat/admin.py:229
 msgid "Deactivate selected fleet types"
-msgstr ""
+msgstr "Désactiver les types de flotte sélectionnés"
 
 #: afat/admin.py:258
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Échec de la désactivation de {failed} type de flotte"
+msgstr[1] "Échec de la désactivation de {failed} types de flotte"
 
 #: afat/admin.py:268
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{notifications_count} type de flotte désactivé"
+msgstr[1] "{notifications_count} types de flotte désactivés"
 
 #: afat/apps.py:20
 #, python-brace-format
 msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
-msgstr ""
+msgstr "AFAT - Un autre suivi d'activité de flotte v{__version__}"
 
 #: afat/forms.py:25
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -87,7 +88,7 @@ msgstr "Ce champ est obligatoire"
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
 msgid "Fleet name"
-msgstr ""
+msgstr "Nom de la flotte"
 
 #: afat/forms.py:45 afat/forms.py:87
 msgid "Enter fleet name"
