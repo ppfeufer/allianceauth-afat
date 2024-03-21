@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-02-06 07:10+0000\n"
+"PO-Revision-Date: 2024-03-21 17:11+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.3.1\n"
+"X-Generator: Weblate 5.4.2\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -357,7 +357,7 @@ msgstr "舰队活动历史"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: afat/templates/afat/modals/general.html:25
 msgid "Cancel"

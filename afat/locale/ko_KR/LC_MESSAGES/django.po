@@ -5,13 +5,14 @@
 # Author50CO <tkddlschry@gmail.com>, 2023.
 # Mind of the Raven <okanieva@gmail.com>, 2024.
 # Hue Radient <seataoji@gmail.com>, 2024.
+# Rodpold Shard <rodpold@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-03-20 05:11+0000\n"
-"Last-Translator: Hue Radient <seataoji@gmail.com>\n"
+"PO-Revision-Date: 2024-03-21 17:11+0000\n"
+"Last-Translator: Mind of the Raven <okanieva@gmail.com>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/ko/>\n"
 "Language: ko_KR\n"
@@ -45,29 +46,29 @@ msgstr "선택된 플릿유형 활성화"
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
-msgstr[0] ""
+msgstr[0] "{failed} 함대 종류를 활성화 할 수 없습니다"
 
 #: afat/admin.py:223
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
-msgstr[0] ""
+msgstr[0] "{notifications_count} 개의 함대 종류가 활성화 되었습니다"
 
 #: afat/admin.py:229
 msgid "Deactivate selected fleet types"
-msgstr ""
+msgstr "선택된 플릿을 필터에서 제외"
 
 #: afat/admin.py:258
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
-msgstr[0] ""
+msgstr[0] "{failed} 개의 함대 종류 비활성화에 실패 했습니다"
 
 #: afat/admin.py:268
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
-msgstr[0] ""
+msgstr[0] "{notifications_count} 개의 함대 종류 비활성화됨"
 
 #: afat/apps.py:20
 #, python-brace-format
@@ -85,8 +86,6 @@ msgstr "필수 항목입니다"
 #: afat/templates/afat/partials/fatlinks/details/fatlink-name-form.html:11
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
-#, fuzzy
-#| msgid "Fleet Name"
 msgid "Fleet name"
 msgstr "함대 이름"
 
@@ -360,11 +359,11 @@ msgstr ""
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 #: afat/templates/afat/modals/general.html:25
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: afat/templates/afat/modals/general.html:26
 msgid "Confirm"
@@ -456,7 +455,7 @@ msgstr ""
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:40
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
 msgid "Ship"
-msgstr ""
+msgstr "함선"
 
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:62
 msgid "No recent FAT activity registered for any of your characters."
