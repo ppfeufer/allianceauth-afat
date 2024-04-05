@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-20 16:49+0100\n"
-"PO-Revision-Date: 2024-03-28 05:39+0000\n"
+"PO-Revision-Date: 2024-04-05 06:53+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Polish <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/pl/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.4.2\n"
+"X-Generator: Weblate 5.4.3\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -29,11 +29,11 @@ msgstr "Śledzenie aktywności floty"
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:28
 msgid "Fleet type"
-msgstr ""
+msgstr "Typ floty"
 
 #: afat/admin.py:169
 msgid "Is enabled"
-msgstr ""
+msgstr "Zaznaczony"
 
 #: afat/admin.py:184
 msgid "Activate selected fleet types"
@@ -79,7 +79,7 @@ msgstr ""
 #: afat/forms.py:25
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
-msgstr ""
+msgstr "To pole jest wymagane"
 
 #: afat/forms.py:43 afat/forms.py:85 afat/forms.py:112
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:12
@@ -105,14 +105,14 @@ msgstr ""
 #: afat/forms.py:67
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
-msgstr ""
+msgstr "System Solarny"
 
 #: afat/forms.py:72
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:38
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:56
 msgid "Ship type"
-msgstr ""
+msgstr "Typ statku"
 
 #: afat/forms.py:97
 msgid "FAT link expiry time in minutes"
@@ -161,7 +161,7 @@ msgstr ""
 
 #: afat/helper/views.py:123 afat/helper/views.py:189
 msgid "Delete"
-msgstr ""
+msgstr "Usuń"
 
 #: afat/helper/views.py:125
 #, python-brace-format
@@ -218,7 +218,7 @@ msgstr ""
 
 #: afat/models.py:110
 msgid "Fleet types"
-msgstr ""
+msgstr "Typy floty"
 
 #: afat/models.py:134
 msgid ""
@@ -429,7 +429,7 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:30
 msgid "Eve time"
-msgstr ""
+msgstr "Czas Gry"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:16
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:21
@@ -689,14 +689,16 @@ msgid ""
 "Do you want to help translate this app into your language or improve the "
 "existing translation?"
 msgstr ""
+"Chciałbyś pomóc w tłumaczeniu tej apki na Twój język bądź poprawić aktualne "
+"tłumaczenia?"
 
 #: afat/templates/afat/partials/footer/app-translation-footer.html:8
 msgid "Join our team of translators!"
-msgstr ""
+msgstr "Dołącz do naszego zespołu tłumaczy!"
 
 #: afat/templates/afat/partials/form/required-field-hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
-msgstr ""
+msgstr "Pola z gwiazdką (*) są wymagane"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs-navigation.html:4
 #: afat/templates/afat/partials/statistics/character/tabs-navigation.html:4
@@ -832,7 +834,7 @@ msgstr ""
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:28
 msgid "Month"
-msgstr ""
+msgstr "Miesiąc"
 
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:30
 msgid "FAT count"
@@ -929,51 +931,51 @@ msgstr ""
 
 #: afat/templatetags/afat.py:42
 msgid "January"
-msgstr ""
+msgstr "Styczeń"
 
 #: afat/templatetags/afat.py:43
 msgid "February"
-msgstr ""
+msgstr "Luty"
 
 #: afat/templatetags/afat.py:44
 msgid "March"
-msgstr ""
+msgstr "Marzec"
 
 #: afat/templatetags/afat.py:45
 msgid "April"
-msgstr ""
+msgstr "Kwiecień"
 
 #: afat/templatetags/afat.py:46
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 #: afat/templatetags/afat.py:47
 msgid "June"
-msgstr ""
+msgstr "Czerwiec"
 
 #: afat/templatetags/afat.py:48
 msgid "July"
-msgstr ""
+msgstr "Lipiec"
 
 #: afat/templatetags/afat.py:49
 msgid "August"
-msgstr ""
+msgstr "Sierpień"
 
 #: afat/templatetags/afat.py:50
 msgid "September"
-msgstr ""
+msgstr "Wrzesień"
 
 #: afat/templatetags/afat.py:51
 msgid "October"
-msgstr ""
+msgstr "Pażdziernik"
 
 #: afat/templatetags/afat.py:52
 msgid "November"
-msgstr ""
+msgstr "Listopad"
 
 #: afat/templatetags/afat.py:53
 msgid "December"
-msgstr ""
+msgstr "Grudzień"
 
 #: afat/views/fatlinks.py:220
 msgid ""
@@ -1160,31 +1162,31 @@ msgstr ""
 
 #: afat/views/statistics.py:487 afat/views/statistics.py:727
 msgid "Monday"
-msgstr ""
+msgstr "Poniedziałek"
 
 #: afat/views/statistics.py:488 afat/views/statistics.py:728
 msgid "Tuesday"
-msgstr ""
+msgstr "Wtorek"
 
 #: afat/views/statistics.py:489 afat/views/statistics.py:729
 msgid "Wednesday"
-msgstr ""
+msgstr "Środa"
 
 #: afat/views/statistics.py:490 afat/views/statistics.py:730
 msgid "Thursday"
-msgstr ""
+msgstr "Czwartek"
 
 #: afat/views/statistics.py:491 afat/views/statistics.py:731
 msgid "Friday"
-msgstr ""
+msgstr "Piątek"
 
 #: afat/views/statistics.py:492 afat/views/statistics.py:732
 msgid "Saturday"
-msgstr ""
+msgstr "Sobota"
 
 #: afat/views/statistics.py:493 afat/views/statistics.py:733
 msgid "Sunday"
-msgstr ""
+msgstr "Niedziela"
 
 #: afat/views/statistics.py:610
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
