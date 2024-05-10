@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-03-16 10:26+0000\n"
+"PO-Revision-Date: 2024-05-10 14:14+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/de/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.2\n"
+"X-Generator: Weblate 5.5.3\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -622,8 +622,7 @@ msgstr "Manueller FAT"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:8
 msgid "FATs for this FAT link <small>(updated every 15 seconds)</small>"
-msgstr ""
-"FATs für diesen FAT-Link <small>(alle 15 Sekunden aktualisiert)</small>"
+msgstr "FATs für diesen FAT-Link <small>(alle 15 Sekunden aktualisiert)</small>"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:10
 msgid "FATs for this FAT link"
@@ -1140,8 +1139,8 @@ msgid ""
 "<h4>Warning!</h4><p>There was an issue with the ESI token for "
 "{character_name}. Please try again.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für "
-"{character_name}. Bitte versuche es noch einmal.</p>"
+"<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character_name}"
+". Bitte versuche es noch einmal.</p>"
 
 #: afat/views/fatlinks.py:636
 #, python-brace-format
@@ -1189,8 +1188,9 @@ msgid ""
 "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
 "p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr ""
-"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link registriert."
-"</p><p>Name: {character_name}<br>System: {system}<br>Schiff: {shiptype}</p>"
+"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link "
+"registriert.</p><p>Name: {character_name}<br>System: {system}<br>Schiff: "
+"{shiptype}</p>"
 
 #: afat/views/fatlinks.py:817
 msgid ""
@@ -1247,8 +1247,8 @@ msgstr ""
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-Link."
-"</p>"
+"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-"
+"Link.</p>"
 
 #: afat/views/fatlinks.py:1174
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
