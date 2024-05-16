@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Peter Pfeufer <info@ppfeufer.de>, 2023, 2024.
+# MxdHana <236833425@qq.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-05-10 14:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-05-16 05:20+0000\n"
+"Last-Translator: MxdHana <236833425@qq.com>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -87,7 +88,7 @@ msgstr "舰队名字"
 
 #: afat/forms.py:45 afat/forms.py:87
 msgid "Enter fleet name"
-msgstr ""
+msgstr "输入舰队名称"
 
 #: afat/forms.py:49 afat/forms.py:91
 msgid "Fleet type (optional)"
@@ -95,12 +96,12 @@ msgstr "舰队类型（可选）"
 
 #: afat/forms.py:62
 msgid "Character Name"
-msgstr ""
+msgstr "角色名称"
 
 #: afat/forms.py:67
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
-msgstr ""
+msgstr "星系"
 
 #: afat/forms.py:72
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
@@ -111,11 +112,11 @@ msgstr "舰船类型"
 
 #: afat/forms.py:97
 msgid "FAT link expiry time in minutes"
-msgstr ""
+msgstr "FAT链接过期时间（分钟）"
 
 #: afat/forms.py:100
 msgid "Expiry time in minutes"
-msgstr ""
+msgstr "失效时间（分钟）"
 
 #: afat/helper/time.py:115
 msgid ""
@@ -129,7 +130,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:78
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: afat/helper/views.py:90
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
@@ -137,7 +138,7 @@ msgstr ""
 msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
-msgstr ""
+msgstr "点击此处将停止通过ESI对该船队的自动跟踪，并关闭相关的FAT链接。"
 
 #: afat/helper/views.py:93
 #, python-brace-format
@@ -145,6 +146,8 @@ msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
 "from {fatlink.character.character_name}?</p>"
 msgstr ""
+"<p>你确定要关闭{fatlink.character.character_name}关于ID{fatlink."
+"esi_fleet_id}的ESI舰队么？</p>"
 
 #: afat/helper/views.py:95
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
@@ -152,7 +155,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:40
 msgid "Stop tracking"
-msgstr ""
+msgstr "停止跟踪"
 
 #: afat/helper/views.py:123 afat/helper/views.py:189
 msgid "Delete"
@@ -161,19 +164,19 @@ msgstr "删除"
 #: afat/helper/views.py:125
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
-msgstr ""
+msgstr "<p>您确定要删除FAT链接{fatlink_fleet}吗？</p>"
 
 #: afat/helper/views.py:191
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
 "FAT link?</p>"
-msgstr ""
+msgstr "<p>您确定要把{fat.character.character_name}从这个FAT链接中删除吗？</p>"
 
 #: afat/helper/views.py:243
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
-msgstr ""
+msgstr "{log.fatlink_hash}（删除）"
 
 #: afat/models.py:59
 msgid "Can access the AFAT module"
