@@ -4,6 +4,7 @@
 # Nikolay <nick.postnikov@gmail.com>, 2023, 2024.
 # "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024.
 # Max <mark25@inbox.ru>, 2023, 2024.
+# Roycce_ <malyasov.roma@mail.ru>, 2024.
 #
 # Translators:
 # Николай Постников, 2022
@@ -13,8 +14,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-05-10 14:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-06-06 14:27+0000\n"
+"Last-Translator: Roycce_ <malyasov.roma@mail.ru>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -150,8 +151,6 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:78
-#, fuzzy
-#| msgid "via ESI"
 msgid "ESI"
 msgstr "ESI"
 
@@ -406,7 +405,7 @@ msgstr "Текущий месяц"
 
 #: afat/templates/afat/partials/common/navigation/top-menu.html:9
 msgid "Dashboard"
-msgstr ""
+msgstr "Панель"
 
 #: afat/templates/afat/partials/common/navigation/top-menu.html:18
 #: afat/templates/afat/view/statistics/statistics-alliance.html:12
@@ -502,23 +501,10 @@ msgid "Create link"
 msgstr "Создать ссылку"
 
 #: afat/templates/afat/partials/fatlinks/add/esi-link.html:9
-#, fuzzy
-#| msgid "Create FAT link using ESI"
 msgid "Create a FAT link using ESI"
 msgstr "Регистрация Боевого Вылета, учет пилотов посредством ESI"
 
 #: afat/templates/afat/partials/fatlinks/add/esi-link.html:15
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                    This option will automatically register and track the "
-#| "entire fleet\n"
-#| "                    without fleet members having to click a link."
-#| "<br><b>Use this if you\n"
-#| "                    are Fleet Boss</b>, otherwise please use the "
-#| "clickable FAT link\n"
-#| "                    option.\n"
-#| "                "
 msgid ""
 "\n"
 "                    This option will automatically register and track the "
@@ -531,23 +517,16 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    Эта опция регистрирует БВ и автоматически учитывает всех "
-"пилотов флота.<br>\n"
-"<b>Используйте данную опцию только если Вы являетесь командующим флота</b>, "
-"иначе используйте опцию регистрации БВ с учетом по ссылке\n"
+"                    Эта опция будет автоматически регистрировать и "
+"отслеживать флот\n"
+"                                             при этом членам флота не нужно "
+"будет переходить по ссылке <b>Используйте если\n"
+"                                             вы флитком</b>, Иначе "
+"воспользуйтесь ссылкой на\n"
+"                                             БВА\n"
 "                "
 
 #: afat/templates/afat/partials/fatlinks/add/esi-link.html:24
-#, fuzzy
-#| msgid ""
-#| "\n"
-#| "                    This will start tracking your fleet automatically and "
-#| "add pilots to\n"
-#| "                    it as they join until the fleet is either closed "
-#| "ingame\n"
-#| "                    (meaning you leave the fleet), or you stop the "
-#| "tracking here.\n"
-#| "                "
 msgid ""
 "\n"
 "                    This will start tracking your fleet automatically and "
@@ -559,7 +538,7 @@ msgid ""
 "                "
 msgstr ""
 "\n"
-"                    Эта опция начинает автоматическое отслеживание всех\n"
+"                    Эта опция начинает автоматическое отслеживание всеx\n"
 "                    пилотов флота до закрытия флота в игре (в том числе\n"
 "                    выхода командующего из флота) или остановки отслеживания "
 "здесь.\n"
@@ -862,8 +841,6 @@ msgid "FATs by weekday"
 msgstr "Количество флотов/линков по дням недели"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:35
-#, fuzzy
-#| msgid "Ship type"
 msgid "Ship Types"
 msgstr "Тип корабля"
 
@@ -872,10 +849,8 @@ msgid "Average FATs by corporation"
 msgstr "Среднее кол-во линков по корпорациям"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:62
-#, fuzzy
-#| msgid "# of FATs"
 msgid "Average # of FATs"
-msgstr "Количество флотов/ссылок"
+msgstr "Среднее количество флотов/ссылок"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:90
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:117
@@ -916,24 +891,14 @@ msgid "My Stats"
 msgstr "Мои показатели"
 
 #: afat/templates/afat/partials/statistics/overview/tabs/corps.html:10
-#, fuzzy
-#| msgid ""
-#| "Corporations <small>(Click on an alliance name to see their "
-#| "corporations)</small>"
 msgid "Click on an alliance name to see their corporations"
-msgstr ""
-"Корпорации <small>(Выберите название альянса, чтобы увидеть входящие в него "
-"корпорации)</small>"
+msgstr "Нажмите на название альянса, чтобы увидеть его корпорации"
 
 #: afat/templates/afat/partials/statistics/overview/tabs/corps.html:35
-#, fuzzy
-#| msgid "Character statistics"
 msgid "Alliance statistics for"
-msgstr "Статистика пилота"
+msgstr "Cтатистика альянса"
 
 #: afat/templates/afat/partials/statistics/overview/tabs/corps.html:61
-#, fuzzy
-#| msgid "Corporation statistics"
 msgid "Corporation statistics for"
 msgstr "Статистика корпорации"
 
@@ -942,10 +907,8 @@ msgid "Your monthly stats"
 msgstr "Ваша статистика за год"
 
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:10
-#, fuzzy
-#| msgid "Only months with FAT data of the selected year are shown."
 msgid "Only months with FAT data for the selected year are shown."
-msgstr "Показаны месяцы выбранного года, в которых были БВП."
+msgstr "Отображаются только месяцы с данными по БВП за выбранный год."
 
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:11
 msgid "Only characters that have FATs for the selected year are shown."
@@ -1023,12 +986,7 @@ msgid "Description"
 msgstr "Описание"
 
 #: afat/templates/afat/view/logs/logs-overview.html:35
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "            Logs are only kept for %(log_duration)s days. Logs older than "
-#| "that are removed automatically.\n"
-#| "        "
+#, python-format
 msgid ""
 "\n"
 "            Logs are kept for %(duration)s day. Logs older than that are "
@@ -1041,23 +999,23 @@ msgid_plural ""
 "        "
 msgstr[0] ""
 "\n"
-"Записи журнала сохраняются в течение %(log_duration)s дней, после чего "
-"автоматически удаляются.\n"
+"            Записи журнала сохраняются в течение %(duration)s дня, после "
+"чего автоматически удаляются.\n"
 "        "
 msgstr[1] ""
 "\n"
-"Записи журнала сохраняются в течение %(log_duration)s дней, после чего "
-"автоматически удаляются.\n"
+"            Записи журнала сохраняются в течение %(duration)s дней, после "
+"чего автоматически удаляются.\n"
 "        "
 msgstr[2] ""
 "\n"
-"Записи журнала сохраняются в течение %(log_duration)s дней, после чего "
-"автоматически удаляются.\n"
+"            Записи журнала сохраняются в течение %(duration)s дней, после "
+"чего автоматически удаляются.\n"
 "        "
 msgstr[3] ""
 "\n"
-"Записи журнала сохраняются в течение %(log_duration)s дней, после чего "
-"автоматически удаляются.\n"
+"            Записи журнала сохраняются в течение %(duration)s дней, после "
+"чего автоматически удаляются.\n"
 "        "
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:7
