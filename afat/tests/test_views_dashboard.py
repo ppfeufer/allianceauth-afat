@@ -86,3 +86,40 @@ class TestDashboard(TestCase):
             member=f'<span class="d-block" id="afat-eve-character-id-{self.character_1002.character_id}">{self.character_1002.character_name}</span>',
             container=content,
         )
+
+    def test_ajax_recent_get_fats_by_character_should_only_show_my_fatlinks(self):
+        """
+        Test that the ajax call only returns the FATs for the given character if the user has access to the character.
+
+        :return:
+        :rtype:
+        """
+
+        # given
+        Fat.objects.create(character=self.character_1101, fatlink=self.afat_link)
+        Fat.objects.create(character=self.character_1002, fatlink=self.afat_link)
+
+        self.client.force_login(user=self.user)
+
+        # when
+        response_correct_char = self.client.get(
+            path=reverse(
+                viewname="afat:dashboard_ajax_get_recent_fats_by_character",
+                kwargs={"charid": self.character_1101.character_id},
+            )
+        )
+
+        response_wrong_char = self.client.get(
+            path=reverse(
+                viewname="afat:dashboard_ajax_get_recent_fats_by_character",
+                kwargs={"charid": self.character_1002.character_id},
+            )
+        )
+
+        # correct character
+        self.assertEqual(first=response_correct_char.status_code, second=HTTPStatus.OK)
+        self.assertNotEqual(first=response_correct_char.json(), second=[])
+
+        # wrong character
+        self.assertEqual(first=response_wrong_char.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=response_wrong_char.json(), second=[])

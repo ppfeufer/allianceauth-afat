@@ -11,6 +11,7 @@ from django.urls import reverse
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+from allianceauth.framework.api.evecharacter import get_user_from_evecharacter
 from allianceauth.services.hooks import get_extension_logger
 
 # Alliance Auth (External Libs)
@@ -71,19 +72,25 @@ def ajax_recent_get_fats_by_character(
     """
 
     character = EveCharacter.objects.get(character_id=charid)
+    user_by_character = get_user_from_evecharacter(character=character)
 
-    fats = (
-        Fat.objects.select_related_default()
-        .filter(character=character)
-        .order_by("fatlink__created")
-        .reverse()[:10]
-    )
+    # Check if the user has access to the character
+    if user_by_character == request.user:
+        fats = (
+            Fat.objects.select_related_default()
+            .filter(character=character)
+            .order_by("fatlink__created")
+            .reverse()[:10]
+        )
 
-    character_fat_rows = [
-        convert_fats_to_dict(request=request, fat=fat) for fat in fats
-    ]
+        character_fat_rows = [
+            convert_fats_to_dict(request=request, fat=fat) for fat in fats
+        ]
 
-    return JsonResponse(data=character_fat_rows, safe=False)
+        return JsonResponse(data=character_fat_rows, safe=False)
+
+    # If the user does not have access to the character
+    return JsonResponse(data=[], safe=False)
 
 
 @login_required
