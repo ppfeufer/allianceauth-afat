@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-05-16 05:20+0000\n"
-"Last-Translator: MxdHana <236833425@qq.com>\n"
+"PO-Revision-Date: 2024-06-06 14:28+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -221,15 +221,15 @@ msgstr "舰队类型"
 #: afat/models.py:134
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
-msgstr ""
+msgstr "舰队指挥官不在已注册的舰队中或舰队不再可用。"
 
 #: afat/models.py:136
 msgid "Registered fleet seems to be no longer available."
-msgstr ""
+msgstr "已登记的舰队似乎不再可用。"
 
 #: afat/models.py:137
 msgid "FC is no longer the fleet boss."
-msgstr ""
+msgstr "舰队指挥官不再是舰队统帅。"
 
 #: afat/models.py:142
 msgid "When was this FAT link created"
@@ -429,7 +429,7 @@ msgstr "创建者"
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:30
 msgid "Eve time"
-msgstr ""
+msgstr "EVE时间"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:16
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:21
@@ -602,7 +602,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:40
 msgid "Count"
-msgstr ""
+msgstr "计数"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "Is someone missing from the list of FATs? Use this form to add them."
