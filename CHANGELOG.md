@@ -35,10 +35,17 @@ Section Order:
 ### Security
 -->
 
+## \[3.0.2\] - 2024-06-06
+
 ### Fixed
 
 - Lack of authorization check when requesting recent FatLinks in Dashboard Ajax call.
   This could lead to unauthorized access to FatLinks of other users. ([#337](https://github.com/ppfeufer/allianceauth-afat/issues/337))
+
+### Changed
+
+- Chinese translation updated
+- Russian translation updated
 
 ## \[3.0.1\] - 2024-05-16
 
