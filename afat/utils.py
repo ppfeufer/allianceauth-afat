@@ -2,9 +2,6 @@
 Utilities
 """
 
-# Standard Library
-from typing import Optional
-
 # Django
 from django.core.handlers.wsgi import WSGIRequest
 from django.utils.functional import lazy
@@ -72,7 +69,7 @@ def write_log(request: WSGIRequest, log_event: str, fatlink_hash: str, log_text:
 
 def get_or_create_character(
     name: str = None, character_id: int = None
-) -> Optional[EveCharacter]:
+) -> EveCharacter | None:
     """
     This function takes a name or id of a character and checks
     to see if the character already exists.
