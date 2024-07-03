@@ -29,7 +29,7 @@
                                 {% if key != 'No Alliance' %}
                                     <a
                                         class="btn btn-primary btn-sm position-absolute btn-alliance-statistics"
-                                        href="{% url 'afat:statistics_alliance' value.0 year %}"
+                                        href="{% url 'afat:statistics_alliance' value.0 %}"
                                         data-bs-toggle="tooltip"
                                         data-bs-html="true"
                                         data-bs-title="{% translate 'Alliance statistics for' %}:<br>{{ key }}"
@@ -55,7 +55,7 @@
                                                         <td class="text-end">
                                                             <a
                                                                 class="btn btn-primary btn-sm"
-                                                                href="{% url 'afat:statistics_corporation' corp.0 year %}"
+                                                                href="{% url 'afat:statistics_corporation' corp.0 %}"
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-html="true"
                                                                 data-bs-title="{% translate 'Corporation statistics for' %}:<br>{{ corp.1 }}"
