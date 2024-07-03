@@ -22,6 +22,7 @@ from django.utils.translation import gettext
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.authentication.models import CharacterOwnership
 from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
+from allianceauth.framework.api.evecharacter import get_main_character_from_evecharacter
 from allianceauth.services.hooks import get_extension_logger
 
 # Alliance Auth (External Libs)
@@ -460,10 +461,29 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_weekday = get_fat_per_weekday(fats)
 
     chars = {}
+    main_chars = {}
 
     for char in characters:
         fat_c = fats.filter(character_id=char.id).count()
         chars[char.character_name] = (fat_c, char.character_id)
+        main_character = get_main_character_from_evecharacter(character=char)
+
+        if main_character:
+            if main_character.character_id not in main_chars:
+                main_chars[main_character.character_id] = {
+                    "name": main_character.character_name,
+                    "id": main_character.character_id,
+                    "fats": 0,
+                    # "characters": {},
+                }
+
+            main_chars[main_character.character_id]["fats"] += fat_c
+
+            # main_chars[main_character.character_id]["characters"][char.character_id] = {
+            #     "id": char.character_id,
+            #     "name": char.character_name,
+            #     "fats": fat_c,
+            # }
 
     context = {
         "corp": corp,
@@ -484,6 +504,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         "data_time": data_time,
         "data_weekday": data_weekday,
         "chars": chars,
+        "main_chars": main_chars,
     }
 
     month_name = calendar.month_name[int(month)]
