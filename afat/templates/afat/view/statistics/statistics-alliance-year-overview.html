@@ -48,7 +48,13 @@
 
                             <td class="text-end">
                                 {% if alliance != "No Alliance" %}
-                                    <a href="{% url 'afat:statistics_alliance' allianceid year month.0 %}" class="btn btn-primary btn-sm">
+                                    <a
+                                        href="{% url 'afat:statistics_alliance' allianceid year month.0 %}"
+                                        class="btn btn-primary btn-sm"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-html="true"
+                                        data-bs-title="{% translate 'View detailed alliance statistics for: ' %}<br>{{ month.0|month_name }} {{ year }}"
+                                    >
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
                                 {% endif %}

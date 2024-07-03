@@ -99,7 +99,6 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
                     )
 
             sanity_check[corp_id] = corp_id
-
     elif request.user.has_perm(perm="afat.stats_corporation_own"):
         data = [
             (
@@ -175,7 +174,6 @@ def _calculate_year_stats(request, year) -> list:
             )
 
     # Return sorted by character name
-    # return sorted(months, key=lambda x: x[0])
     return months
 
 
@@ -280,7 +278,7 @@ def character(  # pylint: disable=too-many-locals
         colors,
     ]
 
-    # Data for by Time Line Chart
+    # Data for by timeline Chart
     data_time = {}
 
     for i in range(0, 24):
@@ -357,7 +355,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     current_month, current_year = current_month_and_year()
 
-    # Check character has permission to view other corp stats
+    # Check character has permission to view other corps stats
     if int(request.user.profile.main_character.corporation_id) != int(corpid):
         if not user_has_any_perms(
             user=request.user,
