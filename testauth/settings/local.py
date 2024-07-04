@@ -12,10 +12,6 @@ from .base import *
 
 PACKAGE = "afat"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-STATICFILES_DIRS = [os.path.join(PROJECT_DIR, f"{PACKAGE}/static")]
-
 SITE_URL = "https://example.com"
 CSRF_TRUSTED_ORIGINS = [SITE_URL]
 
@@ -112,3 +108,8 @@ DEFAULT_FROM_EMAIL = ""
 #######################################
 # Add any custom settings below here. #
 #######################################
+
+# workarounds to suppress warnings
+LOGGING = None
+STATICFILES_DIRS = []
+ANALYTICS_DISABLED = True
