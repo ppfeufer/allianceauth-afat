@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- URL generation modularized
+
 ### Removed
 
 - Support for Python 3.8 and Python 3.9
