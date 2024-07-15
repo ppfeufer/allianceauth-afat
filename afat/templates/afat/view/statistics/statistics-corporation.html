@@ -43,17 +43,19 @@
 
 {% block extra_javascript %}
     {% include "bundles/chart-js.html" %}
+    {% include "afat/bundles/afat-js-settings.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
     {% include "bundles/datatables-js-bs5.html" %}
     {% include "bundles/moment-js.html" %}
 
     <script>
-        $(document).ready(function() {
-            $('#corp-members').DataTable({
+        (() => {
+            $('#corp-main-characters').DataTable({
+                language: afatJsSettings.dataTables.translation,
                 order: [
                     [1, 'desc'],
                     [0, 'asc']
-                ],
+                ]
             });
 
             // Chart rendering
@@ -62,6 +64,6 @@
                     drawChart(chart.element, chart.type, chart.data, chart.options);
                 });
             }
-        });
+        })();
     </script>
 {% endblock %}
