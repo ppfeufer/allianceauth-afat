@@ -100,7 +100,7 @@ const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
 
     modalElement.on('show.bs.modal', (event) => {
         const button = $(event.relatedTarget); // Button that triggered the modal
-        const url = button.data('url'); // Extract info from data-* attributes
+        const url = button.data('url'); // Extract info from data-url attributes
         const cancelText = button.data('cancel-text');
         const confirmText = button.data('confirm-text');
         const bodyText = button.data('body-text');
