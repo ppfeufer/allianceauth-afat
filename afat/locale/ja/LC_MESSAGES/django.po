@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-16 03:08+0100\n"
-"PO-Revision-Date: 2024-05-10 14:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2024-07-16 04:03+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/ja/>\n"
 "Language: ja\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
@@ -74,7 +74,7 @@ msgstr ""
 #: afat/forms.py:25
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
-msgstr ""
+msgstr "この欄は必須です"
 
 #: afat/forms.py:43 afat/forms.py:85 afat/forms.py:112
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:12
