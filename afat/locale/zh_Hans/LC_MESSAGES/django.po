@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-16 03:08+0100\n"
+"POT-Creation-Date: 2024-07-30 11:02+0200\n"
 "PO-Revision-Date: 2024-06-06 14:28+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
@@ -125,14 +125,14 @@ msgid ""
 "{int(duration_seconds[0])} seconds"
 msgstr ""
 
-#: afat/helper/views.py:59 afat/helper/views.py:178
+#: afat/helper/views.py:58 afat/helper/views.py:177
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:78
 msgid "ESI"
 msgstr "ESI"
 
-#: afat/helper/views.py:90
+#: afat/helper/views.py:89
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
 msgid ""
@@ -140,16 +140,16 @@ msgid ""
 "and close the associated FAT link."
 msgstr "点击此处将停止通过ESI对该船队的自动跟踪，并关闭相关的FAT链接。"
 
-#: afat/helper/views.py:93
+#: afat/helper/views.py:92
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
 "from {fatlink.character.character_name}?</p>"
 msgstr ""
-"<p>你确定要关闭{fatlink.character.character_name}关于ID{fatlink."
-"esi_fleet_id}的ESI舰队么？</p>"
+"<p>你确定要关闭{fatlink.character.character_name}关于ID{fatlink.esi_fleet_id}"
+"的ESI舰队么？</p>"
 
-#: afat/helper/views.py:95
+#: afat/helper/views.py:94
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:41
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
@@ -157,23 +157,23 @@ msgstr ""
 msgid "Stop tracking"
 msgstr "停止跟踪"
 
-#: afat/helper/views.py:123 afat/helper/views.py:189
+#: afat/helper/views.py:122 afat/helper/views.py:188
 msgid "Delete"
 msgstr "删除"
 
-#: afat/helper/views.py:125
+#: afat/helper/views.py:124
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr "<p>您确定要删除FAT链接{fatlink_fleet}吗？</p>"
 
-#: afat/helper/views.py:191
+#: afat/helper/views.py:190
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
 "FAT link?</p>"
 msgstr "<p>您确定要把{fat.character.character_name}从这个FAT链接中删除吗？</p>"
 
-#: afat/helper/views.py:243
+#: afat/helper/views.py:242
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr "{log.fatlink_hash}（删除）"

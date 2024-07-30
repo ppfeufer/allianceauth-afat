@@ -35,9 +35,13 @@ Section Order:
 ### Security
 -->
 
+## \[3.1.0\] - 2024-07-30
+
 ### Changed
 
 - URL generation modularized
+- French translation updated
+- Japanese translation updated
 
 ### Removed
 

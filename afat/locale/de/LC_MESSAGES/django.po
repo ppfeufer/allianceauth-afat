@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-16 03:08+0100\n"
+"POT-Creation-Date: 2024-07-30 11:02+0200\n"
 "PO-Revision-Date: 2024-05-10 14:14+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/"
-"alliance-auth-apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
+"apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -135,14 +135,14 @@ msgstr ""
 "{int(duration_hours[0])} Stunden, {int(duration_minutes[0])} Minuten und "
 "{int(duration_seconds[0])} Sekunden"
 
-#: afat/helper/views.py:59 afat/helper/views.py:178
+#: afat/helper/views.py:58 afat/helper/views.py:177
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:78
 msgid "ESI"
 msgstr "ESI"
 
-#: afat/helper/views.py:90
+#: afat/helper/views.py:89
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
 msgid ""
@@ -152,7 +152,7 @@ msgstr ""
 "Klicke hier um das automatische Tracking mittels ESI für diese Flotte zu "
 "stoppen und den FAT-Link zu schließen."
 
-#: afat/helper/views.py:93
+#: afat/helper/views.py:92
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
@@ -161,7 +161,7 @@ msgstr ""
 "<p>Bist Du sicher das Du die ESI Flotte mit ID {fatlink.esi_fleet_id} von "
 "{fatlink.character.character_name} schließen möchtest?</p>"
 
-#: afat/helper/views.py:95
+#: afat/helper/views.py:94
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:41
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
@@ -169,17 +169,17 @@ msgstr ""
 msgid "Stop tracking"
 msgstr "Tracking stoppen"
 
-#: afat/helper/views.py:123 afat/helper/views.py:189
+#: afat/helper/views.py:122 afat/helper/views.py:188
 msgid "Delete"
 msgstr "Löschen"
 
-#: afat/helper/views.py:125
+#: afat/helper/views.py:124
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr ""
 "<p>Bist Du sicher das Du den FAT-Link {fatlink_fleet} löschen möchtest?</p>"
 
-#: afat/helper/views.py:191
+#: afat/helper/views.py:190
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
@@ -188,7 +188,7 @@ msgstr ""
 "<p>Bist Du sicher das Du {fat.character.character_name} von diesem FAT-Link "
 "löschen möchtest?</p>"
 
-#: afat/helper/views.py:243
+#: afat/helper/views.py:242
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr "{log.fatlink_hash} (Gelöscht)"
@@ -622,7 +622,8 @@ msgstr "Manueller FAT"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:8
 msgid "FATs for this FAT link <small>(updated every 15 seconds)</small>"
-msgstr "FATs für diesen FAT-Link <small>(alle 15 Sekunden aktualisiert)</small>"
+msgstr ""
+"FATs für diesen FAT-Link <small>(alle 15 Sekunden aktualisiert)</small>"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:10
 msgid "FATs for this FAT link"
@@ -1139,8 +1140,8 @@ msgid ""
 "<h4>Warning!</h4><p>There was an issue with the ESI token for "
 "{character_name}. Please try again.</p>"
 msgstr ""
-"<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character_name}"
-". Bitte versuche es noch einmal.</p>"
+"<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für "
+"{character_name}. Bitte versuche es noch einmal.</p>"
 
 #: afat/views/fatlinks.py:636
 #, python-brace-format
@@ -1188,9 +1189,8 @@ msgid ""
 "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
 "p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr ""
-"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link "
-"registriert.</p><p>Name: {character_name}<br>System: {system}<br>Schiff: "
-"{shiptype}</p>"
+"<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link registriert."
+"</p><p>Name: {character_name}<br>System: {system}<br>Schiff: {shiptype}</p>"
 
 #: afat/views/fatlinks.py:817
 msgid ""
@@ -1247,8 +1247,8 @@ msgstr ""
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
-"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-"
-"Link.</p>"
+"<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-Link."
+"</p>"
 
 #: afat/views/fatlinks.py:1174
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
