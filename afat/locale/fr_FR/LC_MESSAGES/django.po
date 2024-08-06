@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-30 11:02+0200\n"
-"PO-Revision-Date: 2024-07-06 14:27+0000\n"
+"PO-Revision-Date: 2024-08-06 11:28+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/fr/>\n"
+"Language-Team: French <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,14 +224,16 @@ msgstr ""
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
 msgstr ""
+"Le FC n'est plus dans la flotte enregistré ou cette flotte n'est plus "
+"disponible."
 
 #: afat/models.py:136
 msgid "Registered fleet seems to be no longer available."
-msgstr ""
+msgstr "La flotte enregistrée ne semble plus disponible."
 
 #: afat/models.py:137
 msgid "FC is no longer the fleet boss."
-msgstr ""
+msgstr "Le FC n'est plus à la tête de la flotte."
 
 #: afat/models.py:142
 msgid "When was this FAT link created"
