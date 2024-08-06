@@ -2,15 +2,16 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Peter Pfeufer <info@ppfeufer.de>, 2023, 2024.
+# Anata_no_Usiro <yt23542354m@gmail.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-30 11:02+0200\n"
-"PO-Revision-Date: 2024-07-16 04:03+0000\n"
+"PO-Revision-Date: 2024-08-06 11:28+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ja/>\n"
+"Language-Team: Japanese <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: afat/__init__.py:9 afat/app_settings.py:36
 msgid "Fleet Activity Tracking"
-msgstr ""
+msgstr "フリート活動履歴"
 
 #: afat/admin.py:156 afat/models.py:109
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
@@ -28,43 +29,43 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:28
 msgid "Fleet type"
-msgstr ""
+msgstr "艦隊種類"
 
 #: afat/admin.py:169
 msgid "Is enabled"
-msgstr ""
+msgstr "有効になっています"
 
 #: afat/admin.py:184
 msgid "Activate selected fleet types"
-msgstr ""
+msgstr "選択したフリートの種類をアクティブにする"
 
 #: afat/admin.py:213
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
-msgstr[0] ""
+msgstr[0] "起動に失敗しました {failed} fleet type"
 
 #: afat/admin.py:223
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
-msgstr[0] ""
+msgstr[0] "有効化された {notifications_count}フリートの種類"
 
 #: afat/admin.py:229
 msgid "Deactivate selected fleet types"
-msgstr ""
+msgstr "選択したフリートの種類を無効化する"
 
 #: afat/admin.py:258
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
-msgstr[0] ""
+msgstr[0] "無効化に失敗しました {failed} フリートの種類"
 
 #: afat/admin.py:268
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
-msgstr[0] ""
+msgstr[0] "無効化された {notifications_count} フリートの種類"
 
 #: afat/apps.py:20
 #, python-brace-format
@@ -83,7 +84,7 @@ msgstr "この欄は必須です"
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
 msgid "Fleet name"
-msgstr ""
+msgstr "艦隊名"
 
 #: afat/forms.py:45 afat/forms.py:87
 msgid "Enter fleet name"
@@ -91,7 +92,7 @@ msgstr ""
 
 #: afat/forms.py:49 afat/forms.py:91
 msgid "Fleet type (optional)"
-msgstr ""
+msgstr "艦隊種類（可選）"
 
 #: afat/forms.py:62
 msgid "Character Name"
@@ -218,15 +219,15 @@ msgstr ""
 #: afat/models.py:134
 msgid ""
 "FC is not in the registered fleet anymore or fleet is no longer available."
-msgstr ""
+msgstr "FCが登録されていない。もしくはフリートが利用できなくなりました。"
 
 #: afat/models.py:136
 msgid "Registered fleet seems to be no longer available."
-msgstr ""
+msgstr "登録されたフリートは利用できません。"
 
 #: afat/models.py:137
 msgid "FC is no longer the fleet boss."
-msgstr ""
+msgstr "FCは、もうフリートのボスではない。"
 
 #: afat/models.py:142
 msgid "When was this FAT link created"
@@ -417,7 +418,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Creator"
-msgstr ""
+msgstr "作成者"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:15
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:41
@@ -689,7 +690,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/form/required-field-hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
-msgstr ""
+msgstr "アスタリスクの付いている項目は必須です"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs-navigation.html:4
 #: afat/templates/afat/partials/statistics/character/tabs-navigation.html:4
@@ -770,7 +771,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/character/tabs-navigation.html:7
 msgid "Raw data"
-msgstr ""
+msgstr "検証されていないデータ"
 
 #: afat/templates/afat/partials/statistics/character/tabs/graphs.html:33
 msgid "FATs by time of day"
@@ -782,7 +783,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs-navigation.html:7
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:5
@@ -886,11 +887,11 @@ msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
-msgstr ""
+msgstr "ユーザー"
 
 #: afat/templates/afat/view/logs/logs-overview.html:25
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: afat/templates/afat/view/logs/logs-overview.html:35
 #, python-format
