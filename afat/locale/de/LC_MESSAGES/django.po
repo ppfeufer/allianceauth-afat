@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-30 11:02+0200\n"
+"POT-Creation-Date: 2024-09-15 18:31+0200\n"
 "PO-Revision-Date: 2024-05-10 14:14+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -1313,3 +1313,38 @@ msgstr "Sonntag"
 #: afat/views/statistics.py:610
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
+
+#, fuzzy
+#~| msgid "Next year"
+#~ msgid "Next"
+#~ msgstr "Nächstes Jahr"
+
+#, fuzzy
+#~| msgid "Previous year"
+#~ msgid "Previous"
+#~ msgstr "Vorheriger Monat"
+
+#, fuzzy
+#~| msgid "Corporation statistics for"
+#~ msgid "View detailed corporation statistics for: "
+#~ msgstr "Corporation-Statistik für"
+
+#, fuzzy
+#~| msgid "Character"
+#~ msgid "Main characters"
+#~ msgstr "Charakter"
+
+#, fuzzy
+#~| msgid "Character"
+#~ msgid "Alt characters"
+#~ msgstr "Charakter"
+
+#, fuzzy
+#~| msgid "Statistics"
+#~ msgid "Statistics for"
+#~ msgstr "Statistik"
+
+#, fuzzy
+#~| msgid "Alliance statistics for"
+#~ msgid "View detailed alliance statistics for: "
+#~ msgstr "Allianz-Statistik für"

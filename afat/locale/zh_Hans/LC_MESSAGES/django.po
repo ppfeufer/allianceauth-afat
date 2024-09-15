@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-30 11:02+0200\n"
+"POT-Creation-Date: 2024-09-15 18:31+0200\n"
 "PO-Revision-Date: 2024-06-06 14:28+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
@@ -1194,3 +1194,13 @@ msgstr "星期日"
 #: afat/views/statistics.py:610
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Character"
+#~ msgid "Main characters"
+#~ msgstr "角色"
+
+#, fuzzy
+#~| msgid "Character"
+#~ msgid "Alt characters"
+#~ msgstr "角色"
