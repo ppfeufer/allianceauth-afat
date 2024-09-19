@@ -91,15 +91,18 @@ $(document).ready(() => {
      */
     const realoadDataTable = () => {
         const dt = Date.now() - expectedReloadDatatable; // the drift (positive for overshooting)
+        const currentPath = window.location.pathname + window.location.search + window.location.hash;
 
         if (dt > intervalReloadDatatable) {
             /**
-             * Something really bad happened. Maybe the browser (tab) was inactive?
+             * Something awful happened. Maybe the browser (tab) was inactive?
              * Possibly special handling to avoid futile "catch up" run
              */
-            window.location.replace(
-                window.location.pathname + window.location.search + window.location.hash
-            );
+            if (currentPath.startsWith('/')) {
+                window.location.replace(currentPath);
+            } else {
+                console.error('Invalid redirect URL');
+            }
         }
 
         linkListTable.ajax.reload(null, false);
