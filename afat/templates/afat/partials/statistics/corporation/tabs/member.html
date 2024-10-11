@@ -2,10 +2,10 @@
 
 <div id="tab-members" class="tab-pane fade border-0" role="tabpanel" aria-labelledby="tab-members">
     <div class="row pt-3">
-        <div id="col-corp-main-characters" class="col-md-6 col-lg-4 mb-3">
+        <div id="col-corp-main-characters" class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title mb-0">{% translate "Main characters" %}</div>
+                    <span class="card-title">{% translate "Main characters" %}</span>
                 </div>
 
                 <div class="card-body">
@@ -14,7 +14,7 @@
                             <thead>
                                 <tr>
                                     <th>{% translate "Character" %}</th>
-                                    <th>{% translate "FATs" %}</th>
+                                    <th class="text-end">{% translate "FATs" %}</th>
                                     <th><!-- {% translate "Character statistics" %} --></th>
                                 </tr>
                             </thead>
@@ -25,9 +25,13 @@
                                         {% if main.name %}
                                             <tr>
                                                 <td>{{ main.name }}</td>
-                                                <td>{{ main.fats }}</td>
+                                                <td class="text-end">{{ main.fats }}</td>
                                                 <td class="text-end">
-                                                    <button class="btn btn-primary btn-sm">
+                                                    <button
+                                                        class="btn btn-primary btn-sm btn-afat-corp-stats-view-character"
+                                                        data-character-name="{{ main.name }}"
+                                                        data-character-id="{{ main.id }}"
+                                                    >
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button>
                                                 </td>
@@ -42,10 +46,14 @@
             </div>
         </div>
 
-        <div id="col-character-alt-characters" class="col-md-6 col-lg-8 d-none">
+        <div id="col-character-alt-characters" class="col-md-6 d-none">
             <div class="card card-default">
                 <div class="card-header">
-                    <div class="card-title mb-0">{% translate "Alt characters" %}</div>
+                    <span class="card-title">
+                        <span id="afat-corp-stats-main-character-name"></span>
+                        »
+                        {% translate "All characters" %}
+                    </span>
                 </div>
 
                 <div class="card-body">
