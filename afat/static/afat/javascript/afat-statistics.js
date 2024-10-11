@@ -22,3 +22,23 @@ const drawChart = (element, chartType, data, options) => { // eslint-disable-lin
         options: options
     });
 };
+
+$(document).ready(() => {
+    'use strict';
+
+    const btnMainCharacterDetails = $('.btn-afat-corp-stats-view-character');
+
+    if (btnMainCharacterDetails.length > 0) {
+        btnMainCharacterDetails.on('click', (event) => {
+            const btn = $(event.currentTarget);
+            const characterId = btn.data('character-id');
+            const characterName = btn.data('character-name');
+
+            console.log(btn);
+            console.log(characterId);
+
+            $('#col-character-alt-characters').removeClass('d-none');
+            $('#afat-corp-stats-main-character-name').text(characterName);
+        });
+    }
+});
