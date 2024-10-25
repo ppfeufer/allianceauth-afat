@@ -35,6 +35,12 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Use Chart.js bundled with Alliance Auth
+- Dependencies updated
+  - `allianceauth`>=4.4.0
+
 ## \[3.2.0\] - 2024-09-16
 
 ### Changed
