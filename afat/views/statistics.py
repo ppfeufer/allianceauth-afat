@@ -76,29 +76,18 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         data = {"No Alliance": [1]}
         sanity_check = {}
 
-        # First create the alliance keys in our dict
+        # Group corporations by alliance
         for character_with_access in characters_with_access:
-            if character_with_access.alliance_name is not None:
-                data[character_with_access.alliance_name] = [
-                    character_with_access.alliance_id
-                ]
-
-        # Now append the alliance keys
-        for character_with_access in characters_with_access:
+            alliance_name = character_with_access.alliance_name or "No Alliance"
             corp_id = character_with_access.corporation_id
             corp_name = character_with_access.corporation_name
 
-            # if corp_id not in sanity_check.keys():
+            if alliance_name not in data:
+                data[alliance_name] = [character_with_access.alliance_id]
+
             if corp_id not in sanity_check:
-                if character_with_access.alliance_name is None:
-                    data["No Alliance"].append((corp_id, corp_name))
-                else:
-                    data[character_with_access.alliance_name].append(
-                        (corp_id, corp_name)
-                    )
-
-            sanity_check[corp_id] = corp_id
-
+                data[alliance_name].append((corp_id, corp_name))
+                sanity_check[corp_id] = corp_id
     elif request.user.has_perm(perm="afat.stats_corporation_own"):
         data = [
             (
