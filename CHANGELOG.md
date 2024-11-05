@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Monthly total FATs to statistics overview
+
 ### Changed
 
 - Use Chart.js bundled with Alliance Auth

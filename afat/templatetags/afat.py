@@ -15,6 +15,7 @@ from afat import __version__
 def afat_static(path: str) -> str:
     """
     Versioned static URL
+    example: {% afat_static 'afat/css/allianceauth-afat.min.css' %}
 
     :param path:
     :type path:
@@ -54,3 +55,18 @@ def month_name(month_number):
     }
 
     return month_mapper[int(month_number)]
+
+
+@register.filter
+def sum_values(dictionary):
+    """
+    Template tag :: sum all values in a dictionary
+    example: {{ dictionary|sum_values }}
+
+    :param dictionary:
+    :type dictionary:
+    :return:
+    :rtype:
+    """
+
+    return sum(dictionary.values())

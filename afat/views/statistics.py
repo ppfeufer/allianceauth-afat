@@ -130,7 +130,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     )
 
 
-def _calculate_year_stats(request, year) -> list:
+def _calculate_year_stats(request, year) -> dict:
     """
     Calculate statistics for the year
 
@@ -142,12 +142,25 @@ def _calculate_year_stats(request, year) -> list:
     :rtype:
     """
 
-    months = []
+    months = {"total": {}, "characters": []}
 
     # Get all characters for the user and order by userprofile and character name
     characters = EveCharacter.objects.filter(
         character_ownership__user=request.user
     ).order_by("-userprofile", "character_name")
+
+    # Get all FATs for the year and group by month
+    fats_in_year = (
+        Fat.objects.filter(fatlink__created__year=year)
+        .filter(character__in=characters)
+        .values("fatlink__created__month")
+        .annotate(fat_count=Count("id"))
+    )
+
+    months["total"] = {
+        int(result["fatlink__created__month"]): result["fat_count"]
+        for result in fats_in_year
+    }
 
     for char in characters:
         character_fats_in_year = (
@@ -169,7 +182,7 @@ def _calculate_year_stats(request, year) -> list:
                 sorted(character_fats_per_month.items(), key=lambda item: item[0])
             )
 
-            months.append(
+            months["characters"].append(
                 (char.character_name, character_fats_per_month, char.character_id)
             )
 

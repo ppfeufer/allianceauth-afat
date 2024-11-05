@@ -144,9 +144,15 @@ class TestStatistics(TestCase):
         )
 
         # then
-        self.assertListEqual(
-            list1=result,
-            list2=[("Clark Kent", {4: 2}, 1002), ("Lex Luther", {4: 2}, 1101)],
+        self.assertDictEqual(
+            d1=result,
+            d2={
+                "total": {4: 4},
+                "characters": [
+                    ("Clark Kent", {4: 2}, 1002),
+                    ("Lex Luther", {4: 2}, 1101),
+                ],
+            },
         )
 
     def test_should_show_statistics_dashboard(self):
