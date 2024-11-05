@@ -58,3 +58,26 @@ class TestAfatStatic(TestCase):
             needle=f'/static/afat/css/allianceauth-afat.min.css?v={context["version"]}',
             haystack=rendered_template,
         )
+
+
+class SumValuesFilterTest(TestCase):
+    """
+    Test the sum_values filter
+    """
+
+    def test_sum_values(self):
+        """
+        Test sum_values
+
+        :return:
+        :rtype:
+        """
+
+        context = Context(dict_={"test_dict": {"a": 1, "b": 2, "c": 3}})
+        template_to_render = Template(
+            template_string="{% load afat %} {{ test_dict|sum_values }}"
+        )
+
+        rendered_template = template_to_render.render(context=context)
+
+        self.assertInHTML(needle="6", haystack=rendered_template)

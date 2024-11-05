@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-15 18:31+0200\n"
+"POT-Creation-Date: 2024-11-05 19:52+0100\n"
 "PO-Revision-Date: 2024-05-10 14:14+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -875,36 +875,65 @@ msgstr "Allianz-Statistik für"
 msgid "Corporation statistics for"
 msgstr "Corporation-Statistik für"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:7
-msgid "Your monthly stats"
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:8
+#, fuzzy, python-format
+#| msgid "Your monthly stats"
+msgid "Your monthly stats for %(year)s"
 msgstr "Deine monatliche Statistik"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:10
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:12
 msgid "Only months with FAT data for the selected year are shown."
 msgstr "Nur Monate in denen auch FAT-Links registriert sind werden angezeigt."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:11
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:13
 msgid "Only characters that have FATs for the selected year are shown."
 msgstr ""
 "Nur Charaktere für die auch FAT-Links registriert sind werden angezeigt."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:29
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:20
+#, fuzzy
+#| msgid "Your monthly stats"
+msgid "Total monthly FATs"
+msgstr "Deine monatliche Statistik"
+
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:24
+msgid "This is the monthly total FAT count for all your characters combined."
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:30
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:76
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:28
 msgid "Month"
 msgstr "Monat"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:30
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:31
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:77
 msgid "FAT count"
 msgstr "FAT Anzahl"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:51
-msgid "No FATs for"
-msgstr "Keine FATs für"
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:48
+#, python-format
+msgid "Total FATs for %(year)s"
+msgstr ""
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:59
-msgid "No FATs for this year at all"
-msgstr "Keine FATs für dieses Jahr"
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:60
+#, fuzzy
+#| msgid "Character"
+msgid "Monthly FATs by character"
+msgstr "Charakter"
+
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:93
+#, fuzzy
+#| msgid "Statistics"
+msgid "Statistics for"
+msgstr "Statistik"
+
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:111
+#, fuzzy, python-format
+#| msgid "No recent FAT activity registered for any of your characters."
+msgid "No FATs for %(year)s for any of your characters …"
+msgstr "Keine Aktivität für Deine Charaktere registriert."
 
 #: afat/templates/afat/view/dashboard/dashboard.html:12
 msgid "Recent activity"
@@ -995,51 +1024,51 @@ msgstr "Flottenaktivitäts-Tracking Statistik"
 msgid "Fleet activity"
 msgstr "Flottenaktivität"
 
-#: afat/templatetags/afat.py:42
+#: afat/templatetags/afat.py:43
 msgid "January"
 msgstr "Januar"
 
-#: afat/templatetags/afat.py:43
+#: afat/templatetags/afat.py:44
 msgid "February"
 msgstr "Februar"
 
-#: afat/templatetags/afat.py:44
+#: afat/templatetags/afat.py:45
 msgid "March"
 msgstr "März"
 
-#: afat/templatetags/afat.py:45
+#: afat/templatetags/afat.py:46
 msgid "April"
 msgstr "April"
 
-#: afat/templatetags/afat.py:46
+#: afat/templatetags/afat.py:47
 msgid "May"
 msgstr "Mai"
 
-#: afat/templatetags/afat.py:47
+#: afat/templatetags/afat.py:48
 msgid "June"
 msgstr "Juni"
 
-#: afat/templatetags/afat.py:48
+#: afat/templatetags/afat.py:49
 msgid "July"
 msgstr "Juli"
 
-#: afat/templatetags/afat.py:49
+#: afat/templatetags/afat.py:50
 msgid "August"
 msgstr "August"
 
-#: afat/templatetags/afat.py:50
+#: afat/templatetags/afat.py:51
 msgid "September"
 msgstr "September"
 
-#: afat/templatetags/afat.py:51
+#: afat/templatetags/afat.py:52
 msgid "October"
 msgstr "Oktober"
 
-#: afat/templatetags/afat.py:52
+#: afat/templatetags/afat.py:53
 msgid "November"
 msgstr "November"
 
-#: afat/templatetags/afat.py:53
+#: afat/templatetags/afat.py:54
 msgid "December"
 msgstr "Dezember"
 
@@ -1262,7 +1291,7 @@ msgstr ""
 "<h4>Warnung!</h4><p>Dieser FAT-Link wurde bereits einmal wieder geöffnet. "
 "Dies kann nur einmal getan werden.</p>"
 
-#: afat/views/statistics.py:235
+#: afat/views/statistics.py:248
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
@@ -1270,11 +1299,11 @@ msgstr ""
 "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für "
 "diesen Charakter zu sehen.</p>"
 
-#: afat/views/statistics.py:248
+#: afat/views/statistics.py:261
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 msgstr "<h4>Warnung!</h4><p>Datumsinformationen nicht komplett!</p>"
 
-#: afat/views/statistics.py:369
+#: afat/views/statistics.py:382
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
@@ -1282,69 +1311,34 @@ msgstr ""
 "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diese "
 "Corporation zu sehen.</p>"
 
-#: afat/views/statistics.py:487 afat/views/statistics.py:727
+#: afat/views/statistics.py:500 afat/views/statistics.py:740
 msgid "Monday"
 msgstr "Montag"
 
-#: afat/views/statistics.py:488 afat/views/statistics.py:728
+#: afat/views/statistics.py:501 afat/views/statistics.py:741
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: afat/views/statistics.py:489 afat/views/statistics.py:729
+#: afat/views/statistics.py:502 afat/views/statistics.py:742
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: afat/views/statistics.py:490 afat/views/statistics.py:730
+#: afat/views/statistics.py:503 afat/views/statistics.py:743
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: afat/views/statistics.py:491 afat/views/statistics.py:731
+#: afat/views/statistics.py:504 afat/views/statistics.py:744
 msgid "Friday"
 msgstr "Freitag"
 
-#: afat/views/statistics.py:492 afat/views/statistics.py:732
+#: afat/views/statistics.py:505 afat/views/statistics.py:745
 msgid "Saturday"
 msgstr "Samstag"
 
-#: afat/views/statistics.py:493 afat/views/statistics.py:733
+#: afat/views/statistics.py:506 afat/views/statistics.py:746
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: afat/views/statistics.py:610
+#: afat/views/statistics.py:623
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
-
-#, fuzzy
-#~| msgid "Next year"
-#~ msgid "Next"
-#~ msgstr "Nächstes Jahr"
-
-#, fuzzy
-#~| msgid "Previous year"
-#~ msgid "Previous"
-#~ msgstr "Vorheriger Monat"
-
-#, fuzzy
-#~| msgid "Corporation statistics for"
-#~ msgid "View detailed corporation statistics for: "
-#~ msgstr "Corporation-Statistik für"
-
-#, fuzzy
-#~| msgid "Character"
-#~ msgid "Main characters"
-#~ msgstr "Charakter"
-
-#, fuzzy
-#~| msgid "Character"
-#~ msgid "Alt characters"
-#~ msgstr "Charakter"
-
-#, fuzzy
-#~| msgid "Statistics"
-#~ msgid "Statistics for"
-#~ msgstr "Statistik"
-
-#, fuzzy
-#~| msgid "Alliance statistics for"
-#~ msgid "View detailed alliance statistics for: "
-#~ msgstr "Allianz-Statistik für"
