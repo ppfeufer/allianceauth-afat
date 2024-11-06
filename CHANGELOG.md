@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## \[3.3.0\] - 2024-11-06
+
 ### Added
 
 - Monthly total FATs to statistics overview
