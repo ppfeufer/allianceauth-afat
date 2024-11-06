@@ -586,8 +586,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     colors = [get_random_rgba_color() for _ in data_ship_type]
 
     data_ship_type = [
-        list(str(item["shiptype"]) for item in data_ship_type),
-        list(item["count"] for item in data_ship_type),
+        [str(item["shiptype"]) for item in data_ship_type],
+        [item["count"] for item in data_ship_type],
         colors,
     ]
 
