@@ -4,6 +4,7 @@ Views helper
 
 # Standard Library
 import random
+from collections import OrderedDict
 from datetime import datetime
 
 # Django
@@ -322,3 +323,77 @@ def current_month_and_year() -> tuple[int, int]:
     current_year = datetime.now().year
 
     return current_month, current_year
+
+
+def get_fats_per_hour(fats) -> list:
+    """
+    Get the FATs per hour from the fats queryset
+
+    :param fats:
+    :type fats:
+    :return:
+    :rtype:
+    """
+
+    data_time = {i: fats.filter(fatlink__created__hour=i).count() for i in range(24)}
+
+    return [
+        list(data_time.keys()),
+        list(data_time.values()),
+        [get_random_rgba_color()],
+    ]
+
+
+def get_fat_per_weekday(fats) -> list:
+    """
+    Get the FATs per weekday from the fats queryset
+
+    :param fats:
+    :type fats:
+    :return:
+    :rtype:
+    """
+
+    return [
+        [
+            _("Monday"),
+            _("Tuesday"),
+            _("Wednesday"),
+            _("Thursday"),
+            _("Friday"),
+            _("Saturday"),
+            _("Sunday"),
+        ],
+        [fats.filter(fatlink__created__iso_week_day=i).count() for i in range(1, 8)],
+        [get_random_rgba_color()],
+    ]
+
+
+def get_average_fats_by_corporations(fats, corporations) -> list:
+    """
+    Get the average FATs per corporation
+
+    :param fats:
+    :type fats:
+    :param corporations:
+    :type corporations:
+    :return:
+    :rtype:
+    """
+
+    data_avgs = {
+        corp.corporation_name: round(
+            fats.filter(character__corporation_id=corp.corporation_id).count()
+            / corp.member_count,
+            2,
+        )
+        for corp in corporations
+    }
+
+    data_avgs = OrderedDict(sorted(data_avgs.items(), key=lambda x: x[1], reverse=True))
+
+    return [
+        list(data_avgs.keys()),
+        list(data_avgs.values()),
+        get_random_rgba_color(),
+    ]

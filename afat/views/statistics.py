@@ -32,6 +32,9 @@ from afat import __title__
 from afat.helper.views import (
     characters_with_permission,
     current_month_and_year,
+    get_average_fats_by_corporations,
+    get_fat_per_weekday,
+    get_fats_per_hour,
     get_random_rgba_color,
     user_has_any_perms,
 )
@@ -214,7 +217,7 @@ def character(  # pylint: disable=too-many-locals
     ):
         can_view_character = False
 
-    # Check if the user if by any chance in the same corporation as the character
+    # Check if the user is by any chance in the same corporation as the character
     # and can view own corporation statistics
     if (
         eve_character not in valid
@@ -277,14 +280,8 @@ def character(  # pylint: disable=too-many-locals
         colors,
     ]
 
-    # Data for by Time Line Chart
-    data_time = {i: fats.filter(fatlink__created__hour=i).count() for i in range(24)}
-
-    data_time = [
-        list(data_time.keys()),
-        list(data_time.values()),
-        [get_random_rgba_color()],
-    ]
+    # Data for by timeline Chart
+    data_time = get_fats_per_hour(fats)
 
     context = {
         "character": eve_character,
@@ -351,7 +348,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     current_month, current_year = current_month_and_year()
 
-    # Check character has permission to view other corp stats
+    # Check character has permission to view other corps stats
     if int(request.user.profile.main_character.corporation_id) != int(corpid):
         if not user_has_any_perms(
             user=request.user,
@@ -444,10 +441,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_stacked = []
 
     for key, value in data.items():
-        stack = []
-        stack.append(key)
-        stack.append(get_random_rgba_color())
-        stack.append([])
+        stack = [key, get_random_rgba_color(), []]
 
         data_ = stack[2]
 
@@ -460,28 +454,10 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_stacked = [chars, data_stacked]
 
     # Data for By Time
-    data_time = {i: fats.filter(fatlink__created__hour=i).count() for i in range(24)}
-
-    data_time = [
-        list(data_time.keys()),
-        list(data_time.values()),
-        [get_random_rgba_color()],
-    ]
+    data_time = get_fats_per_hour(fats)
 
     # Data for By Weekday
-    data_weekday = [
-        [
-            gettext("Monday"),
-            gettext("Tuesday"),
-            gettext("Wednesday"),
-            gettext("Thursday"),
-            gettext("Friday"),
-            gettext("Saturday"),
-            gettext("Sunday"),
-        ],
-        [fats.filter(fatlink__created__iso_week_day=i).count() for i in range(1, 8)],
-        [get_random_rgba_color()],
-    ]
+    data_weekday = get_fat_per_weekday(fats)
 
     chars = {}
 
@@ -647,45 +623,15 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     corporations_in_alliance = EveCorporationInfo.objects.filter(alliance=ally)
 
     # Avg fats by corp
-    data_avgs = {
-        corp.corporation_name: round(
-            fats.filter(character__corporation_id=corp.corporation_id).count()
-            / corp.member_count,
-            2,
-        )
-        for corp in corporations_in_alliance
-    }
-
-    data_avgs = OrderedDict(sorted(data_avgs.items(), key=lambda x: x[1], reverse=True))
-    data_avgs = [
-        list(data_avgs.keys()),
-        list(data_avgs.values()),
-        get_random_rgba_color(),
-    ]
+    data_avgs = get_average_fats_by_corporations(
+        fats=fats, corporations=corporations_in_alliance
+    )
 
     # Fats by Time
-    data_time = {i: fats.filter(fatlink__created__hour=i).count() for i in range(24)}
-
-    data_time = [
-        list(data_time.keys()),
-        list(data_time.values()),
-        [get_random_rgba_color()],
-    ]
+    data_time = get_fats_per_hour(fats=fats)
 
     # Fats by weekday
-    data_weekday = [
-        [
-            gettext("Monday"),
-            gettext("Tuesday"),
-            gettext("Wednesday"),
-            gettext("Thursday"),
-            gettext("Friday"),
-            gettext("Saturday"),
-            gettext("Sunday"),
-        ],
-        [fats.filter(fatlink__created__iso_week_day=i).count() for i in range(1, 8)],
-        [get_random_rgba_color()],
-    ]
+    data_weekday = get_fat_per_weekday(fats=fats)
 
     # Corp list
     corps = {}
