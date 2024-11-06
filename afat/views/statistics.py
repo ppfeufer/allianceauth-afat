@@ -32,6 +32,9 @@ from afat import __title__
 from afat.helper.views import (
     characters_with_permission,
     current_month_and_year,
+    get_average_fats_by_corporations,
+    get_fat_per_weekday,
+    get_fats_per_hour,
     get_random_rgba_color,
     user_has_any_perms,
 )
@@ -76,29 +79,18 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         data = {"No Alliance": [1]}
         sanity_check = {}
 
-        # First create the alliance keys in our dict
+        # Group corporations by alliance
         for character_with_access in characters_with_access:
-            if character_with_access.alliance_name is not None:
-                data[character_with_access.alliance_name] = [
-                    character_with_access.alliance_id
-                ]
-
-        # Now append the alliance keys
-        for character_with_access in characters_with_access:
+            alliance_name = character_with_access.alliance_name or "No Alliance"
             corp_id = character_with_access.corporation_id
             corp_name = character_with_access.corporation_name
 
-            # if corp_id not in sanity_check.keys():
+            if alliance_name not in data:
+                data[alliance_name] = [character_with_access.alliance_id]
+
             if corp_id not in sanity_check:
-                if character_with_access.alliance_name is None:
-                    data["No Alliance"].append((corp_id, corp_name))
-                else:
-                    data[character_with_access.alliance_name].append(
-                        (corp_id, corp_name)
-                    )
-
-            sanity_check[corp_id] = corp_id
-
+                data[alliance_name].append((corp_id, corp_name))
+                sanity_check[corp_id] = corp_id
     elif request.user.has_perm(perm="afat.stats_corporation_own"):
         data = [
             (
@@ -149,45 +141,41 @@ def _calculate_year_stats(request, year) -> dict:
         character_ownership__user=request.user
     ).order_by("-userprofile", "character_name")
 
-    # Get all FATs for the year and group by month
+    # Get all FATs for the year and group by character and month
     fats_in_year = (
-        Fat.objects.filter(fatlink__created__year=year)
-        .filter(character__in=characters)
-        .values("fatlink__created__month")
+        Fat.objects.filter(fatlink__created__year=year, character__in=characters)
+        .values("character__character_id", "fatlink__created__month")
         .annotate(fat_count=Count("id"))
     )
 
-    months["total"] = {
-        int(result["fatlink__created__month"]): result["fat_count"]
-        for result in fats_in_year
+    # Initialize character data
+    character_data = {
+        char.character_id: {"name": char.character_name, "fats": {}}
+        for char in characters
     }
 
-    for char in characters:
-        character_fats_in_year = (
-            Fat.objects.filter(fatlink__created__year=year)
-            .filter(character=char)
-            .values("fatlink__created__month")
-            .annotate(fat_count=Count("id"))
-        )
+    # Populate the months and character data
+    for result in fats_in_year:
+        month = int(result["fatlink__created__month"])
+        char_id = int(result["character__character_id"])
+        fat_count = int(result["fat_count"])
 
-        # Only if there are FATs for this year for the character
-        if character_fats_in_year:
-            character_fats_per_month = {
-                int(result["fatlink__created__month"]): result["fat_count"]
-                for result in character_fats_in_year
-            }
+        # Update total fats per month
+        if month not in months["total"]:
+            months["total"][month] = 0
 
-            # Sort by month
-            character_fats_per_month = dict(
-                sorted(character_fats_per_month.items(), key=lambda item: item[0])
-            )
+        months["total"][month] += fat_count
 
-            months["characters"].append(
-                (char.character_name, character_fats_per_month, char.character_id)
-            )
+        # Update character fats per month
+        character_data[char_id]["fats"][month] = fat_count
 
-    # Return sorted by character name
-    # return sorted(months, key=lambda x: x[0])
+    # Sort character fats by month and add to the result,
+    # excluding characters with no FATs
+    for char_id, data in character_data.items():
+        if data["fats"]:  # Only include characters with FATs
+            sorted_fats = dict(sorted(data["fats"].items()))
+            months["characters"].append((data["name"], sorted_fats, char_id))
+
     return months
 
 
@@ -229,7 +217,7 @@ def character(  # pylint: disable=too-many-locals
     ):
         can_view_character = False
 
-    # Check if the user if by any chance in the same corporation as the character
+    # Check if the user is by any chance in the same corporation as the character
     # and can view own corporation statistics
     if (
         eve_character not in valid
@@ -239,7 +227,7 @@ def character(  # pylint: disable=too-many-locals
     ):
         can_view_character = True
 
-    # If the user cannot view the character's statistics, send him home
+    # If the user cannot view the character's statistics, send him home …
     if can_view_character is False:
         messages.warning(
             request=request,
@@ -292,17 +280,8 @@ def character(  # pylint: disable=too-many-locals
         colors,
     ]
 
-    # Data for by Time Line Chart
-    data_time = {}
-
-    for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__created__hour=i).count()
-
-    data_time = [
-        list(data_time.keys()),
-        list(data_time.values()),
-        [get_random_rgba_color()],
-    ]
+    # Data for by timeline Chart
+    data_time = get_fats_per_hour(fats)
 
     context = {
         "character": eve_character,
@@ -369,7 +348,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     current_month, current_year = current_month_and_year()
 
-    # Check character has permission to view other corp stats
+    # Check character has permission to view other corps stats
     if int(request.user.profile.main_character.corporation_id) != int(corpid):
         if not user_has_any_perms(
             user=request.user,
@@ -462,10 +441,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_stacked = []
 
     for key, value in data.items():
-        stack = []
-        stack.append(key)
-        stack.append(get_random_rgba_color())
-        stack.append([])
+        stack = [key, get_random_rgba_color(), []]
 
         data_ = stack[2]
 
@@ -478,36 +454,10 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_stacked = [chars, data_stacked]
 
     # Data for By Time
-    data_time = {}
-
-    for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__created__hour=i).count()
-
-    data_time = [
-        list(data_time.keys()),
-        list(data_time.values()),
-        [get_random_rgba_color()],
-    ]
+    data_time = get_fats_per_hour(fats)
 
     # Data for By Weekday
-    data_weekday = []
-
-    for i in range(1, 8):
-        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
-
-    data_weekday = [
-        [
-            gettext("Monday"),
-            gettext("Tuesday"),
-            gettext("Wednesday"),
-            gettext("Thursday"),
-            gettext("Friday"),
-            gettext("Saturday"),
-            gettext("Sunday"),
-        ],
-        data_weekday,
-        [get_random_rgba_color()],
-    ]
+    data_weekday = get_fat_per_weekday(fats)
 
     chars = {}
 
@@ -571,33 +521,31 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     :rtype:
     """
 
-    if not year:
-        year = datetime.now().year
+    year = year or datetime.now().year
 
-    if allianceid == "000":
-        allianceid = None
-
-    if allianceid is not None:
-        ally = get_or_create_alliance_info(alliance_id=allianceid)
-        alliance_name = ally.alliance_name
-    else:
-        ally = None
-        alliance_name = "No Alliance"
+    ally = (
+        get_or_create_alliance_info(alliance_id=allianceid)
+        if allianceid != "000"
+        else None
+    )
+    alliance_name = ally.alliance_name if ally else "No Alliance"
 
     current_month, current_year = current_month_and_year()
 
     if not month:
         months = []
 
-        for i in range(1, 13):
-            ally_fats = Fat.objects.filter(
+        ally_fats_by_month = (
+            Fat.objects.filter(
                 character__alliance_id=allianceid,
-                fatlink__created__month=i,
                 fatlink__created__year=year,
-            ).count()
+            )
+            .values("fatlink__created__month")
+            .annotate(fat_count=Count("id"))
+        )
 
-            if ally_fats > 0:
-                months.append((i, ally_fats))
+        for entry in ally_fats_by_month:
+            months.append((entry["fatlink__created__month"], entry["fat_count"]))
 
         context = {
             "alliance": alliance_name,
@@ -610,6 +558,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
             "type": 1,
         }
 
+        # /fleet-activity-tracking/statistics/alliance/<alliance_id>/<year>/
         return render(
             request=request,
             template_name="afat/view/statistics/statistics-alliance-year-overview.html",
@@ -632,127 +581,62 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
         fatlink__created__year=year,
     )
 
-    corporations = EveCorporationInfo.objects.filter(alliance=ally)
-
     # Data for ship type pie chart
-    data_ship_type = {}
-
-    for fat in fats:
-        if fat.shiptype in data_ship_type:
-            continue
-
-        data_ship_type[fat.shiptype] = fats.filter(shiptype=fat.shiptype).count()
-
-    colors = []
-
-    for _ in data_ship_type:
-        bg_color_str = get_random_rgba_color()
-        colors.append(bg_color_str)
+    data_ship_type = fats.values("shiptype").annotate(count=Count("shiptype"))
+    colors = [get_random_rgba_color() for _ in data_ship_type]
 
     data_ship_type = [
-        # Ship type can be None, so we need to convert to string here
-        list(str(key) for key in data_ship_type),
-        list(data_ship_type.values()),
+        [str(item["shiptype"]) for item in data_ship_type],
+        [item["count"] for item in data_ship_type],
         colors,
     ]
 
-    # Fats by corp and ship type?
+    # Fats by corp and ship type
     data = {}
+    corps_in_fats = set()
 
     for fat in fats:
-        if fat.shiptype in data:
-            continue
+        shiptype = fat.shiptype
+        corp_name = fat.character.corporation_name
 
-        data[fat.shiptype] = {}
+        if shiptype not in data:
+            data[shiptype] = {}
 
-    corps = []
+        if corp_name not in data[shiptype]:
+            data[shiptype][corp_name] = 0
 
-    for fat in fats:
-        if fat.character.corporation_name in corps:
-            continue
+        data[shiptype][corp_name] += 1
+        corps_in_fats.add(corp_name)
 
-        corps.append(fat.character.corporation_name)
-
-    for key, ship_type in data.items():
-        for corp in corps:
-            ship_type[corp] = 0
-
-    for fat in fats:
-        data[fat.shiptype][fat.character.corporation_name] += 1
+    corps_in_fats = list(corps_in_fats)
 
     if None in data:
-        data["Unknown"] = data[None]
-        data.pop(None)
+        data["Unknown"] = data.pop(None)
 
-    data_stacked = []
+    data_stacked = [
+        (key, get_random_rgba_color(), [value.get(corp, 0) for corp in corps_in_fats])
+        for key, value in data.items()
+    ]
 
-    for key, value in data.items():
-        stack = []
-        stack.append(key)
-        stack.append(get_random_rgba_color())
-        stack.append([])
+    data_stacked = [corps_in_fats, data_stacked]
 
-        data_ = stack[2]
-
-        for corp in corps:
-            data_.append(value[corp])
-
-        stack.append(data_)
-        data_stacked.append(tuple(stack))
-
-    data_stacked = [corps, data_stacked]
+    corporations_in_alliance = EveCorporationInfo.objects.filter(alliance=ally)
 
     # Avg fats by corp
-    data_avgs = {}
-
-    for corp in corporations:
-        c_fats = fats.filter(character__corporation_id=corp.corporation_id).count()
-        avg = c_fats / corp.member_count
-        data_avgs[corp.corporation_name] = round(avg, 2)
-
-    data_avgs = OrderedDict(sorted(data_avgs.items(), key=lambda x: x[1], reverse=True))
-    data_avgs = [
-        list(data_avgs.keys()),
-        list(data_avgs.values()),
-        get_random_rgba_color(),
-    ]
+    data_avgs = get_average_fats_by_corporations(
+        fats=fats, corporations=corporations_in_alliance
+    )
 
     # Fats by Time
-    data_time = {}
-
-    for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__created__hour=i).count()
-
-    data_time = [
-        list(data_time.keys()),
-        list(data_time.values()),
-        [get_random_rgba_color()],
-    ]
+    data_time = get_fats_per_hour(fats=fats)
 
     # Fats by weekday
-    data_weekday = []
-
-    for i in range(1, 8):
-        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
-
-    data_weekday = [
-        [
-            gettext("Monday"),
-            gettext("Tuesday"),
-            gettext("Wednesday"),
-            gettext("Thursday"),
-            gettext("Friday"),
-            gettext("Saturday"),
-            gettext("Sunday"),
-        ],
-        data_weekday,
-        [get_random_rgba_color()],
-    ]
+    data_weekday = get_fat_per_weekday(fats=fats)
 
     # Corp list
     corps = {}
 
-    for corp in corporations:
+    for corp in corporations_in_alliance:
         c_fats = fats.filter(character__corporation_id=corp.corporation_id).count()
         avg = c_fats / corp.member_count
         corps[corp] = (corp.corporation_id, c_fats, round(avg, 2))

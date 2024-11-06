@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-05 19:52+0100\n"
+"POT-Creation-Date: 2024-11-06 02:09+0100\n"
 "PO-Revision-Date: 2024-05-10 14:14+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Polish <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -133,14 +133,14 @@ msgid ""
 "{int(duration_seconds[0])} seconds"
 msgstr ""
 
-#: afat/helper/views.py:58 afat/helper/views.py:177
+#: afat/helper/views.py:59 afat/helper/views.py:178
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:78
 msgid "ESI"
 msgstr ""
 
-#: afat/helper/views.py:89
+#: afat/helper/views.py:90
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
 msgid ""
@@ -148,14 +148,14 @@ msgid ""
 "and close the associated FAT link."
 msgstr ""
 
-#: afat/helper/views.py:92
+#: afat/helper/views.py:93
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
 "from {fatlink.character.character_name}?</p>"
 msgstr ""
 
-#: afat/helper/views.py:94
+#: afat/helper/views.py:95
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:41
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
@@ -163,26 +163,54 @@ msgstr ""
 msgid "Stop tracking"
 msgstr ""
 
-#: afat/helper/views.py:122 afat/helper/views.py:188
+#: afat/helper/views.py:123 afat/helper/views.py:189
 msgid "Delete"
 msgstr "Usuń"
 
-#: afat/helper/views.py:124
+#: afat/helper/views.py:125
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr ""
 
-#: afat/helper/views.py:190
+#: afat/helper/views.py:191
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to remove {fat.character.character_name} from this "
 "FAT link?</p>"
 msgstr ""
 
-#: afat/helper/views.py:242
+#: afat/helper/views.py:243
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr ""
+
+#: afat/helper/views.py:359
+msgid "Monday"
+msgstr "Poniedziałek"
+
+#: afat/helper/views.py:360
+msgid "Tuesday"
+msgstr "Wtorek"
+
+#: afat/helper/views.py:361
+msgid "Wednesday"
+msgstr "Środa"
+
+#: afat/helper/views.py:362
+msgid "Thursday"
+msgstr "Czwartek"
+
+#: afat/helper/views.py:363
+msgid "Friday"
+msgstr "Piątek"
+
+#: afat/helper/views.py:364
+msgid "Saturday"
+msgstr "Sobota"
+
+#: afat/helper/views.py:365
+msgid "Sunday"
+msgstr "Niedziela"
 
 #: afat/models.py:59
 msgid "Can access the AFAT module"
@@ -1172,50 +1200,22 @@ msgid ""
 "be re-opened only once!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:248
+#: afat/views/statistics.py:236
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:261
+#: afat/views/statistics.py:249
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:382
+#: afat/views/statistics.py:361
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:500 afat/views/statistics.py:740
-msgid "Monday"
-msgstr "Poniedziałek"
-
-#: afat/views/statistics.py:501 afat/views/statistics.py:741
-msgid "Tuesday"
-msgstr "Wtorek"
-
-#: afat/views/statistics.py:502 afat/views/statistics.py:742
-msgid "Wednesday"
-msgstr "Środa"
-
-#: afat/views/statistics.py:503 afat/views/statistics.py:743
-msgid "Thursday"
-msgstr "Czwartek"
-
-#: afat/views/statistics.py:504 afat/views/statistics.py:744
-msgid "Friday"
-msgstr "Piątek"
-
-#: afat/views/statistics.py:505 afat/views/statistics.py:745
-msgid "Saturday"
-msgstr "Sobota"
-
-#: afat/views/statistics.py:506 afat/views/statistics.py:746
-msgid "Sunday"
-msgstr "Niedziela"
-
-#: afat/views/statistics.py:623
+#: afat/views/statistics.py:572
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
