@@ -278,10 +278,7 @@ def character(  # pylint: disable=too-many-locals
     ]
 
     # Data for by Time Line Chart
-    data_time = {}
-
-    for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__created__hour=i).count()
+    data_time = {i: fats.filter(fatlink__created__hour=i).count() for i in range(24)}
 
     data_time = [
         list(data_time.keys()),
@@ -463,10 +460,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     data_stacked = [chars, data_stacked]
 
     # Data for By Time
-    data_time = {}
-
-    for i in range(0, 24):
-        data_time[i] = fats.filter(fatlink__created__hour=i).count()
+    data_time = {i: fats.filter(fatlink__created__hour=i).count() for i in range(24)}
 
     data_time = [
         list(data_time.keys()),
@@ -475,11 +469,6 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     ]
 
     # Data for By Weekday
-    data_weekday = []
-
-    for i in range(1, 8):
-        data_weekday.append(fats.filter(fatlink__created__iso_week_day=i).count())
-
     data_weekday = [
         [
             gettext("Monday"),
@@ -490,7 +479,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
             gettext("Saturday"),
             gettext("Sunday"),
         ],
-        data_weekday,
+        [fats.filter(fatlink__created__iso_week_day=i).count() for i in range(1, 8)],
         [get_random_rgba_color()],
     ]
 
