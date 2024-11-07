@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth AFAT
 from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
-from afat.models import FleetType
+from afat.models import Doctrine, FleetType, Setting
 
 
 def get_mandatory_form_label_text(text):
@@ -112,3 +112,33 @@ class FatLinkEditForm(forms.Form):
         label=get_mandatory_form_label_text(text=_("Fleet name")),
         max_length=255,
     )
+
+
+class SettingAdminForm(forms.ModelForm):
+    """
+    Form definitions for the FleetType form
+    """
+
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        Meta
+        """
+
+        model = Setting
+
+        fields = "__all__"
+
+
+class DoctrineAdminForm(forms.ModelForm):
+    """
+    Form definitions for the Doctrine form
+    """
+
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        Meta
+        """
+
+        model = Doctrine
+
+        fields = "__all__"

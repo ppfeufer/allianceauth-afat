@@ -2,9 +2,13 @@
 The models
 """
 
+# Third Party
+from solo.models import SingletonModel
+
 # Django
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.validators import URLValidator
 from django.db import models, transaction
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -14,7 +18,7 @@ from django.utils.translation import gettext as _
 from allianceauth.eveonline.models import EveCharacter
 
 # Alliance Auth AFAT
-from afat.managers import FatLinkManager, FatManager
+from afat.managers import FatLinkManager, FatManager, SettingManager
 
 
 def get_sentinel_user() -> User:
@@ -370,3 +374,130 @@ class Log(models.Model):
         default_permissions = ()
         verbose_name = _("Log")
         verbose_name_plural = _("Logs")
+
+
+class Doctrine(models.Model):
+    """
+    Fleet Doctrines
+    """
+
+    # Doctrine name
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        help_text=_("Short name to identify this doctrine"),
+        verbose_name=_("Name"),
+    )
+
+    # Link to your doctrine
+    link = models.CharField(
+        max_length=255,
+        blank=True,
+        help_text=_("A link to a doctrine page for this doctrine if you have."),
+        verbose_name=_("Doctrine link"),
+    )
+
+    # Doctrine notes
+    notes = models.TextField(
+        null=True,
+        blank=True,
+        help_text=_(
+            "You can add notes about this doctrine here if you want. (Optional)"
+        ),
+        verbose_name=_("Notes"),
+    )
+
+    # Is doctrine active
+    is_enabled = models.BooleanField(
+        default=True,
+        db_index=True,
+        help_text=_("Whether this doctrine is enabled or not."),
+        verbose_name=_("Is enabled"),
+    )
+
+    def clean(self):
+        """
+        Check if the doctrine link is valid
+
+        :return:
+        :rtype:
+        """
+
+        doctrine_link = self.link
+
+        if doctrine_link != "":
+            validate = URLValidator()
+
+            try:
+                validate(doctrine_link)
+            except ValidationError as exception:
+                raise ValidationError(
+                    message=_("Your doctrine URL is not valid.")
+                ) from exception
+
+        super().clean()
+
+    def __str__(self) -> str:
+        """
+        String representation of the object
+
+        :return:
+        :rtype:
+        """
+
+        return str(self.name)
+
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        FleetDoctrine :: Meta
+        """
+
+        verbose_name = _("Doctrine")
+        verbose_name_plural = _("Doctrines")
+        default_permissions = ()
+
+
+class Setting(SingletonModel):
+    """
+    Default forum settings
+    """
+
+    class Field(models.TextChoices):
+        """
+        Choices for Setting.Field
+        """
+
+        USE_DOCTRINES_FROM_FITTINGS_MODULE = "use_doctrines_from_fittings_module", _(
+            "Use Doctrines from Fittings module"
+        )
+
+    use_doctrines_from_fittings_module = models.BooleanField(
+        default=False,
+        db_index=True,
+        help_text=_(
+            "Whether to use the doctrines from the Fittings modules in the doctrine "
+            "dropdown. Note: The fittings module needs to be installed for this."
+        ),
+        verbose_name=Field.USE_DOCTRINES_FROM_FITTINGS_MODULE.label,  # pylint: disable=no-member
+    )
+
+    objects = SettingManager()
+
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        Setting :: Meta
+        """
+
+        default_permissions = ()
+        verbose_name = _("Setting")
+        verbose_name_plural = _("Settings")
+
+    def __str__(self) -> str:
+        """
+        String representation of the object
+
+        :return:
+        :rtype:
+        """
+
+        return str(_("AFAT Settings"))
