@@ -7,8 +7,7 @@ from solo.models import SingletonModel
 
 # Django
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
-from django.core.validators import URLValidator
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, transaction
 from django.utils import timezone
 from django.utils.crypto import get_random_string
@@ -18,7 +17,7 @@ from django.utils.translation import gettext as _
 from allianceauth.eveonline.models import EveCharacter
 
 # Alliance Auth AFAT
-from afat.managers import FatLinkManager, FatManager, SettingManager
+from afat.managers import FatLinkManager, FatManager
 
 
 def get_sentinel_user() -> User:
@@ -389,20 +388,12 @@ class Doctrine(models.Model):
         verbose_name=_("Name"),
     )
 
-    # Link to your doctrine
-    link = models.CharField(
-        max_length=255,
-        blank=True,
-        help_text=_("A link to a doctrine page for this doctrine if you have."),
-        verbose_name=_("Doctrine link"),
-    )
-
     # Doctrine notes
     notes = models.TextField(
         null=True,
         blank=True,
         help_text=_(
-            "You can add notes about this doctrine here if you want. (Optional)"
+            "You can add notes about this doctrine here if you want. (optional)"
         ),
         verbose_name=_("Notes"),
     )
@@ -414,28 +405,6 @@ class Doctrine(models.Model):
         help_text=_("Whether this doctrine is enabled or not."),
         verbose_name=_("Is enabled"),
     )
-
-    def clean(self):
-        """
-        Check if the doctrine link is valid
-
-        :return:
-        :rtype:
-        """
-
-        doctrine_link = self.link
-
-        if doctrine_link != "":
-            validate = URLValidator()
-
-            try:
-                validate(doctrine_link)
-            except ValidationError as exception:
-                raise ValidationError(
-                    message=_("Your doctrine URL is not valid.")
-                ) from exception
-
-        super().clean()
 
     def __str__(self) -> str:
         """
@@ -481,8 +450,6 @@ class Setting(SingletonModel):
         verbose_name=Field.USE_DOCTRINES_FROM_FITTINGS_MODULE.label,  # pylint: disable=no-member
     )
 
-    objects = SettingManager()
-
     class Meta:  # pylint: disable=too-few-public-methods
         """
         Setting :: Meta
@@ -501,3 +468,16 @@ class Setting(SingletonModel):
         """
 
         return str(_("AFAT Settings"))
+
+    @staticmethod
+    def get_setting(setting_key: str):
+        """
+        Get the settings
+
+        :return:
+        :rtype:
+        """
+
+        return Setting.get_solo().__getattribute__(  # pylint: disable=unnecessary-dunder-call
+            setting_key
+        )
