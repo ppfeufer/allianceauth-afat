@@ -42,7 +42,7 @@ from afat.forms import (
     AFatManualFatForm,
     FatLinkEditForm,
 )
-from afat.helper.fatlinks import get_esi_fleet_information_by_user
+from afat.helper.fatlinks import get_doctrines, get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
@@ -142,6 +142,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
         "esi_fleet": get_esi_fleet_information_by_user(request.user),
         "esi_fatlink_form": AFatEsiFatForm(),
         "manual_fatlink_form": AFatClickFatForm(),
+        "doctrines": get_doctrines(),
     }
 
     logger.info(msg=f"Add FAT link view called by {request.user}")

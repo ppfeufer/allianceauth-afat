@@ -9,12 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth AFAT
 from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
-from afat.helper.fatlinks import get_doctrines
 from afat.models import Doctrine, FleetType, Setting
-
-# The first line dropdown is blank
-# Usage example: dropdown = form_choices_blank + [(o.id, o.name) for o in objects]
-form_choices_blank = [("", "---------")]
 
 
 def get_mandatory_form_label_text(text):
@@ -54,22 +49,16 @@ class AFatEsiFatForm(forms.Form):
         label=_("Fleet type (optional)"),
         queryset=FleetType.objects.filter(is_enabled=True),
     )
-    doctrine_esi = forms.ChoiceField(
+    doctrine_esi = forms.CharField(
         required=False,
         label=_("Doctrine (optional)"),
-        choices=(),
+        widget=forms.TextInput(
+            attrs={
+                "data-datalist": "afat-fleet-doctrine-list",
+                "data-full-width": "true",
+            }
+        ),
     )
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
-        super().__init__(*args, **kwargs)
-
-        # Due to the dynamic nature of this dropdown field, we need to initialize it here.
-        # This is a workaround to avoid settings being cached and not updated when changed.
-        # This is also the reason we cannot use a ModelChoiceField here.
-        self.fields["doctrine_esi"].choices = form_choices_blank + [
-            (str(o), str(o)) for o in get_doctrines()
-        ]
 
 
 class AFatManualFatForm(forms.Form):
@@ -111,10 +100,15 @@ class AFatClickFatForm(forms.Form):
         label=_("Fleet type (optional)"),
         queryset=FleetType.objects.filter(is_enabled=True),
     )
-    doctrine = forms.ChoiceField(
+    doctrine = forms.CharField(
         required=False,
         label=_("Doctrine (optional)"),
-        choices=(),
+        widget=forms.TextInput(
+            attrs={
+                "data-datalist": "afat-fleet-doctrine-list",
+                "data-full-width": "true",
+            }
+        ),
     )
     duration = forms.IntegerField(
         required=True,
@@ -123,17 +117,6 @@ class AFatClickFatForm(forms.Form):
         initial=AFAT_DEFAULT_FATLINK_EXPIRY_TIME,
         widget=forms.TextInput(attrs={"placeholder": _("Expiry time in minutes")}),
     )
-
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
-        super().__init__(*args, **kwargs)
-
-        # Due to the dynamic nature of this dropdown field, we need to initialize it here.
-        # This is a workaround to avoid settings being cached and not updated when changed.
-        # This is also the reason we cannot use a ModelChoiceField here.
-        self.fields["doctrine"].choices = form_choices_blank + [
-            (str(o), str(o)) for o in get_doctrines()
-        ]
 
 
 class FatLinkEditForm(forms.Form):
