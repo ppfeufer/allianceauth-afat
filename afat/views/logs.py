@@ -17,9 +17,8 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
-from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
 from afat.helper.views import convert_logs_to_dict
-from afat.models import FatLink, Log
+from afat.models import FatLink, Log, Setting
 
 logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
@@ -38,7 +37,7 @@ def overview(request: WSGIRequest) -> HttpResponse:
 
     logger.info(msg=f"Log view called by {request.user}")
 
-    context = {"log_duration": AFAT_DEFAULT_LOG_DURATION}
+    context = {"log_duration": Setting.get_setting(Setting.Field.DEFAULT_LOG_DURATION)}
 
     return render(
         request=request,

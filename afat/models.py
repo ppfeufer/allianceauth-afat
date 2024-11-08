@@ -440,9 +440,52 @@ class Setting(SingletonModel):
         Choices for Setting.Field
         """
 
-        USE_DOCTRINES_FROM_FITTINGS_MODULE = "use_doctrines_from_fittings_module", _(
-            "Use Doctrines from Fittings module"
+        DEFAULT_FATLINK_EXPIRY_TIME = "default_fatlink_expiry_time", _(
+            "Default FAT link expiry time"
         )
+        DEFAULT_FATLINK_REOPEN_DURATION = "default_fatlink_reopen_duration", _(
+            "Default FAT link reopen duration"
+        )
+        DEFAULT_FATLINK_REOPEN_GRACE_TIME = "default_fatlink_reopen_grace_time", _(
+            "Default FAT link reopen grace time"
+        )
+        DEFAULT_LOG_DURATION = "default_log_duration", _("Default log duration")
+        USE_DOCTRINES_FROM_FITTINGS_MODULE = "use_doctrines_from_fittings_module", _(
+            "Use doctrines from fittings module"
+        )
+
+    default_fatlink_expiry_time = models.PositiveIntegerField(
+        default=60,
+        help_text=_(
+            "Default expiry time for clickable FAT links in minutes. "
+            "(Default: 60 minutes)"
+        ),
+        verbose_name=Field.DEFAULT_FATLINK_EXPIRY_TIME.label,  # pylint: disable=no-member
+    )
+
+    default_fatlink_reopen_grace_time = models.PositiveIntegerField(
+        default=60,
+        help_text=_(
+            "Default time in minutes a FAT link can be re-opened after it is expired. "
+            "(Default: 60 minutes)"
+        ),
+        verbose_name=Field.DEFAULT_FATLINK_REOPEN_GRACE_TIME.label,  # pylint: disable=no-member
+    )
+
+    default_fatlink_reopen_duration = models.PositiveIntegerField(
+        default=60,
+        help_text=_(
+            "Default time in minutes a FAT link is re-opened for. "
+            "(Default: 60 minutes)"
+        ),
+        verbose_name=Field.DEFAULT_FATLINK_REOPEN_DURATION.label,  # pylint: disable=no-member
+    )
+
+    default_log_duration = models.PositiveIntegerField(
+        default=60,
+        help_text=_("Default time in days a log entry is kept. (Default: 60 days)"),
+        verbose_name=Field.DEFAULT_LOG_DURATION.label,  # pylint: disable=no-member
+    )
 
     use_doctrines_from_fittings_module = models.BooleanField(
         default=False,
