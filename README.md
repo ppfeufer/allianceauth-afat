@@ -37,8 +37,6 @@ ______________________________________________________________________
   - [Updating](#updating)
   - [Data Migration](#data-migration)
     - [Import From Native FAT](#import-from-native-fat)
-    - [Import From ImicusFAT](#import-from-imicusfat)
-      - [Uninstall ImicusFAT](#uninstall-imicusfat)
   - [Settings](#settings)
   - [Permissions](#permissions)
   - [Changelog](#changelog)
@@ -112,8 +110,10 @@ please install it first before proceeding. (See the official
 [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html)
 for details)
 
-**For users migrating from one of the other FAT systems, please read the specific
-instructions FIRST.**
+> \[!IMPORTANT\]
+>
+> For users migrating from Alliance Auth's built-in FAT systems,
+> please read the [specific instructions](#data-migration) FIRST.
 
 ### Step 1: Install the App<a name="step-1-install-the-app"></a>
 
@@ -176,8 +176,8 @@ more.
 ## Data Migration<a name="data-migration"></a>
 
 Right after the **initial** installation and running migrations,
-you can import the data from Alliance Auth's native FAT system or from ImicusFAT if
-you have used one of these until now.
+you can import the data from Alliance Auth's native FAT system if
+you have used one it until now.
 
 ### Import From Native FAT<a name="import-from-native-fat"></a>
 
@@ -186,44 +186,6 @@ To import from the native FAT module, simply run the following command:
 ```shell
 python myauth/manage.py afat_import_from_allianceauth_fat
 ```
-
-### Import From ImicusFAT<a name="import-from-imicusfat"></a>
-
-To import from the ImicusFAT module, simply run the following command:
-
-```shell
-python myauth/manage.py afat_import_from_imicusfat
-```
-
-#### Uninstall ImicusFAT<a name="uninstall-imicusfat"></a>
-
-Now that you've migrated, you can uninstal `ImicusFAT`.
-
-First, remove all Django migrations for `ImicusFAT` with:
-
-```shell
-python manage.py migrate imicusfat zero
-```
-
-This will remove all migrations for `ImicusFAT` including its DB tables.
-
-Should this command throw an error, a bit of manual labor is needed, but nothing you
-can't handle, I'm sure.
-
-```shell
-python manage.py migrate imicusfat zero --fake
-```
-
-And remove all DB tables beginning with `imicusfat_` from your DB manually afterwards.
-
-Now that the DB is cleaned up, time to remove te app.
-
-```shell
-pip uninstall allianceauth-imicusfat
-```
-
-Now remove `imicusfat` from your `INSTALLED_APPS` in your `local.py`, restart
-supervisor and ... Done!
 
 ## Settings<a name="settings"></a>
 
