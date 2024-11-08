@@ -2,6 +2,9 @@
 Admin pages configuration
 """
 
+# Third Party
+from solo.admin import SingletonModelAdmin
+
 # Django
 from django.contrib import admin, messages
 from django.db.models import Count
@@ -9,7 +12,8 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
-from afat.models import Fat, FatLink, FleetType, Log
+from afat.forms import DoctrineAdminForm, SettingAdminForm
+from afat.models import Doctrine, Fat, FatLink, FleetType, Log, Setting
 
 
 def custom_filter(title):
@@ -287,3 +291,24 @@ class AFatLogAdmin(admin.ModelAdmin):
         "user__profile__main_character__character_name",
         "user__username",
     )
+
+
+@admin.register(Setting)
+class SettingAdmin(SingletonModelAdmin):
+    """
+    Setting Admin
+    """
+
+    form = SettingAdminForm
+
+
+@admin.register(Doctrine)
+class DoctrineAdmin(admin.ModelAdmin):
+    """
+    Doctrine Admin
+    """
+
+    form = DoctrineAdminForm
+
+    # Display all fields in the admin page
+    list_display = [field.name for field in Doctrine._meta.get_fields()]

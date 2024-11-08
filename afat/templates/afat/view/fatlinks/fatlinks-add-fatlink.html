@@ -16,6 +16,7 @@
     <div class="row">
         {% include "afat/partials/fatlinks/add/esi-link.html" %}
         {% include "afat/partials/fatlinks/add/clickable-link.html" %}
+        {% include "afat/partials/form/fleet-doctrine.html" %}
     </div>
 {% endblock %}
 
@@ -25,6 +26,7 @@
 
 {% block extra_javascript %}
     {% include "afat/bundles/afat-js.html" %}
+    {% include "afat/bundles/afat-fatlink-add-js.html" %}
 
     <script>
         $(document).ready(function () {

@@ -15,6 +15,7 @@ $(document).ready(() => {
         columns: [
             {data: 'fleet_name'},
             {data: 'fleet_type'},
+            {data: 'doctrine'},
             {data: 'creator_name'},
             {
                 data: 'fleet_time',
@@ -45,7 +46,7 @@ $(document).ready(() => {
 
         columnDefs: [
             {
-                targets: [5],
+                targets: [6],
                 orderable: false,
                 createdCell: (td) => {
                     $(td).addClass('text-end');
@@ -53,12 +54,12 @@ $(document).ready(() => {
             },
             {
                 visible: false,
-                targets: [6, 7]
+                targets: [7, 8]
             }
         ],
 
         order: [
-            [3, 'desc']
+            [4, 'desc']
         ],
 
         filterDropDown: {
@@ -67,7 +68,7 @@ $(document).ready(() => {
                     idx: 1
                 },
                 {
-                    idx: 6,
+                    idx: 7,
                     title: afatSettings.translation.dataTable.filter.viaEsi
                 }
             ],

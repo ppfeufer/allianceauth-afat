@@ -259,8 +259,8 @@ class TestFatlinksView(TestCase):
 
     def test_ajax_get_fatlinks_by_year(self):
         # given
-        # self.maxDiff = None
-        self.client.force_login(user=self.user_with_basic_access)
+        self.maxDiff = None
+        self.client.force_login(user=self.user_with_manage_afat)
 
         fatlink_hash = get_hash_on_save()
         fatlink_type_cta = FleetType.objects.create(name="CTA")
@@ -273,6 +273,7 @@ class TestFatlinksView(TestCase):
             is_registered_on_esi=True,
             esi_fleet_id=3726458287,
             link_type=fatlink_type_cta,
+            doctrine="Ships",
             created="2021-11-05T13:19:49.676Z",
         )
 
@@ -299,6 +300,17 @@ class TestFatlinksView(TestCase):
         fleet_time_timestamp = fleet_time.timestamp()
         esi_marker = '<span class="badge bg-success afat-label ms-2">ESI</span>'
 
+        close_esi_tracking_url = reverse(
+            viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink_hash]
+        )
+        redirect_url = reverse(viewname="afat:fatlinks_overview")
+        edit_url = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[fatlink_hash]
+        )
+        delete_url = reverse(
+            viewname="afat:fatlinks_delete_fatlink", args=[fatlink_hash]
+        )
+
         self.assertJSONEqual(
             raw=str(result.content, encoding="utf8"),
             expected_data=[
@@ -314,10 +326,31 @@ class TestFatlinksView(TestCase):
                     "fats_number": 0,
                     "hash": fatlink.hash,
                     "is_esilink": True,
+                    "doctrine": "Ships",
                     "esi_fleet_id": fatlink.esi_fleet_id,
                     "is_registered_on_esi": True,
-                    # "actions": '<a class="btn btn-afat-action btn-info btn-sm" href="/fleet-activity-tracking/fatlink/ncOsHjnjmYZd9k6hI4us8QShRlqJ17/details/"><span class="fa-solid fa-eye"></span></a><a class="btn btn-afat-action btn-danger btn-sm" data-toggle="modal" data-target="#deleteFatLinkModal" data-url="/fleet-activity-tracking/fatlink/ncOsHjnjmYZd9k6hI4us8QShRlqJ17/delete/" data-confirm-text="Delete"data-body-text="<p>Are you sure you want to delete FAT link M2-XFE Keepstar Kill?</p>"><i class="fa-solid fa-trash-can"></i></a>',
-                    "actions": "",
+                    "actions": (
+                        '<a class="btn btn-afat-action btn-primary btn-sm" '
+                        'style="margin-left: 0.25rem;" title="Clicking here will stop '
+                        "the automatic tracking through ESI for this fleet and close "
+                        'the associated FAT link." data-bs-toggle="modal" '
+                        'data-bs-target="#cancelEsiFleetModal" '
+                        f'data-url="{close_esi_tracking_url}?next={redirect_url}" '
+                        'data-body-text="<p>Are you sure you want to close ESI fleet '
+                        'with ID 3726458287 from Bruce Wayne?</p>" '
+                        'data-confirm-text="Stop tracking"><i class="fa-solid fa-times">'
+                        '</i></a><a class="btn btn-info btn-sm m-1" '
+                        f'href="{edit_url}">'
+                        '<span class="fa-solid fa-eye"></span></a>'
+                        '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
+                        'data-bs-target="#deleteFatLinkModal" '
+                        f'data-url="{delete_url}" '
+                        'data-confirm-text="Delete" '
+                        'data-body-text="<p>Are you sure you want to delete FAT '
+                        'link April Fleet 1?</p>">'
+                        '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
+                    ),
+                    # "actions": "",
                     "via_esi": "Yes",
                 }
             ],

@@ -53,7 +53,7 @@ if os.environ.get("USE_MYSQL", True) is True:
     }
 
 # Add any additional apps to this list.
-INSTALLED_APPS += [PACKAGE]
+INSTALLED_APPS += [PACKAGE, "eveuniverse", "fittings"]
 
 # By default, apps are prevented from having public views for security reasons.
 # If you want to allow specific apps to have public views,

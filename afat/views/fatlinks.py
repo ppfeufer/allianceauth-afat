@@ -42,7 +42,7 @@ from afat.forms import (
     AFatManualFatForm,
     FatLinkEditForm,
 )
-from afat.helper.fatlinks import get_esi_fleet_information_by_user
+from afat.helper.fatlinks import get_doctrines, get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
@@ -142,6 +142,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
         "esi_fleet": get_esi_fleet_information_by_user(request.user),
         "esi_fatlink_form": AFatEsiFatForm(),
         "manual_fatlink_form": AFatClickFatForm(),
+        "doctrines": get_doctrines(),
     }
 
     logger.info(msg=f"Add FAT link view called by {request.user}")
@@ -179,6 +180,7 @@ def create_clickable_fatlink(
             if form.cleaned_data["type"] is not None:
                 fatlink.link_type = form.cleaned_data["type"]
 
+            fatlink.doctrine = form.cleaned_data["doctrine"]
             fatlink.creator = request.user
             fatlink.hash = fatlink_hash
             fatlink.created = timezone.now()
@@ -399,6 +401,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     fatlink = FatLink(
         created=timezone.now(),
         fleet=request.session["fatlink_form__name"],
+        doctrine=request.session["fatlink_form__doctrine"],
         creator=request.user,
         character=creator_character,
         hash=fatlink_hash,
@@ -486,6 +489,9 @@ def create_esi_fatlink(
             fatlink_type = fatlink_type_from_form.pk
 
         request.session["fatlink_form__name"] = fatlink_form.cleaned_data["name_esi"]
+        request.session["fatlink_form__doctrine"] = fatlink_form.cleaned_data[
+            "doctrine_esi"
+        ]
         request.session["fatlink_form__type"] = fatlink_type
 
         return redirect(

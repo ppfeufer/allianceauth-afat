@@ -2,6 +2,9 @@
 The models
 """
 
+# Third Party
+from solo.models import SingletonModel
+
 # Django
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -175,6 +178,10 @@ class FatLink(models.Model):
         on_delete=models.CASCADE,
         null=True,
         help_text=_("The FAT link fleet type, if it's set"),
+    )
+
+    doctrine = models.CharField(
+        blank=True, default="", max_length=254, help_text=_("The FAT link doctrine")
     )
 
     is_esilink = models.BooleanField(
@@ -370,3 +377,111 @@ class Log(models.Model):
         default_permissions = ()
         verbose_name = _("Log")
         verbose_name_plural = _("Logs")
+
+
+class Doctrine(models.Model):
+    """
+    Fleet Doctrines
+    """
+
+    # Doctrine name
+    name = models.CharField(
+        max_length=255,
+        unique=True,
+        help_text=_("Short name to identify this doctrine"),
+        verbose_name=_("Name"),
+    )
+
+    # Doctrine notes
+    notes = models.TextField(
+        default="",
+        blank=True,
+        help_text=_(
+            "You can add notes about this doctrine here if you want. (optional)"
+        ),
+        verbose_name=_("Notes"),
+    )
+
+    # Is doctrine active
+    is_enabled = models.BooleanField(
+        default=True,
+        db_index=True,
+        help_text=_("Whether this doctrine is enabled or not."),
+        verbose_name=_("Is enabled"),
+    )
+
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        FleetDoctrine :: Meta
+        """
+
+        verbose_name = _("Doctrine")
+        verbose_name_plural = _("Doctrines")
+        default_permissions = ()
+
+    def __str__(self) -> str:
+        """
+        String representation of the object
+
+        :return:
+        :rtype:
+        """
+
+        return str(self.name)
+
+
+class Setting(SingletonModel):
+    """
+    Default forum settings
+    """
+
+    class Field(models.TextChoices):
+        """
+        Choices for Setting.Field
+        """
+
+        USE_DOCTRINES_FROM_FITTINGS_MODULE = "use_doctrines_from_fittings_module", _(
+            "Use Doctrines from Fittings module"
+        )
+
+    use_doctrines_from_fittings_module = models.BooleanField(
+        default=False,
+        db_index=True,
+        help_text=_(
+            "Whether to use the doctrines from the Fittings modules in the doctrine "
+            "dropdown. Note: The fittings module needs to be installed for this."
+        ),
+        verbose_name=Field.USE_DOCTRINES_FROM_FITTINGS_MODULE.label,  # pylint: disable=no-member
+    )
+
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        Setting :: Meta
+        """
+
+        default_permissions = ()
+        verbose_name = _("Setting")
+        verbose_name_plural = _("Settings")
+
+    def __str__(self) -> str:
+        """
+        String representation of the object
+
+        :return:
+        :rtype:
+        """
+
+        return str(_("AFAT Settings"))
+
+    @staticmethod
+    def get_setting(setting_key: str):
+        """
+        Get the settings
+
+        :return:
+        :rtype:
+        """
+
+        return Setting.get_solo().__getattribute__(  # pylint: disable=unnecessary-dunder-call
+            setting_key
+        )
