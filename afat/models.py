@@ -394,7 +394,7 @@ class Doctrine(models.Model):
 
     # Doctrine notes
     notes = models.TextField(
-        null=True,
+        default="",
         blank=True,
         help_text=_(
             "You can add notes about this doctrine here if you want. (optional)"
@@ -410,6 +410,15 @@ class Doctrine(models.Model):
         verbose_name=_("Is enabled"),
     )
 
+    class Meta:  # pylint: disable=too-few-public-methods
+        """
+        FleetDoctrine :: Meta
+        """
+
+        verbose_name = _("Doctrine")
+        verbose_name_plural = _("Doctrines")
+        default_permissions = ()
+
     def __str__(self) -> str:
         """
         String representation of the object
@@ -419,15 +428,6 @@ class Doctrine(models.Model):
         """
 
         return str(self.name)
-
-    class Meta:  # pylint: disable=too-few-public-methods
-        """
-        FleetDoctrine :: Meta
-        """
-
-        verbose_name = _("Doctrine")
-        verbose_name_plural = _("Doctrines")
-        default_permissions = ()
 
 
 class Setting(SingletonModel):
