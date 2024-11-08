@@ -179,6 +179,7 @@ def create_clickable_fatlink(
             if form.cleaned_data["type"] is not None:
                 fatlink.link_type = form.cleaned_data["type"]
 
+            fatlink.doctrine = form.cleaned_data["doctrine"]
             fatlink.creator = request.user
             fatlink.hash = fatlink_hash
             fatlink.created = timezone.now()
@@ -399,6 +400,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     fatlink = FatLink(
         created=timezone.now(),
         fleet=request.session["fatlink_form__name"],
+        doctrine=request.session["fatlink_form__doctrine"],
         creator=request.user,
         character=creator_character,
         hash=fatlink_hash,
@@ -486,6 +488,9 @@ def create_esi_fatlink(
             fatlink_type = fatlink_type_from_form.pk
 
         request.session["fatlink_form__name"] = fatlink_form.cleaned_data["name_esi"]
+        request.session["fatlink_form__doctrine"] = fatlink_form.cleaned_data[
+            "doctrine_esi"
+        ]
         request.session["fatlink_form__type"] = fatlink_type
 
         return redirect(

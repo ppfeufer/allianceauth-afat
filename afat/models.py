@@ -180,6 +180,10 @@ class FatLink(models.Model):
         help_text=_("The FAT link fleet type, if it's set"),
     )
 
+    doctrine = models.CharField(
+        blank=True, default="", max_length=254, help_text=_("The FAT link doctrine")
+    )
+
     is_esilink = models.BooleanField(
         default=False, help_text=_("Whether this FAT link was created via ESI or not")
     )
