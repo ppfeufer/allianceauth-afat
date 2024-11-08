@@ -38,6 +38,7 @@ Section Order:
 ### Added
 
 - Optional doctrine field to FAT link creation forms
+- Integrity hashes to CSS and JavaScript
 
 ## \[3.3.0\] - 2024-11-06
 
