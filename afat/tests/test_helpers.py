@@ -313,6 +313,7 @@ class TestHelpers(TestCase):
             is_registered_on_esi=True,
             esi_fleet_id="3726458287",
             link_type=fatlink_type_cta,
+            doctrine="Ships",
         )
         fat = Fat.objects.create(
             character=self.character_1101, fatlink=fatlink_created, shiptype="Omen"
@@ -342,6 +343,7 @@ class TestHelpers(TestCase):
                 "system": fat.system,
                 "ship_type": fat.shiptype,
                 "character_name": fat.character.character_name,
+                "doctrine": "Ships",
                 "fleet_name": fat.fatlink.fleet + esi_marker,
                 "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
                 "fleet_type": "CTA",
