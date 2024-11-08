@@ -128,8 +128,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         actions += (
             '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
             f'data-bs-target="#deleteFatLinkModal" data-url="{button_delete_url}" '
-            f'data-confirm-text="{button_delete_text}"'
-            f'data-body-text="{modal_body_text}">'
+            f'data-confirm-text="{button_delete_text}" data-body-text="{modal_body_text}">'
             '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
         )
 
@@ -138,6 +137,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         "fleet_name": fatlink_fleet + esi_fleet_marker,
         "creator_name": creator_main_character,
         "fleet_type": fatlink_type,
+        "doctrine": fatlink.doctrine,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
         "fats_number": fatlink.fats_count,
         "hash": fatlink.hash,
@@ -196,7 +196,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
             'data-bs-toggle="modal" '
             'data-bs-target="#deleteFatModal" '
             f'data-url="{button_delete_fat}" '
-            f'data-confirm-text="{button_delete_text}"'
+            f'data-confirm-text="{button_delete_text}" '
             f'data-body-text="{modal_body_text}">'
             '<i class="fa-solid fa-eye"></i>'
             "</a>"

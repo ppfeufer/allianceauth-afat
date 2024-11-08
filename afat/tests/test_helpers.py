@@ -158,6 +158,7 @@ class TestHelpers(TestCase):
             is_esilink=True,
             is_registered_on_esi=True,
             esi_fleet_id="3726458287",
+            doctrine="Ships",
         )
         Fat.objects.create(
             character=self.character_1101, fatlink=fatlink_1_created, shiptype="Omen"
@@ -172,6 +173,7 @@ class TestHelpers(TestCase):
             character=self.character_1101,
             hash=fatlink_hash_fleet_2,
             link_type=fatlink_type_cta,
+            doctrine="Ships",
         )
         Fat.objects.create(
             character=self.character_1001, fatlink=fatlink_2_created, shiptype="Omen"
@@ -224,6 +226,7 @@ class TestHelpers(TestCase):
                 ),
                 "creator_name": creator_main_character_1,
                 "fleet_type": "",
+                "doctrine": "Ships",
                 "fleet_time": {
                     "time": fleet_time_1,
                     "timestamp": fleet_time_timestamp_1,
@@ -248,7 +251,7 @@ class TestHelpers(TestCase):
                     'fa-eye"></span></a><a class="btn btn-danger btn-sm" '
                     'data-bs-toggle="modal" data-bs-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_1}" '
-                    'data-confirm-text="Delete"data-body-text="<p>Are you '
+                    'data-confirm-text="Delete" data-body-text="<p>Are you '
                     "sure you want to delete FAT link April Fleet "
                     '1?</p>"><i class="fa-solid fa-trash-can fa-fw"></i></a>'
                 ),
@@ -267,6 +270,7 @@ class TestHelpers(TestCase):
                 "fleet_name": "April Fleet 2",
                 "creator_name": creator_main_character_2,
                 "fleet_type": "CTA",
+                "doctrine": "Ships",
                 "fleet_time": {
                     "time": fleet_time_2,
                     "timestamp": fleet_time_timestamp_2,
@@ -278,13 +282,14 @@ class TestHelpers(TestCase):
                 "is_registered_on_esi": False,
                 "actions": (
                     '<a class="btn btn-info btn-sm m-1" '
-                    f'href="{edit_url_2}"><span class="fa-solid '
-                    'fa-eye"></span></a><a class="btn btn-danger btn-sm" '
-                    'data-bs-toggle="modal" data-bs-target="#deleteFatLinkModal" '
+                    f'href="{edit_url_2}"><span '
+                    'class="fa-solid fa-eye"></span></a><a class="btn btn-danger '
+                    'btn-sm" data-bs-toggle="modal" '
+                    'data-bs-target="#deleteFatLinkModal" '
                     f'data-url="{delete_url_2}" '
-                    'data-confirm-text="Delete"data-body-text="<p>Are you '
-                    "sure you want to delete FAT link April Fleet "
-                    '2?</p>"><i class="fa-solid fa-trash-can fa-fw"></i></a>'
+                    'data-confirm-text="Delete" data-body-text="<p>Are you sure you '
+                    'want to delete FAT link April Fleet 2?</p>"><i class="fa-solid '
+                    'fa-trash-can fa-fw"></i></a>'
                 ),
                 "via_esi": "No",
             },
@@ -329,6 +334,7 @@ class TestHelpers(TestCase):
             f"{fat.character.character_name} from this FAT link?</p>"
         )
 
+        self.maxDiff = None
         # then
         self.assertDictEqual(
             d1=result,
@@ -341,14 +347,12 @@ class TestHelpers(TestCase):
                 "fleet_type": "CTA",
                 "via_esi": "Yes",
                 "actions": (
-                    '<a class="btn btn-danger btn-sm" '
-                    'data-bs-toggle="modal" '
+                    '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
                     'data-bs-target="#deleteFatModal" '
                     f'data-url="{button_delete_fat}" '
-                    f'data-confirm-text="{button_delete_text}"'
+                    f'data-confirm-text="{button_delete_text}" '
                     f'data-body-text="{modal_body_text}">'
-                    '<i class="fa-solid fa-eye"></i>'
-                    "</a>"
+                    '<i class="fa-solid fa-eye"></i></a>'
                 ),
             },
         )
