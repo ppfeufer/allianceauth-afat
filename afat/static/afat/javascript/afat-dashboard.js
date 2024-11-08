@@ -24,6 +24,7 @@ $(document).ready(() => {
                 columns: [
                     {data: 'fleet_name'},
                     {data: 'fleet_type'},
+                    {data: 'doctrine'},
                     {data: 'system'},
                     {data: 'ship_type'},
                     {
@@ -74,6 +75,7 @@ $(document).ready(() => {
         columns: [
             {data: 'fleet_name'},
             {data: 'fleet_type'},
+            {data: 'doctrine'},
             {data: 'creator_name'},
             {
                 data: 'fleet_time',
@@ -109,7 +111,7 @@ $(document).ready(() => {
         ],
         columnDefs: [
             {
-                targets: [4],
+                targets: [5],
                 createdCell: (td) => {
                     $(td).addClass('text-end');
                 }

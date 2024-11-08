@@ -9,6 +9,7 @@
                 <tr>
                     <th>{% translate "Name" %}</th>
                     <th>{% translate "Fleet type" %}</th>
+                    <th>{% translate "Doctrine" %}</th>
                     <th>{% translate "Location" %}</th>
                     <th>{% translate "Ship" %}</th>
                     <th>{% translate "Eve time" %}</th>
@@ -34,9 +35,16 @@
                                 {{ fat.fatlink.link_type.name }}
                             {% endif %}
                         </td>
+                        <td>
+                            {% if fat.fatlink.doctrine %}
+                                {{ fat.fatlink.doctrine }}
+                            {% endif %}
+                        </td>
                         <td>{{ fat.system }}</td>
                         <td>{{ fat.shiptype }}</td>
-                        <td data-sort='{{ fat.fatlink.created|date:"Y-m-d H:i" }}'>{{ fat.fatlink.created|date:"Y-M-d, H:i" }}</td>
+                        <td data-sort='{{ fat.fatlink.created|date:"Y-m-d H:i" }}'>
+                            {{ fat.fatlink.created|date:"Y-M-d, H:i" }}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

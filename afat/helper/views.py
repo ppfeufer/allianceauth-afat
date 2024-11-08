@@ -161,9 +161,6 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     :rtype:
     """
 
-    # Fleet type
-    fleet_type = fat.fatlink.link_type.name if fat.fatlink.link_type is not None else ""
-
     # ESI marker
     via_esi = "No"
     esi_fleet_marker = ""
@@ -213,8 +210,11 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
         "ship_type": fat.shiptype,
         "character_name": fat.character.character_name,
         "fleet_name": fleet_name + esi_fleet_marker,
+        "doctrine": fat.fatlink.doctrine,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
-        "fleet_type": fleet_type,
+        "fleet_type": (
+            fat.fatlink.link_type.name if fat.fatlink.link_type is not None else ""
+        ),
         "via_esi": via_esi,
         "actions": actions,
     }
