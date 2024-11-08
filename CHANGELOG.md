@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Optional doctrine field to FAT link creation forms
+
 ## \[3.3.0\] - 2024-11-06
 
 ### Added
