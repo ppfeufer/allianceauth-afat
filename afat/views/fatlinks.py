@@ -31,11 +31,6 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
-from afat.app_settings import (
-    AFAT_DEFAULT_FATLINK_EXPIRY_TIME,
-    AFAT_DEFAULT_FATLINK_REOPEN_DURATION,
-    AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME,
-)
 from afat.forms import (
     AFatClickFatForm,
     AFatEsiFatForm,
@@ -45,7 +40,15 @@ from afat.forms import (
 from afat.helper.fatlinks import get_doctrines, get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
-from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
+from afat.models import (
+    Duration,
+    Fat,
+    FatLink,
+    FleetType,
+    Log,
+    Setting,
+    get_hash_on_save,
+)
 from afat.providers import esi
 from afat.tasks import process_fats
 from afat.utils import get_or_create_character, write_log
@@ -138,7 +141,9 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
 
     context = {
         "link_types_configured": link_types_configured,
-        "default_expiry_time": AFAT_DEFAULT_FATLINK_EXPIRY_TIME,
+        "default_expiry_time": Setting.get_setting(
+            Setting.Field.DEFAULT_FATLINK_EXPIRY_TIME
+        ),
         "esi_fleet": get_esi_fleet_information_by_user(request.user),
         "esi_fatlink_form": AFatEsiFatForm(),
         "manual_fatlink_form": AFatClickFatForm(),
@@ -856,11 +861,9 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
             # Link expired
             link_ongoing = False
 
-            if (
-                link.reopened is False
-                and get_time_delta(then=link_expires, now=now, interval="minutes")
-                < AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME
-            ):
+            if link.reopened is False and get_time_delta(
+                then=link_expires, now=now, interval="minutes"
+            ) < Setting.get_setting(Setting.Field.DEFAULT_FATLINK_REOPEN_GRACE_TIME):
                 link_can_be_reopened = True
 
         # Manual fat still possible?
@@ -887,8 +890,12 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
         "link_ongoing": link_ongoing,
         "link_can_be_reopened": link_can_be_reopened,
         "manual_fat_can_be_added": manual_fat_can_be_added,
-        "reopen_grace_time": AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME,
-        "reopen_duration": AFAT_DEFAULT_FATLINK_REOPEN_DURATION,
+        "reopen_grace_time": Setting.get_setting(
+            Setting.Field.DEFAULT_FATLINK_REOPEN_GRACE_TIME
+        ),
+        "reopen_duration": Setting.get_setting(
+            Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION
+        ),
     }
 
     return render(
@@ -1146,7 +1153,9 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         time_difference_in_minutes = get_time_delta(
             then=created_at, now=now, interval="minutes"
         )
-        new_duration = time_difference_in_minutes + AFAT_DEFAULT_FATLINK_REOPEN_DURATION
+        new_duration = time_difference_in_minutes + Setting.get_setting(
+            Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION
+        )
 
         fatlink_duration.duration = new_duration
         fatlink_duration.save()
@@ -1160,7 +1169,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
             log_event=Log.Event.REOPEN_FATLINK,
             log_text=(
                 "FAT link re-opened for a duration of "
-                f"{AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
+                f"{Setting.get_setting(Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION)} minutes"
             ),
             fatlink_hash=fatlink_duration.fleet.hash,
         )
@@ -1169,7 +1178,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
             msg=(
                 f'FAT link with hash "{fatlink_hash}" '
                 f"re-opened by {request.user} for a "
-                f"duration of {AFAT_DEFAULT_FATLINK_REOPEN_DURATION} minutes"
+                f"duration of {Setting.get_setting(Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION)} minutes"
             )
         )
 

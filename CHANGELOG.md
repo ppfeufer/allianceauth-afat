@@ -40,6 +40,14 @@ Section Order:
 - Optional doctrine field to FAT link creation forms
 - Integrity hashes to CSS and JavaScript
 
+### Changed
+
+- Settings from `local.py` moved to DB
+
+### Removed
+
+- `AFAT_APP_NAME` setting to ensure the app name can be properly localized
+
 ## \[3.3.0\] - 2024-11-06
 
 ### Added

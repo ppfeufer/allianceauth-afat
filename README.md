@@ -189,15 +189,15 @@ python myauth/manage.py afat_import_from_allianceauth_fat
 
 ## Settings<a name="settings"></a>
 
-To customize the module, the following settings are available.
+To customize the module, the following settings can be managed in your admin backend:
 
-| Name                                   | Description                                                      | Default Value           | Value Type |
-| :------------------------------------- | :--------------------------------------------------------------- | :---------------------- | :--------- |
-| AFAT_APP_NAME                          | Custom application name, in case you'd like a different name     | Fleet Activity Tracking | string     |
-| AFAT_DEFAULT_FATLINK_EXPIRY_TIME       | Default expiry time for clickable FAT links in Minutes           | 60                      | int        |
-| AFAT_DEFAULT_FATLINK_REOPEN_GRACE_TIME | Time in minutes a FAT link can be re-opened after it has expired | 60                      | int        |
-| AFAT_DEFAULT_FATLINK_REOPEN_DURATION   | Time in minutes a FAT link is re-opened                          | 60                      | int        |
-| AFAT_DEFAULT_LOG_DURATION              | Time in days before log entries are being removed from the DB    | 60                      | int        |
+| Setting                            | Description                                                                                                                                                                                                           | Default Value |
+| :--------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| Use doctrines from fittings module | Whether to use the doctrines from the Fittings modules in the doctrine dropdown or from AFATs own doctrine list. (Note: The [fittings module](https://gitlab.com/colcrunch/fittings) needs to be installed for this.) | No            |
+| Default FAT link expiry time       | Default expiry time for clickable FAT links in Minutes                                                                                                                                                                | 60            |
+| Default FAT link reopen grace time | Time in minutes a FAT link can be re-opened after it has expired                                                                                                                                                      | 60            |
+| Default FAT link reopen duration   | Time in minutes a FAT link is re-opened                                                                                                                                                                               | 60            |
+| Default log duration               | Time in days before log entries are being removed from the DB                                                                                                                                                         | 60            |
 
 ## Permissions<a name="permissions"></a>
 

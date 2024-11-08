@@ -8,7 +8,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth AFAT
-from afat.app_settings import AFAT_DEFAULT_FATLINK_EXPIRY_TIME
 from afat.models import Doctrine, FleetType, Setting
 
 
@@ -35,7 +34,7 @@ def get_mandatory_form_label_text(text):
 class AFatEsiFatForm(forms.Form):
     """
     Fat link form
-    Used to create ESI fatlinks
+    Used to create ESI FAT links
     """
 
     name_esi = forms.CharField(
@@ -63,7 +62,7 @@ class AFatEsiFatForm(forms.Form):
 
 class AFatManualFatForm(forms.Form):
     """
-    Manual fat form
+    Manual FAT form
     """
 
     character = forms.CharField(
@@ -86,7 +85,7 @@ class AFatManualFatForm(forms.Form):
 class AFatClickFatForm(forms.Form):
     """
     Fat link form
-    Used to create clickable fatlinks
+    Used to create clickable FAT links
     """
 
     name = forms.CharField(
@@ -114,9 +113,19 @@ class AFatClickFatForm(forms.Form):
         required=True,
         label=get_mandatory_form_label_text(text=_("FAT link expiry time in minutes")),
         min_value=1,
-        initial=AFAT_DEFAULT_FATLINK_EXPIRY_TIME,
+        initial=0,
         widget=forms.TextInput(attrs={"placeholder": _("Expiry time in minutes")}),
     )
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request", None)
+        super().__init__(*args, **kwargs)
+
+        # This is a hack to set the initial value of the duration field,
+        # which comes from the settings in the database.
+        self.fields["duration"].initial = Setting.get_setting(
+            Setting.Field.DEFAULT_FATLINK_EXPIRY_TIME
+        )
 
 
 class FatLinkEditForm(forms.Form):

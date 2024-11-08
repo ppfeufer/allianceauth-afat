@@ -23,8 +23,7 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
-from afat.app_settings import AFAT_DEFAULT_LOG_DURATION
-from afat.models import Fat, FatLink, Log
+from afat.models import Fat, FatLink, Log, Setting
 from afat.providers import esi
 from afat.utils import get_or_create_character
 
@@ -308,8 +307,11 @@ def logrotate():
     :rtype:
     """
 
-    logger.info(msg=f"Cleaning up logs older than {AFAT_DEFAULT_LOG_DURATION} days")
+    logger.info(
+        msg=f"Cleaning up logs older than {Setting.get_setting(Setting.Field.DEFAULT_LOG_DURATION)} days"
+    )
 
     Log.objects.filter(
-        log_time__lte=timezone.now() - timedelta(days=AFAT_DEFAULT_LOG_DURATION)
+        log_time__lte=timezone.now()
+        - timedelta(days=Setting.get_setting(Setting.Field.DEFAULT_LOG_DURATION))
     ).delete()
