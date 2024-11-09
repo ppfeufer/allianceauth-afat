@@ -411,10 +411,8 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         is_esilink=True,
         is_registered_on_esi=True,
         esi_fleet_id=fleet_from_esi["fleet_id"],
+        fleet_type=request.session["fatlink_form__type"],
     )
-
-    # Add a fleet type if there is any
-    fatlink.fleet_type = request.session["fleet_type"]
 
     # Save it
     fatlink.save()
