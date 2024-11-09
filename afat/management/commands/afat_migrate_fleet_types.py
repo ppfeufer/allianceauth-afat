@@ -44,7 +44,11 @@ class Command(BaseCommand):
         fatlinks = FatLink.objects.all()
 
         for fatlink in fatlinks:
-            fatlink.fleet_type = str(fatlink.link_type) if fatlink.link_type else ""
+            fatlink.fleet_type = (
+                str(fatlink.link_type)
+                if fatlink.link_type and fatlink.fleet_type == ""
+                else fatlink.fleet_type
+            )
             fatlink.save()
 
         self.stdout.write(msg=self.style.SUCCESS("Migration complete!"))
