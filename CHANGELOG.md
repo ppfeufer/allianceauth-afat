@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## \[3.4.0\] - 2024-11-09
+
 > \[!IMPORTANT\]
 >
 > After updating to this version, make sure to run the following
