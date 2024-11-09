@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-08 21:47+0100\n"
-"PO-Revision-Date: 2024-05-10 14:14+0000\n"
-"Last-Translator: Zigor Fernandez Moreno <sietehierros@gmail.com>\n"
-"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/es/>\n"
+"PO-Revision-Date: 2024-11-09 11:25+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.8.3\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -411,7 +411,7 @@ msgstr ""
 
 #: afat/models.py:391
 msgid "Short name to identify this doctrine"
-msgstr ""
+msgstr "Nombre corto para identificar esta doctrina"
 
 #: afat/models.py:392
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
@@ -424,7 +424,7 @@ msgstr ""
 
 #: afat/models.py:402
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 #: afat/models.py:409
 msgid "Whether this doctrine is enabled or not."
@@ -436,7 +436,7 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
-msgstr ""
+msgstr "Doctrina"
 
 #: afat/models.py:419
 msgid "Doctrines"
@@ -489,6 +489,8 @@ msgid ""
 "Whether to use the doctrines from the Fittings modules in the doctrine "
 "dropdown. Note: The fittings module needs to be installed for this."
 msgstr ""
+"Si usar las doctrinas de los módulos de Fiteos en el menú desplegable de "
+"doctrinas. Nota: Para ello, es necesario instalar el módulo de fiteos."
 
 #: afat/models.py:506
 msgid "Setting"
