@@ -41,7 +41,7 @@ class FatLinkManager(models.Manager):
         """
 
         return self.select_related(
-            "link_type", "creator", "character", "creator__profile__main_character"
+            "creator", "character", "creator__profile__main_character"
         )
 
 
@@ -55,4 +55,4 @@ class FatManager(models.Manager):
         Apply select_related for default query optimizations.
         """
 
-        return self.select_related("fatlink", "fatlink__link_type", "character")
+        return self.select_related("fatlink", "character")

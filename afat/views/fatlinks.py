@@ -133,14 +133,14 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
     :rtype:
     """
 
-    link_types_configured = False
-    link_types_count = FleetType.objects.all().count()
+    fleet_types_configured = False
+    fleet_types = FleetType.objects.all()
 
-    if link_types_count > 0:
-        link_types_configured = True
+    if fleet_types.count() > 0:
+        fleet_types_configured = True
 
     context = {
-        "link_types_configured": link_types_configured,
+        "fleet_types_configured": fleet_types_configured,
         "default_expiry_time": Setting.get_setting(
             Setting.Field.DEFAULT_FATLINK_EXPIRY_TIME
         ),
@@ -148,6 +148,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
         "esi_fatlink_form": AFatEsiFatForm(),
         "manual_fatlink_form": AFatClickFatForm(),
         "doctrines": get_doctrines(),
+        "fleet_types": fleet_types,
     }
 
     logger.info(msg=f"Add FAT link view called by {request.user}")
@@ -181,10 +182,7 @@ def create_clickable_fatlink(
 
             fatlink = FatLink()
             fatlink.fleet = form.cleaned_data["name"]
-
-            if form.cleaned_data["type"] is not None:
-                fatlink.link_type = form.cleaned_data["type"]
-
+            fatlink.fleet_type = form.cleaned_data["type"]
             fatlink.doctrine = form.cleaned_data["doctrine"]
             fatlink.creator = request.user
             fatlink.hash = fatlink_hash
@@ -198,7 +196,7 @@ def create_clickable_fatlink(
 
             # Writing DB log
             fleet_type = (
-                f" (Fleet type: {fatlink.link_type.name})" if fatlink.link_type else ""
+                f" (Fleet type: {fatlink.fleet_type})" if fatlink.fleet_type else ""
             )
 
             write_log(
@@ -416,16 +414,13 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     )
 
     # Add a fleet type if there is any
-    if request.session["fatlink_form__type"] is not None:
-        fatlink.link_type_id = request.session["fatlink_form__type"]
+    fatlink.fleet_type = request.session["fleet_type"]
 
     # Save it
     fatlink.save()
 
     # Writing DB log
-    fleet_type = ""
-    if fatlink.link_type:
-        fleet_type = f"(Fleet type: {fatlink.link_type.name})"
+    fleet_type = f"(Fleet type: {fatlink.fleet_type})" if fatlink.fleet_type else ""
 
     write_log(
         request=request,
@@ -488,16 +483,11 @@ def create_esi_fatlink(
     if fatlink_form.is_valid():
         fatlink_hash = get_hash_on_save()
 
-        fatlink_type = None
-        if fatlink_form.cleaned_data["type_esi"]:
-            fatlink_type_from_form = fatlink_form.cleaned_data["type_esi"]
-            fatlink_type = fatlink_type_from_form.pk
-
         request.session["fatlink_form__name"] = fatlink_form.cleaned_data["name_esi"]
         request.session["fatlink_form__doctrine"] = fatlink_form.cleaned_data[
             "doctrine_esi"
         ]
-        request.session["fatlink_form__type"] = fatlink_type
+        request.session["fatlink_form__type"] = fatlink_form.cleaned_data["type_esi"]
 
         return redirect(
             to="afat:fatlinks_create_esi_fatlink_callback", fatlink_hash=fatlink_hash

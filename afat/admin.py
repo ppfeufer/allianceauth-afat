@@ -78,20 +78,19 @@ class AFatLinkAdmin(admin.ModelAdmin):
     Config for the FAT link model
     """
 
-    list_select_related = ("link_type",)
     list_display = (
         "created",
         "creator",
         "fleet",
-        "link_type",
+        "fleet_type",
         "is_esilink",
         "hash",
         "number_of_fats",
     )
-    list_filter = ("is_esilink", ("link_type__name", custom_filter(title="fleet type")))
+    list_filter = ("is_esilink", "fleet_type")
     ordering = ("-created",)
     search_fields = (
-        "link_type__name",
+        "fleet_type",
         "hash",
         "fleet",
         "creator__profile__main_character__character_name",
