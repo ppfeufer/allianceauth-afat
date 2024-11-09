@@ -96,6 +96,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         "creator__profile__main_character__character_name",
         "creator__username",
     )
+    exclude = ("link_type", "character")
 
     def get_queryset(self, request):
         """
