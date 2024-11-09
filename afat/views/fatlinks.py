@@ -136,7 +136,7 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
     fleet_types_configured = False
     fleet_types = FleetType.objects.all()
 
-    if fleet_types.count() > 0:
+    if fleet_types.exists():
         fleet_types_configured = True
 
     context = {
