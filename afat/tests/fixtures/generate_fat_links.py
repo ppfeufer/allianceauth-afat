@@ -37,7 +37,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.helpers import random_string
 
 # Alliance Auth AFAT
-from afat.models import Fat, FatLink, FleetType, Log
+from afat.models import Fat, FatLink, Log
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log
 
@@ -53,7 +53,7 @@ print(
 
 user = User.objects.first()
 creator = user.profile.main_character
-link_type, _ = FleetType.objects.get_or_create(name="Generated Fleet")
+fleet_type = "Generated Fleet"
 
 for _ in range(LINKS_NUMBER):
     fat_link = FatLink.objects.create(
@@ -61,7 +61,7 @@ for _ in range(LINKS_NUMBER):
         hash=random_string(char_count=20),
         creator=user,
         character=creator,
-        link_type=link_type,
+        fleet_type=fleet_type,
         created=now() - dt.timedelta(days=random.randint(a=0, b=180)),
     )
 
@@ -70,7 +70,7 @@ for _ in range(LINKS_NUMBER):
         log_event=Log.Event.CREATE_FATLINK,
         log_text=(
             f'ESI FAT link with name "{fat_link.fleet}"'
-            f"{link_type} was created by {user}"
+            f"{fleet_type} was created by {user}"
         ),
         fatlink_hash=fat_link.hash,
     )

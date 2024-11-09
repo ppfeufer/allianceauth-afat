@@ -163,7 +163,7 @@ class Command(BaseCommand):
             )
         )
 
-        user_input = get_input(text="Are you sure you want to proceed? (yes/no)?")
+        user_input = get_input(text="Are you sure you want to proceed? (yes/no) ")
 
         if user_input == "yes":
             self.stdout.write(msg="Starting import. Please stand by.")

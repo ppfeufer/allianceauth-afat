@@ -29,8 +29,11 @@
         <div class="allianceauth-afat-footer mt-3 pt-3 border-top border-light">
             {% include "afat/partials/footer/app-translation-footer.html" %}
         </div>
-    </div>
 
+        <div class="allianceauth-afat-datalists">
+            {% block afat_datalists %}{% endblock %}
+        </div>
+    </div>
 {% endblock %}
 
 {% block extra_script %}

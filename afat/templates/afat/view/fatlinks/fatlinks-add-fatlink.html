@@ -16,8 +16,12 @@
     <div class="row">
         {% include "afat/partials/fatlinks/add/esi-link.html" %}
         {% include "afat/partials/fatlinks/add/clickable-link.html" %}
-        {% include "afat/partials/form/fleet-doctrine.html" %}
     </div>
+{% endblock %}
+
+{% block afat_datalists %}
+    {% include "afat/partials/form/fleet-doctrine.html" %}
+    {% include "afat/partials/form/fleet-type.html" %}
 {% endblock %}
 
 {% block extra_css %}
@@ -26,7 +30,7 @@
 
 {% block extra_javascript %}
     {% include "afat/bundles/afat-js.html" %}
-    {% include "afat/bundles/afat-fatlink-add-js.html" %}
+    {% include "afat/bundles/afat-datalist-js.html" %}
 
     <script>
         $(document).ready(function () {

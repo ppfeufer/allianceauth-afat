@@ -24,7 +24,7 @@ from afat.helper.views import (
     convert_fats_to_dict,
     convert_logs_to_dict,
 )
-from afat.models import Duration, Fat, FatLink, FleetType, Log, get_hash_on_save
+from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user, write_log
 
@@ -164,7 +164,6 @@ class TestHelpers(TestCase):
             character=self.character_1101, fatlink=fatlink_1_created, shiptype="Omen"
         )
 
-        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_hash_fleet_2 = get_hash_on_save()
         fatlink_2_created = FatLink.objects.create(
             created=timezone.now(),
@@ -172,7 +171,7 @@ class TestHelpers(TestCase):
             creator=self.user_with_add_fatlink,
             character=self.character_1101,
             hash=fatlink_hash_fleet_2,
-            link_type=fatlink_type_cta,
+            fleet_type="CTA",
             doctrine="Ships",
         )
         Fat.objects.create(
@@ -302,7 +301,6 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = FatLink.objects.create(
             created=timezone.now(),
             fleet="April Fleet 1",
@@ -312,7 +310,7 @@ class TestHelpers(TestCase):
             is_esilink=True,
             is_registered_on_esi=True,
             esi_fleet_id="3726458287",
-            link_type=fatlink_type_cta,
+            fleet_type="CTA",
             doctrine="Ships",
         )
         fat = Fat.objects.create(
@@ -366,7 +364,6 @@ class TestHelpers(TestCase):
         request.user = self.user_with_manage_afat
 
         fatlink_hash = get_hash_on_save()
-        fatlink_type_cta = FleetType.objects.create(name="CTA")
         fatlink_created = FatLink.objects.create(
             created=timezone.now(),
             fleet="April Fleet 1",
@@ -376,12 +373,12 @@ class TestHelpers(TestCase):
             is_esilink=True,
             is_registered_on_esi=True,
             esi_fleet_id="3726458287",
-            link_type=fatlink_type_cta,
+            fleet_type="CTA",
         )
 
         duration = Duration.objects.create(fleet=fatlink_created, duration=120)
 
-        fleet_type = f" (Fleet type: {fatlink_created.link_type.name})"
+        fleet_type = " (Fleet type: CTA)"
 
         write_log(
             request=request,

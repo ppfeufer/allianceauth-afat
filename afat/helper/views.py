@@ -62,7 +62,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         )
 
     # Fleet type
-    fatlink_type = fatlink.link_type.name if fatlink.link_type else ""
+    fleet_type = fatlink.fleet_type
 
     # Creator name
     creator_main_character = get_main_character_from_user(user=fatlink.creator)
@@ -136,7 +136,7 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         "pk": fatlink.pk,
         "fleet_name": fatlink_fleet + esi_fleet_marker,
         "creator_name": creator_main_character,
-        "fleet_type": fatlink_type,
+        "fleet_type": fleet_type,
         "doctrine": fatlink.doctrine,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
         "fats_number": fatlink.fats_count,
@@ -212,9 +212,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
         "fleet_name": fleet_name + esi_fleet_marker,
         "doctrine": fat.fatlink.doctrine,
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
-        "fleet_type": (
-            fat.fatlink.link_type.name if fat.fatlink.link_type is not None else ""
-        ),
+        "fleet_type": fat.fatlink.fleet_type,
         "via_esi": via_esi,
         "actions": actions,
     }

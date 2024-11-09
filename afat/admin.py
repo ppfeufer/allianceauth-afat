@@ -16,61 +16,6 @@ from afat.forms import DoctrineAdminForm, SettingAdminForm
 from afat.models import Doctrine, Fat, FatLink, FleetType, Log, Setting
 
 
-def custom_filter(title):
-    """
-    Defining custom filter titles
-
-    :param title:
-    :type title:
-    :return:
-    :rtype:
-    """
-
-    class Wrapper(admin.FieldListFilter):
-        """
-        Wrapper
-        """
-
-        def expected_parameters(self):
-            """
-            Expected parameters
-
-            :return:
-            :rtype:
-            """
-
-            pass  # pylint: disable=unnecessary-pass
-
-        def choices(self, changelist):
-            """
-            Choices
-
-            :param changelist:
-            :type changelist:
-            :return:
-            :rtype:
-            """
-
-            pass  # pylint: disable=unnecessary-pass
-
-        def __new__(cls, *args, **kwargs):
-            """
-            __new__
-
-            :param args:
-            :type args:
-            :param kwargs:
-            :type kwargs:
-            """
-
-            instance = admin.FieldListFilter.create(*args, **kwargs)
-            instance.title = title
-
-            return instance
-
-    return Wrapper
-
-
 # Register your models here.
 @admin.register(FatLink)
 class AFatLinkAdmin(admin.ModelAdmin):
@@ -78,25 +23,25 @@ class AFatLinkAdmin(admin.ModelAdmin):
     Config for the FAT link model
     """
 
-    list_select_related = ("link_type",)
     list_display = (
         "created",
         "creator",
         "fleet",
-        "link_type",
+        "fleet_type",
         "is_esilink",
         "hash",
         "number_of_fats",
     )
-    list_filter = ("is_esilink", ("link_type__name", custom_filter(title="fleet type")))
+    list_filter = ("is_esilink", "fleet_type")
     ordering = ("-created",)
     search_fields = (
-        "link_type__name",
+        "fleet_type",
         "hash",
         "fleet",
         "creator__profile__main_character__character_name",
         "creator__username",
     )
+    exclude = ("link_type", "character")
 
     def get_queryset(self, request):
         """
