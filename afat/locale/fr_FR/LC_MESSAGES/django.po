@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-08 21:47+0100\n"
-"PO-Revision-Date: 2024-08-06 11:28+0000\n"
+"PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/fr/>\n"
+"Language-Team: French <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.8.3\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -404,7 +404,7 @@ msgstr ""
 
 #: afat/models.py:402
 msgid "Notes"
-msgstr ""
+msgstr "Remarques"
 
 #: afat/models.py:409
 msgid "Whether this doctrine is enabled or not."
@@ -416,7 +416,7 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
-msgstr ""
+msgstr "Doctrine"
 
 #: afat/models.py:419
 msgid "Doctrines"
