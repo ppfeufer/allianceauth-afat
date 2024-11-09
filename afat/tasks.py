@@ -264,6 +264,10 @@ def _process_esi_fatlink(fatlink: FatLink):
                     data_source="esi",
                     fatlink_hash=fatlink.hash,
                 )
+        else:
+            _esi_fatlinks_error_handling(
+                error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
+            )
     else:
         _close_esi_fleet(fatlink=fatlink, reason="No FAT link creator available.")
 
