@@ -177,6 +177,13 @@ class FatLink(models.Model):
         related_name="+",
         on_delete=models.CASCADE,
         null=True,
+        help_text="Deprecated setting, will be removed in a future version …",
+    )
+
+    fleet_type = models.CharField(
+        blank=True,
+        default="",
+        max_length=254,
         help_text=_("The FAT link fleet type, if it's set"),
     )
 
