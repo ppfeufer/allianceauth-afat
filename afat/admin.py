@@ -16,61 +16,6 @@ from afat.forms import DoctrineAdminForm, SettingAdminForm
 from afat.models import Doctrine, Fat, FatLink, FleetType, Log, Setting
 
 
-def custom_filter(title):
-    """
-    Defining custom filter titles
-
-    :param title:
-    :type title:
-    :return:
-    :rtype:
-    """
-
-    class Wrapper(admin.FieldListFilter):
-        """
-        Wrapper
-        """
-
-        def expected_parameters(self):
-            """
-            Expected parameters
-
-            :return:
-            :rtype:
-            """
-
-            pass  # pylint: disable=unnecessary-pass
-
-        def choices(self, changelist):
-            """
-            Choices
-
-            :param changelist:
-            :type changelist:
-            :return:
-            :rtype:
-            """
-
-            pass  # pylint: disable=unnecessary-pass
-
-        def __new__(cls, *args, **kwargs):
-            """
-            __new__
-
-            :param args:
-            :type args:
-            :param kwargs:
-            :type kwargs:
-            """
-
-            instance = admin.FieldListFilter.create(*args, **kwargs)
-            instance.title = title
-
-            return instance
-
-    return Wrapper
-
-
 # Register your models here.
 @admin.register(FatLink)
 class AFatLinkAdmin(admin.ModelAdmin):
