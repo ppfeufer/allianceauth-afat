@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-08 21:47+0100\n"
-"PO-Revision-Date: 2024-06-06 14:28+0000\n"
+"PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Chinese (Simplified) <https://weblate.ppfeufer.de/projects/"
-"alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
+"Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/"
+"projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.8.3\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -387,7 +387,7 @@ msgstr ""
 
 #: afat/models.py:391
 msgid "Short name to identify this doctrine"
-msgstr ""
+msgstr "此配置的简称"
 
 #: afat/models.py:392
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
@@ -400,7 +400,7 @@ msgstr ""
 
 #: afat/models.py:402
 msgid "Notes"
-msgstr ""
+msgstr "笔记"
 
 #: afat/models.py:409
 #, fuzzy
@@ -414,7 +414,7 @@ msgstr "无论这个舰队类型是否活跃"
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
-msgstr ""
+msgstr "舰船要求"
 
 #: afat/models.py:419
 msgid "Doctrines"
@@ -466,15 +466,15 @@ msgstr ""
 msgid ""
 "Whether to use the doctrines from the Fittings modules in the doctrine "
 "dropdown. Note: The fittings module needs to be installed for this."
-msgstr ""
+msgstr "是否使用配置下拉列表中配置模板中的配置。注：为此需要有配置模板。"
 
 #: afat/models.py:506
 msgid "Setting"
-msgstr ""
+msgstr "设置"
 
 #: afat/models.py:507
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: afat/models.py:517
 msgid "AFAT Settings"
