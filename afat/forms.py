@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth AFAT
-from afat.models import Doctrine, FleetType, Setting
+from afat.models import Doctrine, Setting
 
 
 def get_mandatory_form_label_text(text):
@@ -43,10 +43,15 @@ class AFatEsiFatForm(forms.Form):
         max_length=255,
         widget=forms.TextInput(attrs={"placeholder": _("Enter fleet name")}),
     )
-    type_esi = forms.ModelChoiceField(
+    type_esi = forms.CharField(
         required=False,
         label=_("Fleet type (optional)"),
-        queryset=FleetType.objects.filter(is_enabled=True),
+        widget=forms.TextInput(
+            attrs={
+                "data-datalist": "afat-fleet-type-list",
+                "data-full-width": "true",
+            }
+        ),
     )
     doctrine_esi = forms.CharField(
         required=False,
@@ -94,10 +99,15 @@ class AFatClickFatForm(forms.Form):
         max_length=255,
         widget=forms.TextInput(attrs={"placeholder": _("Enter fleet name")}),
     )
-    type = forms.ModelChoiceField(
+    type = forms.CharField(
         required=False,
         label=_("Fleet type (optional)"),
-        queryset=FleetType.objects.filter(is_enabled=True),
+        widget=forms.TextInput(
+            attrs={
+                "data-datalist": "afat-fleet-type-list",
+                "data-full-width": "true",
+            }
+        ),
     )
     doctrine = forms.CharField(
         required=False,

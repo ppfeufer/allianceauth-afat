@@ -18,18 +18,28 @@ $(document).ready(() => {
                 Object.assign(
                     {},
                     {
-                        onSelectItem: console.log,
+                        onSelectItem: console.log
                     },
                     {
                         onRenderItem: (item, label) => {
                             return `<l-i set="fl" name="${item.value.toLowerCase()}" size="16"></l-i> ${label}`;
-                        },
+                        }
                     }
                 )
             );
         }
     };
 
-    autoCompleteDropdown(document.getElementById('id_doctrine_esi'));
-    autoCompleteDropdown(document.getElementById('id_doctrine'));
+    /**
+     * Initialize autocomplete dropdowns
+     */
+    (() => {
+        const elements = document.querySelectorAll('[data-datalist]');
+
+        if (elements.length > 0) {
+            elements.forEach((element) => {
+                autoCompleteDropdown(element);
+            });
+        }
+    })();
 });
