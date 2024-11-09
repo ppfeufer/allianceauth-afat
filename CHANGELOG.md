@@ -49,6 +49,12 @@ Section Order:
 - Optional doctrine field to FAT link creation forms
 - Integrity hashes to CSS and JavaScript
 
+### Fixed
+
+- ESI fleet closing condition. When the FC left the fleet and is now in another
+  fleet, the previous fleet was not detected as no longer tracked, and as such, not
+  closed until the FC is either in no fleet at all or offline.
+
 ### Changed
 
 - Settings from `local.py` moved to DB
