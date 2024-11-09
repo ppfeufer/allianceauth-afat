@@ -35,6 +35,15 @@ Section Order:
 ### Security
 -->
 
+> \[!IMPORTANT\]
+>
+> After updating to this version, make sure to run the following
+> command to migrate the old fleet types to the new system:
+>
+> ```shell
+> python manage.py afat_migrate_fleet_types
+> ```
+
 ### Added
 
 - Optional doctrine field to FAT link creation forms
@@ -43,6 +52,7 @@ Section Order:
 ### Changed
 
 - Settings from `local.py` moved to DB
+- Fleet type dropdown to auto-suggest field
 
 ### Removed
 
