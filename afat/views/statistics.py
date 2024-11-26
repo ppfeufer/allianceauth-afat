@@ -372,17 +372,28 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     corp_name = corp.corporation_name
 
     if not month:
+        fats_per_year = (
+            Fat.objects.filter(
+                character__corporation_id=corpid,
+                fatlink__created__year=year,
+            )
+            .values("fatlink__created__month")
+            .annotate(fat_count=Count("id"))
+        )
+
         months = []
-        fats_per_year = 0
+        fats_per_year_total = 0
 
         for i in range(1, 13):
-            corp_fats = Fat.objects.filter(
-                character__corporation_id=corpid,
-                fatlink__created__month=i,
-                fatlink__created__year=year,
-            ).count()
-
-            fats_per_year += corp_fats
+            corp_fats = next(
+                (
+                    item["fat_count"]
+                    for item in fats_per_year
+                    if item["fatlink__created__month"] == i
+                ),
+                0,
+            )
+            fats_per_year_total += corp_fats
 
             avg_fats = 0
             if corp.member_count > 0:
@@ -396,7 +407,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
             "months": months,
             "corpid": corpid,
             "year": year,
-            "fats_per_year": fats_per_year,
+            "fats_per_year": fats_per_year_total,
             "year_current": current_year,
             "year_prev": int(year) - 1,
             "year_next": int(year) + 1,
