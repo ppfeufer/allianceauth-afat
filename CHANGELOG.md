@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Autocomplete JS updated
+
 ## \[3.4.0\] - 2024-11-09
 
 > \[!IMPORTANT\]
