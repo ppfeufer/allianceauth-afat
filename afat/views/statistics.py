@@ -424,20 +424,15 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         fatlink__created__month=month,
         fatlink__created__year=year,
         character__corporation_id=corpid,
-    )
-
-    characters = EveCharacter.objects.filter(corporation_id=corpid)
+    ).select_related("character")
 
     # Data for Stacked Bar Graph
     # (label, color, [list of data for stack])
     data = {}
 
     for fat in fats:
-        # if fat.shiptype in data.keys():
-        if fat.shiptype in data:
-            continue
-
-        data[fat.shiptype] = {}
+        if fat.shiptype not in data:
+            data[fat.shiptype] = {}
 
     chars = []
 
@@ -478,27 +473,27 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     chars = {}
     main_chars = {}
 
+    characters = EveCharacter.objects.filter(corporation_id=corpid).select_related(
+        "character_ownership__user"
+    )
+    character_fat_counts = fats.values("character_id").annotate(fat_count=Count("id"))
+    character_fat_map = {
+        item["character_id"]: item["fat_count"] for item in character_fat_counts
+    }
+
     for char in characters:
-        fat_c = fats.filter(character_id=char.id).count()
+        fat_c = character_fat_map.get(char.id, 0)
         chars[char.character_name] = (fat_c, char.character_id)
         main_character = get_main_character_from_evecharacter(character=char)
 
-        if main_character:
-            if main_character.character_id not in main_chars:
-                main_chars[main_character.character_id] = {
-                    "name": main_character.character_name,
-                    "id": main_character.character_id,
-                    "fats": 0,
-                    # "characters": {},
-                }
-
+        if main_character and main_character.character_id not in main_chars:
+            main_chars[main_character.character_id] = {
+                "name": main_character.character_name,
+                "id": main_character.character_id,
+                "fats": fat_c,
+            }
+        elif main_character:
             main_chars[main_character.character_id]["fats"] += fat_c
-
-            # main_chars[main_character.character_id]["characters"][char.character_id] = {
-            #     "id": char.character_id,
-            #     "name": char.character_name,
-            #     "fats": fat_c,
-            # }
 
     context = {
         "corp": corp,
