@@ -1,0 +1,9 @@
+{% load afat %}
+{% load i18n %}
+
+<div class="afat-spinner d-none text-center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="{% afat_static "afat/images/ring-resize-white-36.svg" %}">
+        <img src="{% afat_static "afat/images/ring-resize-black-36.svg" %}" alt="{% translate 'Loading …' %}">
+    </picture>
+</div>
