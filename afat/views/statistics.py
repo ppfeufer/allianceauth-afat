@@ -492,8 +492,6 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
                 "id": main_character.character_id,
                 "fats": fat_c,
             }
-        elif main_character:
-            main_chars[main_character.character_id]["fats"] += fat_c
 
     context = {
         "corp": corp,
