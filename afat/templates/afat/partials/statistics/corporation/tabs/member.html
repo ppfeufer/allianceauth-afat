@@ -1,3 +1,4 @@
+{% load afat %}
 {% load i18n %}
 
 <div id="tab-members" class="tab-pane fade border-0" role="tabpanel" aria-labelledby="tab-members">
@@ -9,6 +10,11 @@
                 </div>
 
                 <div class="card-body">
+                    <p>
+                        {% blocktranslate with month_name=month|month_name %}
+                            {{ corp }} main characters and their accumulated FATs for {{ month_name }} {{ year }}.
+                        {% endblocktranslate %}
+                    </p>
                     {% if main_chars %}
                         <table class="table table-striped table-hover w-100" id="corp-main-characters">
                             <thead>
@@ -57,7 +63,14 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="afat-character-alt-characters"></div>
+                    <div class="afat-character-alt-characters">
+                        <div class="afat-spinner d-none text-center">
+                            <picture>
+                                <source media="(prefers-color-scheme: dark)" srcset="{% afat_static "afat/images/ring-resize-white-36.svg" %}">
+                                <img src="{% afat_static "afat/images/ring-resize-black-36.svg" %}" alt="{% translate 'Loading …' %}">
+                            </picture>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

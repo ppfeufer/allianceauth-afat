@@ -26,19 +26,45 @@ const drawChart = (element, chartType, data, options) => { // eslint-disable-lin
 $(document).ready(() => {
     'use strict';
 
-    const btnMainCharacterDetails = $('.btn-afat-corp-stats-view-character');
+    /**
+     * Show the given element
+     *
+     * @param {string} selector Element selector (class or ID)
+     */
+    const showElement = (selector) => {
+        $(selector).removeClass('d-none');
+    };
 
-    if (btnMainCharacterDetails.length > 0) {
-        btnMainCharacterDetails.on('click', (event) => {
-            const btn = $(event.currentTarget);
-            const characterId = btn.data('character-id');
-            const characterName = btn.data('character-name');
+    /**
+     * Add onClick event to the main character details button
+     */
+    const addBtnMainCharacterDetailsEvent = () => {
+        const btnMainCharacterDetails = $('.btn-afat-corp-stats-view-character');
 
-            console.log(btn);
-            console.log(characterId);
+        if (btnMainCharacterDetails.length > 0) {
+            btnMainCharacterDetails.on('click', (event) => {
+                const btn = $(event.currentTarget);
+                const characterId = btn.data('character-id');
+                const characterName = btn.data('character-name');
 
-            $('#col-character-alt-characters').removeClass('d-none');
-            $('#afat-corp-stats-main-character-name').text(characterName);
-        });
-    }
+                console.log(btn);
+                console.log(characterId);
+
+                const hiddenElements = [
+                    '#col-character-alt-characters',
+                    '#col-character-alt-characters .afat-character-alt-characters .afat-spinner'
+                ];
+
+                hiddenElements.forEach(selector => {
+                    showElement(selector);
+                });
+                $('#afat-corp-stats-main-character-name').text(characterName);
+            });
+        }
+    };
+
+    // Start the script
+    (() => {
+        addBtnMainCharacterDetailsEvent();
+    })();
 });
