@@ -1,4 +1,4 @@
-/* global Chart */
+/* global afatSettings, Chart, fetchAjaxData */
 
 const elementBody = document.querySelector('body');
 const elementBodyCss = getComputedStyle(elementBody);
@@ -22,3 +22,107 @@ const drawChart = (element, chartType, data, options) => { // eslint-disable-lin
         options: options
     });
 };
+
+$(document).ready(() => {
+    'use strict';
+
+    /**
+     * Show the given element
+     *
+     * @param {string} selector Element selector (class or ID)
+     */
+    const showElement = (selector) => {
+        $(selector).removeClass('d-none');
+    };
+
+    /**
+     * Hide the given element
+     *
+     * @param {string} selector Element selector (class or ID)
+     */
+    const hideElement = (selector) => {
+        $(selector).addClass('d-none');
+    };
+
+    /**
+     * Add onClick event to the main character details button
+     */
+    const addBtnMainCharacterDetailsEvent = () => {
+        const btnMainCharacterDetails = $('.btn-afat-corp-stats-view-character');
+
+        if (btnMainCharacterDetails.length > 0) {
+            btnMainCharacterDetails.on('click', (event) => {
+                const btn = $(event.currentTarget);
+                const characterName = btn.data('character-name');
+                const url = btn.data('url');
+
+                [
+                    '#col-character-alt-characters .afat-character-alt-characters .afat-no-data',
+                    '#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table'
+                ].forEach(selector => {
+                    hideElement(selector);
+                });
+
+                const hiddenElements = [
+                    '#col-character-alt-characters',
+                    '#col-character-alt-characters .afat-character-alt-characters .afat-spinner'
+                ];
+
+                hiddenElements.forEach(selector => {
+                    showElement(selector);
+                });
+
+                $('#afat-corp-stats-main-character-name').text(characterName);
+
+                // Fetch FAT data for all characters of this main character
+                fetchAjaxData(url).then(tableData => {
+                    const table = $('#character-alt-characters');
+
+                    if (tableData) {
+                        hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-spinner');
+
+                        if (Object.keys(tableData).length === 0) {
+                            showElement('#col-character-alt-characters .afat-character-alt-characters .afat-no-data');
+                        } else {
+                            showElement('#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table');
+
+                            // Destroy the table if it already exists
+                            if ($.fn.DataTable.isDataTable(table)) {
+                                table.DataTable().destroy();
+                            }
+
+                            // Create the table
+                            table.DataTable({
+                                data: tableData,
+                                paging: false,
+                                language: afatSettings.dataTables.translation,
+                                lengthChange: false,
+                                columns: [
+                                    { data: 'character_name' },
+                                    { data: 'fat_count' },
+                                ],
+                                order: [[0, 'asc']],
+                                columnDefs: [
+                                    {
+                                        targets: 1,
+                                        createdCell: (td) => {
+                                            $(td).addClass('text-end');
+                                        }
+                                    }
+                                ]
+                            });
+                        }
+
+                    }
+                }).catch(error => {
+                    console.log(`Error: ${error.message}`);
+                });
+            });
+        }
+    };
+
+    // Start the script
+    (() => {
+        addBtnMainCharacterDetailsEvent();
+    })();
+});

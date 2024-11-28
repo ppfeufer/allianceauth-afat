@@ -43,17 +43,19 @@
 
 {% block extra_javascript %}
     {% include "bundles/chart-js.html" %}
+    {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
     {% include "bundles/datatables-js-bs5.html" %}
     {% include "bundles/moment-js.html" %}
 
     <script>
-        $(document).ready(function() {
-            $('#corp-members').DataTable({
+        $(document).ready(() => {
+            $('#corp-main-characters').DataTable({
+                language: afatSettings.dataTables.translation,
                 order: [
                     [1, 'desc'],
                     [0, 'asc']
-                ],
+                ]
             });
 
             // Chart rendering

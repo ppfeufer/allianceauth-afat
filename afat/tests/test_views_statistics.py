@@ -544,3 +544,90 @@ class TestStatistics(TestCase):
 
         # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
+
+    def test_should_show_main_details_for_user_with_manage_perms(self):
+        """
+        Test that a user with the required permissions can access the view
+
+        :return:
+        :rtype:
+        """
+
+        # given
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        # when
+        url = reverse(
+            viewname="afat:statistics_ajax_get_monthly_fats_for_main_character",
+            kwargs={
+                "character_id": self.user_with_basic_access.profile.main_character.character_id,
+                "year": 2020,
+                "month": 4,
+            },
+        )
+        res = self.client.get(path=url)
+
+        # then
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
+        self.assertEqual(
+            first=response_content_to_str(response=res),
+            second='[{"character_id": 1002, "character_name": "Clark Kent", "fat_count": 2}]',
+        )
+
+    def test_should_show_main_details_for_user_with_corporation_other_perms(self):
+        """
+        Test that a user with the required permissions can access the view (corporation_other)
+
+        :return:
+        :rtype:
+        """
+
+        # given
+        self.client.force_login(user=self.user_with_stats_corporation_other)
+
+        # when
+        url = reverse(
+            viewname="afat:statistics_ajax_get_monthly_fats_for_main_character",
+            kwargs={
+                "character_id": self.user_with_basic_access.profile.main_character.character_id,
+                "year": 2020,
+                "month": 4,
+            },
+        )
+        res = self.client.get(path=url)
+
+        # then
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
+        self.assertEqual(
+            first=response_content_to_str(response=res),
+            second='[{"character_id": 1002, "character_name": "Clark Kent", "fat_count": 2}]',
+        )
+
+    def test_should_not_show_main_details_for_user_without_perms(self):
+        """
+        Test that a user without the required permissions cannot access the view
+
+        :return:
+        :rtype:
+        """
+
+        # given
+        self.client.force_login(user=self.user_with_basic_access)
+
+        # when
+        url = reverse(
+            viewname="afat:statistics_ajax_get_monthly_fats_for_main_character",
+            kwargs={
+                "character_id": self.user_with_basic_access.profile.main_character.character_id,
+                "year": 2020,
+                "month": 4,
+            },
+        )
+        res = self.client.get(path=url)
+
+        # then
+        self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
+        self.assertEqual(
+            first=response_content_to_str(response=res),
+            second="",
+        )

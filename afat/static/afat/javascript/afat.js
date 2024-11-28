@@ -1,9 +1,47 @@
+/* global afatJsSettingsOverride, afatJsSettingsDefaults */
+
+// Build the settings object
+let afatSettings = afatJsSettingsDefaults;
+if (typeof afatJsSettingsOverride !== 'undefined') {
+    afatSettings = Object.assign(
+        {},
+        afatJsSettingsDefaults,
+        afatJsSettingsOverride
+    );
+}
+
 /**
  * Datetime format for AFAT
  *
  * @type {string}
  */
-const AFAT_DATETIME_FORMAT = 'YYYY-MMM-DD, HH:mm'; // eslint-disable-line no-unused-vars
+const AFAT_DATETIME_FORMAT = afatSettings.datetimeFormat; // eslint-disable-line no-unused-vars
+
+/**
+ * Fetch data from an ajax URL
+ *
+ * @param {string} url The URL to fetch data from
+ * @returns {Promise<any>} The fetched data
+ */
+const fetchAjaxData = async (url) => { // eslint-disable-line no-unused-vars
+    'use strict';
+
+    return await fetch(url)
+        .then(response => {
+            if (response.ok) {
+                return Promise.resolve(response);
+            } else {
+                return Promise.reject(new Error('Failed to load'));
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        })
+        .catch(function (error) {
+            console.log(`Error: ${error.message}`);
+        });
+};
 
 /**
  * Convert a string to a slug
@@ -100,7 +138,7 @@ const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
 
     modalElement.on('show.bs.modal', (event) => {
         const button = $(event.relatedTarget); // Button that triggered the modal
-        const url = button.data('url'); // Extract info from data-* attributes
+        const url = button.data('url'); // Extract info from data-url attributes
         const cancelText = button.data('cancel-text');
         const confirmText = button.data('confirm-text');
         const bodyText = button.data('body-text');
