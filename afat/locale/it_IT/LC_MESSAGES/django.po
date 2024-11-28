@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-09 22:26+0100\n"
+"POT-Creation-Date: 2024-11-28 05:55+0100\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Italian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -135,7 +135,7 @@ msgstr ""
 #: afat/helper/views.py:59 afat/helper/views.py:175
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:79
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:75
 msgid "ESI"
 msgstr ""
 
@@ -345,10 +345,11 @@ msgstr ""
 #: afat/models.py:329
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:11
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:23
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:81
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:29
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "FATs"
 msgstr ""
 
@@ -484,6 +485,75 @@ msgstr ""
 msgid "Fleet activity tracking"
 msgstr ""
 
+#: afat/templates/afat/base.html:33
+msgctxt "Decimal separator"
+msgid "."
+msgstr ""
+
+#: afat/templates/afat/base.html:34
+msgctxt "Thousands separator"
+msgid ","
+msgstr ""
+
+#: afat/templates/afat/base.html:35
+msgid "No data available in this table"
+msgstr ""
+
+#: afat/templates/afat/base.html:36
+msgctxt "Keep _END_ as it is. It will be replaced by a number."
+msgid "Showing _END_ entries"
+msgstr ""
+
+#: afat/templates/afat/base.html:37
+msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
+msgid "(filtered from _MAX_ total entries)"
+msgstr ""
+
+#: afat/templates/afat/base.html:38
+msgid "No records available"
+msgstr ""
+
+#: afat/templates/afat/base.html:41
+#: afat/templates/afat/partials/common/spinner.html:7
+msgid "Loading …"
+msgstr ""
+
+#: afat/templates/afat/base.html:42
+msgid "Processing …"
+msgstr ""
+
+#: afat/templates/afat/base.html:43
+msgid "Nothing found, sorry …"
+msgstr ""
+
+#: afat/templates/afat/base.html:45
+msgid "Search …"
+msgstr ""
+
+#: afat/templates/afat/base.html:47
+msgid "First"
+msgstr ""
+
+#: afat/templates/afat/base.html:48
+msgid "Last"
+msgstr ""
+
+#: afat/templates/afat/base.html:49
+msgid "Next"
+msgstr ""
+
+#: afat/templates/afat/base.html:50
+msgid "Previous"
+msgstr ""
+
+#: afat/templates/afat/base.html:53
+msgid ": activate to sort column ascending"
+msgstr ""
+
+#: afat/templates/afat/base.html:54
+msgid ": activate to sort column descending"
+msgstr ""
+
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
 msgstr ""
@@ -496,15 +566,15 @@ msgstr ""
 msgid "Confirm"
 msgstr ""
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:5
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:8
 msgid "Previous month"
 msgstr ""
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:10
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:22
 msgid "Next month"
 msgstr ""
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:11
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:30
 msgid "Current month"
 msgstr ""
 
@@ -528,15 +598,15 @@ msgstr ""
 msgid "View log"
 msgstr ""
 
-#: afat/templates/afat/partials/common/navigation/year-navigation.html:4
+#: afat/templates/afat/partials/common/navigation/year-navigation.html:7
 msgid "Previous year"
 msgstr ""
 
-#: afat/templates/afat/partials/common/navigation/year-navigation.html:9
+#: afat/templates/afat/partials/common/navigation/year-navigation.html:21
 msgid "Next year"
 msgstr ""
 
-#: afat/templates/afat/partials/common/navigation/year-navigation.html:10
+#: afat/templates/afat/partials/common/navigation/year-navigation.html:30
 msgid "Current year"
 msgstr ""
 
@@ -718,7 +788,8 @@ msgid "FATs for this FAT link"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:18
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:10
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:22
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:80
 msgid "Character"
 msgstr ""
 
@@ -836,22 +907,27 @@ msgstr ""
 msgid "Corporations"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:7
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:8
 msgid "Member corporations"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:13
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
 msgid "Corporation"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:16
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:32
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:32
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:64
 msgid "Avg FATs"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:16
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:17
 msgid "Corporation statistics"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:33
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:88
+msgid "View detailed corporation statistics for: "
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:6
@@ -914,28 +990,48 @@ msgid "FATs for"
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/corporation/tabs-navigation.html:7
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:5
 msgid "Members"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:12
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:9
+msgid "Main characters"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:14
+#, python-format
+msgid ""
+"\n"
+"                            %(corp)s main characters and their accumulated "
+"FATs for %(month_name)s %(year)s.\n"
+"                        "
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:24
 msgid "Character statistics"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:64
+msgid "All characters"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:73
+msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/overview/tabs-navigation.html:4
 msgid "My Stats"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:10
-msgid "Click on an alliance name to see their corporations"
-msgstr ""
-
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:35
+#: afat/templates/afat/partials/statistics/overview/tabs/alliance-accordion-item.html:27
 msgid "Alliance statistics for"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:61
+#: afat/templates/afat/partials/statistics/overview/tabs/corp-list.html:31
 msgid "Corporation statistics for"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:10
+msgid "Click on an alliance name to see their corporations"
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:8
@@ -962,7 +1058,7 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:30
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:76
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:28
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:60
 msgid "Month"
 msgstr ""
 
@@ -998,11 +1094,11 @@ msgstr ""
 msgid "Delete FAT link"
 msgstr ""
 
-#: afat/templates/afat/view/dashboard/dashboard.html:53
+#: afat/templates/afat/view/dashboard/dashboard.html:49
 msgid "No recent FATs for"
 msgstr ""
 
-#: afat/templates/afat/view/dashboard/dashboard.html:54
+#: afat/templates/afat/view/dashboard/dashboard.html:50
 msgid "No recent FAT links"
 msgstr ""
 
@@ -1060,14 +1156,36 @@ msgstr[1] ""
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:7
 #: afat/templates/afat/view/statistics/statistics-alliance.html:7
 #: afat/templates/afat/view/statistics/statistics-character.html:6
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:7
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:8
 #: afat/templates/afat/view/statistics/statistics-corporation.html:6
 msgid "Fleet activity tracking statistics"
 msgstr ""
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:12
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:12
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:13
 msgid "Fleet activity"
+msgstr ""
+
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:56
+msgid "View detailed alliance statistics for: "
+msgstr ""
+
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:39
+#, python-format
+msgid ""
+"\n"
+"                                Fleet activity tracking statistics for "
+"<strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
+"                            "
+msgstr ""
+
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:45
+#, python-format
+msgid ""
+"\n"
+"                                Total FATs for %(year)s: "
+"<strong>%(fats_per_year)s</strong>\n"
+"                            "
 msgstr ""
 
 #: afat/templatetags/afat.py:43
@@ -1285,22 +1403,22 @@ msgid ""
 "be re-opened only once!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:236
+#: afat/views/statistics.py:237
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:249
+#: afat/views/statistics.py:250
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:361
+#: afat/views/statistics.py:427
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:572
+#: afat/views/statistics.py:668
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
