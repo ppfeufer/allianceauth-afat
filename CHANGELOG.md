@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## \[3.5.0\] - 2024-11-28
+
 ### Fixed
 
 - Broken corporation performance graph in alliance statistics view

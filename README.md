@@ -20,29 +20,28 @@ An Improved FAT/PAP System for
 
 ______________________________________________________________________
 
-<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=1 -->
+<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 
-- [Alliance Auth AFAT — Another Fleet Activity Tracker](#alliance-auth-afat-%E2%80%94-another-fleet-activity-tracker)
-  - [Features and Highlights](#features-and-highlights)
-  - [Screenshots](#screenshots)
-    - [Dashboard](#dashboard)
-    - [Fat Link List](#fat-link-list)
-    - [Fat Link Details](#fat-link-details)
-    - [Add Fat Link View for FCs](#add-fat-link-view-for-fcs)
-  - [Installation](#installation)
-    - [Important](#important)
-    - [Step 1: Install the App](#step-1-install-the-app)
-    - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
-    - [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
-  - [Updating](#updating)
-  - [Data Migration](#data-migration)
-    - [Import From Native FAT](#import-from-native-fat)
-  - [Settings](#settings)
-  - [Permissions](#permissions)
-  - [Changelog](#changelog)
-  - [Translation Status](#translation-status)
-  - [Contributing](#contributing)
-  - [Credits](#credits)
+- [Features and Highlights](#features-and-highlights)
+- [Screenshots](#screenshots)
+  - [Dashboard](#dashboard)
+  - [Fat Link List](#fat-link-list)
+  - [Fat Link Details](#fat-link-details)
+  - [Add Fat Link View for FCs](#add-fat-link-view-for-fcs)
+- [Installation](#installation)
+  - [Important](#important)
+  - [Step 1: Install the App](#step-1-install-the-app)
+  - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
+  - [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
+- [Updating](#updating)
+- [Data Migration](#data-migration)
+  - [Import From Native FAT](#import-from-native-fat)
+- [Settings](#settings)
+- [Permissions](#permissions)
+- [Changelog](#changelog)
+- [Translation Status](#translation-status)
+- [Contributing](#contributing)
+- [Credits](#credits)
 
 <!-- mdformat-toc end -->
 
