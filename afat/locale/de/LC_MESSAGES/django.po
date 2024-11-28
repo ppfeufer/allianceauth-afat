@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-28 05:55+0100\n"
-"PO-Revision-Date: 2024-11-09 11:25+0000\n"
+"PO-Revision-Date: 2024-11-28 05:05+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/de/>\n"
+"Language-Team: German <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -514,75 +514,71 @@ msgstr "Flottenaktivitäts-Tracking"
 #: afat/templates/afat/base.html:33
 msgctxt "Decimal separator"
 msgid "."
-msgstr ""
+msgstr ","
 
 #: afat/templates/afat/base.html:34
 msgctxt "Thousands separator"
 msgid ","
-msgstr ""
+msgstr "."
 
 #: afat/templates/afat/base.html:35
 msgid "No data available in this table"
-msgstr ""
+msgstr "In dieser Tabelle sind keine Daten verfügbar"
 
 #: afat/templates/afat/base.html:36
 msgctxt "Keep _END_ as it is. It will be replaced by a number."
 msgid "Showing _END_ entries"
-msgstr ""
+msgstr "Zeige _END_ Einträge"
 
 #: afat/templates/afat/base.html:37
 msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
 msgid "(filtered from _MAX_ total entries)"
-msgstr ""
+msgstr "(gefiltert von _MAX_ Einträgen)"
 
 #: afat/templates/afat/base.html:38
 msgid "No records available"
-msgstr ""
+msgstr "Keine Datensätze vorhanden"
 
 #: afat/templates/afat/base.html:41
 #: afat/templates/afat/partials/common/spinner.html:7
 msgid "Loading …"
-msgstr ""
+msgstr "Lade …"
 
 #: afat/templates/afat/base.html:42
 msgid "Processing …"
-msgstr ""
+msgstr "Verarbeite …"
 
 #: afat/templates/afat/base.html:43
 msgid "Nothing found, sorry …"
-msgstr ""
+msgstr "Nichts gefunden, tut mir leid …"
 
 #: afat/templates/afat/base.html:45
 msgid "Search …"
-msgstr ""
+msgstr "Suche …"
 
 #: afat/templates/afat/base.html:47
 msgid "First"
-msgstr ""
+msgstr "Erster"
 
 #: afat/templates/afat/base.html:48
 msgid "Last"
-msgstr ""
+msgstr "Letzter"
 
 #: afat/templates/afat/base.html:49
-#, fuzzy
-#| msgid "Next year"
 msgid "Next"
-msgstr "Nächstes Jahr"
+msgstr "Nächster"
 
 #: afat/templates/afat/base.html:50
-#, fuzzy
-#| msgid "Previous year"
 msgid "Previous"
-msgstr "Vorheriger Monat"
+msgstr "Vorheriger"
 
 #: afat/templates/afat/base.html:53
 msgid ": activate to sort column ascending"
-msgstr ""
+msgstr ": aktivieren, um die Spalte aufsteigend zu sortieren"
 
 #: afat/templates/afat/base.html:54
 msgid ": activate to sort column descending"
-msgstr ""
+msgstr ": aktivieren, um die Spalte absteigend zu sortieren"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -1001,10 +997,8 @@ msgstr "Corporation-Statistik"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:33
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:88
-#, fuzzy
-#| msgid "Corporation statistics for"
 msgid "View detailed corporation statistics for: "
-msgstr "Corporation-Statistik für"
+msgstr "Zeige detaillierte Corporation-Statistik für: "
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:6
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:22
@@ -1070,10 +1064,8 @@ msgid "Members"
 msgstr "Mitglieder"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:9
-#, fuzzy
-#| msgid "Character"
 msgid "Main characters"
-msgstr "Charakter"
+msgstr "Hauptcharakter"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:14
 #, python-format
@@ -1083,20 +1075,23 @@ msgid ""
 "FATs for %(month_name)s %(year)s.\n"
 "                        "
 msgstr ""
+"\n"
+"                            %(corp)s Hauptcharaktere und ihre angesammelten "
+"FATs für %(month_name)s %(year)s\n"
+"                        "
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:24
 msgid "Character statistics"
 msgstr "Charakterstatistik"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:64
-#, fuzzy
-#| msgid "Character"
 msgid "All characters"
-msgstr "Charakter"
+msgstr "Alle Charaktere"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:73
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr ""
+"Dieser Pilot scheint keine FATs für einen registrierten Charakter zu haben."
 
 #: afat/templates/afat/partials/statistics/overview/tabs-navigation.html:4
 msgid "My Stats"
@@ -1258,10 +1253,8 @@ msgid "Fleet activity"
 msgstr "Flottenaktivität"
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:56
-#, fuzzy
-#| msgid "Alliance statistics for"
 msgid "View detailed alliance statistics for: "
-msgstr "Allianz-Statistik für"
+msgstr "Zeige detaillierte Allianz-Statistik für: "
 
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:39
 #, python-format
@@ -1271,6 +1264,10 @@ msgid ""
 "<strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
 "                            "
 msgstr ""
+"\n"
+"                                Flottenaktivitäts-Tracking Statistiken für "
+"<strong>%(corporation)s</strong> für das Jahr <strong>%(year)s</strong>\n"
+"                            "
 
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:45
 #, python-format
@@ -1280,6 +1277,10 @@ msgid ""
 "<strong>%(fats_per_year)s</strong>\n"
 "                            "
 msgstr ""
+"\n"
+"                                Gesamte FATs für %(year)s: "
+"<strong>%(fats_per_year)s</strong>\n"
+"                            "
 
 #: afat/templatetags/afat.py:43
 msgid "January"
