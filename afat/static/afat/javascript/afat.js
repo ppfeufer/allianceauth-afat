@@ -1,13 +1,63 @@
 /* global afatJsSettingsOverride, afatJsSettingsDefaults */
 
+/* jshint -W097 */
+'use strict';
+
+/**
+ * Checks if the given item is a plain object, excluding arrays and dates.
+ *
+ * @param {*} item - The item to check.
+ * @returns {boolean} True if the item is a plain object, false otherwise.
+ */
+function isObject (item) {
+    return (
+        item && typeof item === 'object' && !Array.isArray(item) && !(item instanceof Date)
+    );
+}
+
+/**
+ * Recursively merges properties from source objects into a target object. If a property at the current level is an object,
+ * and both target and source have it, the property is merged. Otherwise, the source property overwrites the target property.
+ * This function does not modify the source objects and prevents prototype pollution by not allowing __proto__, constructor,
+ * and prototype property names.
+ *
+ * @param {Object} target - The target object to merge properties into.
+ * @param {...Object} sources - One or more source objects from which to merge properties.
+ * @returns {Object} The target object after merging properties from sources.
+ */
+function deepMerge (target, ...sources) {
+    if (!sources.length) {
+        return target;
+    }
+
+    // Iterate through each source object without modifying the `sources` array.
+    sources.forEach(source => {
+        if (isObject(target) && isObject(source)) {
+            for (const key in source) {
+                if (isObject(source[key])) {
+                    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+                        continue; // Skip potentially dangerous keys to prevent prototype pollution.
+                    }
+
+                    if (!target[key] || !isObject(target[key])) {
+                        target[key] = {};
+                    }
+
+                    deepMerge(target[key], source[key]);
+                } else {
+                    target[key] = source[key];
+                }
+            }
+        }
+    });
+
+    return target;
+}
+
 // Build the settings object
 let afatSettings = afatJsSettingsDefaults;
 if (typeof afatJsSettingsOverride !== 'undefined') {
-    afatSettings = Object.assign(
-        {},
-        afatJsSettingsDefaults,
-        afatJsSettingsOverride
-    );
+    afatSettings = deepMerge(afatJsSettingsDefaults, afatJsSettingsOverride);
 }
 
 /**
@@ -24,8 +74,6 @@ const AFAT_DATETIME_FORMAT = afatSettings.datetimeFormat; // eslint-disable-line
  * @returns {Promise<any>} The fetched data
  */
 const fetchAjaxData = async (url) => { // eslint-disable-line no-unused-vars
-    'use strict';
-
     return await fetch(url)
         .then(response => {
             if (response.ok) {
@@ -49,8 +97,6 @@ const fetchAjaxData = async (url) => { // eslint-disable-line no-unused-vars
  * @returns {string}
  */
 const convertStringToSlug = (text) => { // eslint-disable-line no-unused-vars
-    'use strict';
-
     return text.toLowerCase()
         .replace(/[^\w ]+/g, '')
         .replace(/ +/g, '-');
@@ -62,8 +108,6 @@ const convertStringToSlug = (text) => { // eslint-disable-line no-unused-vars
  * @param {string} order
  */
 const sortTable = (table, order) => { // eslint-disable-line no-unused-vars
-    'use strict';
-
     const asc = order === 'asc';
     const tbody = table.find('tbody');
 
@@ -81,8 +125,6 @@ const sortTable = (table, order) => { // eslint-disable-line no-unused-vars
  * @param {element} modalElement
  */
 const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
-    'use strict';
-
     /**
      * Set modal buttons
      *
@@ -163,8 +205,6 @@ const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
  * Prevent double form submits
  */
 document.querySelectorAll('form').forEach((form) => {
-    'use strict';
-
     form.addEventListener('submit', (e) => {
         // Prevent if already submitting
         if (form.classList.contains('is-submitting')) {
