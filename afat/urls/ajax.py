@@ -7,7 +7,7 @@ These URLs are used for AJAX calls and are prefixed with `{INTERNAL_URL_PREFIX}/
 from django.urls import path
 
 # Alliance Auth AFAT
-from afat.views import dashboard, fatlinks, logs
+from afat.views import dashboard, fatlinks, logs, statistics
 
 urls = [
     # Ajax calls :: Dashboard
@@ -37,5 +37,11 @@ urls = [
         route="logs/",
         view=logs.ajax_get_logs,
         name="logs_ajax_get_logs",
+    ),
+    # Ajax calls :: Statistics
+    path(
+        route="statistics/get-monthly-fats-for-main-character/<int:character_id>/<int:year>/<int:month>/",
+        view=statistics.ajax_get_monthly_fats_for_main_character,
+        name="statistics_ajax_get_monthly_fats_for_main_character",
     ),
 ]

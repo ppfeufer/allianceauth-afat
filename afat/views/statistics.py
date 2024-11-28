@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Permission
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Count
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
@@ -326,6 +326,70 @@ def character(  # pylint: disable=too-many-locals
         "afat.manage_afat",
     )
 )
+def ajax_get_monthly_fats_for_main_character(
+    request: WSGIRequest,
+    character_id: int,
+    year: int,
+    month: int,
+) -> JsonResponse:
+    """
+    Ajax call :: Get monthly FATs for the main characters registered characters
+
+    :param request: The request object
+    :type request: WSGIRequest
+    :param character_id: The main character
+    :type character_id: EveCharacter
+    :param year: The year
+    :type year: int
+    :param month: The month
+    :type month: int
+    :return: JSON response
+    :rtype: JsonResponse
+    """
+
+    main_character = EveCharacter.objects.get(character_id=character_id)
+
+    # Check character has permission to view other corps stats
+    if int(request.user.profile.main_character.corporation_id) != int(
+        main_character.corporation_id
+    ) and not user_has_any_perms(
+        user=request.user,
+        perm_list=["afat.stats_corporation_other", "afat.manage_afat"],
+    ):
+        return JsonResponse(data="", safe=False)
+
+    fats_per_character = (
+        Fat.objects.filter(
+            character__corporation_id=main_character.corporation_id,
+            character__character_ownership__user=main_character.character_ownership.user,
+            fatlink__created__month=month,
+            fatlink__created__year=year,
+        )
+        .values("character__character_id", "character__character_name")
+        .annotate(fat_count=Count("id"))
+    )
+
+    return JsonResponse(
+        data=[
+            {
+                "character_id": item["character__character_id"],
+                "character_name": item["character__character_name"],
+                "fat_count": item["fat_count"],
+            }
+            for item in fats_per_character
+        ],
+        safe=False,
+    )
+
+
+@login_required()
+@permissions_required(
+    perm=(
+        "afat.stats_corporation_other",
+        "afat.stats_corporation_own",
+        "afat.manage_afat",
+    )
+)
 def corporation(  # pylint: disable=too-many-statements too-many-branches too-many-locals
     request: WSGIRequest, corpid: int = 0000, year: int = None, month: int = None
 ) -> HttpResponse:
@@ -350,23 +414,24 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     current_month, current_year = current_month_and_year()
 
     # Check character has permission to view other corps stats
-    if int(request.user.profile.main_character.corporation_id) != int(corpid):
-        if not user_has_any_perms(
-            user=request.user,
-            perm_list=["afat.stats_corporation_other", "afat.manage_afat"],
-        ):
-            messages.warning(
-                request=request,
-                message=mark_safe(
-                    s=gettext(
-                        "<h4>Warning!</h4>"
-                        "<p>You do not have permission to view statistics "
-                        "for that corporation.</p>"
-                    )
-                ),
-            )
+    if int(request.user.profile.main_character.corporation_id) != int(
+        corpid
+    ) and not user_has_any_perms(
+        user=request.user,
+        perm_list=["afat.stats_corporation_other", "afat.manage_afat"],
+    ):
+        messages.warning(
+            request=request,
+            message=mark_safe(
+                s=gettext(
+                    "<h4>Warning!</h4>"
+                    "<p>You do not have permission to view statistics "
+                    "for that corporation.</p>"
+                )
+            ),
+        )
 
-            return redirect(to="afat:dashboard")
+        return redirect(to="afat:dashboard")
 
     corp = get_or_create_corporation_info(corporation_id=corpid)
     corp_name = corp.corporation_name

@@ -42,14 +42,6 @@
 {% endblock %}
 
 {% block extra_javascript %}
-    <script>
-        const afatJsSettingsOverride = {
-            url: {
-                fatMainCharacterDetails: '{% url "afat:dashboard" %}'
-            },
-        };
-    </script>
-
     {% include "bundles/chart-js.html" %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}

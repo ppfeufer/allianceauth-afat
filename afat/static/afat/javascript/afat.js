@@ -34,9 +34,7 @@ const fetchAjaxData = async (url) => { // eslint-disable-line no-unused-vars
                 return Promise.reject(new Error('Failed to load'));
             }
         })
-        .then(response => {
-            response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             return data;
         })
