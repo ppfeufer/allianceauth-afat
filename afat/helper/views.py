@@ -391,7 +391,7 @@ def get_average_fats_by_corporations(fats, corporations) -> list:
     data_avgs = OrderedDict(sorted(data_avgs.items(), key=lambda x: x[1], reverse=True))
 
     return [
-        [data_avgs.keys()],
-        [data_avgs.values()],
+        list(data_avgs.keys()),
+        list(data_avgs.values()),
         get_random_rgba_color(),
     ]
