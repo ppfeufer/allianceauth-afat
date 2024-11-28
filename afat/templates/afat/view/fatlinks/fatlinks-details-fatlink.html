@@ -35,12 +35,8 @@
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include "afat/bundles/afat-js.html" %}
-    {% include "bundles/datatables-js-bs5.html" %}
-    {% include "bundles/clipboard-js.html" %}
-
     <script>
-        let afatSettings = {
+        const afatJsSettingsOverride = {
             url: '{% url "afat:fatlinks_ajax_get_fats_by_fatlink" 0 %}'.replace(
                     '0',
                     '{{ link.hash }}'
@@ -60,5 +56,8 @@
         };
     </script>
 
+    {% include "afat/bundles/afat-js.html" %}
+    {% include "bundles/datatables-js-bs5.html" %}
+    {% include "bundles/clipboard-js.html" %}
     {% include "afat/bundles/afat-fatlink-details-js.html" %}
 {% endblock %}

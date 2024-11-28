@@ -60,12 +60,8 @@
 {% endblock %}
 
 {% block extra_javascript %}
-    {% include "bundles/datatables-js-bs5.html" %}
-    {% include "bundles/moment-js.html" with locale=True %}
-    {% include "afat/bundles/afat-js.html" %}
-
     <script>
-        let afatSettings = {
+        const afatJsSettingsOverride = {
             url: {
                 linkList: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year %}'
             },
@@ -91,6 +87,9 @@
         };
     </script>
 
+    {% include "bundles/datatables-js-bs5.html" %}
+    {% include "bundles/moment-js.html" with locale=True %}
+    {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-fatlist-js.html" %}
     {% include "bundles/filterdropdown-js.html" %}
 {% endblock %}
