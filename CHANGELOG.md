@@ -35,9 +35,14 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Broken corporation performance graph in alliance statistics view
+
 ### Changed
 
 - Autocomplete JS updated
+- Corporation statistics pages improved
 
 ## \[3.4.0\] - 2024-11-09
 
