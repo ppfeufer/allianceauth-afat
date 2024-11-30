@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Peter Pfeufer <info@ppfeufer.de>, 2023, 2024.
 # MxdHana <236833425@qq.com>, 2024.
+# Dehao Wu <wudehao2000@163.com>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-28 05:55+0100\n"
-"PO-Revision-Date: 2024-11-09 11:25+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"PO-Revision-Date: 2024-11-30 16:15+0000\n"
+"Last-Translator: Dehao Wu <wudehao2000@163.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/"
 "projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -222,19 +223,19 @@ msgstr ""
 
 #: afat/models.py:72
 msgid "Can create FAT links"
-msgstr ""
+msgstr "可创建FAT链接"
 
 #: afat/models.py:74
 msgid "Can see own corporation statistics"
-msgstr ""
+msgstr "可查看我的军团状态"
 
 #: afat/models.py:76
 msgid "Can see statistics of other corporations"
-msgstr ""
+msgstr "可查看其他军团状态"
 
 #: afat/models.py:78
 msgid "Can view the modules log"
-msgstr ""
+msgstr "可以检视装备记录"
 
 #: afat/models.py:80
 msgid "AFAT"
@@ -242,7 +243,7 @@ msgstr ""
 
 #: afat/models.py:97
 msgid "Descriptive name of the fleet type"
-msgstr ""
+msgstr "描述你的舰队类型"
 
 #: afat/models.py:103
 msgid "Whether this fleet type is active or not"
@@ -267,19 +268,19 @@ msgstr "舰队指挥官不再是舰队统帅。"
 
 #: afat/models.py:145
 msgid "When was this FAT link created"
-msgstr ""
+msgstr "这个FAT链接是什么时候创建的"
 
 #: afat/models.py:152
 msgid "The FAT link fleet name"
-msgstr ""
+msgstr "这个FAT链接的舰队名字"
 
 #: afat/models.py:156
 msgid "The FAT link hash"
-msgstr ""
+msgstr "这个FAX链接的哈希值"
 
 #: afat/models.py:163
 msgid "Who created the FAT link?"
-msgstr ""
+msgstr "谁创建的这个FAT链接？"
 
 #: afat/models.py:172
 msgid "Character this FAT link has been created with"
@@ -291,7 +292,7 @@ msgstr ""
 
 #: afat/models.py:191
 msgid "The FAT link doctrine"
-msgstr ""
+msgstr "这个FAT链接的舰队类型"
 
 #: afat/models.py:195
 msgid "Whether this FAT link was created via ESI or not"
@@ -307,29 +308,30 @@ msgstr ""
 
 #: afat/models.py:226 afat/templates/afat/view/logs/logs-overview.html:24
 msgid "FAT link"
-msgstr ""
+msgstr "FAT链接"
 
 #: afat/models.py:227
 #: afat/templates/afat/partials/common/navigation/top-menu.html:27
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:28
 msgid "FAT links"
-msgstr ""
+msgstr "FAT链接"
 
 #: afat/models.py:284
 msgid "FAT link duration"
-msgstr ""
+msgstr "FAT链接持续时间"
 
 #: afat/models.py:285
 msgid "FAT link durations"
-msgstr ""
+msgstr "FAT链接持续时间"
 
 #: afat/models.py:298
 msgid "Character who registered this FAT"
-msgstr ""
+msgstr "注册该FAT链接的角色"
 
 #: afat/models.py:305
+#, fuzzy
 msgid "The FAT link the character registered at"
-msgstr ""
+msgstr "注册该FAT链接的角色创建时间在"
 
 #: afat/models.py:309
 msgid "The system the character is in"
