@@ -1,7 +1,7 @@
 # flake8: noqa
 
 """
-Scripts generates large amount of fat links for load testing
+Script to generate many fat links for load testing.
 
 This script can be executed directly from shell.
 """
@@ -41,14 +41,14 @@ from afat.models import Fat, FatLink, Log
 from afat.tests.fixtures.utils import RequestStub
 from afat.utils import write_log
 
-LINKS_NUMBER = 1000
+LINKS_NUMBER = 100
+MAX_PILOTS_IN_FLEET = 256
 
 
 characters = list(EveCharacter.objects.all())
 
 print(
-    f"Adding {LINKS_NUMBER:,} FAT links "
-    f"with up to {len(characters)} characters each"
+    f"Adding {LINKS_NUMBER:,} FAT links with up to {MAX_PILOTS_IN_FLEET} characters each"
 )
 
 user = User.objects.first()
@@ -62,21 +62,21 @@ for _ in range(LINKS_NUMBER):
         creator=user,
         character=creator,
         fleet_type=fleet_type,
-        created=now() - dt.timedelta(days=random.randint(a=0, b=180)),
+        created=now() - dt.timedelta(days=random.randint(a=0, b=365)),
     )
 
     write_log(
         request=RequestStub(user=user),
         log_event=Log.Event.CREATE_FATLINK,
         log_text=(
-            f'ESI FAT link with name "{fat_link.fleet}"'
-            f"{fleet_type} was created by {user}"
+            f'FAT link with name "{fat_link.fleet}" '
+            f'(Fleet type: "{fleet_type}") was created'
         ),
         fatlink_hash=fat_link.hash,
     )
 
     for character in random.sample(
-        characters, k=random.randint(a=1, b=len(characters))
+        population=characters, k=random.randint(a=1, b=MAX_PILOTS_IN_FLEET)
     ):
         Fat.objects.create(
             character_id=character.id,
