@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Month order in alliance stats view (#377)
+
 ## \[3.5.0\] - 2024-11-28
 
 ### Fixed

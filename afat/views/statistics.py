@@ -636,6 +636,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
                 character__alliance_id=allianceid,
                 fatlink__created__year=year,
             )
+            .order_by("fatlink__created__month")
             .values("fatlink__created__month")
             .annotate(fat_count=Count("id"))
         )
