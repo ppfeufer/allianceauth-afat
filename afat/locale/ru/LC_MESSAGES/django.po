@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-28 05:55+0100\n"
+"POT-Creation-Date: 2024-12-01 12:21+0100\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -1608,6 +1608,6 @@ msgstr ""
 "<h4>Внимание!</h4><p>У Вас нет прав для просмотра статистики этой корпорации."
 "</p>"
 
-#: afat/views/statistics.py:668
+#: afat/views/statistics.py:669
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Ошибка!</h4><p>Информация о дате неполная.</p>"

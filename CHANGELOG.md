@@ -35,9 +35,15 @@ Section Order:
 ### Security
 -->
 
+## \[3.5.1\] - 2024-12-01
+
 ### Fixed
 
 - Month order in alliance stats view (#377)
+
+### Changed
+
+- Chinese translation updated
 
 ## \[3.5.0\] - 2024-11-28
 

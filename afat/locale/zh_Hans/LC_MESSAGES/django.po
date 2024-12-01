@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-28 05:55+0100\n"
+"POT-Creation-Date: 2024-12-01 12:21+0100\n"
 "PO-Revision-Date: 2024-11-30 16:15+0000\n"
 "Last-Translator: Dehao Wu <wudehao2000@163.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/"
@@ -1439,6 +1439,6 @@ msgid ""
 "corporation.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:668
+#: afat/views/statistics.py:669
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
