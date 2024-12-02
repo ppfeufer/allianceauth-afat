@@ -92,7 +92,7 @@ information, see below.
 
 ## Installation<a name="installation"></a>
 
-> \[!NOTE\]
+> [!NOTE]
 >
 > **Alliance Auth AFAT >= 3.0.0 needs at least Alliance Auth v4.0.0!**
 >
@@ -109,7 +109,7 @@ please install it first before proceeding. (See the official
 [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html)
 for details)
 
-> \[!IMPORTANT\]
+> [!IMPORTANT]
 >
 > For users migrating from Alliance Auth's built-in FAT systems,
 > please read the [specific instructions](#data-migration) FIRST.
