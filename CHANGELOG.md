@@ -22,7 +22,7 @@ https://docs.github.com/assets/cb-41128/mw-1440/images/help/writing/alerts-rende
 > Critical content demanding immediate user attention due to potential risks.
 -->
 
-## \[In Development\] - Unreleased
+## [In Development] - Unreleased
 
 <!--
 Section Order:
@@ -35,7 +35,7 @@ Section Order:
 ### Security
 -->
 
-## \[3.5.1\] - 2024-12-01
+## [3.5.1] - 2024-12-01
 
 ### Fixed
 
@@ -45,7 +45,7 @@ Section Order:
 
 - Chinese translation updated
 
-## \[3.5.0\] - 2024-11-28
+## [3.5.0] - 2024-11-28
 
 ### Fixed
 
@@ -56,9 +56,9 @@ Section Order:
 - Autocomplete JS updated
 - Corporation statistics pages improved
 
-## \[3.4.0\] - 2024-11-09
+## [3.4.0] - 2024-11-09
 
-> \[!IMPORTANT\]
+> [!IMPORTANT]
 >
 > After updating to this version, make sure to run the following
 > command to migrate the old fleet types to the new system:
@@ -87,7 +87,7 @@ Section Order:
 
 - `AFAT_APP_NAME` setting to ensure the app name can be properly localized
 
-## \[3.3.0\] - 2024-11-06
+## [3.3.0] - 2024-11-06
 
 ### Added
 
@@ -99,7 +99,7 @@ Section Order:
 - Dependencies updated
   - `allianceauth`>=4.4.0
 
-## \[3.2.0\] - 2024-09-16
+## [3.2.0] - 2024-09-16
 
 ### Changed
 
@@ -109,7 +109,7 @@ Section Order:
 - Japanese translation improved
 - Lingua codes updated to match Alliance Auth v4.3.1
 
-## \[3.1.0\] - 2024-07-30
+## [3.1.0] - 2024-07-30
 
 ### Changed
 
@@ -121,7 +121,7 @@ Section Order:
 
 - Support for Python 3.8 and Python 3.9
 
-## \[3.0.2\] - 2024-06-06
+## [3.0.2] - 2024-06-06
 
 ### Fixed
 
@@ -133,15 +133,15 @@ Section Order:
 - Chinese translation updated
 - Russian translation updated
 
-## \[3.0.1\] - 2024-05-16
+## [3.0.1] - 2024-05-16
 
 ### Change
 
 - Translations updated
 
-## \[3.0.0\] - 2024-03-16
+## [3.0.0] - 2024-03-16
 
-> \[!NOTE\]
+> [!NOTE]
 >
 > **This version needs at least Alliance Auth v4.0.0!**
 >
@@ -175,9 +175,9 @@ Section Order:
 
 - Support for Alliance Auth 3
 
-## \[3.0.0-beta.3\] - 2024-03-05
+## [3.0.0-beta.3] - 2024-03-05
 
-> \[!NOTE\]
+> [!NOTE]
 >
 > **This version needs at least Alliance Auth v4.0.0b2!**
 >
@@ -189,9 +189,9 @@ Section Order:
 
 - A potential performance issue with an ajax call in the dashboard view (thx to @pvyParts)
 
-## \[3.0.0-beta.2\] - 2024-03-04
+## [3.0.0-beta.2] - 2024-03-04
 
-> \[!NOTE\]
+> [!NOTE]
 >
 > **This version needs at least Alliance Auth v4.0.0b2!**
 >
@@ -205,9 +205,9 @@ Section Order:
 - A bug where the previous or next month number wasn't calculated correctly in the statistics detail view
 - A bug where the next month button in the statistics detail view was not displayed correctly
 
-## \[3.0.0-beta.1\] - 2024-02-25
+## [3.0.0-beta.1] - 2024-02-25
 
-> \[!NOTE\]
+> [!NOTE]
 >
 > **This version needs at least Alliance Auth v4.0.0b2!**
 >
@@ -237,9 +237,9 @@ Section Order:
 
 - Support for Alliance Auth 3
 
-## \[2.13.0\] - 2023-09-26
+## [2.13.0] - 2023-09-26
 
-> \[!NOTE\]
+> [!NOTE]
 >
 > **This is the last version compatible with Alliance Auth v3.**
 
@@ -268,7 +268,7 @@ Section Order:
 - Manual FAT model. This has been deprecated back in April 2021, so it's time to
   remove it.
 
-## \[2.12.3\] - 2023-09-02
+## [2.12.3] - 2023-09-02
 
 ### Changed
 
@@ -276,13 +276,13 @@ Section Order:
 - Russian translation improved
 - Spanish translation improved
 
-## \[2.12.2\] - 2023-08-13
+## [2.12.2] - 2023-08-13
 
 ### Fixed
 
 - Bootstrap CSS fix
 
-## \[2.12.1\] - 2023-07-30
+## [2.12.1] - 2023-07-30
 
 ### Added
 
@@ -294,7 +294,7 @@ Section Order:
 - Russian translation improved
 - Ukrainian translation improved
 
-## \[2.12.0\] - 2023-04-21
+## [2.12.0] - 2023-04-21
 
 ### Added
 
@@ -310,25 +310,25 @@ Section Order:
 - German translation updated
 - Russian translation updated
 
-## \[2.11.3\] - 2023-04-13
+## [2.11.3] - 2023-04-13
 
 ### Changed
 
 - German translation updated
 
-## \[2.11.2\] - 2023-03-25
+## [2.11.2] - 2023-03-25
 
 ### Fixed
 
 - Include Sunday in statistics again (Related to [#251])
 
-## \[2.11.1\] - 2023-03-06
+## [2.11.1] - 2023-03-06
 
 ### Fixed
 
 - FATs by Weekday for Alliance are off by one day
 
-## \[2.11.0\] - 2023-03-06
+## [2.11.0] - 2023-03-06
 
 ### Fixed
 
@@ -345,14 +345,14 @@ Section Order:
 - Russian translation updated
 - German translation updated
 
-## \[2.10.2\] - 2022-10-16
+## [2.10.2] - 2022-10-16
 
 ### Fixed
 
 - Hide hint text behind the permissions the users should have to see it
 - Bottom margin in some statistics views
 
-## \[2.10.1\] - 2022-10-12
+## [2.10.1] - 2022-10-12
 
 ### Fixed
 
@@ -363,7 +363,7 @@ Section Order:
 - Auto retry for ESI and OS errors in tasks, since django-esi already retries all
   relevant errors
 
-## \[2.10.0\] - 2022-10-06
+## [2.10.0] - 2022-10-06
 
 ### Changed
 
@@ -372,7 +372,7 @@ Section Order:
 - Minimum requirements:
   - `allianceauth>=3.2.0`
 
-## \[2.9.7\] - 2022-08-11
+## [2.9.7] - 2022-08-11
 
 ### Update Information
 
@@ -395,13 +395,13 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   - `unidecode>=1.3.4`
   - `python>=3.8`
 
-## \[2.9.6\] - 2022-07-29
+## [2.9.6] - 2022-07-29
 
 ### Fixed
 
 - Missing JS re-added
 
-## \[2.9.5\] - 2022-07-29
+## [2.9.5] - 2022-07-29
 
 ### Fixed
 
@@ -413,19 +413,19 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   `allianceauth` itself
 - Deprecated `MANIFEST.in` file
 
-## \[2.9.4\] - 2022-07-12
+## [2.9.4] - 2022-07-12
 
 ### Fixed
 
 - JS template order
 
-## \[2.9.3\] - 2022-07-12
+## [2.9.3] - 2022-07-12
 
 ### Changed
 
 - Form for "Manual FAT" re-activated again
 
-## \[2.9.2\] - 2022-07-11
+## [2.9.2] - 2022-07-11
 
 ### Changed
 
@@ -434,7 +434,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   which was used for this feature. Alternatives that would make this feature work
   as it was until now are currently unavailable. Say "Thank You CCP" ...
 
-## \[2.9.1\] - 2022-07-11
+## [2.9.1] - 2022-07-11
 
 ### Added
 
@@ -442,7 +442,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   [!43](https://gitlab.com/evictus.iou/allianceauth-imicusfat/-/issues/43) added. It
   is not a work of art but should mitigate the issue. Thanks to @pvyParts for the idea.
 
-## \[2.9.0\] - 2022-07-11
+## [2.9.0] - 2022-07-11
 
 ### Changed
 
@@ -454,14 +454,14 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 
 - Unused JavaScript
 
-## \[2.8.6\] - 2022-06-23
+## [2.8.6] - 2022-06-23
 
 ### Fixed
 
 - Apparently, I did it wrong and `get_or_create` was throwing errors. Should be
   fixed now
 
-## \[2.8.5\] - 2022-06-16
+## [2.8.5] - 2022-06-16
 
 ### Fixed
 
@@ -469,26 +469,26 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   time. This is - to my analysis - because ESI is not fast enough to handle all
   the calls between the task runs. So we let Django handle it now, hopefully.
 
-## \[2.8.4\] - 2022-05-02
+## [2.8.4] - 2022-05-02
 
 ### Fixed
 
 - Duplicate Key error by moving check if character exists to `process_character`
   function instead of `process_fats` function
 
-## \[2.8.3\] - 2022-04-28
+## [2.8.3] - 2022-04-28
 
 ### Fixed
 
 - Access to character statistics
 
-## \[2.8.2\] - 2022-04-25
+## [2.8.2] - 2022-04-25
 
 ### Fixed
 
 - More permission fixes for statistics
 
-## \[2.8.1\] - 2022-04-25
+## [2.8.1] - 2022-04-25
 
 ### Changed
 
@@ -499,7 +499,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 - An issue where a user can't see other characters statistics despite having the
   right permissions
 
-## \[2.8.0\] - 2022-03-02
+## [2.8.0] - 2022-03-02
 
 ### Added
 
@@ -513,21 +513,21 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 
 - Deprecated settings
 
-## \[2.7.0\] - 2022-02-28
+## [2.7.0] - 2022-02-28
 
 ### Fixed
 
-- \[Compatibility\] AA 3.x / Django 4 :: ImportError: cannot import name
+- [Compatibility] AA 3.x / Django 4 :: ImportError: cannot import name
   'ugettext_lazy' from 'django.utils.translation'
 
-## \[2.6.0\] - 2022-02-02
+## [2.6.0] - 2022-02-02
 
 ### Changed
 
 - `models.TextChoices` refactored for better code readability
 - Using `path` in URL config instead of soon-to-be removed `url`
 
-## \[2.5.0\] - 2022-01-26
+## [2.5.0] - 2022-01-26
 
 ### Changed
 
@@ -538,7 +538,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 - Import from bFAT. bFAT is deprecated since quite some time now and by now everyone
   who was using it should have updated to a working and supported FAT module.
 
-## \[2.4.0\] - 2022-01-12
+## [2.4.0] - 2022-01-12
 
 ### Changed
 
@@ -546,14 +546,14 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 - Minimum requirements
   - Alliance Auth v2.9.4
 
-## \[2.3.3\] - 2022-01-05
+## [2.3.3] - 2022-01-05
 
 ### Changed
 
 - `update_esi_fatlinks` task chain improved, so the sub-task `process_character` is
   only fired for new pilots in fleet, not for every pilot
 
-## \[2.3.2\] - 2022-01-04
+## [2.3.2] - 2022-01-04
 
 ### Added
 
@@ -566,7 +566,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 - Cleanup for ImicusFAT migration moved to migration command and removed from README
   (Meaning: No more manual preparation needed when migrating from ImicusFAT to AFAT)
 
-## \[2.3.1\] - 2022-01-04
+## [2.3.1] - 2022-01-04
 
 ### Removed
 
@@ -577,7 +577,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 
 - Slugified links with unicode characters in `AFAT_APP_NAME`
 
-## \[2.3.0\] - 2021-11-30
+## [2.3.0] - 2021-11-30
 
 ### Changed
 
@@ -587,19 +587,19 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   - Python 3.7
   - Alliance Auth v2.9.3
 
-## \[2.2.20\] - 2021-11-21
+## [2.2.20] - 2021-11-21
 
 ### Updated
 
 - Russian and German translations (We should have it all now ...)
 
-## \[2.2.19\] - 2021-11-20
+## [2.2.19] - 2021-11-20
 
 ### Updated
 
 - Russian and German translations
 
-## \[2.2.18\] - 2021-11-17
+## [2.2.18] - 2021-11-17
 
 ### Fixed
 
@@ -609,57 +609,57 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 
 - Russian translation
 
-## \[2.2.17\] - 2021-11-17
+## [2.2.17] - 2021-11-17
 
 ### Added
 
-- Russian translation (Thanks to -7- \[0RIG\] Neomad Miromme)
+- Russian translation (Thanks to -7- [0RIG] Neomad Miromme)
 
 ### Fixed
 
 - Spelling in some templates
 - Sorting of months in statistics view
 
-## \[2.2.16\] - 2021-11-17
+## [2.2.16] - 2021-11-17
 
 ### Added
 
 - German translation
 
-## \[2.2.15\] - 2021-11-10
+## [2.2.15] - 2021-11-10
 
 ### Fixed
 
 - TypeError in convert_fats_to_dict() When fleet (name) Is NULL/None (#115)
 
-## \[2.2.14\] - 2021-11-05
+## [2.2.14] - 2021-11-05
 
 ### Fixed
 
 - User with `manage_afat` permission now have access to the logs as well, as they
   should have from the beginning
 
-## \[2.2.13\] - 2021-11-04
+## [2.2.13] - 2021-11-04
 
 ### Added
 
 - Activate and Deactivate actions in admin backend for fleet types now throw
   an error message if they error out for some reason
 
-## \[2.2.12\] - 2021-10-31
+## [2.2.12] - 2021-10-31
 
 ### Changed
 
 - Minimum version for `allianceauth-app-utils` set to 1.8.1
 
-## \[2.2.11\] - 2021-10-17
+## [2.2.11] - 2021-10-17
 
 ### Changed
 
 - Automatically reload information in fatlink detail view only when the fleet is
   still tracked/active
 
-## \[2.2.10\] - 2021-10-05
+## [2.2.10] - 2021-10-05
 
 ### Changed
 
@@ -669,13 +669,13 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 
 - An import from the wrong module
 
-## \[2.2.9\] - 2021-10-03
+## [2.2.9] - 2021-10-03
 
 ### Fixed
 
 - A possible "division by zero" error in corp statistics
 
-## \[2.2.8\] - 2021-10-01
+## [2.2.8] - 2021-10-01
 
 ### Added
 
@@ -686,7 +686,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 
 - GitHub Templates
 
-## \[2.2.7\] - 2021-08-02
+## [2.2.7] - 2021-08-02
 
 ### Fixed
 
@@ -694,32 +694,32 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 - Sort by month in statistics overview
 - Expected parentheses around arrow function argument
 
-## \[2.2.6\] - 2021-07-15
+## [2.2.6] - 2021-07-15
 
 ### Fixed
 
 - Prevent double submit of forms, to stop multiple manual FAT links from being
   created if someone double-clicks (or more) on the "Create Link" button
 
-## \[2.2.5\] - 2021-07-12
+## [2.2.5] - 2021-07-12
 
 ### Fixed
 
 - Next and current month buttons in corp stats
 
-## \[2.2.4\] - 2021-07-12
+## [2.2.4] - 2021-07-12
 
 ### Fixed
 
 - Error 500 due to non existent EveCorporationInfo objects
 
-## \[2.2.3\] - 2021-07-08
+## [2.2.3] - 2021-07-08
 
 ### Added
 
 - Checked for compatibility with Python 3.9 and Django 3.2
 
-## \[2.2.2\] - 2021-06-20
+## [2.2.2] - 2021-06-20
 
 ### Changed
 
@@ -728,7 +728,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   combined log. If you haven't done so yet, see
   [update instructions for v2.0.0](#-update-instructions-for-v200-) please
 
-## \[2.2.1\] - 2021-06-17
+## [2.2.1] - 2021-06-17
 
 ### Changed
 
@@ -736,7 +736,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
 - FAT link hash creation, to ensure the hash is definitely unique (Not that it
   wasn't before, but now it is enforced via its DB table field)
 
-## \[2.2.0\] - 2021-05-11
+## [2.2.0] - 2021-05-11
 
 ### Fixed
 
@@ -755,7 +755,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   how to do so without firing potentially hundreds of queries against the database)
 - Reduced load time for all pages incl. admin site (Thanks @ErikKalkoken)
 
-## \[2.1.1\] - 2021-04-30
+## [2.1.1] - 2021-04-30
 
 ### Added
 
@@ -769,7 +769,7 @@ breaking changes. (See [Alliance Auth 3.0.0 release notes](https://gitlab.com/al
   created within the last 24 hours and has not been re-opened.
 - Message templates refactored to make them more maintainable
 
-## \[2.1.0\] - 2021-04-22
+## [2.1.0] - 2021-04-22
 
 ### Changed
 
@@ -784,7 +784,7 @@ If you haven't updated to the v2 version yet, do so first and do not go straight
 this version. Read the [update instructions for v2.0.0 please](#-update-instructions-for-v200-)
 please.
 
-## \[2.0.1\] - 2021-04-22
+## [2.0.1] - 2021-04-22
 
 ### Fixed
 
@@ -797,7 +797,7 @@ If you haven't updated to the v2 version yet, do so first and do not go straight
 this version. Read the [update instructions for v2.0.0 please](#-update-instructions-for-v200-)
 please.
 
-## \[2.0.0\] - 2021-04-21
+## [2.0.0] - 2021-04-21
 
 ### Fixed
 
@@ -893,7 +893,7 @@ Finally migrate the Manual FAT log to the new logging table
 python manage.py afat_migrate_manual_fat_log
 ```
 
-## \[1.10.0\] - 2021-03-30
+## [1.10.0] - 2021-03-30
 
 ### ⚠️ IMPORTANT ⚠️
 
@@ -939,7 +939,7 @@ that were previously "deleted" as active again.
 
 - Migration information for migration from ImicusFAT in README.md file
 
-## \[1.9.0\] - 2021-03-20
+## [1.9.0] - 2021-03-20
 
 ### Added
 
@@ -947,7 +947,7 @@ that were previously "deleted" as active again.
 
   ![Ship Type Overview](docs/images/changelog/1.9.0/ship-type-overview.png "Ship Type Overview")
 
-## \[1.8.0\] - 2021-03-07
+## [1.8.0] - 2021-03-07
 
 ### Added
 
@@ -956,13 +956,13 @@ that were previously "deleted" as active again.
 
   ![Manually close ESI links](docs/images/changelog/1.8.0/manually-close-esi-links.png "Manually close ESI links")
 
-## \[1.7.0\] - 2021-03-02
+## [1.7.0] - 2021-03-02
 
 ### Added
 
 - Setting to change the application name, in case you want it named something specific
 
-## \[1.6.0\] - 2021-02-04
+## [1.6.0] - 2021-02-04
 
 ### Added
 
@@ -971,13 +971,13 @@ that were previously "deleted" as active again.
   already has a fleet registered, and it is hte same fleet, he gets a message. If it
   is a new fleet, the old fleet will be closed, and the new fleet will be registered.
 
-## \[1.5.3\] - 2021-02-03
+## [1.5.3] - 2021-02-03
 
 ### Fixed
 
 - An issue with sorting by date in datatables
 
-## \[1.5.2\] - 2021-02-02
+## [1.5.2] - 2021-02-02
 
 ### Changed
 
@@ -986,13 +986,13 @@ that were previously "deleted" as active again.
   - Added hover effect to all tables
   - Added common table style
 
-## \[1.5.1\] - 2021-01-27
+## [1.5.1] - 2021-01-27
 
 ### Changed
 
 - EVE/UTC tz handling optimized
 
-## \[1.5.0\] - 2021-01-25
+## [1.5.0] - 2021-01-25
 
 ### Added
 
@@ -1000,7 +1000,7 @@ that were previously "deleted" as active again.
   of their alts up and running
 - More ESI error handling
 
-## \[1.4.5\] - 2021-01-20
+## [1.4.5] - 2021-01-20
 
 ### Changed
 
@@ -1011,7 +1011,7 @@ that were previously "deleted" as active again.
 - An issue when the FC switched to another fleet. This was not detected properly, and
   the "old" ESI link was not closed.
 
-## \[1.4.4\] - 2021-01-11
+## [1.4.4] - 2021-01-11
 
 ### Added
 
@@ -1067,14 +1067,14 @@ that were previously "deleted" as active again.
   **Keep in mind, you have to set the new permission to the states/groups that
   previously had permissions.**
 
-## \[1.4.3\] - 2021-01-08
+## [1.4.3] - 2021-01-08
 
 ### Fixed
 
 - Deal with invalid user profiles. For example when a user has revoked his/her ESI
   access.
 
-## \[1.4.2\] - 2021-01-07
+## [1.4.2] - 2021-01-07
 
 ### Added
 
@@ -1098,7 +1098,7 @@ that were previously "deleted" as active again.
 - Hardened the auto ESI pull against possible ESI hiccups, so ESI FAT links are not
   closed prematurely
 
-## \[1.4.1\] - 2020-12-24
+## [1.4.1] - 2020-12-24
 
 ### Added
 
@@ -1109,7 +1109,7 @@ that were previously "deleted" as active again.
 
 - Prevent user from opening more than 1 ESI fleet
 
-## \[1.4.0\] - 2020-12-24
+## [1.4.0] - 2020-12-24
 
 ### New
 
@@ -1117,13 +1117,13 @@ ESI links will now be updated automagically. This means, pilots who join later w
 still be registered, as long as the FC who created the ESI link is still the actual
 fleet boss and didn't close or leave the fleet.
 
-## \[1.3.4\] - 2020-12-16
+## [1.3.4] - 2020-12-16
 
 ### Fixed
 
 - Bootstrap classes in template
 
-## \[1.3.3\] - 2020-11-28
+## [1.3.3] - 2020-11-28
 
 ### Changed
 
@@ -1135,14 +1135,14 @@ fleet boss and didn't close or leave the fleet.
   (This happens when the creator of a FAT link for what ever reason lost his main char
   and prevents the FAT link list from being loaded.)
 
-## \[1.3.2\] - 2020-11-23
+## [1.3.2] - 2020-11-23
 
 ### Changed
 
 - couple of tweaks to templates and JS
 - show only characters with FAT links in stats main view
 
-## \[1.3.1\] - 2020-11-22
+## [1.3.1] - 2020-11-22
 
 ### Changed
 
@@ -1151,7 +1151,7 @@ fleet boss and didn't close or leave the fleet.
   - even/odd styles
   - text alignments
 
-## \[1.3.0\] - 2020-11-19
+## [1.3.0] - 2020-11-19
 
 ### New Feature
 
@@ -1174,7 +1174,7 @@ fleet boss and didn't close or leave the fleet.
 
 - Support for Django 2
 
-## \[1.2.0\] - 2020-10-19
+## [1.2.0] - 2020-10-19
 
 ### New
 
@@ -1213,7 +1213,7 @@ python manage.py migrate
 
 Finally restart your supervisor services for AA
 
-## \[1.1.0\] - 2020-10-05
+## [1.1.0] - 2020-10-05
 
 ### Changes to the URL structure
 
@@ -1242,7 +1242,7 @@ Finally restart your supervisor services for AA
 
 - Deleted FATs have not been logged
 
-## \[1.0.0\] - 2020-09-28
+## [1.0.0] - 2020-09-28
 
 ### Added
 
@@ -1266,7 +1266,7 @@ Finally restart your supervisor services for AA
 - Fleet edit form
 - Permissions to edit and delete fatlinks and fats
 
-## \[1.0.0a1\] - 2020-09-22
+## [1.0.0a1] - 2020-09-22
 
 ### New
 
@@ -1284,7 +1284,7 @@ Finally restart your supervisor services for AA
 - Permissions to edit and delete fatlinks and fats
 - Templates prepared for Django 3 update in Alliance Auth
 
-## \[0.3.5\] - 2020-09-11
+## [0.3.5] - 2020-09-11
 
 ### Added
 
@@ -1300,7 +1300,7 @@ Finally restart your supervisor services for AA
 - an issue with "No Alliance" in stats view
 - fleet types are now sorted alphabetically
 
-## \[0.3.5\] - 2020-08-31
+## [0.3.5] - 2020-08-31
 
 ### Changed
 
