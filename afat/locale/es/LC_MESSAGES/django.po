@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-01 12:21+0100\n"
-"PO-Revision-Date: 2024-11-09 11:25+0000\n"
+"PO-Revision-Date: 2024-12-02 17:40+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/es/>\n"
+"Language-Team: Spanish <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -28,8 +28,6 @@ msgstr "Seguimiento de la Actividad de Flota"
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:28
-#, fuzzy
-#| msgid "Fleet Type"
 msgid "Fleet type"
 msgstr "Tipo de Flota"
 
@@ -519,7 +517,7 @@ msgstr "Seguimiento de la Actividad de Flota"
 #: afat/templates/afat/base.html:33
 msgctxt "Decimal separator"
 msgid "."
-msgstr ""
+msgstr ","
 
 #: afat/templates/afat/base.html:34
 msgctxt "Thousands separator"
