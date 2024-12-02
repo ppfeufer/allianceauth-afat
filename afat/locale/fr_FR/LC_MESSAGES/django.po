@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-01 12:21+0100\n"
-"PO-Revision-Date: 2024-11-09 11:25+0000\n"
+"PO-Revision-Date: 2024-12-02 17:40+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/fr/>\n"
+"Language-Team: French <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -493,21 +493,21 @@ msgstr ""
 #: afat/templates/afat/base.html:33
 msgctxt "Decimal separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #: afat/templates/afat/base.html:34
 msgctxt "Thousands separator"
 msgid ","
-msgstr ""
+msgstr ","
 
 #: afat/templates/afat/base.html:35
 msgid "No data available in this table"
-msgstr ""
+msgstr "Aucune donnée disponible dans cette table"
 
 #: afat/templates/afat/base.html:36
 msgctxt "Keep _END_ as it is. It will be replaced by a number."
 msgid "Showing _END_ entries"
-msgstr ""
+msgstr "Montre les _END_ entrées"
 
 #: afat/templates/afat/base.html:37
 msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
@@ -516,48 +516,48 @@ msgstr ""
 
 #: afat/templates/afat/base.html:38
 msgid "No records available"
-msgstr ""
+msgstr "Aucun enregistrement disponible"
 
 #: afat/templates/afat/base.html:41
 #: afat/templates/afat/partials/common/spinner.html:7
 msgid "Loading …"
-msgstr ""
+msgstr "Chargement …"
 
 #: afat/templates/afat/base.html:42
 msgid "Processing …"
-msgstr ""
+msgstr "Traitement …"
 
 #: afat/templates/afat/base.html:43
 msgid "Nothing found, sorry …"
-msgstr ""
+msgstr "Rien n'a été trouvé, désolé …"
 
 #: afat/templates/afat/base.html:45
 msgid "Search …"
-msgstr ""
+msgstr "Recherche …"
 
 #: afat/templates/afat/base.html:47
 msgid "First"
-msgstr ""
+msgstr "Premier"
 
 #: afat/templates/afat/base.html:48
 msgid "Last"
-msgstr ""
+msgstr "Dernier"
 
 #: afat/templates/afat/base.html:49
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: afat/templates/afat/base.html:50
 msgid "Previous"
-msgstr ""
+msgstr "Précèdent"
 
 #: afat/templates/afat/base.html:53
 msgid ": activate to sort column ascending"
-msgstr ""
+msgstr ": activer pour trier les colonnes par ordre croissant"
 
 #: afat/templates/afat/base.html:54
 msgid ": activate to sort column descending"
-msgstr ""
+msgstr ": activer pour trier les colonnes dans l'ordre décroissant"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
