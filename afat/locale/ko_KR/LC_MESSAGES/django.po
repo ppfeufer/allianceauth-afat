@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-01 12:21+0100\n"
-"PO-Revision-Date: 2024-11-09 11:25+0000\n"
+"PO-Revision-Date: 2024-12-02 17:40+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ko/>\n"
+"Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ko/>\n"
 "Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -494,71 +494,71 @@ msgstr ""
 #: afat/templates/afat/base.html:33
 msgctxt "Decimal separator"
 msgid "."
-msgstr ""
+msgstr "."
 
 #: afat/templates/afat/base.html:34
 msgctxt "Thousands separator"
 msgid ","
-msgstr ""
+msgstr ","
 
 #: afat/templates/afat/base.html:35
 msgid "No data available in this table"
-msgstr ""
+msgstr "테이블에 유효한 데이터가 없습니다"
 
 #: afat/templates/afat/base.html:36
 msgctxt "Keep _END_ as it is. It will be replaced by a number."
 msgid "Showing _END_ entries"
-msgstr ""
+msgstr "_END_ 개의 결과 표시중"
 
 #: afat/templates/afat/base.html:37
 msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
 msgid "(filtered from _MAX_ total entries)"
-msgstr ""
+msgstr "(총 _MAX_ 개의 결과 에서 필터링됨)"
 
 #: afat/templates/afat/base.html:38
 msgid "No records available"
-msgstr ""
+msgstr "사용 가능한 레코드가 없습니다"
 
 #: afat/templates/afat/base.html:41
 #: afat/templates/afat/partials/common/spinner.html:7
 msgid "Loading …"
-msgstr ""
+msgstr "로딩 …"
 
 #: afat/templates/afat/base.html:42
 msgid "Processing …"
-msgstr ""
+msgstr "처리 중 …"
 
 #: afat/templates/afat/base.html:43
 msgid "Nothing found, sorry …"
-msgstr ""
+msgstr "아무것도 찾지 못했습니다, 죄송합니다 …"
 
 #: afat/templates/afat/base.html:45
 msgid "Search …"
-msgstr ""
+msgstr "검색 …"
 
 #: afat/templates/afat/base.html:47
 msgid "First"
-msgstr ""
+msgstr "첫 번째"
 
 #: afat/templates/afat/base.html:48
 msgid "Last"
-msgstr ""
+msgstr "마지막"
 
 #: afat/templates/afat/base.html:49
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 #: afat/templates/afat/base.html:50
 msgid "Previous"
-msgstr ""
+msgstr "이전"
 
 #: afat/templates/afat/base.html:53
 msgid ": activate to sort column ascending"
-msgstr ""
+msgstr ": 열 오름차순으로 정렬 활성화"
 
 #: afat/templates/afat/base.html:54
 msgid ": activate to sort column descending"
-msgstr ""
+msgstr ": 열 내림차순으로 정렬 활성화"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
