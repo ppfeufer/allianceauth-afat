@@ -14,17 +14,17 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-01 12:21+0100\n"
-"PO-Revision-Date: 2024-11-09 11:25+0000\n"
+"PO-Revision-Date: 2024-12-02 17:40+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ru/>\n"
+"Language-Team: Russian <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : "
 "n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -526,75 +526,71 @@ msgstr "Учет Боевых Вылетов"
 #: afat/templates/afat/base.html:33
 msgctxt "Decimal separator"
 msgid "."
-msgstr ""
+msgstr ","
 
 #: afat/templates/afat/base.html:34
 msgctxt "Thousands separator"
 msgid ","
-msgstr ""
+msgstr " "
 
 #: afat/templates/afat/base.html:35
 msgid "No data available in this table"
-msgstr ""
+msgstr "Данные в таблице отсутствуют"
 
 #: afat/templates/afat/base.html:36
 msgctxt "Keep _END_ as it is. It will be replaced by a number."
 msgid "Showing _END_ entries"
-msgstr ""
+msgstr "Отображаются _END_ записей"
 
 #: afat/templates/afat/base.html:37
 msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
 msgid "(filtered from _MAX_ total entries)"
-msgstr ""
+msgstr "(отфильтрованы из _MAX_ записей)"
 
 #: afat/templates/afat/base.html:38
 msgid "No records available"
-msgstr ""
+msgstr "Записи недоступны"
 
 #: afat/templates/afat/base.html:41
 #: afat/templates/afat/partials/common/spinner.html:7
 msgid "Loading …"
-msgstr ""
+msgstr "Загрузка …"
 
 #: afat/templates/afat/base.html:42
 msgid "Processing …"
-msgstr ""
+msgstr "Обработка …"
 
 #: afat/templates/afat/base.html:43
 msgid "Nothing found, sorry …"
-msgstr ""
+msgstr "Ничего не найдено …"
 
 #: afat/templates/afat/base.html:45
 msgid "Search …"
-msgstr ""
+msgstr "Поиск…"
 
 #: afat/templates/afat/base.html:47
 msgid "First"
-msgstr ""
+msgstr "Первый"
 
 #: afat/templates/afat/base.html:48
 msgid "Last"
-msgstr ""
+msgstr "Последний"
 
 #: afat/templates/afat/base.html:49
-#, fuzzy
-#| msgid "Next year"
 msgid "Next"
-msgstr "Следующий год"
+msgstr "Следующий"
 
 #: afat/templates/afat/base.html:50
-#, fuzzy
-#| msgid "Previous year"
 msgid "Previous"
-msgstr "Предыдущий год"
+msgstr "Предыдущий"
 
 #: afat/templates/afat/base.html:53
 msgid ": activate to sort column ascending"
-msgstr ""
+msgstr ": активируйте для сортировки по возрастанию"
 
 #: afat/templates/afat/base.html:54
 msgid ": activate to sort column descending"
-msgstr ""
+msgstr ": активируйте для сортировки по убыванию"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
