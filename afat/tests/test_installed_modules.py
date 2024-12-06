@@ -59,6 +59,9 @@ class TestModulesInstalled(TestCase):
         settings.use_doctrines_from_fittings_module = False
         settings.save()
 
+        self.assertFalse(
+            expr=Setting.get_setting(Setting.Field.USE_DOCTRINES_FROM_FITTINGS_MODULE)
+        )
         self.assertFalse(expr=use_fittings_module_for_doctrines())
 
     @modify_settings(INSTALLED_APPS={"remove": "fittings"})
@@ -76,6 +79,9 @@ class TestModulesInstalled(TestCase):
         settings.use_doctrines_from_fittings_module = True
         settings.save()
 
+        self.assertTrue(
+            expr=Setting.get_setting(Setting.Field.USE_DOCTRINES_FROM_FITTINGS_MODULE)
+        )
         self.assertFalse(expr=use_fittings_module_for_doctrines())
 
     @modify_settings(INSTALLED_APPS={"append": "fittings"})
@@ -93,6 +99,9 @@ class TestModulesInstalled(TestCase):
         settings.use_doctrines_from_fittings_module = True
         settings.save()
 
+        self.assertTrue(
+            expr=Setting.get_setting(Setting.Field.USE_DOCTRINES_FROM_FITTINGS_MODULE)
+        )
         self.assertTrue(expr=use_fittings_module_for_doctrines())
 
     @modify_settings(INSTALLED_APPS={"append": "fittings"})
@@ -110,4 +119,7 @@ class TestModulesInstalled(TestCase):
         settings.use_doctrines_from_fittings_module = False
         settings.save()
 
+        self.assertFalse(
+            expr=Setting.get_setting(Setting.Field.USE_DOCTRINES_FROM_FITTINGS_MODULE)
+        )
         self.assertFalse(expr=use_fittings_module_for_doctrines())
