@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-01 12:21+0100\n"
-"PO-Revision-Date: 2024-12-02 17:40+0000\n"
+"PO-Revision-Date: 2024-12-06 09:19+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Spanish <https://weblate.ppfeufer.de/projects/"
 "alliance-auth-apps/allianceauth-afat/es/>\n"
@@ -1012,7 +1012,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/character/tabs-navigation.html:7
 msgid "Raw data"
-msgstr ""
+msgstr "datos RAW"
 
 #: afat/templates/afat/partials/statistics/character/tabs/graphs.html:33
 msgid "FATs by time of day"
