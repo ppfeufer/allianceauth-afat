@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Python 3.13 to test matrix
+
 ### Fixed
 
 - Colspan in affected tables
