@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## [3.5.2] - 2024-12-06
+
 ### Added
 
 - Python 3.13 to test matrix
