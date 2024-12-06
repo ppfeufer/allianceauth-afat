@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Colspan in affected tables
+
 ## [3.5.1] - 2024-12-01
 
 ### Fixed

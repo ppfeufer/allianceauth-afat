@@ -14,7 +14,10 @@
                     <th>{% translate "Doctrine" %}</th>
                     <th>{% translate "Creator" %}</th>
                     <th>{% translate "Eve time" %}</th>
-                    <th><!-- {% translate "Actions" %} --></th>
+
+                    {% if perms.afat.manage_afat %}
+                        <th><!-- {% translate "Actions" %} --></th>
+                    {% endif %}
                 </tr>
             </thead>
 
@@ -22,7 +25,7 @@
 
             <tfoot>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="{% if perms.afat.manage_afat %}6{% else %}5{% endif %}">
                         {% include "afat/partials/fatlinks/fatlink-list-legend.html" %}
                     </td>
                 </tr>

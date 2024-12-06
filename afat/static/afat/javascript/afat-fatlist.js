@@ -3,6 +3,70 @@
 $(document).ready(() => {
     'use strict';
 
+    const linkListTableColumns = [
+        {data: 'fleet_name'},
+        {data: 'fleet_type'},
+        {data: 'doctrine'},
+        {data: 'creator_name'},
+        {
+            data: 'fleet_time',
+            render: {
+                display: (data) => {
+                    return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
+                },
+                _: 'timestamp'
+            }
+        },
+        {data: 'fats_number'}
+    ];
+
+    const linkListTableColumnDefs = [
+        {
+            targets: [5],
+            createdCell: (td) => {
+                $(td).addClass('text-end');
+            },
+        }
+    ];
+
+    if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
+        linkListTableColumns.push(
+            {
+                data: 'actions',
+                render: (data) => {
+                    return data;
+                }
+            },
+        );
+
+        linkListTableColumnDefs.push(
+            {
+                targets: [6],
+                orderable: false,
+                createdCell: (td) => {
+                    $(td).addClass('text-end');
+                },
+            },
+            // Hide the columns, which are only for searching
+            {
+                targets: [7, 8],
+                visible: false
+            }
+        );
+    } else {
+        // Hide the columns, which are only for searching
+        linkListTableColumnDefs.push({
+            targets: [6, 7],
+            visible: false
+        });
+    }
+
+    // Add hidden columns
+    linkListTableColumns.push(
+        {data: 'via_esi'},
+        {data: 'hash'}
+    );
+
     /**
      * DataTable :: FAT link list
      */
@@ -12,51 +76,8 @@ $(document).ready(() => {
             dataSrc: '',
             cache: false
         },
-        columns: [
-            {data: 'fleet_name'},
-            {data: 'fleet_type'},
-            {data: 'doctrine'},
-            {data: 'creator_name'},
-            {
-                data: 'fleet_time',
-                render: {
-                    display: (data) => {
-                        return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
-                    },
-                    _: 'timestamp'
-                }
-            },
-            {data: 'fats_number'},
-
-            {
-                data: 'actions',
-                render: (data) => {
-                    if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
-                        return data;
-                    } else {
-                        return '';
-                    }
-                }
-            },
-
-            // hidden column
-            {data: 'via_esi'},
-            {data: 'hash'}
-        ],
-
-        columnDefs: [
-            {
-                targets: [6],
-                orderable: false,
-                createdCell: (td) => {
-                    $(td).addClass('text-end');
-                }
-            },
-            {
-                visible: false,
-                targets: [7, 8]
-            }
-        ],
+        columns: linkListTableColumns,
+        columnDefs: linkListTableColumnDefs,
 
         order: [
             [4, 'desc']
@@ -76,9 +97,6 @@ $(document).ready(() => {
             bootstrap: true,
             bootstrap_version: 5
         },
-
-        stateSave: true,
-        stateDuration: -1
     });
 
     /**
