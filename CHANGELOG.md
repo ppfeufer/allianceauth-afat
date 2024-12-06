@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Colspan in affected tables
+
 ### Changed
 
 - Better implementation of `get_solo()`
