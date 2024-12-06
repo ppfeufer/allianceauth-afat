@@ -176,11 +176,11 @@ more.
 
 Right after the **initial** installation and running migrations,
 you can import the data from Alliance Auth's native FAT system if
-you have used one it until now.
+you have used it until now.
 
 ### Import From Native FAT<a name="import-from-native-fat"></a>
 
-To import from the native FAT module, simply run the following command:
+To import from the native FAT module, run the following command:
 
 ```shell
 python myauth/manage.py afat_import_from_allianceauth_fat
