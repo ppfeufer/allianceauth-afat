@@ -2,6 +2,9 @@
 The models
 """
 
+# Standard Library
+from typing import Any
+
 # Third Party
 from solo.models import SingletonModel
 
@@ -524,14 +527,17 @@ class Setting(SingletonModel):
         return str(_("AFAT Settings"))
 
     @staticmethod
-    def get_setting(setting_key: str):
+    def get_setting(setting_key: str) -> Any:
         """
-        Get the settings
+        Get the setting value for a given setting key
 
-        :return:
-        :rtype:
+        :param setting_key: The setting key
+        :type setting_key: str
+        :return: The setting value
+        :rtype: Any
         """
 
-        return Setting.get_solo().__getattribute__(  # pylint: disable=unnecessary-dunder-call
-            setting_key
-        )
+        try:
+            return getattr(Setting.get_solo(), setting_key)
+        except AttributeError as exc:
+            raise KeyError(f"Setting key '{setting_key}' does not exist.") from exc
