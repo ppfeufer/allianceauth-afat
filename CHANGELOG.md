@@ -39,6 +39,10 @@ Section Order:
 
 - Colspan in affected tables
 
+### Changed
+
+- Better implementation of `get_solo()`
+
 ## [3.5.1] - 2024-12-01
 
 ### Fixed
