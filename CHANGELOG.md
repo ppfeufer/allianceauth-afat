@@ -39,6 +39,10 @@ Section Order:
 
 - Reintroduced corp stats table for all characters (#381)
 
+### Changed
+
+- A little bit of JS rework
+
 ## [3.5.2] - 2024-12-06
 
 ### Added
