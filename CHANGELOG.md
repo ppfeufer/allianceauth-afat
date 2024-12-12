@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Element spacing in some views for better readability
+
 ## [3.5.3] - 2024-12-12
 
 ### Fixed
