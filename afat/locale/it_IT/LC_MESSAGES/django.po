@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 10:23+0100\n"
+"POT-Creation-Date: 2024-12-12 16:09+0100\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Italian <https://weblate.ppfeufer.de/projects/alliance-auth-"
@@ -346,8 +346,9 @@ msgstr ""
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:23
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:81
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:35
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:93
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:115
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "FATs"
@@ -788,8 +789,9 @@ msgid "FATs for this FAT link"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:18
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:22
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:80
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:34
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:92
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:114
 msgid "Character"
 msgstr ""
 
@@ -993,28 +995,34 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:9
-msgid "Main characters"
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:7
+msgid "By main character"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:14
-#, python-format
-msgid ""
-"\n"
-"                            %(corp)s main characters and their accumulated "
-"FATs for %(month_name)s %(year)s.\n"
-"                        "
-msgstr ""
-
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:24
-msgid "Character statistics"
-msgstr ""
-
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:64
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:10
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:76
 msgid "All characters"
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:73
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:21
+msgid "Main characters"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:26
+#, python-format
+msgid ""
+"\n"
+"                                            %(corp)s main characters and "
+"their accumulated FATs for %(month_name)s %(year)s.\n"
+"                                        "
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:36
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:116
+msgid "Character statistics"
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:85
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr ""
 

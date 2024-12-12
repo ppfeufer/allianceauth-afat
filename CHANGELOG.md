@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## [3.5.3] - 2024-12-12
+
 ### Fixed
 
 - Reintroduced corp stats table for all characters (#381)
