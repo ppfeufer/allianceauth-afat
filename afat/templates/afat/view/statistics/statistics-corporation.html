@@ -58,6 +58,14 @@
                 ]
             });
 
+            $('#corp-members').DataTable({
+                language: afatSettings.dataTables.translation,
+                order: [
+                    [1, 'desc'],
+                    [0, 'asc']
+                ],
+            });
+
             // Chart rendering
             if (chartInfo.length > 0) {
                 chartInfo.forEach((chart) => {
