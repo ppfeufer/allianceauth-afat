@@ -56,34 +56,44 @@ $(document).ready(() => {
                 const characterName = btn.data('character-name');
                 const url = btn.data('url');
 
-                [
+                // Elements to hide initially
+                const hideInitially= [
                     '#col-character-alt-characters .afat-character-alt-characters .afat-no-data',
                     '#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table'
-                ].forEach(selector => {
+                ];
+
+                hideInitially.forEach(selector => {
                     hideElement(selector);
                 });
 
-                const hiddenElements = [
+                // Elements to show initially
+                const showInitially = [
                     '#col-character-alt-characters',
                     '#col-character-alt-characters .afat-character-alt-characters .afat-spinner'
                 ];
 
-                hiddenElements.forEach(selector => {
+                showInitially.forEach(selector => {
                     showElement(selector);
                 });
 
+                // Set the main character name
                 $('#afat-corp-stats-main-character-name').text(characterName);
 
                 // Fetch FAT data for all characters of this main character
                 fetchAjaxData(url).then(tableData => {
                     const table = $('#character-alt-characters');
 
+                    // If we have table data from the server
                     if (tableData) {
+                        // Hide the spinner
                         hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-spinner');
 
+                        // If we have no data
                         if (Object.keys(tableData).length === 0) {
+                            // Show the no data message
                             showElement('#col-character-alt-characters .afat-character-alt-characters .afat-no-data');
                         } else {
+                            // Show the table
                             showElement('#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table');
 
                             // Destroy the table if it already exists
