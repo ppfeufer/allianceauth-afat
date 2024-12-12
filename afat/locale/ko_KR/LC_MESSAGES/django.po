@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-06 10:23+0100\n"
-"PO-Revision-Date: 2024-12-02 17:40+0000\n"
+"PO-Revision-Date: 2024-12-12 00:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
-"Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-"
-"apps/allianceauth-afat/ko/>\n"
+"Language-Team: Korean <https://weblate.ppfeufer.de/projects/"
+"alliance-auth-apps/allianceauth-afat/ko/>\n"
 "Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -405,10 +405,8 @@ msgid "Notes"
 msgstr "설명"
 
 #: afat/models.py:419
-#, fuzzy
-#| msgid "Whether this fleet type is active or not"
 msgid "Whether this doctrine is enabled or not."
-msgstr "함대 종류 활성화 여부"
+msgstr "함대 종류 활성화 여부."
 
 #: afat/models.py:428
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14

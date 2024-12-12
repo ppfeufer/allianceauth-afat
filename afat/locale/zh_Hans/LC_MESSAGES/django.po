@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-12-06 10:23+0100\n"
-"PO-Revision-Date: 2024-11-30 16:15+0000\n"
-"Last-Translator: Dehao Wu <wudehao2000@163.com>\n"
+"PO-Revision-Date: 2024-12-12 00:25+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/"
 "projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -406,10 +406,8 @@ msgid "Notes"
 msgstr "笔记"
 
 #: afat/models.py:419
-#, fuzzy
-#| msgid "Whether this fleet type is active or not"
 msgid "Whether this doctrine is enabled or not."
-msgstr "无论这个舰队类型是否活跃"
+msgstr "无论这个舰队类型是否活跃."
 
 #: afat/models.py:428
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
