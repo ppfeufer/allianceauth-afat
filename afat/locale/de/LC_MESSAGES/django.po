@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-12 16:09+0100\n"
-"PO-Revision-Date: 2024-12-12 00:25+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
+"POT-Creation-Date: 2024-12-12 16:10+0100\n"
+"PO-Revision-Date: 2024-12-12 15:13+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-"
 "apps/allianceauth-afat/de/>\n"
@@ -1066,10 +1066,8 @@ msgid "Members"
 msgstr "Mitglieder"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:7
-#, fuzzy
-#| msgid "Main characters"
 msgid "By main character"
-msgstr "Hauptcharakter"
+msgstr "Bei Hauptcharakter"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:10
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:76
@@ -1081,12 +1079,7 @@ msgid "Main characters"
 msgstr "Hauptcharakter"
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:26
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                            %(corp)s main characters and their "
-#| "accumulated FATs for %(month_name)s %(year)s.\n"
-#| "                        "
+#, python-format
 msgid ""
 "\n"
 "                                            %(corp)s main characters and "
@@ -1094,9 +1087,9 @@ msgid ""
 "                                        "
 msgstr ""
 "\n"
-"                            %(corp)s Hauptcharaktere und ihre angesammelten "
-"FATs für %(month_name)s %(year)s\n"
-"                        "
+"                                            %(corp)s Hauptcharaktere und "
+"ihre angesammelten FATs für %(month_name)s %(year)s\n"
+"                                        "
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:36
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:116
