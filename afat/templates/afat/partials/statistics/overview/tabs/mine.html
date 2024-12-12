@@ -60,13 +60,13 @@
                         <h5>{% translate "Monthly FATs by character" %}</h5>
                     </header>
 
-                    <ul class="nav nav-pills">
+                    <ul class="nav nav-pills mb-3">
                         {% for character in charstats.characters %}
                             {% include "afat/partials/common/navigation/tab-character.html" with forloop=forloop character_id=character.2 character_name=character.0 %}
                         {% endfor %}
                     </ul>
 
-                    <div class="tab-content">
+                    <div class="tab-content border-top">
                         {% for character in charstats.characters %}
                             <div id="content-{{ character.2 }}" class="tab-pane fade card-default{% if forloop.first %} show active{% endif %}">
                                 <div class="mt-3">
