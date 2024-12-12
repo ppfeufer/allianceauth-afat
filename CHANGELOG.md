@@ -44,6 +44,7 @@ Section Order:
 ### Changed
 
 - A little bit of JS rework
+- Translations updated
 
 ## [3.5.2] - 2024-12-06
 
