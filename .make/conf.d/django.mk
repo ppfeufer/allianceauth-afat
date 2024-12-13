@@ -20,6 +20,10 @@ translations:
 		-l zh_Hans \
 		--keep-pot \
 		--ignore 'build/*'
+	@current_app_version=$$(pip show $(appname) | grep 'Version: ' | awk '{print $$NF}'); \
+	echo "Current app version: $$current_app_version"; \
+	sed -i "/\"Project-Id-Version: /c\\\"Project-Id-Version: $(appname_verbose) $$current_app_version\\\n\"" $(translation_template); \
+	sed -i "/\"Report-Msgid-Bugs-To: /c\\\"Report-Msgid-Bugs-To: $(git_repository_issues)\\\n\"" $(translation_template); \
 
 # Compile translation files
 .PHONY: compile_translations
