@@ -2,21 +2,20 @@
 
 ______________________________________________________________________
 
-<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=1 -->
+<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->
 
-- [Contributing](#contributing)
-  - [Development Environment](#development-environment)
-  - [Code Formatting and Linting](#code-formatting-and-linting)
-    - [Python](#python)
-    - [JavaScript](#javascript)
-      - [Minified JS](#minified-js)
-    - [CSS](#css)
-      - [Minified CSS](#minified-css)
-    - [pre-commit](#pre-commit)
-  - [Branching and Contributing via Pull Requests](#branching-and-contributing-via-pull-requests)
-    - [Tests](#tests)
-    - [Checklist](#checklist)
-  - [Translation](#translation)
+- [Development Environment](#development-environment)
+- [Code Formatting and Linting](#code-formatting-and-linting)
+  - [Python](#python)
+  - [JavaScript](#javascript)
+    - [Minified JS](#minified-js)
+  - [CSS](#css)
+    - [Minified CSS](#minified-css)
+  - [pre-commit](#pre-commit)
+- [Branching and Contributing via Pull Requests](#branching-and-contributing-via-pull-requests)
+  - [Tests](#tests)
+  - [Checklist](#checklist)
+- [Translation](#translation)
 
 <!-- mdformat-toc end -->
 
@@ -25,11 +24,12 @@ ______________________________________________________________________
 ## Development Environment<a name="development-environment"></a>
 
 To develop and test your change, you will need a development environment on your
-local machine. There are many different options to choose from. But please make sure
-that you can run pre-commit checks and tox tests on your local machine.
+local machine. There are different options to choose from. But please make sure
+you can run pre-commit checks and tox tests on your local machine before
+committing.
 
 If you are on Windows or Linux, you can use the [AA guide for setting up a dev
-environment][aa guide for setting up a dev environment].
+environment][aa dev environment].
 
 ## Code Formatting and Linting<a name="code-formatting-and-linting"></a>
 
@@ -50,12 +50,12 @@ pre-commit run black
 
 The JavaScript code follows [ECMAScript 6 (or ES6 for short)][ecmascript 6] or newer
 rules. The use of arrow functions is preferred and `this` or `$(this)` should be
-prevented. Functions need to be declared before their use and the JavaScript code
+prevented. Functions need to be declared before their use, and the JavaScript code
 should follow `'use strict';`.
 
 Indent size: 4 spaces
 
-A linter configuration is declared as `.eslintrc.json` in the app's root directory.
+A linter configuration is declared as `eslint.config.js` in the app's root directory.
 Do not change this file.
 
 To check that your JavaScript code adheres to the rules, run:
@@ -97,7 +97,7 @@ This project uses minified CSS files with source maps created by [CSSO]. Make su
 to add/update them as well if you add or change CSS.
 
 ```shell
-csso -i styles.css -o styles.min.css  -s file
+csso -i styles.css -o styles.min.css -s file
 ```
 
 ### pre-commit<a name="pre-commit"></a>
@@ -123,13 +123,13 @@ pre-commit run --all-files
 
 The following will be checked by `pre-commit` (among others):
 
-- No trailing whitespaces (excluded are minified js and css, .po and .mo files and
+- No trailing whitespaces (excluded are minified JS and CSS, .po and .mo files and
   external libs)
-- One, and only one, empty line at the end of every file (excluded are minified js
-  and css, .po and .mo files and external libs)
+- One, and only one, empty line at the end of every file (excluded are minified JS
+  and CSS, .po and .mo files and external libs)
 - Line ending is LF
 - Python code formatted according to black code style
-- Python code blocks in markdown files are formatted to black code style
+- Python code blocks in Markdown files are formatted to black code style
 - Code conforms with flake8
 - Code generally adheres to the editor config
 - Python code is updated to the minimal Python version
@@ -158,8 +158,9 @@ that your merge request is ready for review by removing the DRAFT flag again.
 
 ### Tests<a name="tests"></a>
 
-Please update existing or provide additional unit tests for your changes. Note that
-your merge request might fail if it reduces the current level of test coverage.
+Please update the existing or provide additional unit tests for your changes.
+Note that your merge request might fail if it reduces the current level of test
+coverage.
 
 We are using [Python unittest] with the Django `TestCase` class for all tests. In
 addition, we are using some following third party test tools:
@@ -187,7 +188,7 @@ register on my [Weblate] instance and start translating.
 
 <!-- Links -->
 
-[aa guide for setting up a dev environment]: https://allianceauth.readthedocs.io/en/latest/development/dev_setup/aa-dev-setup-wsl-vsc-v2.html "AA Guide for Setting up a Dev Environment"
+[aa dev environment]: https://allianceauth.readthedocs.io/en/latest/development/dev_setup/aa-dev-setup-wsl-vsc-v2.html "AA Guide for Setting up a Dev Environment"
 [black code style]: https://black.readthedocs.io/en/latest/l "Black Code Style"
 [coverage]: https://coverage.readthedocs.io/en/latest/ "coverage"
 [csso]: https://github.com/css/csso "CSSO (CSS Optimizer)"
