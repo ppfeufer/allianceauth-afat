@@ -44,6 +44,7 @@
 
 {% block extra_javascript %}
     {% include "bundles/chart-js.html" %}
+    {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
     {% include "bundles/datatables-js-bs5.html" %}
     {% include "bundles/moment-js.html" %}
@@ -51,7 +52,9 @@
     <script>
         $(document).ready(() => {
             // DataTables
-            $('#member-corps').DataTable();
+            $('#member-corps').DataTable({
+                language: afatSettings.dataTables.translation,
+            });
 
             // Chart rendering
             if (chartInfo.length > 0) {

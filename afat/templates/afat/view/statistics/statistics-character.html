@@ -43,6 +43,7 @@
 
 {% block extra_javascript %}
     {% include "bundles/chart-js.html" %}
+    {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
     {% include "bundles/datatables-js-bs5.html" %}
     {% include "bundles/moment-js.html" %}
@@ -50,6 +51,7 @@
     <script>
         $(document).ready(() => {
             $('#raw-data').DataTable({
+                language: afatSettings.dataTables.translation,
                 "order": [
                     [4, "desc"]
                 ]

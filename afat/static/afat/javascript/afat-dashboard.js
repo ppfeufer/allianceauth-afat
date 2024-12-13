@@ -3,16 +3,15 @@
 $(document).ready(() => {
     'use strict';
 
+    const dtLanguage = afatSettings.dataTables.translation;
+
     /**
      * DataTable :: Recent FATs per character
      */
     if (characters.length > 0) {
-        const noFatsWarning = '<div class="aa-callout aa-callout-warning" role="alert">' +
-            '<p>' + afatSettings.translation.dataTable.noFatsWarning + ' ###CHARACTER_NAME###</p>' +
-            '</div>';
-
         characters.forEach((character) => {
             $('#recent-fats-character-' + character.charId).DataTable({
+                language: dtLanguage,
                 ajax: {
                     url: afatSettings.url.characterFats.replace(
                         '0',
@@ -45,12 +44,6 @@ $(document).ready(() => {
                         }
                     }
                 ],
-                language: {
-                    emptyTable: noFatsWarning.replace(
-                        '###CHARACTER_NAME###',
-                        character.charName
-                    )
-                },
                 paging: false,
                 ordering: false,
                 searching: false,
@@ -113,7 +106,10 @@ $(document).ready(() => {
         });
     }
 
+    dtLanguage.emptyTable = noFatlinksWarning;
+
     $('#dashboard-recent-fatlinks').DataTable({
+        language: dtLanguage,
         ajax: {
             url: afatSettings.url.recentFatLinks,
             dataSrc: '',
@@ -121,9 +117,6 @@ $(document).ready(() => {
         },
         columns: recentFatlinksTableColumns,
         columnDefs: recentFatlinksTableColumnDefs,
-        language: {
-            emptyTable: noFatlinksWarning
-        },
         paging: false,
         ordering: false,
         searching: false,

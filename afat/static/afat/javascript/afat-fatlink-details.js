@@ -3,7 +3,10 @@
 $(document).ready(() => {
     'use strict';
 
+    const dtLanguage = afatSettings.dataTables.translation;
+
     const fatListTable = $('#fleet-edit-fat-list').DataTable({
+        language: dtLanguage,
         ajax: {
             url: afatSettings.url,
             dataSrc: '',
@@ -73,7 +76,7 @@ $(document).ready(() => {
         if (dt > intervalReloadDatatable) {
             /**
              * Something awful happened. Maybe the browser (tab) was inactive?
-             * Possibly special handling to avoid futile "catch up" run
+             * Possibly special handling to avoid futile "catch up" run.
              */
             if (currentPath.startsWith('/')) {
                 window.location.replace(currentPath);

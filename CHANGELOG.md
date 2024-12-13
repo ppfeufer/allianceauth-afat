@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Translation to all DataTables
+
 ### Changed
 
 - Element spacing in some views for better readability

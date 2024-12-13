@@ -3,6 +3,8 @@
 $(document).ready(() => {
     'use strict';
 
+    const dtLanguage = afatSettings.dataTables.translation;
+
     const linkListTableColumns = [
         {data: 'fleet_name'},
         {data: 'fleet_type'},
@@ -71,6 +73,7 @@ $(document).ready(() => {
      * DataTable :: FAT link list
      */
     const linkListTable = $('#link-list').DataTable({
+        language: dtLanguage,
         ajax: {
             url: afatSettings.url.linkList,
             dataSrc: '',
