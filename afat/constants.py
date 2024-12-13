@@ -2,17 +2,13 @@
 Constants used in this module
 """
 
-# Django
-from django.utils.text import slugify
+# Alliance Auth
+from esi import __version__ as esi_version
 
 # Alliance Auth AFAT
 from afat import __version__
 
-VERBOSE_NAME = "AFAT Fleet Activity Tracking for Alliance Auth"
-
-verbose_name_slugified: str = slugify(value=VERBOSE_NAME, allow_unicode=True)
-github_url: str = "https://github.com/ppfeufer/allianceauth-afat"
-
-USER_AGENT = f"{verbose_name_slugified} v{__version__} {github_url}"
-
+APP_NAME = "allianceauth-afat"
+GITHUB_URL = f"https://github.com/ppfeufer/{APP_NAME}"
+USER_AGENT = f"{APP_NAME}/{__version__} ({GITHUB_URL}) via django-esi/{esi_version}"
 INTERNAL_URL_PREFIX = "-"

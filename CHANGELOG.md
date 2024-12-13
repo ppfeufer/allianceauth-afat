@@ -39,6 +39,10 @@ Section Order:
 
 - Translation to all DataTables
 
+### Fixed
+
+- Correct User Agent string used for ESI calls
+
 ### Changed
 
 - Element spacing in some views for better readability
