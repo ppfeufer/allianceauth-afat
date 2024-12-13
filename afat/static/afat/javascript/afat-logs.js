@@ -3,10 +3,13 @@
 $(document).ready(() => {
     'use strict';
 
+    const dtLanguage = afatSettings.dataTables.translation;
+
     /**
      * DataTable :: FAT link list
      */
     $('#afat-logs').DataTable({
+        language: dtLanguage,
         ajax: {
             url: afatSettings.url.logs,
             dataSrc: '',

@@ -103,9 +103,9 @@ $(document).ready(() => {
 
                             // Create the table
                             table.DataTable({
+                                language: afatSettings.dataTables.translation,
                                 data: tableData,
                                 paging: false,
-                                language: afatSettings.dataTables.translation,
                                 lengthChange: false,
                                 columns: [
                                     { data: 'character_name' },
