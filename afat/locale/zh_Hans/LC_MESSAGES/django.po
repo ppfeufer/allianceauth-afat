@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2024-12-12 16:10+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-13 01:07+0100\n"
 "PO-Revision-Date: 2024-12-12 00:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/"
@@ -350,8 +350,8 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:35
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:93
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:115
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:95
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:117
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "FATs"
@@ -797,8 +797,8 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:18
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:34
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:92
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:114
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:94
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:116
 msgid "Character"
 msgstr "角色"
 
@@ -1031,12 +1031,16 @@ msgid ""
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:36
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:116
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:118
 msgid "Character statistics"
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:85
 msgid "This pilot does not seem to have any FATs on any associated character."
+msgstr ""
+
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:89
+msgid "All characters associated with this main character."
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/overview/tabs-navigation.html:4
@@ -1118,10 +1122,6 @@ msgid "Delete FAT link"
 msgstr ""
 
 #: afat/templates/afat/view/dashboard/dashboard.html:49
-msgid "No recent FATs for"
-msgstr ""
-
-#: afat/templates/afat/view/dashboard/dashboard.html:50
 msgid "No recent FAT links"
 msgstr ""
 
