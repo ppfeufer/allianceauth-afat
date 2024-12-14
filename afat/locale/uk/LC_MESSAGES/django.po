@@ -5,9 +5,9 @@
 # "Andrii M." <elfleg0las88@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2024-12-13 01:07+0100\n"
+"POT-Creation-Date: 2024-12-14 19:18+0100\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-"
