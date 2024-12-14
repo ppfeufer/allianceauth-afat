@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## [3.5.4] - 2024-12-14
+
 ### Added
 
 - Translation to all DataTables
@@ -46,6 +48,7 @@ Section Order:
 ### Changed
 
 - Element spacing in some views for better readability
+- Translations updated
 
 ## [3.5.3] - 2024-12-12
 
