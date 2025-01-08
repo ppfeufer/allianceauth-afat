@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
+"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.4\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2024-12-14 19:18+0100\n"
+"POT-Creation-Date: 2025-01-08 23:18+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -135,7 +135,7 @@ msgstr ""
 #: afat/helper/views.py:59 afat/helper/views.py:175
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:78
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:66
 msgid "ESI"
 msgstr ""
 
@@ -486,72 +486,72 @@ msgstr ""
 msgid "Fleet activity tracking"
 msgstr ""
 
-#: afat/templates/afat/base.html:33
+#: afat/templates/afat/base.html:26
 msgctxt "Decimal separator"
 msgid "."
 msgstr ""
 
-#: afat/templates/afat/base.html:34
+#: afat/templates/afat/base.html:27
 msgctxt "Thousands separator"
 msgid ","
 msgstr ""
 
-#: afat/templates/afat/base.html:35
+#: afat/templates/afat/base.html:28
 msgid "No data available in this table"
 msgstr ""
 
-#: afat/templates/afat/base.html:36
+#: afat/templates/afat/base.html:29
 msgctxt "Keep _END_ as it is. It will be replaced by a number."
 msgid "Showing _END_ entries"
 msgstr ""
 
-#: afat/templates/afat/base.html:37
+#: afat/templates/afat/base.html:30
 msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
 msgid "(filtered from _MAX_ total entries)"
 msgstr ""
 
-#: afat/templates/afat/base.html:38
+#: afat/templates/afat/base.html:31
 msgid "No records available"
 msgstr ""
 
-#: afat/templates/afat/base.html:41
+#: afat/templates/afat/base.html:32
 #: afat/templates/afat/partials/common/spinner.html:7
 msgid "Loading …"
 msgstr ""
 
-#: afat/templates/afat/base.html:42
+#: afat/templates/afat/base.html:33
 msgid "Processing …"
 msgstr ""
 
-#: afat/templates/afat/base.html:43
+#: afat/templates/afat/base.html:34
 msgid "Nothing found, sorry …"
 msgstr ""
 
-#: afat/templates/afat/base.html:45
+#: afat/templates/afat/base.html:35
 msgid "Search …"
 msgstr ""
 
-#: afat/templates/afat/base.html:47
+#: afat/templates/afat/base.html:36
 msgid "First"
 msgstr ""
 
-#: afat/templates/afat/base.html:48
+#: afat/templates/afat/base.html:37
 msgid "Last"
 msgstr ""
 
-#: afat/templates/afat/base.html:49
+#: afat/templates/afat/base.html:38
 msgid "Next"
 msgstr ""
 
-#: afat/templates/afat/base.html:50
+#: afat/templates/afat/base.html:39
 msgid "Previous"
 msgstr ""
 
-#: afat/templates/afat/base.html:53
+#: afat/templates/afat/base.html:40
 msgid ": activate to sort column ascending"
 msgstr ""
 
-#: afat/templates/afat/base.html:54
+#: afat/templates/afat/base.html:41
 msgid ": activate to sort column descending"
 msgstr ""
 
@@ -1106,7 +1106,7 @@ msgstr ""
 msgid "Delete FAT link"
 msgstr ""
 
-#: afat/templates/afat/view/dashboard/dashboard.html:49
+#: afat/templates/afat/view/dashboard/dashboard.html:37
 msgid "No recent FAT links"
 msgstr ""
 
