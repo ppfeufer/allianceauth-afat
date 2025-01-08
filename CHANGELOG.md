@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Ensure that translated strings in JS are properly escaped
+
 ## [3.5.4] - 2024-12-14
 
 ### Added
