@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-01-08 23:18+0100\n"
+"POT-Creation-Date: 2025-01-16 23:28+0100\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
@@ -334,9 +334,7 @@ msgstr ""
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:35
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:95
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:117
+#: afat/templates/afat/partials/statistics/character/tables/character-fats.html:7
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "FATs"
@@ -755,9 +753,7 @@ msgid "FATs for this FAT link"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:18
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:34
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:94
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:116
+#: afat/templates/afat/partials/statistics/character/tables/character-fats.html:6
 msgid "Character"
 msgstr ""
 
@@ -934,6 +930,10 @@ msgstr ""
 msgid "# of FATs"
 msgstr ""
 
+#: afat/templates/afat/partials/statistics/character/tables/character-fats.html:8
+msgid "Character statistics"
+msgstr ""
+
 #: afat/templates/afat/partials/statistics/character/tabs-navigation.html:7
 msgid "Raw data"
 msgstr "検証されていないデータ"
@@ -955,7 +955,7 @@ msgid "By main character"
 msgstr ""
 
 #: afat/templates/afat/partials/statistics/corporation/tabs/member.html:10
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:76
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:48
 msgid "All characters"
 msgstr ""
 
@@ -971,16 +971,15 @@ msgid ""
 "                                        "
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:36
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:118
-msgid "Character statistics"
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:35
+msgid "This corporation doesn't seem to have any main characters registered."
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:85
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:57
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:89
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:61
 msgid "All characters associated with this main character."
 msgstr ""
 
@@ -1314,18 +1313,18 @@ msgstr ""
 msgid "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can be re-opened only once!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:237
+#: afat/views/statistics.py:238
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for this character.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:250
+#: afat/views/statistics.py:251
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:427
+#: afat/views/statistics.py:433
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:669
+#: afat/views/statistics.py:675
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
