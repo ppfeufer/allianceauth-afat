@@ -15,6 +15,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 
@@ -369,12 +370,17 @@ def ajax_get_monthly_fats_for_main_character(
         .annotate(fat_count=Count("id"))
     )
 
+    logger.debug("Fat per character: %s", fats_per_character)
+
     return JsonResponse(
         data=[
             {
                 "character_id": item["character__character_id"],
                 "character_name": item["character__character_name"],
                 "fat_count": item["fat_count"],
+                "show_details_button": (
+                    f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[item["character__character_id"], year, month])}"><i class="fa-solid fa-eye"></i></a>'
+                ),
             }
             for item in fats_per_character
         ],

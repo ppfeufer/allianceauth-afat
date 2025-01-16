@@ -110,14 +110,25 @@ $(document).ready(() => {
                                 columns: [
                                     { data: 'character_name' },
                                     { data: 'fat_count' },
+                                    { data: 'show_details_button' },
                                 ],
-                                order: [[0, 'asc']],
+                                order: [
+                                    [1, 'desc'],
+                                    [0, 'asc']
+                                ],
                                 columnDefs: [
                                     {
                                         targets: 1,
                                         createdCell: (td) => {
                                             $(td).addClass('text-end');
                                         }
+                                    },
+                                    {
+                                        targets: 2,
+                                        createdCell: (td) => {
+                                            $(td).addClass('text-end');
+                                        },
+                                        sortable: false
                                     }
                                 ]
                             });
