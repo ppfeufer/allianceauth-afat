@@ -35,6 +35,14 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Details button to the "Main Character » All Characters" table
+
+### Fixed
+
+- Sortable columns in the character FATs tables
+
 ### Changed
 
 - Character FATs table moved to its own template, so we can include it when needed instead of duplicating the template code
