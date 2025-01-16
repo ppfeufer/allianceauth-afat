@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Character FATs table moved to its own template, so we can include it when needed instead of duplicating the template code
+
 ## [3.5.5] - 2025-01-08
 
 ### Fixed
