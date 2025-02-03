@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-01-16 23:28+0100\n"
+"POT-Creation-Date: 2025-02-03 15:17+0100\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
@@ -1144,51 +1144,51 @@ msgid ""
 "                            "
 msgstr ""
 
-#: afat/templatetags/afat.py:43
+#: afat/templatetags/afat.py:97
 msgid "January"
 msgstr "1月"
 
-#: afat/templatetags/afat.py:44
+#: afat/templatetags/afat.py:98
 msgid "February"
 msgstr "2月"
 
-#: afat/templatetags/afat.py:45
+#: afat/templatetags/afat.py:99
 msgid "March"
 msgstr "3月"
 
-#: afat/templatetags/afat.py:46
+#: afat/templatetags/afat.py:100
 msgid "April"
 msgstr "4月"
 
-#: afat/templatetags/afat.py:47
+#: afat/templatetags/afat.py:101
 msgid "May"
 msgstr "5月"
 
-#: afat/templatetags/afat.py:48
+#: afat/templatetags/afat.py:102
 msgid "June"
 msgstr "6月"
 
-#: afat/templatetags/afat.py:49
+#: afat/templatetags/afat.py:103
 msgid "July"
 msgstr "7月"
 
-#: afat/templatetags/afat.py:50
+#: afat/templatetags/afat.py:104
 msgid "August"
 msgstr "8月"
 
-#: afat/templatetags/afat.py:51
+#: afat/templatetags/afat.py:105
 msgid "September"
 msgstr "9月"
 
-#: afat/templatetags/afat.py:52
+#: afat/templatetags/afat.py:106
 msgid "October"
 msgstr "10月"
 
-#: afat/templatetags/afat.py:53
+#: afat/templatetags/afat.py:107
 msgid "November"
 msgstr "11月"
 
-#: afat/templatetags/afat.py:54
+#: afat/templatetags/afat.py:108
 msgid "December"
 msgstr "12月"
 
