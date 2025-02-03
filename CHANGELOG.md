@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## [3.6.0] - 2025-02-03
+
 ### Added
 
 - Details button to the "Main Character » All Characters" table
