@@ -350,7 +350,7 @@ class Log(models.Model):
 
     class Event(models.TextChoices):
         """
-        Choices for SRP Status
+        Choices for log event
         """
 
         CREATE_FATLINK = "CR_FAT_LINK", _("FAT link created")

@@ -45,6 +45,9 @@ Section Order:
 
 ### Changed
 
+- Use `django-sri` for sri hashes
+- Minimum requirements
+  - Alliance Auth >= 4.6.0
 - Character FATs table moved to its own template, so we can include it when needed instead of duplicating the template code
 
 ## [3.5.5] - 2025-01-08
