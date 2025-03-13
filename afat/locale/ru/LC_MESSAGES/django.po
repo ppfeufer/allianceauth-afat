@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-02-03 15:17+0100\n"
+"POT-Creation-Date: 2025-03-13 15:20+0100\n"
 "PO-Revision-Date: 2024-12-12 00:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ru/>\n"
@@ -485,7 +485,7 @@ msgstr "Настройки"
 msgid "AFAT Settings"
 msgstr "Ссылки РБВ"
 
-#: afat/templates/afat/base.html:6 afat/templates/afat/base.html:11
+#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
 #: afat/templates/afat/view/dashboard/dashboard.html:7
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
@@ -493,75 +493,6 @@ msgstr "Ссылки РБВ"
 #: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet activity tracking"
 msgstr "Учет Боевых Вылетов"
-
-#: afat/templates/afat/base.html:26
-msgctxt "Decimal separator"
-msgid "."
-msgstr ","
-
-#: afat/templates/afat/base.html:27
-msgctxt "Thousands separator"
-msgid ","
-msgstr " "
-
-#: afat/templates/afat/base.html:28
-msgid "No data available in this table"
-msgstr "Данные в таблице отсутствуют"
-
-#: afat/templates/afat/base.html:29
-msgctxt "Keep _END_ as it is. It will be replaced by a number."
-msgid "Showing _END_ entries"
-msgstr "Отображаются _END_ записей"
-
-#: afat/templates/afat/base.html:30
-msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-msgid "(filtered from _MAX_ total entries)"
-msgstr "(отфильтрованы из _MAX_ записей)"
-
-#: afat/templates/afat/base.html:31
-msgid "No records available"
-msgstr "Записи недоступны"
-
-#: afat/templates/afat/base.html:32
-#: afat/templates/afat/partials/common/spinner.html:7
-msgid "Loading …"
-msgstr "Загрузка …"
-
-#: afat/templates/afat/base.html:33
-msgid "Processing …"
-msgstr "Обработка …"
-
-#: afat/templates/afat/base.html:34
-msgid "Nothing found, sorry …"
-msgstr "Ничего не найдено …"
-
-#: afat/templates/afat/base.html:35
-msgid "Search …"
-msgstr "Поиск…"
-
-#: afat/templates/afat/base.html:36
-msgid "First"
-msgstr "Первый"
-
-#: afat/templates/afat/base.html:37
-msgid "Last"
-msgstr "Последний"
-
-#: afat/templates/afat/base.html:38
-msgid "Next"
-msgstr "Следующий"
-
-#: afat/templates/afat/base.html:39
-msgid "Previous"
-msgstr "Предыдущий"
-
-#: afat/templates/afat/base.html:40
-msgid ": activate to sort column ascending"
-msgstr ": активируйте для сортировки по возрастанию"
-
-#: afat/templates/afat/base.html:41
-msgid ": activate to sort column descending"
-msgstr ": активируйте для сортировки по убыванию"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -618,6 +549,10 @@ msgstr "Следующий год"
 #: afat/templates/afat/partials/common/navigation/year-navigation.html:30
 msgid "Current year"
 msgstr "Текущий год"
+
+#: afat/templates/afat/partials/common/spinner.html:7
+msgid "Loading …"
+msgstr "Загрузка …"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:6
 msgid "Most recent FAT links <small>(latest 10)</small>"
@@ -1246,51 +1181,51 @@ msgid ""
 "                            "
 msgstr ""
 
-#: afat/templatetags/afat.py:97
+#: afat/templatetags/afat.py:101
 msgid "January"
 msgstr "Январь"
 
-#: afat/templatetags/afat.py:98
+#: afat/templatetags/afat.py:102
 msgid "February"
 msgstr "Февраль"
 
-#: afat/templatetags/afat.py:99
+#: afat/templatetags/afat.py:103
 msgid "March"
 msgstr "Март"
 
-#: afat/templatetags/afat.py:100
+#: afat/templatetags/afat.py:104
 msgid "April"
 msgstr "Апрель"
 
-#: afat/templatetags/afat.py:101
+#: afat/templatetags/afat.py:105
 msgid "May"
 msgstr "Май"
 
-#: afat/templatetags/afat.py:102
+#: afat/templatetags/afat.py:106
 msgid "June"
 msgstr "Июнь"
 
-#: afat/templatetags/afat.py:103
+#: afat/templatetags/afat.py:107
 msgid "July"
 msgstr "Июль"
 
-#: afat/templatetags/afat.py:104
+#: afat/templatetags/afat.py:108
 msgid "August"
 msgstr "Август"
 
-#: afat/templatetags/afat.py:105
+#: afat/templatetags/afat.py:109
 msgid "September"
 msgstr "Сентябрь"
 
-#: afat/templatetags/afat.py:106
+#: afat/templatetags/afat.py:110
 msgid "October"
 msgstr "Октябрь"
 
-#: afat/templatetags/afat.py:107
+#: afat/templatetags/afat.py:111
 msgid "November"
 msgstr "Ноябрь"
 
-#: afat/templatetags/afat.py:108
+#: afat/templatetags/afat.py:112
 msgid "December"
 msgstr "Декабрь"
 
@@ -1430,3 +1365,52 @@ msgstr "<h4>Внимание!</h4><p>У Вас нет прав для просм
 #: afat/views/statistics.py:675
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Ошибка!</h4><p>Информация о дате неполная.</p>"
+
+#~ msgctxt "Decimal separator"
+#~ msgid "."
+#~ msgstr ","
+
+#~ msgctxt "Thousands separator"
+#~ msgid ","
+#~ msgstr " "
+
+#~ msgid "No data available in this table"
+#~ msgstr "Данные в таблице отсутствуют"
+
+#~ msgctxt "Keep _END_ as it is. It will be replaced by a number."
+#~ msgid "Showing _END_ entries"
+#~ msgstr "Отображаются _END_ записей"
+
+#~ msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
+#~ msgid "(filtered from _MAX_ total entries)"
+#~ msgstr "(отфильтрованы из _MAX_ записей)"
+
+#~ msgid "No records available"
+#~ msgstr "Записи недоступны"
+
+#~ msgid "Processing …"
+#~ msgstr "Обработка …"
+
+#~ msgid "Nothing found, sorry …"
+#~ msgstr "Ничего не найдено …"
+
+#~ msgid "Search …"
+#~ msgstr "Поиск…"
+
+#~ msgid "First"
+#~ msgstr "Первый"
+
+#~ msgid "Last"
+#~ msgstr "Последний"
+
+#~ msgid "Next"
+#~ msgstr "Следующий"
+
+#~ msgid "Previous"
+#~ msgstr "Предыдущий"
+
+#~ msgid ": activate to sort column ascending"
+#~ msgstr ": активируйте для сортировки по возрастанию"
+
+#~ msgid ": activate to sort column descending"
+#~ msgstr ": активируйте для сортировки по убыванию"
