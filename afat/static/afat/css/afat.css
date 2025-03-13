@@ -56,12 +56,3 @@
         line-height: 1.1;
     }
 }
-
-/* Data tables
-------------------------------------------------------------------------------------- */
-@media all {
-    div.dataTables_filter input[type="search"] {
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
-}

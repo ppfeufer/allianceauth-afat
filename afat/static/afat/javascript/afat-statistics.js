@@ -103,7 +103,7 @@ $(document).ready(() => {
 
                             // Create the table
                             table.DataTable({
-                                language: afatSettings.dataTables.translation,
+                                language: afatSettings.dataTable.language,
                                 data: tableData,
                                 paging: false,
                                 lengthChange: false,
