@@ -1,24 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Peter Pfeufer <info@ppfeufer.de>, 2023, 2024.
+# Peter Pfeufer <info@ppfeufer.de>, 2023, 2024, 2025.
 # MxdHana <236833425@qq.com>, 2024.
 # Dehao Wu <wudehao2000@163.com>, 2024.
 # Chilmore <chenmo1203@gmail.com>, 2025.
+# Kelly Hsueh <kelly_hsueh@users.noreply.weblate.ppfeufer.de>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-02-03 15:17+0100\n"
-"PO-Revision-Date: 2025-01-20 06:17+0000\n"
-"Last-Translator: Chilmore <chenmo1203@gmail.com>\n"
+"POT-Creation-Date: 2025-03-13 15:20+0100\n"
+"PO-Revision-Date: 2025-03-06 04:52+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.2\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -71,7 +72,7 @@ msgstr[0] "未激活 {notifications_count} 舰队类型"
 #: afat/apps.py:20
 #, python-brace-format
 msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
-msgstr ""
+msgstr "AFAT - 另一个舰队活动追踪器 v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -96,10 +97,8 @@ msgid "Fleet type (optional)"
 msgstr "舰队类型（可选）"
 
 #: afat/forms.py:58 afat/forms.py:114
-#, fuzzy
-#| msgid "Fleet type (optional)"
 msgid "Doctrine (optional)"
-msgstr "舰队类型（可选）"
+msgstr "建制（可选）"
 
 #: afat/forms.py:75
 msgid "Character Name"
@@ -228,7 +227,7 @@ msgstr "可以检视装备记录"
 
 #: afat/models.py:83
 msgid "AFAT"
-msgstr ""
+msgstr "AFAT"
 
 #: afat/models.py:100
 msgid "Descriptive name of the fleet type"
@@ -264,7 +263,7 @@ msgstr "这个FAT链接的舰队名字"
 
 #: afat/models.py:159
 msgid "The FAT link hash"
-msgstr "这个FAX链接的哈希值"
+msgstr "这个FAT链接的哈希值"
 
 #: afat/models.py:166
 msgid "Who created the FAT link?"
@@ -272,19 +271,19 @@ msgstr "谁创建的这个FAT链接？"
 
 #: afat/models.py:175
 msgid "Character this FAT link has been created with"
-msgstr ""
+msgstr "创建这个FAT链接的角色"
 
 #: afat/models.py:190
 msgid "The FAT link fleet type, if it's set"
-msgstr ""
+msgstr "这个FAT链接的舰队类型（若已设定）"
 
 #: afat/models.py:194
 msgid "The FAT link doctrine"
-msgstr "这个FAT链接的舰队类型"
+msgstr "这个FAT链接的建制"
 
 #: afat/models.py:198
 msgid "Whether this FAT link was created via ESI or not"
-msgstr ""
+msgstr "这个FAT链接是否是通过ESI创建的"
 
 #: afat/models.py:203
 msgid "Whether the fleet to this FAT link is available in ESI or not"
@@ -331,7 +330,7 @@ msgstr "该角色曾驾驶这条飞船"
 
 #: afat/models.py:331
 msgid "FAT"
-msgstr ""
+msgstr "FAT"
 
 #: afat/models.py:332
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
@@ -341,7 +340,7 @@ msgstr ""
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "FATs"
-msgstr ""
+msgstr "FAT"
 
 #: afat/models.py:356
 msgid "FAT link created"
@@ -377,7 +376,7 @@ msgstr ""
 
 #: afat/models.py:401
 msgid "Short name to identify this doctrine"
-msgstr "此配置的简称"
+msgstr "此建制的简称"
 
 #: afat/models.py:402
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
@@ -394,7 +393,7 @@ msgstr "笔记"
 
 #: afat/models.py:419
 msgid "Whether this doctrine is enabled or not."
-msgstr "无论这个舰队类型是否活跃."
+msgstr "这个建制是否已启用。"
 
 #: afat/models.py:428
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
@@ -402,11 +401,11 @@ msgstr "无论这个舰队类型是否活跃."
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
-msgstr "舰船要求"
+msgstr "建制"
 
 #: afat/models.py:429
 msgid "Doctrines"
-msgstr ""
+msgstr "建制"
 
 #: afat/models.py:454
 #, fuzzy
@@ -448,7 +447,7 @@ msgstr ""
 
 #: afat/models.py:504
 msgid "Whether to use the doctrines from the Fittings modules in the doctrine dropdown. Note: The fittings module needs to be installed for this."
-msgstr "是否使用配置下拉列表中配置模板中的配置。注：为此需要有配置模板。"
+msgstr "是否使用建制下拉列表中装配模板中的建制。注：为此需要有装配模板。"
 
 #: afat/models.py:516
 msgid "Setting"
@@ -462,85 +461,14 @@ msgstr "设置"
 msgid "AFAT Settings"
 msgstr ""
 
-#: afat/templates/afat/base.html:6 afat/templates/afat/base.html:11
+#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
 #: afat/templates/afat/view/dashboard/dashboard.html:7
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
 #: afat/templates/afat/view/statistics/statistics-overview.html:8
-#, fuzzy
-#| msgid "Fleet Activity Tracking"
 msgid "Fleet activity tracking"
 msgstr "舰队活动历史"
-
-#: afat/templates/afat/base.html:26
-msgctxt "Decimal separator"
-msgid "."
-msgstr ""
-
-#: afat/templates/afat/base.html:27
-msgctxt "Thousands separator"
-msgid ","
-msgstr ""
-
-#: afat/templates/afat/base.html:28
-msgid "No data available in this table"
-msgstr ""
-
-#: afat/templates/afat/base.html:29
-msgctxt "Keep _END_ as it is. It will be replaced by a number."
-msgid "Showing _END_ entries"
-msgstr ""
-
-#: afat/templates/afat/base.html:30
-msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-msgid "(filtered from _MAX_ total entries)"
-msgstr ""
-
-#: afat/templates/afat/base.html:31
-msgid "No records available"
-msgstr ""
-
-#: afat/templates/afat/base.html:32
-#: afat/templates/afat/partials/common/spinner.html:7
-msgid "Loading …"
-msgstr ""
-
-#: afat/templates/afat/base.html:33
-msgid "Processing …"
-msgstr ""
-
-#: afat/templates/afat/base.html:34
-msgid "Nothing found, sorry …"
-msgstr ""
-
-#: afat/templates/afat/base.html:35
-msgid "Search …"
-msgstr ""
-
-#: afat/templates/afat/base.html:36
-msgid "First"
-msgstr ""
-
-#: afat/templates/afat/base.html:37
-msgid "Last"
-msgstr ""
-
-#: afat/templates/afat/base.html:38
-msgid "Next"
-msgstr ""
-
-#: afat/templates/afat/base.html:39
-msgid "Previous"
-msgstr ""
-
-#: afat/templates/afat/base.html:40
-msgid ": activate to sort column ascending"
-msgstr ""
-
-#: afat/templates/afat/base.html:41
-msgid ": activate to sort column descending"
-msgstr ""
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -552,23 +480,23 @@ msgstr "取消"
 
 #: afat/templates/afat/modals/general.html:26
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #: afat/templates/afat/partials/common/navigation/month-navigation.html:8
 msgid "Previous month"
-msgstr ""
+msgstr "上一个月"
 
 #: afat/templates/afat/partials/common/navigation/month-navigation.html:22
 msgid "Next month"
-msgstr ""
+msgstr "下一个月"
 
 #: afat/templates/afat/partials/common/navigation/month-navigation.html:30
 msgid "Current month"
-msgstr ""
+msgstr "当前月份"
 
 #: afat/templates/afat/partials/common/navigation/top-menu.html:9
 msgid "Dashboard"
-msgstr ""
+msgstr "仪表盘"
 
 #: afat/templates/afat/partials/common/navigation/top-menu.html:18
 #: afat/templates/afat/view/statistics/statistics-alliance.html:12
@@ -576,7 +504,7 @@ msgstr ""
 #: afat/templates/afat/view/statistics/statistics-corporation.html:11
 #: afat/templates/afat/view/statistics/statistics-overview.html:13
 msgid "Statistics"
-msgstr ""
+msgstr "统计"
 
 #: afat/templates/afat/partials/common/navigation/top-menu.html:37
 msgid "Add FAT link"
@@ -597,6 +525,10 @@ msgstr ""
 #: afat/templates/afat/partials/common/navigation/year-navigation.html:30
 msgid "Current year"
 msgstr ""
+
+#: afat/templates/afat/partials/common/spinner.html:7
+msgid "Loading …"
+msgstr "加载中…"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:6
 msgid "Most recent FAT links <small>(latest 10)</small>"
@@ -883,7 +815,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:17
 msgid "Corporation statistics"
-msgstr ""
+msgstr "公司统计"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:33
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:88
@@ -945,7 +877,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/character/tabs-navigation.html:7
 msgid "Raw data"
-msgstr ""
+msgstr "原始数据"
 
 #: afat/templates/afat/partials/statistics/character/tabs/graphs.html:33
 msgid "FATs by time of day"
@@ -1000,7 +932,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/overview/tabs-navigation.html:4
 msgid "My Stats"
-msgstr ""
+msgstr "我的统计资料"
 
 #: afat/templates/afat/partials/statistics/overview/tabs/alliance-accordion-item.html:27
 msgid "Alliance statistics for"
@@ -1167,51 +1099,51 @@ msgid ""
 "                            "
 msgstr ""
 
-#: afat/templatetags/afat.py:97
+#: afat/templatetags/afat.py:101
 msgid "January"
 msgstr "一月"
 
-#: afat/templatetags/afat.py:98
+#: afat/templatetags/afat.py:102
 msgid "February"
 msgstr "二月"
 
-#: afat/templatetags/afat.py:99
+#: afat/templatetags/afat.py:103
 msgid "March"
 msgstr "三月"
 
-#: afat/templatetags/afat.py:100
+#: afat/templatetags/afat.py:104
 msgid "April"
 msgstr "四月"
 
-#: afat/templatetags/afat.py:101
+#: afat/templatetags/afat.py:105
 msgid "May"
 msgstr "五月"
 
-#: afat/templatetags/afat.py:102
+#: afat/templatetags/afat.py:106
 msgid "June"
 msgstr "六月"
 
-#: afat/templatetags/afat.py:103
+#: afat/templatetags/afat.py:107
 msgid "July"
 msgstr "七月"
 
-#: afat/templatetags/afat.py:104
+#: afat/templatetags/afat.py:108
 msgid "August"
 msgstr "八月"
 
-#: afat/templatetags/afat.py:105
+#: afat/templatetags/afat.py:109
 msgid "September"
 msgstr "九月"
 
-#: afat/templatetags/afat.py:106
+#: afat/templatetags/afat.py:110
 msgid "October"
 msgstr "十月"
 
-#: afat/templatetags/afat.py:107
+#: afat/templatetags/afat.py:111
 msgid "November"
 msgstr "十一月"
 
-#: afat/templatetags/afat.py:108
+#: afat/templatetags/afat.py:112
 msgid "December"
 msgstr "十二月"
 
@@ -1296,7 +1228,7 @@ msgstr ""
 
 #: afat/views/fatlinks.py:816
 msgid "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you entered was not found.</p>"
-msgstr ""
+msgstr "<h4>哦不！</h4><p>手动的FAT处理失败了！您输入的角色名未被找到。</p>"
 
 #: afat/views/fatlinks.py:825
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
@@ -1338,7 +1270,7 @@ msgstr ""
 
 #: afat/views/statistics.py:238
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for this character.</p>"
-msgstr ""
+msgstr "<h4>警告！</h4><p>你没有查看该角色统计资料的权限。</p>"
 
 #: afat/views/statistics.py:251
 msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
@@ -1346,8 +1278,22 @@ msgstr ""
 
 #: afat/views/statistics.py:433
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
-msgstr ""
+msgstr "<h4>警告！</h4><p>你没有查看该公司统计资料的权限。</p>"
 
 #: afat/views/statistics.py:675
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
+
+#~ msgctxt "Decimal separator"
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgctxt "Thousands separator"
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "Processing …"
+#~ msgstr "处理中…"
+
+#~ msgid "Search …"
+#~ msgstr "搜索…"
