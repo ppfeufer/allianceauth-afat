@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-02-03 15:17+0100\n"
+"POT-Creation-Date: 2025-03-13 15:20+0100\n"
 "PO-Revision-Date: 2024-12-22 21:15+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Italian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/it/>\n"
@@ -458,82 +458,13 @@ msgstr ""
 msgid "AFAT Settings"
 msgstr ""
 
-#: afat/templates/afat/base.html:6 afat/templates/afat/base.html:11
+#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
 #: afat/templates/afat/view/dashboard/dashboard.html:7
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
 #: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet activity tracking"
-msgstr ""
-
-#: afat/templates/afat/base.html:26
-msgctxt "Decimal separator"
-msgid "."
-msgstr ""
-
-#: afat/templates/afat/base.html:27
-msgctxt "Thousands separator"
-msgid ","
-msgstr ""
-
-#: afat/templates/afat/base.html:28
-msgid "No data available in this table"
-msgstr ""
-
-#: afat/templates/afat/base.html:29
-msgctxt "Keep _END_ as it is. It will be replaced by a number."
-msgid "Showing _END_ entries"
-msgstr ""
-
-#: afat/templates/afat/base.html:30
-msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-msgid "(filtered from _MAX_ total entries)"
-msgstr ""
-
-#: afat/templates/afat/base.html:31
-msgid "No records available"
-msgstr ""
-
-#: afat/templates/afat/base.html:32
-#: afat/templates/afat/partials/common/spinner.html:7
-msgid "Loading …"
-msgstr ""
-
-#: afat/templates/afat/base.html:33
-msgid "Processing …"
-msgstr ""
-
-#: afat/templates/afat/base.html:34
-msgid "Nothing found, sorry …"
-msgstr ""
-
-#: afat/templates/afat/base.html:35
-msgid "Search …"
-msgstr ""
-
-#: afat/templates/afat/base.html:36
-msgid "First"
-msgstr ""
-
-#: afat/templates/afat/base.html:37
-msgid "Last"
-msgstr ""
-
-#: afat/templates/afat/base.html:38
-msgid "Next"
-msgstr ""
-
-#: afat/templates/afat/base.html:39
-msgid "Previous"
-msgstr ""
-
-#: afat/templates/afat/base.html:40
-msgid ": activate to sort column ascending"
-msgstr ""
-
-#: afat/templates/afat/base.html:41
-msgid ": activate to sort column descending"
 msgstr ""
 
 #: afat/templates/afat/modals/general.html:12
@@ -590,6 +521,10 @@ msgstr ""
 
 #: afat/templates/afat/partials/common/navigation/year-navigation.html:30
 msgid "Current year"
+msgstr ""
+
+#: afat/templates/afat/partials/common/spinner.html:7
+msgid "Loading …"
 msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:6
@@ -1148,51 +1083,51 @@ msgid ""
 "                            "
 msgstr ""
 
-#: afat/templatetags/afat.py:97
+#: afat/templatetags/afat.py:101
 msgid "January"
 msgstr "Gennaio"
 
-#: afat/templatetags/afat.py:98
+#: afat/templatetags/afat.py:102
 msgid "February"
 msgstr "Febbraio"
 
-#: afat/templatetags/afat.py:99
+#: afat/templatetags/afat.py:103
 msgid "March"
 msgstr "Marzo"
 
-#: afat/templatetags/afat.py:100
+#: afat/templatetags/afat.py:104
 msgid "April"
 msgstr "Aprile"
 
-#: afat/templatetags/afat.py:101
+#: afat/templatetags/afat.py:105
 msgid "May"
 msgstr "Maggio"
 
-#: afat/templatetags/afat.py:102
+#: afat/templatetags/afat.py:106
 msgid "June"
 msgstr "Giugno"
 
-#: afat/templatetags/afat.py:103
+#: afat/templatetags/afat.py:107
 msgid "July"
 msgstr "Luglio"
 
-#: afat/templatetags/afat.py:104
+#: afat/templatetags/afat.py:108
 msgid "August"
 msgstr "Agosto"
 
-#: afat/templatetags/afat.py:105
+#: afat/templatetags/afat.py:109
 msgid "September"
 msgstr "Settembre"
 
-#: afat/templatetags/afat.py:106
+#: afat/templatetags/afat.py:110
 msgid "October"
 msgstr "Ottobre"
 
-#: afat/templatetags/afat.py:107
+#: afat/templatetags/afat.py:111
 msgid "November"
 msgstr "Novembre"
 
-#: afat/templatetags/afat.py:108
+#: afat/templatetags/afat.py:112
 msgid "December"
 msgstr "Dicembre"
 
