@@ -3,7 +3,7 @@
 $(document).ready(() => {
     'use strict';
 
-    const dtLanguage = afatSettings.dataTables.translation;
+    const dtLanguage = afatSettings.dataTable.language;
 
     const linkListTableColumns = [
         {data: 'fleet_name'},
