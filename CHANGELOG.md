@@ -35,10 +35,13 @@ Section Order:
 ### Security
 -->
 
+## [3.6.1] - 2025-03-13
+
 ### Changed
 
 - Use DataTables native translations
 - Templatetag code improved
+- Translations updated
 
 ## [3.6.0] - 2025-02-03
 
