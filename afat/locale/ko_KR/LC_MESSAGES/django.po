@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-02-03 15:17+0100\n"
+"POT-Creation-Date: 2025-03-13 15:20+0100\n"
 "PO-Revision-Date: 2024-12-12 00:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ko/>\n"
@@ -460,7 +460,7 @@ msgstr "설정"
 msgid "AFAT Settings"
 msgstr ""
 
-#: afat/templates/afat/base.html:6 afat/templates/afat/base.html:11
+#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
 #: afat/templates/afat/view/dashboard/dashboard.html:7
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
@@ -468,75 +468,6 @@ msgstr ""
 #: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet activity tracking"
 msgstr ""
-
-#: afat/templates/afat/base.html:26
-msgctxt "Decimal separator"
-msgid "."
-msgstr "."
-
-#: afat/templates/afat/base.html:27
-msgctxt "Thousands separator"
-msgid ","
-msgstr ","
-
-#: afat/templates/afat/base.html:28
-msgid "No data available in this table"
-msgstr "테이블에 유효한 데이터가 없습니다"
-
-#: afat/templates/afat/base.html:29
-msgctxt "Keep _END_ as it is. It will be replaced by a number."
-msgid "Showing _END_ entries"
-msgstr "_END_ 개의 결과 표시중"
-
-#: afat/templates/afat/base.html:30
-msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-msgid "(filtered from _MAX_ total entries)"
-msgstr "(총 _MAX_ 개의 결과 에서 필터링됨)"
-
-#: afat/templates/afat/base.html:31
-msgid "No records available"
-msgstr "사용 가능한 레코드가 없습니다"
-
-#: afat/templates/afat/base.html:32
-#: afat/templates/afat/partials/common/spinner.html:7
-msgid "Loading …"
-msgstr "로딩 …"
-
-#: afat/templates/afat/base.html:33
-msgid "Processing …"
-msgstr "처리 중 …"
-
-#: afat/templates/afat/base.html:34
-msgid "Nothing found, sorry …"
-msgstr "아무것도 찾지 못했습니다, 죄송합니다 …"
-
-#: afat/templates/afat/base.html:35
-msgid "Search …"
-msgstr "검색 …"
-
-#: afat/templates/afat/base.html:36
-msgid "First"
-msgstr "첫 번째"
-
-#: afat/templates/afat/base.html:37
-msgid "Last"
-msgstr "마지막"
-
-#: afat/templates/afat/base.html:38
-msgid "Next"
-msgstr "다음"
-
-#: afat/templates/afat/base.html:39
-msgid "Previous"
-msgstr "이전"
-
-#: afat/templates/afat/base.html:40
-msgid ": activate to sort column ascending"
-msgstr ": 열 오름차순으로 정렬 활성화"
-
-#: afat/templates/afat/base.html:41
-msgid ": activate to sort column descending"
-msgstr ": 열 내림차순으로 정렬 활성화"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -593,6 +524,10 @@ msgstr ""
 #: afat/templates/afat/partials/common/navigation/year-navigation.html:30
 msgid "Current year"
 msgstr ""
+
+#: afat/templates/afat/partials/common/spinner.html:7
+msgid "Loading …"
+msgstr "로딩 …"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:6
 msgid "Most recent FAT links <small>(latest 10)</small>"
@@ -1169,51 +1104,51 @@ msgid ""
 "                            "
 msgstr ""
 
-#: afat/templatetags/afat.py:97
+#: afat/templatetags/afat.py:101
 msgid "January"
 msgstr "1월"
 
-#: afat/templatetags/afat.py:98
+#: afat/templatetags/afat.py:102
 msgid "February"
 msgstr "2월"
 
-#: afat/templatetags/afat.py:99
+#: afat/templatetags/afat.py:103
 msgid "March"
 msgstr "3월"
 
-#: afat/templatetags/afat.py:100
+#: afat/templatetags/afat.py:104
 msgid "April"
 msgstr "4월"
 
-#: afat/templatetags/afat.py:101
+#: afat/templatetags/afat.py:105
 msgid "May"
 msgstr "5월"
 
-#: afat/templatetags/afat.py:102
+#: afat/templatetags/afat.py:106
 msgid "June"
 msgstr "6월"
 
-#: afat/templatetags/afat.py:103
+#: afat/templatetags/afat.py:107
 msgid "July"
 msgstr "7월"
 
-#: afat/templatetags/afat.py:104
+#: afat/templatetags/afat.py:108
 msgid "August"
 msgstr "8월"
 
-#: afat/templatetags/afat.py:105
+#: afat/templatetags/afat.py:109
 msgid "September"
 msgstr "9월"
 
-#: afat/templatetags/afat.py:106
+#: afat/templatetags/afat.py:110
 msgid "October"
 msgstr "10월"
 
-#: afat/templatetags/afat.py:107
+#: afat/templatetags/afat.py:111
 msgid "November"
 msgstr "11월"
 
-#: afat/templatetags/afat.py:108
+#: afat/templatetags/afat.py:112
 msgid "December"
 msgstr "12월"
 
@@ -1353,3 +1288,52 @@ msgstr ""
 #: afat/views/statistics.py:675
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
+
+#~ msgctxt "Decimal separator"
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgctxt "Thousands separator"
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "No data available in this table"
+#~ msgstr "테이블에 유효한 데이터가 없습니다"
+
+#~ msgctxt "Keep _END_ as it is. It will be replaced by a number."
+#~ msgid "Showing _END_ entries"
+#~ msgstr "_END_ 개의 결과 표시중"
+
+#~ msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
+#~ msgid "(filtered from _MAX_ total entries)"
+#~ msgstr "(총 _MAX_ 개의 결과 에서 필터링됨)"
+
+#~ msgid "No records available"
+#~ msgstr "사용 가능한 레코드가 없습니다"
+
+#~ msgid "Processing …"
+#~ msgstr "처리 중 …"
+
+#~ msgid "Nothing found, sorry …"
+#~ msgstr "아무것도 찾지 못했습니다, 죄송합니다 …"
+
+#~ msgid "Search …"
+#~ msgstr "검색 …"
+
+#~ msgid "First"
+#~ msgstr "첫 번째"
+
+#~ msgid "Last"
+#~ msgstr "마지막"
+
+#~ msgid "Next"
+#~ msgstr "다음"
+
+#~ msgid "Previous"
+#~ msgstr "이전"
+
+#~ msgid ": activate to sort column ascending"
+#~ msgstr ": 열 오름차순으로 정렬 활성화"
+
+#~ msgid ": activate to sort column descending"
+#~ msgstr ": 열 내림차순으로 정렬 활성화"
