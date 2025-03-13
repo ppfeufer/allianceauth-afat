@@ -8,7 +8,7 @@ from allianceauth.services.hooks import MenuItemHook, UrlHook
 
 # Alliance Auth AFAT
 from afat import __title__, urls
-from afat.app_settings import AFAT_BASE_URL
+from afat.constants import APP_BASE_URL
 
 
 class AaAfatMenuItem(MenuItemHook):  # pylint: disable=too-few-public-methods
@@ -63,4 +63,4 @@ def register_url():
     :rtype:
     """
 
-    return UrlHook(urls=urls, namespace="afat", base_url=rf"^{AFAT_BASE_URL}/")
+    return UrlHook(urls=urls, namespace="afat", base_url=rf"^{APP_BASE_URL}/")
