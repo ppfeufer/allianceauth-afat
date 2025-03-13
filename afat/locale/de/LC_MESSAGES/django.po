@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-02-03 15:17+0100\n"
-"PO-Revision-Date: 2025-01-16 23:10+0000\n"
+"POT-Creation-Date: 2025-03-13 15:20+0100\n"
+"PO-Revision-Date: 2025-02-24 15:17+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.1\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -462,7 +462,7 @@ msgstr "Einstellungen"
 msgid "AFAT Settings"
 msgstr "AFAT Einstellungen"
 
-#: afat/templates/afat/base.html:6 afat/templates/afat/base.html:11
+#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
 #: afat/templates/afat/view/dashboard/dashboard.html:7
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
@@ -470,75 +470,6 @@ msgstr "AFAT Einstellungen"
 #: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet activity tracking"
 msgstr "Flottenaktivitäts-Tracking"
-
-#: afat/templates/afat/base.html:26
-msgctxt "Decimal separator"
-msgid "."
-msgstr ","
-
-#: afat/templates/afat/base.html:27
-msgctxt "Thousands separator"
-msgid ","
-msgstr "."
-
-#: afat/templates/afat/base.html:28
-msgid "No data available in this table"
-msgstr "In dieser Tabelle sind keine Daten verfügbar"
-
-#: afat/templates/afat/base.html:29
-msgctxt "Keep _END_ as it is. It will be replaced by a number."
-msgid "Showing _END_ entries"
-msgstr "Zeige _END_ Einträge"
-
-#: afat/templates/afat/base.html:30
-msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-msgid "(filtered from _MAX_ total entries)"
-msgstr "(gefiltert von _MAX_ Einträgen)"
-
-#: afat/templates/afat/base.html:31
-msgid "No records available"
-msgstr "Keine Datensätze vorhanden"
-
-#: afat/templates/afat/base.html:32
-#: afat/templates/afat/partials/common/spinner.html:7
-msgid "Loading …"
-msgstr "Lade …"
-
-#: afat/templates/afat/base.html:33
-msgid "Processing …"
-msgstr "Verarbeite …"
-
-#: afat/templates/afat/base.html:34
-msgid "Nothing found, sorry …"
-msgstr "Nichts gefunden, tut mir leid …"
-
-#: afat/templates/afat/base.html:35
-msgid "Search …"
-msgstr "Suche …"
-
-#: afat/templates/afat/base.html:36
-msgid "First"
-msgstr "Erster"
-
-#: afat/templates/afat/base.html:37
-msgid "Last"
-msgstr "Letzter"
-
-#: afat/templates/afat/base.html:38
-msgid "Next"
-msgstr "Nächster"
-
-#: afat/templates/afat/base.html:39
-msgid "Previous"
-msgstr "Vorheriger"
-
-#: afat/templates/afat/base.html:40
-msgid ": activate to sort column ascending"
-msgstr ": aktivieren, um die Spalte aufsteigend zu sortieren"
-
-#: afat/templates/afat/base.html:41
-msgid ": activate to sort column descending"
-msgstr ": aktivieren, um die Spalte absteigend zu sortieren"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -595,6 +526,10 @@ msgstr "Nächstes Jahr"
 #: afat/templates/afat/partials/common/navigation/year-navigation.html:30
 msgid "Current year"
 msgstr "Aktuelles Jahr"
+
+#: afat/templates/afat/partials/common/spinner.html:7
+msgid "Loading …"
+msgstr "Lade …"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:6
 msgid "Most recent FAT links <small>(latest 10)</small>"
@@ -1139,11 +1074,11 @@ msgid_plural ""
 "        "
 msgstr[0] ""
 "\n"
-"            Logs werden für %(log_duration)s Tage gespeichert. Danach werden sie automatisch gelöscht.\n"
+"            Logs werden für %(duration)s Tage gespeichert. Danach werden sie automatisch gelöscht.\n"
 "        "
 msgstr[1] ""
 "\n"
-"            Logs werden für %(log_duration)s Tage gespeichert. Danach werden sie automatisch gelöscht.\n"
+"            Logs werden für %(duration)s Tagen gespeichert. Danach werden sie automatisch gelöscht.\n"
 "        "
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:7
@@ -1185,51 +1120,51 @@ msgstr ""
 "                                Gesamte FATs für %(year)s: <strong>%(fats_per_year)s</strong>\n"
 "                            "
 
-#: afat/templatetags/afat.py:97
+#: afat/templatetags/afat.py:101
 msgid "January"
 msgstr "Januar"
 
-#: afat/templatetags/afat.py:98
+#: afat/templatetags/afat.py:102
 msgid "February"
 msgstr "Februar"
 
-#: afat/templatetags/afat.py:99
+#: afat/templatetags/afat.py:103
 msgid "March"
 msgstr "März"
 
-#: afat/templatetags/afat.py:100
+#: afat/templatetags/afat.py:104
 msgid "April"
 msgstr "April"
 
-#: afat/templatetags/afat.py:101
+#: afat/templatetags/afat.py:105
 msgid "May"
 msgstr "Mai"
 
-#: afat/templatetags/afat.py:102
+#: afat/templatetags/afat.py:106
 msgid "June"
 msgstr "Juni"
 
-#: afat/templatetags/afat.py:103
+#: afat/templatetags/afat.py:107
 msgid "July"
 msgstr "Juli"
 
-#: afat/templatetags/afat.py:104
+#: afat/templatetags/afat.py:108
 msgid "August"
 msgstr "August"
 
-#: afat/templatetags/afat.py:105
+#: afat/templatetags/afat.py:109
 msgid "September"
 msgstr "September"
 
-#: afat/templatetags/afat.py:106
+#: afat/templatetags/afat.py:110
 msgid "October"
 msgstr "Oktober"
 
-#: afat/templatetags/afat.py:107
+#: afat/templatetags/afat.py:111
 msgid "November"
 msgstr "November"
 
-#: afat/templatetags/afat.py:108
+#: afat/templatetags/afat.py:112
 msgid "December"
 msgstr "Dezember"
 
@@ -1369,3 +1304,52 @@ msgstr "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für 
 #: afat/views/statistics.py:675
 msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
+
+#~ msgctxt "Decimal separator"
+#~ msgid "."
+#~ msgstr ","
+
+#~ msgctxt "Thousands separator"
+#~ msgid ","
+#~ msgstr "."
+
+#~ msgid "No data available in this table"
+#~ msgstr "In dieser Tabelle sind keine Daten verfügbar"
+
+#~ msgctxt "Keep _END_ as it is. It will be replaced by a number."
+#~ msgid "Showing _END_ entries"
+#~ msgstr "Zeige _END_ Einträge"
+
+#~ msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
+#~ msgid "(filtered from _MAX_ total entries)"
+#~ msgstr "(gefiltert von _MAX_ Einträgen)"
+
+#~ msgid "No records available"
+#~ msgstr "Keine Datensätze vorhanden"
+
+#~ msgid "Processing …"
+#~ msgstr "Verarbeite …"
+
+#~ msgid "Nothing found, sorry …"
+#~ msgstr "Nichts gefunden, tut mir leid …"
+
+#~ msgid "Search …"
+#~ msgstr "Suche …"
+
+#~ msgid "First"
+#~ msgstr "Erster"
+
+#~ msgid "Last"
+#~ msgstr "Letzter"
+
+#~ msgid "Next"
+#~ msgstr "Nächster"
+
+#~ msgid "Previous"
+#~ msgstr "Vorheriger"
+
+#~ msgid ": activate to sort column ascending"
+#~ msgstr ": aktivieren, um die Spalte aufsteigend zu sortieren"
+
+#~ msgid ": activate to sort column descending"
+#~ msgstr ": aktivieren, um die Spalte absteigend zu sortieren"
