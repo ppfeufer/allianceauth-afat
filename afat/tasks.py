@@ -299,6 +299,14 @@ def update_esi_fatlinks() -> None:
     :rtype:
     """
 
+    esi_status = fetch_esi_status()
+
+    # Abort if ESI seems to be offline or above the error limit
+    if not esi_status.is_ok:
+        logger.warning(msg="ESI doesn't seem to be available at this time. Aborting.")
+
+        return
+
     try:
         esi_fatlinks = FatLink.objects.select_related_default().filter(
             is_esilink=True, is_registered_on_esi=True
@@ -308,14 +316,6 @@ def update_esi_fatlinks() -> None:
 
     # Work our way through the FAT links
     else:
-        # Abort if ESI seems to be offline or above the error limit
-        if not fetch_esi_status().is_ok:
-            logger.warning(
-                msg="ESI doesn't seem to be available at this time. Aborting."
-            )
-
-            return
-
         for fatlink in esi_fatlinks:
             _process_esi_fatlink(fatlink=fatlink)
 
