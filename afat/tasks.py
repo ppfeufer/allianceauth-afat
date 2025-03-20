@@ -7,7 +7,7 @@ from datetime import timedelta
 
 # Third Party
 from bravado.exception import HTTPNotFound
-from celery import shared_task
+from celery import chain, shared_task
 
 # Django
 from django.utils import timezone
@@ -69,13 +69,31 @@ def process_fats(data_list, data_source: str, fatlink_hash: str):
             )
         )
 
+        my_tasks = []
+
         for char in data_list:
-            process_character.delay(
+            logger.debug("Chaining task for character %s", char["character_id"])
+
+            task_signature = process_character.si(
                 character_id=char["character_id"],
                 solar_system_id=char["solar_system_id"],
                 ship_type_id=char["ship_type_id"],
                 fatlink_hash=fatlink_hash,
             )
+
+            # Add the task signature to the list
+            # This will be used to create a chain of tasks to be executed in order
+            logger.debug(
+                msg=(
+                    f"Adding task for character {char['character_id']} "
+                    f"to the chain for FAT link with hash {fatlink_hash}"
+                )
+            )
+            my_tasks.append(task_signature)
+
+        # Create a chain of tasks
+        logger.debug("Running chain of tasks for FAT link with hash %s", fatlink_hash)
+        chain(my_tasks).delay()
 
 
 @shared_task

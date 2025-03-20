@@ -35,6 +35,12 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Use Celery `chain` for ESI tasks to ensure that the tasks are executed in the
+  correct order and that the tasks are not executed in parallel.
+  This should improve performance a bit.
+
 ## [3.6.1] - 2025-03-13
 
 ### Changed

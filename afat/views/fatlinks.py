@@ -433,7 +433,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     logger.info(
         msg=(
             f'ESI FAT link "{fatlink_hash}" with name '
-            f'"{request.session["fatlink_form__name"]}"{fleet_type} '
+            f'"{request.session["fatlink_form__name"]}" {fleet_type} '
             f"was created by {request.user}"
         )
     )
