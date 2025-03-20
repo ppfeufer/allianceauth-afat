@@ -6,8 +6,9 @@ Tasks
 from datetime import timedelta
 
 # Third Party
+import kombu
 from bravado.exception import HTTPNotFound
-from celery import chain, shared_task
+from celery import group, shared_task
 
 # Django
 from django.utils import timezone
@@ -29,7 +30,6 @@ from afat.utils import get_or_create_character
 
 logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
-
 ESI_ERROR_LIMIT = 50
 ESI_TIMEOUT_ONCE_ERROR_LIMIT_REACHED = 60
 ESI_MAX_RETRIES = 3
@@ -45,9 +45,7 @@ TASK_DEFAULT_KWARGS = {"time_limit": TASK_TIME_LIMIT, "max_retries": ESI_MAX_RET
 @shared_task(**{**TASK_DEFAULT_KWARGS}, **{"base": QueueOnce})
 def process_fats(data_list, data_source: str, fatlink_hash: str):
     """
-    Due to the large possible size of fatlists,
-    this process will be scheduled to process esi data
-    and possible other sources in the future.
+    Process FAT link data
 
     :param data_list:
     :type data_list:
@@ -69,37 +67,36 @@ def process_fats(data_list, data_source: str, fatlink_hash: str):
             )
         )
 
-        my_tasks = []
-
-        for char in data_list:
-            logger.debug("Chaining task for character %s", char["character_id"])
-
-            task_signature = process_character.si(
+        my_tasks = [
+            process_character.si(
                 character_id=char["character_id"],
                 solar_system_id=char["solar_system_id"],
                 ship_type_id=char["ship_type_id"],
                 fatlink_hash=fatlink_hash,
             )
+            for char in list(data_list)
+        ]
 
-            # Add the task signature to the list
-            # This will be used to create a chain of tasks to be executed in order
+        if my_tasks:
             logger.debug(
-                msg=(
-                    f"Adding task for character {char['character_id']} "
-                    f"to the chain for FAT link with hash {fatlink_hash}"
-                )
+                "Creating group of tasks for %s characters and adding them to the queue",
+                len(my_tasks),
             )
-            my_tasks.append(task_signature)
 
-        # Create a chain of tasks
-        logger.debug("Running chain of tasks for FAT link with hash %s", fatlink_hash)
-        chain(my_tasks).delay()
+            try:
+                group(my_tasks).delay()
+            except kombu.exceptions.EncodeError:
+                logger.debug(
+                    msg=(
+                        "No changes to the current fleet rooster, nothing to add to the queue"
+                    )
+                )
 
 
 @shared_task
 def process_character(
     character_id: int, solar_system_id: int, ship_type_id: int, fatlink_hash: str
-):
+) -> None:
     """
     Process character
 
@@ -113,13 +110,12 @@ def process_character(
     character = get_or_create_character(character_id=character_id)
     link = FatLink.objects.get(hash=fatlink_hash)
 
-    solar_system = esi.client.Universe.get_universe_systems_system_id(
+    solar_system_name = esi.client.Universe.get_universe_systems_system_id(
         system_id=solar_system_id
-    ).result()
-    ship = esi.client.Universe.get_universe_types_type_id(type_id=ship_type_id).result()
-
-    solar_system_name = solar_system["name"]
-    ship_name = ship["name"]
+    ).result()["name"]
+    ship_name = esi.client.Universe.get_universe_types_type_id(
+        type_id=ship_type_id
+    ).result()["name"]
 
     fat, created = Fat.objects.get_or_create(
         fatlink=link,
@@ -127,22 +123,16 @@ def process_character(
         defaults={"system": solar_system_name, "shiptype": ship_name},
     )
 
-    if created is True:
+    if created:
         logger.info(
-            msg=(
-                f"New Pilot: Adding {character} in {solar_system_name} flying "
-                f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
-            )
+            f"New Pilot: Adding {character} in {solar_system_name} flying "
+            f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
         )
-
-        return
-
-    logger.debug(
-        msg=(
+    else:
+        logger.debug(
             f"Pilot {character} already registered for FAT link {fatlink_hash} "
             f"with FAT ID {fat.pk}"
         )
-    )
 
 
 def _close_esi_fleet(fatlink: FatLink, reason: str) -> None:
@@ -169,8 +159,8 @@ def _esi_fatlinks_error_handling(error_key: str, fatlink: FatLink) -> None:
     """
     ESI error handling
 
-    :param cache_key:
-    :type cache_key:
+    :param error_key:
+    :type error_key:
     :param fatlink:
     :type fatlink:
     :return:
@@ -178,68 +168,76 @@ def _esi_fatlinks_error_handling(error_key: str, fatlink: FatLink) -> None:
     """
 
     time_now = timezone.now()
+    grace_period = time_now - timedelta(seconds=ESI_ERROR_GRACE_TIME)
 
-    # Close ESI fleet if the consecutive error count is too high
     if (
         fatlink.last_esi_error == error_key
-        and fatlink.last_esi_error_time
-        >= (time_now - timedelta(seconds=ESI_ERROR_GRACE_TIME))
+        and fatlink.last_esi_error_time >= grace_period
         and fatlink.esi_error_count >= ESI_MAX_ERROR_COUNT
     ):
         _close_esi_fleet(fatlink=fatlink, reason=error_key.label)
 
         return
 
-    error_count = (
+    fatlink.esi_error_count = (
         fatlink.esi_error_count + 1
         if fatlink.last_esi_error == error_key
-        and fatlink.last_esi_error_time
-        >= (time_now - timedelta(seconds=ESI_ERROR_GRACE_TIME))
+        and fatlink.last_esi_error_time >= grace_period
         else 1
     )
-
-    logger.info(
-        msg=(
-            f'FAT link "{fatlink.hash}" Error: "{error_key.label}" '
-            f"({error_count} of {ESI_MAX_ERROR_COUNT})."
-        )
-    )
-
-    fatlink.esi_error_count = error_count
     fatlink.last_esi_error = error_key
     fatlink.last_esi_error_time = time_now
     fatlink.save()
 
+    logger.info(
+        msg=(
+            f'FAT link "{fatlink.hash}" Error: "{error_key.label}" '
+            f"({fatlink.esi_error_count} of {ESI_MAX_ERROR_COUNT})."
+        )
+    )
 
-def _check_for_esi_fleet(fatlink: FatLink):
+
+def _check_for_esi_fleet(fatlink: FatLink) -> dict | None:
+    """
+    Check if there is a fleet for this FAT link registered on ESI
+
+    :param fatlink:
+    :type fatlink:
+    :return:
+    :rtype:
+    """
+
     required_scopes = ["esi-fleets.read_fleet.v1"]
+    fleet_commander_id = fatlink.character.character_id
 
-    # Check if there is a fleet
     try:
-        fleet_commander_id = fatlink.character.character_id
         esi_token = Token.get_token(
             character_id=fleet_commander_id, scopes=required_scopes
         )
-
         fleet_from_esi = esi.client.Fleets.get_characters_character_id_fleet(
             character_id=fleet_commander_id,
             token=esi_token.valid_access_token(),
         ).result()
 
+        logger.debug("Fleet from ESI: %s", fleet_from_esi)
+        logger.debug("FAT Link ESI fleet ID: %s", fatlink.esi_fleet_id)
+
+        if not fleet_from_esi or fatlink.esi_fleet_id != fleet_from_esi["fleet_id"]:
+            raise HTTPNotFound
+
         return {"fleet": fleet_from_esi, "token": esi_token}
     except HTTPNotFound:
-        _esi_fatlinks_error_handling(
-            error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
-        )
+        error_key = FatLink.EsiError.NOT_IN_FLEET
     except Exception:  # pylint: disable=broad-exception-caught
-        _esi_fatlinks_error_handling(
-            error_key=FatLink.EsiError.NO_FLEET, fatlink=fatlink
-        )
+        error_key = FatLink.EsiError.NO_FLEET
 
-    return False
+    _esi_fatlinks_error_handling(error_key=error_key, fatlink=fatlink)
+
+    return None
 
 
-def _process_esi_fatlink(fatlink: FatLink):
+@shared_task()
+def _process_esi_fatlink(fatlink: FatLink) -> None:
     """
     Processing ESI FAT link
 
@@ -251,73 +249,68 @@ def _process_esi_fatlink(fatlink: FatLink):
 
     logger.info(msg=f'Processing ESI FAT link with hash "{fatlink.hash}"')
 
-    if fatlink.creator.profile.main_character is not None:
-        # Check if there is a fleet
-        esi_fleet = _check_for_esi_fleet(fatlink=fatlink)
-
-        # We have a valid fleet result from ESI
-        if esi_fleet and fatlink.esi_fleet_id == esi_fleet["fleet"]["fleet_id"]:
-            # Check if we deal with the fleet boss here
-            try:
-                esi_fleet_member = esi.client.Fleets.get_fleets_fleet_id_members(
-                    fleet_id=esi_fleet["fleet"]["fleet_id"],
-                    token=esi_fleet["token"].valid_access_token(),
-                ).result()
-            except Exception:  # pylint: disable=broad-exception-caught
-                _esi_fatlinks_error_handling(
-                    error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
-                )
-
-            # Process fleet members
-            else:
-                logger.debug(
-                    msg=(
-                        "Processing fleet members for ESI FAT link with "
-                        f'hash "{fatlink.hash}"'
-                    )
-                )
-
-                process_fats.delay(
-                    data_list=esi_fleet_member,
-                    data_source="esi",
-                    fatlink_hash=fatlink.hash,
-                )
-        else:
-            _esi_fatlinks_error_handling(
-                error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
-            )
-    else:
+    if not fatlink.creator.profile.main_character:
         _close_esi_fleet(fatlink=fatlink, reason="No FAT link creator available.")
 
+        return
 
-@shared_task(**{**TASK_DEFAULT_KWARGS, **{"base": QueueOnce}})
+    # Check if there is a fleet
+    esi_fleet = _check_for_esi_fleet(fatlink=fatlink)
+    logger.debug("ESI fleet: %s", esi_fleet)
+
+    if not esi_fleet:
+        return
+
+    # Check if we deal with the fleet boss here
+    try:
+        esi_fleet_member = esi.client.Fleets.get_fleets_fleet_id_members(
+            fleet_id=esi_fleet["fleet"]["fleet_id"],
+            token=esi_fleet["token"].valid_access_token(),
+        ).result()
+    except Exception:  # pylint: disable=broad-exception-caught
+        _esi_fatlinks_error_handling(
+            error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
+        )
+
+        return
+
+    # Process fleet members
+    logger.debug(
+        msg=f'Processing fleet members for ESI FAT link with hash "{fatlink.hash}"'
+    )
+
+    process_fats.delay(
+        data_list=esi_fleet_member,
+        data_source="esi",
+        fatlink_hash=fatlink.hash,
+    )
+
+
+@shared_task(**{**TASK_DEFAULT_KWARGS, "base": QueueOnce})
 def update_esi_fatlinks() -> None:
     """
     Checking ESI fat links for changes
-
-    :return:
-    :rtype:
     """
 
     esi_status = fetch_esi_status()
 
-    # Abort if ESI seems to be offline or above the error limit
+    # Abort if ESI seems offline or above the error limit
     if not esi_status.is_ok:
-        logger.warning(msg="ESI doesn't seem to be available at this time. Aborting.")
+        logger.warning("ESI doesn't seem to be available at this time. Aborting.")
 
         return
 
-    try:
-        esi_fatlinks = FatLink.objects.select_related_default().filter(
-            is_esilink=True, is_registered_on_esi=True
-        )
-    except FatLink.DoesNotExist:
-        pass
+    esi_fatlinks = (
+        FatLink.objects.select_related_default()
+        .filter(is_esilink=True, is_registered_on_esi=True)
+        .distinct()
+    )
 
-    # Work our way through the FAT links
-    else:
-        for fatlink in esi_fatlinks:
-            _process_esi_fatlink(fatlink=fatlink)
+    logger.debug(msg=f"Found {len(esi_fatlinks)} ESI FAT links to process")
+    logger.debug("ESI FAT Links: %s", esi_fatlinks)
+
+    for fatlink in esi_fatlinks:
+        _process_esi_fatlink(fatlink=fatlink)
 
 
 @shared_task
