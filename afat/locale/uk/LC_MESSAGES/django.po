@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-03-13 15:20+0100\n"
-"PO-Revision-Date: 2025-03-08 15:17+0000\n"
+"POT-Creation-Date: 2025-03-23 19:18+0100\n"
+"PO-Revision-Date: 2025-03-23 08:24+0000\n"
 "Last-Translator: M <skrypets@gmail.com>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -82,7 +82,7 @@ msgstr[3] "Деактивовано {notifications_count} тип флоту"
 #: afat/apps.py:20
 #, python-brace-format
 msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
-msgstr ""
+msgstr "AFAT - Another Fleet Activity Tracker v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -331,7 +331,7 @@ msgstr "FAT-посилання персонажа який зареєструв�
 
 #: afat/models.py:312
 msgid "The system the character is in"
-msgstr "Система знаходження персонажа"
+msgstr "Система розташування персонажа"
 
 #: afat/models.py:319
 msgid "The ship the character was flying"
@@ -349,7 +349,7 @@ msgstr ""
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "FATs"
-msgstr ""
+msgstr "FATи"
 
 #: afat/models.py:356
 msgid "FAT link created"
@@ -552,7 +552,7 @@ msgstr "Автор"
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:15
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:31
 msgid "Eve time"
-msgstr "Час за Eve"
+msgstr "Час (EVE)"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:19
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:21
