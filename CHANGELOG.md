@@ -35,6 +35,10 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Use Celery `group` for ESI tasks to improve performance
+
 ## [3.6.1] - 2025-03-13
 
 ### Changed
