@@ -8,15 +8,15 @@
 
         <div class="col-md-6 text-end">
             <p>
-                {% translate "Link created (Eve Time)" %}: {{ link.created|date:"d. F Y H:i" }}
+                {% translate "Link created (EVE Time)" %}: {{ link.created|date:"d. F Y H:i" }}
 
                 {% if link_expires %}
                     <br>
 
                     {% if link_ongoing %}
-                        {% translate "Link expires (Eve Time)" as line_title %}
+                        {% translate "Link expires (EVE Time)" as line_title %}
                     {% else %}
-                        {% translate "Link expired (Eve Time)" as line_title %}
+                        {% translate "Link expired (EVE Time)" as line_title %}
                     {% endif %}
 
                     {{ line_title }}: {{ link_expires|date:"d. F Y H:i" }}
