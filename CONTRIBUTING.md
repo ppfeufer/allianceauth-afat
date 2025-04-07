@@ -25,11 +25,10 @@ ______________________________________________________________________
 
 To develop and test your change, you will need a development environment on your
 local machine. There are different options to choose from. But please make sure
-you can run pre-commit checks and tox tests on your local machine before
-committing.
+you can run pre-commit checks and tox tests on your local machine.
 
 If you are on Windows or Linux, you can use the [AA guide for setting up a dev
-environment][aa dev environment].
+environment][aa guide for setting up a dev environment].
 
 ## Code Formatting and Linting<a name="code-formatting-and-linting"></a>
 
@@ -55,7 +54,7 @@ should follow `'use strict';`.
 
 Indent size: 4 spaces
 
-A linter configuration is declared as `eslint.config.js` in the app's root directory.
+A linter configuration is declared as `.eslintrc.json` in the app's root directory.
 Do not change this file.
 
 To check that your JavaScript code adheres to the rules, run:
@@ -72,7 +71,7 @@ This project uses minified and compressed JavaScript files with source maps crea
 To do so, run:
 
 ```shell
-uglifyjs script.js -o script.min.js --source-map "url='script.min.js.map'" --compress --mangle
+uglifyjs script.js -o script.min.js --source-map "url='script.min.js.map'" --compress reduce_vars=false,templates=false --mangle
 ```
 
 ### CSS<a name="css"></a>
@@ -106,7 +105,7 @@ This repository uses [pre-commit] to verify compliance with formatting / linting
 To use:
 
 - Install `pre-commit` to your system.
-- Run' pre-commit install' inside the app's root directory.
+- Run `pre-commit install` inside the app's root directory.
 - You're all done! Code will be checked automatically using git hooks.
 
 You can check if your code to commit adheres to the given style by simply running:
@@ -123,10 +122,10 @@ pre-commit run --all-files
 
 The following will be checked by `pre-commit` (among others):
 
-- No trailing whitespaces (excluded are minified JS and CSS, .po and .mo files and
+- No trailing whitespaces (excluded are minified JS and CSS, PO and MO files, and
   external libs)
 - One, and only one, empty line at the end of every file (excluded are minified JS
-  and CSS, .po and .mo files and external libs)
+  and CSS, PO and MO files, and external libs)
 - Line ending is LF
 - Python code formatted according to black code style
 - Python code blocks in Markdown files are formatted to black code style
@@ -140,8 +139,8 @@ The following will be checked by `pre-commit` (among others):
 
 ## Branching and Contributing via Pull Requests<a name="branching-and-contributing-via-pull-requests"></a>
 
-To contribute code via pull request, make sure that you fork the repository and
-branch your changes from the `master` branch.
+To contribute code via pull request, make sure you fork the repository and branch your
+changes from the `master` branch.
 
 We strongly recommend creating a new branch for every new feature or change you
 plan to be submitting as merge request. Please make sure to keep the `master` branch of
@@ -158,9 +157,8 @@ that your merge request is ready for review by removing the DRAFT flag again.
 
 ### Tests<a name="tests"></a>
 
-Please update the existing or provide additional unit tests for your changes.
-Note that your merge request might fail if it reduces the current level of test
-coverage.
+Please update existing or provide additional unit tests for your changes. Note that
+your merge request might fail if it reduces the current level of test coverage.
 
 We are using [Python unittest] with the Django `TestCase` class for all tests. In
 addition, we are using some following third party test tools:
@@ -188,7 +186,7 @@ register on my [Weblate] instance and start translating.
 
 <!-- Links -->
 
-[aa dev environment]: https://allianceauth.readthedocs.io/en/latest/development/dev_setup/aa-dev-setup-wsl-vsc-v2.html "AA Guide for Setting up a Dev Environment"
+[aa guide for setting up a dev environment]: https://allianceauth.readthedocs.io/en/latest/development/dev_setup/aa-dev-setup-wsl-vsc-v2.html "AA Guide for Setting up a Dev Environment"
 [black code style]: https://black.readthedocs.io/en/latest/l "Black Code Style"
 [coverage]: https://coverage.readthedocs.io/en/latest/ "coverage"
 [csso]: https://github.com/css/csso "CSSO (CSS Optimizer)"
