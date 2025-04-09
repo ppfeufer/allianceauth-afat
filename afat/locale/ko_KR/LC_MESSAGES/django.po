@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-03-23 19:18+0100\n"
+"POT-Creation-Date: 2025-04-09 12:11+0200\n"
 "PO-Revision-Date: 2024-12-12 00:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ko/>\n"
@@ -543,7 +543,9 @@ msgstr "생성자"
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:42
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:15
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:31
-msgid "Eve time"
+#, fuzzy
+#| msgid "Eve time"
+msgid "EVE time"
 msgstr "이브 표준시간"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:19
@@ -615,15 +617,15 @@ msgid "Add ESI link"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:11
-msgid "Link created (Eve Time)"
+msgid "Link created (EVE Time)"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:17
-msgid "Link expires (Eve Time)"
+msgid "Link expires (EVE Time)"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:19
-msgid "Link expired (Eve Time)"
+msgid "Link expired (EVE Time)"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:29
