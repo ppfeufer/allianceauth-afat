@@ -3,7 +3,7 @@ The models
 """
 
 # Standard Library
-from typing import Any
+from typing import Any, ClassVar
 
 # Third Party
 from solo.models import SingletonModel
@@ -217,7 +217,7 @@ class FatLink(models.Model):
 
     esi_error_count = models.IntegerField(default=0)
 
-    objects = FatLinkManager()
+    objects: ClassVar[FatLinkManager] = FatLinkManager()
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
@@ -319,7 +319,7 @@ class Fat(models.Model):
         help_text=_("The ship the character was flying"),
     )
 
-    objects = FatManager()
+    objects: ClassVar[FatManager] = FatManager()
 
     class Meta:  # pylint: disable=too-few-public-methods
         """
