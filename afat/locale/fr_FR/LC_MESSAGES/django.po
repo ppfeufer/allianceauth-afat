@@ -8,16 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-03-23 19:18+0100\n"
-"PO-Revision-Date: 2025-01-21 10:17+0000\n"
-"Last-Translator: balbozorre <loic.petiot2002@gmail.com>\n"
+"POT-Creation-Date: 2025-04-09 12:11+0200\n"
+"PO-Revision-Date: 2025-03-25 14:24+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -545,8 +545,8 @@ msgstr "Créateur"
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:42
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:15
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:31
-msgid "Eve time"
-msgstr "Heure d'Eve"
+msgid "EVE time"
+msgstr "Heure d'EVE"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:19
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:21
@@ -617,15 +617,15 @@ msgid "Add ESI link"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:11
-msgid "Link created (Eve Time)"
+msgid "Link created (EVE Time)"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:17
-msgid "Link expires (Eve Time)"
+msgid "Link expires (EVE Time)"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:19
-msgid "Link expired (Eve Time)"
+msgid "Link expired (EVE Time)"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:29
