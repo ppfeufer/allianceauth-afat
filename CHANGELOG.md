@@ -51,7 +51,7 @@ Section Order:
 > command to migrate the characters historic association data:
 >
 > ```shell
-> python manage.py afat_migrate_character_association
+> python manage.py afat_fix_affiliation_in_statistics
 > ```
 >
 > Depending on how many FAT links you have in total, this may take a while.
