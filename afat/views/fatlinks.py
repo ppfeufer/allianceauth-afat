@@ -624,7 +624,12 @@ def add_fat(
 
         try:
             Fat(
-                fatlink=fleet, character=character, system=system, shiptype=ship_name
+                fatlink=fleet,
+                character=character,
+                system=system,
+                shiptype=ship_name,
+                corporation_eve_id=character.corporation_id,
+                alliance_eve_id=character.alliance_id,
             ).save()
         except IntegrityError:
             messages.warning(

@@ -301,6 +301,20 @@ class Fat(models.Model):
         help_text=_("Character who registered this FAT"),
     )
 
+    corporation_eve_id = models.BigIntegerField(
+        null=True,
+        help_text=_(
+            "Corporation EVE ID of the character who registered this FAT at the time of registration"
+        ),
+    )
+
+    alliance_eve_id = models.BigIntegerField(
+        null=True,
+        help_text=_(
+            "Alliance EVE ID of the character who registered this FAT at the time of registration"
+        ),
+    )
+
     fatlink = models.ForeignKey(
         to=FatLink,
         related_name="afat_fats",
