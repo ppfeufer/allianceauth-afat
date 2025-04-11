@@ -11,7 +11,7 @@
                         data-character-id="{{ main.id }}"
                         data-year="{{ year }}"
                         data-month="{{ month }}"
-                        data-url="{% url 'afat:statistics_ajax_get_monthly_fats_for_main_character' main.id year month %}"
+                        data-url="{% url 'afat:statistics_ajax_get_monthly_fats_for_main_character' corp.corporation_id main.id year month %}"
                     >
                         <i class="fa-solid fa-eye"></i>
                     </button>

@@ -82,7 +82,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         sanity_check = {}
 
         # Group corporations by alliance
-        for character_with_access in characters_with_access:
+        for character_with_access in list(characters_with_access):
             alliance_name = character_with_access.alliance_name or "No Alliance"
             corp_id = character_with_access.corporation_id
             corp_name = character_with_access.corporation_name
@@ -329,6 +329,7 @@ def character(  # pylint: disable=too-many-locals
 )
 def ajax_get_monthly_fats_for_main_character(
     request: WSGIRequest,
+    corporation_id: int,
     character_id: int,
     year: int,
     month: int,
@@ -361,7 +362,7 @@ def ajax_get_monthly_fats_for_main_character(
 
     fats_per_character = (
         Fat.objects.filter(
-            character__corporation_id=main_character.corporation_id,
+            corporation_eve_id=corporation_id,
             character__character_ownership__user=main_character.character_ownership.user,
             fatlink__created__month=month,
             fatlink__created__year=year,
@@ -445,7 +446,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     if not month:
         fats_per_year = (
             Fat.objects.filter(
-                character__corporation_id=corpid,
+                corporation_eve_id=corpid,
                 fatlink__created__year=year,
             )
             .values("fatlink__created__month")
@@ -494,14 +495,14 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     fats = Fat.objects.filter(
         fatlink__created__month=month,
         fatlink__created__year=year,
-        character__corporation_id=corpid,
+        corporation_eve_id=corpid,
     ).select_related("character")
 
     # Data for Stacked Bar Graph
     # (label, color, [list of data for stack])
     data = {}
 
-    for fat in fats:
+    for fat in list(fats):
         if fat.shiptype not in data:
             data[fat.shiptype] = {}
 
@@ -549,7 +550,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     )
     character_fat_counts = fats.values("character_id").annotate(fat_count=Count("id"))
     character_fat_map = {
-        item["character_id"]: item["fat_count"] for item in character_fat_counts
+        item["character_id"]: item["fat_count"] for item in list(character_fat_counts)
     }
 
     for char in characters:
@@ -639,7 +640,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
         ally_fats_by_month = (
             Fat.objects.filter(
-                character__alliance_id=allianceid,
+                alliance_eve_id=allianceid,
                 fatlink__created__year=year,
             )
             .order_by("fatlink__created__month")
@@ -679,7 +680,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
         return redirect(to="afat:dashboard")
 
     fats = Fat.objects.filter(
-        character__alliance_id=allianceid,
+        alliance_eve_id=allianceid,
         fatlink__created__month=month,
         fatlink__created__year=year,
     )
@@ -689,8 +690,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     colors = [get_random_rgba_color() for _ in data_ship_type]
 
     data_ship_type = [
-        [str(item["shiptype"]) for item in data_ship_type],
-        [item["count"] for item in data_ship_type],
+        [str(item["shiptype"]) for item in list(data_ship_type)],
+        [item["count"] for item in list(data_ship_type)],
         colors,
     ]
 
@@ -740,7 +741,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     corps = {}
 
     for corp in corporations_in_alliance:
-        c_fats = fats.filter(character__corporation_id=corp.corporation_id).count()
+        c_fats = fats.filter(corporation_eve_id=corp.corporation_id).count()
         avg = c_fats / corp.member_count
         corps[corp] = (corp.corporation_id, c_fats, round(avg, 2))
 

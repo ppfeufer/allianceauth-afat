@@ -11,11 +11,12 @@ from datetime import datetime
 from django.contrib.auth.models import Permission, User
 from django.core.handlers.wsgi import WSGIRequest
 from django.db import models
+from django.db.models import QuerySet
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
 # Alliance Auth
-from allianceauth.eveonline.models import EveCharacter
+from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
 
 # Alliance Auth (External Libs)
 from app_utils.django import users_with_permission
@@ -367,7 +368,9 @@ def get_fat_per_weekday(fats) -> list:
     ]
 
 
-def get_average_fats_by_corporations(fats, corporations) -> list:
+def get_average_fats_by_corporations(
+    fats: QuerySet[Fat], corporations: QuerySet[EveCorporationInfo]
+) -> list:
     """
     Get the average FATs per corporation
 
@@ -381,7 +384,7 @@ def get_average_fats_by_corporations(fats, corporations) -> list:
 
     data_avgs = {
         corp.corporation_name: round(
-            fats.filter(character__corporation_id=corp.corporation_id).count()
+            fats.filter(corporation_eve_id=corp.corporation_id).count()
             / corp.member_count,
             2,
         )
