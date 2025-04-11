@@ -40,7 +40,7 @@ urls = [
     ),
     # Ajax calls :: Statistics
     path(
-        route="statistics/get-monthly-fats-for-main-character/<int:character_id>/<int:year>/<int:month>/",
+        route="statistics/get-monthly-fats-for-main-character/<int:corporation_id>/<int:character_id>/<int:year>/<int:month>/",
         view=statistics.ajax_get_monthly_fats_for_main_character,
         name="statistics_ajax_get_monthly_fats_for_main_character",
     ),

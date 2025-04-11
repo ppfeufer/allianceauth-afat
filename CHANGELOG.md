@@ -35,8 +35,11 @@ Section Order:
 ### Security
 -->
 
+## [3.8.0-beta.1] - 2025-04-11
+
 ### Fixed
 
+- Statistics for alts in a different corp
 - Historic data in statistics. Up until now, corporation and alliance statistics were
   calculated with the characters' current association. This has been changed to use the
   character association at the time of the FAT link creation, to ensure that the

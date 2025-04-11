@@ -329,6 +329,7 @@ def character(  # pylint: disable=too-many-locals
 )
 def ajax_get_monthly_fats_for_main_character(
     request: WSGIRequest,
+    corporation_id: int,
     character_id: int,
     year: int,
     month: int,
@@ -361,7 +362,7 @@ def ajax_get_monthly_fats_for_main_character(
 
     fats_per_character = (
         Fat.objects.filter(
-            corporation_eve_id=main_character.corporation_id,
+            corporation_eve_id=corporation_id,
             character__character_ownership__user=main_character.character_ownership.user,
             fatlink__created__month=month,
             fatlink__created__year=year,
