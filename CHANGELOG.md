@@ -35,9 +35,27 @@ Section Order:
 ### Security
 -->
 
-## [3.7.2] - 2025-04-15
-
 ### Change
+
+- Historic data in statistics. Up until now, corporation and alliance statistics were
+  calculated with the characters' current association. This has been changed to use the
+  character association at the time of the FAT link creation, to ensure that the
+  statistics are correct and not changing over time. \
+  Meaning, if a character left your corp this month, your corp lost the statistics
+  for this character entirely.
+
+> [!IMPORTANT]
+>
+> After you updated to this version and ran migrations, you need to run the following
+> command to migrate the characters historic association data:
+>
+> ```shell
+> python manage.py afat_migrate_character_association
+> ```
+>
+> Depending on how many FAT links you have in total, this may take a while.
+
+### Changed
 
 - Use Bootstrap `text-bg-*` classes to make use of Bootstrap's native text-color selection
 

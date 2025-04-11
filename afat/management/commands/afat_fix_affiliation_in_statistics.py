@@ -28,6 +28,42 @@ class Command(BaseCommand):
     Fix affiliation in statistics
     """
 
+    def _get_character_corp_history(self, character_id: int) -> list:
+        """
+        Get character corporation history
+
+        :param character_id:
+        :type character_id:
+        :return:
+        :rtype:
+        """
+
+        self.stdout.write(
+            msg=f"Querying ESI for corporation history for character with ID {character_id} …"
+        )
+
+        return esi.client.Character.get_characters_character_id_corporationhistory(
+            character_id=character_id
+        ).results()
+
+    def _get_corporation_alliance_history(self, corporation_id: int) -> list:
+        """
+        Get corporation alliance history
+
+        :param corporation_id:
+        :type corporation_id:
+        :return:
+        :rtype:
+        """
+
+        self.stdout.write(
+            msg=f"Querying ESI for alliance history for corporation with ID {corporation_id} …"
+        )
+
+        return esi.client.Corporation.get_corporations_corporation_id_alliancehistory(
+            corporation_id=corporation_id
+        ).results()
+
     def _fix_affiliation_in_statistics(self) -> None:
         """
         Fix affiliation in statistics
@@ -36,38 +72,45 @@ class Command(BaseCommand):
         :rtype:
         """
 
-        all_fats = Fat.objects.all()
-        # all_fats = Fat.objects.filter(pk=12)
+        all_fats = Fat.objects.all().order_by("character_id")
+        fats_totlal = all_fats.count()
 
         cache_character_corp_history = {}
         cache_corp_alliance_history = {}
         update_rows = []
 
         # Fix affiliation in statistics
-        for fat in all_fats:
-            corp_history = cache_character_corp_history.setdefault(
-                fat.character.corporation_id,
-                esi.client.Character.get_characters_character_id_corporationhistory(
-                    character_id=fat.character.character_id
-                ).results(),
+        for loop_count, fat in enumerate(all_fats):
+            self.stdout.write(
+                msg=f"Migrating affiliation data for FAT ID {fat.pk} ({loop_count + 1}/{fats_totlal}) …"
             )
 
-            for corp_entry in corp_history:
+            if fat.character.character_id not in cache_character_corp_history:
+                corp_history = self._get_character_corp_history(
+                    character_id=fat.character.character_id
+                )
+
+                cache_character_corp_history[fat.character.character_id] = corp_history
+
+            # print("cache_character_corp_history", cache_character_corp_history)
+
+            for corp_entry in cache_character_corp_history[fat.character.character_id]:
                 if fat.fatlink.created <= corp_entry["start_date"]:
                     continue
 
                 affiliation_corp_id = corp_entry["corporation_id"]
-                alliance_history = cache_corp_alliance_history.setdefault(
-                    affiliation_corp_id,
-                    esi.client.Corporation.get_corporations_corporation_id_alliancehistory(
+
+                if affiliation_corp_id not in cache_corp_alliance_history:
+                    alliance_history = self._get_corporation_alliance_history(
                         corporation_id=affiliation_corp_id
-                    ).results(),
-                )
+                    )
+
+                    cache_corp_alliance_history[affiliation_corp_id] = alliance_history
 
                 affiliation_alliance_id = next(
                     (
                         entry["alliance_id"]
-                        for entry in alliance_history
+                        for entry in cache_corp_alliance_history[affiliation_corp_id]
                         if entry.get("alliance_id")
                         and fat.fatlink.created > entry["start_date"]
                     ),
@@ -97,7 +140,7 @@ class Command(BaseCommand):
             batch_size=500,
         )
 
-        self.stdout.write(msg=self.style.SUCCESS("Merge complete!"))
+        self.stdout.write(msg=self.style.SUCCESS("Migration complete!"))
 
     def handle(self, *args, **options):  # pylint: disable=unused-argument
         """
