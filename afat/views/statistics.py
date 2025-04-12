@@ -201,6 +201,10 @@ def character(  # pylint: disable=too-many-locals
     :rtype:
     """
 
+    # Default to current year and month if not provided
+    year = year or datetime.now().year
+    month = month or datetime.now().month
+
     current_month, current_year = current_month_and_year()
     eve_character = EveCharacter.objects.get(character_id=charid)
     valid = [
@@ -239,16 +243,6 @@ def character(  # pylint: disable=too-many-locals
                     "<p>You do not have permission to view "
                     "statistics for this character.</p>"
                 )
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
-
-    if not month or not year:
-        messages.error(
-            request=request,
-            message=mark_safe(
-                s=gettext("<h4>Warning!</h4><p>Date information not complete!</p>")
             ),
         )
 
@@ -415,8 +409,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     :rtype:
     """
 
-    if not year:
-        year = datetime.now().year
+    # Default to current year if not provided
+    year = year or datetime.now().year
 
     current_month, current_year = current_month_and_year()
 
@@ -624,6 +618,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     :rtype:
     """
 
+    # Default to current year if not provided
     year = year or datetime.now().year
 
     ally = (
