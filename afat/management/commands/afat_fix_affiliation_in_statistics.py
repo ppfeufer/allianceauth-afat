@@ -73,7 +73,7 @@ class Command(BaseCommand):
         """
 
         all_fats = Fat.objects.all().order_by("character_id")
-        fats_totlal = all_fats.count()
+        fats_total = all_fats.count()
 
         cache_character_corp_history = {}
         cache_corp_alliance_history = {}
@@ -82,7 +82,7 @@ class Command(BaseCommand):
         # Fix affiliation in statistics
         for loop_count, fat in enumerate(all_fats):
             self.stdout.write(
-                msg=f"Migrating affiliation data for FAT ID {fat.pk} ({loop_count + 1}/{fats_totlal}) …"
+                msg=f"Migrating affiliation data for FAT ID {fat.pk} ({loop_count + 1}/{fats_total}) …"
             )
 
             if fat.character.character_id not in cache_character_corp_history:
