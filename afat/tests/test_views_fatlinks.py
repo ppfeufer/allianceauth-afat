@@ -5,6 +5,7 @@ Test fatlinks views
 # Standard Library
 import datetime as dt
 from http import HTTPStatus
+from unittest.mock import ANY, MagicMock, patch
 
 # Third Party
 from pytz import utc
@@ -13,6 +14,7 @@ from pytz import utc
 from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -21,7 +23,7 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
-from afat.models import Duration, Fat, FatLink, get_hash_on_save
+from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user
 
@@ -352,3 +354,275 @@ class TestFatlinksView(TestCase):
                 }
             ],
         )
+
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    @patch("afat.views.fatlinks.Setting.get_setting")
+    @patch("afat.views.fatlinks.write_log")
+    def test_reopens_fatlink_successfully(
+        self, mock_write_log, mock_get_setting, mock_duration_get
+    ):
+        mock_duration = MagicMock()
+        mock_duration.fleet.reopened = False
+        mock_duration.fleet.created = datetime(2023, 1, 1, 12, 0, 0)
+        mock_duration.fleet.hash = "test_hash"
+        mock_get_setting.return_value = 60
+        mock_duration_get.return_value = mock_duration
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_reopen_fatlink", args=["test_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            response,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": "test_hash"}
+            ),
+            target_status_code=HTTPStatus.FOUND,
+        )
+        mock_duration.save.assert_called_once()
+        mock_write_log.assert_called_once()
+
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    def test_shows_error_when_fatlink_does_not_exist(self, mock_duration_get):
+        mock_duration_get.side_effect = Duration.DoesNotExist
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_reopen_fatlink", args=["invalid_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:dashboard"))
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any(
+                "The hash you provided does not match with any FAT link." in str(m)
+                for m in messages
+            )
+        )
+
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    def test_shows_warning_when_fatlink_already_reopened(self, mock_duration_get):
+        mock_duration = MagicMock()
+        mock_duration.fleet.reopened = True
+        mock_duration_get.return_value = mock_duration
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.post(
+            reverse("afat:fatlinks_reopen_fatlink", args=["test_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            response,
+            reverse(
+                "afat:fatlinks_details_fatlink",
+                kwargs={"fatlink_hash": "test_hash"},
+            ),
+            target_status_code=HTTPStatus.FOUND,
+        )
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any("This FAT link has already been re-opened." in str(m) for m in messages)
+        )
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    def test_closes_esi_fatlink_successfully(self, mock_get_fatlink):
+        mock_fatlink = MagicMock()
+        mock_get_fatlink.return_value = mock_fatlink
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_close_esi_fatlink", args=["test_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:dashboard"))
+        mock_fatlink.save.assert_called_once()
+        self.assertFalse(mock_fatlink.is_registered_on_esi)
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    def test_handles_nonexistent_fatlink_gracefully(self, mock_get_fatlink):
+        mock_get_fatlink.side_effect = FatLink.DoesNotExist
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_close_esi_fatlink", args=["nonexistent_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    @patch("afat.views.fatlinks.Fat.objects.get")
+    @patch("afat.views.fatlinks.write_log")
+    def test_deletes_fat_successfully(
+        self, mock_write_log, mock_get_fat, mock_get_fatlink
+    ):
+        mock_fatlink = MagicMock(hash="test_hash")
+        mock_fat = MagicMock(character=MagicMock(character_name="Test Character"))
+        mock_get_fatlink.return_value = mock_fatlink
+        mock_get_fat.return_value = mock_fat
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_delete_fat", args=["test_hash", 1])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            response,
+            reverse("afat:fatlinks_details_fatlink", args=["test_hash"]),
+            target_status_code=HTTPStatus.FOUND,
+        )
+        mock_fat.delete.assert_called_once()
+        mock_write_log.assert_called_once_with(
+            request=ANY,
+            log_event=Log.Event.DELETE_FAT,
+            log_text="The FAT for Test Character has been deleted",
+            fatlink_hash="test_hash",
+        )
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    def test_handles_delete_fat_with_nonexistent_fatlink_gracefully(
+        self, mock_get_fatlink
+    ):
+        mock_get_fatlink.side_effect = FatLink.DoesNotExist
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_delete_fat", args=["invalid_hash", 1])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    @patch("afat.views.fatlinks.Fat.objects.get")
+    def test_handles_nonexistent_fat_gracefully(self, mock_get_fat, mock_get_fatlink):
+        mock_fatlink = MagicMock(hash="test_hash")
+        mock_get_fatlink.return_value = mock_fatlink
+        mock_get_fat.side_effect = Fat.DoesNotExist
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_delete_fat", args=["test_hash", 999])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    @patch("afat.views.fatlinks.Fat.objects.filter")
+    @patch("afat.views.fatlinks.write_log")
+    def test_deletes_fatlink_and_associated_fats_successfully(
+        self, mock_write_log, mock_fat_filter, mock_fatlink_get
+    ):
+        mock_fatlink = MagicMock(hash="test_hash", pk=1)
+        mock_fat_filter.return_value = MagicMock(delete=MagicMock())
+        mock_fatlink_get.return_value = mock_fatlink
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_delete_fatlink", args=["test_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:fatlinks_overview"))
+        mock_fat_filter.assert_called_once_with(fatlink_id=mock_fatlink.pk)
+        mock_fat_filter.return_value.delete.assert_called_once()
+        mock_fatlink.delete.assert_called_once()
+        mock_write_log.assert_called_once_with(
+            ANY,  # Allow any request object
+            log_event=Log.Event.DELETE_FATLINK,
+            log_text="FAT link deleted.",
+            fatlink_hash="test_hash",
+        )
+
+    @patch("afat.views.fatlinks.FatLink.objects.get")
+    def test_handles_delete_fatlink_with_nonexistent_fatlink_gracefully(
+        self, mock_fatlink_get
+    ):
+        mock_fatlink_get.side_effect = FatLink.DoesNotExist
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_delete_fatlink", args=["invalid_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(response, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.Fat.objects.select_related_default")
+    @patch("afat.views.fatlinks.convert_fats_to_dict")
+    def test_returns_fats_for_valid_fatlink_hash(
+        self, mock_convert_fats_to_dict, mock_select_related_default
+    ):
+        # Create a mock Fat object with realistic attributes
+        class MockFat:
+            id = 1
+            shiptype = "Omen"
+            system = "Jita"
+
+            class Character:
+                character_name = "Test Character"
+
+            character = Character()
+
+            class FatLink:
+                is_esilink = True
+                is_registered_on_esi = True
+                hash = "test_hash"
+                created = dt.datetime(2020, 4, 1, tzinfo=utc)
+                fleet = "Test Fleet"
+                doctrine = "Test Doctrine"
+                fleet_type = "Test Fleet Type"
+
+            fatlink = FatLink()
+
+        mock_fat = MockFat()
+
+        # Mock the queryset returned by select_related_default
+        mock_queryset = MagicMock()
+        mock_queryset.filter.return_value = [mock_fat]
+        mock_select_related_default.return_value = mock_queryset
+
+        # Mock the convert_fats_to_dict function to return a JSON-serializable dictionary
+        mock_convert_fats_to_dict.return_value = {
+            "id": mock_fat.id,
+            "character": mock_fat.character.character_name,
+            "shiptype": mock_fat.shiptype,
+        }
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_ajax_get_fats_by_fatlink", args=["1231"])
+        )
+
+        # Assertions
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        mock_select_related_default.return_value.filter.assert_called_once_with(
+            fatlink__hash="1231"
+        )
+        mock_convert_fats_to_dict.assert_called_once_with(request=ANY, fat=mock_fat)
+        self.assertEqual(
+            response.json(),
+            [{"id": 1, "character": "Test Character", "shiptype": "Omen"}],
+        )
+
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
+    def test_redirects_to_dashboard_when_invalid_hash_provided(
+        self, mock_select_related_default, mock_duration_get
+    ):
+        mock_select_related_default.return_value.get.side_effect = FatLink.DoesNotExist
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(
+            reverse("afat:fatlinks_details_fatlink", args=["invalid_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:dashboard"))
