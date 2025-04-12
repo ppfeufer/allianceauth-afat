@@ -570,23 +570,8 @@ class TestStatistics(TestCase):
         )
         res = self.client.get(path=url)
 
-        # expected_result = json.dumps(
-        #     [
-        #         {
-        #             "character_id": 1002,
-        #             "character_name": "Clark Kent",
-        #             "fat_count": 2,
-        #             "show_details_button": f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[self.user_with_basic_access.profile.main_character.character_id, 2020, 4])}"><i class="fa-solid fa-eye"></i></a>',
-        #         }
-        #     ]
-        # )
-
         # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
-        # self.assertEqual(
-        #     first=response_content_to_str(response=res),
-        #     second=expected_result,
-        # )
 
     def test_should_show_main_details_for_user_with_corporation_other_perms(self):
         """
@@ -611,25 +596,8 @@ class TestStatistics(TestCase):
         )
         res = self.client.get(path=url)
 
-        # print(response_content_to_str(response=res))
-
-        # expected_result = json.dumps(
-        #     [
-        #         {
-        #             "character_id": 1002,
-        #             "character_name": "Clark Kent",
-        #             "fat_count": 2,
-        #             "show_details_button": f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[self.user_with_basic_access.profile.main_character.character_id, 2020, 4])}"><i class="fa-solid fa-eye"></i></a>',
-        #         }
-        #     ]
-        # )
-
         # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
-        # self.assertEqual(
-        #     first=response_content_to_str(response=res),
-        #     second=expected_result,
-        # )
 
     def test_should_not_show_main_details_for_user_without_perms(self):
         """

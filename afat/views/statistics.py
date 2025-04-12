@@ -669,16 +669,6 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
             context=context,
         )
 
-    if not month or not year:
-        messages.error(
-            request=request,
-            message=mark_safe(
-                s=gettext("<h4>Error!</h4><p>Date information incomplete.</p>")
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
-
     fats = Fat.objects.filter(
         alliance_eve_id=allianceid,
         fatlink__created__month=month,
