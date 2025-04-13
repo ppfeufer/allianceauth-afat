@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## [3.8.0-beta.1] - 2025-04-11
+
 ### Fixed
 
 - Statistics for alts in a different corp
