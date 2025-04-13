@@ -35,6 +35,26 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Renamed the management command from `afat_fix_affiliation_in_statistics` to `afat_migrate_affiliation_history` to better reflect what it does
+- Some defaults in the statistics code
+
+### Removed
+
+- Unnecessary checks in alliance statistics
+
+> [!IMPORTANT]
+>
+> After you updated to this version and ran migrations, you need to run the following
+> command to migrate the characters historic association data:
+>
+> ```shell
+> python manage.py afat_migrate_affiliation_history
+> ```
+>
+> Depending on how many FAT links you have in total, this may take a while.
+
 ## [3.8.0-beta.1] - 2025-04-11
 
 ### Fixed
