@@ -15,11 +15,17 @@ https://docs.github.com/assets/cb-41128/mw-1440/images/help/writing/alerts-rende
 > [!NOTE]
 > Highlights information that users should take into account, even when skimming.
 
+> [!TIP]
+> Optional information to help a user be more successful.
+
 > [!IMPORTANT]
 > Crucial information necessary for users to succeed.
 
 > [!WARNING]
-> Critical content demanding immediate user attention due to potential risks.
+> Urgent info that needs immediate user attention to avoid problems.
+
+> [!CAUTION]
+> Advised about risks or negative outcomes of certain actions.
 -->
 
 ## [In Development] - Unreleased
@@ -35,8 +41,18 @@ Section Order:
 ### Security
 -->
 
+## [3.8.0-beta.2] - 2025-04-13
+
+> [!NOTE]
+>
+> **This is a pre-release.** \
+> Do not run this version in production yet if you don't know how to debug a
+> potentially broken installation, as this version is not yet fully tested and may
+> break.
+
 ### Changed
 
+- Some minor code improvements
 - Renamed the management command from `afat_fix_affiliation_in_statistics` to `afat_migrate_affiliation_history` to better reflect what it does
 - Some defaults in the statistics code
 
@@ -55,7 +71,24 @@ Section Order:
 >
 > Depending on how many FAT links you have in total, this may take a while.
 
+### Reverting the Release to Stable
+
+In case something goes wrong, and you need to revert back to the latest stable version, run the following commands in your venv:
+
+```shell
+python manage.py migrate afat 0024
+pip install allianceauth-afat==3.7.1
+python manage.py collectstatic
+```
+
 ## [3.8.0-beta.1] - 2025-04-11
+
+> [!NOTE]
+>
+> **This is a pre-release.** \
+> Do not run this version in production yet if you don't know how to debug a
+> potentially broken installation, as this version is not yet fully tested and may
+> break.
 
 ### Fixed
 
@@ -77,6 +110,16 @@ Section Order:
 > ```
 >
 > Depending on how many FAT links you have in total, this may take a while.
+
+### Reverting the Release to Stable
+
+In case something goes wrong, and you need to revert back to the latest stable version, run the following commands in your venv:
+
+```shell
+python manage.py migrate afat 0024
+pip install allianceauth-afat==3.7.1
+python manage.py collectstatic
+```
 
 ## [3.7.1] - 2025-04-09
 

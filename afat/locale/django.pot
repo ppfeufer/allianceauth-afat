@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.8.0-beta.1\n"
+"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.8.0-beta.2\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-04-11 22:43+0200\n"
+"POT-Creation-Date: 2025-04-13 10:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1242,7 +1242,7 @@ msgid ""
 "FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:536 afat/views/fatlinks.py:942
+#: afat/views/fatlinks.py:536
 msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
 msgstr ""
 
@@ -1312,67 +1312,59 @@ msgstr ""
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:955
+#: afat/views/fatlinks.py:943
 msgid ""
 "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT "
 "link has already been deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:980
+#: afat/views/fatlinks.py:969
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs "
 "have been successfully deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1024
+#: afat/views/fatlinks.py:1011
 msgid ""
 "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</"
 "p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1038
+#: afat/views/fatlinks.py:1022
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1058
+#: afat/views/fatlinks.py:1042
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT for {character_name} has been successfully "
 "deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1134
+#: afat/views/fatlinks.py:1116
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1182
+#: afat/views/fatlinks.py:1161
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1192
+#: afat/views/fatlinks.py:1171
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:238
+#: afat/views/statistics.py:242
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:251
-msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
-msgstr ""
-
-#: afat/views/statistics.py:434
+#: afat/views/statistics.py:428
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
-msgstr ""
-
-#: afat/views/statistics.py:676
-msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
 msgstr ""
