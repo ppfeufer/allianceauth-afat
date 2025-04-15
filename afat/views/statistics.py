@@ -5,7 +5,6 @@ Statistics related views
 # Standard Library
 import calendar
 from collections import OrderedDict, defaultdict
-from datetime import datetime
 
 # Django
 from django.contrib import messages
@@ -16,6 +15,7 @@ from django.db.models import Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext
 

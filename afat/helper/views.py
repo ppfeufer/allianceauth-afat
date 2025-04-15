@@ -5,7 +5,6 @@ Views helper
 # Standard Library
 import random
 from collections import OrderedDict
-from datetime import datetime
 
 # Django
 from django.contrib.auth.models import Permission, User
@@ -13,6 +12,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.db import models
 from django.db.models import QuerySet
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 from django.utils.translation import gettext as _
 
 # Alliance Auth

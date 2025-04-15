@@ -1,7 +1,5 @@
-# Standard Library
-import datetime as dt
-
 # import json
+# Standard Library
 from http import HTTPStatus
 
 # Third Party
@@ -10,6 +8,7 @@ from pytz import utc
 # Django
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -78,21 +77,21 @@ class TestStatistics(TestCase):
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
         afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
         afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
         Fat.objects.create(

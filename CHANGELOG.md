@@ -83,7 +83,7 @@ In case something goes wrong, and you need to revert back to the latest stable v
 
 ```shell
 python manage.py migrate afat 0024
-pip install allianceauth-afat==3.7.1
+pip install allianceauth-afat==3.7.2
 python manage.py collectstatic
 ```
 
@@ -123,7 +123,7 @@ In case something goes wrong, and you need to revert back to the latest stable v
 
 ```shell
 python manage.py migrate afat 0024
-pip install allianceauth-afat==3.7.1
+pip install allianceauth-afat==3.7.2
 python manage.py collectstatic
 ```
 

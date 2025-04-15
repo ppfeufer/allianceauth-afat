@@ -3,7 +3,6 @@ Test fatlinks views
 """
 
 # Standard Library
-import datetime as dt
 from http import HTTPStatus
 from unittest.mock import ANY, MagicMock, patch
 
@@ -69,28 +68,28 @@ class TestFatlinksView(TestCase):
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
         cls.afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
         cls.afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
         cls.afat_link_september_no_fats = FatLink.objects.create(
             fleet="September Fleet 2",
             hash="1234",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
         Fat.objects.create(
@@ -575,7 +574,7 @@ class TestFatlinksView(TestCase):
                 is_esilink = True
                 is_registered_on_esi = True
                 hash = "test_hash"
-                created = dt.datetime(2020, 4, 1, tzinfo=utc)
+                created = datetime(2020, 4, 1, tzinfo=utc)
                 fleet = "Test Fleet"
                 doctrine = "Test Doctrine"
                 fleet_type = "Test Fleet Type"

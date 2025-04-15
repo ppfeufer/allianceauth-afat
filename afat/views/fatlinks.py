@@ -3,7 +3,7 @@ Fat links related views
 """
 
 # Standard Library
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 # Django
 from django.contrib import messages
@@ -14,6 +14,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.datetime_safe import datetime
 from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _

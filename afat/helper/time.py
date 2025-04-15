@@ -2,10 +2,8 @@
 Helper for time related functions
 """
 
-# Standard Library
-from datetime import datetime
-
 # Django
+from django.utils.datetime_safe import datetime
 from django.utils.translation import gettext as _
 
 
