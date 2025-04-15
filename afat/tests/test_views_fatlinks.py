@@ -295,7 +295,7 @@ class TestFatlinksView(TestCase):
         creator_main_character = get_main_character_from_user(user=fatlink.creator)
         fleet_time = fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
-        esi_marker = '<span class="badge bg-success afat-label ms-2">ESI</span>'
+        esi_marker = '<span class="badge text-bg-success afat-label ms-2">ESI</span>'
 
         close_esi_tracking_url = reverse(
             viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink_hash]
