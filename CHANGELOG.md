@@ -41,6 +41,40 @@ Section Order:
 ### Security
 -->
 
+## [3.8.0-beta.4] - 2025-04-15
+
+> [!NOTE]
+>
+> **This is a pre-release.** \
+> Do not run this version in production yet if you don't know how to debug a
+> potentially broken installation, as this version is not yet fully tested and may
+> break.
+
+### Added
+
+- Alt information in mains' corp statistics member details
+
+> [!IMPORTANT]
+>
+> After you updated to this version and ran migrations, you need to run the following
+> command to migrate the characters historic association data:
+>
+> ```shell
+> python manage.py afat_migrate_affiliation_history
+> ```
+>
+> Depending on how many FAT links you have in total, this may take a while.
+
+### Reverting the Release to Stable
+
+In case something goes wrong, and you need to revert back to the latest stable version, run the following commands in your venv:
+
+```shell
+python manage.py migrate afat 0024
+pip install 'allianceauth-afat<3.8.0'
+python manage.py collectstatic
+```
+
 ## [3.8.0-beta.3] - 2025-04-15
 
 > [!NOTE]
