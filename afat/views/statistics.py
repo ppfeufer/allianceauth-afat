@@ -495,6 +495,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     # Data for Stacked Bar Graph
     # (label, color, [list of data for stack])
     data = defaultdict(lambda: defaultdict(int))
+    character_ids = set()
 
     character_names_list = sorted(
         {fat.character.character_name for fat in fats}, key=str.lower
@@ -502,6 +503,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     for fat in fats:
         data[fat.shiptype][fat.character.character_name] += 1
+        character_ids.add(fat.character.character_id)
 
     data_stacked = [
         character_names_list,
@@ -524,9 +526,9 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     chars = {}
     main_chars = {}
 
-    characters = EveCharacter.objects.filter(corporation_id=corpid).select_related(
-        "character_ownership__user"
-    )
+    characters = EveCharacter.objects.filter(
+        character_id__in=character_ids
+    ).select_related("character_ownership__user")
     character_fat_counts = fats.values("character_id").annotate(fat_count=Count("id"))
     character_fat_map = {
         item["character_id"]: item["fat_count"] for item in list(character_fat_counts)
