@@ -51,10 +51,10 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     # Check for ESI link
     if fatlink.is_esilink:
         via_esi = "Yes"
-        esi_fleet_marker_classes = "badge bg-secondary afat-label ms-2"
+        esi_fleet_marker_classes = "badge text-bg-secondary afat-label ms-2"
 
         if fatlink.is_registered_on_esi:
-            esi_fleet_marker_classes = "badge bg-success afat-label ms-2"
+            esi_fleet_marker_classes = "badge text-bg-success afat-label ms-2"
 
         marker_text = _("ESI")
         esi_fleet_marker += (
@@ -167,10 +167,10 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
 
     if fat.fatlink.is_esilink:
         via_esi = "Yes"
-        esi_fleet_marker_classes = "badge bg-secondary afat-label ms-2"
+        esi_fleet_marker_classes = "badge text-bg-secondary afat-label ms-2"
 
         if fat.fatlink.is_registered_on_esi:
-            esi_fleet_marker_classes = "badge bg-success afat-label ms-2"
+            esi_fleet_marker_classes = "badge text-bg-success afat-label ms-2"
 
         marker_text = _("ESI")
         esi_fleet_marker += (

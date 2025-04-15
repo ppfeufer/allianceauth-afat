@@ -221,7 +221,7 @@ class TestHelpers(TestCase):
             d2={
                 "pk": fatlink_1.pk,
                 "fleet_name": (
-                    'April Fleet 1<span class="badge bg-success afat-label ms-2">ESI</span>'
+                    'April Fleet 1<span class="badge text-bg-success afat-label ms-2">ESI</span>'
                 ),
                 "creator_name": creator_main_character_1,
                 "fleet_type": "",
@@ -320,7 +320,7 @@ class TestHelpers(TestCase):
         # when
         result = convert_fats_to_dict(request=request, fat=fat)
 
-        esi_marker = '<span class="badge bg-success afat-label ms-2">ESI</span>'
+        esi_marker = '<span class="badge text-bg-success afat-label ms-2">ESI</span>'
         fleet_time = fat.fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
 
