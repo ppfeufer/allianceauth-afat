@@ -3,11 +3,11 @@
 <table class="table table-striped table-hover w-100" id="{{ id }}">
     <thead>
         <tr>
-            <th>{% translate "Character" %}</th>
+            <th>{% translate "Character" %} {{ character_data_template }}</th>
             <th class="text-end">{% translate "FATs" %}</th>
             <th><!-- {% translate "Character statistics" %} --></th>
 
-            {% if character_data_template == "character-alt-characters" %}
+            {% if id == "character-alt-characters" %}
                 <th>
                     {% comment %}
                         Status check: In Main Corp
