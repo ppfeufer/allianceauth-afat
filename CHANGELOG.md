@@ -35,6 +35,8 @@ Section Order:
 ### Security
 -->
 
+## [3.7.2] - 2025-04-15
+
 ### Change
 
 - Use Bootstrap `text-bg-*` classes to make use of Bootstrap's native text-color selection
