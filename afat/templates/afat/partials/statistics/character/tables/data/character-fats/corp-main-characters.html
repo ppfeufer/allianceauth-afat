@@ -2,8 +2,16 @@
     {% for main in main_char %}
         {% if main.name %}
             <tr>
-                <td>{{ main.name }}</td>
+                <td>
+                    {{ main.name }}
+
+                    {% if corp.corporation_id != main.corporation_id %}
+                        ({{ main.corporation_name }})
+                    {% endif %}
+                </td>
+
                 <td class="text-end">{{ main.fats }}</td>
+
                 <td class="text-end">
                     <button
                         class="btn btn-primary btn-sm btn-afat-corp-stats-view-character"

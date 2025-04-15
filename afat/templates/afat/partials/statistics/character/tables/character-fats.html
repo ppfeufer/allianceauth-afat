@@ -6,6 +6,14 @@
             <th>{% translate "Character" %}</th>
             <th class="text-end">{% translate "FATs" %}</th>
             <th><!-- {% translate "Character statistics" %} --></th>
+
+            {% if character_data_template == "character-alt-characters" %}
+                <th>
+                    {% comment %}
+                        Status check: In Main Corp
+                    {% endcomment %}
+                </th>
+            {% endif %}
         </tr>
     </thead>
 

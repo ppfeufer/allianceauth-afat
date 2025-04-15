@@ -17,7 +17,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext
+from django.utils.translation import gettext, gettext_lazy
 
 # Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
@@ -356,13 +356,36 @@ def ajax_get_monthly_fats_for_main_character(
 
     fats_per_character = (
         Fat.objects.filter(
-            corporation_eve_id=corporation_id,
+            # corporation_eve_id=corporation_id,
             character__character_ownership__user=main_character.character_ownership.user,
             fatlink__created__month=month,
             fatlink__created__year=year,
         )
-        .values("character__character_id", "character__character_name")
+        .values(
+            "character__character_id",
+            "character__character_name",
+            "character__corporation_id",
+            "character__corporation_name",
+        )
         .annotate(fat_count=Count("id"))
+    )
+
+    if main_character.corporation_id != corporation_id:
+        fats_per_character = fats_per_character.filter(
+            character__corporation_id=corporation_id
+        )
+
+    info_button_text = gettext_lazy(
+        "This character is in a different corporation and their FATs are "
+        "not counted towards the statistics of the main corporation."
+    )
+
+    info_button = (
+        "<sup>"
+        f'<span class="ms-1 cursor-pointer"title="{info_button_text}" data-bs-tooltip="afat">'
+        '<i class="fa-solid fa-circle-info"></i>'
+        "</span>"
+        "</sup>"
     )
 
     logger.debug("Fat per character: %s", fats_per_character)
@@ -370,12 +393,18 @@ def ajax_get_monthly_fats_for_main_character(
     return JsonResponse(
         data=[
             {
+                "character": item,
                 "character_id": item["character__character_id"],
-                "character_name": item["character__character_name"],
+                "character_name": (
+                    item["character__character_name"]
+                    if item["character__corporation_id"] == corporation_id
+                    else f'{item["character__character_name"]} ({item["character__corporation_name"]}){info_button}'
+                ),
                 "fat_count": item["fat_count"],
                 "show_details_button": (
                     f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[item["character__character_id"], year, month])}"><i class="fa-solid fa-eye"></i></a>'
                 ),
+                "in_main_corp": item["character__corporation_id"] == corporation_id,
             }
             for item in fats_per_character
         ],
@@ -543,6 +572,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
             main_chars[main_character.character_id] = {
                 "name": main_character.character_name,
                 "id": main_character.character_id,
+                "corporation_id": main_character.corporation_id,
+                "corporation_name": main_character.corporation_name,
                 "fats": fat_c,
             }
         elif main_character:
