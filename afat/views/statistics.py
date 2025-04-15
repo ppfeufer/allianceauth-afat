@@ -4,7 +4,7 @@ Statistics related views
 
 # Standard Library
 import calendar
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 from datetime import datetime
 
 # Django
@@ -469,7 +469,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
                 months.append((i, corp_fats, round(avg_fats, 2)))
 
         context = {
-            "corporation": corp.corporation_name,
+            "corporation": corp_name,
             "months": months,
             "corpid": corpid,
             "year": year,
@@ -494,41 +494,26 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     # Data for Stacked Bar Graph
     # (label, color, [list of data for stack])
-    data = {}
+    data = defaultdict(lambda: defaultdict(int))
 
-    for fat in list(fats):
-        if fat.shiptype not in data:
-            data[fat.shiptype] = {}
-
-    chars = []
-
-    for fat in fats:
-        if fat.character.character_name in chars:
-            continue
-
-        chars.append(fat.character.character_name)
-
-    for key, ship_type in data.items():
-        for char in chars:
-            ship_type[char] = 0
+    character_names_list = sorted(
+        {fat.character.character_name for fat in fats}, key=str.lower
+    )
 
     for fat in fats:
         data[fat.shiptype][fat.character.character_name] += 1
 
-    data_stacked = []
-
-    for key, value in data.items():
-        stack = [key, get_random_rgba_color(), []]
-
-        data_ = stack[2]
-
-        for char in chars:
-            data_.append(value[char])
-
-        stack.append(data_)
-        data_stacked.append(tuple(stack))
-
-    data_stacked = [chars, data_stacked]
+    data_stacked = [
+        character_names_list,
+        [
+            (
+                shiptype,
+                get_random_rgba_color(),
+                [counts[char] for char in character_names_list],
+            )
+            for shiptype, counts in data.items()
+        ],
+    ]
 
     # Data for By Time
     data_time = get_fats_per_hour(fats)
@@ -563,7 +548,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     context = {
         "corp": corp,
-        "corporation": corp.corporation_name,
+        "corporation": corp_name,
         "month": month,
         "month_current": datetime.now().month,
         "month_prev": int(month) - 1,
@@ -584,6 +569,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     }
 
     month_name = calendar.month_name[int(month)]
+
     logger.info(
         msg=(
             f"Corporation statistics for {corp_name} ({month_name} {year}) "
