@@ -362,6 +362,7 @@ def ajax_get_monthly_fats_for_main_character(
             fatlink__created__year=year,
         )
         .values(
+            "corporation_eve_id",
             "character__character_id",
             "character__character_name",
             "character__corporation_id",
@@ -370,10 +371,10 @@ def ajax_get_monthly_fats_for_main_character(
         .annotate(fat_count=Count("id"))
     )
 
-    if main_character.corporation_id != corporation_id:
-        fats_per_character = fats_per_character.filter(
-            character__corporation_id=corporation_id
-        )
+    # if main_character.corporation_id != corporation_id:
+    #     fats_per_character = fats_per_character.filter(
+    #         character__corporation_id=corporation_id
+    #     )
 
     info_button_text = gettext_lazy(
         "This character is in a different corporation and their FATs are "
@@ -397,14 +398,14 @@ def ajax_get_monthly_fats_for_main_character(
                 "character_id": item["character__character_id"],
                 "character_name": (
                     item["character__character_name"]
-                    if item["character__corporation_id"] == corporation_id
+                    if item["corporation_eve_id"] == corporation_id
                     else f'{item["character__character_name"]} ({item["character__corporation_name"]}){info_button}'
                 ),
                 "fat_count": item["fat_count"],
                 "show_details_button": (
                     f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[item["character__character_id"], year, month])}"><i class="fa-solid fa-eye"></i></a>'
                 ),
-                "in_main_corp": item["character__corporation_id"] == corporation_id,
+                "in_main_corp": item["corporation_eve_id"] == corporation_id,
             }
             for item in fats_per_character
         ],
