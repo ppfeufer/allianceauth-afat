@@ -4,8 +4,7 @@ Statistics related views
 
 # Standard Library
 import calendar
-from collections import OrderedDict
-from datetime import datetime
+from collections import OrderedDict, defaultdict
 
 # Django
 from django.contrib import messages
@@ -16,8 +15,9 @@ from django.db.models import Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext
+from django.utils.translation import gettext, gettext_lazy
 
 # Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
@@ -82,7 +82,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         sanity_check = {}
 
         # Group corporations by alliance
-        for character_with_access in characters_with_access:
+        for character_with_access in list(characters_with_access):
             alliance_name = character_with_access.alliance_name or "No Alliance"
             corp_id = character_with_access.corporation_id
             corp_name = character_with_access.corporation_name
@@ -201,6 +201,10 @@ def character(  # pylint: disable=too-many-locals
     :rtype:
     """
 
+    # Default to current year and month if not provided
+    year = year or datetime.now().year
+    month = month or datetime.now().month
+
     current_month, current_year = current_month_and_year()
     eve_character = EveCharacter.objects.get(character_id=charid)
     valid = [
@@ -239,16 +243,6 @@ def character(  # pylint: disable=too-many-locals
                     "<p>You do not have permission to view "
                     "statistics for this character.</p>"
                 )
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
-
-    if not month or not year:
-        messages.error(
-            request=request,
-            message=mark_safe(
-                s=gettext("<h4>Warning!</h4><p>Date information not complete!</p>")
             ),
         )
 
@@ -329,6 +323,7 @@ def character(  # pylint: disable=too-many-locals
 )
 def ajax_get_monthly_fats_for_main_character(
     request: WSGIRequest,
+    corporation_id: int,
     character_id: int,
     year: int,
     month: int,
@@ -361,13 +356,37 @@ def ajax_get_monthly_fats_for_main_character(
 
     fats_per_character = (
         Fat.objects.filter(
-            character__corporation_id=main_character.corporation_id,
+            # corporation_eve_id=corporation_id,
             character__character_ownership__user=main_character.character_ownership.user,
             fatlink__created__month=month,
             fatlink__created__year=year,
         )
-        .values("character__character_id", "character__character_name")
+        .values(
+            "corporation_eve_id",
+            "character__character_id",
+            "character__character_name",
+            "character__corporation_id",
+            "character__corporation_name",
+        )
         .annotate(fat_count=Count("id"))
+    )
+
+    # if main_character.corporation_id != corporation_id:
+    #     fats_per_character = fats_per_character.filter(
+    #         character__corporation_id=corporation_id
+    #     )
+
+    info_button_text = gettext_lazy(
+        "This character is in a different corporation and their FATs are "
+        "not counted towards the statistics of the main corporation."
+    )
+
+    info_button = (
+        "<sup>"
+        f'<span class="ms-1 cursor-pointer"title="{info_button_text}" data-bs-tooltip="afat">'
+        '<i class="fa-solid fa-circle-info"></i>'
+        "</span>"
+        "</sup>"
     )
 
     logger.debug("Fat per character: %s", fats_per_character)
@@ -375,12 +394,18 @@ def ajax_get_monthly_fats_for_main_character(
     return JsonResponse(
         data=[
             {
+                "character": item,
                 "character_id": item["character__character_id"],
-                "character_name": item["character__character_name"],
+                "character_name": (
+                    item["character__character_name"]
+                    if item["corporation_eve_id"] == corporation_id
+                    else f'{item["character__character_name"]} ({item["character__corporation_name"]}){info_button}'
+                ),
                 "fat_count": item["fat_count"],
                 "show_details_button": (
                     f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[item["character__character_id"], year, month])}"><i class="fa-solid fa-eye"></i></a>'
                 ),
+                "in_main_corp": item["corporation_eve_id"] == corporation_id,
             }
             for item in fats_per_character
         ],
@@ -414,8 +439,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     :rtype:
     """
 
-    if not year:
-        year = datetime.now().year
+    # Default to current year if not provided
+    year = year or datetime.now().year
 
     current_month, current_year = current_month_and_year()
 
@@ -445,7 +470,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     if not month:
         fats_per_year = (
             Fat.objects.filter(
-                character__corporation_id=corpid,
+                corporation_eve_id=corpid,
                 fatlink__created__year=year,
             )
             .values("fatlink__created__month")
@@ -474,7 +499,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
                 months.append((i, corp_fats, round(avg_fats, 2)))
 
         context = {
-            "corporation": corp.corporation_name,
+            "corporation": corp_name,
             "months": months,
             "corpid": corpid,
             "year": year,
@@ -494,46 +519,33 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     fats = Fat.objects.filter(
         fatlink__created__month=month,
         fatlink__created__year=year,
-        character__corporation_id=corpid,
+        corporation_eve_id=corpid,
     ).select_related("character")
 
     # Data for Stacked Bar Graph
     # (label, color, [list of data for stack])
-    data = {}
+    data = defaultdict(lambda: defaultdict(int))
+    character_ids = set()
 
-    for fat in fats:
-        if fat.shiptype not in data:
-            data[fat.shiptype] = {}
-
-    chars = []
-
-    for fat in fats:
-        if fat.character.character_name in chars:
-            continue
-
-        chars.append(fat.character.character_name)
-
-    for key, ship_type in data.items():
-        for char in chars:
-            ship_type[char] = 0
+    character_names_list = sorted(
+        {fat.character.character_name for fat in fats}, key=str.lower
+    )
 
     for fat in fats:
         data[fat.shiptype][fat.character.character_name] += 1
+        character_ids.add(fat.character.character_id)
 
-    data_stacked = []
-
-    for key, value in data.items():
-        stack = [key, get_random_rgba_color(), []]
-
-        data_ = stack[2]
-
-        for char in chars:
-            data_.append(value[char])
-
-        stack.append(data_)
-        data_stacked.append(tuple(stack))
-
-    data_stacked = [chars, data_stacked]
+    data_stacked = [
+        character_names_list,
+        [
+            (
+                shiptype,
+                get_random_rgba_color(),
+                [counts[char] for char in character_names_list],
+            )
+            for shiptype, counts in data.items()
+        ],
+    ]
 
     # Data for By Time
     data_time = get_fats_per_hour(fats)
@@ -544,12 +556,12 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     chars = {}
     main_chars = {}
 
-    characters = EveCharacter.objects.filter(corporation_id=corpid).select_related(
-        "character_ownership__user"
-    )
+    characters = EveCharacter.objects.filter(
+        character_id__in=character_ids
+    ).select_related("character_ownership__user")
     character_fat_counts = fats.values("character_id").annotate(fat_count=Count("id"))
     character_fat_map = {
-        item["character_id"]: item["fat_count"] for item in character_fat_counts
+        item["character_id"]: item["fat_count"] for item in list(character_fat_counts)
     }
 
     for char in characters:
@@ -561,6 +573,8 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
             main_chars[main_character.character_id] = {
                 "name": main_character.character_name,
                 "id": main_character.character_id,
+                "corporation_id": main_character.corporation_id,
+                "corporation_name": main_character.corporation_name,
                 "fats": fat_c,
             }
         elif main_character:
@@ -568,7 +582,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
 
     context = {
         "corp": corp,
-        "corporation": corp.corporation_name,
+        "corporation": corp_name,
         "month": month,
         "month_current": datetime.now().month,
         "month_prev": int(month) - 1,
@@ -589,6 +603,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     }
 
     month_name = calendar.month_name[int(month)]
+
     logger.info(
         msg=(
             f"Corporation statistics for {corp_name} ({month_name} {year}) "
@@ -623,6 +638,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     :rtype:
     """
 
+    # Default to current year if not provided
     year = year or datetime.now().year
 
     ally = (
@@ -639,7 +655,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
 
         ally_fats_by_month = (
             Fat.objects.filter(
-                character__alliance_id=allianceid,
+                alliance_eve_id=allianceid,
                 fatlink__created__year=year,
             )
             .order_by("fatlink__created__month")
@@ -668,18 +684,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
             context=context,
         )
 
-    if not month or not year:
-        messages.error(
-            request=request,
-            message=mark_safe(
-                s=gettext("<h4>Error!</h4><p>Date information incomplete.</p>")
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
-
     fats = Fat.objects.filter(
-        character__alliance_id=allianceid,
+        alliance_eve_id=allianceid,
         fatlink__created__month=month,
         fatlink__created__year=year,
     )
@@ -689,8 +695,8 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     colors = [get_random_rgba_color() for _ in data_ship_type]
 
     data_ship_type = [
-        [str(item["shiptype"]) for item in data_ship_type],
-        [item["count"] for item in data_ship_type],
+        [str(item["shiptype"]) for item in list(data_ship_type)],
+        [item["count"] for item in list(data_ship_type)],
         colors,
     ]
 
@@ -740,7 +746,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     corps = {}
 
     for corp in corporations_in_alliance:
-        c_fats = fats.filter(character__corporation_id=corp.corporation_id).count()
+        c_fats = fats.filter(corporation_eve_id=corp.corporation_id).count()
         avg = c_fats / corp.member_count
         corps[corp] = (corp.corporation_id, c_fats, round(avg, 2))
 

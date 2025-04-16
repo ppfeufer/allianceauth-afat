@@ -3,7 +3,7 @@ Fat links related views
 """
 
 # Standard Library
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 # Django
 from django.contrib import messages
@@ -14,6 +14,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.datetime_safe import datetime
 from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
@@ -624,7 +625,12 @@ def add_fat(
 
         try:
             Fat(
-                fatlink=fleet, character=character, system=system, shiptype=ship_name
+                fatlink=fleet,
+                character=character,
+                system=system,
+                shiptype=ship_name,
+                corporation_eve_id=character.corporation_id,
+                alliance_eve_id=character.alliance_id,
             ).save()
         except IntegrityError:
             messages.warning(
@@ -916,9 +922,7 @@ def ajax_get_fats_by_fatlink(request: WSGIRequest, fatlink_hash) -> JsonResponse
 
 @login_required()
 @permission_required(perm="afat.manage_afat")
-def delete_fatlink(
-    request: WSGIRequest, fatlink_hash: str = None
-) -> HttpResponseRedirect:
+def delete_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedirect:
     """
     Delete fat link helper
 
@@ -930,23 +934,13 @@ def delete_fatlink(
     :rtype:
     """
 
-    if fatlink_hash is None:
-        messages.warning(
-            request=request,
-            message=mark_safe(
-                s=_("<h4>Warning!</h4><p>No FAT link hash provided.</p>")
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
-
     try:
         link = FatLink.objects.get(hash=fatlink_hash)
     except FatLink.DoesNotExist:
         messages.error(
-            request=request,
-            message=mark_safe(
-                s=_(
+            request,
+            mark_safe(
+                _(
                     "<h4>Error!</h4>"
                     "<p>The FAT link hash provided is either invalid "
                     "or the FAT link has already been deleted.</p>"
@@ -954,23 +948,24 @@ def delete_fatlink(
             ),
         )
 
-        return redirect(to="afat:dashboard")
+        return redirect("afat:dashboard")
 
+    # Delete associated FATs and the FAT link
     Fat.objects.filter(fatlink_id=link.pk).delete()
-
     link.delete()
 
+    # Log the deletion
     write_log(
-        request=request,
+        request,
         log_event=Log.Event.DELETE_FATLINK,
         log_text="FAT link deleted.",
-        fatlink_hash=link.hash,
+        fatlink_hash=fatlink_hash,
     )
 
     messages.success(
-        request=request,
-        message=mark_safe(
-            s=format_lazy(
+        request,
+        mark_safe(
+            format_lazy(
                 _(
                     "<h4>Success!</h4>"
                     '<p>The FAT link "{fatlink_hash}" and all associated FATs have '
@@ -982,13 +977,10 @@ def delete_fatlink(
     )
 
     logger.info(
-        msg=(
-            f'Fat link "{fatlink_hash}" and all associated '
-            f"FATs have been deleted by {request.user}"
-        )
+        f'Fat link "{fatlink_hash}" and all associated FATs have been deleted by {request.user}'
     )
 
-    return redirect(to="afat:fatlinks_overview")
+    return redirect("afat:fatlinks_overview")
 
 
 @login_required()
@@ -1011,6 +1003,7 @@ def delete_fat(
 
     try:
         link = FatLink.objects.get(hash=fatlink_hash)
+        fat_details = Fat.objects.get(pk=fat_id, fatlink_id=link.pk)
     except FatLink.DoesNotExist:
         messages.error(
             request=request,
@@ -1023,9 +1016,6 @@ def delete_fat(
         )
 
         return redirect(to="afat:dashboard")
-
-    try:
-        fat_details = Fat.objects.get(pk=fat_id, fatlink_id=link.pk)
     except Fat.DoesNotExist:
         messages.error(
             request=request,
@@ -1086,21 +1076,19 @@ def close_esi_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRe
 
     try:
         fatlink = FatLink.objects.get(hash=fatlink_hash)
-    except FatLink.DoesNotExist:
-        logger.info(msg=f'ESI FAT link with hash "{fatlink_hash}" does not exist')
-    else:
+        fatlink.is_registered_on_esi = False
+        fatlink.save()
+
         logger.info(
             msg=(
                 f'Closing ESI FAT link with hash "{fatlink_hash}". '
                 "Reason: Closed by manual request"
             )
         )
+    except FatLink.DoesNotExist:
+        logger.info(msg=f'ESI FAT link with hash "{fatlink_hash}" does not exist')
 
-        fatlink.is_registered_on_esi = False
-        fatlink.save()
-
-    default_redirect = reverse(viewname="afat:dashboard")
-    next_view = request.GET.get(key="next", default=default_redirect)
+    next_view = request.GET.get("next", reverse("afat:dashboard"))
 
     return HttpResponseRedirect(redirect_to=next_view)
 
@@ -1134,16 +1122,17 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
 
         return redirect(to="afat:dashboard")
 
-    if fatlink_duration.fleet.reopened is False:
+    if not fatlink_duration.fleet.reopened:
         created_at = fatlink_duration.fleet.created
         now = datetime.now()
 
+        default_reopen_duration = Setting.get_setting(
+            Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION
+        )
         time_difference_in_minutes = get_time_delta(
             then=created_at, now=now, interval="minutes"
         )
-        new_duration = time_difference_in_minutes + Setting.get_setting(
-            Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION
-        )
+        new_duration = time_difference_in_minutes + default_reopen_duration
 
         fatlink_duration.duration = new_duration
         fatlink_duration.save()
@@ -1155,18 +1144,14 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
         write_log(
             request=request,
             log_event=Log.Event.REOPEN_FATLINK,
-            log_text=(
-                "FAT link re-opened for a duration of "
-                f"{Setting.get_setting(Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION)} minutes"
-            ),
+            log_text=f"FAT link re-opened for a duration of {default_reopen_duration} minutes",
             fatlink_hash=fatlink_duration.fleet.hash,
         )
 
         logger.info(
             msg=(
-                f'FAT link with hash "{fatlink_hash}" '
-                f"re-opened by {request.user} for a "
-                f"duration of {Setting.get_setting(Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION)} minutes"
+                f'FAT link with hash "{fatlink_hash}" re-opened by {request.user} '
+                f"for a duration of {default_reopen_duration} minutes"
             )
         )
 

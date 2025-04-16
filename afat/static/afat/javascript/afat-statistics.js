@@ -1,4 +1,4 @@
-/* global afatSettings, Chart, fetchAjaxData */
+/* global afatSettings, bootstrap, Chart, fetchAjaxData */
 
 const elementBody = document.querySelector('body');
 const elementBodyCss = getComputedStyle(elementBody);
@@ -6,7 +6,7 @@ const elementBodyCss = getComputedStyle(elementBody);
 Chart.defaults.color = elementBodyCss.color;
 
 /**
- * Draw a chart on the given element with the given data and options using Chart.js
+ * Draw a chart on the given element with the given data and options using Chart.js …
  *
  * @param {HTMLElement} element The element to draw the chart on
  * @param {string} chartType The type of chart to draw
@@ -105,14 +105,16 @@ $(document).ready(() => {
                             table.DataTable({
                                 language: afatSettings.dataTable.language,
                                 data: tableData,
-                                paging: false,
-                                lengthChange: false,
+                                // paging: false,
+                                // lengthChange: false,
                                 columns: [
                                     { data: 'character_name' },
                                     { data: 'fat_count' },
                                     { data: 'show_details_button' },
+                                    { data: 'in_main_corp' },
                                 ],
                                 order: [
+                                    [3, 'desc'],
                                     [1, 'desc'],
                                     [0, 'asc']
                                 ],
@@ -129,12 +131,24 @@ $(document).ready(() => {
                                             $(td).addClass('text-end');
                                         },
                                         sortable: false
+                                    },
+                                    {
+                                        targets: 3,
+                                        visible: false
                                     }
                                 ]
                             });
                         }
-
                     }
+                }).then(() => {
+                    // Show bootstrap tooltips
+                    [].slice.call(
+                        document.querySelectorAll(
+                            '[data-bs-tooltip="afat"]'
+                        )
+                    ).map((tooltipTriggerEl) => {
+                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    });
                 }).catch(error => {
                     console.log(`Error: ${error.message}`);
                 });

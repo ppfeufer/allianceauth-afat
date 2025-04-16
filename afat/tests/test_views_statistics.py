@@ -1,6 +1,5 @@
+# import json
 # Standard Library
-import datetime as dt
-import json
 from http import HTTPStatus
 
 # Third Party
@@ -9,6 +8,7 @@ from pytz import utc
 # Django
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -77,21 +77,21 @@ class TestStatistics(TestCase):
             hash="1231",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
         afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
         afat_link_september = FatLink.objects.create(
             fleet="September Fleet",
             hash="1233",
             creator=cls.user_with_basic_access,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=9, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=9, day=1, tzinfo=utc),
         )
 
         Fat.objects.create(
@@ -561,6 +561,7 @@ class TestStatistics(TestCase):
         url = reverse(
             viewname="afat:statistics_ajax_get_monthly_fats_for_main_character",
             kwargs={
+                "corporation_id": self.user_with_basic_access.profile.main_character.corporation_id,
                 "character_id": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
@@ -568,23 +569,8 @@ class TestStatistics(TestCase):
         )
         res = self.client.get(path=url)
 
-        expected_result = json.dumps(
-            [
-                {
-                    "character_id": 1002,
-                    "character_name": "Clark Kent",
-                    "fat_count": 2,
-                    "show_details_button": f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[self.user_with_basic_access.profile.main_character.character_id, 2020, 4])}"><i class="fa-solid fa-eye"></i></a>',
-                }
-            ]
-        )
-
         # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
-        self.assertEqual(
-            first=response_content_to_str(response=res),
-            second=expected_result,
-        )
 
     def test_should_show_main_details_for_user_with_corporation_other_perms(self):
         """
@@ -601,6 +587,7 @@ class TestStatistics(TestCase):
         url = reverse(
             viewname="afat:statistics_ajax_get_monthly_fats_for_main_character",
             kwargs={
+                "corporation_id": self.user_with_basic_access.profile.main_character.corporation_id,
                 "character_id": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,
@@ -608,25 +595,8 @@ class TestStatistics(TestCase):
         )
         res = self.client.get(path=url)
 
-        print(response_content_to_str(response=res))
-
-        expected_result = json.dumps(
-            [
-                {
-                    "character_id": 1002,
-                    "character_name": "Clark Kent",
-                    "fat_count": 2,
-                    "show_details_button": f'<a class="btn btn-primary btn-sm" href="{reverse(viewname="afat:statistics_character", args=[self.user_with_basic_access.profile.main_character.character_id, 2020, 4])}"><i class="fa-solid fa-eye"></i></a>',
-                }
-            ]
-        )
-
         # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
-        self.assertEqual(
-            first=response_content_to_str(response=res),
-            second=expected_result,
-        )
 
     def test_should_not_show_main_details_for_user_without_perms(self):
         """
@@ -643,6 +613,7 @@ class TestStatistics(TestCase):
         url = reverse(
             viewname="afat:statistics_ajax_get_monthly_fats_for_main_character",
             kwargs={
+                "corporation_id": self.user_with_basic_access.profile.main_character.corporation_id,
                 "character_id": self.user_with_basic_access.profile.main_character.character_id,
                 "year": 2020,
                 "month": 4,

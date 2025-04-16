@@ -3,7 +3,6 @@ Test logs view
 """
 
 # Standard Library
-import datetime as dt
 from http import HTTPStatus
 
 # Third Party
@@ -12,6 +11,7 @@ from pytz import utc
 # Django
 from django.test import TestCase
 from django.urls import reverse
+from django.utils.datetime_safe import datetime
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -65,14 +65,14 @@ class TestLogsView(TestCase):
             hash="1231",
             creator=cls.user_with_manage_afat,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=1, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=1, tzinfo=utc),
         )
         cls.afat_link_april_2 = FatLink.objects.create(
             fleet="April Fleet 2",
             hash="1232",
             creator=cls.user_with_manage_afat,
             character=cls.character_1001,
-            created=dt.datetime(year=2020, month=4, day=15, tzinfo=utc),
+            created=datetime(year=2020, month=4, day=15, tzinfo=utc),
         )
 
     def test_should_not_show_log_view_for_user_without_access(self):

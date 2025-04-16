@@ -10,6 +10,7 @@ This script can be executed directly from shell.
 # Standard Library
 import os
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 myauth_dir = Path(__file__).parent.parent.parent.parent.parent / "myauth"
@@ -23,7 +24,6 @@ os.environ.setdefault(key="DJANGO_SETTINGS_MODULE", value="myauth.settings.local
 django.setup()
 
 # Standard Library
-import datetime as dt
 import random
 
 # Django
@@ -62,7 +62,7 @@ for _ in range(LINKS_NUMBER):
         creator=user,
         character=creator,
         fleet_type=fleet_type,
-        created=now() - dt.timedelta(days=random.randint(a=0, b=365)),
+        created=now() - timedelta(days=random.randint(a=0, b=365)),
     )
 
     write_log(

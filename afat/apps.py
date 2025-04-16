@@ -17,4 +17,4 @@ class AfatConfig(AppConfig):
 
     name = "afat"
     label = "afat"
-    verbose_name = _(f"AFAT - Another Fleet Activity Tracker v{__version__}")
+    verbose_name = _(f"Fleet Activity Tracking (AFAT) v{__version__}")
