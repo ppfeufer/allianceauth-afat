@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-04-15 11:15+0200\n"
-"PO-Revision-Date: 2025-03-25 14:24+0000\n"
+"POT-Creation-Date: 2025-04-23 01:36+0200\n"
+"PO-Revision-Date: 2025-04-22 23:21+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.11\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -33,7 +33,7 @@ msgstr "Flottenaktivitäts-Tracking"
 msgid "Fleet type"
 msgstr "Flottenart"
 
-#: afat/admin.py:118 afat/models.py:420
+#: afat/admin.py:118 afat/models.py:434
 msgid "Is enabled"
 msgstr "Ist aktiviert"
 
@@ -75,8 +75,8 @@ msgstr[1] "{notifications_count} Flottenarten deaktiviert"
 
 #: afat/apps.py:20
 #, python-brace-format
-msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
-msgstr "AFAT - Another Fleet Activity Tracker v{__version__}"
+msgid "Fleet Activity Tracking (AFAT) v{__version__}"
+msgstr "Flottenaktivitäts-Tracking v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -128,29 +128,29 @@ msgstr "FAT-Link Ablaufzeit in Minuten"
 msgid "Expiry time in minutes"
 msgstr "Ablaufzeit in Minuten"
 
-#: afat/helper/time.py:115
+#: afat/helper/time.py:113
 msgid "{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"
 msgstr "{int(duration_years[0])} Jahre, {int(duration_days[0])} Tage, {int(duration_hours[0])} Stunden, {int(duration_minutes[0])} Minuten und {int(duration_seconds[0])} Sekunden"
 
-#: afat/helper/views.py:59 afat/helper/views.py:175
+#: afat/helper/views.py:60 afat/helper/views.py:176
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:66
 msgid "ESI"
 msgstr "ESI"
 
-#: afat/helper/views.py:90
+#: afat/helper/views.py:91
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
 msgid "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
 msgstr "Klicke hier um das automatische Tracking mittels ESI für diese Flotte zu stoppen und den FAT-Link zu schließen."
 
-#: afat/helper/views.py:93
+#: afat/helper/views.py:94
 #, python-brace-format
 msgid "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
 msgstr "<p>Bist Du sicher das Du die ESI Flotte mit ID {fatlink.esi_fleet_id} von {fatlink.character.character_name} schließen möchtest?</p>"
 
-#: afat/helper/views.py:95
+#: afat/helper/views.py:96
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:41
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
@@ -158,50 +158,50 @@ msgstr "<p>Bist Du sicher das Du die ESI Flotte mit ID {fatlink.esi_fleet_id} vo
 msgid "Stop tracking"
 msgstr "Tracking stoppen"
 
-#: afat/helper/views.py:123 afat/helper/views.py:186
+#: afat/helper/views.py:124 afat/helper/views.py:187
 msgid "Delete"
 msgstr "Löschen"
 
-#: afat/helper/views.py:125
+#: afat/helper/views.py:126
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr "<p>Bist Du sicher das Du den FAT-Link {fatlink_fleet} löschen möchtest?</p>"
 
-#: afat/helper/views.py:188
+#: afat/helper/views.py:189
 #, python-brace-format
 msgid "<p>Are you sure you want to remove {fat.character.character_name} from this FAT link?</p>"
 msgstr "<p>Bist Du sicher das Du {fat.character.character_name} von diesem FAT-Link löschen möchtest?</p>"
 
-#: afat/helper/views.py:241
+#: afat/helper/views.py:242
 #, python-brace-format
 msgid "{log.fatlink_hash} (Deleted)"
 msgstr "{log.fatlink_hash} (Gelöscht)"
 
-#: afat/helper/views.py:357
+#: afat/helper/views.py:358
 msgid "Monday"
 msgstr "Montag"
 
-#: afat/helper/views.py:358
+#: afat/helper/views.py:359
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: afat/helper/views.py:359
+#: afat/helper/views.py:360
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: afat/helper/views.py:360
+#: afat/helper/views.py:361
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: afat/helper/views.py:361
+#: afat/helper/views.py:362
 msgid "Friday"
 msgstr "Freitag"
 
-#: afat/helper/views.py:362
+#: afat/helper/views.py:363
 msgid "Saturday"
 msgstr "Samstag"
 
-#: afat/helper/views.py:363
+#: afat/helper/views.py:364
 msgid "Sunday"
 msgstr "Sonntag"
 
@@ -319,23 +319,31 @@ msgstr "FAT-Link Laufzeiten"
 msgid "Character who registered this FAT"
 msgstr "Charakter welcher diesen FAT registriert hat"
 
-#: afat/models.py:308
+#: afat/models.py:307
+msgid "Corporation EVE ID of the character who registered this FAT at the time of registration"
+msgstr "EVE ID der Corporation des Charakters, der für diesen FAT registriert ist, zum Zeitpunkt der Registrierung"
+
+#: afat/models.py:314
+msgid "Alliance EVE ID of the character who registered this FAT at the time of registration"
+msgstr "EVE ID der Allianz des Charakters, der für diesen FAT registriert ist, zum Zeitpunkt der Registrierung"
+
+#: afat/models.py:322
 msgid "The FAT link the character registered at"
 msgstr "Der FAT-Link zu dem der Charakter registriert ist"
 
-#: afat/models.py:312
+#: afat/models.py:326
 msgid "The system the character is in"
 msgstr "Das System in dem der Charakter ist"
 
-#: afat/models.py:319
+#: afat/models.py:333
 msgid "The ship the character was flying"
 msgstr "Das Schiff welches der Charakter geflogen ist"
 
-#: afat/models.py:331
+#: afat/models.py:345
 msgid "FAT"
 msgstr "FAT"
 
-#: afat/models.py:332
+#: afat/models.py:346
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
@@ -345,60 +353,60 @@ msgstr "FAT"
 msgid "FATs"
 msgstr "FATs"
 
-#: afat/models.py:356
+#: afat/models.py:370
 msgid "FAT link created"
 msgstr "Fat-Link erstellt"
 
-#: afat/models.py:357
+#: afat/models.py:371
 msgid "FAT link changed"
 msgstr "Fat-Link geändert"
 
-#: afat/models.py:358
+#: afat/models.py:372
 msgid "FAT link removed"
 msgstr "Fat-Link entfernt"
 
-#: afat/models.py:359
+#: afat/models.py:373
 msgid "FAT link re-opened"
 msgstr "Fat-Link wieder geöffnet"
 
-#: afat/models.py:361
+#: afat/models.py:375
 msgid "FAT removed"
 msgstr "FAT entfernt"
 
-#: afat/models.py:362
+#: afat/models.py:376
 msgid "Manual FAT added"
 msgstr "Manueller FAT Eintrag hinzugefügt"
 
-#: afat/models.py:388
+#: afat/models.py:402
 msgid "Log"
 msgstr "Log"
 
-#: afat/models.py:389 afat/templates/afat/view/logs/logs-overview.html:11
+#: afat/models.py:403 afat/templates/afat/view/logs/logs-overview.html:11
 msgid "Logs"
 msgstr "Logs"
 
-#: afat/models.py:401
+#: afat/models.py:415
 msgid "Short name to identify this doctrine"
 msgstr "Kurzname der Doktrin"
 
-#: afat/models.py:402
+#: afat/models.py:416
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
 msgstr "Name"
 
-#: afat/models.py:410
+#: afat/models.py:424
 msgid "You can add notes about this doctrine here if you want. (optional)"
 msgstr "Du kannst hier bei Bedarf Notizen zu dieser Doktrin hinzufügen. (optional)"
 
-#: afat/models.py:412
+#: afat/models.py:426
 msgid "Notes"
 msgstr "Notizen"
 
-#: afat/models.py:419
+#: afat/models.py:433
 msgid "Whether this doctrine is enabled or not."
 msgstr "Ist diese Doktrin aktiv oder nicht."
 
-#: afat/models.py:428
+#: afat/models.py:442
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:39
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
@@ -406,59 +414,59 @@ msgstr "Ist diese Doktrin aktiv oder nicht."
 msgid "Doctrine"
 msgstr "Doktrin"
 
-#: afat/models.py:429
+#: afat/models.py:443
 msgid "Doctrines"
 msgstr "Doktrinen"
 
-#: afat/models.py:454
+#: afat/models.py:468
 msgid "Default FAT link expiry time"
 msgstr "FAT-Link Ablaufzeit in Minuten"
 
-#: afat/models.py:457
+#: afat/models.py:471
 msgid "Default FAT link reopen duration"
 msgstr "Standarddauer für wieder geöffnete FAT-Links"
 
-#: afat/models.py:460
+#: afat/models.py:474
 msgid "Default FAT link reopen grace time"
 msgstr "Standarddauer in der FAT-Links wieder geöffnet werden können"
 
-#: afat/models.py:462
+#: afat/models.py:476
 msgid "Default log duration"
 msgstr "Standardprotokolldauer"
 
-#: afat/models.py:464
+#: afat/models.py:478
 msgid "Use doctrines from fittings module"
 msgstr "Doktrinen vom Fittings Modul nutzen"
 
-#: afat/models.py:470
+#: afat/models.py:484
 msgid "Default expiry time for clickable FAT links in minutes. (Default: 60 minutes)"
 msgstr "Standardablaufzeit für klickbare FAT-Links in Minuten. (Standard: 60 Minuten)"
 
-#: afat/models.py:479
+#: afat/models.py:493
 msgid "Default time in minutes a FAT link can be re-opened after it is expired. (Default: 60 minutes)"
 msgstr "Standardzeit in Minuten in der ein FAT-Link nach Ablauf wieder geöffnet werden. (Standard: 60 Minuten)"
 
-#: afat/models.py:488
+#: afat/models.py:502
 msgid "Default time in minutes a FAT link is re-opened for. (Default: 60 minutes)"
 msgstr "Standardzeit in Minuten die ein FAT-Link wieder geöffnet wird. (Standard: 60 Minuten)"
 
-#: afat/models.py:496
+#: afat/models.py:510
 msgid "Default time in days a log entry is kept. (Default: 60 days)"
 msgstr "Standardzeit in Tagen die ein Protokolleintrag gespeichert wird. (Standard: 60 Tage)"
 
-#: afat/models.py:504
+#: afat/models.py:518
 msgid "Whether to use the doctrines from the Fittings modules in the doctrine dropdown. Note: The fittings module needs to be installed for this."
 msgstr "Sollen die Doktrinen aus dem Fittings Modul genutzt werden? Hinweis: das Fittings Module muss hierfür installiert sein."
 
-#: afat/models.py:516
+#: afat/models.py:530
 msgid "Setting"
 msgstr "Einstellung"
 
-#: afat/models.py:517
+#: afat/models.py:531
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: afat/models.py:527
+#: afat/models.py:541
 msgid "AFAT Settings"
 msgstr "AFAT Einstellungen"
 
@@ -1168,142 +1176,144 @@ msgstr "November"
 msgid "December"
 msgstr "Dezember"
 
-#: afat/views/fatlinks.py:225
+#: afat/views/fatlinks.py:226
 msgid "<h4>Success!</h4><p>Clickable FAT link created!</p><p>Make sure to give your fleet members the link to click so that they get credit for this fleet.</p>"
 msgstr "<h4>Erfolg!</h4><p>Klickbarer FAT-Link erstellt!</p><p>Bitte stelle sicher diesen Link in Deiner Flotte zu teilen.</p>"
 
-#: afat/views/fatlinks.py:241
+#: afat/views/fatlinks.py:242
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your clickable FAT link.</p>"
 msgstr "<h4>Fehler!</h4><p>Es ist etwas schief gelaufen beid er Erstellung Deines FAT-Links.</p>"
 
-#: afat/views/fatlinks.py:254
+#: afat/views/fatlinks.py:255
 msgid "<h4>Warning!</h4><p>You must fill out the form on the \"Add FAT link\" page to create a clickable FAT link</p>"
 msgstr "<h4>Warnung!</h4><p>Du musst das Formular auf der „FAT-Link hinzufügen“ Seite ausfüllen um einen FAT-Link zu erstellen.</p>"
 
-#: afat/views/fatlinks.py:299
+#: afat/views/fatlinks.py:300
 msgid "<h4>Warning!</h4><p>To use the ESI function, you need to be in fleet and you need to be the fleet boss! You can create a clickable FAT link and share it, if you like.</p>"
 msgstr "<h4>Warnung!</h4><p>Um die ESI Funktion zu nutzen musst Du in einer Flotte sein und Du musst der Flottenkommandant sein. Du kannst allerdings auch einen klickbaren FAT-Link erstellen, wenn Du magst.</p>"
 
-#: afat/views/fatlinks.py:342
+#: afat/views/fatlinks.py:343
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>Fleet with ID \"{fleet_id}\" for your character {creator__character_name} has already been registered and pilots joining this fleet are automatically tracked.</p>"
 msgstr "<h4>Warnung!</h4><p>Die Flotte mit der ID „{fleet_id}“ für Deinen Charakter {creator__character_name} wurde bereits registriert und Piloten werden automatisch erfasst.</p>"
 
-#: afat/views/fatlinks.py:390
+#: afat/views/fatlinks.py:391
 msgid "<h4>Warning!</h4><p>Not Fleet Boss! Only the fleet boss can utilize the ESI function. You can create a clickable FAT link and share it, if you like.</p>"
 msgstr "<h4>Warnung!</h4><p>Du bist nicht der Flottenkommandant! Nur der Flottenkommandant kann die ESI Funktion nutzen. Du kannst einen klickbaren FAT-Link erstellen, wenn Du magst.</p>"
 
-#: afat/views/fatlinks.py:454
+#: afat/views/fatlinks.py:455
 msgid "<h4>Success!</h4><p>FAT link Created!</p><p>FATs have been queued, they may take a few minutes to show up.</p><p>Pilots who join later will be automatically added until you close or leave the fleet in-game.</p>"
 msgstr "<h4>Erfolg!</h4><p>FAT-Link erstellt!</p><p>FATs werden eingelesen. Dies mag einen Moment dauern</p><p>Piloten welche später der Flotte beitreten werden automatisch hinzugefügt bis Du die Flotte schließt oder verlässt.</p>"
 
-#: afat/views/fatlinks.py:498
+#: afat/views/fatlinks.py:499
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI FAT link.</p>"
 msgstr "<h4>Fehler!</h4><p>Es ist etwas schief gelaufen beid er Erstellung Deines ESI-FAT-Links.</p>"
 
-#: afat/views/fatlinks.py:536 afat/views/fatlinks.py:937
+#: afat/views/fatlinks.py:537
 msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
 msgstr "<h4>Warnung!</h4><p>Keinen FAT-Link Hash zur Verfügung gestellt.</p>"
 
-#: afat/views/fatlinks.py:548 afat/views/fatlinks.py:709
+#: afat/views/fatlinks.py:549 afat/views/fatlinks.py:715
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr "<h4>Warnung!</h4><p>Der zur Verfügung gestellte FAT-Link Hash ist nicht gültig.</p>"
 
-#: afat/views/fatlinks.py:562
+#: afat/views/fatlinks.py:563
 msgid "<h4>Warning!</h4><p>Sorry, that FAT link is expired. If you were on that fleet, contact your FC about having your FAT manually added.</p>"
 msgstr "<h4>Warnung!</h4><p>Dieser FAT-Link ist bereits abgelaufen. Wenn Du in der Flotte warst kontaktiere bitte Deinen FC damit dieser Dich manuell hinzufügen kann.</p>"
 
-#: afat/views/fatlinks.py:589
+#: afat/views/fatlinks.py:590
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>There was an issue with the ESI token for {character_name}. Please try again.</p>"
 msgstr "<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character_name}. Bitte versuche es noch einmal.</p>"
 
-#: afat/views/fatlinks.py:635
+#: afat/views/fatlinks.py:641
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
 msgstr "<h4>Warnung!</h4><p>Der ausgewählte Charakter ({character_name}) wurde bereits für diese Flotte registriert.</p>"
 
-#: afat/views/fatlinks.py:654
+#: afat/views/fatlinks.py:660
 #, python-brace-format
 msgid "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</p>"
 msgstr "<h4>Erfolg!</h4><p>Teilnahme für {character_name} in Flotte „{fleet_name}“ registriert.</p>"
 
-#: afat/views/fatlinks.py:675
+#: afat/views/fatlinks.py:681
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>Cannot register the fleet participation for {character_name}. The character needs to be online.</p>"
 msgstr "<h4>Warnung!</h4><p>Der Charakter {character_name} kann nicht registriert werden. Charakter ist nicht online.</p>"
 
-#: afat/views/fatlinks.py:741
+#: afat/views/fatlinks.py:747
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Erfolg!</h4><p>Flottennname erfolgreich geändert.</p>"
 
-#: afat/views/fatlinks.py:766
+#: afat/views/fatlinks.py:772
 #, python-brace-format
 msgid "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added flying a {shiptype} in {system}</p>"
 msgstr "<h4>Erfolg!</h4><p>Manueller FAT Eintrag verarbeitet.<br>{character_name} wurde in einer {shiptype} im System {system} hinzugefügt</p>"
 
-#: afat/views/fatlinks.py:801
+#: afat/views/fatlinks.py:807
 #, python-brace-format
 msgid "<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr "<h4>Information</h4><p>Der Pilot ist bereits für diesen FAT-Link registriert.</p><p>Name: {character_name}<br>System: {system}<br>Schiff: {shiptype}</p>"
 
-#: afat/views/fatlinks.py:816
+#: afat/views/fatlinks.py:822
 msgid "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you entered was not found.</p>"
 msgstr "<h4>Oh Nein!</h4><p>Manueller FAT Eintrag fehlgeschlagen. Der Charakter konnte nicht gefunden werden.</p>"
 
-#: afat/views/fatlinks.py:825
+#: afat/views/fatlinks.py:831
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr "<h4>Oh Nein!</h4><p>Irgendetwas ist schief gelaufen!</p>"
 
-#: afat/views/fatlinks.py:950
+#: afat/views/fatlinks.py:944
 msgid "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT link has already been deleted.</p>"
 msgstr "<h4>Fehler!</h4><p>Der FAT-Link Hash ist entweder ungültig oder der dazugehörige FAT-Link wurde gelöscht.</p>"
 
-#: afat/views/fatlinks.py:975
+#: afat/views/fatlinks.py:970
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs have been successfully deleted.</p>"
 msgstr "<h4>Erfolg!</h4><p>Der FAT-Link „{fatlink_hash}“ und alle assoziierten FATs wurden erfolgreich gelöscht.</p>"
 
-#: afat/views/fatlinks.py:1019
+#: afat/views/fatlinks.py:1012
 msgid "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</p>"
 msgstr "<h4>Fehler!</h4><p>Der FAT-Link Hash ist entweder ungültig oder der dazugehörige FAT Link wurde bereits gelöscht.</p>"
 
-#: afat/views/fatlinks.py:1033
+#: afat/views/fatlinks.py:1023
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr "<h4>Fehler!</h4><p>Fat-Link Hash und FAT-Link ID passen nicht zusammen.</p>"
 
-#: afat/views/fatlinks.py:1053
+#: afat/views/fatlinks.py:1043
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT for {character_name} has been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr "<h4>Erfolg!</h4><p>Der FAT für {character_name} wurde erfolgreich vom FAT-Link „{fatlink_hash}“ gelöscht.</p>"
 
-#: afat/views/fatlinks.py:1129
+#: afat/views/fatlinks.py:1117
 msgid "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr "<h4>Fehler!</h4><p>Der zur Verfügung gestellt Hash passt zu keinem FAT-Link.</p>"
 
-#: afat/views/fatlinks.py:1177
+#: afat/views/fatlinks.py:1162
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>Erfolg!</h4><p>Der FAT-Link wurde erfolgreich wieder geöffnet.</p>"
 
-#: afat/views/fatlinks.py:1187
+#: afat/views/fatlinks.py:1172
 msgid "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can be re-opened only once!</p>"
 msgstr "<h4>Warnung!</h4><p>Dieser FAT-Link wurde bereits einmal wieder geöffnet. Dies kann nur einmal getan werden.</p>"
 
-#: afat/views/statistics.py:238
+#: afat/views/statistics.py:242
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for this character.</p>"
 msgstr "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diesen Charakter zu sehen.</p>"
 
-#: afat/views/statistics.py:251
-msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
-msgstr "<h4>Warnung!</h4><p>Datumsinformationen nicht komplett!</p>"
+#: afat/views/statistics.py:380
+msgid "This character is in a different corporation and their FATs are not counted towards the statistics of the main corporation."
+msgstr "Dieser Charakter ist in einer anderen Corporation und seine FATs werden nicht zu den Statistiken dieser Corporation gezählt."
 
-#: afat/views/statistics.py:433
+#: afat/views/statistics.py:458
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diese Corporation zu sehen.</p>"
 
-#: afat/views/statistics.py:675
-msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
-msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
+#~ msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
+#~ msgstr "<h4>Warnung!</h4><p>Datumsinformationen nicht komplett!</p>"
+
+#~ msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
+#~ msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
 
 #~ msgctxt "Decimal separator"
 #~ msgid "."
