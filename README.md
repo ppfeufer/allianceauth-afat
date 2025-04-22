@@ -29,7 +29,6 @@ ______________________________________________________________________
   - [Fat Link Details](#fat-link-details)
   - [Add Fat Link View for FCs](#add-fat-link-view-for-fcs)
 - [Installation](#installation)
-  - [Important](#important)
   - [Step 1: Install the App](#step-1-install-the-app)
   - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
   - [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
@@ -92,27 +91,16 @@ information, see below.
 
 ## Installation<a name="installation"></a>
 
+> [!Important]
+>
+> This app is a plugin for [Alliance Auth](https://gitlab.com/allianceauth/allianceauth). \
+> If you don't have Alliance Auth running already, please install it first before
+> proceeding. (See the official [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html) for details)
+
 > [!NOTE]
 >
-> **Alliance Auth AFAT >= 3.0.0 needs at least Alliance Auth v4.0.0!**
->
-> Please make sure to update your Alliance Auth instance _before_ you install this
-> module or update to the latest version, otherwise an update to Alliance Auth will
-> be pulled in unsupervised.
->
-> The last version compatible with Alliance Auth v3 is `2.13.0`.
-
-### Important<a name="important"></a>
-
-This app is a plugin for Alliance Auth. If you don't have Alliance Auth running already,
-please install it first before proceeding. (See the official
-[AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html)
-for details)
-
-> [!IMPORTANT]
->
 > For users migrating from Alliance Auth's built-in FAT systems,
-> please read the [specific instructions](#data-migration) FIRST.
+> please read the [specific instructions](#data-migration).
 
 ### Step 1: Install the App<a name="step-1-install-the-app"></a>
 

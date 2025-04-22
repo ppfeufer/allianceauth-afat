@@ -41,6 +41,46 @@ Section Order:
 ### Security
 -->
 
+## [3.8.0] - 2025-04-23
+
+### Added
+
+- Alt information in mains' corp statistics member details
+
+### Fixed
+
+- Statistics for alts in a different corp
+- Historic data in statistics. Up until now, corporation and alliance statistics were
+  calculated with the characters' current association. This has been changed to use the
+  character association at the time of the FAT link creation, to ensure that the
+  statistics are correct and not changing over time. \
+  Meaning, if a character left your corp, your corp lost the statistics for this
+  character entirely.
+
+### Changed
+
+- Code for monthly corporation statistics improved
+- Switch to Django `datetime` implementation for date/time handling
+- Show only main characters with FATs in the member statistics overview for corporations
+- Some defaults in the statistics code
+
+### Removed
+
+- Unnecessary checks in alliance statistics
+
+### Update instructions
+
+> [!IMPORTANT]
+>
+> After you updated to this version and ran migrations, you need to run the following
+> command to migrate the characters historic association data:
+>
+> ```shell
+> python manage.py afat_migrate_affiliation_history
+> ```
+>
+> Depending on how many FAT links you have in total, this may take a while.
+
 ## [3.8.0-beta.5] - 2025-04-16
 
 > [!NOTE]
