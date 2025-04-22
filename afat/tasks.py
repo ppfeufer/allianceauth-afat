@@ -120,6 +120,8 @@ def process_character(
     fat, created = Fat.objects.get_or_create(
         fatlink=link,
         character=character,
+        corporation_eve_id=character.corporation_id,
+        alliance_eve_id=character.alliance_id,
         defaults={"system": solar_system_name, "shiptype": ship_name},
     )
 

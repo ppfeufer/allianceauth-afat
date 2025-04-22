@@ -3,13 +3,15 @@ Test cases for the task in the afat module.
 """
 
 # Standard Library
-import datetime
 import unittest
 from datetime import timedelta
 from unittest.mock import ANY, MagicMock, patch
 
 # Third Party
 import kombu
+
+# Django
+from django.utils.datetime_safe import datetime
 
 # Alliance Auth (External Libs)
 from app_utils.esi import EsiStatus
@@ -275,7 +277,7 @@ class EsiFatlinksErrorHandlingTests(unittest.TestCase):
         fatlink = MagicMock(spec=FatLink)
         error_key = MagicMock()
         error_key.label = "Test Error"
-        now = datetime.datetime(2023, 10, 1, 12, 0, 0)
+        now = datetime(2023, 10, 1, 12, 0, 0)
         mock_now.return_value = now
         fatlink.last_esi_error = error_key
         fatlink.last_esi_error_time = now - timedelta(seconds=30)
@@ -302,7 +304,7 @@ class EsiFatlinksErrorHandlingTests(unittest.TestCase):
         fatlink = MagicMock(spec=FatLink)
         error_key = MagicMock()
         error_key.label = "Test Error"
-        now = datetime.datetime(2023, 10, 1, 12, 0, 0)
+        now = datetime(2023, 10, 1, 12, 0, 0)
         mock_now.return_value = now
         fatlink.last_esi_error = error_key
         fatlink.last_esi_error_time = now - timedelta(seconds=30)
@@ -327,7 +329,7 @@ class EsiFatlinksErrorHandlingTests(unittest.TestCase):
         fatlink = MagicMock(spec=FatLink)
         error_key = MagicMock()
         error_key.label = "Test Error"
-        now = datetime.datetime(2023, 10, 1, 12, 0, 0)
+        now = datetime(2023, 10, 1, 12, 0, 0)
         mock_now.return_value = now
         fatlink.last_esi_error = error_key
         fatlink.last_esi_error_time = now - timedelta(seconds=100)
@@ -352,7 +354,7 @@ class EsiFatlinksErrorHandlingTests(unittest.TestCase):
         fatlink = MagicMock(spec=FatLink)
         error_key = MagicMock()
         error_key.label = "Test Error"
-        now = datetime.datetime(2023, 10, 1, 12, 0, 0)
+        now = datetime(2023, 10, 1, 12, 0, 0)
         mock_now.return_value = now
         fatlink.last_esi_error = None
         fatlink.last_esi_error_time = None

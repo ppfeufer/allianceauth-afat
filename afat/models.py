@@ -14,7 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import models, transaction
 from django.utils import timezone
 from django.utils.crypto import get_random_string
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -299,6 +299,20 @@ class Fat(models.Model):
         related_name="afat_fats",
         on_delete=models.CASCADE,
         help_text=_("Character who registered this FAT"),
+    )
+
+    corporation_eve_id = models.BigIntegerField(
+        null=True,
+        help_text=_(
+            "Corporation EVE ID of the character who registered this FAT at the time of registration"
+        ),
+    )
+
+    alliance_eve_id = models.BigIntegerField(
+        null=True,
+        help_text=_(
+            "Alliance EVE ID of the character who registered this FAT at the time of registration"
+        ),
     )
 
     fatlink = models.ForeignKey(
