@@ -15,7 +15,8 @@
                     <th>{% translate "Creator" %}</th>
                     <th>{% translate "EVE time" %}</th>
 
-                    {% if perms.afat.manage_afat %}
+                    {# Display the "Actions" column only if the user has the 'add_fatlink' or 'manage_afat' permission. #}
+                    {% if perms.afat.add_fatlink or perms.afat.manage_afat %}
                         <th><!-- {% translate "Actions" %} --></th>
                     {% endif %}
                 </tr>
@@ -25,7 +26,7 @@
 
             <tfoot>
                 <tr>
-                    <td colspan="{% if perms.afat.manage_afat %}6{% else %}5{% endif %}">
+                    <td colspan="{% if perms.afat.add_fatlink or perms.afat.manage_afat %}6{% else %}5{% endif %}">
                         {% include "afat/partials/fatlinks/fatlink-list-legend.html" %}
                     </td>
                 </tr>
