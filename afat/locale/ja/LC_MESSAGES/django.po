@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-04-23 01:36+0200\n"
+"POT-Creation-Date: 2025-05-05 16:51+0200\n"
 "PO-Revision-Date: 2024-11-09 11:25+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
@@ -131,7 +131,7 @@ msgstr ""
 #: afat/helper/views.py:60 afat/helper/views.py:176
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:66
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:67
 msgid "ESI"
 msgstr ""
 
@@ -552,9 +552,9 @@ msgstr "作成者"
 msgid "EVE time"
 msgstr ""
 
-#: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:19
+#: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:21
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:35
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:36
 msgid "Actions"
 msgstr ""
 
@@ -675,7 +675,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:90
 #: afat/templates/afat/view/dashboard/dashboard.html:27
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:56
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:57
 msgid "Close ESI fleet tracking"
 msgstr ""
 
@@ -999,7 +999,7 @@ msgid "Recent activity"
 msgstr ""
 
 #: afat/templates/afat/view/dashboard/dashboard.html:24
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:53
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr ""
 
