@@ -41,6 +41,8 @@ Section Order:
 ### Security
 -->
 
+## [3.8.1] - 2025-05-05
+
 ### Fixed
 
 - Permission check in the templates for the FAT link tables
