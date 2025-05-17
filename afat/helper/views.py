@@ -196,7 +196,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
             f'data-url="{button_delete_fat}" '
             f'data-confirm-text="{button_delete_text}" '
             f'data-body-text="{modal_body_text}">'
-            '<i class="fa-solid fa-eye"></i>'
+            '<i class="fa-solid fa-trash-can fa-fw"></i>'
             "</a>"
         )
 

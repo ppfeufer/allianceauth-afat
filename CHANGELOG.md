@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Icon for the FAT delete button in FAT link details view
+
 ## [3.8.1] - 2025-05-05
 
 ### Fixed
