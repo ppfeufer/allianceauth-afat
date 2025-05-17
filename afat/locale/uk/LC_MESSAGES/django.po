@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-05-05 16:51+0200\n"
-"PO-Revision-Date: 2025-04-16 13:24+0000\n"
+"POT-Creation-Date: 2025-05-17 05:31+0200\n"
+"PO-Revision-Date: 2025-05-12 20:48+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -81,10 +81,9 @@ msgstr[2] "Деактивовано {notifications_count} типів флоту"
 msgstr[3] "Деактивовано {notifications_count} тип флоту"
 
 #: afat/apps.py:20
-#, fuzzy, python-brace-format
-#| msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
+#, python-brace-format
 msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-msgstr "AFAT - Another Fleet Activity трекер v{__version__}"
+msgstr "Трекер флотової активності (AFAT) v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -329,11 +328,11 @@ msgstr "Персонаж який зареєстрував цей FAT"
 
 #: afat/models.py:307
 msgid "Corporation EVE ID of the character who registered this FAT at the time of registration"
-msgstr ""
+msgstr "EVE ID копрорації персонажа, який зареєстрував цей FAT на момент реєстрації"
 
 #: afat/models.py:314
 msgid "Alliance EVE ID of the character who registered this FAT at the time of registration"
-msgstr ""
+msgstr "EVE ID альянсу персонажа, який зареєстрував цей FAT на момент реєстрації"
 
 #: afat/models.py:322
 msgid "The FAT link the character registered at"
@@ -651,9 +650,8 @@ msgid "Link expires (EVE Time)"
 msgstr "Посилання прострочиться (EVE Time)"
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:19
-#, fuzzy
 msgid "Link expired (EVE Time)"
-msgstr "Посилання прострочиться (EVE Time)"
+msgstr "Посилання прострочене (час EVE)"
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:29
 msgid "Participation is being tracked via ESI"
@@ -1340,7 +1338,7 @@ msgstr "<h4>Попередження!</h4><p>Ви не маєте дозволу
 
 #: afat/views/statistics.py:380
 msgid "This character is in a different corporation and their FATs are not counted towards the statistics of the main corporation."
-msgstr ""
+msgstr "Цей персонаж перебуває в іншій корпорації, і його FAT-и не враховуються в статистиці основної корпорації."
 
 #: afat/views/statistics.py:458
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
