@@ -17,3 +17,4 @@ from afat.models.afat import (
     get_hash_on_save,
     get_sentinel_user,
 )
+from afat.models.smart_filter import FatsInTimeFilter

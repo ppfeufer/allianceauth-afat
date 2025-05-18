@@ -12,8 +12,17 @@ from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
 
 # Alliance Auth AFAT
+from afat.app_settings import securegroups_installed
 from afat.forms import DoctrineAdminForm, SettingAdminForm
-from afat.models import Doctrine, Fat, FatLink, FleetType, Log, Setting
+from afat.models import (
+    Doctrine,
+    Fat,
+    FatLink,
+    FatsInTimeFilter,
+    FleetType,
+    Log,
+    Setting,
+)
 
 
 # Register your models here.
@@ -257,3 +266,21 @@ class DoctrineAdmin(admin.ModelAdmin):
 
     # Display all fields in the admin page
     list_display = [field.name for field in Doctrine._meta.get_fields()]
+
+
+class FatsInTimeFilterAdmin(admin.ModelAdmin):
+    """
+    Config for the FATs in time filter model
+    """
+
+    list_display = ("name", "description", "days", "fats_needed")
+    filter_horizontal = (
+        # "ship_types",
+        "fleet_types",
+    )
+
+    select_related = True
+
+
+if securegroups_installed():
+    admin.site.register(FatsInTimeFilter, FatsInTimeFilterAdmin)

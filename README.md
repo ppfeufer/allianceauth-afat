@@ -66,6 +66,8 @@ ______________________________________________________________________
   - Re-open FAT link
   - Manually add pilot to FAT link
   - Remove pilot from FAT link
+- Smart filter for integration with [Secure Groups](https://github.com/Solar-Helix-Independent-Transport/allianceauth-secure-groups)
+  - FATs in time period
 
 AFAT will work alongside the built-in native FAT System and ImicusFAT.
 However, data doesn't share, but you can migrate their data to AFAT, for more
@@ -115,7 +117,7 @@ pip install allianceauth-afat
 
 Configure your AA settings in your `local.py` as follows:
 
-- Add `'afat',` to `INSTALLED_APPS`
+- Add `"afat",` to `INSTALLED_APPS`
 - Add the scheduled tasks
 
 ```python

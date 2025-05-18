@@ -21,6 +21,17 @@ def fittings_installed() -> bool:
     return apps.is_installed(app_name="fittings")
 
 
+def securegroups_installed() -> bool:
+    """
+    Check if the Alliance Auth Secure Groups module is installed
+
+    :return:
+    :rtype:
+    """
+
+    return apps.is_installed(app_name="securegroups")
+
+
 def use_fittings_module_for_doctrines() -> bool:
     """
     Check if the Fittings module is used for doctrines

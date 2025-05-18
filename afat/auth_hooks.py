@@ -8,7 +8,9 @@ from allianceauth.services.hooks import MenuItemHook, UrlHook
 
 # Alliance Auth AFAT
 from afat import __title__, urls
+from afat.app_settings import securegroups_installed
 from afat.constants import APP_BASE_URL
+from afat.models import FatsInTimeFilter
 
 
 class AaAfatMenuItem(MenuItemHook):  # pylint: disable=too-few-public-methods
@@ -64,3 +66,17 @@ def register_url():
     """
 
     return UrlHook(urls=urls, namespace="afat", base_url=rf"^{APP_BASE_URL}/")
+
+
+if securegroups_installed():
+
+    @hooks.register("secure_group_filters")
+    def filters() -> list:
+        """
+        Secure group filter
+
+        :return: Secure group filters
+        :rtype: list
+        """
+
+        return [FatsInTimeFilter]
