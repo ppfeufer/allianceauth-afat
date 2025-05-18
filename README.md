@@ -54,7 +54,6 @@ ______________________________________________________________________
 - Fleet type classification (can be added in the admin backend)
 - Ship type overview per FAT link
 - Graphical statistics views
-- Custom module name
 - Re-open FAT link if the FAT link has expired and is within the defined grace time
   (only for clickable FAT links)
 - Manually add pilots to clickable FAT links, in case they missed clicking the link
@@ -154,6 +153,8 @@ pip install -U allianceauth-afat
 
 python manage.py collectstatic
 python manage.py migrate
+
+redis-cli flushall
 ```
 
 Finally, restart your supervisor services for AA
