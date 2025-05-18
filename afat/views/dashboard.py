@@ -19,6 +19,7 @@ from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
 from afat import __title__
+from afat.helper.association import get_all_characters_with_fats_from_user
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
 from afat.models import Fat, FatLink
 
@@ -37,12 +38,7 @@ def overview(request: WSGIRequest) -> HttpResponse:
     :rtype:
     """
 
-    characters = (
-        EveCharacter.objects.select_related("character_ownership")
-        .filter(character_ownership__user=request.user, afat_fats__isnull=False)
-        .order_by("-userprofile", "character_name")
-        .distinct()
-    )
+    characters = get_all_characters_with_fats_from_user(request.user)
 
     context = {"characters": characters}
 

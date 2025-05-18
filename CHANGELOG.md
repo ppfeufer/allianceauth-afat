@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Smart Filter: FATs in time period
+
 ## [3.8.2] - 2025-05-17
 
 ### Fixed
