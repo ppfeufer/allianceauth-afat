@@ -17,6 +17,7 @@ from allianceauth.services.hooks import get_extension_logger
 
 # Alliance Auth (External Libs)
 from app_utils.logging import LoggerAddTag
+from eveuniverse.models import EveType
 
 # Alliance Auth AFAT
 from afat import __title__
@@ -103,12 +104,23 @@ class FatsInTimeFilter(BaseFilter):
     FatsInTimeFilter
     """
 
-    days = models.IntegerField(default=30)
-    fats_needed = models.IntegerField(default=10)
-    fleet_types = models.ManyToManyField(to=FleetType, blank=True)
-    # ship_types = models.ManyToManyField(
-    #     to=EveGroup, blank=True, limit_choices_to={"eve_category_id": 6}
-    # )
+    days = models.IntegerField(
+        default=30, help_text=_("The number of days to look back for FATs.")
+    )
+    fats_needed = models.IntegerField(
+        default=10, help_text=_("The number of FATs needed to pass the filter.")
+    )
+    fleet_types = models.ManyToManyField(
+        to=FleetType,
+        blank=True,
+        help_text=_("Any of the selected fleet types are needed to pass the filter."),
+    )
+    ship_classes = models.ManyToManyField(
+        to=EveType,
+        blank=True,
+        limit_choices_to={"eve_group__eve_category_id": 6},
+        help_text=_("Any of the selected ship classes are needed to pass the filter."),
+    )
 
     class Meta:
         """
@@ -134,17 +146,16 @@ class FatsInTimeFilter(BaseFilter):
             character_ids = character_list.values_list(
                 "character__character_id", flat=True
             )
+            ship_classes = self.ship_classes.all().values_list("name", flat=True)
+            fleet_types = self.fleet_types.all().values_list("name", flat=True)
+
             fats = Fat.objects.filter(
                 character__character_id__in=character_ids,
                 fatlink__created__gte=start_time,
             )
-            # ship_types = self.ship_types.all()
-            fleet_types = self.fleet_types.all().values_list("name", flat=True)
 
-            # if ship_types.exists():
-            #     fat_count = fat_count.filter(
-            #         ship_types__in=ship_types.values_list("name", flat=True)
-            #     )
+            if ship_classes.exists():
+                fats = fats.filter(shiptype__in=ship_classes)
 
             if fleet_types.exists():
                 fats = fats.filter(fatlink__fleet_type__in=fleet_types)
@@ -166,7 +177,7 @@ class FatsInTimeFilter(BaseFilter):
 
         character_list = CharacterOwnership.objects.filter(user__in=users)
         start_time = _get_threshold_date(timedelta_in_days=self.days)
-        # ship_types = self.ship_types.all()
+        ship_classes = self.ship_classes.all().values_list("name", flat=True)
         fleet_types = self.fleet_types.all().values_list("name", flat=True)
 
         fats = Fat.objects.filter(
@@ -174,8 +185,8 @@ class FatsInTimeFilter(BaseFilter):
             fatlink__created__gte=start_time,
         ).select_related("character__character_ownership__user", "character")
 
-        # if ship_types.exists():
-        #     fats = fats.filter(shiptype__in=ship_types.values_list("name", flat=True))
+        if ship_classes.exists():
+            fats = fats.filter(shiptype__in=ship_classes)
 
         if fleet_types.exists():
             fats = fats.filter(fatlink__fleet_type__in=fleet_types)

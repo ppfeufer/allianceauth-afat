@@ -58,7 +58,7 @@ class Command(BaseCommand):
         params = [
             "eveuniverse_load_types",
             __title__,
-            "--category_id",
+            "--category_id_with_dogma",
             str(EveCategoryId.SHIP.value),
         ]
 
