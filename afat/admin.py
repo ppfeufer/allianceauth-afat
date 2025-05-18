@@ -273,13 +273,46 @@ class FatsInTimeFilterAdmin(admin.ModelAdmin):
     Config for the FATs in time filter model
     """
 
-    list_display = ("name", "description", "days", "fats_needed")
+    list_display = (
+        "name",
+        "description",
+        "days",
+        "fats_needed",
+        "get_fleet_types",
+        "get_ship_classes",
+    )
     filter_horizontal = (
-        # "ship_types",
         "fleet_types",
+        "ship_classes",
     )
 
     select_related = True
+
+    @admin.display(description=_("Fleet types"))
+    def get_fleet_types(self, obj):
+        """
+        Get fleet types
+
+        :param obj:
+        :type obj:
+        :return:
+        :rtype:
+        """
+
+        return ", ".join([fleet_type.name for fleet_type in obj.fleet_types.all()])
+
+    @admin.display(description=_("Ship classes"))
+    def get_ship_classes(self, obj):
+        """
+        Get ship classes
+
+        :param obj:
+        :type obj:
+        :return:
+        :rtype:
+        """
+
+        return ", ".join([ship_class.name for ship_class in obj.ship_classes.all()])
 
 
 if securegroups_installed():

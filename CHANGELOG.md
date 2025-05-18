@@ -44,6 +44,30 @@ Section Order:
 ### Added
 
 - Smart Filter: FATs in time period
+- Dependency to `django-eveuniverse`
+
+### Update Instructions
+
+> [!IMPORTANT]
+>
+> **New Dependency:** `django-eveuniverse`
+>
+> After updating to this version and **before** running the DB migrations,
+> please make sure to add `eveuniverse` to the list of installed apps
+> in your `local.py` file:
+
+```python
+INSTALLED_APPS += [
+    "eveuniverse",
+]
+```
+
+Then run the following commands:
+
+```bash
+python manage.py migrate
+python manage.py afat_load_shiptypes
+```
 
 ## [3.8.2] - 2025-05-17
 

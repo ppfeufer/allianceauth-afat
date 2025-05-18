@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.8.2\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-05-18 10:11+0200\n"
+"POT-Creation-Date: 2025-05-18 21:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,6 +69,14 @@ msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
 msgstr[0] ""
 msgstr[1] ""
+
+#: afat/admin.py:291 afat/models/afat.py:116
+msgid "Fleet types"
+msgstr ""
+
+#: afat/admin.py:304
+msgid "Ship classes"
+msgstr ""
 
 #: afat/apps.py:20
 #, python-brace-format
@@ -245,10 +253,6 @@ msgstr ""
 
 #: afat/models/afat.py:106
 msgid "Whether this fleet type is active or not"
-msgstr ""
-
-#: afat/models/afat.py:116
-msgid "Fleet types"
 msgstr ""
 
 #: afat/models/afat.py:140
@@ -487,23 +491,39 @@ msgstr ""
 msgid "AFAT Settings"
 msgstr ""
 
-#: afat/models/smart_filter.py:50
+#: afat/models/smart_filter.py:51
 msgid "The filter name that is shown to the admin."
 msgstr ""
 
-#: afat/models/smart_filter.py:55
+#: afat/models/smart_filter.py:56
 msgid "The filter description that is shown to end users."
 msgstr ""
 
-#: afat/models/smart_filter.py:85
+#: afat/models/smart_filter.py:86
 msgid "Please create a filter!"
 msgstr ""
 
-#: afat/models/smart_filter.py:98
+#: afat/models/smart_filter.py:99
 msgid "Please create an audit function!"
 msgstr ""
 
-#: afat/models/smart_filter.py:118
+#: afat/models/smart_filter.py:108
+msgid "The number of days to look back for FATs."
+msgstr ""
+
+#: afat/models/smart_filter.py:111
+msgid "The number of FATs needed to pass the filter."
+msgstr ""
+
+#: afat/models/smart_filter.py:116
+msgid "Any of the selected fleet types are needed to pass the filter."
+msgstr ""
+
+#: afat/models/smart_filter.py:122
+msgid "Any of the selected ship classes are needed to pass the filter."
+msgstr ""
+
+#: afat/models/smart_filter.py:130
 msgid "Smart Filter: FATs in time period"
 msgstr ""
 

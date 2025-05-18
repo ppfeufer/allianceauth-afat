@@ -32,6 +32,7 @@ ______________________________________________________________________
   - [Step 1: Install the App](#step-1-install-the-app)
   - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
   - [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
+  - [Step 4: Preload Eve Universe Data](#step-4-preload-eve-universe-data)
 - [Updating](#updating)
 - [Data Migration](#data-migration)
   - [Import From Native FAT](#import-from-native-fat)
@@ -139,6 +140,15 @@ Run migrations & copy static files
 ```bash
 python manage.py collectstatic
 python manage.py migrate
+```
+
+### Step 4: Preload Eve Universe Data<a name="step-4-preload-eve-universe-data"></a>
+
+The smart filter uses Eve Universe data to filter the ship types.
+To preload the data, run the following command:
+
+```bash
+python manage.py afat_load_shiptypes
 ```
 
 Restart your supervisor services for AA.
