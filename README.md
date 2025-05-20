@@ -30,13 +30,23 @@ ______________________________________________________________________
   - [Add Fat Link View for FCs](#add-fat-link-view-for-fcs)
   - [Smart Filter: FATs in Time Period](#smart-filter-fats-in-time-period)
 - [Installation](#installation)
-  - [Step 1: Install the App](#step-1-install-the-app)
-  - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
-  - [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
-  - [Step 4: Preload Eve Universe Data](#step-4-preload-eve-universe-data)
+  - [Bare Metal Installation](#bare-metal-installation)
+    - [Step 1: Install the App](#step-1-install-the-app)
+    - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
+    - [Step 3: Finalizing the Installation](#step-3-finalizing-the-installation)
+  - [Docker Installation](#docker-installation)
+    - [Step 1: Add the App](#step-1-add-the-app)
+    - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings-1)
+    - [Step 3: Build Auth and Restart Your Containers](#step-3-build-auth-and-restart-your-containers)
+    - [Step 4: Finalizing the Installation](#step-4-finalizing-the-installation)
 - [Updating](#updating)
+  - [Bare Metal Installation](#bare-metal-installation-1)
+  - [Docker Installation](#docker-installation-1)
+  - [Common Steps](#common-steps)
 - [Data Migration](#data-migration)
   - [Import From Native FAT](#import-from-native-fat)
+    - [Bare Metal Installation](#bare-metal-installation-2)
+    - [Docker Installation](#docker-installation-2)
 - [Settings](#settings)
 - [Permissions](#permissions)
 - [Changelog](#changelog)
@@ -109,21 +119,23 @@ information, see below.
 > For users migrating from Alliance Auth's built-in FAT systems,
 > please read the [specific instructions](#data-migration).
 
-### Step 1: Install the App<a name="step-1-install-the-app"></a>
+### Bare Metal Installation<a name="bare-metal-installation"></a>
+
+#### Step 1: Install the App<a name="step-1-install-the-app"></a>
 
 Make sure you're in the virtual environment (venv) of your Alliance Auth installation.
 Then install the latest version:
 
-```bash
+```shell
 pip install allianceauth-afat
 ```
 
-### Step 2: Update Your AA Settings<a name="step-2-update-your-aa-settings"></a>
+#### Step 2: Update Your AA Settings<a name="step-2-update-your-aa-settings"></a>
 
 Configure your AA settings in your `local.py` as follows:
 
 - Add `"afat",` to `INSTALLED_APPS`
-- Add the scheduled tasks
+- Add the Scheduled Tasks
 
 ```python
 # AFAT - https://github.com/ppfeufer/allianceauth-afat
@@ -138,32 +150,72 @@ CELERYBEAT_SCHEDULE["afat_logrotate"] = {
 }
 ```
 
-### Step 3: Finalizing the Installation<a name="step-3-finalizing-the-installation"></a>
+#### Step 3: Finalizing the Installation<a name="step-3-finalizing-the-installation"></a>
 
-Run migrations & copy static files
+Run migrations, copy static files and load EVE universe data:
 
-```bash
+```shell
 python manage.py collectstatic
 python manage.py migrate
-```
-
-### Step 4: Preload Eve Universe Data<a name="step-4-preload-eve-universe-data"></a>
-
-The smart filter uses Eve Universe data to filter the ship types.
-To preload the data, run the following command:
-
-```bash
 python manage.py afat_load_shiptypes
 ```
 
-Restart your supervisor services for AA.
+### Docker Installation<a name="docker-installation"></a>
+
+#### Step 1: Add the App<a name="step-1-add-the-app"></a>
+
+Add the app to your `conf/requirements.txt`:
+
+```text
+allianceauth-afat==3.9.0
+```
+
+#### Step 2: Update Your AA Settings<a name="step-2-update-your-aa-settings-1"></a>
+
+Configure your AA settings (`conf/local.py`) as follows:
+
+- Add `"afat",` to `INSTALLED_APPS`
+- Add the Scheduled Tasks
+
+```python
+# AFAT - https://github.com/ppfeufer/allianceauth-afat
+CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
+    "task": "afat.tasks.update_esi_fatlinks",
+    "schedule": crontab(minute="*/1"),
+}
+
+CELERYBEAT_SCHEDULE["afat_logrotate"] = {
+    "task": "afat.tasks.logrotate",
+    "schedule": crontab(minute="0", hour="1"),
+}
+```
+
+#### Step 3: Build Auth and Restart Your Containers<a name="step-3-build-auth-and-restart-your-containers"></a>
+
+```shell
+docker compose build
+docker compose --env-file=.env up -d
+```
+
+#### Step 4: Finalizing the Installation<a name="step-4-finalizing-the-installation"></a>
+
+Run migrations, copy static files and load EVE universe data:
+
+```shell
+docker compose exec allianceauth_gunicorn bash
+auth collectstatic
+auth migrate
+auth afat_load_shiptypes
+```
 
 ## Updating<a name="updating"></a>
+
+### Bare Metal Installation<a name="bare-metal-installation-1"></a>
 
 To update your existing installation of AFAT, first enable your
 virtual environment (venv) of your Alliance Auth installation.
 
-```bash
+```shell
 pip install -U allianceauth-afat
 
 python manage.py collectstatic
@@ -174,9 +226,26 @@ redis-cli flushall
 
 Finally, restart your supervisor services for AA
 
+### Docker Installation<a name="docker-installation-1"></a>
+
+To update your existing installation of AFAT, all you need to do is to update the
+respective line in your `conf/requirements.txt` file to the latest version.
+
+```text
+allianceauth-afat==3.9.0
+```
+
+Now rebuild your containers:
+
+```shell
+docker compose build
+docker compose --env-file=.env up -d
+```
+
+### Common Steps<a name="common-steps"></a>
+
 It is possible that some versions need some more changes. Always read the
-[release notes](https://github.com/ppfeufer/allianceauth-afat/releases) to find out
-more.
+[release notes](https://github.com/ppfeufer/allianceauth-afat/releases) to find out more.
 
 ## Data Migration<a name="data-migration"></a>
 
@@ -186,10 +255,19 @@ you have used it until now.
 
 ### Import From Native FAT<a name="import-from-native-fat"></a>
 
-To import from the native FAT module, run the following command:
+To import from the native FAT module, run the following:
+
+#### Bare Metal Installation<a name="bare-metal-installation-2"></a>
 
 ```shell
 python myauth/manage.py afat_import_from_allianceauth_fat
+```
+
+#### Docker Installation<a name="docker-installation-2"></a>
+
+```shell
+docker compose exec allianceauth_gunicorn bash
+auth afat_import_from_allianceauth_fat
 ```
 
 ## Settings<a name="settings"></a>
