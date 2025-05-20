@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-05-17 05:31+0200\n"
-"PO-Revision-Date: 2025-05-12 20:48+0000\n"
+"POT-Creation-Date: 2025-05-20 03:26+0200\n"
+"PO-Revision-Date: 2025-05-19 20:24+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Fleet Activity Tracking"
 msgstr "Відстежування активності у флоті"
 
-#: afat/admin.py:105 afat/models.py:115
+#: afat/admin.py:114 afat/models/afat.py:115
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
@@ -32,15 +32,15 @@ msgstr "Відстежування активності у флоті"
 msgid "Fleet type"
 msgstr "Тип флоту"
 
-#: afat/admin.py:118 afat/models.py:434
+#: afat/admin.py:127 afat/models/afat.py:434
 msgid "Is enabled"
 msgstr "Дозволено"
 
-#: afat/admin.py:133
+#: afat/admin.py:142
 msgid "Activate selected fleet types"
 msgstr "Активуйте обрані типи флотів"
 
-#: afat/admin.py:162
+#: afat/admin.py:171
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
@@ -49,7 +49,7 @@ msgstr[1] "Не вдалось активувати: {failed} типи флот�
 msgstr[2] "Не вдалось активувати: {failed} типи флотів"
 msgstr[3] "Не вдалось активувати: {failed} тип флоту"
 
-#: afat/admin.py:172
+#: afat/admin.py:181
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
@@ -58,11 +58,11 @@ msgstr[1] "Активовано {notifications_count} типи флоту"
 msgstr[2] "Активовано {notifications_count} типів флоту"
 msgstr[3] "Активовано {notifications_count} тип флоту"
 
-#: afat/admin.py:178
+#: afat/admin.py:187
 msgid "Deactivate selected fleet types"
 msgstr "Деактивувати обрані типи флотів"
 
-#: afat/admin.py:207
+#: afat/admin.py:216
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
@@ -71,7 +71,7 @@ msgstr[1] "Не вдалось деактивувати {failed} типи фло
 msgstr[2] "Не вдалось деактивувати {failed} типів флоту"
 msgstr[3] "Не вдалось деактивувати {failed} тип флоту"
 
-#: afat/admin.py:217
+#: afat/admin.py:226
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
@@ -79,6 +79,14 @@ msgstr[0] "Деактивовано {notifications_count} тип флоту"
 msgstr[1] "Деактивовано {notifications_count} типи флоту"
 msgstr[2] "Деактивовано {notifications_count} типів флоту"
 msgstr[3] "Деактивовано {notifications_count} тип флоту"
+
+#: afat/admin.py:291 afat/models/afat.py:116
+msgid "Fleet types"
+msgstr "Тип флоту"
+
+#: afat/admin.py:304
+msgid "Ship classes"
+msgstr "Класи кораблів"
 
 #: afat/apps.py:20
 #, python-brace-format
@@ -212,145 +220,141 @@ msgstr "Субота"
 msgid "Sunday"
 msgstr "Неділя"
 
-#: afat/models.py:65
+#: afat/models/afat.py:65
 msgid "Can access the AFAT module"
 msgstr "Може отримати доступ до модуля AFAT"
 
-#: afat/models.py:73
+#: afat/models/afat.py:73
 msgid "Can manage the AFAT module"
 msgstr "Може керувати модулем AFAT"
 
-#: afat/models.py:75
+#: afat/models/afat.py:75
 msgid "Can create FAT links"
 msgstr "Може створювати FAT-посилання"
 
-#: afat/models.py:77
+#: afat/models/afat.py:77
 msgid "Can see own corporation statistics"
 msgstr "Може переглядати статистику своєї корпорації"
 
-#: afat/models.py:79
+#: afat/models/afat.py:79
 msgid "Can see statistics of other corporations"
 msgstr "Може переглядати статистику інших корпорацій"
 
-#: afat/models.py:81
+#: afat/models/afat.py:81
 msgid "Can view the modules log"
 msgstr "Може переглядати журнал модуля"
 
-#: afat/models.py:83
+#: afat/models/afat.py:83
 msgid "AFAT"
 msgstr "AFAT"
 
-#: afat/models.py:100
+#: afat/models/afat.py:100
 msgid "Descriptive name of the fleet type"
 msgstr "Опис типу флоту"
 
-#: afat/models.py:106
+#: afat/models/afat.py:106
 msgid "Whether this fleet type is active or not"
 msgstr "Чи активний цей тип флоту"
 
-#: afat/models.py:116
-msgid "Fleet types"
-msgstr "Тип флоту"
-
-#: afat/models.py:140
+#: afat/models/afat.py:140
 msgid "FC is not in the registered fleet anymore or fleet is no longer available."
 msgstr "ФлітКом не знаходиться в зареєстрованому флоті або флот вже не доступний."
 
-#: afat/models.py:142
+#: afat/models/afat.py:142
 msgid "Registered fleet seems to be no longer available."
 msgstr "Зареєстрований флот, здається, більше не доступний."
 
-#: afat/models.py:143
+#: afat/models/afat.py:143
 msgid "FC is no longer the fleet boss."
 msgstr "ФлітКом більше не бос флоту."
 
-#: afat/models.py:148
+#: afat/models/afat.py:148
 msgid "When was this FAT link created"
 msgstr "Коли було створено це FAT-посилання"
 
-#: afat/models.py:155
+#: afat/models/afat.py:155
 msgid "The FAT link fleet name"
 msgstr "Назва флоту FAT-посилання"
 
-#: afat/models.py:159
+#: afat/models/afat.py:159
 msgid "The FAT link hash"
 msgstr "Хеш FAT-посилання"
 
-#: afat/models.py:166
+#: afat/models/afat.py:166
 msgid "Who created the FAT link?"
 msgstr "Хто створив FAT-посилання?"
 
-#: afat/models.py:175
+#: afat/models/afat.py:175
 msgid "Character this FAT link has been created with"
 msgstr "Персонаж через которого було створено FAT-посилання"
 
-#: afat/models.py:190
+#: afat/models/afat.py:190
 msgid "The FAT link fleet type, if it's set"
 msgstr "Тип флоту FAT-посилання, якщо встановлено"
 
-#: afat/models.py:194
+#: afat/models/afat.py:194
 msgid "The FAT link doctrine"
 msgstr "Доктрина FAT-посилання"
 
-#: afat/models.py:198
+#: afat/models/afat.py:198
 msgid "Whether this FAT link was created via ESI or not"
 msgstr "Чи створено це FAT-посилання через ESI"
 
-#: afat/models.py:203
+#: afat/models/afat.py:203
 msgid "Whether the fleet to this FAT link is available in ESI or not"
 msgstr "Чи доступний флот для цього FAT-посилання в ESI"
 
-#: afat/models.py:209
+#: afat/models/afat.py:209
 msgid "Has this FAT link being re-opened?"
 msgstr "Чи перевідкрито це FAT-посилання?"
 
-#: afat/models.py:229 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:229 afat/templates/afat/view/logs/logs-overview.html:24
 msgid "FAT link"
 msgstr "FAT-посилання"
 
-#: afat/models.py:230
+#: afat/models/afat.py:230
 #: afat/templates/afat/partials/common/navigation/top-menu.html:27
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:28
 msgid "FAT links"
 msgstr "FAT-посилання"
 
-#: afat/models.py:287
+#: afat/models/afat.py:287
 msgid "FAT link duration"
 msgstr "Тривалість FAT-посилання"
 
-#: afat/models.py:288
+#: afat/models/afat.py:288
 msgid "FAT link durations"
 msgstr "Тривалість FAT-посилання"
 
-#: afat/models.py:301
+#: afat/models/afat.py:301
 msgid "Character who registered this FAT"
 msgstr "Персонаж який зареєстрував цей FAT"
 
-#: afat/models.py:307
+#: afat/models/afat.py:307
 msgid "Corporation EVE ID of the character who registered this FAT at the time of registration"
 msgstr "EVE ID копрорації персонажа, який зареєстрував цей FAT на момент реєстрації"
 
-#: afat/models.py:314
+#: afat/models/afat.py:314
 msgid "Alliance EVE ID of the character who registered this FAT at the time of registration"
 msgstr "EVE ID альянсу персонажа, який зареєстрував цей FAT на момент реєстрації"
 
-#: afat/models.py:322
+#: afat/models/afat.py:322
 msgid "The FAT link the character registered at"
 msgstr "FAT-посилання персонажа який зареєстрував"
 
-#: afat/models.py:326
+#: afat/models/afat.py:326
 msgid "The system the character is in"
 msgstr "Система розташування персонажа"
 
-#: afat/models.py:333
+#: afat/models/afat.py:333
 msgid "The ship the character was flying"
 msgstr "Корабель персонажа"
 
-#: afat/models.py:345
+#: afat/models/afat.py:345
 msgid "FAT"
 msgstr "FAT"
 
-#: afat/models.py:346
+#: afat/models/afat.py:346
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
@@ -360,60 +364,60 @@ msgstr "FAT"
 msgid "FATs"
 msgstr "FATи"
 
-#: afat/models.py:370
+#: afat/models/afat.py:370
 msgid "FAT link created"
 msgstr "FAT-посилання створено"
 
-#: afat/models.py:371
+#: afat/models/afat.py:371
 msgid "FAT link changed"
 msgstr "FAT-посилання змінено"
 
-#: afat/models.py:372
+#: afat/models/afat.py:372
 msgid "FAT link removed"
 msgstr "FAT-посилання видалено"
 
-#: afat/models.py:373
+#: afat/models/afat.py:373
 msgid "FAT link re-opened"
 msgstr "FAT-посилання перевідкрито"
 
-#: afat/models.py:375
+#: afat/models/afat.py:375
 msgid "FAT removed"
 msgstr "FAT видалено"
 
-#: afat/models.py:376
+#: afat/models/afat.py:376
 msgid "Manual FAT added"
 msgstr "Ручний FAT додано"
 
-#: afat/models.py:402
+#: afat/models/afat.py:402
 msgid "Log"
 msgstr "Журнал"
 
-#: afat/models.py:403 afat/templates/afat/view/logs/logs-overview.html:11
+#: afat/models/afat.py:403 afat/templates/afat/view/logs/logs-overview.html:11
 msgid "Logs"
 msgstr "Журнал"
 
-#: afat/models.py:415
+#: afat/models/afat.py:415
 msgid "Short name to identify this doctrine"
 msgstr "Коротка назва для ідентифікації цієї доктрини"
 
-#: afat/models.py:416
+#: afat/models/afat.py:416
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
 msgstr "Назва"
 
-#: afat/models.py:424
+#: afat/models/afat.py:424
 msgid "You can add notes about this doctrine here if you want. (optional)"
 msgstr "Ви можете додати примітки щодо цієї доктрини. (необов'язково)"
 
-#: afat/models.py:426
+#: afat/models/afat.py:426
 msgid "Notes"
 msgstr "Примітки"
 
-#: afat/models.py:433
+#: afat/models/afat.py:433
 msgid "Whether this doctrine is enabled or not."
 msgstr "Чи активна ця доктрина."
 
-#: afat/models.py:442
+#: afat/models/afat.py:442
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:39
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
@@ -421,61 +425,97 @@ msgstr "Чи активна ця доктрина."
 msgid "Doctrine"
 msgstr "Доктрина"
 
-#: afat/models.py:443
+#: afat/models/afat.py:443
 msgid "Doctrines"
 msgstr "Доктрини"
 
-#: afat/models.py:468
+#: afat/models/afat.py:468
 msgid "Default FAT link expiry time"
 msgstr "Термін дії FAT-посилання за замовчуванням"
 
-#: afat/models.py:471
+#: afat/models/afat.py:471
 msgid "Default FAT link reopen duration"
 msgstr "Тривалість повторного відкриття посилання FAT за замовчуванням"
 
-#: afat/models.py:474
+#: afat/models/afat.py:474
 msgid "Default FAT link reopen grace time"
 msgstr "Час для повторного відкриття посилання FAT за замовчуванням"
 
-#: afat/models.py:476
+#: afat/models/afat.py:476
 msgid "Default log duration"
 msgstr "Час зберігання журналу за замовчуванням"
 
-#: afat/models.py:478
+#: afat/models/afat.py:478
 msgid "Use doctrines from fittings module"
 msgstr "Використовувати доктрини з модуля фітингів"
 
-#: afat/models.py:484
+#: afat/models/afat.py:484
 msgid "Default expiry time for clickable FAT links in minutes. (Default: 60 minutes)"
 msgstr "Час до закінчення терміну дії активних FAT-посилань. (За замовчуванням: 60 хвилин)"
 
-#: afat/models.py:493
+#: afat/models/afat.py:493
 msgid "Default time in minutes a FAT link can be re-opened after it is expired. (Default: 60 minutes)"
 msgstr "Час протягом якого можна знову відкрити посилання FAT після його завершення. (За замовчуванням: 60 хвилин)"
 
-#: afat/models.py:502
+#: afat/models/afat.py:502
 msgid "Default time in minutes a FAT link is re-opened for. (Default: 60 minutes)"
 msgstr "Тривалість повторного відкриття посилання FAT у хвилинах. (За замовчуванням: 60 хвилин)"
 
-#: afat/models.py:510
+#: afat/models/afat.py:510
 msgid "Default time in days a log entry is kept. (Default: 60 days)"
 msgstr "Тривалість зберігання запису в журналі в днях. (За замовчуванням: 60 днів)"
 
-#: afat/models.py:518
+#: afat/models/afat.py:518
 msgid "Whether to use the doctrines from the Fittings modules in the doctrine dropdown. Note: The fittings module needs to be installed for this."
 msgstr "Чи використовувати доктрини з модуля фітингів у випадаючому списку доктрин. Примітка: для цього необхідно встановити модуль фітингів."
 
-#: afat/models.py:530
+#: afat/models/afat.py:530
 msgid "Setting"
 msgstr "Налаштування"
 
-#: afat/models.py:531
+#: afat/models/afat.py:531
 msgid "Settings"
 msgstr "Налаштування"
 
-#: afat/models.py:541
+#: afat/models/afat.py:541
 msgid "AFAT Settings"
 msgstr "Налаштування AFAT"
+
+#: afat/models/smart_filter.py:51
+msgid "The filter name that is shown to the admin."
+msgstr "Назва фільтра, що відображатиметься адміну."
+
+#: afat/models/smart_filter.py:56
+msgid "The filter description that is shown to end users."
+msgstr "Опис фільтра, який відображається користувачам."
+
+#: afat/models/smart_filter.py:86
+msgid "Please create a filter!"
+msgstr "Будь ласка, створіть фільтр!"
+
+#: afat/models/smart_filter.py:99
+msgid "Please create an audit function!"
+msgstr "Будь ласка, створіть функцію аудиту!"
+
+#: afat/models/smart_filter.py:108
+msgid "The number of days to look back for FATs."
+msgstr "Кількість днів за які подвитись ФАТи."
+
+#: afat/models/smart_filter.py:111
+msgid "The number of FATs needed to pass the filter."
+msgstr "Кількість ФАТів, необхідних для проходження фільтру."
+
+#: afat/models/smart_filter.py:116
+msgid "Any of the selected fleet types are needed to pass the filter."
+msgstr "Будь який з обраних типів флотів, які необхідні для проходження фільтру."
+
+#: afat/models/smart_filter.py:122
+msgid "Any of the selected ship classes are needed to pass the filter."
+msgstr "Будь який з обраних класів кораблів, які необхідні для проходження фільтру."
+
+#: afat/models/smart_filter.py:130
+msgid "Smart Filter: FATs in time period"
+msgstr "Смарт-фільтр: ФАТи за період часу"
 
 #: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
 #: afat/templates/afat/view/dashboard/dashboard.html:7
