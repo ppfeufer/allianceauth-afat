@@ -41,6 +41,8 @@ Section Order:
 ### Security
 -->
 
+## [3.9.0] - 2025-05-20
+
 ### Added
 
 - Smart Filter: FATs in time period
@@ -65,9 +67,15 @@ INSTALLED_APPS += [
 Then run the following commands:
 
 ```bash
+python manage.py collectstatic
 python manage.py migrate
+
 python manage.py afat_load_shiptypes
+
+redis-cli flushall
 ```
+
+Finally, restart your supervisor services for AA.
 
 ## [3.8.2] - 2025-05-17
 

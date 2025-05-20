@@ -28,6 +28,7 @@ ______________________________________________________________________
   - [Fat Link List](#fat-link-list)
   - [Fat Link Details](#fat-link-details)
   - [Add Fat Link View for FCs](#add-fat-link-view-for-fcs)
+  - [Smart Filter: FATs in Time Period](#smart-filter-fats-in-time-period)
 - [Installation](#installation)
   - [Step 1: Install the App](#step-1-install-the-app)
   - [Step 2: Update Your AA Settings](#step-2-update-your-aa-settings)
@@ -90,6 +91,10 @@ information, see below.
 ### Add Fat Link View for FCs<a name="add-fat-link-view-for-fcs"></a>
 
 ![Add Fat Link View for FCs](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/add-fatlink.png "Add Fat Link View for FCs")
+
+### Smart Filter: FATs in Time Period<a name="smart-filter-fats-in-time-period"></a>
+
+![Smart Filter: FATs in Time Period](https://raw.githubusercontent.com/ppfeufer/allianceauth-afat/master/docs/images/smart-filter-fats-in-time.png "Smart Filter: FATs in Time Period")
 
 ## Installation<a name="installation"></a>
 
