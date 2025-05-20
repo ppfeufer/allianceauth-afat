@@ -47,6 +47,7 @@ Section Order:
 
 - Smart Filter: FATs in time period
 - Dependency to `django-eveuniverse`
+- Translations updated
 
 ### Update Instructions
 
