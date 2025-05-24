@@ -34,11 +34,7 @@
                 {% csrf_token %}
 
                 {% bootstrap_field esi_fatlink_form.name_esi %}
-
-                {% if fleet_types_configured %}
-                    {% bootstrap_field esi_fatlink_form.type_esi %}
-                {% endif %}
-
+                {% bootstrap_field esi_fatlink_form.type_esi %}
                 {% bootstrap_field esi_fatlink_form.doctrine_esi %}
 
                 {% include "afat/partials/form/required-field-hint.html" %}

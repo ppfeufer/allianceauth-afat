@@ -19,13 +19,8 @@
                 {% csrf_token %}
 
                 {% bootstrap_field manual_fatlink_form.name %}
-
-                {% if fleet_types_configured %}
-                    {% bootstrap_field manual_fatlink_form.type %}
-                {% endif %}
-
+                {% bootstrap_field manual_fatlink_form.type %}
                 {% bootstrap_field manual_fatlink_form.doctrine %}
-
                 {% bootstrap_field manual_fatlink_form.duration %}
 
                 {% include "afat/partials/form/required-field-hint.html" %}
