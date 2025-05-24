@@ -193,7 +193,7 @@ CELERYBEAT_SCHEDULE["afat_logrotate"] = {
 #### Step 3: Build Auth and Restart Your Containers<a name="step-3-build-auth-and-restart-your-containers"></a>
 
 ```shell
-docker compose build
+docker compose build --no-cache
 docker compose --env-file=.env up -d
 ```
 
@@ -203,6 +203,7 @@ Run migrations, copy static files and load EVE universe data:
 
 ```shell
 docker compose exec allianceauth_gunicorn bash
+
 auth collectstatic
 auth migrate
 auth afat_load_shiptypes
@@ -240,6 +241,15 @@ Now rebuild your containers:
 ```shell
 docker compose build
 docker compose --env-file=.env up -d
+```
+
+After that, run the following commands to update your database and static files:
+
+```shell
+docker compose exec allianceauth_gunicorn bash
+
+auth collectstatic
+auth migrate
 ```
 
 ### Common Steps<a name="common-steps"></a>
