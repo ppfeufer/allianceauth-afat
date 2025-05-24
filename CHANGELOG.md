@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Added
+
+- Docker instructions to README
+
 ### Fixed
 
 - Fleet type form field not shown when no fleet types are configured
