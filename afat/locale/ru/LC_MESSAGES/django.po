@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-05-20 03:26+0200\n"
-"PO-Revision-Date: 2025-05-19 20:24+0000\n"
+"POT-Creation-Date: 2025-05-24 19:14+0200\n"
+"PO-Revision-Date: 2025-05-20 14:02+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ru/>\n"
 "Language: ru\n"
@@ -504,15 +504,15 @@ msgstr ""
 
 #: afat/models/smart_filter.py:56
 msgid "The filter description that is shown to end users."
-msgstr ""
+msgstr "Описание фильтра, отображаемое пользователю."
 
 #: afat/models/smart_filter.py:86
 msgid "Please create a filter!"
-msgstr ""
+msgstr "Пожалуйста, создайте фильтр!"
 
 #: afat/models/smart_filter.py:99
 msgid "Please create an audit function!"
-msgstr ""
+msgstr "Пожалуйста, создайте функцию аудита!"
 
 #: afat/models/smart_filter.py:108
 msgid "The number of days to look back for FATs."
@@ -657,7 +657,7 @@ msgstr "Регистрация Боевого Вылета, учет пилот�
 msgid "This option will create a clickable link to share with your fleet members."
 msgstr "Эта опция регистрирует БВ и формирует ссылку РБВ, предназначенную для учета пилотов."
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:37
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:32
 msgid "Create link"
 msgstr "Создать ссылку"
 
@@ -695,7 +695,7 @@ msgstr ""
 "                    выхода командующего из флота) или остановки отслеживания здесь.\n"
 "                "
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:50
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:46
 msgid "Add ESI link"
 msgstr "Начать ESI отслеживание флота"
 
@@ -1236,172 +1236,172 @@ msgid ""
 "                            "
 msgstr ""
 
-#: afat/templatetags/afat.py:101
+#: afat/templatetags/afat.py:32
 msgid "January"
 msgstr "Январь"
 
-#: afat/templatetags/afat.py:102
+#: afat/templatetags/afat.py:33
 msgid "February"
 msgstr "Февраль"
 
-#: afat/templatetags/afat.py:103
+#: afat/templatetags/afat.py:34
 msgid "March"
 msgstr "Март"
 
-#: afat/templatetags/afat.py:104
+#: afat/templatetags/afat.py:35
 msgid "April"
 msgstr "Апрель"
 
-#: afat/templatetags/afat.py:105
+#: afat/templatetags/afat.py:36
 msgid "May"
 msgstr "Май"
 
-#: afat/templatetags/afat.py:106
+#: afat/templatetags/afat.py:37
 msgid "June"
 msgstr "Июнь"
 
-#: afat/templatetags/afat.py:107
+#: afat/templatetags/afat.py:38
 msgid "July"
 msgstr "Июль"
 
-#: afat/templatetags/afat.py:108
+#: afat/templatetags/afat.py:39
 msgid "August"
 msgstr "Август"
 
-#: afat/templatetags/afat.py:109
+#: afat/templatetags/afat.py:40
 msgid "September"
 msgstr "Сентябрь"
 
-#: afat/templatetags/afat.py:110
+#: afat/templatetags/afat.py:41
 msgid "October"
 msgstr "Октябрь"
 
-#: afat/templatetags/afat.py:111
+#: afat/templatetags/afat.py:42
 msgid "November"
 msgstr "Ноябрь"
 
-#: afat/templatetags/afat.py:112
+#: afat/templatetags/afat.py:43
 msgid "December"
 msgstr "Декабрь"
 
-#: afat/views/fatlinks.py:226
+#: afat/views/fatlinks.py:221
 msgid "<h4>Success!</h4><p>Clickable FAT link created!</p><p>Make sure to give your fleet members the link to click so that they get credit for this fleet.</p>"
 msgstr "<h4>Успех!</h4><p>Ссылка РБВ создана!</p><p>Предоставьте данную ссылку членам флота, чтобы они могли зарегистрировать свое участие.</p>"
 
-#: afat/views/fatlinks.py:242
+#: afat/views/fatlinks.py:237
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your clickable FAT link.</p>"
 msgstr "<h4>Ошибка!</h4><p>Что-то пошло не так при попытке создания ссылки РБВ.</p>"
 
-#: afat/views/fatlinks.py:255
+#: afat/views/fatlinks.py:250
 msgid "<h4>Warning!</h4><p>You must fill out the form on the \"Add FAT link\" page to create a clickable FAT link</p>"
 msgstr "<h4>Внимание!</h4><p>Для создания ссылки необходимо заполнить поля формы</p>"
 
-#: afat/views/fatlinks.py:300
+#: afat/views/fatlinks.py:295
 msgid "<h4>Warning!</h4><p>To use the ESI function, you need to be in fleet and you need to be the fleet boss! You can create a clickable FAT link and share it, if you like.</p>"
 msgstr "<h4>Внимание!</h4><p>Для использования ESI отслеживания вы должны быть командиром флота!</p>"
 
-#: afat/views/fatlinks.py:343
+#: afat/views/fatlinks.py:338
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>Fleet with ID \"{fleet_id}\" for your character {creator__character_name} has already been registered and pilots joining this fleet are automatically tracked.</p>"
 msgstr "<h4>Внимание!</h4><p>Флот с ID «{fleet_id}» под командованием {creator__character_name} уже зарегистрирован и пилоты участники отслеживаются автоматически.</p>"
 
-#: afat/views/fatlinks.py:391
+#: afat/views/fatlinks.py:386
 msgid "<h4>Warning!</h4><p>Not Fleet Boss! Only the fleet boss can utilize the ESI function. You can create a clickable FAT link and share it, if you like.</p>"
 msgstr "<h4>Внимание!</h4><p>Вы не командир флота! Только командиру флота доступна функция ESI отлеживания.</p>"
 
-#: afat/views/fatlinks.py:455
+#: afat/views/fatlinks.py:450
 msgid "<h4>Success!</h4><p>FAT link Created!</p><p>FATs have been queued, they may take a few minutes to show up.</p><p>Pilots who join later will be automatically added until you close or leave the fleet in-game.</p>"
 msgstr "<h4>Успех!</h4><p>Запись УБВ флота создана!</p><p>Для отображения записей текущих членов флота может потребоваться несколько минут.</p><p>Присоединяющиеся позже пилоты будут зарегистрированы автоматически, до тех пора пока Вы находитесь во флоте.</p>"
 
-#: afat/views/fatlinks.py:499
+#: afat/views/fatlinks.py:494
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI FAT link.</p>"
 msgstr "<h4>Ошибка!</h4><p>Что-то пошло не так при попытке ESI отслеживания флота.</p>"
 
-#: afat/views/fatlinks.py:537
+#: afat/views/fatlinks.py:532
 msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
 msgstr "<h4>Внимание!</h4><p>Не предоставлен hash ссылки РБВ.</p>"
 
-#: afat/views/fatlinks.py:549 afat/views/fatlinks.py:715
+#: afat/views/fatlinks.py:544 afat/views/fatlinks.py:710
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr "<h4>Внимание!</h4><p>Предоставлен некорректный hash.</p>"
 
-#: afat/views/fatlinks.py:563
+#: afat/views/fatlinks.py:558
 msgid "<h4>Warning!</h4><p>Sorry, that FAT link is expired. If you were on that fleet, contact your FC about having your FAT manually added.</p>"
 msgstr "<h4>Внимание!</h4><p>К сожалению, срок действия ссылки истек. Если Вы участвовали во флоте, обратитесь к командиру флота с просьбой добавить Вас ручном режиме.</p>"
 
-#: afat/views/fatlinks.py:590
+#: afat/views/fatlinks.py:585
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>There was an issue with the ESI token for {character_name}. Please try again.</p>"
 msgstr "<h4>Внимание!</h4><p>Возникли проблемы с ESI токеном пилота {character_name}. Повторите операцию.</p>"
 
-#: afat/views/fatlinks.py:641
+#: afat/views/fatlinks.py:636
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
 msgstr "<h4>Внимание!</h4><p>БВП ({character_name}) в выбранном флоте уже был учтен.</p>"
 
-#: afat/views/fatlinks.py:660
+#: afat/views/fatlinks.py:655
 #, python-brace-format
 msgid "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</p>"
 msgstr "<h4>Успех!</h4><p>Пилот {character_name} зарегистрирован в «{fleet_name}»</p>"
 
-#: afat/views/fatlinks.py:681
+#: afat/views/fatlinks.py:676
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>Cannot register the fleet participation for {character_name}. The character needs to be online.</p>"
 msgstr "<h4>Внимание!</h4><p>Невозможно зарегистрировать участие пилота {character_name}. Пилот должен быть онлайн.</p>"
 
-#: afat/views/fatlinks.py:747
+#: afat/views/fatlinks.py:742
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Успех!</h4><p>Название флота успешно изменено.</p>"
 
-#: afat/views/fatlinks.py:772
+#: afat/views/fatlinks.py:767
 #, python-brace-format
 msgid "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added flying a {shiptype} in {system}</p>"
 msgstr "<h4>Успех!</h4><p>Ссылка РБВ обновлена.<br>{character_name} добавлен на {shiptype} в {system}</p>"
 
-#: afat/views/fatlinks.py:807
+#: afat/views/fatlinks.py:802
 #, python-brace-format
 msgid "<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr "<h4>Информация</h4><p>Пилот уже зарегистрирован в указанном БВ.</p><p>Имя: {character_name}<br>Система: {system}<br>Корабль: {shiptype}</p>"
 
-#: afat/views/fatlinks.py:822
+#: afat/views/fatlinks.py:817
 msgid "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you entered was not found.</p>"
 msgstr "<h4>Упс!</h4><p>Ошибка редактирования БВ! Пилот с введенным именем не найден.</p>"
 
-#: afat/views/fatlinks.py:831
+#: afat/views/fatlinks.py:826
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr "<h4>Упс!</h4><p>Что-то пошло не так!</p>"
 
-#: afat/views/fatlinks.py:944
+#: afat/views/fatlinks.py:939
 msgid "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT link has already been deleted.</p>"
 msgstr "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или относится к ранее аннулированной ссылке РБВ.</p>"
 
-#: afat/views/fatlinks.py:970
+#: afat/views/fatlinks.py:965
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs have been successfully deleted.</p>"
 msgstr "<h4>Успех!</h4><p>Запись БВ флота «{fatlink_hash}» и все зарегистрированные БВП были удалены.</p>"
 
-#: afat/views/fatlinks.py:1012
+#: afat/views/fatlinks.py:1007
 msgid "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</p>"
 msgstr "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или ранее удален.</p>"
 
-#: afat/views/fatlinks.py:1023
+#: afat/views/fatlinks.py:1018
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr "<h4>Ошибка!</h4><p>Значение hash и идентификатор ссылки РБВ не совпадают.</p>"
 
-#: afat/views/fatlinks.py:1043
+#: afat/views/fatlinks.py:1038
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT for {character_name} has been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr "<h4>Успех!</h4><p>Регистрация БВП для {character_name} удалена из БВ флота «{fatlink_hash}».</p>"
 
-#: afat/views/fatlinks.py:1117
+#: afat/views/fatlinks.py:1112
 msgid "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr "<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакому БВ флота.</p>"
 
-#: afat/views/fatlinks.py:1162
+#: afat/views/fatlinks.py:1157
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>Успех!</h4><p>Ссылка РБВ успешно реактивирована.</p>"
 
-#: afat/views/fatlinks.py:1172
+#: afat/views/fatlinks.py:1167
 msgid "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can be re-opened only once!</p>"
 msgstr "<h4>Внимание!</h4><p>Данная ссылка РБВ уже была реактивирована ранее. Возможна только одна реактивация ссылки РБВ!</p>"
 
