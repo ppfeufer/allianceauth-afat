@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Fleet type form field not shown when no fleet types are configured
+
 ### Removed
 
 - Cache breaker for static files. Doesn't work as expected with `django-sri`.

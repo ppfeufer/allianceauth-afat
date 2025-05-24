@@ -134,14 +134,9 @@ def add_fatlink(request: WSGIRequest) -> HttpResponse:
     :rtype:
     """
 
-    fleet_types_configured = False
-    fleet_types = FleetType.objects.all()
-
-    if fleet_types.exists():
-        fleet_types_configured = True
+    fleet_types = FleetType.objects.filter(is_enabled=True).order_by("name")
 
     context = {
-        "fleet_types_configured": fleet_types_configured,
         "default_expiry_time": Setting.get_setting(
             Setting.Field.DEFAULT_FATLINK_EXPIRY_TIME
         ),
