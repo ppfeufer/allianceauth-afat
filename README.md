@@ -277,6 +277,7 @@ python myauth/manage.py afat_import_from_allianceauth_fat
 
 ```shell
 docker compose exec allianceauth_gunicorn bash
+
 auth afat_import_from_allianceauth_fat
 ```
 
