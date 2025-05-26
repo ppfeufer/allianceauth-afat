@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Removed
+
+- Unused constants
+
 ## [3.9.1] - 2025-05-24
 
 ### Added
