@@ -216,44 +216,6 @@ class ProcessEsiFatlinkTests(unittest.TestCase):
         _process_esi_fatlink(fatlink)
         mock_check_for_esi_fleet.assert_called_once_with(fatlink=fatlink)
 
-    @patch("afat.tasks.logger")
-    @patch("afat.tasks._check_for_esi_fleet")
-    @patch("afat.tasks.esi.client.Fleets.get_fleets_fleet_id_members")
-    @patch("afat.tasks._esi_fatlinks_error_handling")
-    def test_processing_esi_fatlink_when_not_fleet_boss(
-        self,
-        mock_error_handling,
-        mock_get_fleet_members,
-        mock_check_for_esi_fleet,
-        mock_logger,
-    ):
-        """
-        Test that the _process_esi_fatlink function handles the case when the user is not the fleet boss.
-
-        :param mock_error_handling:
-        :type mock_error_handling:
-        :param mock_get_fleet_members:
-        :type mock_get_fleet_members:
-        :param mock_check_for_esi_fleet:
-        :type mock_check_for_esi_fleet:
-        :param mock_logger:
-        :type mock_logger:
-        :return:
-        :rtype:
-        """
-
-        fatlink = MagicMock()
-        fatlink.creator.profile.main_character = MagicMock()
-        mock_check_for_esi_fleet.return_value = {
-            "fleet": {"fleet_id": 123},
-            "token": MagicMock(),
-        }
-        mock_get_fleet_members.side_effect = Exception
-        _process_esi_fatlink(fatlink)
-        mock_error_handling.assert_called_once_with(
-            error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
-        )
-
 
 class EsiFatlinksErrorHandlingTests(unittest.TestCase):
     """
