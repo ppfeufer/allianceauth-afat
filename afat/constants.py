@@ -2,9 +2,6 @@
 Constants used in this module
 """
 
-# Standard Library
-import os
-
 # Django
 from django.utils.text import slugify
 
@@ -26,8 +23,3 @@ GITHUB_URL = f"https://github.com/ppfeufer/{APP_NAME}"
 USER_AGENT = f"{APP_NAME_USERAGENT}/{__version__} (+{GITHUB_URL}) Django-ESI/{esi_version} (+{DJANGO_ESI_URL})"
 
 INTERNAL_URL_PREFIX = "-"
-
-# allianceauth-afat/afat
-APP_BASE_DIR = os.path.join(os.path.dirname(__file__))
-# allianceauth-afat/afat/static/afat
-APP_STATIC_DIR = os.path.join(APP_BASE_DIR, "static", PACKAGE_NAME)
