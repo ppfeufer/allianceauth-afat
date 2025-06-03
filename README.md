@@ -167,7 +167,7 @@ python manage.py afat_load_shiptypes
 Add the app to your `conf/requirements.txt`:
 
 ```text
-allianceauth-afat==3.9.1
+allianceauth-afat==3.10.0
 ```
 
 #### Step 2: Update Your AA Settings<a name="step-2-update-your-aa-settings-1"></a>
@@ -233,7 +233,7 @@ To update your existing installation of AFAT, all you need to do is to update th
 respective line in your `conf/requirements.txt` file to the latest version.
 
 ```text
-allianceauth-afat==3.9.1
+allianceauth-afat==3.10.0
 ```
 
 Now rebuild your containers:
