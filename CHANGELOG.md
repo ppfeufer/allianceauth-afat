@@ -41,6 +41,12 @@ Section Order:
 ### Security
 -->
 
+## [3.10.0] - 2025-06-03
+
+### Changed
+
+- Translations updated
+
 ### Removed
 
 - Unused constants
