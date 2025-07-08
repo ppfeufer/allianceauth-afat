@@ -6,13 +6,14 @@
 # Dehao Wu <wudehao2000@163.com>, 2024.
 # Chilmore <chenmo1203@gmail.com>, 2025.
 # Kelly Hsueh <kelly_hsueh@users.noreply.weblate.ppfeufer.de>, 2025.
+# 夕あいか <dahsjun@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-06-03 14:46+0200\n"
-"PO-Revision-Date: 2025-05-23 08:24+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"POT-Creation-Date: 2025-07-08 16:35+0200\n"
+"PO-Revision-Date: 2025-06-18 16:24+0000\n"
+"Last-Translator: 夕あいか <dahsjun@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +138,7 @@ msgstr "失效时间（分钟）"
 
 #: afat/helper/time.py:113
 msgid "{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"
-msgstr ""
+msgstr "{int(duration_years[0])} 年, {int(duration_days[0])} 天, {int(duration_hours[0])} 小时, {int(duration_minutes[0])} 分钟, {int(duration_seconds[0])} 秒"
 
 #: afat/helper/views.py:60 afat/helper/views.py:176
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
@@ -214,11 +215,11 @@ msgstr "周日"
 
 #: afat/models/afat.py:65
 msgid "Can access the AFAT module"
-msgstr ""
+msgstr "可使用AFAT模块"
 
 #: afat/models/afat.py:73
 msgid "Can manage the AFAT module"
-msgstr ""
+msgstr "可管理AFAT模块"
 
 #: afat/models/afat.py:75
 msgid "Can create FAT links"
@@ -294,11 +295,11 @@ msgstr "这个FAT链接是否是通过ESI创建的"
 
 #: afat/models/afat.py:203
 msgid "Whether the fleet to this FAT link is available in ESI or not"
-msgstr ""
+msgstr "这个FAT链接的舰队是否在ESI中可用"
 
 #: afat/models/afat.py:209
 msgid "Has this FAT link being re-opened?"
-msgstr ""
+msgstr "这个FAT链接是否被重新开放？"
 
 #: afat/models/afat.py:229 afat/templates/afat/view/logs/logs-overview.html:24
 msgid "FAT link"
@@ -331,17 +332,16 @@ msgid "Alliance EVE ID of the character who registered this FAT at the time of r
 msgstr ""
 
 #: afat/models/afat.py:322
-#, fuzzy
 msgid "The FAT link the character registered at"
-msgstr "注册该FAT链接的角色创建时间在"
+msgstr "角色注册的FAT链接"
 
 #: afat/models/afat.py:326
 msgid "The system the character is in"
-msgstr ""
+msgstr "角色所在星系"
 
 #: afat/models/afat.py:333
 msgid "The ship the character was flying"
-msgstr "该角色曾驾驶这条飞船"
+msgstr "角色曾驾驶的船型"
 
 #: afat/models/afat.py:345
 msgid "FAT"
@@ -359,27 +359,27 @@ msgstr "FAT"
 
 #: afat/models/afat.py:370
 msgid "FAT link created"
-msgstr ""
+msgstr "已创建FAT链接"
 
 #: afat/models/afat.py:371
 msgid "FAT link changed"
-msgstr ""
+msgstr "已修改FAT链接"
 
 #: afat/models/afat.py:372
 msgid "FAT link removed"
-msgstr ""
+msgstr "已移除FAT链接"
 
 #: afat/models/afat.py:373
 msgid "FAT link re-opened"
-msgstr ""
+msgstr "已重新开放FAT链接"
 
 #: afat/models/afat.py:375
 msgid "FAT removed"
-msgstr ""
+msgstr "已移除FAT"
 
 #: afat/models/afat.py:376
 msgid "Manual FAT added"
-msgstr ""
+msgstr "已手动添加FAT"
 
 #: afat/models/afat.py:402
 msgid "Log"
@@ -400,7 +400,7 @@ msgstr "名字"
 
 #: afat/models/afat.py:424
 msgid "You can add notes about this doctrine here if you want. (optional)"
-msgstr ""
+msgstr "可在此输入该建制的备注。（可选）"
 
 #: afat/models/afat.py:426
 msgid "Notes"
