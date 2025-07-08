@@ -41,6 +41,8 @@ Section Order:
 ### Security
 -->
 
+## [3.11.0] - 2025-07-08
+
 ### Added
 
 - New dependency
@@ -49,6 +51,7 @@ Section Order:
 ### Changed
 
 - User Agent generation updated to match latest `django-esi` guidelines
+- Translations updated
 
 ## [3.10.0] - 2025-06-03
 
