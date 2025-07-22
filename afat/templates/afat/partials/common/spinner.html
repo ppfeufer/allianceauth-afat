@@ -1,9 +1,9 @@
-{% load static %}
 {% load i18n %}
 
-<div class="afat-spinner d-none text-center">
-    <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="{% static "afat/images/ring-resize-white-36.svg" %}">
-        <img src="{% static "afat/images/ring-resize-black-36.svg" %}" alt="{% translate 'Loading …' %}">
-    </picture>
-</div>
+<picture class="afat-spinner">
+    {% include "afat/svg/spinner.svg" %}
+</picture>
+
+<p class="my-1">
+    {% translate "Loading …" %}
+</p>

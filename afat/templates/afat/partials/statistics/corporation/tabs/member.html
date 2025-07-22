@@ -51,7 +51,9 @@
 
                                 <div class="card-body">
                                     <div class="afat-character-alt-characters">
-                                        {% include "afat/partials/common/spinner.html" %}
+                                        <div class="afat-loading-character-data text-center">
+                                            {% include "afat/partials/common/spinner.html" %}
+                                        </div>
 
                                         <div class="afat-no-data aa-callout aa-callout-warning d-none">
                                             <p>{% translate "This pilot does not seem to have any FATs on any associated character." %}</p>

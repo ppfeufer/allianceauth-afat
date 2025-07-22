@@ -69,7 +69,7 @@ $(document).ready(() => {
                 // Elements to show initially
                 const showInitially = [
                     '#col-character-alt-characters',
-                    '#col-character-alt-characters .afat-character-alt-characters .afat-spinner'
+                    '#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data'
                 ];
 
                 showInitially.forEach(selector => {
@@ -86,7 +86,7 @@ $(document).ready(() => {
                     // If we have table data from the server
                     if (tableData) {
                         // Hide the spinner
-                        hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-spinner');
+                        hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data');
 
                         // If we have no data
                         if (Object.keys(tableData).length === 0) {
