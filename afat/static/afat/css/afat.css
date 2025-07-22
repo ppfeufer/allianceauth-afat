@@ -37,11 +37,11 @@
 /* Labels
 ------------------------------------------------------------------------------------- */
 @media all {
-    .afat-label-active-esi-fleet {
+    .allianceauth-afat .afat-label-active-esi-fleet {
         background-color: rgb(98 196 98);
     }
 
-    .afat-label-statistics {
+    .allianceauth-afat .afat-label-statistics {
         position: relative;
         top: 0.2rem;
     }
@@ -50,9 +50,17 @@
 /* Time period select
 ------------------------------------------------------------------------------------- */
 @media all {
-    .afat-select-time-period {
+    .allianceauth-afat .afat-select-time-period {
         font-size: 1.25rem;
         font-weight: 400;
         line-height: 1.1;
+    }
+}
+
+/* Spinner
+------------------------------------------------------------------------------------- */
+@media all {
+    .allianceauth-afat .afat-spinner svg.svg-spinner {
+        stroke: var(--bs-body-color);
     }
 }

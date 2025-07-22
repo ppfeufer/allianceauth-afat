@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Changed
+
+- Loading spinner animation improved
+
 ## [3.11.0] - 2025-07-08
 
 ### Added
