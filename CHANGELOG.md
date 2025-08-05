@@ -41,9 +41,13 @@ Section Order:
 ### Security
 -->
 
+## [3.11.1] - 2025-08-05
+
 ### Changed
 
+- `fetchAjaxData` function improved
 - Loading spinner animation improved
+- Translations updated
 
 ## [3.11.0] - 2025-07-08
 
