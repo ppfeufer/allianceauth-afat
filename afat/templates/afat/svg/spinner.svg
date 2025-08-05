@@ -1,4 +1,4 @@
-<svg class="svg-spinner" width="36" height="36" stroke="#000000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<svg class="svg-spinner" width="36" height="36" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <style>
         .spinner_QPB9 {
             transform-origin: center;
