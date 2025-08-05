@@ -71,18 +71,17 @@ const AFAT_DATETIME_FORMAT = afatSettings.datetimeFormat; // eslint-disable-line
  * Fetch data from an ajax URL
  *
  * @param {string} url The URL to fetch data from
+ * @param {boolean} responseIsJson Whether the response is expected to be JSON or not (default: true)
  * @returns {Promise<any>} The fetched data
  */
-const fetchAjaxData = async (url) => { // eslint-disable-line no-unused-vars
+const fetchAjaxData = async (url, responseIsJson = true) => { // eslint-disable-line no-unused-vars
     return await fetch(url)
         .then(response => {
-            if (response.ok) {
-                return Promise.resolve(response);
-            } else {
-                return Promise.reject(new Error('Failed to load'));
-            }
+            return response.ok ? Promise.resolve(response) : Promise.reject(new Error('Something went wrong'));
         })
-        .then(response => response.json())
+        .then(response => {
+            return responseIsJson ? response.json() : response.text();
+        })
         .then(data => {
             return data;
         })
