@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-07-08 16:35+0200\n"
+"POT-Creation-Date: 2025-08-05 15:56+0200\n"
 "PO-Revision-Date: 2025-05-19 20:24+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
@@ -582,7 +582,7 @@ msgstr "Наступний рік"
 msgid "Current year"
 msgstr "Поточний рік"
 
-#: afat/templates/afat/partials/common/spinner.html:7
+#: afat/templates/afat/partials/common/spinner.html:8
 msgid "Loading …"
 msgstr "Завантаження …"
 
@@ -1013,11 +1013,11 @@ msgstr ""
 msgid "This corporation doesn't seem to have any main characters registered."
 msgstr "Ця корпорація не має зареєстрованих основних персонажів."
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:57
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:59
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr "Цей пілот немає FATів на жодному з пов'язаних персонажів."
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:61
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:63
 msgid "All characters associated with this main character."
 msgstr "Всі персонажі, пов'язані з цим основним персонажем."
 
