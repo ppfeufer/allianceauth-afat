@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-07-08 16:35+0200\n"
-"PO-Revision-Date: 2025-05-20 14:02+0000\n"
+"POT-Creation-Date: 2025-08-05 15:56+0200\n"
+"PO-Revision-Date: 2025-08-05 14:02+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/es/>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -71,10 +71,8 @@ msgstr[0] "Tipo de flota {notifications_count} desactivada"
 msgstr[1] "Tipos de flota {notifications_count} desactivados"
 
 #: afat/admin.py:291 afat/models/afat.py:116
-#, fuzzy
-#| msgid "Fleet Type"
 msgid "Fleet types"
-msgstr "Tipo de Flota"
+msgstr "Tipos de Flota"
 
 #: afat/admin.py:304
 #, fuzzy
@@ -83,10 +81,9 @@ msgid "Ship classes"
 msgstr "Tipo de Nave"
 
 #: afat/apps.py:20
-#, fuzzy, python-brace-format
-#| msgid "Fleet Activity Tracking"
+#, python-brace-format
 msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-msgstr "Seguimiento de la Actividad de Flota"
+msgstr "Seguimiento de la Actividad de Flota (AFAT) v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -99,8 +96,6 @@ msgstr "Este campo es obligatorio"
 #: afat/templates/afat/partials/fatlinks/details/fatlink-name-form.html:11
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
-#, fuzzy
-#| msgid "Fleet Name"
 msgid "Fleet name"
 msgstr "Nombre de la flota"
 
@@ -109,8 +104,6 @@ msgid "Enter fleet name"
 msgstr ""
 
 #: afat/forms.py:48 afat/forms.py:104
-#, fuzzy
-#| msgid "Fleet Type (optional)"
 msgid "Fleet type (optional)"
 msgstr "Tipo de flota (opcional)"
 
@@ -173,8 +166,6 @@ msgstr "<p>¿Está seguro de que desea cerrar la flota ESI con ID {fatlink.esi_f
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:41
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:40
-#, fuzzy
-#| msgid "Stop Tracking"
 msgid "Stop tracking"
 msgstr "Dejar de Rastrear"
 
@@ -532,8 +523,6 @@ msgstr ""
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
 #: afat/templates/afat/view/statistics/statistics-overview.html:8
-#, fuzzy
-#| msgid "Fleet Activity Tracking"
 msgid "Fleet activity tracking"
 msgstr "Seguimiento de la Actividad de Flota"
 
@@ -593,7 +582,7 @@ msgstr ""
 msgid "Current year"
 msgstr ""
 
-#: afat/templates/afat/partials/common/spinner.html:7
+#: afat/templates/afat/partials/common/spinner.html:8
 msgid "Loading …"
 msgstr ""
 
@@ -985,11 +974,11 @@ msgstr ""
 msgid "This corporation doesn't seem to have any main characters registered."
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:57
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:59
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:61
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:63
 msgid "All characters associated with this main character."
 msgstr ""
 
