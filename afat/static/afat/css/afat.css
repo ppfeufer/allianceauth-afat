@@ -56,11 +56,3 @@
         line-height: 1.1;
     }
 }
-
-/* Spinner
-------------------------------------------------------------------------------------- */
-@media all {
-    .allianceauth-afat .afat-spinner svg.svg-spinner {
-        stroke: var(--bs-body-color);
-    }
-}
