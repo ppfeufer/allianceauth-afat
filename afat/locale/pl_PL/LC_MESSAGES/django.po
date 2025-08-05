@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Peter Pfeufer <info@ppfeufer.de>, 2024.
+# Peter Pfeufer <info@ppfeufer.de>, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-07-08 16:35+0200\n"
-"PO-Revision-Date: 2024-05-10 14:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2025-08-05 15:56+0200\n"
+"PO-Revision-Date: 2025-07-29 20:18+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Polish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/pl/>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -82,10 +82,9 @@ msgid "Ship classes"
 msgstr ""
 
 #: afat/apps.py:20
-#, fuzzy, python-brace-format
-#| msgid "Fleet Activity Tracking"
+#, python-brace-format
 msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-msgstr "Śledzenie aktywności floty"
+msgstr "Śledzenie aktywności floty (AFAT) v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -576,7 +575,7 @@ msgstr ""
 msgid "Current year"
 msgstr ""
 
-#: afat/templates/afat/partials/common/spinner.html:7
+#: afat/templates/afat/partials/common/spinner.html:8
 msgid "Loading …"
 msgstr ""
 
@@ -970,11 +969,11 @@ msgstr ""
 msgid "This corporation doesn't seem to have any main characters registered."
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:57
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:59
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr ""
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:61
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:63
 msgid "All characters associated with this main character."
 msgstr ""
 
