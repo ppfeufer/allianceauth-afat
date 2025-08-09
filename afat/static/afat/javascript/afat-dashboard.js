@@ -1,4 +1,4 @@
-/* global afatSettings, characters, moment, manageModal, AFAT_DATETIME_FORMAT */
+/* global afatSettings, characters, moment, manageModal, AFAT_DATETIME_FORMAT, fetchGet */
 
 $(document).ready(() => {
     'use strict';
@@ -10,45 +10,47 @@ $(document).ready(() => {
      */
     if (characters.length > 0) {
         characters.forEach((character) => {
-            $('#recent-fats-character-' + character.charId).DataTable({
-                language: dtLanguage,
-                ajax: {
-                    url: afatSettings.url.characterFats.replace(
-                        '0',
-                        character.charId
-                    ),
-                    dataSrc: '',
-                    cache: false
-                },
-                columns: [
-                    {data: 'fleet_name'},
-                    {data: 'fleet_type'},
-                    {data: 'doctrine'},
-                    {data: 'system'},
-                    {data: 'ship_type'},
-                    {
-                        data: 'fleet_time',
-                        render: {
-                            /**
-                             * Render date
-                             *
-                             * @param data
-                             * @returns {*}
-                             */
-                            display: (data) => {
-                                return moment(data.time).utc().format(
-                                    AFAT_DATETIME_FORMAT
-                                );
-                            },
-                            _: 'timestamp'
-                        }
-                    }
-                ],
-                paging: false,
-                ordering: false,
-                searching: false,
-                info: false
-            });
+            const recentFatsCharacterTable = $('#recent-fats-character-' + character.charId);
+            const url = afatSettings.url.characterFats.replace('0', character.charId);
+
+            fetchGet({url: url})
+                .then((data) => {
+                    recentFatsCharacterTable.DataTable({
+                        language: dtLanguage,
+                        data: data,
+                        columns: [
+                            {data: 'fleet_name'},
+                            {data: 'fleet_type'},
+                            {data: 'doctrine'},
+                            {data: 'system'},
+                            {data: 'ship_type'},
+                            {
+                                data: 'fleet_time',
+                                render: {
+                                    /**
+                                     * Render date
+                                     *
+                                     * @param data
+                                     * @returns {*}
+                                     */
+                                    display: (data) => {
+                                        return moment(data.time).utc().format(
+                                            AFAT_DATETIME_FORMAT
+                                        );
+                                    },
+                                    _: 'timestamp'
+                                }
+                            }
+                        ],
+                        paging: false,
+                        ordering: false,
+                        searching: false,
+                        info: false
+                    });
+                })
+                .catch((error) => {
+                    console.error('Error fetching recent FATs for character:', character.charId, error);
+                });
         });
     }
 
@@ -108,20 +110,22 @@ $(document).ready(() => {
 
     dtLanguage.emptyTable = noFatlinksWarning;
 
-    $('#dashboard-recent-fatlinks').DataTable({
-        language: dtLanguage,
-        ajax: {
-            url: afatSettings.url.recentFatLinks,
-            dataSrc: '',
-            cache: false
-        },
-        columns: recentFatlinksTableColumns,
-        columnDefs: recentFatlinksTableColumnDefs,
-        paging: false,
-        ordering: false,
-        searching: false,
-        info: false
-    });
+    fetchGet({url: afatSettings.url.recentFatLinks})
+        .then((data) => {
+            $('#dashboard-recent-fatlinks').DataTable({
+                language: dtLanguage,
+                data: data,
+                columns: recentFatlinksTableColumns,
+                columnDefs: recentFatlinksTableColumnDefs,
+                paging: false,
+                ordering: false,
+                searching: false,
+                info: false
+            });
+        })
+        .catch((error) => {
+            console.error('Error fetching recent FAT links:', error);
+        });
 
     /**
      * Modal :: Close ESI fleet

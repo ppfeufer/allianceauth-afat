@@ -1,63 +1,16 @@
-/* global afatJsSettingsOverride, afatJsSettingsDefaults */
+/* global afatJsSettingsOverride, afatJsSettingsDefaults, objectDeepMerge */
 
 /* jshint -W097 */
 'use strict';
 
-/**
- * Checks if the given item is a plain object, excluding arrays and dates.
- *
- * @param {*} item - The item to check.
- * @returns {boolean} True if the item is a plain object, false otherwise.
- */
-function isObject (item) {
-    return (
-        item && typeof item === 'object' && !Array.isArray(item) && !(item instanceof Date)
-    );
-}
-
-/**
- * Recursively merges properties from source objects into a target object. If a property at the current level is an object,
- * and both target and source have it, the property is merged. Otherwise, the source property overwrites the target property.
- * This function does not modify the source objects and prevents prototype pollution by not allowing __proto__, constructor,
- * and prototype property names.
- *
- * @param {Object} target - The target object to merge properties into.
- * @param {...Object} sources - One or more source objects from which to merge properties.
- * @returns {Object} The target object after merging properties from sources.
- */
-function deepMerge (target, ...sources) {
-    if (!sources.length) {
-        return target;
-    }
-
-    // Iterate through each source object without modifying the `sources` array.
-    sources.forEach(source => {
-        if (isObject(target) && isObject(source)) {
-            for (const key in source) {
-                if (isObject(source[key])) {
-                    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-                        continue; // Skip potentially dangerous keys to prevent prototype pollution.
-                    }
-
-                    if (!target[key] || !isObject(target[key])) {
-                        target[key] = {};
-                    }
-
-                    deepMerge(target[key], source[key]);
-                } else {
-                    target[key] = source[key];
-                }
-            }
-        }
-    });
-
-    return target;
-}
-
 // Build the settings object
-let afatSettings = afatJsSettingsDefaults;
-if (typeof afatJsSettingsOverride !== 'undefined') {
-    afatSettings = deepMerge(afatJsSettingsDefaults, afatJsSettingsOverride);
+let afatSettings = typeof afatJsSettingsDefaults !== 'undefined' ? afatJsSettingsDefaults : null;
+
+if (afatSettings && typeof afatJsSettingsOverride !== 'undefined') {
+    afatSettings = objectDeepMerge(
+        afatJsSettingsDefaults,
+        afatJsSettingsOverride
+    );
 }
 
 /**
@@ -66,29 +19,6 @@ if (typeof afatJsSettingsOverride !== 'undefined') {
  * @type {string}
  */
 const AFAT_DATETIME_FORMAT = afatSettings.datetimeFormat; // eslint-disable-line no-unused-vars
-
-/**
- * Fetch data from an ajax URL
- *
- * @param {string} url The URL to fetch data from
- * @param {boolean} responseIsJson Whether the response is expected to be JSON or not (default: true)
- * @returns {Promise<any>} The fetched data
- */
-const fetchAjaxData = async (url, responseIsJson = true) => { // eslint-disable-line no-unused-vars
-    return await fetch(url)
-        .then(response => {
-            return response.ok ? Promise.resolve(response) : Promise.reject(new Error('Something went wrong'));
-        })
-        .then(response => {
-            return responseIsJson ? response.json() : response.text();
-        })
-        .then(data => {
-            return data;
-        })
-        .catch(function (error) {
-            console.log(`Error: ${error.message}`);
-        });
-};
 
 /**
  * Convert a string to a slug
@@ -199,18 +129,3 @@ const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
         clearModalElements();
     });
 };
-
-/**
- * Prevent double form submits
- */
-document.querySelectorAll('form').forEach((form) => {
-    form.addEventListener('submit', (e) => {
-        // Prevent if already submitting
-        if (form.classList.contains('is-submitting')) {
-            e.preventDefault();
-        }
-
-        // Add class to hook our visual indicator on
-        form.classList.add('is-submitting');
-    });
-});

@@ -1,4 +1,4 @@
-/* global afatSettings, moment, manageModal, AFAT_DATETIME_FORMAT */
+/* global afatSettings, moment, manageModal, AFAT_DATETIME_FORMAT, fetchGet */
 
 $(document).ready(() => {
     'use strict';
@@ -72,35 +72,39 @@ $(document).ready(() => {
     /**
      * DataTable :: FAT link list
      */
-    const linkListTable = $('#link-list').DataTable({
-        language: dtLanguage,
-        ajax: {
-            url: afatSettings.url.linkList,
-            dataSrc: '',
-            cache: false
-        },
-        columns: linkListTableColumns,
-        columnDefs: linkListTableColumnDefs,
+    const linkListTable = $('#link-list');
 
-        order: [
-            [4, 'desc']
-        ],
+    fetchGet({url: afatSettings.url.linkList})
+        .then((data) => {
+            linkListTable.DataTable({
+                language: dtLanguage,
+                data: data,
+                columns: linkListTableColumns,
+                columnDefs: linkListTableColumnDefs,
 
-        filterDropDown: {
-            columns: [
-                {
-                    idx: 1
+                order: [
+                    [4, 'desc']
+                ],
+
+                filterDropDown: {
+                    columns: [
+                        {
+                            idx: 1
+                        },
+                        {
+                            idx: 7,
+                            title: afatSettings.translation.dataTable.filter.viaEsi
+                        }
+                    ],
+                    autoSize: false,
+                    bootstrap: true,
+                    bootstrap_version: 5
                 },
-                {
-                    idx: 7,
-                    title: afatSettings.translation.dataTable.filter.viaEsi
-                }
-            ],
-            autoSize: false,
-            bootstrap: true,
-            bootstrap_version: 5
-        },
-    });
+            });
+        })
+        .catch((error) => {
+            console.error('Error fetching link list:', error);
+        });
 
     /**
      * Refresh the datatable information every 60 seconds
@@ -127,7 +131,15 @@ $(document).ready(() => {
             }
         }
 
-        linkListTable.ajax.reload(null, false);
+        fetchGet({url: afatSettings.url.linkList})
+            .then((newData) => {
+                const dataTable = linkListTable.DataTable();
+
+                dataTable.clear().rows.add(newData).draw();
+            })
+            .catch((error) => {
+                console.error('Error fetching updated data:', error);
+            });
 
         expectedReloadDatatable += intervalReloadDatatable;
 

@@ -1,66 +1,69 @@
-/* global afatSettings, convertStringToSlug, sortTable, ClipboardJS, manageModal */
+/* global afatSettings, convertStringToSlug, sortTable, ClipboardJS, manageModal, fetchGet */
 
 $(document).ready(() => {
     'use strict';
 
     const dtLanguage = afatSettings.dataTable.language;
+    const fatListTable = $('#fleet-edit-fat-list');
 
-    const fatListTable = $('#fleet-edit-fat-list').DataTable({
-        language: dtLanguage,
-        ajax: {
-            url: afatSettings.url,
-            dataSrc: '',
-            cache: false
-        },
-        columns: [
-            {data: 'character_name'},
-            {data: 'system'},
-            {data: 'ship_type'},
-            {data: 'actions'}
-        ],
-        columnDefs: [
-            {
-                targets: [3],
-                orderable: false,
-                createdCell: (td) => {
-                    $(td).addClass('text-end');
-                }
-            }
-        ],
-        order: [
-            [0, 'asc']
-        ],
-        createdRow: (row, data) => {
-            const shipTypeOverviewTable = $('#fleet-edit-ship-types');
-            const shipTypeSlug = convertStringToSlug(data.ship_type);
+    fetchGet({url: afatSettings.url})
+        .then((data) => {
+            fatListTable.DataTable({
+                language: dtLanguage,
+                data: data,
+                columns: [
+                    {data: 'character_name'},
+                    {data: 'system'},
+                    {data: 'ship_type'},
+                    {data: 'actions'}
+                ],
+                columnDefs: [
+                    {
+                        targets: [3],
+                        orderable: false,
+                        createdCell: (td) => {
+                            $(td).addClass('text-end');
+                        }
+                    }
+                ],
+                order: [
+                    [0, 'asc']
+                ],
+                createdRow: (row, data) => {
+                    const shipTypeOverviewTable = $('#fleet-edit-ship-types');
+                    const shipTypeSlug = convertStringToSlug(data.ship_type);
 
-            if ($('tr.shiptype-' + shipTypeSlug).length) {
-                const currentCount = shipTypeOverviewTable.find(
-                    'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                ).html();
-                const newCount = parseInt(currentCount) + 1;
+                    if ($('tr.shiptype-' + shipTypeSlug).length) {
+                        const currentCount = shipTypeOverviewTable.find(
+                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
+                        ).html();
+                        const newCount = parseInt(currentCount) + 1;
 
-                shipTypeOverviewTable.find(
-                    'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                ).html(newCount);
-            } else {
-                shipTypeOverviewTable.append(
-                    '<tr class="shiptype-' + shipTypeSlug + '">' +
-                    '<td class="ship-type">' + data.ship_type + '</td>' +
-                    '<td class="ship-type-count text-end">1</td>' +
-                    '</tr>'
-                );
-            }
+                        shipTypeOverviewTable.find(
+                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
+                        ).html(newCount);
+                    } else {
+                        shipTypeOverviewTable.append(
+                            '<tr class="shiptype-' + shipTypeSlug + '">' +
+                            '<td class="ship-type">' + data.ship_type + '</td>' +
+                            '<td class="ship-type-count text-end">1</td>' +
+                            '</tr>'
+                        );
+                    }
 
-            sortTable(shipTypeOverviewTable, 'asc');
-        },
+                    sortTable(shipTypeOverviewTable, 'asc');
+                },
 
-        stateSave: true,
-        stateDuration: -1
-    });
+                stateSave: true,
+                stateDuration: -1
+            });
+        })
+        .catch((error) => {
+            console.error('Error fetching FAT list:', error);
+        });
 
     /**
-     * Refresh the datatable information every 15 seconds
+     * Refresh the DataTable information every 15 seconds
      */
     const intervalReloadDatatable = 15000; // ms
     let expectedReloadDatatable = Date.now() + intervalReloadDatatable;
@@ -85,12 +88,15 @@ $(document).ready(() => {
             }
         }
 
-        fatListTable.ajax.reload(
-            (tableData) => {
+        fetchGet({url: afatSettings.url})
+            .then((newData) => {
+                const dataTable = fatListTable.DataTable();
                 const shipTypeOverviewTable = $('#fleet-edit-ship-types');
+
+                dataTable.clear().rows.add(newData).draw();
                 shipTypeOverviewTable.find('tbody').html('');
 
-                $.each(tableData, (i, item) => {
+                $.each(newData, (i, item) => {
                     const shipTypeSlug = convertStringToSlug(item.ship_type);
 
                     if ($('tr.shiptype-' + shipTypeSlug).length) {
@@ -113,9 +119,7 @@ $(document).ready(() => {
                 });
 
                 sortTable(shipTypeOverviewTable, 'asc');
-            },
-            false
-        );
+            });
 
         expectedReloadDatatable += intervalReloadDatatable;
 

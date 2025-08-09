@@ -1,4 +1,4 @@
-/* global afatSettings, bootstrap, Chart, fetchAjaxData */
+/* global afatSettings, bootstrap, Chart, fetchGet */
 
 const elementBody = document.querySelector('body');
 const elementBodyCss = getComputedStyle(elementBody);
@@ -80,78 +80,79 @@ $(document).ready(() => {
                 $('#afat-corp-stats-main-character-name').text(characterName);
 
                 // Fetch FAT data for all characters of this main character
-                fetchAjaxData(url).then(tableData => {
-                    const table = $('#character-alt-characters');
+                fetchGet({url: url})
+                    .then((tableData) => {
+                        const table = $('#character-alt-characters');
 
-                    // If we have table data from the server
-                    if (tableData) {
-                        // Hide the spinner
-                        hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data');
+                        // If we have table data from the server
+                        if (tableData) {
+                            // Hide the spinner
+                            hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data');
 
-                        // If we have no data
-                        if (Object.keys(tableData).length === 0) {
-                            // Show the no data message
-                            showElement('#col-character-alt-characters .afat-character-alt-characters .afat-no-data');
-                        } else {
-                            // Show the table
-                            showElement('#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table');
+                            // If we have no data
+                            if (Object.keys(tableData).length === 0) {
+                                // Show the no data message
+                                showElement('#col-character-alt-characters .afat-character-alt-characters .afat-no-data');
+                            } else {
+                                // Show the table
+                                showElement('#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table');
 
-                            // Destroy the table if it already exists
-                            if ($.fn.DataTable.isDataTable(table)) {
-                                table.DataTable().destroy();
-                            }
+                                // Destroy the table if it already exists
+                                if ($.fn.DataTable.isDataTable(table)) {
+                                    table.DataTable().destroy();
+                                }
 
-                            // Create the table
-                            table.DataTable({
-                                language: afatSettings.dataTable.language,
-                                data: tableData,
-                                // paging: false,
-                                // lengthChange: false,
-                                columns: [
-                                    { data: 'character_name' },
-                                    { data: 'fat_count' },
-                                    { data: 'show_details_button' },
-                                    { data: 'in_main_corp' },
-                                ],
-                                order: [
-                                    [3, 'desc'],
-                                    [1, 'desc'],
-                                    [0, 'asc']
-                                ],
-                                columnDefs: [
-                                    {
-                                        targets: 1,
-                                        createdCell: (td) => {
-                                            $(td).addClass('text-end');
-                                        }
-                                    },
-                                    {
-                                        targets: 2,
-                                        createdCell: (td) => {
-                                            $(td).addClass('text-end');
+                                // Create the table
+                                table.DataTable({
+                                    language: afatSettings.dataTable.language,
+                                    data: tableData,
+                                    // paging: false,
+                                    // lengthChange: false,
+                                    columns: [
+                                        { data: 'character_name' },
+                                        { data: 'fat_count' },
+                                        { data: 'show_details_button' },
+                                        { data: 'in_main_corp' },
+                                    ],
+                                    order: [
+                                        [3, 'desc'],
+                                        [1, 'desc'],
+                                        [0, 'asc']
+                                    ],
+                                    columnDefs: [
+                                        {
+                                            targets: 1,
+                                            createdCell: (td) => {
+                                                $(td).addClass('text-end');
+                                            }
                                         },
-                                        sortable: false
-                                    },
-                                    {
-                                        targets: 3,
-                                        visible: false
-                                    }
-                                ]
-                            });
+                                        {
+                                            targets: 2,
+                                            createdCell: (td) => {
+                                                $(td).addClass('text-end');
+                                            },
+                                            sortable: false
+                                        },
+                                        {
+                                            targets: 3,
+                                            visible: false
+                                        }
+                                    ]
+                                });
+                            }
                         }
-                    }
-                }).then(() => {
-                    // Show bootstrap tooltips
-                    [].slice.call(
-                        document.querySelectorAll(
-                            '[data-bs-tooltip="afat"]'
-                        )
-                    ).map((tooltipTriggerEl) => {
-                        return new bootstrap.Tooltip(tooltipTriggerEl);
+                    }).then(() => {
+                        // Show bootstrap tooltips
+                        [].slice.call(
+                            document.querySelectorAll(
+                                '[data-bs-tooltip="afat"]'
+                            )
+                        ).map((tooltipTriggerEl) => {
+                            return new bootstrap.Tooltip(tooltipTriggerEl);
+                        });
+                    }).catch((error) => {
+                        console.log(`Error: ${error.message}`);
                     });
-                }).catch(error => {
-                    console.log(`Error: ${error.message}`);
-                });
             });
         }
     };
