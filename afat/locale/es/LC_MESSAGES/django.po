@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
 "POT-Creation-Date: 2025-08-05 15:56+0200\n"
-"PO-Revision-Date: 2025-08-05 14:02+0000\n"
+"PO-Revision-Date: 2025-08-14 08:41+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/es/>\n"
 "Language: es\n"
@@ -471,11 +471,11 @@ msgstr "Si usar las doctrinas de los módulos de Fiteos en el menú desplegable 
 
 #: afat/models/afat.py:530
 msgid "Setting"
-msgstr ""
+msgstr "ajuste"
 
 #: afat/models/afat.py:531
 msgid "Settings"
-msgstr ""
+msgstr "ajustes"
 
 #: afat/models/afat.py:541
 msgid "AFAT Settings"
