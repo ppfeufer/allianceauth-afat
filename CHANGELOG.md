@@ -43,6 +43,7 @@ Section Order:
 
 ### Changed
 
+- Use the AA framework SVG spinner for the loading animation
 - Use AA framework JS functions
 - Minimum requirements
   - Alliance Auth >= 4.9.0
