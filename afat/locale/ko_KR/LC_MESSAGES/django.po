@@ -6,13 +6,14 @@
 # Mind of the Raven <okanieva@gmail.com>, 2024.
 # Hue Radient <seataoji@gmail.com>, 2024.
 # Rodpold Shard <rodpold@gmail.com>, 2024.
+# SiO4 <hohoit0078@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
 "POT-Creation-Date: 2025-08-05 15:56+0200\n"
-"PO-Revision-Date: 2025-07-29 20:18+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"PO-Revision-Date: 2025-08-14 08:41+0000\n"
+"Last-Translator: SiO4 <hohoit0078@gmail.com>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ko/>\n"
 "Language: ko_KR\n"
 "MIME-Version: 1.0\n"
@@ -872,10 +873,8 @@ msgstr "코퍼레이션"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:33
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:88
-#, fuzzy
-#| msgid "Corporation"
 msgid "View detailed corporation statistics for: "
-msgstr "코퍼레이션"
+msgstr "코퍼레이션 상태 자세히 보기: "
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:6
 #: afat/templates/afat/partials/statistics/alliance/tabs/graphs.html:22
