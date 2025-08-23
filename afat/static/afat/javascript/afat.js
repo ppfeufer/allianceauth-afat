@@ -51,82 +51,48 @@ const sortTable = (table, order) => { // eslint-disable-line no-unused-vars
 
 /**
  * Manage a modal window
- * @param {element} modalElement
+ *
+ * @param {element} modalElement The modal element
  */
 const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
     /**
-     * Set modal buttons
+     * Update modal elements
      *
-     * @param {string} confirmButtonText
-     * @param {string} cancelButtonText
+     * @param {string} bodyText Modal body text
+     * @param {string} confirmButtonText Text for the confirm action button
+     * @param {string} cancelButtonText Text for the cancel action button
+     * @param {string} confirmActionUrl URL for the confirm action button
      */
-    const setModalButtons = (confirmButtonText, cancelButtonText) => {
-        modalElement.find('#confirm-action').text(confirmButtonText);
+    const updateModal = ({bodyText, confirmButtonText, cancelButtonText, confirmActionUrl}) => {
+        modalElement.find('#confirm-action').text(confirmButtonText).attr('href', confirmActionUrl);
         modalElement.find('#cancel-action').text(cancelButtonText);
-    };
-
-    /**
-     * Set modal body
-     *
-     * @param {string} bodyText
-     */
-    const setModalBody = (bodyText) => {
         modalElement.find('.modal-body').html(bodyText);
-    };
-
-    /**
-     * Set modal confirm action
-     *
-     * @param {string} confirmActionUrl
-     */
-    const setModalConfirmActionUrl = (confirmActionUrl) => {
-        modalElement.find('#confirm-action').attr('href', confirmActionUrl);
-    };
-
-    /**
-     * Set modal elements
-     *
-     * @param {string} bodyText
-     * @param {string} confirmButtonText
-     * @param {string} cancelButtonText
-     * @param {string} confirmActionUrl
-     */
-    const setModalElements = (bodyText, confirmButtonText, cancelButtonText, confirmActionUrl) => {
-        setModalButtons(confirmButtonText, cancelButtonText);
-        setModalBody(bodyText);
-        setModalConfirmActionUrl(confirmActionUrl);
     };
 
     /**
      * Clear modal elements
      */
-    const clearModalElements = () => {
+    const clearModal = () => {
+        modalElement.find('#confirm-action').text('').attr('href', '');
+        modalElement.find('#cancel-action').text('');
         modalElement.find('.modal-body').html('');
-        modalElement.find('#cancel-action').text();
-        modalElement.find('#confirm-action').text();
-        modalElement.find('#confirm-action').attr('href', '');
     };
 
     modalElement.on('show.bs.modal', (event) => {
-        const button = $(event.relatedTarget); // Button that triggered the modal
-        const url = button.data('url'); // Extract info from data-url attributes
-        const cancelText = button.data('cancel-text');
-        const confirmText = button.data('confirm-text');
+        const button = $(event.relatedTarget);
+        const url = button.data('url');
         const bodyText = button.data('body-text');
-        let confirmButtonText = modalElement.find('#confirmButtonDefaultText').text();
-        let cancelButtonText = modalElement.find('#cancelButtonDefaultText').text();
+        const confirmButtonText = button.data('confirm-text') || modalElement.find('#confirmButtonDefaultText').text();
+        const cancelButtonText = button.data('cancel-text') || modalElement.find('#cancelButtonDefaultText').text();
 
-        if (typeof cancelText !== 'undefined' && cancelText !== '') {
-            cancelButtonText = cancelText;
-        }
-
-        if (typeof confirmText !== 'undefined' && confirmText !== '') {
-            confirmButtonText = confirmText;
-        }
-
-        setModalElements(bodyText, confirmButtonText, cancelButtonText, url);
+        updateModal({
+            bodyText: bodyText,
+            confirmButtonText: confirmButtonText,
+            cancelButtonText: cancelButtonText,
+            url: url
+        });
     }).on('hide.bs.modal', () => {
-        clearModalElements();
+        clearModal();
     });
 };
 

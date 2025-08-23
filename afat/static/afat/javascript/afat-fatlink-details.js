@@ -5,158 +5,116 @@ $(document).ready(() => {
 
     const dtLanguage = afatSettings.dataTable.language;
     const fatListTable = $('#fleet-edit-fat-list');
+    const shipTypeOverviewTable = $('#fleet-edit-ship-types');
 
+    // Helper function to update ship type counts
+    const updateShipTypeCounts = (data) => {
+        const shipTypeCounts = {};
+
+        // Count ship types
+        data.forEach((item) => {
+            shipTypeCounts[item.ship_type] = (shipTypeCounts[item.ship_type] || 0) + 1;
+        });
+
+        // Clear and rebuild ship type overview
+        shipTypeOverviewTable.find('tbody').empty();
+
+        Object.entries(shipTypeCounts).forEach(([shipType, count]) => {
+            const shipTypeSlug = convertStringToSlug(shipType);
+
+            shipTypeOverviewTable.append(
+                `<tr class="shiptype-${shipTypeSlug}"><td class="ship-type">${shipType}</td><td class="ship-type-count text-end">${count}</td></tr>`
+            );
+        });
+
+        sortTable(shipTypeOverviewTable, 'asc');
+    };
+
+    // Initialize DataTable
+    const initializeDataTable = (data) => {
+        fatListTable.DataTable({
+            language: dtLanguage,
+            data: data,
+            columns: [
+                {data: 'character_name'},
+                {data: 'system'},
+                {data: 'ship_type'},
+                {data: 'actions'}
+            ],
+            columnDefs: [
+                {
+                    targets: [3],
+                    orderable: false,
+                    createdCell: (td) => {
+                        $(td).addClass('text-end');
+                    }
+                }
+            ],
+            order: [[0, 'asc']],
+            stateSave: true,
+            stateDuration: -1
+        });
+
+        updateShipTypeCounts(data);
+    };
+
+    // Load initial data
     fetchGet({url: afatSettings.url})
-        .then((data) => {
-            fatListTable.DataTable({
-                language: dtLanguage,
-                data: data,
-                columns: [
-                    {data: 'character_name'},
-                    {data: 'system'},
-                    {data: 'ship_type'},
-                    {data: 'actions'}
-                ],
-                columnDefs: [
-                    {
-                        targets: [3],
-                        orderable: false,
-                        createdCell: (td) => {
-                            $(td).addClass('text-end');
-                        }
-                    }
-                ],
-                order: [
-                    [0, 'asc']
-                ],
-                createdRow: (row, data) => {
-                    const shipTypeOverviewTable = $('#fleet-edit-ship-types');
-                    const shipTypeSlug = convertStringToSlug(data.ship_type);
-
-                    if ($('tr.shiptype-' + shipTypeSlug).length) {
-                        const currentCount = shipTypeOverviewTable.find(
-                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                        ).html();
-                        const newCount = parseInt(currentCount) + 1;
-
-                        shipTypeOverviewTable.find(
-                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                        ).html(newCount);
-                    } else {
-                        shipTypeOverviewTable.append(
-                            '<tr class="shiptype-' + shipTypeSlug + '">' +
-                            '<td class="ship-type">' + data.ship_type + '</td>' +
-                            '<td class="ship-type-count text-end">1</td>' +
-                            '</tr>'
-                        );
-                    }
-
-                    sortTable(shipTypeOverviewTable, 'asc');
-                },
-
-                stateSave: true,
-                stateDuration: -1
-            });
-        })
+        .then(initializeDataTable)
         .catch((error) => {
             console.error('Error fetching FAT list:', error);
         });
 
-    /**
-     * Refresh the DataTable information every 15 seconds
-     */
-    const intervalReloadDatatable = 15000; // ms
-    let expectedReloadDatatable = Date.now() + intervalReloadDatatable;
+    // Auto-reload functionality
+    if (afatSettings.reloadDatatable === true) {
+        const intervalReloadDatatable = 15000;
+        let expectedReloadTime = Date.now() + intervalReloadDatatable;
 
-    /**
-     * reload datatable "linkListTable"
-     */
-    const realoadDataTable = () => {
-        // The drift (positive for overshooting)
-        const dt = Date.now() - expectedReloadDatatable;
-        const currentPath = window.location.pathname + window.location.search + window.location.hash;
+        const reloadDataTable = () => {
+            const drift = Date.now() - expectedReloadTime;
 
-        if (dt > intervalReloadDatatable) {
-            /**
-             * Something awful happened. Maybe the browser (tab) was inactive?
-             * Possibly special handling to avoid futile "catch up" run.
-             */
-            if (currentPath.startsWith('/')) {
-                window.location.replace(currentPath);
-            } else {
-                console.error('Invalid redirect URL');
+            if (drift > intervalReloadDatatable) {
+                const currentPath = window.location.pathname + window.location.search + window.location.hash;
+
+                if (currentPath.startsWith('/')) {
+                    window.location.replace(currentPath);
+
+                    return;
+                } else {
+                    console.error('Invalid redirect URL');
+                }
             }
-        }
 
-        fetchGet({url: afatSettings.url})
-            .then((newData) => {
-                const dataTable = fatListTable.DataTable();
-                const shipTypeOverviewTable = $('#fleet-edit-ship-types');
+            fetchGet({url: afatSettings.url})
+                .then((newData) => {
+                    const dataTable = fatListTable.DataTable();
 
-                dataTable.clear().rows.add(newData).draw();
-                shipTypeOverviewTable.find('tbody').html('');
-
-                $.each(newData, (i, item) => {
-                    const shipTypeSlug = convertStringToSlug(item.ship_type);
-
-                    if ($('tr.shiptype-' + shipTypeSlug).length) {
-                        const currentCount = shipTypeOverviewTable.find(
-                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                        ).html();
-                        const newCount = parseInt(currentCount) + 1;
-
-                        shipTypeOverviewTable.find(
-                            'tr.shiptype-' + shipTypeSlug + ' td.ship-type-count'
-                        ).html(newCount);
-                    } else {
-                        shipTypeOverviewTable.append(
-                            '<tr class="shiptype-' + shipTypeSlug + '">' +
-                            '<td class="ship-type">' + item.ship_type + '</td>' +
-                            '<td class="ship-type-count text-end">1</td>' +
-                            '</tr>'
-                        );
-                    }
+                    dataTable.clear().rows.add(newData).draw();
+                    updateShipTypeCounts(newData);
+                })
+                .catch((error) => {
+                    console.error('Error reloading data:', error);
                 });
 
-                sortTable(shipTypeOverviewTable, 'asc');
-            });
+            expectedReloadTime += intervalReloadDatatable;
 
-        expectedReloadDatatable += intervalReloadDatatable;
+            setTimeout(reloadDataTable, Math.max(0, intervalReloadDatatable - drift));
+        };
 
-        // take drift into account
-        setTimeout(
-            realoadDataTable,
-            Math.max(0, intervalReloadDatatable - dt)
-        );
-    };
-
-    if (afatSettings.reloadDatatable === true) {
-        setTimeout(
-            realoadDataTable,
-            intervalReloadDatatable
-        );
+        setTimeout(reloadDataTable, intervalReloadDatatable);
     }
 
+    // Initialize clipboard and modals
     const clipboard = new ClipboardJS('.copy-btn');
     clipboard.on('success', () => {
         $('.copy-btn').tooltip('show');
     });
 
-    /**
-     * Modal :: Close ESI fleet
-     */
-    const cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
-    manageModal(cancelEsiFleetModal);
-
-    /**
-     * Modal :: Delete FAT from FAT link
-     */
-    const deleteFatModal = $(afatSettings.modal.deleteFatModal.element);
-    manageModal(deleteFatModal);
-
-    /**
-     * Modal :: Delete FAT from FAT link
-     */
-    const reopenFatLinkModal = $(afatSettings.modal.reopenFatLinkModal.element);
-    manageModal(reopenFatLinkModal);
+    [
+        afatSettings.modal.cancelEsiFleetModal.element,
+        afatSettings.modal.deleteFatModal.element,
+        afatSettings.modal.reopenFatLinkModal.element
+    ].forEach((modalElement) => {
+        manageModal($(modalElement));
+    });
 });
