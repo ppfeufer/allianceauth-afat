@@ -6,7 +6,7 @@ const elementBodyCss = getComputedStyle(elementBody);
 Chart.defaults.color = elementBodyCss.color;
 
 /**
- * Draw a chart on the given element with the given data and options using Chart.js …
+ * Draw a chart on the given element with the given data and options using Chart.js
  *
  * @param {HTMLElement} element The element to draw the chart on
  * @param {string} chartType The type of chart to draw
@@ -27,131 +27,117 @@ $(document).ready(() => {
     'use strict';
 
     /**
-     * Show the given element
+     * Toggle element visibility
      *
-     * @param {string} selector Element selector (class or ID)
+     * @param {string} selector Element selector
+     * @param {boolean} show True to show, false to hide
      */
-    const showElement = (selector) => {
-        $(selector).removeClass('d-none');
+    const toggleElement = (selector, show) => {
+        $(selector).toggleClass('d-none', !show);
     };
 
     /**
-     * Hide the given element
+     * Toggle multiple elements at once
      *
-     * @param {string} selector Element selector (class or ID)
+     * @param {string[]} selectors Array of selectors
+     * @param {boolean} show True to show, false to hide
      */
-    const hideElement = (selector) => {
-        $(selector).addClass('d-none');
+    const toggleElements = (selectors, show) => {
+        selectors.forEach(selector => toggleElement(selector, show));
     };
 
     /**
-     * Add onClick event to the main character details button
+     * Handle character details button click
+     *
+     * @param {Event} event Click event
      */
-    const addBtnMainCharacterDetailsEvent = () => {
-        const btnMainCharacterDetails = $('.btn-afat-corp-stats-view-character');
+    const handleCharacterDetailsClick = (event) => {
+        const btn = $(event.currentTarget);
+        const characterName = btn.data('character-name');
+        const url = btn.data('url');
 
-        if (btnMainCharacterDetails.length > 0) {
-            btnMainCharacterDetails.on('click', (event) => {
-                const btn = $(event.currentTarget);
-                const characterName = btn.data('character-name');
-                const url = btn.data('url');
+        // Hide loading/data elements initially
+        toggleElements([
+            '#col-character-alt-characters .afat-character-alt-characters .afat-no-data',
+            '#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table'
+        ], false);
 
-                // Elements to hide initially
-                const hideInitially= [
-                    '#col-character-alt-characters .afat-character-alt-characters .afat-no-data',
-                    '#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table'
-                ];
+        // Show container and loading spinner
+        toggleElements([
+            '#col-character-alt-characters',
+            '#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data'
+        ], true);
 
-                hideInitially.forEach(selector => {
-                    hideElement(selector);
-                });
+        // Set character name
+        $('#afat-corp-stats-main-character-name').text(characterName);
 
-                // Elements to show initially
-                const showInitially = [
-                    '#col-character-alt-characters',
-                    '#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data'
-                ];
-
-                showInitially.forEach(selector => {
-                    showElement(selector);
-                });
-
-                // Set the main character name
-                $('#afat-corp-stats-main-character-name').text(characterName);
-
-                // Fetch FAT data for all characters of this main character
-                fetchGet({url: url})
-                    .then((tableData) => {
-                        const table = $('#character-alt-characters');
-
-                        // If we have table data from the server
-                        if (tableData) {
-                            // Hide the spinner
-                            hideElement('#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data');
-
-                            // If we have no data
-                            if (Object.keys(tableData).length === 0) {
-                                // Show the no data message
-                                showElement('#col-character-alt-characters .afat-character-alt-characters .afat-no-data');
-                            } else {
-                                // Show the table
-                                showElement('#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table');
-
-                                // Destroy the table if it already exists
-                                if ($.fn.DataTable.isDataTable(table)) {
-                                    table.DataTable().destroy();
-                                }
-
-                                // Create the table
-                                table.DataTable({
-                                    language: afatSettings.dataTable.language,
-                                    data: tableData,
-                                    // paging: false,
-                                    // lengthChange: false,
-                                    columns: [
-                                        { data: 'character_name' },
-                                        { data: 'fat_count' },
-                                        { data: 'show_details_button' },
-                                        { data: 'in_main_corp' },
-                                    ],
-                                    order: [
-                                        [3, 'desc'],
-                                        [1, 'desc'],
-                                        [0, 'asc']
-                                    ],
-                                    columnDefs: [
-                                        {
-                                            targets: 1,
-                                            createdCell: (td) => {
-                                                $(td).addClass('text-end');
-                                            }
-                                        },
-                                        {
-                                            targets: 2,
-                                            createdCell: (td) => {
-                                                $(td).addClass('text-end');
-                                            },
-                                            sortable: false
-                                        },
-                                        {
-                                            targets: 3,
-                                            visible: false
-                                        }
-                                    ],
-                                    initComplete: () => {
-                                        afatBootstrapTooltip({selector: '#character-alt-characters'});
-                                    }
-                                });
-                            }
-                        }
-                    })
-                    .catch((error) => {
-                        console.log(`Error: ${error.message}`);
-                    });
+        // Fetch and display data
+        fetchGet({url})
+            .then(handleTableData)
+            .catch((error) => {
+                console.error(`Error: ${error.message}`);
             });
-        }
     };
 
-    // Start the script
-    addBtnMainCharacterDetailsEvent();
+    /**
+     * Handle table data response
+     *
+     * @param {Object} tableData Array of table data objects
+     */
+    const handleTableData = (tableData) => {
+        const table = $('#character-alt-characters');
+
+        // Hide loading spinner
+        toggleElement('#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data', false);
+
+        if (!tableData || Object.keys(tableData).length === 0) {
+            toggleElement('#col-character-alt-characters .afat-character-alt-characters .afat-no-data', true);
+
+            return;
+        }
+
+        // Show table and initialize DataTable
+        toggleElement('#col-character-alt-characters .afat-character-alt-characters .afat-character-alt-characters-table', true);
+
+        // Destroy existing table if present
+        if ($.fn.DataTable.isDataTable(table)) {
+            table.DataTable().destroy();
+        }
+
+        // Create new DataTable
+        table.DataTable({
+            language: afatSettings.dataTable.language,
+            data: tableData,
+            columns: [
+                { data: 'character_name' },
+                { data: 'fat_count' },
+                { data: 'show_details_button' },
+                { data: 'in_main_corp' }
+            ],
+            order: [
+                [3, 'desc'],
+                [1, 'desc'],
+                [0, 'asc']
+            ],
+            columnDefs: [
+                {
+                    targets: [1, 2],
+                    createdCell: (td) => $(td).addClass('text-end')
+                },
+                {
+                    targets: 2,
+                    sortable: false
+                },
+                {
+                    targets: 3,
+                    visible: false
+                }
+            ],
+            initComplete: () => {
+                afatBootstrapTooltip({selector: '#character-alt-characters'});
+            }
+        });
+    };
+
+    $('.btn-afat-corp-stats-view-character').on('click', handleCharacterDetailsClick);
 });

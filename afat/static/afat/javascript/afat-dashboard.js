@@ -6,136 +6,120 @@ $(document).ready(() => {
     const dtLanguage = afatSettings.dataTable.language;
 
     /**
-     * DataTable :: Recent FATs per character
+     * Common date renderer for DataTables
      */
-    if (characters.length > 0) {
+    const dateRenderer = {
+        display: (data) => moment(data.time).utc().format(AFAT_DATETIME_FORMAT),
+        _: 'timestamp'
+    };
+
+    /**
+     * Common DataTable configuration
+     */
+    const commonTableConfig = {
+        language: dtLanguage,
+        paging: false,
+        ordering: false,
+        searching: false,
+        info: false
+    };
+
+    /**
+     * Initialize character FAT tables
+     */
+    const initCharacterFatTables = () => {
+        const characterTableColumns = [
+            {data: 'fleet_name'},
+            {data: 'fleet_type'},
+            {data: 'doctrine'},
+            {data: 'system'},
+            {data: 'ship_type'},
+            {data: 'fleet_time', render: dateRenderer}
+        ];
+
         characters.forEach((character) => {
-            const recentFatsCharacterTable = $('#recent-fats-character-' + character.charId);
+            const table = $('#recent-fats-character-' + character.charId);
             const url = afatSettings.url.characterFats.replace('0', character.charId);
 
-            fetchGet({url: url})
+            fetchGet({url})
                 .then((data) => {
-                    recentFatsCharacterTable.DataTable({
-                        language: dtLanguage,
-                        data: data,
-                        columns: [
-                            {data: 'fleet_name'},
-                            {data: 'fleet_type'},
-                            {data: 'doctrine'},
-                            {data: 'system'},
-                            {data: 'ship_type'},
-                            {
-                                data: 'fleet_time',
-                                render: {
-                                    /**
-                                     * Render date
-                                     *
-                                     * @param data
-                                     * @returns {*}
-                                     */
-                                    display: (data) => {
-                                        return moment(data.time).utc().format(
-                                            AFAT_DATETIME_FORMAT
-                                        );
-                                    },
-                                    _: 'timestamp'
-                                }
-                            }
-                        ],
-                        paging: false,
-                        ordering: false,
-                        searching: false,
-                        info: false
+                    table.DataTable({
+                        ...commonTableConfig,
+                        data,
+                        columns: characterTableColumns
                     });
                 })
                 .catch((error) => {
                     console.error('Error fetching recent FATs for character:', character.charId, error);
                 });
         });
-    }
+    };
 
     /**
-     * DataTable :: Recent FAT links
+     * Initialize recent FAT links table
      */
-    const noFatlinksWarning = '<div class="aa-callout aa-callout-warning" role="alert">' +
-        '<p>' + afatSettings.translation.dataTable.noFatlinksWarning + '</p>' +
-        '</div>';
+    const initRecentFatLinksTable = () => {
+        const columns = [
+            {data: 'fleet_name'},
+            {data: 'fleet_type'},
+            {data: 'doctrine'},
+            {data: 'creator_name'},
+            {data: 'fleet_time', render: dateRenderer}
+        ];
 
-    const recentFatlinksTableColumns = [
-        {data: 'fleet_name'},
-        {data: 'fleet_type'},
-        {data: 'doctrine'},
-        {data: 'creator_name'},
-        {
-            data: 'fleet_time',
-            render: {
-                /**
-                 * Render timestamp
-                 *
-                 * @param data
-                 * @returns {*}
-                 */
-                display: (data) => {
-                    return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
-                },
-                _: 'timestamp'
-            }
-        }
-    ];
+        const columnDefs = [];
+        const hasPermissions = afatSettings.permissions.addFatLink || afatSettings.permissions.manageAfat;
 
-    const recentFatlinksTableColumnDefs = [];
-
-    if (afatSettings.permissions.addFatLink === true || afatSettings.permissions.manageAfat === true) {
-        recentFatlinksTableColumns.push({
-            data: 'actions',
-            /**
-             * Render action buttons
-             *
-             * @param data
-             * @returns {*|string}
-             */
-            render: (data) => {
-                return data;
-            }
-        });
-
-        recentFatlinksTableColumnDefs.push({
-            targets: [5],
-            orderable: false,
-            createdCell: (td) => {
-                $(td).addClass('text-end');
-            }
-        });
-    }
-
-    dtLanguage.emptyTable = noFatlinksWarning;
-
-    fetchGet({url: afatSettings.url.recentFatLinks})
-        .then((data) => {
-            $('#dashboard-recent-fatlinks').DataTable({
-                language: dtLanguage,
-                data: data,
-                columns: recentFatlinksTableColumns,
-                columnDefs: recentFatlinksTableColumnDefs,
-                paging: false,
-                ordering: false,
-                searching: false,
-                info: false
+        if (hasPermissions) {
+            columns.push({
+                data: 'actions',
+                render: (data) => data
             });
-        })
-        .catch((error) => {
-            console.error('Error fetching recent FAT links:', error);
+
+            columnDefs.push({
+                targets: [5],
+                orderable: false,
+                createdCell: (td) => $(td).addClass('text-end')
+            });
+        }
+
+        dtLanguage.emptyTable = `<div class="aa-callout aa-callout-warning" role="alert">
+            <p>${afatSettings.translation.dataTable.noFatlinksWarning}</p>
+        </div>`;
+
+        fetchGet({url: afatSettings.url.recentFatLinks})
+            .then((data) => {
+                $('#dashboard-recent-fatlinks').DataTable({
+                    ...commonTableConfig,
+                    data: data,
+                    columns: columns,
+                    columnDefs: columnDefs
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching recent FAT links:', error);
+            });
+    };
+
+    /**
+     * Initialize modals
+     */
+    const initModals = () => {
+        const modals = [
+            afatSettings.modal.cancelEsiFleetModal.element,
+            afatSettings.modal.deleteFatLinkModal.element
+        ];
+
+        modals.forEach(modalElement => {
+            manageModal($(modalElement));
         });
+    };
 
-    /**
-     * Modal :: Close ESI fleet
-     */
-    const cancelEsiFleetModal = $(afatSettings.modal.cancelEsiFleetModal.element);
-    manageModal(cancelEsiFleetModal);
+    // Initialize components
+    if (characters.length > 0) {
+        initCharacterFatTables();
+    }
 
-    /**
-     * Modal :: Delete FAT link
-     */
-    const deleteFatLinkModal = $(afatSettings.modal.deleteFatLinkModal.element);
-    manageModal(deleteFatLinkModal);
+    initRecentFatLinksTable();
+    initModals();
 });
