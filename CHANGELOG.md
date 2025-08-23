@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- DataTables `initComplete` actions
+
 ### Changed
 
 - Switch to Terser for JavaScript compression
