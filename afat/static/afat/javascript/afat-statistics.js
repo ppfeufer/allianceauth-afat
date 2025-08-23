@@ -1,4 +1,4 @@
-/* global afatSettings, bootstrap, Chart, fetchGet */
+/* global afatSettings, afatBootstrapTooltip, Chart, fetchGet */
 
 const elementBody = document.querySelector('body');
 const elementBodyCss = getComputedStyle(elementBody);
@@ -137,20 +137,15 @@ $(document).ready(() => {
                                             targets: 3,
                                             visible: false
                                         }
-                                    ]
+                                    ],
+                                    initComplete: () => {
+                                        afatBootstrapTooltip({selector: '#character-alt-characters'});
+                                    }
                                 });
                             }
                         }
-                    }).then(() => {
-                        // Show bootstrap tooltips
-                        [].slice.call(
-                            document.querySelectorAll(
-                                '[data-bs-tooltip="afat"]'
-                            )
-                        ).map((tooltipTriggerEl) => {
-                            return new bootstrap.Tooltip(tooltipTriggerEl);
-                        });
-                    }).catch((error) => {
+                    })
+                    .catch((error) => {
                         console.log(`Error: ${error.message}`);
                     });
             });
@@ -158,7 +153,5 @@ $(document).ready(() => {
     };
 
     // Start the script
-    (() => {
-        addBtnMainCharacterDetailsEvent();
-    })();
+    addBtnMainCharacterDetailsEvent();
 });
