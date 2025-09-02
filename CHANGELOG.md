@@ -41,6 +41,8 @@ Section Order:
 ### Security
 -->
 
+## [3.12.1] - 2025-09-02
+
 ### Fixed
 
 - DataTables `initComplete` actions
@@ -49,6 +51,7 @@ Section Order:
 
 - JavaScript optimized
 - Switch to Terser for JavaScript compression
+- Translations updated
 
 ## [3.12.0] - 2025-08-14
 
