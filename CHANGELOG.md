@@ -2,8 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+The format is based on [Keep a Changelog] and this project adheres to [Semantic Versioning].
 
 <!--
 GitHub MD Syntax:
@@ -40,6 +39,8 @@ Section Order:
 ### Removed
 ### Security
 -->
+
+<!-- Your changes go here -->
 
 ### Fixed
 
@@ -1726,7 +1727,7 @@ Finally restart your supervisor services for AA
 - Permissions to edit and delete fatlinks and fats
 - Templates prepared for Django 3 update in Alliance Auth
 
-## [0.3.5] - 2020-09-11
+## [0.4.0] - 2020-09-11
 
 ### Added
 
@@ -1759,4 +1760,131 @@ Finally restart your supervisor services for AA
 - ESI FAT Messages
 - Various Formatting Enhancements
 
+<!-- Links to be updated upon release -->
+
 [#251]: https://github.com/ppfeufer/allianceauth-afat/issues/251 "FATs by Weekday for Corp are off by one day"
+[0.3.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v0.0.2...v0.3.5 "v0.3.5"
+[0.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v0.3.5...v0.4.0 "v0.4.0"
+[1.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v0.4.0...v1.0.0 "v1.0.0"
+[1.0.0a1]: https://github.com/ppfeufer/allianceauth-afat/compare/v0.4.0...v1.0.0a1 "v1.0.0a1"
+[1.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.0.0...v1.1.0 "v1.1.0"
+[1.10.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.9.0...v1.10.0 "v1.10.0"
+[1.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.1.0...v1.2.0 "v1.2.0"
+[1.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.1.0...v1.3.0 "v1.3.0"
+[1.3.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.3.0...v1.3.1 "v1.3.1"
+[1.3.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.3.1...v1.3.2 "v1.3.2"
+[1.3.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.3.2...v1.3.3 "v1.3.3"
+[1.3.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.3.3...v1.3.4 "v1.3.4"
+[1.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.3.4...v1.4.0 "v1.4.0"
+[1.4.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.4.0...v1.4.1 "v1.4.1"
+[1.4.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.4.1...v1.4.2 "v1.4.2"
+[1.4.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.4.2...v1.4.3 "v1.4.3"
+[1.4.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.4.3...v1.4.4 "v1.4.4"
+[1.4.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.4.4...v1.4.5 "v1.4.5"
+[1.5.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.4.5...v1.5.0 "v1.5.0"
+[1.5.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.5.0...v1.5.1 "v1.5.1"
+[1.5.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.5.1...v1.5.2 "v1.5.2"
+[1.5.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.5.2...v1.5.3 "v1.5.3"
+[1.6.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.5.3...v1.6.0 "v1.6.0"
+[1.7.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.6.0...v1.7.0 "v1.7.0"
+[1.8.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.7.0...v1.8.0 "v1.8.0"
+[1.9.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.8.0...v1.9.0 "v1.9.0"
+[2.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v1.10.0...v2.0.0 "v2.0.0"
+[2.0.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.0.0...v2.0.1 "v2.0.1"
+[2.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.0.1...v2.1.0 "v2.1.0"
+[2.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.1.0...v2.1.1 "v2.1.1"
+[2.10.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.7...v2.10.0 "v2.10.0"
+[2.10.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.10.0...v2.10.1 "v2.10.1"
+[2.10.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.10.1...v2.10.2 "v2.10.2"
+[2.11.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.10.2...v2.11.0 "v2.11.0"
+[2.11.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.11.0...v2.11.1 "v2.11.1"
+[2.11.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.11.1...v2.11.2 "v2.11.2"
+[2.11.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.11.2...v2.11.3 "v2.11.3"
+[2.12.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.11.3...v2.12.0 "v2.12.0"
+[2.12.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.12.0...v2.12.1 "v2.12.1"
+[2.12.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.12.1...v2.12.2 "v2.12.2"
+[2.12.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.12.2...v2.12.3 "v2.12.3"
+[2.13.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.12.3...v2.13.0 "v2.13.0"
+[2.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.1.1...v2.2.0 "v2.2.0"
+[2.2.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.0...v2.2.1 "v2.2.1"
+[2.2.10]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.9...v2.2.10 "v2.2.10"
+[2.2.11]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.10...v2.2.11 "v2.2.11"
+[2.2.12]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.11...v2.2.12 "v2.2.12"
+[2.2.13]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.12...v2.2.13 "v2.2.13"
+[2.2.14]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.13...v2.2.14 "v2.2.14"
+[2.2.15]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.14...v2.2.15 "v2.2.15"
+[2.2.16]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.15...v2.2.16 "v2.2.16"
+[2.2.17]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.16...v2.2.17 "v2.2.17"
+[2.2.18]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.17...v2.2.18 "v2.2.18"
+[2.2.19]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.18...v2.2.19 "v2.2.19"
+[2.2.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.1...v2.2.2 "v2.2.2"
+[2.2.20]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.19...v2.2.20 "v2.2.20"
+[2.2.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.2...v2.2.3 "v2.2.3"
+[2.2.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.3...v2.2.4 "v2.2.4"
+[2.2.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.4...v2.2.5 "v2.2.5"
+[2.2.6]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.5...v2.2.6 "v2.2.6"
+[2.2.7]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.6...v2.2.7 "v2.2.7"
+[2.2.8]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.7...v2.2.8 "v2.2.8"
+[2.2.9]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.8...v2.2.9 "v2.2.9"
+[2.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.2.20...v2.3.0 "v2.3.0"
+[2.3.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.3.0...v2.3.1 "v2.3.1"
+[2.3.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.3.1...v2.3.2 "v2.3.2"
+[2.3.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.3.2...v2.3.3 "v2.3.3"
+[2.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.3.3...v2.4.0 "v2.4.0"
+[2.5.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.4.0...v2.5.0 "v2.5.0"
+[2.6.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.5.0...v2.6.0 "v2.6.0"
+[2.7.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.6.0...v2.7.0 "v2.7.0"
+[2.8.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.7.0...v2.8.0 "v2.8.0"
+[2.8.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.0...v2.8.1 "v2.8.1"
+[2.8.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.1...v2.8.2 "v2.8.2"
+[2.8.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.2...v2.8.3 "v2.8.3"
+[2.8.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.3...v2.8.4 "v2.8.4"
+[2.8.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.4...v2.8.5 "v2.8.5"
+[2.8.6]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.5...v2.8.6 "v2.8.6"
+[2.9.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.8.6...v2.9.0 "v2.9.0"
+[2.9.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.0...v2.9.1 "v2.9.1"
+[2.9.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.1...v2.9.2 "v2.9.2"
+[2.9.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.2...v2.9.3 "v2.9.3"
+[2.9.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.3...v2.9.4 "v2.9.4"
+[2.9.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.4...v2.9.5 "v2.9.5"
+[2.9.6]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.5...v2.9.6 "v2.9.6"
+[2.9.7]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.9.6...v2.9.7 "v2.9.7"
+[3.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.13.0...v3.0.0 "v3.0.0"
+[3.0.0-beta.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v2.13.0...v3.0.0-beta.1 "v3.0.0-beta.1"
+[3.0.0-beta.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.0.0-beta.1...v3.0.0-beta.2 "v3.0.0-beta.2"
+[3.0.0-beta.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.0.0-beta.2...v3.0.0-beta.3 "v3.0.0-beta.3"
+[3.0.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.0.0...v3.0.1 "v3.0.1"
+[3.0.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.0.1...v3.0.2 "v3.0.2"
+[3.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.0.2...v3.1.0 "v3.1.0"
+[3.10.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.9.1...v3.10.0 "v3.10.0"
+[3.11.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.10.0...v3.11.0 "v3.11.0"
+[3.11.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.11.0...v3.11.1 "v3.11.1"
+[3.12.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.11.1...v3.12.0 "v3.12.0"
+[3.12.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.0...v3.12.1 "v3.12.1"
+[3.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.1.0...v3.2.0 "v3.2.0"
+[3.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.2.0...v3.3.0 "v3.3.0"
+[3.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.3.0...v3.4.0 "v3.4.0"
+[3.5.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.4.0...v3.5.0 "v3.5.0"
+[3.5.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.5.0...v3.5.1 "v3.5.1"
+[3.5.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.5.1...v3.5.2 "v3.5.2"
+[3.5.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.5.2...v3.5.3 "v3.5.3"
+[3.5.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.5.3...v3.5.4 "v3.5.4"
+[3.5.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.5.4...v3.5.5 "v3.5.5"
+[3.6.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.5.5...v3.6.0 "v3.6.0"
+[3.6.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.6.0...v3.6.1 "v3.6.1"
+[3.7.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.6.1...v3.7.0 "v3.7.0"
+[3.7.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.7.0...v3.7.1 "v3.7.1"
+[3.7.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.7.1...v3.7.2 "v3.7.2"
+[3.8.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.7.2...v3.8.0 "v3.8.0"
+[3.8.0-beta.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.7.1...v3.8.0-beta.1 "v3.8.0-beta.1"
+[3.8.0-beta.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.0-beta.1...v3.8.0-beta.2 "v3.8.0-beta.2"
+[3.8.0-beta.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.0-beta.2...v3.8.0-beta.3 "v3.8.0-beta.3"
+[3.8.0-beta.4]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.0-beta.3...v3.8.0-beta.4 "v3.8.0-beta.4"
+[3.8.0-beta.5]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.0-beta.4...v3.8.0-beta.5 "v3.8.0-beta.5"
+[3.8.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.0...v3.8.1 "v3.8.1"
+[3.8.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.1...v3.8.2 "v3.8.2"
+[3.9.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.2...v3.9.0 "v3.9.0"
+[3.9.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.9.0...v3.9.1 "v3.9.1"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.1...HEAD "In Development"
+[keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
+[semantic versioning]: http://semver.org/ "Semantic Versioning"
