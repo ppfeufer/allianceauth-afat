@@ -1,4 +1,4 @@
-# Make targets for Django projects
+# Makefile fragment for Django-related tasks
 
 # List of languages to create translation files for
 django_locales = \
@@ -49,9 +49,9 @@ add_translation: check-python-venv
 	sed -i "/\"Project-Id-Version: /c\\\"Project-Id-Version: $(appname_verbose) $$current_app_version\\\n\"" $(translation_directory)/$$language_code/$(translation_file_relative_path); \
 	sed -i "/\"Report-Msgid-Bugs-To: /c\\\"Report-Msgid-Bugs-To: $(git_repository_issues)\\\n\"" $(translation_directory)/$$language_code/$(translation_file_relative_path); \
 	echo "New translation added for $$language_code"; \
-	echo "Please remember to add '-l $$language_code \' to the 'translations' target in the Makefile";
+	echo "Please remember to add '--locale $$language_code \' to the 'translations' target in the Makefile";
 
-# Translation files
+# Greate or update translation files
 .PHONY: translations
 translations: check-python-venv
 	@echo "Creating or updating translation files"
@@ -86,13 +86,13 @@ compile_translations: check-python-venv
 .PHONY: migrate
 migrate: check-python-venv
 	@echo "Migrating the database"
-	@python ../myauth/manage.py migrate $(package)
+	@python $(myauth_path)/manage.py migrate $(package)
 
 # Make migrations for the app
 .PHONY: migrations
 migrations: check-python-venv
 	@echo "Creating or updating migrations"
-	@python ../myauth/manage.py makemigrations $(package)
+	@python $(myauth_path)/manage.py makemigrations $(package)
 
 # Help message
 .PHONY: help

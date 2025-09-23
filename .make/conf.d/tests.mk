@@ -1,11 +1,10 @@
-# Make targets for tests
+# Makefile fragment for running tests and generating coverage reports
 
 # Coverage
 .PHONY: coverage
 coverage: check-python-venv
 	@echo "Running tests and creating a coverage report …"
-#	@rm -rf htmlcov
-	@coverage run ../myauth/manage.py \
+	@coverage run $(myauth_path)/manage.py \
 		test \
 		$(package) \
 		--keepdb \
@@ -18,7 +17,6 @@ coverage: check-python-venv
 .PHONY: build_test
 build_test: check-python-venv
 	@echo "Building the package …"
-#	@rm -rf dist
 	@python3 -m build
 
 # Tox tests
@@ -27,7 +25,6 @@ tox_tests: check-python-venv
 	@echo "Running tests with tox …"
 	@export USE_MYSQL=False; \
 	tox -v -e allianceauth-latest; \
-#	rm -rf .tox/
 
 # Help message
 .PHONY: help
