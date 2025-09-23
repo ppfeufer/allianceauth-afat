@@ -41,6 +41,10 @@ Section Order:
 ### Security
 -->
 
+### Fixed
+
+- Modal confirm button URL
+
 ## [3.12.1] - 2025-09-02
 
 ### Fixed

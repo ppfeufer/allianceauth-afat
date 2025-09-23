@@ -89,7 +89,7 @@ const manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
             bodyText: bodyText,
             confirmButtonText: confirmButtonText,
             cancelButtonText: cancelButtonText,
-            url: url
+            confirmActionUrl: url
         });
     }).on('hide.bs.modal', () => {
         clearModal();
