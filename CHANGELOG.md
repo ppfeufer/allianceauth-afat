@@ -42,9 +42,15 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [3.12.2] - 2025-09-23
+
 ### Fixed
 
 - Modal confirm button URL
+
+### Changed
+
+- Translations updated
 
 ## [3.12.1] - 2025-09-02
 
@@ -1861,6 +1867,7 @@ Finally restart your supervisor services for AA
 [3.11.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.11.0...v3.11.1 "v3.11.1"
 [3.12.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.11.1...v3.12.0 "v3.12.0"
 [3.12.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.0...v3.12.1 "v3.12.1"
+[3.12.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.1...v3.12.2 "v3.12.2"
 [3.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.1.0...v3.2.0 "v3.2.0"
 [3.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.2.0...v3.3.0 "v3.3.0"
 [3.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.3.0...v3.4.0 "v3.4.0"
@@ -1885,6 +1892,6 @@ Finally restart your supervisor services for AA
 [3.8.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.1...v3.8.2 "v3.8.2"
 [3.9.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.2...v3.9.0 "v3.9.0"
 [3.9.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.9.0...v3.9.1 "v3.9.1"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.1...HEAD "In Development"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.2...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"

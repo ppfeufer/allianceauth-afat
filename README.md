@@ -127,7 +127,7 @@ Make sure you're in the virtual environment (venv) of your Alliance Auth install
 Then install the latest version:
 
 ```shell
-pip install allianceauth-afat==3.12.1
+pip install allianceauth-afat==3.12.2
 ```
 
 #### Step 2: Update Your AA Settings<a name="step-2-update-your-aa-settings"></a>
@@ -167,7 +167,7 @@ python manage.py afat_load_shiptypes
 Add the app to your `conf/requirements.txt`:
 
 ```text
-allianceauth-afat==3.12.1
+allianceauth-afat==3.12.2
 ```
 
 #### Step 2: Update Your AA Settings<a name="step-2-update-your-aa-settings-1"></a>
@@ -217,7 +217,7 @@ To update your existing installation of AFAT, first enable your
 virtual environment (venv) of your Alliance Auth installation.
 
 ```shell
-pip install allianceauth-afat==3.12.1
+pip install allianceauth-afat==3.12.2
 
 python manage.py collectstatic
 python manage.py migrate
@@ -233,7 +233,7 @@ To update your existing installation of AFAT, all you need to do is to update th
 respective line in your `conf/requirements.txt` file to the latest version.
 
 ```text
-allianceauth-afat==3.12.1
+allianceauth-afat==3.12.2
 ```
 
 Now rebuild your containers:
