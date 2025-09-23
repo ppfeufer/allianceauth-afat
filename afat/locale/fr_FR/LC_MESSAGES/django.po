@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
 "POT-Creation-Date: 2025-08-05 15:56+0200\n"
-"PO-Revision-Date: 2025-05-20 14:02+0000\n"
+"PO-Revision-Date: 2025-09-16 16:43+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.13.3\n"
 
 #: afat/__init__.py:9
 msgid "Fleet Activity Tracking"
@@ -526,11 +526,11 @@ msgstr "Clôturé"
 
 #: afat/templates/afat/modals/general.html:25
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: afat/templates/afat/modals/general.html:26
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: afat/templates/afat/partials/common/navigation/month-navigation.html:8
 msgid "Previous month"
