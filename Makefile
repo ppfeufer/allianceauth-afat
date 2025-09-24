@@ -49,8 +49,8 @@ confirm:
 	fi
 
 # Graph models
-.PHONY: graph_models
-graph_models: check-python-venv
+.PHONY: graph-models
+graph-models: check-python-venv
 	@echo "Creating a graph of the models …"
 	@python $(myauth_path)/manage.py \
 		graph_models \
@@ -61,7 +61,7 @@ graph_models: check-python-venv
 # Prepare a new release
 # Update the graph of the models, translation files and the version in the package
 .PHONY: prepare-release
-prepare-release: pot graph_models
+prepare-release: pot graph-models
 	@echo "Preparing a release …"
 	@read -p "New Version Number: " new_version; \
 	if ! grep -qE "^## \[$$new_version\]" CHANGELOG.md; then \
@@ -98,7 +98,7 @@ help::
 	@echo ""
 	@echo "$(TEXT_BOLD)Commands:$(TEXT_BOLD_END)"
 	@echo "  $(TEXT_UNDERLINE)General:$(TEXT_UNDERLINE_END)"
-	@echo "    graph_models                Create a graph of the models"
+	@echo "    graph-models                Create a graph of the models"
 	@echo "    help                        Show this help message"
 	@echo "    prepare-release             Prepare a release and update the version in '$(package)/__init__.py'."
 	@echo "                                Please make sure to update the 'CHANGELOG.md' file accordingly."
