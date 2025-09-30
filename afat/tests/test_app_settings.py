@@ -3,13 +3,14 @@ Test checks for installed modules we might use
 """
 
 # Django
-from django.test import TestCase, override_settings
+from django.test import override_settings
 
 # Alliance Auth AFAT
 from afat.app_settings import debug_enabled
+from afat.tests import BaseTestCase
 
 
-class TestDebugCheck(TestCase):
+class TestDebugCheck(BaseTestCase):
     """
     Test if debug is enabled
     """

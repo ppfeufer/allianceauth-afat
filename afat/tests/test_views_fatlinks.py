@@ -11,7 +11,6 @@ from pytz import utc
 
 # Django
 from django.contrib.messages import get_messages
-from django.test import TestCase
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
@@ -23,19 +22,30 @@ from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
 from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
+from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.utils import get_main_character_from_user
 
 MODULE_PATH = "afat.views.fatlinks"
 
 
-class TestFatlinksView(TestCase):
+class TestFatlinksView(BaseTestCase):
+    """
+    Test the fatlinks views
+    """
+
     @classmethod
     def setUpClass(cls):
+        """
+        Setup the test class
+
+        :return:
+        :rtype:
+        """
+
         super().setUpClass()
         load_allianceauth()
 
-        # given
         cls.character_1001 = EveCharacter.objects.get(character_id=1001)
         cls.character_1002 = EveCharacter.objects.get(character_id=1002)
         cls.character_1003 = EveCharacter.objects.get(character_id=1003)
@@ -161,89 +171,117 @@ class TestFatlinksView(TestCase):
         )
 
     def test_should_show_fatlnks_overview(self):
-        # given
+        """
+        Test should show fatlnks overview
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_basic_access)
 
-        # when
         url = reverse(viewname="afat:fatlinks_overview")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_fatlnks_overview_with_year(self):
-        # given
+        """
+        Test should show fatlnks overview with year
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_basic_access)
 
-        # when
         url = reverse(viewname="afat:fatlinks_overview", kwargs={"year": 2020})
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_add_fatlink_for_user_with_manage_afat(self):
-        # given
+        """
+        Test should show add fatlink for user with manage afat
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_manage_afat)
 
-        # when
         url = reverse(viewname="afat:fatlinks_add_fatlink")
         res = self.client.get(url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_add_fatlink_for_user_with_add_fatlinkt(self):
-        # given
+        """
+        Test should show add fatlink for user with add fatlinkt
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_add_fatlink)
 
-        # when
         url = reverse(viewname="afat:fatlinks_add_fatlink")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_fatlink_details_for_user_with_manage_afat(self):
-        # given
+        """
+        Test should show fatlink details for user with manage afat
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_manage_afat)
 
-        # when
         url = reverse(
             viewname="afat:fatlinks_details_fatlink",
             kwargs={"fatlink_hash": self.afat_link_april_1.hash},
         )
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_fatlink_details_for_user_with_add_fatlinkt(self):
-        # given
+        """
+        Test should show fatlink details for user with add fatlinkt
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_add_fatlink)
 
-        # when
         url = reverse(
             viewname="afat:fatlinks_details_fatlink",
             kwargs={"fatlink_hash": self.afat_link_april_1.hash},
         )
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_fatlink_details_for_non_existing_fatlink(self):
-        # given
+        """
+        Test should not show fatlink details for non existing fatlink
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_manage_afat)
 
-        # when
         url = reverse(
             viewname="afat:fatlinks_details_fatlink",
             kwargs={"fatlink_hash": "foobarsson"},
         )
         res = self.client.get(path=url)
 
-        # then
         self.assertNotEqual(first=res.status_code, second=HTTPStatus.OK)
         self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
 
@@ -257,8 +295,13 @@ class TestFatlinksView(TestCase):
         )
 
     def test_ajax_get_fatlinks_by_year(self):
-        # given
-        self.maxDiff = None
+        """
+        Test ajax get fatlinks by year
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_manage_afat)
 
         fatlink_hash = get_hash_on_save()
@@ -277,7 +320,6 @@ class TestFatlinksView(TestCase):
 
         Duration.objects.create(fleet=fatlink_created, duration=120)
 
-        # when
         fatlink = (
             FatLink.objects.select_related_default()
             .annotate_fats_count()
@@ -290,7 +332,6 @@ class TestFatlinksView(TestCase):
         )
         result = self.client.get(path=url_with_year)
 
-        # then
         self.assertEqual(first=result.status_code, second=HTTPStatus.OK)
 
         creator_main_character = get_main_character_from_user(user=fatlink.creator)
@@ -360,6 +401,19 @@ class TestFatlinksView(TestCase):
     def test_reopens_fatlink_successfully(
         self, mock_write_log, mock_get_setting, mock_duration_get
     ):
+        """
+        Test reopens fatlink successfully
+
+        :param mock_write_log:
+        :type mock_write_log:
+        :param mock_get_setting:
+        :type mock_get_setting:
+        :param mock_duration_get:
+        :type mock_duration_get:
+        :return:
+        :rtype:
+        """
+
         mock_duration = MagicMock()
         mock_duration.fleet.reopened = False
         mock_duration.fleet.created = datetime(2023, 1, 1, 12, 0, 0)
@@ -385,6 +439,15 @@ class TestFatlinksView(TestCase):
 
     @patch("afat.views.fatlinks.Duration.objects.get")
     def test_shows_error_when_fatlink_does_not_exist(self, mock_duration_get):
+        """
+        Test shows error when fatlink does not exist
+
+        :param mock_duration_get:
+        :type mock_duration_get:
+        :return:
+        :rtype:
+        """
+
         mock_duration_get.side_effect = Duration.DoesNotExist
 
         self.client.force_login(self.user_with_manage_afat)
@@ -404,6 +467,15 @@ class TestFatlinksView(TestCase):
 
     @patch("afat.views.fatlinks.Duration.objects.get")
     def test_shows_warning_when_fatlink_already_reopened(self, mock_duration_get):
+        """
+        Test shows warning when fatlink already reopened
+
+        :param mock_duration_get:
+        :type mock_duration_get:
+        :return:
+        :rtype:
+        """
+
         mock_duration = MagicMock()
         mock_duration.fleet.reopened = True
         mock_duration_get.return_value = mock_duration
@@ -429,6 +501,15 @@ class TestFatlinksView(TestCase):
 
     @patch("afat.views.fatlinks.FatLink.objects.get")
     def test_closes_esi_fatlink_successfully(self, mock_get_fatlink):
+        """
+        Test closes esi fatlink successfully
+
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink = MagicMock()
         mock_get_fatlink.return_value = mock_fatlink
 
@@ -444,6 +525,15 @@ class TestFatlinksView(TestCase):
 
     @patch("afat.views.fatlinks.FatLink.objects.get")
     def test_handles_nonexistent_fatlink_gracefully(self, mock_get_fatlink):
+        """
+        Test handles nonexistent fatlink gracefully
+
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :return:
+        :rtype:
+        """
+
         mock_get_fatlink.side_effect = FatLink.DoesNotExist
 
         self.client.force_login(self.user_with_manage_afat)
@@ -460,6 +550,19 @@ class TestFatlinksView(TestCase):
     def test_deletes_fat_successfully(
         self, mock_write_log, mock_get_fat, mock_get_fatlink
     ):
+        """
+        Test deletes fat successfully
+
+        :param mock_write_log:
+        :type mock_write_log:
+        :param mock_get_fat:
+        :type mock_get_fat:
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink = MagicMock(hash="test_hash")
         mock_fat = MagicMock(character=MagicMock(character_name="Test Character"))
         mock_get_fatlink.return_value = mock_fatlink
@@ -488,6 +591,15 @@ class TestFatlinksView(TestCase):
     def test_handles_delete_fat_with_nonexistent_fatlink_gracefully(
         self, mock_get_fatlink
     ):
+        """
+        Test handles delete fat with nonexistent fatlink gracefully
+
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :return:
+        :rtype:
+        """
+
         mock_get_fatlink.side_effect = FatLink.DoesNotExist
 
         self.client.force_login(self.user_with_manage_afat)
@@ -501,6 +613,17 @@ class TestFatlinksView(TestCase):
     @patch("afat.views.fatlinks.FatLink.objects.get")
     @patch("afat.views.fatlinks.Fat.objects.get")
     def test_handles_nonexistent_fat_gracefully(self, mock_get_fat, mock_get_fatlink):
+        """
+        Test handles nonexistent fat gracefully
+
+        :param mock_get_fat:
+        :type mock_get_fat:
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink = MagicMock(hash="test_hash")
         mock_get_fatlink.return_value = mock_fatlink
         mock_get_fat.side_effect = Fat.DoesNotExist
@@ -519,6 +642,19 @@ class TestFatlinksView(TestCase):
     def test_deletes_fatlink_and_associated_fats_successfully(
         self, mock_write_log, mock_fat_filter, mock_fatlink_get
     ):
+        """
+        Test deletes fatlink and associated fats successfully
+
+        :param mock_write_log:
+        :type mock_write_log:
+        :param mock_fat_filter:
+        :type mock_fat_filter:
+        :param mock_fatlink_get:
+        :type mock_fatlink_get:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink = MagicMock(hash="test_hash", pk=1)
         mock_fat_filter.return_value = MagicMock(delete=MagicMock())
         mock_fatlink_get.return_value = mock_fatlink
@@ -544,6 +680,15 @@ class TestFatlinksView(TestCase):
     def test_handles_delete_fatlink_with_nonexistent_fatlink_gracefully(
         self, mock_fatlink_get
     ):
+        """
+        Test handles delete fatlink with nonexistent fatlink gracefully
+
+        :param mock_fatlink_get:
+        :type mock_fatlink_get:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink_get.side_effect = FatLink.DoesNotExist
 
         self.client.force_login(self.user_with_manage_afat)
@@ -559,6 +704,17 @@ class TestFatlinksView(TestCase):
     def test_returns_fats_for_valid_fatlink_hash(
         self, mock_convert_fats_to_dict, mock_select_related_default
     ):
+        """
+        Test returns fats for valid fatlink hash
+
+        :param mock_convert_fats_to_dict:
+        :type mock_convert_fats_to_dict:
+        :param mock_select_related_default:
+        :type mock_select_related_default:
+        :return:
+        :rtype:
+        """
+
         # Create a mock Fat object with realistic attributes
         class MockFat:
             id = 1
@@ -616,6 +772,17 @@ class TestFatlinksView(TestCase):
     def test_redirects_to_dashboard_when_invalid_hash_provided(
         self, mock_select_related_default, mock_duration_get
     ):
+        """
+        Test redirects to dashboard when invalid hash provided
+
+        :param mock_select_related_default:
+        :type mock_select_related_default:
+        :param mock_duration_get:
+        :type mock_duration_get:
+        :return:
+        :rtype:
+        """
+
         mock_select_related_default.return_value.get.side_effect = FatLink.DoesNotExist
 
         self.client.force_login(self.user_with_manage_afat)

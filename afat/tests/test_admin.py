@@ -7,7 +7,6 @@ from unittest.mock import MagicMock, patch
 
 # Django
 from django.contrib import admin
-from django.test import TestCase
 
 # Alliance Auth AFAT
 from afat.admin import (
@@ -19,9 +18,10 @@ from afat.admin import (
 )
 from afat.forms import DoctrineAdminForm, SettingAdminForm
 from afat.models import Doctrine, FatsInTimeFilter, FleetType, Log, Setting
+from afat.tests import BaseTestCase
 
 
-class TestAFatLinkTypeAdmin(TestCase):
+class TestAFatLinkTypeAdmin(BaseTestCase):
     """
     Test cases for the AFatLinkTypeAdmin class.
     """
@@ -123,7 +123,7 @@ class TestAFatLinkTypeAdmin(TestCase):
         self.assertFalse(mock_obj_2.is_enabled)  # Ensure successful deactivation
 
 
-class TestAFatLogAdmin(TestCase):
+class TestAFatLogAdmin(BaseTestCase):
     """
     Test cases for the AFatLogAdmin class.
     """
@@ -187,7 +187,7 @@ class TestAFatLogAdmin(TestCase):
         )
 
 
-class TestSettingAdmin(TestCase):
+class TestSettingAdmin(BaseTestCase):
     """
     Test cases for the SettingAdmin class.
     """
@@ -211,7 +211,7 @@ class TestSettingAdmin(TestCase):
             self.assertIsNone(admin_instance.form)
 
 
-class TestDoctrineAdmin(TestCase):
+class TestDoctrineAdmin(BaseTestCase):
     """
     Test cases for the DoctrineAdmin class.
     """
@@ -258,7 +258,7 @@ class TestDoctrineAdmin(TestCase):
             self.assertEqual(admin_instance.list_display, [])
 
 
-class TestFatsInTimeFilterAdmin(TestCase):
+class TestFatsInTimeFilterAdmin(BaseTestCase):
     """
     Test cases for the FatsInTimeFilterAdmin class.
     """

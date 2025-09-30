@@ -3,7 +3,6 @@ Test cases for the task in the afat module.
 """
 
 # Standard Library
-import unittest
 from datetime import timedelta
 from unittest.mock import ANY, MagicMock, patch
 
@@ -26,9 +25,10 @@ from afat.tasks import (
     process_fats,
     update_esi_fatlinks,
 )
+from afat.tests import BaseTestCase
 
 
-class TestLogrotateTask(unittest.TestCase):
+class TestLogrotateTask(BaseTestCase):
     """
     Test cases for the logrotate task.
     """
@@ -78,7 +78,7 @@ class TestLogrotateTask(unittest.TestCase):
         mock_filter.return_value.delete.assert_called_once()
 
 
-class UpdateEsiFatlinksTests(unittest.TestCase):
+class UpdateEsiFatlinksTests(BaseTestCase):
     """
     Test cases for the update_esi_fatlinks task.
     """
@@ -166,7 +166,7 @@ class UpdateEsiFatlinksTests(unittest.TestCase):
         mock_logger.debug.assert_any_call(msg="Found 1 ESI FAT links to process")
 
 
-class ProcessEsiFatlinkTests(unittest.TestCase):
+class ProcessEsiFatlinkTests(BaseTestCase):
     """
     Test cases for the _process_esi_fatlink function.
     """
@@ -217,7 +217,7 @@ class ProcessEsiFatlinkTests(unittest.TestCase):
         mock_check_for_esi_fleet.assert_called_once_with(fatlink=fatlink)
 
 
-class EsiFatlinksErrorHandlingTests(unittest.TestCase):
+class EsiFatlinksErrorHandlingTests(BaseTestCase):
     """
     Test cases for the _esi_fatlinks_error_handling function.
     """
@@ -330,7 +330,7 @@ class EsiFatlinksErrorHandlingTests(unittest.TestCase):
         fatlink.save.assert_called_once()
 
 
-class CloseEsiFleetTests(unittest.TestCase):
+class CloseEsiFleetTests(BaseTestCase):
     """
     Test cases for the _close_esi_fleet function.
     """
@@ -402,7 +402,7 @@ class CloseEsiFleetTests(unittest.TestCase):
         )
 
 
-class ProcessFatsTests(unittest.TestCase):
+class ProcessFatsTests(BaseTestCase):
     """
     Test cases for the process_fats function.
     """

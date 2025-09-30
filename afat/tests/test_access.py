@@ -6,7 +6,6 @@ Test access to the AFAT module
 from http import HTTPStatus
 
 # Django
-from django.test import TestCase
 from django.urls import reverse
 
 # Alliance Auth
@@ -16,16 +15,17 @@ from allianceauth.eveonline.models import EveCharacter
 from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
+from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 
 MODULE_PATH = "afat.views.statistics"
 
 
-class TestAccesss(TestCase):
+class TestAccesss(BaseTestCase):
     @classmethod
     def setUpClass(cls):
         """
-        Setup
+        Setup the test class
 
         :return:
         :rtype:
@@ -48,25 +48,33 @@ class TestAccesss(TestCase):
         )
 
     def test_should_show_afat_dashboard_for_user_with_basic_access(self):
-        # given
+        """
+        Test should show afat dashboard for user with basic access
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_basic_access)
 
-        # when
         url = reverse(viewname="afat:dashboard")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_not_show_afat_dashboard_for_user_without_access(self):
-        # given
+        """
+        Test should not show afat dashboard for user without access
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_without_access)
 
-        # when
         url = reverse(viewname="afat:dashboard")
         res = self.client.get(path=url)
 
-        # then
         self.assertNotEqual(first=res.status_code, second=HTTPStatus.OK)
         self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
         self.assertEqual(
