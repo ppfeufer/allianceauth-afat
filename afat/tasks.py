@@ -57,8 +57,6 @@ def process_fats(data_list, data_source: str, fatlink_hash: str):
     :rtype:
     """
 
-    logger.debug(f"Data Source: {data_source}")
-
     if data_source == "esi":
         logger.info(
             msg=(
@@ -110,25 +108,26 @@ def process_character(
     character = get_or_create_character(character_id=character_id)
     link = FatLink.objects.get(hash=fatlink_hash)
 
-    solar_system_name = esi.client.Universe.get_universe_systems_system_id(
+    solar_system = esi.client.Universe.GetUniverseSystemsSystemId(
         system_id=solar_system_id
-    ).result()["name"]
-    ship_name = esi.client.Universe.get_universe_types_type_id(
-        type_id=ship_type_id
-    ).result()["name"]
+    ).result(force_refresh=True)
+
+    ship = esi.client.Universe.GetUniverseTypesTypeId(type_id=ship_type_id).result(
+        force_refresh=True
+    )
 
     fat, created = Fat.objects.get_or_create(
         fatlink=link,
         character=character,
         corporation_eve_id=character.corporation_id,
         alliance_eve_id=character.alliance_id,
-        defaults={"system": solar_system_name, "shiptype": ship_name},
+        defaults={"system": solar_system.name, "shiptype": ship.name},
     )
 
     if created:
         logger.info(
-            f"New Pilot: Adding {character} in {solar_system_name} flying "
-            f'a {ship_name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
+            f"New Pilot: Adding {character} in {solar_system.name} flying "
+            f'a {ship.name} to FAT link "{fatlink_hash}" (FAT ID {fat.pk})'
         )
     else:
         logger.debug(
@@ -216,15 +215,15 @@ def _check_for_esi_fleet(fatlink: FatLink) -> dict | None:
         esi_token = Token.get_token(
             character_id=fleet_commander_id, scopes=required_scopes
         )
-        fleet_from_esi = esi.client.Fleets.get_characters_character_id_fleet(
+        fleet_from_esi = esi.client.Fleets.GetCharactersCharacterIdFleet(
             character_id=fleet_commander_id,
-            token=esi_token.valid_access_token(),
-        ).result()
+            token=esi_token,
+        ).result(force_refresh=True)
 
         logger.debug("Fleet from ESI: %s", fleet_from_esi)
         logger.debug("FAT Link ESI fleet ID: %s", fatlink.esi_fleet_id)
 
-        if not fleet_from_esi or fatlink.esi_fleet_id != fleet_from_esi["fleet_id"]:
+        if not fleet_from_esi or fatlink.esi_fleet_id != fleet_from_esi.fleet_id:
             raise HTTPNotFound
 
         return {"fleet": fleet_from_esi, "token": esi_token}
@@ -258,17 +257,16 @@ def _process_esi_fatlink(fatlink: FatLink) -> None:
 
     # Check if there is a fleet
     esi_fleet = _check_for_esi_fleet(fatlink=fatlink)
-    logger.debug("ESI fleet: %s", esi_fleet)
 
     if not esi_fleet:
         return
 
     # Check if we deal with the fleet boss here
     try:
-        esi_fleet_member = esi.client.Fleets.get_fleets_fleet_id_members(
-            fleet_id=esi_fleet["fleet"]["fleet_id"],
-            token=esi_fleet["token"].valid_access_token(),
-        ).result()
+        esi_fleet_member = esi.client.Fleets.GetFleetsFleetIdMembers(
+            fleet_id=esi_fleet["fleet"].fleet_id,
+            token=esi_fleet["token"],
+        ).result(force_refresh=True)
     except Exception:  # pylint: disable=broad-exception-caught
         _esi_fatlinks_error_handling(
             error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
@@ -282,7 +280,7 @@ def _process_esi_fatlink(fatlink: FatLink) -> None:
     )
 
     process_fats.delay(
-        data_list=esi_fleet_member,
+        data_list=[fleet_member.dict() for fleet_member in esi_fleet_member],
         data_source="esi",
         fatlink_hash=fatlink.hash,
     )
