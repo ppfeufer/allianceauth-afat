@@ -4,10 +4,12 @@ Test our template tags
 
 # Django
 from django.template import Context, Template
-from django.test import TestCase
+
+# Alliance Auth AFAT
+from afat.tests import BaseTestCase
 
 
-class TestAfatFilters(TestCase):
+class TestAfatFilters(BaseTestCase):
     """
     Test template filters
     """
@@ -29,7 +31,7 @@ class TestAfatFilters(TestCase):
         self.assertInHTML(needle="May", haystack=rendered_template)
 
 
-class TestSumValuesFilter(TestCase):
+class TestSumValuesFilter(BaseTestCase):
     """
     Test the sum_values filter
     """

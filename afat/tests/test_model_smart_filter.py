@@ -9,7 +9,6 @@ from unittest.mock import MagicMock, patch
 # Django
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
-from django.test import TestCase
 
 # Alliance Auth
 from allianceauth.authentication.models import CharacterOwnership
@@ -17,9 +16,10 @@ from allianceauth.authentication.signals import assign_state_on_active_change
 
 # Alliance Auth AFAT
 from afat.models.smart_filter import FatsInTimeFilter, _get_threshold_date
+from afat.tests import BaseTestCase
 
 
-class TestGetThresholdDate(TestCase):
+class TestGetThresholdDate(BaseTestCase):
     """
     Test cases for the _get_threshold_date function.
     """
@@ -53,7 +53,7 @@ class TestGetThresholdDate(TestCase):
         self.assertAlmostEqual(result, expected_date, delta=timedelta(seconds=1))
 
 
-class TestFatsInTimeFilter(TestCase):
+class TestFatsInTimeFilter(BaseTestCase):
     """
     Test cases for the FatsInTimeFilter class.
     """

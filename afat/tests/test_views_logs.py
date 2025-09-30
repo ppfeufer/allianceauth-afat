@@ -9,7 +9,6 @@ from http import HTTPStatus
 from pytz import utc
 
 # Django
-from django.test import TestCase
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
@@ -21,18 +20,29 @@ from app_utils.testing import create_user_from_evecharacter
 
 # Alliance Auth AFAT
 from afat.models import FatLink
+from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
 
 MODULE_PATH = "afat.views.logs"
 
 
-class TestLogsView(TestCase):
+class TestLogsView(BaseTestCase):
+    """
+    Test the logs view
+    """
+
     @classmethod
     def setUpClass(cls):
+        """
+        Setup the test class
+
+        :return:
+        :rtype:
+        """
+
         super().setUpClass()
         load_allianceauth()
 
-        # given
         cls.character_1001 = EveCharacter.objects.get(character_id=1001)
         cls.character_1002 = EveCharacter.objects.get(character_id=1002)
         cls.character_1003 = EveCharacter.objects.get(character_id=1003)
@@ -76,55 +86,76 @@ class TestLogsView(TestCase):
         )
 
     def test_should_not_show_log_view_for_user_without_access(self):
-        # given
+        """
+        Test should not show log view for user without access
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_without_access)
 
-        # when
         url = reverse(viewname="afat:logs_overview")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
 
     def test_should_not_show_log_view_for_user_with_basic_access(self):
-        # given
+        """
+        Test should not show log view for user with basic access
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_basic_access)
 
-        # when
         url = reverse(viewname="afat:logs_overview")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.FOUND)
 
     def test_should_show_log_view_for_user_with_manage_afat_permission(self):
-        # given
+        """
+        Test should show log view for user with manage afat permission
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_manage_afat)
 
-        # when
         url = reverse(viewname="afat:logs_overview")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_should_show_log_view_for_user_with_log_view_permission(self):
-        # given
+        """
+        Test should show log view for user with log view permission
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_log_view)
 
-        # when
         url = reverse(viewname="afat:logs_overview")
         res = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
     def test_ajax_get_logs(self):
-        # given
+        """
+        Test ajax get logs
+
+        :return:
+        :rtype:
+        """
+
         self.client.force_login(user=self.user_with_log_view)
 
         url = reverse(viewname="afat:logs_ajax_get_logs")
         result = self.client.get(path=url)
 
-        # then
         self.assertEqual(first=result.status_code, second=HTTPStatus.OK)

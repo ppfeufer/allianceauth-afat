@@ -2,18 +2,20 @@
 Test checks for installed modules we might use
 """
 
-# Django
-from django.test import TestCase
-
 # Alliance Auth AFAT
 from afat.models import Setting
+from afat.tests import BaseTestCase
 
 
-class TestSettingModel(TestCase):
+class TestSettingModel(BaseTestCase):
+    """
+    Test the Setting model
+    """
+
     @classmethod
     def setUpClass(cls) -> None:
         """
-        Setup
+        Setup the test class.
 
         :return:
         :rtype:

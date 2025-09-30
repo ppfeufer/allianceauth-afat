@@ -3,7 +3,7 @@ Test checks for installed modules we might use
 """
 
 # Django
-from django.test import TestCase, modify_settings
+from django.test import modify_settings
 
 # Alliance Auth AFAT
 from afat.app_settings import (
@@ -12,13 +12,18 @@ from afat.app_settings import (
     use_fittings_module_for_doctrines,
 )
 from afat.models import Setting
+from afat.tests import BaseTestCase
 
 
-class TestModulesInstalled(TestCase):
+class TestModulesInstalled(BaseTestCase):
+    """
+    Test if modules are installed
+    """
+
     @classmethod
     def setUpClass(cls) -> None:
         """
-        Setup
+        Setup the test class
 
         :return:
         :rtype:
