@@ -4,7 +4,7 @@ Test cases for the task in the afat module.
 
 # Standard Library
 from datetime import timedelta
-from unittest.mock import ANY, MagicMock, patch
+from unittest.mock import ANY, MagicMock, PropertyMock, patch
 
 # Third Party
 import kombu
@@ -18,6 +18,7 @@ from app_utils.esi import EsiStatus
 # Alliance Auth AFAT
 from afat.models import FatLink
 from afat.tasks import (
+    _check_for_esi_fleet,
     _close_esi_fleet,
     _esi_fatlinks_error_handling,
     _process_esi_fatlink,
@@ -166,58 +167,124 @@ class UpdateEsiFatlinksTests(BaseTestCase):
         mock_logger.debug.assert_any_call(msg="Found 1 ESI FAT links to process")
 
 
-class ProcessEsiFatlinkTests(BaseTestCase):
+class TestProcessEsiFatlink(BaseTestCase):
     """
     Test cases for the _process_esi_fatlink function.
     """
 
-    @patch("afat.tasks.logger")
+    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
+    @patch("afat.tasks._check_for_esi_fleet")
     @patch("afat.tasks._close_esi_fleet")
-    def test_processing_esi_fatlink_when_no_creator(
-        self, mock_close_esi_fleet, mock_logger
+    @patch("afat.tasks.process_fats.delay")
+    def test_processes_fatlink_with_valid_fleet(
+        self, mock_process_fats, mock_close_fleet, mock_check_fleet, mock_client_prop
     ):
         """
-        Test that the _process_esi_fatlink function handles the case when there is no creator.
+        Test that the _process_esi_fatlink function processes a FAT link with a valid fleet.
 
-        :param mock_close_esi_fleet:
-        :type mock_close_esi_fleet:
-        :param mock_logger:
-        :type mock_logger:
+        :param mock_process_fats:
+        :type mock_process_fats:
+        :param mock_close_fleet:
+        :type mock_close_fleet:
+        :param mock_check_fleet:
+        :type mock_check_fleet:
+        :param mock_client_prop:
+        :type mock_client_prop:
         :return:
         :rtype:
         """
 
-        fatlink = MagicMock()
-        fatlink.creator.profile.main_character = None
-        _process_esi_fatlink(fatlink)
-        mock_close_esi_fleet.assert_called_once_with(
-            fatlink=fatlink, reason="No FAT link creator available."
+        mock_fatlink = MagicMock()
+        mock_fatlink.hash = "valid_hash"
+        mock_fatlink.creator.profile.main_character = True
+
+        mock_esi_fleet = {"fleet": MagicMock(fleet_id=12345), "token": MagicMock()}
+        mock_check_fleet.return_value = mock_esi_fleet
+
+        mock_client = MagicMock()
+        mock_client.Fleets.GetFleetsFleetIdMembers.return_value.result.return_value = [
+            MagicMock(dict=lambda: {"character_id": 1})
+        ]
+        mock_client_prop.return_value = mock_client
+
+        _process_esi_fatlink(mock_fatlink)
+
+        mock_process_fats.assert_called_once()
+        mock_close_fleet.assert_not_called()
+
+    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
+    @patch("afat.tasks._check_for_esi_fleet")
+    @patch("afat.tasks._close_esi_fleet")
+    def test_closes_fatlink_when_no_creator(
+        self, mock_close_fleet, mock_check_fleet, mock_client_prop
+    ):
+        """
+        Test that the _process_esi_fatlink function closes a FAT link when there is no creator.
+
+        :param mock_close_fleet:
+        :type mock_close_fleet:
+        :param mock_check_fleet:
+        :type mock_check_fleet:
+        :param mock_client_prop:
+        :type mock_client_prop:
+        :return:
+        :rtype:
+        """
+
+        mock_fatlink = MagicMock()
+        mock_fatlink.hash = "no_creator_hash"
+        mock_fatlink.creator.profile.main_character = None
+
+        _process_esi_fatlink(mock_fatlink)
+
+        mock_close_fleet.assert_called_once_with(
+            fatlink=mock_fatlink, reason="No FAT link creator available."
+        )
+        mock_check_fleet.assert_not_called()
+
+    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
+    @patch("afat.tasks._check_for_esi_fleet")
+    @patch("afat.tasks._esi_fatlinks_error_handling")
+    def test_handles_error_when_not_fleetboss(
+        self, mock_error_handling, mock_check_fleet, mock_client_prop
+    ):
+        mock_fatlink = MagicMock()
+        mock_fatlink.hash = "not_fleetboss_hash"
+        mock_fatlink.creator.profile.main_character = True
+
+        mock_esi_fleet = {"fleet": MagicMock(fleet_id=12345), "token": MagicMock()}
+        mock_check_fleet.return_value = mock_esi_fleet
+
+        mock_client = MagicMock()
+        mock_client.Fleets.GetFleetsFleetIdMembers.return_value.result.side_effect = (
+            Exception
+        )
+        mock_client_prop.return_value = mock_client
+
+        _process_esi_fatlink(mock_fatlink)
+
+        mock_error_handling.assert_called_once_with(
+            error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=mock_fatlink
         )
 
-    @patch("afat.tasks.logger")
+    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
     @patch("afat.tasks._check_for_esi_fleet")
-    def test_processing_esi_fatlink_when_no_fleet(
-        self, mock_check_for_esi_fleet, mock_logger
+    @patch("afat.tasks._close_esi_fleet")
+    def does_nothing_when_no_fleet_found(
+        self, mock_close_fleet, mock_check_fleet, mock_client_prop
     ):
-        """
-        Test that the _process_esi_fatlink function handles the case when there is no fleet.
+        mock_fatlink = MagicMock()
+        mock_fatlink.hash = "no_fleet_hash"
+        mock_fatlink.creator.profile.main_character = True
 
-        :param mock_check_for_esi_fleet:
-        :type mock_check_for_esi_fleet:
-        :param mock_logger:
-        :type mock_logger:
-        :return:
-        :rtype:
-        """
+        mock_check_fleet.return_value = None
 
-        fatlink = MagicMock()
-        fatlink.creator.profile.main_character = MagicMock()
-        mock_check_for_esi_fleet.return_value = None
-        _process_esi_fatlink(fatlink)
-        mock_check_for_esi_fleet.assert_called_once_with(fatlink=fatlink)
+        _process_esi_fatlink(mock_fatlink)
+
+        mock_close_fleet.assert_not_called()
 
 
-class EsiFatlinksErrorHandlingTests(BaseTestCase):
+class TestEsiFatlinksErrorHandling(BaseTestCase):
     """
     Test cases for the _esi_fatlinks_error_handling function.
     """
@@ -330,7 +397,7 @@ class EsiFatlinksErrorHandlingTests(BaseTestCase):
         fatlink.save.assert_called_once()
 
 
-class CloseEsiFleetTests(BaseTestCase):
+class TestCloseEsiFleet(BaseTestCase):
     """
     Test cases for the _close_esi_fleet function.
     """
@@ -402,7 +469,7 @@ class CloseEsiFleetTests(BaseTestCase):
         )
 
 
-class ProcessFatsTests(BaseTestCase):
+class TestProcessFats(BaseTestCase):
     """
     Test cases for the process_fats function.
     """
@@ -474,3 +541,101 @@ class ProcessFatsTests(BaseTestCase):
         self.assertEqual(mock_process_character_si.call_count, 1)
         mock_group.assert_called_once()
         mock_group.return_value.delay.assert_called_once()
+
+
+class TestCheckForEsiFleet(BaseTestCase):
+    """
+    Test cases for the _check_for_esi_fleet function.
+    """
+
+    @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
+    @patch("esi.models.Token.get_token")
+    def test_returns_fleet_and_token_when_fleet_is_registered(
+        self, mock_get_token, mock_client
+    ):
+        """
+        Test that the _check_for_esi_fleet function returns the fleet and token when the fleet is registered.
+
+        :param mock_get_token:
+        :type mock_get_token:
+        :param mock_client:
+        :type mock_client:
+        :return:
+        :rtype:
+        """
+
+        mock_fatlink = MagicMock()
+        mock_fatlink.character.character_id = 12345
+        mock_fatlink.esi_fleet_id = 67890
+
+        mock_token = MagicMock()
+        mock_get_token.return_value = mock_token
+
+        mock_fleet = MagicMock(fleet_id=67890)
+        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.return_value = (
+            mock_fleet
+        )
+
+        result = _check_for_esi_fleet(fatlink=mock_fatlink)
+
+        self.assertDictEqual(result, {"fleet": mock_fleet, "token": mock_token})
+
+    @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
+    @patch("afat.tasks._esi_fatlinks_error_handling")
+    @patch("esi.models.Token.get_token")
+    def test_handles_generic_error(
+        self, mock_get_token, mock_error_handling, mock_client
+    ):
+        """
+        Test that the _check_for_esi_fleet function handles a generic error.
+
+        :param mock_get_token:
+        :type mock_get_token:
+        :param mock_error_handling:
+        :type mock_error_handling:
+        :param mock_client:
+        :type mock_client:
+        :return:
+        :rtype:
+        """
+
+        mock_fatlink = MagicMock()
+        mock_fatlink.character.character_id = 12345
+        mock_fatlink.esi_fleet_id = 67890
+
+        mock_get_token.return_value = MagicMock()
+        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.side_effect = (
+            Exception
+        )
+
+        result = _check_for_esi_fleet(fatlink=mock_fatlink)
+
+        self.assertIsNone(result)
+        mock_error_handling.assert_called_once_with(
+            error_key=FatLink.EsiError.NO_FLEET, fatlink=mock_fatlink
+        )
+
+    @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
+    @patch("afat.tasks._esi_fatlinks_error_handling")
+    @patch("esi.models.Token.get_token")
+    def test_returns_none_when_fleet_id_does_not_match(
+        self, mock_get_token, mock_error_handling, mock_client
+    ):
+        mock_fatlink = MagicMock()
+        mock_fatlink.character.character_id = 12345
+        mock_fatlink.esi_fleet_id = 67890
+
+        mock_token = MagicMock()
+        mock_get_token.return_value = mock_token
+
+        mock_fleet = MagicMock(fleet_id=11111)
+        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.return_value = (
+            mock_fleet
+        )
+
+        result = _check_for_esi_fleet(fatlink=mock_fatlink)
+
+        self.assertIsNone(result)
+        mock_error_handling.assert_called_once_with(
+            error_key=FatLink.EsiError.NO_FLEET, fatlink=mock_fatlink
+        )
