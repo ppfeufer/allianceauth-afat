@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.11.1\n"
+"Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.12.2\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-08-05 15:56+0200\n"
+"POT-Creation-Date: 2025-10-01 08:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: afat/__init__.py:9
+#: afat/__init__.py:9 afat/templates/afat/view/dashboard/dashboard.html:7
+#: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
+#: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
+#: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet Activity Tracking"
 msgstr ""
 
@@ -528,11 +532,6 @@ msgid "Smart Filter: FATs in time period"
 msgstr ""
 
 #: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
-#: afat/templates/afat/view/dashboard/dashboard.html:7
-#: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
-#: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet activity tracking"
 msgstr ""
 
@@ -1113,7 +1112,7 @@ msgid "All FAT links"
 msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:6
-msgid "Fleet activity tracking logs"
+msgid "Fleet Activity Tracking logs"
 msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:21
@@ -1152,7 +1151,7 @@ msgstr[1] ""
 #: afat/templates/afat/view/statistics/statistics-character.html:6
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:8
 #: afat/templates/afat/view/statistics/statistics-corporation.html:6
-msgid "Fleet activity tracking statistics"
+msgid "Fleet Activity Tracking statistics"
 msgstr ""
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:12
@@ -1168,7 +1167,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"                                Fleet activity tracking statistics for "
+"                                Fleet Activity Tracking statistics for "
 "<strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
 "                            "
 msgstr ""
