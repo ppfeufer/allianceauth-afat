@@ -4,8 +4,6 @@ Utilities
 
 # Django
 from django.core.handlers.wsgi import WSGIRequest
-from django.utils.functional import lazy
-from django.utils.html import format_html
 
 # Alliance Auth
 from allianceauth.authentication.admin import User
@@ -27,8 +25,6 @@ logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__ti
 
 # Format for output of datetime for this app
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
-
-format_html_lazy = lazy(format_html, str)
 
 
 class NoDataError(Exception):
