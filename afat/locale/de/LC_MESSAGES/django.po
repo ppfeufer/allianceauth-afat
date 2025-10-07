@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-08-05 15:56+0200\n"
-"PO-Revision-Date: 2025-07-29 20:18+0000\n"
+"POT-Creation-Date: 2025-10-07 15:50+0200\n"
+"PO-Revision-Date: 2025-10-01 06:26+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
@@ -19,11 +19,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.13.3\n"
 
-#: afat/__init__.py:9
+#: afat/__init__.py:9 afat/templates/afat/base.html:7
+#: afat/templates/afat/base.html:12
+#: afat/templates/afat/view/dashboard/dashboard.html:7
+#: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
+#: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
+#: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet Activity Tracking"
-msgstr "Flottenaktivitäts-Tracking"
+msgstr "Flotten Aktivitäts Verfolgung"
 
 #: afat/admin.py:114 afat/models/afat.py:115
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
@@ -84,7 +90,7 @@ msgstr "Schiffsklassen"
 #: afat/apps.py:20
 #, python-brace-format
 msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-msgstr "Flottenaktivitäts-Tracking v{__version__}"
+msgstr "Flotten Aktivitäts Verfolgung v{__version__}"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -509,15 +515,6 @@ msgstr "Um den Filter zu bestehen, muss eine der ausgewählten Schiffsklassen vo
 #: afat/models/smart_filter.py:130
 msgid "Smart Filter: FATs in time period"
 msgstr "Smart Filter: FATs in Zeitraum"
-
-#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
-#: afat/templates/afat/view/dashboard/dashboard.html:7
-#: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
-#: afat/templates/afat/view/statistics/statistics-overview.html:8
-msgid "Fleet activity tracking"
-msgstr "Flottenaktivitäts-Tracking"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -1091,8 +1088,8 @@ msgid "All FAT links"
 msgstr "Alle FAT-Links"
 
 #: afat/templates/afat/view/logs/logs-overview.html:6
-msgid "Fleet activity tracking logs"
-msgstr "Flottenaktivitäts-Tracking Logs"
+msgid "Fleet Activity Tracking logs"
+msgstr "Flotten Aktivitäts Verfolgung Logs"
 
 #: afat/templates/afat/view/logs/logs-overview.html:21
 msgid "Time"
@@ -1134,8 +1131,8 @@ msgstr[1] ""
 #: afat/templates/afat/view/statistics/statistics-character.html:6
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:8
 #: afat/templates/afat/view/statistics/statistics-corporation.html:6
-msgid "Fleet activity tracking statistics"
-msgstr "Flottenaktivitäts-Tracking Statistik"
+msgid "Fleet Activity Tracking statistics"
+msgstr "Flotten Aktivitäts Verfolgung Statistik"
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:12
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:13
@@ -1150,11 +1147,11 @@ msgstr "Zeige detaillierte Allianz-Statistik für: "
 #, python-format
 msgid ""
 "\n"
-"                                Fleet activity tracking statistics for <strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
+"                                Fleet Activity Tracking statistics for <strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
 "                            "
 msgstr ""
 "\n"
-"                                Flottenaktivitäts-Tracking Statistiken für <strong>%(corporation)s</strong> für das Jahr <strong>%(year)s</strong>\n"
+"                                Flotten Aktivitäts Verfolgung Statistiken für <strong>%(corporation)s</strong> für das Jahr <strong>%(year)s</strong>\n"
 "                            "
 
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:45
@@ -1348,6 +1345,9 @@ msgstr "Dieser Charakter ist in einer anderen Corporation und seine FATs werden 
 #: afat/views/statistics.py:458
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diese Corporation zu sehen.</p>"
+
+#~ msgid "Fleet activity tracking"
+#~ msgstr "Flotten Aktivitäts Verfolgung"
 
 #~ msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 #~ msgstr "<h4>Warnung!</h4><p>Datumsinformationen nicht komplett!</p>"

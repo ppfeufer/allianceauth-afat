@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-08-05 15:56+0200\n"
+"POT-Creation-Date: 2025-10-07 15:50+0200\n"
 "PO-Revision-Date: 2025-08-27 20:43+0000\n"
 "Last-Translator: s0k0l -_- <salarysalo@gmail.com>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
@@ -20,7 +20,13 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 5.13\n"
 
-#: afat/__init__.py:9
+#: afat/__init__.py:9 afat/templates/afat/base.html:7
+#: afat/templates/afat/base.html:12
+#: afat/templates/afat/view/dashboard/dashboard.html:7
+#: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
+#: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
+#: afat/templates/afat/view/statistics/statistics-overview.html:8
 msgid "Fleet Activity Tracking"
 msgstr "Відстежування активності у флоті"
 
@@ -516,15 +522,6 @@ msgstr "Будь який з обраних класів кораблів, як�
 #: afat/models/smart_filter.py:130
 msgid "Smart Filter: FATs in time period"
 msgstr "Смарт-фільтр: ФАТи за період часу"
-
-#: afat/templates/afat/base.html:7 afat/templates/afat/base.html:12
-#: afat/templates/afat/view/dashboard/dashboard.html:7
-#: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
-#: afat/templates/afat/view/statistics/statistics-overview.html:8
-msgid "Fleet activity tracking"
-msgstr "Відстежування активності у флоті"
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
@@ -1118,7 +1115,9 @@ msgid "All FAT links"
 msgstr "Всі FAT-посилання"
 
 #: afat/templates/afat/view/logs/logs-overview.html:6
-msgid "Fleet activity tracking logs"
+#, fuzzy
+#| msgid "Fleet activity tracking logs"
+msgid "Fleet Activity Tracking logs"
 msgstr "Відстежування активності у флоті"
 
 #: afat/templates/afat/view/logs/logs-overview.html:21
@@ -1169,7 +1168,9 @@ msgstr[3] ""
 #: afat/templates/afat/view/statistics/statistics-character.html:6
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:8
 #: afat/templates/afat/view/statistics/statistics-corporation.html:6
-msgid "Fleet activity tracking statistics"
+#, fuzzy
+#| msgid "Fleet activity tracking statistics"
+msgid "Fleet Activity Tracking statistics"
 msgstr "Статистика аідстеження активності"
 
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:12
@@ -1182,10 +1183,14 @@ msgid "View detailed alliance statistics for: "
 msgstr "Переглянути детальну статистику альянсу для: "
 
 #: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:39
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                                Fleet activity tracking statistics for <strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
+#| "                            "
 msgid ""
 "\n"
-"                                Fleet activity tracking statistics for <strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
+"                                Fleet Activity Tracking statistics for <strong>%(corporation)s</strong> for the year <strong>%(year)s</strong>.\n"
 "                            "
 msgstr ""
 "\n"
@@ -1383,6 +1388,9 @@ msgstr "Цей персонаж перебуває в іншій корпора�
 #: afat/views/statistics.py:458
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Попередження!</h4><p>Ви не маєте дозволу переглядати статистику для цієї корпорації.</p>"
+
+#~ msgid "Fleet activity tracking"
+#~ msgstr "Відстежування активності у флоті"
 
 #~ msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
 #~ msgstr "<h4>Попередження!</h4><p>Дані про дату не повні!</p>"
