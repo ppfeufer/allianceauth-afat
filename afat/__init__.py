@@ -6,7 +6,10 @@ App config
 from django.utils.translation import gettext_lazy as _
 
 __version__ = "3.12.3"
-__title__ = _("Fleet Activity Tracking")
+__title__ = "Fleet Activity Tracking"
+__title_translated__ = _("Fleet Activity Tracking")
+
+__esi_compatibility_date__ = "2025-09-30"
 
 __package_name__ = "allianceauth-afat"
 __app_name__ = "afat"
