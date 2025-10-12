@@ -12,9 +12,6 @@ import kombu
 # Django
 from django.utils.datetime_safe import datetime
 
-# Alliance Auth (External Libs)
-from app_utils.esi import EsiStatus
-
 # Alliance Auth AFAT
 from afat.models import FatLink
 from afat.tasks import (
@@ -84,33 +81,10 @@ class UpdateEsiFatlinksTests(BaseTestCase):
     Test cases for the update_esi_fatlinks task.
     """
 
-    @patch("afat.tasks.fetch_esi_status")
-    @patch("afat.tasks.logger")
-    def test_checking_esi_fat_links_when_esi_is_offline(
-        self, mock_logger, mock_fetch_esi_status
-    ):
-        """
-        Test that the update_esi_fatlinks task handles the case when ESI is offline.
-
-        :param mock_logger:
-        :type mock_logger:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
-        :return:
-        :rtype:
-        """
-
-        mock_fetch_esi_status.return_value = EsiStatus(is_online=False)
-        update_esi_fatlinks()
-        mock_logger.warning.assert_called_once_with(
-            "ESI doesn't seem to be available at this time. Aborting."
-        )
-
-    @patch("afat.tasks.fetch_esi_status")
     @patch("afat.tasks.FatLink.objects.select_related_default")
     @patch("afat.tasks.logger")
     def test_checking_esi_fat_links_when_no_fatlinks(
-        self, mock_logger, mock_fatlink_queryset, mock_fetch_esi_status
+        self, mock_logger, mock_fatlink_queryset
     ):
         """
         Test that the update_esi_fatlinks task handles the case when there are no ESI FAT links.
@@ -119,20 +93,16 @@ class UpdateEsiFatlinksTests(BaseTestCase):
         :type mock_logger:
         :param mock_fatlink_queryset:
         :type mock_fatlink_queryset:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
         :return:
         :rtype:
         """
 
-        mock_fetch_esi_status.return_value = EsiStatus(is_online=True)
         mock_fatlink_queryset.return_value.filter.return_value.distinct.return_value = (
             []
         )
         update_esi_fatlinks()
         mock_logger.debug.assert_any_call(msg="Found 0 ESI FAT links to process")
 
-    @patch("afat.tasks.fetch_esi_status")
     @patch("afat.tasks.FatLink.objects.select_related_default")
     @patch("afat.tasks.logger")
     @patch("afat.tasks._process_esi_fatlink")
@@ -141,7 +111,6 @@ class UpdateEsiFatlinksTests(BaseTestCase):
         mock_process_esi_fatlink,
         mock_logger,
         mock_fatlink_queryset,
-        mock_fetch_esi_status,
     ):
         """
         Test that the update_esi_fatlinks task handles the case when there are ESI FAT links.
@@ -152,13 +121,10 @@ class UpdateEsiFatlinksTests(BaseTestCase):
         :type mock_logger:
         :param mock_fatlink_queryset:
         :type mock_fatlink_queryset:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
         :return:
         :rtype:
         """
 
-        mock_fetch_esi_status.return_value = EsiStatus(is_online=True)
         mock_fatlink_queryset.return_value.filter.return_value.distinct.return_value = [
             MagicMock()
         ]
