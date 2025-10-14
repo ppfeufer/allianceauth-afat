@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- Loading spinner to all dynamically loading DataTables to indicate loading state
+
 ## [3.12.3] - 2025-10-07
 
 ### Changed

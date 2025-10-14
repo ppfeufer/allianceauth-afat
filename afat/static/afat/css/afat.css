@@ -57,10 +57,10 @@
     }
 }
 
-/* Statistics
+/* Loading Spinner
 ------------------------------------------------------------------------------------- */
 @media all {
-    .allianceauth-afat .afat-loading-character-data .afat-spinner {
+    .allianceauth-afat .afat-spinner {
         width: 2.5rem;
         height: 2.5rem;
     }
