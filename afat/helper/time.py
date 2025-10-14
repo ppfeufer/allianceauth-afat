@@ -4,7 +4,8 @@ Helper for time related functions
 
 # Django
 from django.utils.datetime_safe import datetime
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext_lazy
 
 
 def get_time_delta(then, now=datetime.now(), interval="default"):
@@ -110,7 +111,39 @@ def get_time_delta(then, now=datetime.now(), interval="default"):
         duration_seconds = seconds(from_seconds=duration_minutes[1])
 
         return _(
-            f"{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"  # pylint: disable=line-too-long
+            "%(l10n_year)s, %(l10n_day)s, %(l10n_hour)s, %(l10n_minute)s and %(l10n_second)s"
+            % {
+                "l10n_year": ngettext_lazy(
+                    singular="%(count)d year",
+                    plural="%(count)d years",
+                    number=int(duration_years[0]),
+                )
+                % {"count": int(duration_years[0])},
+                "l10n_day": ngettext_lazy(
+                    singular="%(count)d day",
+                    plural="%(count)d days",
+                    number=int(duration_days[0]),
+                )
+                % {"count": int(duration_days[0])},
+                "l10n_hour": ngettext_lazy(
+                    singular="%(count)d hour",
+                    plural="%(count)d hours",
+                    number=int(duration_hours[0]),
+                )
+                % {"count": int(duration_hours[0])},
+                "l10n_minute": ngettext_lazy(
+                    singular="%(count)d minute",
+                    plural="%(count)d minutes",
+                    number=int(duration_minutes[0]),
+                )
+                % {"count": int(duration_minutes[0])},
+                "l10n_second": ngettext_lazy(
+                    singular="%(count)d second",
+                    plural="%(count)d seconds",
+                    number=int(duration_seconds[0]),
+                )
+                % {"count": int(duration_seconds[0])},
+            }
         )
 
     return {

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.12.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-10-14 08:10+0200\n"
+"POT-Creation-Date: 2025-10-14 08:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -132,6 +132,48 @@ msgstr ""
 
 #: afat/forms.py:127
 msgid "Expiry time in minutes"
+msgstr ""
+
+#: afat/helper/time.py:117
+#, python-format
+msgid "%(count)d year"
+msgid_plural "%(count)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: afat/helper/time.py:123
+#, python-format
+msgid "%(count)d day"
+msgid_plural "%(count)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: afat/helper/time.py:129
+#, python-format
+msgid "%(count)d hour"
+msgid_plural "%(count)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: afat/helper/time.py:135
+#, python-format
+msgid "%(count)d minute"
+msgid_plural "%(count)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: afat/helper/time.py:141
+#, python-format
+msgid "%(count)d second"
+msgid_plural "%(count)d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: afat/helper/time.py:114
+#, python-format
+msgid ""
+"%(l10n_year)s, %(l10n_day)s, %(l10n_hour)s, %(l10n_minute)s and "
+"%(l10n_second)s"
 msgstr ""
 
 #: afat/helper/views.py:60 afat/helper/views.py:176
