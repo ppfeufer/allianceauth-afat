@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.12.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-10-07 15:50+0200\n"
+"POT-Creation-Date: 2025-10-14 08:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,11 +84,6 @@ msgstr ""
 msgid "Ship classes"
 msgstr ""
 
-#: afat/apps.py:20
-#, python-brace-format
-msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-msgstr ""
-
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
@@ -126,7 +121,7 @@ msgstr ""
 
 #: afat/forms.py:85
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:38
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:56
 msgid "Ship type"
 msgstr ""
@@ -139,17 +134,10 @@ msgstr ""
 msgid "Expiry time in minutes"
 msgstr ""
 
-#: afat/helper/time.py:113
-msgid ""
-"{int(duration_years[0])} years, {int(duration_days[0])} days, "
-"{int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and "
-"{int(duration_seconds[0])} seconds"
-msgstr ""
-
 #: afat/helper/views.py:60 afat/helper/views.py:176
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:67
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:73
 msgid "ESI"
 msgstr ""
 
@@ -159,13 +147,6 @@ msgstr ""
 msgid ""
 "Clicking here will stop the automatic tracking through ESI for this fleet "
 "and close the associated FAT link."
-msgstr ""
-
-#: afat/helper/views.py:94
-#, python-brace-format
-msgid ""
-"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} "
-"from {fatlink.character.character_name}?</p>"
 msgstr ""
 
 #: afat/helper/views.py:96
@@ -178,23 +159,6 @@ msgstr ""
 
 #: afat/helper/views.py:124 afat/helper/views.py:187
 msgid "Delete"
-msgstr ""
-
-#: afat/helper/views.py:126
-#, python-brace-format
-msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
-msgstr ""
-
-#: afat/helper/views.py:189
-#, python-brace-format
-msgid ""
-"<p>Are you sure you want to remove {fat.character.character_name} from this "
-"FAT link?</p>"
-msgstr ""
-
-#: afat/helper/views.py:242
-#, python-brace-format
-msgid "{log.fatlink_hash} (Deleted)"
 msgstr ""
 
 #: afat/helper/views.py:358
@@ -637,7 +601,7 @@ msgstr ""
 msgid "Ship"
 msgstr ""
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:63
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:69
 msgid "No recent FAT activity registered for any of your characters."
 msgstr ""
 
@@ -749,7 +713,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:90
 #: afat/templates/afat/view/dashboard/dashboard.html:27
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:57
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:63
 msgid "Close ESI fleet tracking"
 msgstr ""
 
@@ -775,11 +739,11 @@ msgstr ""
 msgid "Character"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:31
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:37
 msgid "Ship type overview"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:40
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:46
 msgid "Count"
 msgstr ""
 
@@ -1085,7 +1049,7 @@ msgid "Recent activity"
 msgstr ""
 
 #: afat/templates/afat/view/dashboard/dashboard.html:24
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:60
 msgid "Delete FAT link"
 msgstr ""
 
@@ -1129,7 +1093,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: afat/templates/afat/view/logs/logs-overview.html:35
+#: afat/templates/afat/view/logs/logs-overview.html:41
 #, python-format
 msgid ""
 "\n"
