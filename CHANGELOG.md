@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- 'CharactersCharacterIdLocationGet' object is not subscriptable on clickable FAT links
+
 ## [4.0.0-beta.1] - 2025-10-20
 
 > [!CAUTION]

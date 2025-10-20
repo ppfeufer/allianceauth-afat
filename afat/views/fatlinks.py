@@ -596,23 +596,23 @@ def add_fat(
     # Check if character is online
     character_online = esi.client.Location.GetCharactersCharacterIdOnline(
         character_id=token.character_id, token=esi_token
-    ).result()
+    ).result(force_refresh=True)
 
     if character_online.online is True:
         # Character location
         location = esi.client.Location.GetCharactersCharacterIdLocation(
             character_id=token.character_id, token=esi_token
-        ).result()
+        ).result(force_refresh=True)
 
         # Current ship
         ship = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
-        ).result()
+        ).result(force_refresh=True)
 
         # System information
         system = esi.client.Universe.GetUniverseSystemsSystemId(
-            system_id=location["solar_system_id"]
-        ).result()
+            system_id=location.solar_system_id
+        ).result(force_refresh=True)
 
         try:
             Fat(
