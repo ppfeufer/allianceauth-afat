@@ -91,7 +91,10 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
             "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."  # pylint: disable=line-too-long
         )
         modal_body_text = _(
-            f"<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"  # pylint: disable=line-too-long
+            "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from {character_name}?</p>"
+        ).format(
+            esi_fleet_id=fatlink.esi_fleet_id,
+            character_name=fatlink.character.character_name,
         )
         modal_confirm_text = _("Stop tracking")
 
@@ -123,8 +126,8 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
         )
         button_delete_text = _("Delete")
         modal_body_text = _(
-            f"<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
-        )
+            "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
+        ).format(fatlink_fleet=fatlink_fleet)
 
         actions += (
             '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
@@ -186,8 +189,8 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
         )
         button_delete_text = _("Delete")
         modal_body_text = _(
-            f"<p>Are you sure you want to remove {fat.character.character_name} from this FAT link?</p>"  # pylint: disable=line-too-long
-        )
+            "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
+        ).format(character_name=fat.character.character_name)
 
         actions += (
             '<a class="btn btn-danger btn-sm" '
@@ -239,7 +242,7 @@ def convert_logs_to_dict(log: Log, fatlink_exists: bool = False) -> dict:
     # User name
     user_main_character = get_main_character_from_user(user=log.user)
 
-    fatlink_html = _(f"{log.fatlink_hash} (Deleted)")
+    fatlink_html = _("{fatlink_hash} (Deleted)").format(fatlink_hash=log.fatlink_hash)
     if fatlink_exists is True:
         fatlink_link = reverse(
             viewname="afat:fatlinks_details_fatlink", args=[log.fatlink_hash]
