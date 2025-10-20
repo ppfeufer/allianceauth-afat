@@ -46,6 +46,11 @@ Section Order:
 
 - Loading spinner to all dynamically loading DataTables to indicate loading state
 
+### Changed
+
+- Switch to OpenAPI3-based ESI client
+  - Set ESI compatibility date to 2025-09-30 (September 30, 2025)
+
 ## [3.12.3] - 2025-10-07
 
 ### Changed

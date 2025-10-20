@@ -21,4 +21,15 @@ esi = ESIClientProvider(
     ua_appname=__app_name_verbose__,
     ua_version=__version__,
     ua_url=__github_url__,
+    operations=[
+        "GetCharactersCharacterIdCorporationhistory",
+        "GetCharactersCharacterIdFleet",
+        "GetCharactersCharacterIdLocation",
+        "GetCharactersCharacterIdOnline",
+        "GetCharactersCharacterIdShip",
+        "GetCorporationsCorporationIdAlliancehistory",
+        "GetFleetsFleetIdMembers",
+        "GetUniverseSystemsSystemId",
+        "PostUniverseIds",
+    ],
 )
