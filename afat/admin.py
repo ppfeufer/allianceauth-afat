@@ -80,7 +80,7 @@ class AFatLinkAdmin(admin.ModelAdmin):
         :rtype:
         """
 
-        return obj._number_of_fats
+        return getattr(obj, "_number_of_fats", None)
 
 
 @admin.register(Fat)
