@@ -46,6 +46,10 @@ Section Order:
 
 - 'CharactersCharacterIdLocationGet' object is not subscriptable on clickable FAT links
 
+### Changed
+
+- User Agent test re-added
+
 ## [4.0.0-beta.1] - 2025-10-20
 
 > [!CAUTION]
