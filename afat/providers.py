@@ -30,6 +30,7 @@ esi = ESIClientProvider(
         "GetCorporationsCorporationIdAlliancehistory",
         "GetFleetsFleetIdMembers",
         "GetUniverseSystemsSystemId",
+        "GetUniverseTypesTypeId",
         "PostUniverseIds",
     ],
 )
