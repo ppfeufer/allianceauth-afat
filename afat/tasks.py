@@ -19,6 +19,7 @@ from allianceauth.services.tasks import QueueOnce
 from esi.models import Token
 
 # Alliance Auth (External Libs)
+from app_utils.esi import fetch_esi_status
 from app_utils.logging import LoggerAddTag
 
 # Alliance Auth AFAT
@@ -290,6 +291,14 @@ def update_esi_fatlinks() -> None:
     """
     Checking ESI fat links for changes
     """
+
+    esi_status = fetch_esi_status()
+
+    # Abort if ESI seems offline or above the error limit
+    if not esi_status.is_ok:
+        logger.warning("ESI doesn't seem to be available at this time. Aborting.")
+
+        return
 
     esi_fatlinks = (
         FatLink.objects.select_related_default()
