@@ -29,9 +29,9 @@ from afat.utils import get_main_character_from_user
 MODULE_PATH = "afat.views.fatlinks"
 
 
-class TestFatlinksView(BaseTestCase):
+class FatlinksViewTestCase(BaseTestCase):
     """
-    Test the fatlinks views
+    Base test class for fatlinks views
     """
 
     @classmethod
@@ -170,6 +170,12 @@ class TestFatlinksView(BaseTestCase):
             shiptype="Omen",
         )
 
+
+class TestOverview(FatlinksViewTestCase):
+    """
+    Test overview
+    """
+
     def test_should_show_fatlnks_overview(self):
         """
         Test should show fatlnks overview
@@ -199,6 +205,12 @@ class TestFatlinksView(BaseTestCase):
         res = self.client.get(path=url)
 
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
+
+
+class TestAddFatlink(FatlinksViewTestCase):
+    """
+    Test add fatlink
+    """
 
     def test_should_show_add_fatlink_for_user_with_manage_afat(self):
         """
@@ -248,6 +260,12 @@ class TestFatlinksView(BaseTestCase):
 
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
+
+class TestDetailsFatlink(FatlinksViewTestCase):
+    """
+    Test details fatlink
+    """
+
     def test_should_show_fatlink_details_for_user_with_add_fatlinkt(self):
         """
         Test should show fatlink details for user with add fatlinkt
@@ -293,6 +311,12 @@ class TestFatlinksView(BaseTestCase):
             first=str(messages[0]),
             second="<h4>Warning!</h4><p>The hash provided is not valid.</p>",
         )
+
+
+class TestAjaxGetFatlinksByYear(FatlinksViewTestCase):
+    """
+    Test ajax get fatlinks by year
+    """
 
     def test_ajax_get_fatlinks_by_year(self):
         """
@@ -394,6 +418,12 @@ class TestFatlinksView(BaseTestCase):
                 }
             ],
         )
+
+
+class TestReopenFatlink(FatlinksViewTestCase):
+    """
+    Test reopen fatlink
+    """
 
     @patch("afat.views.fatlinks.Duration.objects.get")
     @patch("afat.views.fatlinks.Setting.get_setting")
@@ -499,6 +529,12 @@ class TestFatlinksView(BaseTestCase):
             any("This FAT link has already been re-opened." in str(m) for m in messages)
         )
 
+
+class TestCloseEsiFatlink(FatlinksViewTestCase):
+    """
+    Test close esi fatlink
+    """
+
     @patch("afat.views.fatlinks.FatLink.objects.get")
     def test_closes_esi_fatlink_successfully(self, mock_get_fatlink):
         """
@@ -543,6 +579,12 @@ class TestFatlinksView(BaseTestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(response, reverse("afat:dashboard"))
+
+
+class TestDeleteFat(FatlinksViewTestCase):
+    """
+    Test delete fat
+    """
 
     @patch("afat.views.fatlinks.FatLink.objects.get")
     @patch("afat.views.fatlinks.Fat.objects.get")
@@ -699,6 +741,12 @@ class TestFatlinksView(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(response, reverse("afat:dashboard"))
 
+
+class TestAjaxGetFatsByFatlink(FatlinksViewTestCase):
+    """
+    Test ajax get fats by fatlink
+    """
+
     @patch("afat.views.fatlinks.Fat.objects.select_related_default")
     @patch("afat.views.fatlinks.convert_fats_to_dict")
     def test_returns_fats_for_valid_fatlink_hash(
@@ -766,29 +814,3 @@ class TestFatlinksView(BaseTestCase):
             response.json(),
             [{"id": 1, "character": "Test Character", "shiptype": "Omen"}],
         )
-
-    @patch("afat.views.fatlinks.Duration.objects.get")
-    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
-    def test_redirects_to_dashboard_when_invalid_hash_provided(
-        self, mock_select_related_default, mock_duration_get
-    ):
-        """
-        Test redirects to dashboard when invalid hash provided
-
-        :param mock_select_related_default:
-        :type mock_select_related_default:
-        :param mock_duration_get:
-        :type mock_duration_get:
-        :return:
-        :rtype:
-        """
-
-        mock_select_related_default.return_value.get.side_effect = FatLink.DoesNotExist
-
-        self.client.force_login(self.user_with_manage_afat)
-        response = self.client.get(
-            reverse("afat:fatlinks_details_fatlink", args=["invalid_hash"])
-        )
-
-        self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response.url, reverse("afat:dashboard"))
