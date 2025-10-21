@@ -43,7 +43,7 @@ TASK_DEFAULT_KWARGS = {"time_limit": TASK_TIME_LIMIT, "max_retries": ESI_MAX_RET
 
 
 @shared_task(**{**TASK_DEFAULT_KWARGS}, **{"base": QueueOnce})
-def process_fats(data_list, data_source: str, fatlink_hash: str):
+def process_fats(data_list, data_source: str, fatlink_hash: str) -> None:
     """
     Process FAT link data
 
@@ -89,6 +89,12 @@ def process_fats(data_list, data_source: str, fatlink_hash: str):
                         "No changes to the current fleet rooster, nothing to add to the queue"
                     )
                 )
+    else:
+        logger.warning(
+            msg=(
+                f'Unknown data source "{data_source}" for FAT link hash "{fatlink_hash}"'
+            )
+        )
 
 
 @shared_task
@@ -105,8 +111,16 @@ def process_character(
     :return:
     """
 
+    try:
+        link = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
+        logger.warning(
+            f'FAT link with hash "{fatlink_hash}" does not exist, skipping character {character_id}'
+        )
+
+        return
+
     character = get_or_create_character(character_id=character_id)
-    link = FatLink.objects.get(hash=fatlink_hash)
 
     solar_system = esi.client.Universe.GetUniverseSystemsSystemId(
         system_id=solar_system_id
@@ -292,25 +306,30 @@ def update_esi_fatlinks() -> None:
     Checking ESI fat links for changes
     """
 
-    esi_status = fetch_esi_status()
-
-    # Abort if ESI seems offline or above the error limit
-    if not esi_status.is_ok:
-        logger.warning("ESI doesn't seem to be available at this time. Aborting.")
-
-        return
-
     esi_fatlinks = (
         FatLink.objects.select_related_default()
         .filter(is_esilink=True, is_registered_on_esi=True)
         .distinct()
     )
 
-    logger.debug(msg=f"Found {len(esi_fatlinks)} ESI FAT links to process")
-    logger.debug("ESI FAT Links: %s", esi_fatlinks)
+    if esi_fatlinks.exists():
+        esi_status = fetch_esi_status()
 
-    for fatlink in esi_fatlinks:
-        _process_esi_fatlink(fatlink=fatlink)
+        # Abort if ESI seems offline or above the error limit
+        if not esi_status.is_ok:
+            logger.warning("ESI doesn't seem to be available at this time. Aborting.")
+
+            return
+
+        logger.debug(msg=f"Found {len(esi_fatlinks)} ESI FAT links to process")
+        logger.debug("ESI FAT Links: %s", esi_fatlinks)
+
+        for fatlink in esi_fatlinks:
+            _process_esi_fatlink(fatlink=fatlink)
+    else:
+        logger.debug(msg="No ESI FAT links to process")
+
+        return
 
 
 @shared_task
