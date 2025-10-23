@@ -42,7 +42,7 @@ class Command(BaseCommand):
             msg=f"Querying ESI for corporation history for character with ID {character_id} …"
         )
 
-        return esi.client.Character.get_characters_character_id_corporationhistory(
+        return esi.client.Character.GetCharactersCharacterIdCorporationhistory(
             character_id=character_id
         ).results()
 
@@ -60,7 +60,7 @@ class Command(BaseCommand):
             msg=f"Querying ESI for alliance history for corporation with ID {corporation_id} …"
         )
 
-        return esi.client.Corporation.get_corporations_corporation_id_alliancehistory(
+        return esi.client.Corporation.GetCorporationsCorporationIdAlliancehistory(
             corporation_id=corporation_id
         ).results()
 
@@ -95,10 +95,10 @@ class Command(BaseCommand):
             # print("cache_character_corp_history", cache_character_corp_history)
 
             for corp_entry in cache_character_corp_history[fat.character.character_id]:
-                if fat.fatlink.created <= corp_entry["start_date"]:
+                if fat.fatlink.created <= corp_entry.start_date:
                     continue
 
-                affiliation_corp_id = corp_entry["corporation_id"]
+                affiliation_corp_id = corp_entry.corporation_id
 
                 if affiliation_corp_id not in cache_corp_alliance_history:
                     alliance_history = self._get_corporation_alliance_history(
@@ -109,10 +109,9 @@ class Command(BaseCommand):
 
                 affiliation_alliance_id = next(
                     (
-                        entry["alliance_id"]
+                        entry.alliance_id
                         for entry in cache_corp_alliance_history[affiliation_corp_id]
-                        if entry.get("alliance_id")
-                        and fat.fatlink.created > entry["start_date"]
+                        if entry.alliance_id and fat.fatlink.created > entry.start_date
                     ),
                     None,
                 )

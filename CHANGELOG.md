@@ -42,9 +42,47 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.0.0-beta.2] - 2025-10-20
+
+> [!CAUTION]
+>
+> This is a BETA version, not intended for production use!
+> Please test it in a safe environment first and [report any issues you find](https://github.com/ppfeufer/allianceauth-afat/issues).
+>
+> This version is pulling in an BETA version of `django-esi` as well,
+> so please be aware that this might break at any time.
+
+### Fixed
+
+- 'CharactersCharacterIdLocationGet' object is not subscriptable on clickable FAT links
+
+### Changed
+
+- User Agent test re-added
+
+## [4.0.0-beta.1] - 2025-10-20
+
+> [!CAUTION]
+>
+> This is a BETA version, not intended for production use!
+> Please test it in a safe environment first and [report any issues you find](https://github.com/ppfeufer/allianceauth-afat/issues).
+>
+> This version is pulling in an BETA version of `django-esi` as well,
+> so please be aware that this might break at any time.
+
 ### Added
 
 - Loading spinner to all dynamically loading DataTables to indicate loading state
+
+### Fixed
+
+- Django's `makemessages` doesn't seem to recognize f-strings anymore, so all f-strings
+  in translatable strings have been converted back to `.format()` calls.
+
+### Changed
+
+- Switch to OpenAPI3-based ESI client
+  - Set ESI compatibility date to 2025-09-30 (September 30, 2025)
 
 ## [3.12.3] - 2025-10-07
 
@@ -1903,6 +1941,8 @@ Finally restart your supervisor services for AA
 [3.8.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.1...v3.8.2 "v3.8.2"
 [3.9.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.2...v3.9.0 "v3.9.0"
 [3.9.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.9.0...v3.9.1 "v3.9.1"
+[4.0.0-beta.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0-beta.1 "v4.0.0-beta.1"
+[4.0.0-beta.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0-beta.2 "v4.0.0-beta.2"
 [in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"

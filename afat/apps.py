@@ -4,10 +4,10 @@ App config
 
 # Django
 from django.apps import AppConfig
-from django.utils.translation import gettext_lazy as _
+from django.utils.text import format_lazy
 
 # Alliance Auth AFAT
-from afat import __version__
+from afat import __title_translated__, __version__
 
 
 class AfatConfig(AppConfig):
@@ -17,4 +17,6 @@ class AfatConfig(AppConfig):
 
     name = "afat"
     label = "afat"
-    verbose_name = _(f"Fleet Activity Tracking (AFAT) v{__version__}")
+    verbose_name = format_lazy(
+        "{app_title} v{version}", app_title=__title_translated__, version=__version__
+    )

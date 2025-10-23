@@ -7,9 +7,11 @@ from unittest.mock import MagicMock, patch
 
 # Django
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 # Alliance Auth AFAT
 from afat.admin import (
+    AFatLinkAdmin,
     AFatLinkTypeAdmin,
     AFatLogAdmin,
     DoctrineAdmin,
@@ -17,7 +19,7 @@ from afat.admin import (
     SettingAdmin,
 )
 from afat.forms import DoctrineAdminForm, SettingAdminForm
-from afat.models import Doctrine, FatsInTimeFilter, FleetType, Log, Setting
+from afat.models import Doctrine, FatLink, FatsInTimeFilter, FleetType, Log, Setting
 from afat.tests import BaseTestCase
 
 
@@ -121,6 +123,45 @@ class TestAFatLinkTypeAdmin(BaseTestCase):
 
         self.assertTrue(mock_obj_1.is_enabled)  # Ensure it remains True after failure
         self.assertFalse(mock_obj_2.is_enabled)  # Ensure successful deactivation
+
+    def test_returns_fleet_type_name(self):
+        """
+        Test that the _name method returns the correct fleet type name.
+
+        :return:
+        :rtype:
+        """
+
+        fleet_type = FleetType.objects.create(name="Test Fleet Type")
+        admin_instance = AFatLinkTypeAdmin(FleetType, admin.site)
+
+        self.assertEqual(admin_instance._name(fleet_type), "Test Fleet Type")
+
+    def test_returns_true_when_is_enabled_is_true(self):
+        """
+        Test that the _is_enabled method returns True when is_enabled is True.
+
+        :return:
+        :rtype:
+        """
+
+        fleet_type = FleetType.objects.create(name="Test Fleet Type", is_enabled=True)
+        admin_instance = AFatLinkTypeAdmin(FleetType, admin.site)
+
+        self.assertTrue(admin_instance._is_enabled(fleet_type))
+
+    def test_returns_false_when_is_enabled_is_false(self):
+        """
+        Test that the _is_enabled method returns False when is_enabled is False.
+
+        :return:
+        :rtype:
+        """
+
+        fleet_type = FleetType.objects.create(name="Test Fleet Type", is_enabled=False)
+        admin_instance = AFatLinkTypeAdmin(FleetType, admin.site)
+
+        self.assertFalse(admin_instance._is_enabled(fleet_type))
 
 
 class TestAFatLogAdmin(BaseTestCase):
@@ -342,3 +383,98 @@ class TestFatsInTimeFilterAdmin(BaseTestCase):
         result = admin_instance.get_ship_classes(obj)
 
         self.assertEqual(result, "")
+
+
+class TestAFatLinkAdmin(BaseTestCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        user = User.objects.create(username="testuser")
+        cls.fat_link = FatLink.objects.create(fleet="Test Fleet", creator=user)
+
+    @patch("afat.admin.Count")
+    @patch("django.db.models.query.QuerySet.annotate")
+    def test_get_queryset_returns_annotated_queryset(self, mock_annotate, mock_count):
+        """
+        Test that get_queryset returns an annotated queryset with the correct fat count.
+
+        :param mock_annotate:
+        :type mock_annotate:
+        :param mock_count:
+        :type mock_count:
+        :return:
+        :rtype:
+        """
+
+        # Return a mock that looks like a Django expression (has resolve_expression)
+        mock_expr = MagicMock()
+        mock_expr.resolve_expression = MagicMock()
+        mock_count.return_value = mock_expr
+
+        # Prevent annotate from triggering SQL compilation; return the base queryset
+        mock_annotate.return_value = FatLink.objects.all()
+
+        admin_instance = AFatLinkAdmin(FatLink, admin.site)
+        request = self.client.request().wsgi_request
+        queryset = admin_instance.get_queryset(request)
+
+        self.assertIn(self.fat_link, queryset)
+        mock_count.assert_called_once_with(expression="afat_fats", distinct=True)
+        mock_annotate.assert_called_once()
+
+    def test_get_queryset_handles_empty_queryset(self):
+        """
+        Test that get_queryset handles an empty queryset without errors.
+
+        :return:
+        :rtype:
+        """
+
+        FatLink.objects.all().delete()
+
+        admin_instance = AFatLinkAdmin(FatLink, admin.site)
+        request = self.client.request().wsgi_request
+        queryset = admin_instance.get_queryset(request)
+
+        self.assertEqual(queryset.count(), 0)
+
+    def test_returns_correct_number_of_fats(self):
+        """
+        Test that number_of_fats returns the correct count from the annotation.
+
+        :return:
+        :rtype:
+        """
+
+        self.fat_link._number_of_fats = 5
+
+        admin_instance = AFatLinkAdmin(FatLink, admin.site)
+        self.assertEqual(admin_instance.number_of_fats(self.fat_link), 5)
+
+    def test_handles_zero_fats(self):
+        """
+        Test that number_of_fats correctly handles zero fats.
+
+        :return:
+        :rtype:
+        """
+
+        self.fat_link._number_of_fats = 0
+
+        admin_instance = AFatLinkAdmin(FatLink, admin.site)
+        self.assertEqual(admin_instance.number_of_fats(self.fat_link), 0)
+
+    def test_handles_missing_annotation(self):
+        """
+        Test that number_of_fats returns None when the annotation is missing.
+
+        :return:
+        :rtype:
+        """
+
+        if hasattr(self.fat_link, "_number_of_fats"):
+            delattr(self.fat_link, "_number_of_fats")
+
+        admin_instance = AFatLinkAdmin(FatLink, admin.site)
+        self.assertIsNone(admin_instance.number_of_fats(self.fat_link))

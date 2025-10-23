@@ -7,7 +7,7 @@ from allianceauth import hooks
 from allianceauth.services.hooks import MenuItemHook, UrlHook
 
 # Alliance Auth AFAT
-from afat import __title__, urls
+from afat import __title_translated__, urls
 from afat.app_settings import securegroups_installed
 from afat.constants import APP_BASE_URL
 from afat.models import FatsInTimeFilter
@@ -22,7 +22,7 @@ class AaAfatMenuItem(MenuItemHook):  # pylint: disable=too-few-public-methods
         # Setup menu entry for sidebar
         MenuItemHook.__init__(
             self,
-            text=__title__,
+            text=__title_translated__,
             classes="fa-solid fa-space-shuttle",
             url_name="afat:dashboard",
             navactive=["afat:"],

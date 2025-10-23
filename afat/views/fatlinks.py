@@ -22,7 +22,6 @@ from django.utils.translation import gettext_lazy as _
 # Alliance Auth
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.eveonline.models import EveCharacter
-from allianceauth.eveonline.providers import provider
 from allianceauth.services.hooks import get_extension_logger
 from esi.decorators import token_required
 from esi.models import Token
@@ -283,9 +282,9 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
             character_id=token.character_id, scopes=required_scopes
         )
 
-        fleet_from_esi = esi.client.Fleets.get_characters_character_id_fleet(
-            character_id=token.character_id, token=esi_token.valid_access_token()
-        ).result()
+        fleet_from_esi = esi.client.Fleets.GetCharactersCharacterIdFleet(
+            character_id=token.character_id, token=esi_token
+        ).result(force_refresh=True)
     except Exception:  # pylint: disable=broad-exception-caught
         # Not in a fleet
         messages.warning(
@@ -319,7 +318,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         character_has_registered_fleets = True
 
         for registered_fleet in registered_fleets_for_creator:
-            if registered_fleet.esi_fleet_id == fleet_from_esi["fleet_id"]:
+            if registered_fleet.esi_fleet_id == fleet_from_esi.fleet_id:
                 # Character already has a fleet
                 fleet_already_registered = True
             else:
@@ -340,7 +339,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
                         "{creator__character_name} has already been registered and "
                         "pilots joining this fleet are automatically tracked.</p>"
                     ),
-                    fleet_id=fleet_from_esi["fleet_id"],
+                    fleet_id=fleet_from_esi.fleet_id,
                     creator__character_name=creator_character.character_name,
                 ),
             ),
@@ -374,10 +373,9 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
     # Check if we deal with the fleet boss here
     try:
-        esi_fleet_member = esi.client.Fleets.get_fleets_fleet_id_members(
-            fleet_id=fleet_from_esi["fleet_id"],
-            token=esi_token.valid_access_token(),
-        ).result()
+        esi_fleet_member = esi.client.Fleets.GetFleetsFleetIdMembers(
+            fleet_id=fleet_from_esi.fleet_id, token=esi_token
+        ).result(force_refresh=True)
     except Exception:  # pylint: disable=broad-exception-caught
         messages.warning(
             request=request,
@@ -406,7 +404,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         hash=fatlink_hash,
         is_esilink=True,
         is_registered_on_esi=True,
-        esi_fleet_id=fleet_from_esi["fleet_id"],
+        esi_fleet_id=fleet_from_esi.fleet_id,
         fleet_type=request.session["fatlink_form__type"],
     )
 
@@ -440,7 +438,9 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
     # Process fleet members in the background
     process_fats.delay(
-        data_list=esi_fleet_member, data_source="esi", fatlink_hash=fatlink_hash
+        data_list=[fleet_member.dict() for fleet_member in esi_fleet_member],
+        data_source="esi",
+        fatlink_hash=fatlink_hash,
     )
 
     messages.success(
@@ -594,36 +594,32 @@ def add_fat(
         return redirect(to="afat:dashboard")
 
     # Check if character is online
-    character_online = esi.client.Location.get_characters_character_id_online(
-        character_id=token.character_id, token=esi_token.valid_access_token()
-    ).result()
+    character_online = esi.client.Location.GetCharactersCharacterIdOnline(
+        character_id=token.character_id, token=esi_token
+    ).result(force_refresh=True)
 
-    if character_online["online"] is True:
+    if character_online.online is True:
         # Character location
-        location = esi.client.Location.get_characters_character_id_location(
-            character_id=token.character_id,
-            token=esi_token.valid_access_token(),
-        ).result()
+        location = esi.client.Location.GetCharactersCharacterIdLocation(
+            character_id=token.character_id, token=esi_token
+        ).result(force_refresh=True)
 
         # Current ship
-        ship = esi.client.Location.get_characters_character_id_ship(
-            character_id=token.character_id,
-            token=esi_token.valid_access_token(),
-        ).result()
+        ship = esi.client.Location.GetCharactersCharacterIdShip(
+            character_id=token.character_id, token=esi_token
+        ).result(force_refresh=True)
 
         # System information
-        system = esi.client.Universe.get_universe_systems_system_id(
-            system_id=location["solar_system_id"]
-        ).result()["name"]
-
-        ship_name = provider.get_itemtype(type_id=ship["ship_type_id"]).name
+        system = esi.client.Universe.GetUniverseSystemsSystemId(
+            system_id=location.solar_system_id
+        ).result(force_refresh=True)
 
         try:
             Fat(
                 fatlink=fleet,
                 character=character,
-                system=system,
-                shiptype=ship_name,
+                system=system.name,
+                shiptype=ship.ship_name,
                 corporation_eve_id=character.corporation_id,
                 alliance_eve_id=character.alliance_id,
             ).save()
