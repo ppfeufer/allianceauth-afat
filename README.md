@@ -11,7 +11,7 @@
 [![codecov](https://codecov.io/gh/ppfeufer/allianceauth-afat/branch/master/graph/badge.svg?token=GNE88NUAKK)](https://codecov.io/gh/ppfeufer/allianceauth-afat)
 [![Translation status](https://weblate.ppfeufer.de/widget/alliance-auth-apps/allianceauth-afat/svg-badge.svg)](https://weblate.ppfeufer.de/engage/alliance-auth-apps/)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](https://github.com/ppfeufer/aa-forum/blob/master/CODE_OF_CONDUCT.md)
-[![Discord](https://img.shields.io/discord/790364535294132234?label=discord)](https://discord.gg/zmh52wnfvM)
+[![Discord](https://img.shields.io/discord/399006117012832262?label=discord)](https://discord.gg/fjnHAmk)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/N4N8CL1BY)
 
