@@ -54,11 +54,13 @@ optional-dependencies.tests-allianceauth-latest = [
     "fittings",
 ]
 urls.Changelog = "https://github.com/ppfeufer/allianceauth-afat/blob/master/CHANGELOG.md"
+urls.Codecov = "https://codecov.io/gh/ppfeufer/allianceauth-afat"
+urls.Discord = "https://discord.gg/fjnHAmk"
 urls.Documentation = "https://github.com/ppfeufer/allianceauth-afat/blob/master/README.md"
-urls.Donations = "https://ko-fi.com/ppfeufer"
-urls.Homepage = "https://github.com/ppfeufer/allianceauth-afat"
-urls.Source = "https://github.com/ppfeufer/allianceauth-afat.git"
+urls.Donation = "https://ko-fi.com/ppfeufer"
+urls.GitHub = "https://github.com/ppfeufer/allianceauth-afat"
 urls.Tracker = "https://github.com/ppfeufer/allianceauth-afat/issues"
+urls.Translation = "https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/"
 
 [tool.hatch.build]
 include = [
