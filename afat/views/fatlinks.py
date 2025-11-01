@@ -512,7 +512,7 @@ def create_esi_fatlink(
     ]
 )
 def add_fat(  # pylint: disable=too-many-locals
-    request: WSGIRequest, token, fatlink_hash: str = None
+    request: WSGIRequest, token, fatlink_hash: str
 ) -> HttpResponseRedirect:
     """
     Click fat link helper
@@ -526,16 +526,6 @@ def add_fat(  # pylint: disable=too-many-locals
     :return:
     :rtype:
     """
-
-    if fatlink_hash is None:
-        messages.warning(
-            request=request,
-            message=mark_safe(
-                s=_("<h4>Warning!</h4><p>No FAT link hash provided.</p>")
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
 
     try:
         fleet = FatLink.objects.get(hash=fatlink_hash, is_esilink=False)
@@ -606,6 +596,10 @@ def add_fat(  # pylint: disable=too-many-locals
             character_id=token.character_id, token=esi_token
         ).result(force_refresh=True)
 
+        system, created_system = (  # pylint: disable=unused-variable
+            EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
+        )
+
         # Current ship
         current_ship = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
@@ -613,10 +607,6 @@ def add_fat(  # pylint: disable=too-many-locals
 
         ship, created_ship = (  # pylint: disable=unused-variable
             EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)
-        )
-
-        system, created_system = (  # pylint: disable=unused-variable
-            EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
         )
 
         try:
