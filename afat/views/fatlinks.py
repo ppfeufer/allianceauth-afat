@@ -605,8 +605,12 @@ def add_fat(
         ).result(force_refresh=True)
 
         # Current ship
-        ship = esi.client.Location.GetCharactersCharacterIdShip(
+        current_ship = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
+        ).result(force_refresh=True)
+
+        ship = esi.client.Universe.GetUniverseTypesTypeId(
+            type_id=current_ship.ship_type_id
         ).result(force_refresh=True)
 
         # System information
@@ -619,7 +623,7 @@ def add_fat(
                 fatlink=fleet,
                 character=character,
                 system=system.name,
-                shiptype=ship.ship_name,
+                shiptype=ship.name,
                 corporation_eve_id=character.corporation_id,
                 alliance_eve_id=character.alliance_id,
             ).save()
