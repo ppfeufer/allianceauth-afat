@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Ship type name on clickable FAT
+
 ## [4.0.0-beta.2] - 2025-10-20
 
 > [!CAUTION]

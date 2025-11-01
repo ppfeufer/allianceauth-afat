@@ -28,6 +28,7 @@ from esi.models import Token
 
 # Alliance Auth (External Libs)
 from app_utils.logging import LoggerAddTag
+from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
@@ -510,11 +511,12 @@ def create_esi_fatlink(
         "esi-location.read_online.v1",
     ]
 )
-def add_fat(
-    request: WSGIRequest, token, fatlink_hash: str = None
+def add_fat(  # pylint: disable=too-many-locals
+    request: WSGIRequest, token, fatlink_hash: str
 ) -> HttpResponseRedirect:
     """
     Click fat link helper
+
     :param request:
     :type request:
     :param token:
@@ -524,16 +526,6 @@ def add_fat(
     :return:
     :rtype:
     """
-
-    if fatlink_hash is None:
-        messages.warning(
-            request=request,
-            message=mark_safe(
-                s=_("<h4>Warning!</h4><p>No FAT link hash provided.</p>")
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
 
     try:
         fleet = FatLink.objects.get(hash=fatlink_hash, is_esilink=False)
@@ -604,22 +596,25 @@ def add_fat(
             character_id=token.character_id, token=esi_token
         ).result(force_refresh=True)
 
+        system, created_system = (  # pylint: disable=unused-variable
+            EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
+        )
+
         # Current ship
-        ship = esi.client.Location.GetCharactersCharacterIdShip(
+        current_ship = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
         ).result(force_refresh=True)
 
-        # System information
-        system = esi.client.Universe.GetUniverseSystemsSystemId(
-            system_id=location.solar_system_id
-        ).result(force_refresh=True)
+        ship, created_ship = (  # pylint: disable=unused-variable
+            EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)
+        )
 
         try:
             Fat(
                 fatlink=fleet,
                 character=character,
                 system=system.name,
-                shiptype=ship.ship_name,
+                shiptype=ship.name,
                 corporation_eve_id=character.corporation_id,
                 alliance_eve_id=character.alliance_id,
             ).save()
