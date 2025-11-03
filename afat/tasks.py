@@ -21,6 +21,7 @@ from esi.models import Token
 # Alliance Auth (External Libs)
 from app_utils.esi import fetch_esi_status
 from app_utils.logging import LoggerAddTag
+from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
@@ -121,13 +122,11 @@ def process_character(
         return
 
     character = get_or_create_character(character_id=character_id)
-
-    solar_system = esi.client.Universe.GetUniverseSystemsSystemId(
-        system_id=solar_system_id
-    ).result(force_refresh=True)
-
-    ship = esi.client.Universe.GetUniverseTypesTypeId(type_id=ship_type_id).result(
-        force_refresh=True
+    solar_system, solar_system_created = (  # pylint: disable=unused-variable
+        EveSolarSystem.objects.get_or_create_esi(id=solar_system_id)
+    )
+    ship, ship_created = (  # pylint: disable=unused-variable
+        EveType.objects.get_or_create_esi(id=ship_type_id)
     )
 
     fat, created = Fat.objects.get_or_create(
