@@ -596,7 +596,7 @@ def add_fat(  # pylint: disable=too-many-locals
             character_id=token.character_id, token=esi_token
         ).result(force_refresh=True)
 
-        system, created_system = (  # pylint: disable=unused-variable
+        solar_system, solar_system_created = (  # pylint: disable=unused-variable
             EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
         )
 
@@ -605,7 +605,7 @@ def add_fat(  # pylint: disable=too-many-locals
             character_id=token.character_id, token=esi_token
         ).result(force_refresh=True)
 
-        ship, created_ship = (  # pylint: disable=unused-variable
+        ship, ship_created = (  # pylint: disable=unused-variable
             EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)
         )
 
@@ -613,7 +613,7 @@ def add_fat(  # pylint: disable=too-many-locals
             Fat(
                 fatlink=fleet,
                 character=character,
-                system=system.name,
+                system=solar_system.name,
                 shiptype=ship.name,
                 corporation_eve_id=character.corporation_id,
                 alliance_eve_id=character.alliance_id,

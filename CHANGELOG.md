@@ -48,6 +48,7 @@ Section Order:
 
 ### Changed
 
+- Reduced potential ESI calls
 - Dependency to `django-esi` updated to >=8.0.0b2
 
 ## [4.0.0-beta.2] - 2025-10-20

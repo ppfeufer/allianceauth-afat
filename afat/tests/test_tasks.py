@@ -717,191 +717,96 @@ class TestProcessCharacterTask(BaseTestCase):
     Test cases for the process_character task.
     """
 
-    @patch("afat.tasks.logger.info")
-    @patch("afat.tasks.logger.debug")
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
-    @patch("afat.tasks.Fat.objects.get_or_create")
-    @patch("afat.tasks.FatLink.objects.get")
     @patch("afat.tasks.get_or_create_character")
-    def test_processes_character_successfully(
+    @patch("afat.models.FatLink.objects.get")
+    @patch("afat.tasks.EveSolarSystem.objects.get_or_create_esi")
+    @patch("afat.tasks.EveType.objects.get_or_create_esi")
+    @patch("afat.models.Fat.objects.get_or_create")
+    def test_processes_character_when_fatlink_exists(
         self,
-        mock_get_or_create_character,
-        mock_get_fatlink,
         mock_get_or_create_fat,
-        mock_client_prop,
-        mock_logger_debug,
-        mock_logger_info,
+        mock_get_or_create_ship,
+        mock_get_or_create_system,
+        mock_get_fatlink,
+        mock_get_character,
     ):
         """
-        Test that the process_character task processes a character successfully.
+        Test that the process_character task processes a character when the FAT link exists.
 
-        :param mock_get_or_create_character:
-        :type mock_get_or_create_character:
-        :param mock_get_fatlink:
-        :type mock_get_fatlink:
         :param mock_get_or_create_fat:
         :type mock_get_or_create_fat:
-        :param mock_client_prop:
-        :type mock_client_prop:
-        :param mock_logger_debug:
-        :type mock_logger_debug:
-        :param mock_logger_info:
-        :type mock_logger_info:
+        :param mock_get_or_create_ship:
+        :type mock_get_or_create_ship:
+        :param mock_get_or_create_system:
+        :type mock_get_or_create_system:
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :param mock_get_character:
+        :type mock_get_character:
         :return:
         :rtype:
         """
 
-        mock_character = MagicMock()
-        mock_character.corporation_id = 100
-        mock_character.alliance_id = 200
-        mock_get_or_create_character.return_value = mock_character
+        mock_get_fatlink.return_value = MagicMock()
+        mock_get_character.return_value = MagicMock(corporation_id=1, alliance_id=2)
+        mock_get_or_create_system.return_value = (MagicMock(name="SolarSystem"), True)
+        mock_get_or_create_ship.return_value = (MagicMock(name="ShipType"), True)
+        mock_get_or_create_fat.return_value = (MagicMock(pk=1), True)
 
-        mock_fatlink = MagicMock()
-        mock_get_fatlink.return_value = mock_fatlink
+        process_character(1, 2, 3, "valid_hash")
 
-        mock_system = MagicMock()
-        mock_system.name = "Test System"
+        mock_get_fatlink.assert_called_once_with(hash="valid_hash")
+        mock_get_character.assert_called_once_with(character_id=1)
+        mock_get_or_create_system.assert_called_once_with(id=2)
+        mock_get_or_create_ship.assert_called_once_with(id=3)
+        mock_get_or_create_fat.assert_called_once()
 
-        mock_ship = MagicMock()
-        mock_ship.name = "Test Ship"
-
-        mock_client = MagicMock()
-        mock_client.Universe.GetUniverseSystemsSystemId.return_value.result.return_value = (
-            mock_system
-        )
-        mock_client.Universe.GetUniverseTypesTypeId.return_value.result.return_value = (
-            mock_ship
-        )
-        mock_client_prop.return_value = mock_client
-
-        mock_fat = MagicMock()
-        mock_fat.pk = 1
-        mock_get_or_create_fat.return_value = (mock_fat, True)
-
-        process_character(12345, 67890, 111213, "test_hash")
-
-        mock_logger_info.assert_called_once()
-        logged_msg = mock_logger_info.call_args[0][0]
-        self.assertIn("New Pilot: Adding", logged_msg)
-        self.assertIn("in Test System flying a Test Ship", logged_msg)
-        self.assertIn('FAT link "test_hash" (FAT ID 1)', logged_msg)
-
-    @patch("afat.tasks.logger.info")
-    @patch("afat.tasks.logger.debug")
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
-    @patch("afat.tasks.Fat.objects.get_or_create")
-    @patch("afat.tasks.FatLink.objects.get")
     @patch("afat.tasks.get_or_create_character")
-    def test_handles_existing_character(
-        self,
-        mock_get_or_create_character,
-        mock_get_fatlink,
-        mock_get_or_create_fat,
-        mock_client_prop,
-        mock_logger_debug,
-        mock_logger_info,
+    @patch("afat.models.FatLink.objects.get")
+    def test_skips_character_when_fatlink_does_not_exist(
+        self, mock_get_fatlink, mock_get_character
     ):
         """
-        Test that the process_character task handles an existing character.
+        Test that the process_character task skips a character when the FAT link does not exist.
 
-        :param mock_get_or_create_character:
-        :type mock_get_or_create_character:
         :param mock_get_fatlink:
         :type mock_get_fatlink:
-        :param mock_get_or_create_fat:
-        :type mock_get_or_create_fat:
-        :param mock_client_prop:
-        :type mock_client_prop:
-        :param mock_logger_debug:
-        :type mock_logger_debug:
-        :param mock_logger_info:
-        :type mock_logger_info:
+        :param mock_get_character:
+        :type mock_get_character:
         :return:
         :rtype:
         """
 
-        mock_character = MagicMock()
-        mock_character.corporation_id = 100
-        mock_character.alliance_id = 200
-        mock_get_or_create_character.return_value = mock_character
-
-        mock_fatlink = MagicMock()
-        mock_get_fatlink.return_value = mock_fatlink
-
-        mock_system = MagicMock()
-        mock_system.name = "Test System"
-
-        mock_ship = MagicMock()
-        mock_ship.name = "Test Ship"
-
-        mock_client = MagicMock()
-        mock_client.Universe.GetUniverseSystemsSystemId.return_value.result.return_value = (
-            mock_system
-        )
-        mock_client.Universe.GetUniverseTypesTypeId.return_value.result.return_value = (
-            mock_ship
-        )
-        mock_client_prop.return_value = mock_client
-
-        mock_fat = MagicMock()
-        mock_fat.pk = 1
-        mock_get_or_create_fat.return_value = (mock_fat, False)
-
-        process_character(12345, 67890, 111213, "test_hash")
-
-        mock_logger_debug.assert_called_once()
-        logged_msg = mock_logger_debug.call_args[0][0]
-        self.assertIn(
-            "already registered for FAT link test_hash with FAT ID 1", logged_msg
-        )
-
-    @patch("afat.tasks.logger.warning")
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
-    @patch("afat.tasks.Fat.objects.get_or_create")
-    @patch("afat.tasks.FatLink.objects.get")
-    @patch("afat.tasks.get_or_create_character")
-    def test_handles_missing_fatlink(
-        self,
-        mock_get_or_create_character,
-        mock_get_fatlink,
-        mock_get_or_create_fat,
-        mock_client_prop,
-        mock_logger_warning,
-    ):
         mock_get_fatlink.side_effect = FatLink.DoesNotExist
 
-        # Ensure client is patched to avoid network calls during patch setup
-        mock_client_prop.return_value = MagicMock()
+        process_character(1, 2, 3, "invalid_hash")
 
-        process_character(12345, 67890, 111213, "test_hash")
+        mock_get_fatlink.assert_called_once_with(hash="invalid_hash")
+        mock_get_character.assert_not_called()
 
-        mock_logger_warning.assert_called_once()
-        logged_msg = mock_logger_warning.call_args[0][0]
-        self.assertIn("FAT link with hash", logged_msg)
-        self.assertIn('"test_hash"', logged_msg)
-        self.assertIn("skipping character 12345", logged_msg)
-
-    @patch("afat.tasks.logger.info")
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
-    @patch("afat.tasks.Fat.objects.get_or_create")
-    @patch("afat.tasks.FatLink.objects.get")
     @patch("afat.tasks.get_or_create_character")
-    def handles_esi_client_error(
+    @patch("afat.models.FatLink.objects.get")
+    @patch("afat.tasks.EveSolarSystem.objects.get_or_create_esi")
+    @patch("afat.tasks.EveType.objects.get_or_create_esi")
+    @patch("afat.models.Fat.objects.get_or_create")
+    def test_does_not_create_duplicate_fat_entry(
         self,
-        mock_get_or_create_character,
-        mock_get_fatlink,
         mock_get_or_create_fat,
-        mock_client_prop,
-        mock_logger_info,
+        mock_get_or_create_ship,
+        mock_get_or_create_system,
+        mock_get_fatlink,
+        mock_get_character,
     ):
-        mock_client = MagicMock()
-        mock_client.Universe.GetUniverseSystemsSystemId.return_value.result.side_effect = Exception(
-            "ESI client error"
-        )
-        mock_client_prop.return_value = mock_client
+        mock_get_fatlink.return_value = MagicMock()
+        mock_get_character.return_value = MagicMock(corporation_id=1, alliance_id=2)
+        mock_get_or_create_system.return_value = (MagicMock(name="SolarSystem"), True)
+        mock_get_or_create_ship.return_value = (MagicMock(name="ShipType"), True)
+        mock_get_or_create_fat.return_value = (MagicMock(pk=1), False)
 
-        process_character(12345, 67890, 111213, "test_hash")
+        process_character(1, 2, 3, "valid_hash")
 
-        mock_logger_info.assert_called_once_with(
-            "Error occurred while processing character 12345 for FAT link test_hash: ESI client error"
-        )
+        mock_get_fatlink.assert_called_once_with(hash="valid_hash")
+        mock_get_character.assert_called_once_with(character_id=1)
+        mock_get_or_create_system.assert_called_once_with(id=2)
+        mock_get_or_create_ship.assert_called_once_with(id=3)
+        mock_get_or_create_fat.assert_called_once()
