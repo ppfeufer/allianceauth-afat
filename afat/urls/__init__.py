@@ -10,7 +10,7 @@ from afat.constants import INTERNAL_URL_PREFIX
 from afat.urls import statistics  # pylint: disable=W0406 E0611
 from afat.urls import ajax, dashboard, fatlinks, logs
 
-app_name: str = "afat"
+app_name: str = "afat"  # pylint: disable=invalid-name
 
 urlpatterns = [
     # Dashboard
