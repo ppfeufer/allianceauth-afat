@@ -5,7 +5,7 @@ App config
 # Django
 from django.utils.translation import gettext_lazy as _
 
-__version__ = "4.0.0-beta.2"
+__version__ = "4.0.0-beta.3"
 __title__ = "Fleet Activity Tracking"
 __title_translated__ = _("Fleet Activity Tracking")
 
