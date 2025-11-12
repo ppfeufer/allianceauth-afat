@@ -42,6 +42,25 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.0.0] - 2025-11-12
+
+### Added
+
+- Loading spinner to all dynamically loading DataTables to indicate loading state
+
+### Fixed
+
+- Django's `makemessages` doesn't seem to recognize f-strings anymore, so all f-strings
+  in translatable strings have been converted back to `.format()` calls.
+
+### Changed
+
+- Switched to OpenAPI3 specification for ESI endpoints
+  - Dependency to `django-esi` set to `>=8,<9`
+  - Set compatibility date to 2025-11-06 (November 6th, 2025)
+- Reduced potential ESI calls
+- Translations updated
+
 ## [4.0.0-beta.3] - 2025-11-04
 
 > [!CAUTION]
@@ -1960,9 +1979,10 @@ Finally restart your supervisor services for AA
 [3.8.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.1...v3.8.2 "v3.8.2"
 [3.9.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.8.2...v3.9.0 "v3.9.0"
 [3.9.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.9.0...v3.9.1 "v3.9.1"
+[4.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0 "v4.0.0"
 [4.0.0-beta.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0-beta.1 "v4.0.0-beta.1"
 [4.0.0-beta.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0-beta.2 "v4.0.0-beta.2"
 [4.0.0-beta.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0-beta.3 "v4.0.0-beta.3"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...HEAD "In Development"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.0.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
