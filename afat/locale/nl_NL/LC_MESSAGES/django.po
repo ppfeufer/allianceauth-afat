@@ -1,22 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# Peter Pfeufer <info@ppfeufer.de>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-11-03 11:09+0100\n"
-"PO-Revision-Date: 2024-05-10 14:14+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2025-11-12 03:57+0100\n"
+"PO-Revision-Date: 2025-11-08 09:17+0000\n"
+"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Dutch <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.3\n"
+"X-Generator: Weblate 5.14\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -221,31 +220,31 @@ msgstr ""
 
 #: afat/helper/views.py:361
 msgid "Monday"
-msgstr ""
+msgstr "Maandag"
 
 #: afat/helper/views.py:362
 msgid "Tuesday"
-msgstr ""
+msgstr "Dinsdag"
 
 #: afat/helper/views.py:363
 msgid "Wednesday"
-msgstr ""
+msgstr "Woensdag"
 
 #: afat/helper/views.py:364
 msgid "Thursday"
-msgstr ""
+msgstr "Donderdag"
 
 #: afat/helper/views.py:365
 msgid "Friday"
-msgstr ""
+msgstr "Vrijdag"
 
 #: afat/helper/views.py:366
 msgid "Saturday"
-msgstr ""
+msgstr "Zaterdag"
 
 #: afat/helper/views.py:367
 msgid "Sunday"
-msgstr ""
+msgstr "Zondag"
 
 #: afat/models/afat.py:65
 msgid "Can access the AFAT module"
@@ -1162,31 +1161,31 @@ msgstr ""
 
 #: afat/templatetags/afat.py:32
 msgid "January"
-msgstr ""
+msgstr "Januari"
 
 #: afat/templatetags/afat.py:33
 msgid "February"
-msgstr ""
+msgstr "Februari"
 
 #: afat/templatetags/afat.py:34
 msgid "March"
-msgstr ""
+msgstr "Maart"
 
 #: afat/templatetags/afat.py:35
 msgid "April"
-msgstr ""
+msgstr "April"
 
 #: afat/templatetags/afat.py:36
 msgid "May"
-msgstr ""
+msgstr "Mei"
 
 #: afat/templatetags/afat.py:37
 msgid "June"
-msgstr ""
+msgstr "Juni"
 
 #: afat/templatetags/afat.py:38
 msgid "July"
-msgstr ""
+msgstr "Juli"
 
 #: afat/templatetags/afat.py:39
 msgid "August"
@@ -1194,19 +1193,19 @@ msgstr ""
 
 #: afat/templatetags/afat.py:40
 msgid "September"
-msgstr ""
+msgstr "September"
 
 #: afat/templatetags/afat.py:41
 msgid "October"
-msgstr ""
+msgstr "Oktober"
 
 #: afat/templatetags/afat.py:42
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: afat/templatetags/afat.py:43
 msgid "December"
-msgstr ""
+msgstr "December"
 
 #: afat/views/fatlinks.py:221
 msgid "<h4>Success!</h4><p>Clickable FAT link created!</p><p>Make sure to give your fleet members the link to click so that they get credit for this fleet.</p>"

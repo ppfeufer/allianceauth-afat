@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Peter Pfeufer <info@ppfeufer.de>, 2023, 2024, 2025.
 # Anata_no_Usiro <yt23542354m@gmail.com>, 2024.
+# Dexsar <dexsar.paf@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-11-03 11:09+0100\n"
-"PO-Revision-Date: 2025-09-23 16:45+0000\n"
+"POT-Creation-Date: 2025-11-12 03:57+0100\n"
+"PO-Revision-Date: 2025-11-08 09:17+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
 "Language: ja\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13.3\n"
+"X-Generator: Weblate 5.14\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -74,11 +75,11 @@ msgstr[0] "無効化された {notifications_count} フリートの種類"
 
 #: afat/admin.py:291 afat/models/afat.py:116
 msgid "Fleet types"
-msgstr ""
+msgstr "フリートの種類"
 
 #: afat/admin.py:304
 msgid "Ship classes"
-msgstr ""
+msgstr "船のクラス"
 
 #: afat/forms.py:24
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
@@ -96,65 +97,63 @@ msgstr "艦隊名"
 
 #: afat/forms.py:44 afat/forms.py:100
 msgid "Enter fleet name"
-msgstr ""
+msgstr "フリート名を記入"
 
 #: afat/forms.py:48 afat/forms.py:104
 msgid "Fleet type (optional)"
 msgstr "艦隊種類（可選）"
 
 #: afat/forms.py:58 afat/forms.py:114
-#, fuzzy
-#| msgid "Fleet type (optional)"
 msgid "Doctrine (optional)"
-msgstr "艦隊種類（可選）"
+msgstr "ドクトリン（任意）"
 
 #: afat/forms.py:75
 msgid "Character Name"
-msgstr ""
+msgstr "キャラクター名"
 
 #: afat/forms.py:80
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
-msgstr ""
+msgstr "システム（星系）"
 
 #: afat/forms.py:85
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:56
 msgid "Ship type"
-msgstr ""
+msgstr "シップタイプ"
 
 #: afat/forms.py:124
 msgid "FAT link expiry time in minutes"
-msgstr ""
+msgstr "FATリンクの有効期限（分単位）"
 
 #: afat/forms.py:127
 msgid "Expiry time in minutes"
-msgstr ""
+msgstr "有効期限（分単位）"
 
 #: afat/helper/time.py:117
 #, python-format
 msgid "%(count)d year"
 msgid_plural "%(count)d years"
-msgstr[0] ""
+msgstr[0] "%(count)d 年"
 
 #: afat/helper/time.py:123
 #, python-format
 msgid "%(count)d day"
 msgid_plural "%(count)d days"
-msgstr[0] ""
+msgstr[0] "%(count)d 日"
 
 #: afat/helper/time.py:129
 #, python-format
 msgid "%(count)d hour"
 msgid_plural "%(count)d hours"
-msgstr[0] ""
+msgstr[0] "%(count)d 時間"
 
 #: afat/helper/time.py:135
 #, python-format
 msgid "%(count)d minute"
 msgid_plural "%(count)d minutes"
-msgstr[0] ""
+msgstr[0] "%(count)d 分"
 
 #: afat/helper/time.py:141
 #, python-format
@@ -195,7 +194,7 @@ msgstr ""
 
 #: afat/helper/views.py:127 afat/helper/views.py:190
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: afat/helper/views.py:129
 #, python-brace-format
@@ -418,7 +417,7 @@ msgstr ""
 
 #: afat/models/afat.py:415
 msgid "Short name to identify this doctrine"
-msgstr ""
+msgstr "このドクトリンを識別するための略称"
 
 #: afat/models/afat.py:416
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
@@ -431,7 +430,7 @@ msgstr ""
 
 #: afat/models/afat.py:426
 msgid "Notes"
-msgstr ""
+msgstr "ノート"
 
 #: afat/models/afat.py:433
 msgid "Whether this doctrine is enabled or not."
@@ -443,7 +442,7 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
-msgstr "装着機器（モジュール）"
+msgstr "ドクトリン"
 
 #: afat/models/afat.py:443
 msgid "Doctrines"
@@ -491,11 +490,11 @@ msgstr ""
 
 #: afat/models/afat.py:530
 msgid "Setting"
-msgstr ""
+msgstr "設定"
 
 #: afat/models/afat.py:531
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: afat/models/afat.py:541
 msgid "AFAT Settings"
@@ -612,7 +611,7 @@ msgstr "作成者"
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:15
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:31
 msgid "EVE time"
-msgstr ""
+msgstr "EVE時間（ET）"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:21
@@ -844,11 +843,11 @@ msgstr ""
 
 #: afat/templates/afat/partials/footer/app-translation-footer.html:5
 msgid "Do you want to help translate this app into your language or improve the existing translation?"
-msgstr ""
+msgstr "このアプリをあなたの言語に翻訳するお手伝いをしたり、既存の翻訳を改善したりしませんか？"
 
 #: afat/templates/afat/partials/footer/app-translation-footer.html:8
 msgid "Join our team of translators!"
-msgstr ""
+msgstr "翻訳者チームに参加しましょう！"
 
 #: afat/templates/afat/partials/form/required-field-hint.html:4
 msgid "Fields marked with an asterisk (*) are mandatory"
