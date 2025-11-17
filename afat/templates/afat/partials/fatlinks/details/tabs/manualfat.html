@@ -13,7 +13,7 @@
                 <strong>{% translate "Note" %}:</strong> {% translate "This action is logged!" %}
             </p>
 
-            <form class="form" role="form" action="" method="POST">
+            <form class="form" role="form" action="{% url 'afat:fatlinks_process_manual_fat' link.hash %}" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
                     <div class="row">

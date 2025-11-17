@@ -1308,7 +1308,8 @@ msgid ""
 "FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:541 afat/views/fatlinks.py:713
+#: afat/views/fatlinks.py:541 afat/views/fatlinks.py:712
+#: afat/views/fatlinks.py:765 afat/views/fatlinks.py:866
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr ""
 
@@ -1346,74 +1347,74 @@ msgid ""
 "{character_name}. The character needs to be online.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:745
+#: afat/views/fatlinks.py:735
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:770
+#: afat/views/fatlinks.py:740
+msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
+msgstr ""
+
+#: afat/views/fatlinks.py:806
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added "
 "flying a {shiptype} in {system}</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:805
+#: afat/views/fatlinks.py:822
 #, python-brace-format
 msgid ""
 "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
 "p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:820
+#: afat/views/fatlinks.py:837
 msgid ""
 "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you "
 "entered was not found.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:829
-msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
-msgstr ""
-
-#: afat/views/fatlinks.py:942
+#: afat/views/fatlinks.py:957
 msgid ""
 "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT "
 "link has already been deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:968
+#: afat/views/fatlinks.py:983
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs "
 "have been successfully deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1010
+#: afat/views/fatlinks.py:1025
 msgid ""
 "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</"
 "p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1021
+#: afat/views/fatlinks.py:1036
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1041
+#: afat/views/fatlinks.py:1056
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT for {character_name} has been successfully "
 "deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1115
+#: afat/views/fatlinks.py:1130
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1160
+#: afat/views/fatlinks.py:1175
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1170
+#: afat/views/fatlinks.py:1185
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"

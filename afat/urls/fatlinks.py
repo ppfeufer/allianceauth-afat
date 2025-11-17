@@ -43,6 +43,16 @@ urls = [
         name="fatlinks_create_clickable_fatlink",
     ),
     path(
+        route="<str:fatlink_hash>/process/fatlink-name-change/",
+        view=fatlinks.process_fatlink_name_change,
+        name="fatlinks_process_fatlink_name_change",
+    ),
+    path(
+        route="<str:fatlink_hash>/process/manual-fat/",
+        view=fatlinks.process_manual_fat,
+        name="fatlinks_process_manual_fat",
+    ),
+    path(
         route="<str:fatlink_hash>/details/",
         view=fatlinks.details_fatlink,
         name="fatlinks_details_fatlink",
