@@ -25,6 +25,7 @@ from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
+from afat.handler import esi_handler
 from afat.models import Fat, FatLink, Log, Setting
 from afat.providers import esi
 from afat.utils import get_or_create_character
@@ -222,16 +223,18 @@ def _check_for_esi_fleet(fatlink: FatLink) -> dict | None:
     """
 
     required_scopes = ["esi-fleets.read_fleet.v1"]
+
     fleet_commander_id = fatlink.character.character_id
+    esi_token = Token.get_token(character_id=fleet_commander_id, scopes=required_scopes)
+
+    operation = esi.client.Fleets.GetCharactersCharacterIdFleet(
+        character_id=fleet_commander_id, token=esi_token
+    )
 
     try:
-        esi_token = Token.get_token(
-            character_id=fleet_commander_id, scopes=required_scopes
+        fleet_from_esi = esi_handler.result(
+            operation=operation, return_cached_for_304=True
         )
-        fleet_from_esi = esi.client.Fleets.GetCharactersCharacterIdFleet(
-            character_id=fleet_commander_id,
-            token=esi_token,
-        ).result(force_refresh=True)
 
         logger.debug("Fleet from ESI: %s", fleet_from_esi)
         logger.debug("FAT Link ESI fleet ID: %s", fatlink.esi_fleet_id)
@@ -275,11 +278,15 @@ def _process_esi_fatlink(fatlink: FatLink) -> None:
         return
 
     # Check if we deal with the fleet boss here
+    operation = esi.client.Fleets.GetFleetsFleetIdMembers(
+        fleet_id=esi_fleet["fleet"].fleet_id,
+        token=esi_fleet["token"],
+    )
+
     try:
-        esi_fleet_member = esi.client.Fleets.GetFleetsFleetIdMembers(
-            fleet_id=esi_fleet["fleet"].fleet_id,
-            token=esi_fleet["token"],
-        ).result(force_refresh=True)
+        esi_fleet_member = esi_handler.result(
+            operation=operation, return_cached_for_304=True
+        )
     except Exception:  # pylint: disable=broad-exception-caught
         _esi_fatlinks_error_handling(
             error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink

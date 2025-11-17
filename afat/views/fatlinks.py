@@ -38,6 +38,7 @@ from afat.forms import (
     AFatManualFatForm,
     FatLinkEditForm,
 )
+from afat.handler import esi_handler
 from afat.helper.fatlinks import get_doctrines, get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
@@ -277,15 +278,16 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     """
 
     # Check if there is a fleet
+    required_scopes = ["esi-fleets.read_fleet.v1"]
+    esi_token = Token.get_token(character_id=token.character_id, scopes=required_scopes)
+    operation = esi.client.Fleets.GetCharactersCharacterIdFleet(
+        character_id=token.character_id, token=esi_token
+    )
     try:
-        required_scopes = ["esi-fleets.read_fleet.v1"]
-        esi_token = Token.get_token(
-            character_id=token.character_id, scopes=required_scopes
-        )
 
-        fleet_from_esi = esi.client.Fleets.GetCharactersCharacterIdFleet(
-            character_id=token.character_id, token=esi_token
-        ).result(force_refresh=True)
+        fleet_from_esi = esi_handler.result(
+            operation=operation, return_cached_for_304=True
+        )
     except Exception:  # pylint: disable=broad-exception-caught
         # Not in a fleet
         messages.warning(
@@ -373,10 +375,13 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
             registered_fleet_to_close["registered_fleet"].save()
 
     # Check if we deal with the fleet boss here
+    operation = esi.client.Fleets.GetFleetsFleetIdMembers(
+        fleet_id=fleet_from_esi.fleet_id, token=esi_token
+    )
     try:
-        esi_fleet_member = esi.client.Fleets.GetFleetsFleetIdMembers(
-            fleet_id=fleet_from_esi.fleet_id, token=esi_token
-        ).result(force_refresh=True)
+        esi_fleet_member = esi_handler.result(
+            operation=operation, return_cached_for_304=True
+        )
     except Exception:  # pylint: disable=broad-exception-caught
         messages.warning(
             request=request,
@@ -586,24 +591,31 @@ def add_fat(  # pylint: disable=too-many-locals
         return redirect(to="afat:dashboard")
 
     # Check if character is online
-    character_online = esi.client.Location.GetCharactersCharacterIdOnline(
+    operation = esi.client.Location.GetCharactersCharacterIdOnline(
         character_id=token.character_id, token=esi_token
-    ).result(force_refresh=True)
+    )
+    character_online = esi_handler.result(
+        operation=operation, return_cached_for_304=True
+    )
 
     if character_online.online is True:
         # Character location
-        location = esi.client.Location.GetCharactersCharacterIdLocation(
+        operation = esi.client.Location.GetCharactersCharacterIdLocation(
             character_id=token.character_id, token=esi_token
-        ).result(force_refresh=True)
+        )
+        location = esi_handler.result(operation=operation, return_cached_for_304=True)
 
         solar_system, solar_system_created = (  # pylint: disable=unused-variable
             EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
         )
 
         # Current ship
-        current_ship = esi.client.Location.GetCharactersCharacterIdShip(
+        operation = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
-        ).result(force_refresh=True)
+        )
+        current_ship = esi_handler.result(
+            operation=operation, return_cached_for_304=True
+        )
 
         ship, ship_created = (  # pylint: disable=unused-variable
             EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)

@@ -192,51 +192,60 @@ class TestGetOrCreateCorporationInfo(BaseTestCase):
             )
 
 
-def get_or_create_character_info(character_id):
-    pass
-
-
-class EveCharacterInfo:
-    pass
-
-
-class TestGetOrCreateCharacterInfo(BaseTestCase):
+class TestGetOrCreateCharacter(BaseTestCase):
     """
-    Test the get_or_create_character_info function
+    Test the get_or_create_character function
     """
 
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
-    @patch("allianceauth.eveonline.models.EveCharacter.objects.filter")
-    def test_returns_existing_character_by_name(self, mock_filter, mock_client_prop):
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.esi_handler.result")
+    def test_returns_None_when_name_resolution_returns_no_characters(self, mock_result):
         """
-        Test that the function returns existing character by name
+        Test that the function returns None when name resolution returns no characters
 
-        :param mock_filter:
-        :type mock_filter:
-        :param mock_client_prop:
-        :type mock_client_prop:
+        :param mock_result:
+        :type mock_result:
         :return:
         :rtype:
         """
 
-        mock_universe = MagicMock()
-        mock_universe.PostUniverseIds.return_value.results.return_value = {
-            "characters": [{"id": 12345}]
-        }
-        mock_client_prop.return_value = MagicMock(Universe=mock_universe)
-        mock_character = EveCharacter(
-            character_id=12345, character_name="Test Character"
-        )
-        mock_filter.return_value = [mock_character]
+        mock_result.return_value = MagicMock(characters=None)
 
-        result = get_or_create_character(name="Test Character")
+        result = get_or_create_character(name="NonExistent")
 
-        self.assertEqual(result, mock_character)
+        self.assertIsNone(result)
 
-    @patch("allianceauth.eveonline.models.EveCharacter.objects.filter")
-    def test_returns_existing_character_by_id(self, mock_filter):
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.esi_handler.result")
+    @patch("afat.utils.EveCharacter.objects.filter")
+    def test_returns_existing_character_when_found_by_name(
+        self, mock_filter, mock_result
+    ):
         """
-        Test that the function returns existing character by ID
+        Test that the function returns existing character when found by name
+
+        :param mock_filter:
+        :type mock_filter:
+        :param mock_result:
+        :type mock_result:
+        :return:
+        :rtype:
+        """
+
+        esi_char = MagicMock(id=12345)
+        mock_result.return_value = MagicMock(characters=[esi_char])
+        existing = MagicMock(character_id=12345)
+        mock_filter.return_value = [existing]
+
+        character = get_or_create_character(name="ExistingName")
+
+        self.assertEqual(character.character_id, 12345)
+
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.EveCharacter.objects.filter")
+    def test_returns_existing_character_when_found_by_id(self, mock_filter):
+        """
+        Test that the function returns existing character when found by ID
 
         :param mock_filter:
         :type mock_filter:
@@ -244,31 +253,114 @@ class TestGetOrCreateCharacterInfo(BaseTestCase):
         :rtype:
         """
 
-        mock_character = EveCharacter(
-            character_id=12345, character_name="Test Character"
+        existing = MagicMock(character_id=11111)
+        mock_filter.return_value = [existing]
+
+        character = get_or_create_character(character_id=11111)
+
+        self.assertEqual(character.character_id, 11111)
+
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.EveCorporationInfo.objects.create_corporation")
+    @patch("afat.utils.EveCorporationInfo.objects.filter")
+    @patch("afat.utils.EveCharacter.objects.get")
+    @patch("afat.utils.EveCharacter.objects.create_character")
+    @patch("afat.utils.EveCharacter.objects.filter")
+    def test_creates_character_and_corporation_info_when_no_alliance(
+        self,
+        mock_eve_filter,
+        mock_create_character,
+        mock_get,
+        mock_corp_filter,
+        mock_create_corp,
+    ):
+        """
+        Test that the function creates character and corporation info when no alliance
+
+        :param mock_eve_filter:
+        :type mock_eve_filter:
+        :param mock_create_character:
+        :type mock_create_character:
+        :param mock_get:
+        :type mock_get:
+        :param mock_corp_filter:
+        :type mock_corp_filter:
+        :param mock_create_corp:
+        :type mock_create_corp:
+        :return:
+        :rtype:
+        """
+
+        mock_eve_filter.return_value = []
+        created = MagicMock(
+            pk=1, character_name="NewChar", alliance_id=None, corporation_id=33333
         )
-        mock_filter.return_value = [mock_character]
+        mock_create_character.return_value = created
+        mock_get.return_value = created
+        mock_corp_filter.return_value.exists.return_value = False
 
-        result = get_or_create_character(character_id=12345)
+        character = get_or_create_character(character_id=22222)
 
-        self.assertEqual(result, mock_character)
+        self.assertEqual(character.character_name, "NewChar")
+        mock_create_corp.assert_called_once_with(corp_id=33333)
 
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
-    def test_returns_none_when_character_not_found_by_name(self, mock_client_prop):
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.EveAllianceInfo.objects.create_alliance")
+    @patch("afat.utils.EveAllianceInfo.objects.filter")
+    @patch("afat.utils.EveCharacter.objects.get")
+    @patch("afat.utils.EveCharacter.objects.create_character")
+    @patch("afat.utils.EveCharacter.objects.filter")
+    def test_creates_character_and_alliance_info_when_alliance_present(
+        self,
+        mock_eve_filter,
+        mock_create_character,
+        mock_get,
+        mock_alliance_filter,
+        mock_create_alliance,
+    ):
+        """
+        Test that the function creates character and alliance info when alliance present
+
+        :param mock_eve_filter:
+        :type mock_eve_filter:
+        :param mock_create_character:
+        :type mock_create_character:
+        :param mock_get:
+        :type mock_get:
+        :param mock_alliance_filter:
+        :type mock_alliance_filter:
+        :param mock_create_alliance:
+        :type mock_create_alliance:
+        :return:
+        :rtype:
+        """
+
+        mock_eve_filter.return_value = []
+        created = MagicMock(
+            pk=2, character_name="NewChar2", alliance_id=44444, corporation_id=55555
+        )
+        mock_create_character.return_value = created
+        mock_get.return_value = created
+        mock_alliance_filter.return_value.exists.return_value = False
+
+        character = get_or_create_character(character_id=33333)
+
+        self.assertEqual(character.character_name, "NewChar2")
+        mock_create_alliance.assert_called_once_with(alliance_id=44444)
+
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.esi_handler.result")
+    def test_returns_none_when_character_not_found_by_name(self, mock_result):
         """
         Test that the function returns None when character not found by name
 
-        :param mock_client_prop:
-        :type mock_client_prop:
+        :param mock_result:
+        :type mock_result:
         :return:
         :rtype:
         """
 
-        mock_universe = MagicMock()
-        mock_universe.PostUniverseIds.return_value.results.return_value = {
-            "characters": None
-        }
-        mock_client_prop.return_value = MagicMock(Universe=mock_universe)
+        mock_result.return_value = MagicMock(characters=None)
 
         result = get_or_create_character(name="Nonexistent Character")
 
