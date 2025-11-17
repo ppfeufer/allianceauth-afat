@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
      * Initialize autocomplete dropdown
      *
      * @param {HTMLElement} element
+     * @private
      */
-    const initializeAutocomplete = (element) => {
+    const _initializeAutocomplete = (element) => {
         const datalistId = element.getAttribute('data-datalist');
         const datalist = document.getElementById(datalistId);
 
@@ -26,5 +27,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize all autocomplete dropdowns
     document.querySelectorAll('[data-datalist]')
-        .forEach(initializeAutocomplete);
+        .forEach(_initializeAutocomplete);
 });

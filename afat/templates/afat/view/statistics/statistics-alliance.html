@@ -38,7 +38,7 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "bundles/datatables-css-bs5.html" %}
+    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -46,14 +46,41 @@
     {% include "bundles/chart-js.html" %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
-    {% include "bundles/datatables-js-bs5.html" %}
+    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
     {% include "bundles/moment-js.html" %}
 
     <script>
+        /* global _removeSearchFromColumnControl, _removeColumnControl, _afatBootstrapTooltip, drawChart */
+
         $(document).ready(() => {
+            const elementTableMemberCorps = $('#member-corps');
+
             // DataTables
-            $('#member-corps').DataTable({
-                language: afatSettings.dataTable.language,
+            const dt = new DataTable(elementTableMemberCorps, {
+                ...afatSettings.dataTables,
+                order: [
+                    [0, 'asc']
+                ],
+                columnDefs: [
+                    {
+                        targets: [1, 2],
+                        columnControl: _removeSearchFromColumnControl(),
+                    },
+                    {
+                        targets: 3,
+                        columnControl: _removeColumnControl(),
+                        width: 50
+                    }
+                ],
+                initComplete: () => {
+                    const dt = elementTableMemberCorps.DataTable();
+
+                    _afatBootstrapTooltip({selector: '#member-corps'});
+
+                    dt.on('draw', () => {
+                        _afatBootstrapTooltip({selector: '#member-corps'});
+                    });
+                }
             });
 
             // Chart rendering
@@ -62,6 +89,8 @@
                     drawChart(chart.element, chart.type, chart.data, chart.options);
                 });
             }
+
+            _afatBootstrapTooltip({namespace: 'afat'});
         });
     </script>
 {% endblock %}

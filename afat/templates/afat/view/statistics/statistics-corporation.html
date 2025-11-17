@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "bundles/datatables-css-bs5.html" %}
+    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -45,13 +45,13 @@
     {% include "bundles/chart-js.html" %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
-    {% include "bundles/datatables-js-bs5.html" %}
+    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
     {% include "bundles/moment-js.html" %}
 
     <script>
         $(document).ready(() => {
-            $('#corp-main-characters').DataTable({
-                language: afatSettings.dataTable.language,
+            const mainCharactersDt = new DataTable($('#corp-main-characters'), { // eslint-disable-line no-unused-vars
+                ...afatSettings.dataTables,
                 order: [
                     [1, 'desc'],
                     [0, 'asc']
@@ -59,22 +59,21 @@
                 columnDefs: [
                     {
                         targets: 1,
-                        createdCell: (td) => {
-                            $(td).addClass('text-end');
-                        }
+                        columnControl: _removeSearchFromColumnControl(),
                     },
                     {
-                        targets: 2,
+                        target: 2,
                         createdCell: (td) => {
                             $(td).addClass('text-end');
                         },
-                        sortable: false
+                        columnControl: _removeColumnControl(),
+                        width: 50
                     }
                 ]
             });
 
-            $('#corp-members').DataTable({
-                language: afatSettings.dataTable.language,
+            const corpMembersDt = new DataTable($('#corp-members'), { // eslint-disable-line no-unused-vars
+                ...afatSettings.dataTables,
                 order: [
                     [1, 'desc'],
                     [0, 'asc']
@@ -82,16 +81,15 @@
                 columnDefs: [
                     {
                         targets: 1,
-                        createdCell: (td) => {
-                            $(td).addClass('text-end');
-                        }
+                        columnControl: _removeSearchFromColumnControl(),
                     },
                     {
-                        targets: 2,
+                        target: 2,
                         createdCell: (td) => {
                             $(td).addClass('text-end');
                         },
-                        sortable: false
+                        columnControl: _removeColumnControl(),
+                        width: 50
                     }
                 ]
             });
@@ -102,6 +100,8 @@
                     drawChart(chart.element, chart.type, chart.data, chart.options);
                 });
             }
+
+            _afatBootstrapTooltip({namespace: 'afat'});
         });
     </script>
 {% endblock %}

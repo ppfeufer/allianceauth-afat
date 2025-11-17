@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "bundles/datatables-css-bs5.html" %}
+    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -58,11 +58,20 @@
                 cancelEsiFleetModal: {
                     element: '#cancelEsiFleetModal'
                 }
+            },
+            dataTables: {
+                // Override the default layout for the dashboard tables
+                layout: {
+                    topStart: null,
+                    topEnd: null,
+                    bottomStart: 'info',
+                    bottomEnd: null
+                }
             }
         };
     </script>
 
-    {% include "bundles/datatables-js-bs5.html" %}
+    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
     {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-dashboard-js.html" %}
