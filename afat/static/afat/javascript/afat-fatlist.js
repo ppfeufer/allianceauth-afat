@@ -1,9 +1,8 @@
-/* global afatSettings, moment, manageModal, AFAT_DATETIME_FORMAT, fetchGet */
+/* global afatSettings, _dateRender, _manageModal, fetchGet, _removeSearchFromColumnControl, _removeColumnControl, DataTable */
 
 $(document).ready(() => {
     'use strict';
 
-    const dtLanguage = afatSettings.dataTable.language;
     const hasPermissions = afatSettings.permissions.addFatLink || afatSettings.permissions.manageAfat;
 
     // Base columns configuration
@@ -13,48 +12,38 @@ $(document).ready(() => {
         {data: 'doctrine'},
         {data: 'creator_name'},
         {
-            data: 'fleet_time',
-            render: {
-                display: (data) => moment(data.time).utc().format(AFAT_DATETIME_FORMAT),
-                _: 'timestamp'
-            }
+            data: {
+                display: (data) => _dateRender(data.fleet_time.time),
+                sort: (data) => data.fleet_time.timestamp
+            },
         },
         {data: 'fats_number'},
-        {data: 'via_esi'},
-        {data: 'hash'}
     ];
 
     // Add actions column if user has permissions
     if (hasPermissions) {
-        linkListTableColumns.splice(-2, 0, {
-            data: 'actions',
-            render: (data) => {
-                return data;
-            }
+        linkListTableColumns.push({
+            data: 'actions'
         });
     }
 
     // Column definitions based on permissions
     const linkListTableColumnDefs = [
         {
-            targets: [5],
-            createdCell: (td) => {
-                $(td).addClass('text-end');
-            }
+            targets: [4, 5],
+            columnControl: _removeSearchFromColumnControl(),
         },
-        {
-            targets: hasPermissions ? [7, 8] : [6, 7],
-            visible: false
-        }
     ];
 
     if (hasPermissions) {
         linkListTableColumnDefs.splice(1, 0, {
-            targets: [6],
-            orderable: false,
+            target: 6,
             createdCell: (td) => {
                 $(td).addClass('text-end');
-            }
+            },
+            columnControl: _removeColumnControl(),
+            orderable: false,
+            width: 125
         });
     }
 
@@ -64,24 +53,12 @@ $(document).ready(() => {
 
     // Initialize DataTable
     const initializeDataTable = (data) => {
-        return linkListTable.DataTable({
-            language: dtLanguage,
+        const dt = new DataTable(linkListTable, { // eslint-disable-line no-unused-vars
+            ...afatSettings.dataTables,
             data: data,
             columns: linkListTableColumns,
             columnDefs: linkListTableColumnDefs,
             order: [[4, 'desc']],
-            filterDropDown: {
-                columns: [
-                    {idx: 1},
-                    {
-                        idx: 7,
-                        title: afatSettings.translation.dataTable.filter.viaEsi
-                    }
-                ],
-                autoSize: false,
-                bootstrap: true,
-                bootstrap_version: 5
-            }
         });
     };
 
@@ -130,6 +107,6 @@ $(document).ready(() => {
         afatSettings.modal.cancelEsiFleetModal.element,
         afatSettings.modal.deleteFatLinkModal.element,
     ].forEach((modalElement) => {
-        manageModal($(modalElement));
+        _manageModal($(modalElement));
     });
 });

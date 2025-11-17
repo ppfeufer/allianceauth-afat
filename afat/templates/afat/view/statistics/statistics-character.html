@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "bundles/datatables-css-bs5.html" %}
+    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -45,16 +45,24 @@
     {% include "bundles/chart-js.html" %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
-    {% include "bundles/datatables-js-bs5.html" %}
+    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
     {% include "bundles/moment-js.html" %}
 
     <script>
+        /* global _removeSearchFromColumnControl, _afatBootstrapTooltip */
+
         $(document).ready(() => {
-            $('#raw-data').DataTable({
-                language: afatSettings.dataTable.language,
-                "order": [
-                    [4, "desc"]
-                ]
+            const dt = new DataTable($('#raw-data'), {
+                ...afatSettings.dataTables,
+                order: [
+                    [5, 'desc']
+                ],
+                columnDefs: [
+                    {
+                        targets: 5,
+                        columnControl: _removeSearchFromColumnControl()
+                    }
+                ],
             });
 
             // Chart rendering
@@ -63,6 +71,8 @@
                     drawChart(chart.element, chart.type, chart.data, chart.options);
                 });
             }
+
+            _afatBootstrapTooltip({namespace: 'afat'});
         });
     </script>
 {% endblock %}

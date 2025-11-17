@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Switched to DataTables 2
+
 ## [4.0.0] - 2025-11-12
 
 ### Added

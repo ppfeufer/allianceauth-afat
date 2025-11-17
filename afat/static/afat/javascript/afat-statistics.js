@@ -1,4 +1,4 @@
-/* global afatSettings, afatBootstrapTooltip, Chart, fetchGet */
+/* global afatSettings, _afatBootstrapTooltip, Chart, fetchGet, _removeSearchFromColumnControl, _removeColumnControl, DataTable */
 
 const elementBody = document.querySelector('body');
 const elementBodyCss = getComputedStyle(elementBody);
@@ -105,8 +105,8 @@ $(document).ready(() => {
         }
 
         // Create new DataTable
-        table.DataTable({
-            language: afatSettings.dataTable.language,
+        const dt = new DataTable(table, { // eslint-disable-line no-unused-vars
+            ...afatSettings.dataTables,
             data: tableData,
             columns: [
                 { data: 'character_name' },
@@ -121,12 +121,16 @@ $(document).ready(() => {
             ],
             columnDefs: [
                 {
-                    targets: [1, 2],
-                    createdCell: (td) => $(td).addClass('text-end')
+                    targets: 1,
+                    columnControl: _removeSearchFromColumnControl(),
                 },
                 {
-                    targets: 2,
-                    sortable: false
+                    target: 2,
+                    createdCell: (td) => {
+                        $(td).addClass('text-end');
+                    },
+                    columnControl: _removeColumnControl(),
+                    width: 50
                 },
                 {
                     targets: 3,
@@ -134,7 +138,7 @@ $(document).ready(() => {
                 }
             ],
             initComplete: () => {
-                afatBootstrapTooltip({selector: '#character-alt-characters'});
+                _afatBootstrapTooltip({selector: '#character-alt-characters'});
             }
         });
     };

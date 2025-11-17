@@ -83,7 +83,7 @@
                                             <a
                                                 href="{% url 'afat:statistics_corporation' corpid year month.0 %}"
                                                 class="btn btn-primary btn-sm"
-                                                data-bs-toggle="tooltip"
+                                                data-bs-tooltip="afat"
                                                 data-bs-html="true"
                                                 data-bs-title="{% translate 'View detailed corporation statistics for: ' %}<br>{{ month.0|month_name }} {{ year }}"
                                             >
@@ -103,4 +103,8 @@
 
 {% block extra_css %}
     {% include "afat/bundles/afat-css.html" %}
+{% endblock %}
+
+{% block extra_javascript %}
+    {% include "afat/bundles/afat-js.html" %}
 {% endblock %}

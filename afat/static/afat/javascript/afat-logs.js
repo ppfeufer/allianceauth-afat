@@ -1,60 +1,42 @@
-/* global afatSettings, moment, AFAT_DATETIME_FORMAT, fetchGet */
+/* global afatSettings, _dateRender, fetchGet, DataTable, _removeSearchFromColumnControl */
 
 $(document).ready(() => {
     'use strict';
-
-    const dtLanguage = afatSettings.dataTable.language;
 
     /**
      * DataTable :: FAT link list
      */
     fetchGet({url: afatSettings.url.logs})
         .then((data) => {
-            $('#afat-logs').DataTable({
-                language: dtLanguage,
+            const dt = new DataTable($('#afat-logs'), { // eslint-disable-line no-unused-vars
+                ...afatSettings.dataTables,
                 data: data,
                 columns: [
                     {
-                        data: 'log_time',
-                        render: {
-                            display: (data) => {
-                                return moment(data.time).utc().format(AFAT_DATETIME_FORMAT);
-                            },
-                            _: 'timestamp'
+                        data: {
+                            display: (data) => _dateRender(data.log_time.time),
+                            sort: (data) => data.log_time.timestamp
                         }
                     },
                     {data: 'log_event'},
                     {data: 'user'},
                     {
-                        data: 'fatlink',
-                        render: {
-                            display: 'html',
-                            _: 'hash'
+                        data: {
+                            display: (data) => data.fatlink.html,
+                            sort: (data) => data.fatlink.hash
                         }
                     },
                     {data: 'description'}
                 ],
-
+                columnDefs: [
+                    {
+                        targets: 0,
+                        columnControl: _removeSearchFromColumnControl()
+                    }
+                ],
                 order: [
                     [0, 'desc']
-                ],
-
-                filterDropDown: {
-                    columns: [
-                        {
-                            idx: 1
-                        },
-                        {
-                            idx: 2
-                        }
-                    ],
-                    autoSize: false,
-                    bootstrap: true,
-                    bootstrap_version: 5
-                },
-
-                stateSave: true,
-                stateDuration: -1
+                ]
             });
         })
         .catch((error) => {

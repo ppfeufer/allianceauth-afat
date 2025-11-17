@@ -1,14 +1,20 @@
-/* global afatSettings, convertStringToSlug, sortTable, ClipboardJS, manageModal, fetchGet */
+/* global afatSettings, _convertStringToSlug, _sortTable, ClipboardJS, _manageModal, fetchGet, DataTable, _removeColumnControl */
 
 $(document).ready(() => {
     'use strict';
 
-    const dtLanguage = afatSettings.dataTable.language;
+    // const dtLanguage = afatSettings.dataTables.language;
     const fatListTable = $('#fleet-edit-fat-list');
     const shipTypeOverviewTable = $('#fleet-edit-ship-types');
 
-    // Helper function to update ship type counts
-    const updateShipTypeCounts = (data) => {
+    /**
+     * Update ship type counts in the overview table
+     *
+     * @param {Object} data Object of FAT link data
+     * @private
+     */
+    const _updateShipTypeCounts = (data) => {
+        console.log('Updating ship type counts...', data);
         const shipTypeCounts = {};
 
         // Count ship types
@@ -20,20 +26,25 @@ $(document).ready(() => {
         shipTypeOverviewTable.find('tbody').empty();
 
         Object.entries(shipTypeCounts).forEach(([shipType, count]) => {
-            const shipTypeSlug = convertStringToSlug(shipType);
+            const shipTypeSlug = _convertStringToSlug(shipType);
 
             shipTypeOverviewTable.append(
                 `<tr class="shiptype-${shipTypeSlug}"><td class="ship-type">${shipType}</td><td class="ship-type-count text-end">${count}</td></tr>`
             );
         });
 
-        sortTable(shipTypeOverviewTable, 'asc');
+        _sortTable(shipTypeOverviewTable, 'asc');
     };
 
-    // Initialize DataTable
-    const initializeDataTable = (data) => {
-        fatListTable.DataTable({
-            language: dtLanguage,
+    /**
+     * Initialize the FAT list DataTable
+     *
+     * @param {Object} data Object of FAT link data
+     * @private
+     */
+    const _initializeDataTable = (data) => {
+        const dt = new DataTable(fatListTable, { // eslint-disable-line no-unused-vars
+            ...afatSettings.dataTables,
             data: data,
             columns: [
                 {data: 'character_name'},
@@ -43,24 +54,25 @@ $(document).ready(() => {
             ],
             columnDefs: [
                 {
-                    targets: [3],
-                    orderable: false,
+                    target: 3,
+                    columnControl: _removeColumnControl(),
                     createdCell: (td) => {
                         $(td).addClass('text-end');
-                    }
+                    },
+                    orderable: false,
+                    width: 50
                 }
             ],
             order: [[0, 'asc']],
-            stateSave: true,
-            stateDuration: -1
+            initComplete: () => {
+                _updateShipTypeCounts(data);
+            }
         });
-
-        updateShipTypeCounts(data);
     };
 
     // Load initial data
     fetchGet({url: afatSettings.url})
-        .then(initializeDataTable)
+        .then(_initializeDataTable)
         .catch((error) => {
             console.error('Error fetching FAT list:', error);
         });
@@ -90,7 +102,7 @@ $(document).ready(() => {
                     const dataTable = fatListTable.DataTable();
 
                     dataTable.clear().rows.add(newData).draw();
-                    updateShipTypeCounts(newData);
+                    _updateShipTypeCounts(newData);
                 })
                 .catch((error) => {
                     console.error('Error reloading data:', error);
@@ -115,6 +127,6 @@ $(document).ready(() => {
         afatSettings.modal.deleteFatModal.element,
         afatSettings.modal.reopenFatLinkModal.element
     ].forEach((modalElement) => {
-        manageModal($(modalElement));
+        _manageModal($(modalElement));
     });
 });
