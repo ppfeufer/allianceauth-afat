@@ -3,8 +3,9 @@ Test fatlinks views
 """
 
 # Standard Library
+from datetime import timedelta
 from http import HTTPStatus
-from unittest.mock import ANY, MagicMock, patch
+from unittest.mock import ANY, MagicMock, Mock, patch
 
 # Third Party
 from pytz import utc
@@ -12,6 +13,7 @@ from pytz import utc
 # Django
 from django.contrib.messages import get_messages
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.datetime_safe import datetime
 
 # Alliance Auth
@@ -311,6 +313,129 @@ class TestDetailsFatlink(FatlinksViewTestCase):
             first=str(messages[0]),
             second="<h4>Warning!</h4><p>The hash provided is not valid.</p>",
         )
+
+    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    @patch("afat.views.fatlinks.get_time_delta")
+    def test_details_fatlink_renders_correctly_for_valid_fatlink(
+        self, mock_get_time_delta, mock_get_duration, mock_select_related_default
+    ):
+        """
+        Test details fatlink renders correctly for valid fatlink
+
+        :param mock_get_time_delta:
+        :type mock_get_time_delta:
+        :param mock_get_duration:
+        :type mock_get_duration:
+        :param mock_select_related_default:
+        :type mock_select_related_default:
+        :return:
+        :rtype:
+        """
+
+        mock_fatlink = Mock()
+        mock_fatlink.is_esilink = False
+        mock_fatlink.reopened = False
+        mock_fatlink.created = timezone.now()
+        mock_fatlink.fleet = "Test Fleet"
+        mock_fatlink.hash = "valid_hash"
+        mock_fatlink.is_registered_on_esi = False
+
+        # Make select_related_default().get(...) return the mock fatlink
+        mock_qs = Mock()
+        mock_qs.get.return_value = mock_fatlink
+        mock_select_related_default.return_value = mock_qs
+
+        mock_duration = Mock()
+        mock_duration.duration = 60
+        mock_get_duration.return_value = mock_duration
+
+        mock_get_time_delta.return_value = 10
+
+        self.client.force_login(user=self.user_with_manage_afat)
+        response = self.client.get(
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": "valid_hash"}
+            )
+        )
+
+        # Ensure the patched path was used
+        self.assertTrue(mock_select_related_default.called)
+        mock_qs.get.assert_called_once_with(hash="valid_hash")
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(
+            response, "afat/view/fatlinks/fatlinks-details-fatlink.html"
+        )
+        self.assertIn("link", response.context)
+        self.assertTrue(response.context["link_ongoing"])
+        self.assertTrue(response.context["manual_fat_can_be_added"])
+
+    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    def test_details_fatlink_handles_expired_fatlink(
+        self, mock_get_duration, mock_select_related_default
+    ):
+        """
+        Test details fatlink handles expired fatlink
+
+        :param mock_get_duration:
+        :type mock_get_duration:
+        :param mock_select_related_default:
+        :type mock_select_related_default:
+        :return:
+        :rtype:
+        """
+
+        mock_fatlink = Mock()
+        mock_fatlink.is_esilink = False
+        mock_fatlink.reopened = False
+        mock_fatlink.created = timezone.now() - timedelta(days=2)
+
+        # Make select_related_default().get(...) return the mock fatlink
+        mock_qs = Mock()
+        mock_qs.get.return_value = mock_fatlink
+        mock_select_related_default.return_value = mock_qs
+
+        mock_duration = Mock()
+        mock_duration.duration = 60
+        mock_get_duration.return_value = mock_duration
+
+        self.client.force_login(self.user_with_add_fatlink)
+        response = self.client.get(
+            reverse("afat:fatlinks_details_fatlink", args=["expired_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertFalse(response.context["link_ongoing"])
+        self.assertFalse(response.context["manual_fat_can_be_added"])
+
+    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    def test_details_fatlink_allows_reopening_within_grace_period(
+        self, mock_get_duration, mock_select_related_default
+    ):
+        mock_fatlink = Mock()
+        mock_fatlink.is_esilink = False
+        mock_fatlink.reopened = False
+        mock_fatlink.created = timezone.now() - timedelta(hours=1)
+
+        # Make select_related_default().get(...) return the mock fatlink
+        mock_qs = Mock()
+        mock_qs.get.return_value = mock_fatlink
+        mock_select_related_default.return_value = mock_qs
+
+        mock_duration = Mock()
+        mock_duration.duration = 60
+        mock_get_duration.return_value = mock_duration
+
+        self.client.force_login(self.user_with_add_fatlink)
+        response = self.client.get(
+            reverse("afat:fatlinks_details_fatlink", args=["grace_hash"])
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTrue(response.context["link_can_be_reopened"])
 
 
 class TestAjaxGetFatlinksByYear(FatlinksViewTestCase):
@@ -814,3 +939,84 @@ class TestAjaxGetFatsByFatlink(FatlinksViewTestCase):
             response.json(),
             [{"id": 1, "character": "Test Character", "shiptype": "Omen"}],
         )
+
+
+class TestCreateClickableFatlink(FatlinksViewTestCase):
+    """
+    Test create clickable fatlink
+    """
+
+    @patch("afat.views.fatlinks.get_hash_on_save", return_value="created_testhash")
+    @patch("afat.views.fatlinks.AFatClickFatForm")
+    def test_should_create_clickable_fatlink_when_form_is_valid(
+        self, mock_form, mock_get_hash
+    ):
+        """
+        Test should create clickable fatlink when form is valid
+
+        :param mock_form:
+        :type mock_form:
+        :param mock_get_hash:
+        :type mock_get_hash:
+        :return:
+        :rtype:
+        """
+
+        mock_form.return_value.is_valid.return_value = True
+        mock_form.return_value.cleaned_data = {
+            "name": "Test Fleet",
+            "type": "PvP",
+            "doctrine": "Test Doctrine",
+            "duration": 60,
+        }
+        testhash = "created_testhash"
+
+        # Create a real initial FatLink and Duration so descriptor checks pass
+        initial_fatlink = FatLink.objects.create(
+            fleet="Initial Fleet",
+            creator=self.user_with_basic_access,
+            character=self.character_1001,
+        )
+        Duration.objects.create(fleet=initial_fatlink, duration=30)
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.post(reverse("afat:fatlinks_create_clickable_fatlink"))
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+
+        created = FatLink.objects.get(hash=testhash)
+        self.assertIsNotNone(created)
+        expected_url = reverse(
+            "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": testhash}
+        )
+        self.assertEqual(response.url, expected_url)
+
+        # The view creates a new Duration for the created FatLink with the requested duration
+        created_duration = Duration.objects.filter(fleet=created, duration=60).first()
+        self.assertIsNotNone(created_duration)
+
+    @patch("afat.views.fatlinks.AFatClickFatForm")
+    def test_should_redirect_to_add_fatlink_when_form_is_invalid(self, mock_form):
+        """
+        Test should redirect to add fatlink when form is invalid
+
+        :param mock_form:
+        :type mock_form:
+        :return:
+        :rtype:
+
+        """
+        mock_form.return_value.is_valid.return_value = False
+
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.post(reverse("afat:fatlinks_create_clickable_fatlink"))
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
+
+    def test_should_redirect_to_add_fatlink_when_request_method_is_not_post(self):
+        self.client.force_login(self.user_with_manage_afat)
+        response = self.client.get(reverse("afat:fatlinks_create_clickable_fatlink"))
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
