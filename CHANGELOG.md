@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- JS error in create FAT link view; Uncaught ReferenceError: manageModal is not defined
+
 ## [4.1.0] - 2025-11-17
 
 ### Changed
