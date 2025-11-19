@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Restore sort order for dashboard tables
+
 ## [4.1.1] - 2025-11-18
 
 ### Fixed

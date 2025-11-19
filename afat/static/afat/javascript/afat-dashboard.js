@@ -4,7 +4,6 @@ $(document).ready(() => {
     'use strict';
 
     const dtLanguage = afatSettings.dataTables.language;
-    const defaultOrder = [[0, 'desc']];
 
     const _createDataTable = ({table, url, columns, columnDefs, order, columnControl}) => {
         fetchGet({url})
@@ -13,7 +12,7 @@ $(document).ready(() => {
                     ...afatSettings.dataTables,
                     data: data,
                     columns: columns,
-                    order: order || defaultOrder,
+                    order: order,
                     columnDefs: columnDefs || [],
                     columnControl: columnControl || afatSettings.dataTables.columnControl
                 });
@@ -47,7 +46,8 @@ $(document).ready(() => {
                 table: table,
                 url: url,
                 columns: characterTableColumns,
-                columnControl: []
+                columnControl: [],
+                order: [[5, 'desc']]
             });
         });
     };
@@ -94,7 +94,8 @@ $(document).ready(() => {
             url: afatSettings.url.recentFatLinks,
             columns: columns,
             columnDefs: columnDefs,
-            columnControl: []
+            columnControl: [],
+            order: [[4, 'desc']]
         });
     };
 
