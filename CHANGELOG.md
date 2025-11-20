@@ -42,6 +42,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.1.2] - 2025-11-20
+
 ### Fixed
 
 - Restore sort order for dashboard tables
@@ -2002,6 +2004,7 @@ Finally restart your supervisor services for AA
 [4.0.0-beta.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v3.12.3...v4.0.0-beta.3 "v4.0.0-beta.3"
 [4.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.0.0...v4.1.0 "v4.1.0"
 [4.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.0...v4.1.1 "v4.1.1"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.1...HEAD "In Development"
+[4.1.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.1...v4.1.2 "v4.1.2"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.2...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
