@@ -141,6 +141,7 @@ class FatLink(models.Model):
         )
         NO_FLEET = "NO_FLEET", _("Registered fleet seems to be no longer available.")
         NOT_FLEETBOSS = "NOT_FLEETBOSS", _("FC is no longer the fleet boss.")
+        FC_WRONG_FLEET = "FC_WRONG_FLEET", _("FC switched to another fleet.")
 
     created = models.DateTimeField(
         default=timezone.now,

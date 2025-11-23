@@ -30,7 +30,6 @@ def result(  # pylint: disable=too-many-arguments too-many-positional-arguments
     return_response: bool = False,
     force_refresh: bool = False,
     use_cache: bool = True,
-    return_cached_for_304: bool = False,
     **extra,
 ) -> tuple[Any, Response] | Any:
     """
@@ -47,8 +46,6 @@ def result(  # pylint: disable=too-many-arguments too-many-positional-arguments
     :param use_cache: Whether to use cached data.
     :type use_cache: bool
     :param extra: Additional parameters to pass to the operation.
-    :param return_cached_for_304: Whether to return cached data on 304 Not Modified. If False, returns None for 304 responses.
-    :type return_cached_for_304: bool
     :type extra: dict
     :return: The result of the ESI operation, optionally with the response object.
     :rtype: tuple[Any, Response] | Any
@@ -66,11 +63,10 @@ def result(  # pylint: disable=too-many-arguments too-many-positional-arguments
         )
     except HTTPNotModified:
         logger.debug(
-            f"ESI returned 304 Not Modified for operation: {operation.operation.operationId} "
-            f"- {'Using cached data.' if return_cached_for_304 else 'Skipping update.'}"
+            f"ESI returned 304 Not Modified for operation: {operation.operation.operationId} - Skipping update."
         )
 
-        esi_result = operation.result(use_etag=False) if return_cached_for_304 else None
+        esi_result = None
     except ContentTypeError:
         logger.warning(
             msg="ESI returned gibberish (ContentTypeError) - Skipping update."
@@ -78,8 +74,11 @@ def result(  # pylint: disable=too-many-arguments too-many-positional-arguments
 
         esi_result = None
     except HTTPClientError as exc:
-        logger.error(msg=f"Error while fetching data from ESI: {str(exc)}")
+        logger.error(
+            msg=f"Error while fetching data from ESI for operation: {operation.operation.operationId} -  {str(exc)}"
+        )
 
-        esi_result = None
+        # Re-raise the exception to be handled by the caller
+        raise
 
     return esi_result

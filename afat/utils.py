@@ -86,7 +86,7 @@ def get_or_create_character(
     if name:
         # If a name is passed to this function, we have to check it on ESI
         operation = esi.client.Universe.PostUniverseIds(body=[name])
-        result = esi_handler.result(operation, return_cached_for_304=True)
+        result = esi_handler.result(operation, use_etag=False)
 
         if not result or not result.characters:
             return None

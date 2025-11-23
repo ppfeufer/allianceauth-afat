@@ -285,9 +285,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     )
     try:
 
-        fleet_from_esi = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        fleet_from_esi = esi_handler.result(operation=operation, use_etag=False)
     except Exception:  # pylint: disable=broad-exception-caught
         # Not in a fleet
         messages.warning(
@@ -379,9 +377,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         fleet_id=fleet_from_esi.fleet_id, token=esi_token
     )
     try:
-        esi_fleet_member = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        esi_fleet_member = esi_handler.result(operation=operation, use_etag=False)
     except Exception:  # pylint: disable=broad-exception-caught
         messages.warning(
             request=request,
@@ -594,16 +590,14 @@ def add_fat(  # pylint: disable=too-many-locals
     operation = esi.client.Location.GetCharactersCharacterIdOnline(
         character_id=token.character_id, token=esi_token
     )
-    character_online = esi_handler.result(
-        operation=operation, return_cached_for_304=True
-    )
+    character_online = esi_handler.result(operation=operation, use_etag=False)
 
     if character_online.online is True:
         # Character location
         operation = esi.client.Location.GetCharactersCharacterIdLocation(
             character_id=token.character_id, token=esi_token
         )
-        location = esi_handler.result(operation=operation, return_cached_for_304=True)
+        location = esi_handler.result(operation=operation, use_etag=False)
 
         solar_system, solar_system_created = (  # pylint: disable=unused-variable
             EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
@@ -613,9 +607,7 @@ def add_fat(  # pylint: disable=too-many-locals
         operation = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
         )
-        current_ship = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        current_ship = esi_handler.result(operation=operation, use_etag=False)
 
         ship, ship_created = (  # pylint: disable=unused-variable
             EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)
