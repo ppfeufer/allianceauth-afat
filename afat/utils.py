@@ -14,15 +14,12 @@ from allianceauth.eveonline.models import (
 )
 from allianceauth.services.hooks import get_extension_logger
 
-# Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
-
 # Alliance Auth AFAT
 from afat import __title__
 from afat.handler import esi_handler
-from afat.providers import esi
+from afat.providers import AppLogger, esi
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 # Format for output of datetime for this app
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
@@ -86,7 +83,7 @@ def get_or_create_character(
     if name:
         # If a name is passed to this function, we have to check it on ESI
         operation = esi.client.Universe.PostUniverseIds(body=[name])
-        result = esi_handler.result(operation, return_cached_for_304=True)
+        result = esi_handler.result(operation, use_etag=False)
 
         if not result or not result.characters:
             return None

@@ -13,6 +13,9 @@ import sys
 from datetime import timedelta
 from pathlib import Path
 
+# Django
+from django.utils.crypto import get_random_string
+
 myauth_dir = Path(__file__).parent.parent.parent.parent.parent / "myauth"
 sys.path.insert(0, str(myauth_dir))
 
@@ -32,9 +35,6 @@ from django.utils.timezone import now
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
-
-# Alliance Auth (External Libs)
-from app_utils.helpers import random_string
 
 # Alliance Auth AFAT
 from afat.models import Fat, FatLink, Log
@@ -58,7 +58,7 @@ fleet_type = "Generated Fleet"
 for _ in range(LINKS_NUMBER):
     fat_link = FatLink.objects.create(
         fleet=f"Generated Fleet #{random.randint(a=1, b=1000000000)}",
-        hash=random_string(char_count=20),
+        hash=get_random_string(length=30),
         creator=user,
         character=creator,
         fleet_type=fleet_type,

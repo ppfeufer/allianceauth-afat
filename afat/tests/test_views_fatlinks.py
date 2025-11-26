@@ -19,13 +19,11 @@ from django.utils.datetime_safe import datetime
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
 
-# Alliance Auth (External Libs)
-from app_utils.testing import create_user_from_evecharacter
-
 # Alliance Auth AFAT
 from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
 from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.tests.fixtures.utils import create_user_from_evecharacter
 from afat.utils import get_main_character_from_user
 
 MODULE_PATH = "afat.views.fatlinks"
@@ -415,6 +413,17 @@ class TestDetailsFatlink(FatlinksViewTestCase):
     def test_details_fatlink_allows_reopening_within_grace_period(
         self, mock_get_duration, mock_select_related_default
     ):
+        """
+        Test details fatlink allows reopening within grace period
+
+        :param mock_get_duration:
+        :type mock_get_duration:
+        :param mock_select_related_default:
+        :type mock_select_related_default:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink = Mock()
         mock_fatlink.is_esilink = False
         mock_fatlink.reopened = False
@@ -436,6 +445,254 @@ class TestDetailsFatlink(FatlinksViewTestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTrue(response.context["link_can_be_reopened"])
+
+
+class TestProcessFatlinkNameChange(FatlinksViewTestCase):
+    """
+    Test process fatlink name change
+    """
+
+    def test_process_fatlink_name_change_updates_fleet_name(self):
+        """
+        Test process fatlink name change updates fleet name
+
+        :return:
+        :rtype:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="testhash",
+            fleet="Old Fleet Name",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        url = reverse("afat:fatlinks_process_fatlink_name_change", args=[fatlink.hash])
+        form_data = {"fleet": "New Fleet Name"}
+
+        response = self.client.post(url, data=form_data)
+
+        fatlink.refresh_from_db()
+        self.assertEqual(fatlink.fleet, "New Fleet Name")
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any("Fleet name successfully changed." in str(m) for m in messages)
+        )
+
+    def test_process_fatlink_name_change_invalid_form_shows_error(self):
+        """
+        Test process fatlink name change invalid form shows error
+
+        :return:
+        :rtype:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="testhash",
+            fleet="Old Fleet Name",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        url = reverse("afat:fatlinks_process_fatlink_name_change", args=[fatlink.hash])
+        form_data = {"fleet": ""}  # Invalid form data
+
+        response = self.client.post(url, data=form_data)
+
+        fatlink.refresh_from_db()
+        self.assertEqual(fatlink.fleet, "Old Fleet Name")
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(any("Something went wrong!" in str(m) for m in messages))
+
+    def test_process_fatlink_name_change_invalid_hash_redirects_with_warning(self):
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        url = reverse("afat:fatlinks_process_fatlink_name_change", args=["invalidhash"])
+        form_data = {"fleet": "New Fleet Name"}
+
+        response = self.client.post(url, data=form_data)
+
+        self.assertRedirects(response, reverse("afat:dashboard"))
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any("The hash provided is not valid." in str(m) for m in messages)
+        )
+
+
+class TestProcessManualFat(FatlinksViewTestCase):
+    """
+    Test process manual fat addition
+    """
+
+    @patch("afat.views.fatlinks.get_or_create_character")
+    def test_manual_fat_adds_new_character_successfully(
+        self, mock_get_or_create_character
+    ):
+        """
+        Test manual fat adds new character successfully
+
+        :param mock_get_or_create_character:
+        :type mock_get_or_create_character:
+        :return:
+        :rtype:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="testhash",
+            fleet="Test Fleet",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        mock_character = self.character_1101
+        mock_get_or_create_character.return_value = mock_character
+
+        form_data = {
+            "character": mock_character.character_name,
+            "system": "Test System",
+            "shiptype": "Test Ship",
+        }
+        url = reverse("afat:fatlinks_process_manual_fat", args=[fatlink.hash])
+
+        response = self.client.post(url, data=form_data)
+
+        self.assertTrue(
+            Fat.objects.filter(fatlink=fatlink, character=mock_character).exists()
+        )
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any(
+                f"{mock_character.character_name} has been added flying a {form_data['shiptype']} in {form_data['system']}"
+                in str(m)
+                for m in messages
+            )
+        )
+
+    @patch("afat.views.fatlinks.get_or_create_character")
+    def test_manual_fat_character_already_registered_shows_info(
+        self, mock_get_or_create_character
+    ):
+        """
+        Test manual fat character already registered shows info
+
+        :param mock_get_or_create_character:
+        :type mock_get_or_create_character:
+        :return:
+        :rtype:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="testhash",
+            fleet="Test Fleet",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        mock_character = self.character_1001
+        mock_get_or_create_character.return_value = mock_character
+
+        Fat.objects.create(
+            fatlink=fatlink,
+            character=mock_character,
+            system="Test System",
+            shiptype="Test Ship",
+        )
+
+        form_data = {
+            "character": mock_character.character_name,
+            "system": "Test System",
+            "shiptype": "Test Ship",
+        }
+        url = reverse("afat:fatlinks_process_manual_fat", args=[fatlink.hash])
+
+        response = self.client.post(url, data=form_data)
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any(
+                "Pilot is already registered for this FAT link." in str(m)
+                for m in messages
+            )
+        )
+
+    @patch("afat.views.fatlinks.get_or_create_character")
+    def test_manual_fat_invalid_character_shows_error(
+        self, mock_get_or_create_character
+    ):
+        """
+        Test manual fat invalid character shows error
+
+        :param mock_get_or_create_character:
+        :type mock_get_or_create_character:
+        :return:
+        :rtype:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="testhash",
+            fleet="Test Fleet",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        mock_get_or_create_character.return_value = None
+
+        form_data = {
+            "character": "Unknown Pilot",
+            "system": "Test System",
+            "shiptype": "Test Ship",
+        }
+        url = reverse("afat:fatlinks_process_manual_fat", args=[fatlink.hash])
+
+        response = self.client.post(url, data=form_data)
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any(
+                "The character name you entered was not found." in str(m)
+                for m in messages
+            )
+        )
+
+    def test_manual_fat_invalid_fatlink_hash_redirects_with_warning(self):
+        """
+        Test manual fat invalid fatlink hash redirects with warning
+
+        :return:
+        :rtype:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        url = reverse("afat:fatlinks_process_manual_fat", args=["invalidhash"])
+        form_data = {
+            "character": "Test Character",
+            "system": "Test System",
+            "shiptype": "Test Ship",
+        }
+
+        response = self.client.post(url, data=form_data)
+
+        self.assertRedirects(response, reverse("afat:dashboard"))
+
+        messages = list(get_messages(response.wsgi_request))
+        self.assertTrue(
+            any("The hash provided is not valid." in str(m) for m in messages)
+        )
 
 
 class TestAjaxGetFatlinksByYear(FatlinksViewTestCase):

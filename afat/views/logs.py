@@ -12,15 +12,13 @@ from django.shortcuts import render
 from allianceauth.authentication.decorators import permissions_required
 from allianceauth.services.hooks import get_extension_logger
 
-# Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
-
 # Alliance Auth AFAT
 from afat import __title__
 from afat.helper.views import convert_logs_to_dict
 from afat.models import FatLink, Log, Setting
+from afat.providers import AppLogger
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()

@@ -26,9 +26,6 @@ from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
 from allianceauth.framework.api.evecharacter import get_main_character_from_evecharacter
 from allianceauth.services.hooks import get_extension_logger
 
-# Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
-
 # Alliance Auth AFAT
 from afat import __title__
 from afat.helper.views import (
@@ -41,9 +38,10 @@ from afat.helper.views import (
     user_has_any_perms,
 )
 from afat.models import Fat
+from afat.providers import AppLogger
 from afat.utils import get_or_create_alliance_info, get_or_create_corporation_info
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()

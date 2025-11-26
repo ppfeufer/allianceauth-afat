@@ -27,7 +27,6 @@ from esi.decorators import token_required
 from esi.models import Token
 
 # Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
 from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
@@ -51,11 +50,11 @@ from afat.models import (
     Setting,
     get_hash_on_save,
 )
-from afat.providers import esi
+from afat.providers import AppLogger, esi
 from afat.tasks import process_fats
 from afat.utils import get_or_create_character, write_log
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()
@@ -285,9 +284,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     )
     try:
 
-        fleet_from_esi = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        fleet_from_esi = esi_handler.result(operation=operation, use_etag=False)
     except Exception:  # pylint: disable=broad-exception-caught
         # Not in a fleet
         messages.warning(
@@ -379,9 +376,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
         fleet_id=fleet_from_esi.fleet_id, token=esi_token
     )
     try:
-        esi_fleet_member = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        esi_fleet_member = esi_handler.result(operation=operation, use_etag=False)
     except Exception:  # pylint: disable=broad-exception-caught
         messages.warning(
             request=request,
@@ -594,16 +589,14 @@ def add_fat(  # pylint: disable=too-many-locals
     operation = esi.client.Location.GetCharactersCharacterIdOnline(
         character_id=token.character_id, token=esi_token
     )
-    character_online = esi_handler.result(
-        operation=operation, return_cached_for_304=True
-    )
+    character_online = esi_handler.result(operation=operation, use_etag=False)
 
     if character_online.online is True:
         # Character location
         operation = esi.client.Location.GetCharactersCharacterIdLocation(
             character_id=token.character_id, token=esi_token
         )
-        location = esi_handler.result(operation=operation, return_cached_for_304=True)
+        location = esi_handler.result(operation=operation, use_etag=False)
 
         solar_system, solar_system_created = (  # pylint: disable=unused-variable
             EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
@@ -613,9 +606,7 @@ def add_fat(  # pylint: disable=too-many-locals
         operation = esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=esi_token
         )
-        current_ship = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        current_ship = esi_handler.result(operation=operation, use_etag=False)
 
         ship, ship_created = (  # pylint: disable=unused-variable
             EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)
@@ -690,11 +681,165 @@ def add_fat(  # pylint: disable=too-many-locals
 
 @login_required()
 @permissions_required(perm=("afat.manage_afat", "afat.add_fatlink"))
-def details_fatlink(  # pylint: disable=too-many-statements too-many-branches too-many-locals
+def process_fatlink_name_change(
     request: WSGIRequest, fatlink_hash: str
-) -> HttpResponse:
+) -> HttpResponseRedirect:
     """
-    Fat link view
+    Process fat link name change form
+
+    :param request: The request object
+    :type request: WSGIRequest
+    :param fatlink_hash: The fat link hash
+    :type fatlink_hash: str
+    :return: Redirect to fat link details view
+    :rtype: HttpResponseRedirect
+    """
+
+    try:
+        fatlink = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
+        messages.warning(
+            request,
+            mark_safe(_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")),
+        )
+
+        return redirect("afat:dashboard")
+
+    if request.method == "POST":
+        form = FatLinkEditForm(request.POST)
+
+        if form.is_valid():
+            logger.debug(f"Processing FAT link name change form: {form.cleaned_data}")
+
+            fatlink.fleet = form.cleaned_data["fleet"]
+            fatlink.save()
+
+            write_log(
+                request,
+                Log.Event.CHANGE_FATLINK,
+                f'FAT link changed. Fleet name was set to "{fatlink.fleet}"',
+                fatlink.hash,
+            )
+            messages.success(
+                request,
+                mark_safe(
+                    _("<h4>Success!</h4><p>Fleet name successfully changed.</p>")
+                ),
+            )
+        else:
+            messages.error(
+                request, mark_safe(_("<h4>Oh No!</h4><p>Something went wrong!</p>"))
+            )
+
+    return redirect("afat:fatlinks_details_fatlink", fatlink_hash=fatlink_hash)
+
+
+@login_required()
+@permissions_required(perm=("afat.manage_afat", "afat.add_fatlink"))
+def process_manual_fat(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedirect:
+    """
+    Process manual fat form
+
+    :param request: The request object
+    :type request: WSGIRequest
+    :param fatlink_hash: The fat link hash
+    :type fatlink_hash: str
+    :return: Redirect to fat link details view
+    :rtype: HttpResponseRedirect
+    """
+
+    try:
+        fatlink = FatLink.objects.get(hash=fatlink_hash)
+    except FatLink.DoesNotExist:
+        messages.warning(
+            request,
+            mark_safe(_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")),
+        )
+
+        return redirect("afat:dashboard")
+
+    if request.method == "POST":
+        form = AFatManualFatForm(request.POST)
+
+        if form.is_valid():
+            logger.debug(f"Processing manual FAT addition form: {form.cleaned_data}")
+
+            character_name = form.cleaned_data["character"]
+            system = form.cleaned_data["system"]
+            shiptype = form.cleaned_data["shiptype"]
+            character = get_or_create_character(name=character_name)
+
+            if character:
+                logger.debug(
+                    f"Manual FAT addition for character: {character_name}, system: {system}, shiptype: {shiptype}"
+                )
+
+                fat, created = (  # pylint: disable=unused-variable
+                    Fat.objects.get_or_create(
+                        fatlink=fatlink,
+                        character=character,
+                        defaults={"system": system, "shiptype": shiptype},
+                    )
+                )
+
+                if created:
+                    write_log(
+                        request,
+                        Log.Event.MANUAL_FAT,
+                        f"Pilot {character.character_name} flying a {shiptype} was manually added",
+                        fatlink.hash,
+                    )
+                    messages.success(
+                        request,
+                        mark_safe(
+                            format_lazy(
+                                _(
+                                    "<h4>Success!</h4><p>Manual FAT processed.<br>"
+                                    "{character_name} has been added flying a {shiptype} "
+                                    "in {system}</p>"
+                                ),
+                                character_name=character.character_name,
+                                shiptype=shiptype,
+                                system=system,
+                            )
+                        ),
+                    )
+                else:
+                    messages.info(
+                        request,
+                        mark_safe(
+                            format_lazy(
+                                _(
+                                    "<h4>Information</h4>"
+                                    "<p>Pilot is already registered for this FAT link.</p>"
+                                    "<p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
+                                ),
+                                character_name=character.character_name,
+                                shiptype=shiptype,
+                                system=system,
+                            )
+                        ),
+                    )
+            else:
+                messages.error(
+                    request,
+                    mark_safe(
+                        _(
+                            "<h4>Oh No!</h4>"
+                            "<p>Manual FAT processing failed! "
+                            "The character name you entered was not found.</p>"
+                        )
+                    ),
+                )
+
+    return redirect("afat:fatlinks_details_fatlink", fatlink_hash=fatlink_hash)
+
+
+@login_required()
+@permissions_required(perm=("afat.manage_afat", "afat.add_fatlink"))
+def details_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponse:
+    """
+    Fat link details view
 
     :param request:
     :type request:
@@ -708,168 +853,33 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
         link = FatLink.objects.select_related_default().get(hash=fatlink_hash)
     except FatLink.DoesNotExist:
         messages.warning(
-            request=request,
-            message=mark_safe(
-                s=_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")
-            ),
+            request,
+            mark_safe(_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")),
         )
 
-        return redirect(to="afat:dashboard")
+        return redirect("afat:dashboard")
 
-    if request.method == "POST":
-        fatlink_edit_form = FatLinkEditForm(data=request.POST)
-        manual_fat_form = AFatManualFatForm(data=request.POST)
-
-        if fatlink_edit_form.is_valid():
-            link.fleet = fatlink_edit_form.cleaned_data["fleet"]
-            link.save()
-
-            # Writing DB log
-            write_log(
-                request=request,
-                log_event=Log.Event.CHANGE_FATLINK,
-                log_text=f'FAT link changed. Fleet name was set to "{link.fleet}"',
-                fatlink_hash=link.hash,
-            )
-
-            logger.info(
-                msg=(
-                    f'FAT link with hash "{link.hash}" changed. '
-                    f'Fleet name was set to "{link.fleet}" by {request.user}'
-                )
-            )
-
-            messages.success(
-                request=request,
-                message=mark_safe(
-                    s=_("<h4>Success!</h4><p>Fleet name successfully changed.</p>")
-                ),
-            )
-        elif manual_fat_form.is_valid():
-            character_name = manual_fat_form.cleaned_data["character"]
-            system = manual_fat_form.cleaned_data["system"]
-            shiptype = manual_fat_form.cleaned_data["shiptype"]
-            character = get_or_create_character(name=character_name)
-
-            if character is not None:
-                afat_object, created = Fat.objects.get_or_create(
-                    fatlink=link,
-                    character=character,
-                    defaults={
-                        "system": system,
-                        "shiptype": shiptype,
-                    },
-                )
-
-                if created is True:
-                    messages.success(
-                        request=request,
-                        message=mark_safe(
-                            s=format_lazy(
-                                _(
-                                    "<h4>Success!</h4><p>Manual FAT processed.<br>"
-                                    "{character_name} has been added flying a {shiptype} "
-                                    "in {system}</p>"
-                                ),
-                                character_name=character.character_name,
-                                shiptype=shiptype,
-                                system=system,
-                            )
-                        ),
-                    )
-
-                    # Writing DB log
-                    write_log(
-                        request=request,
-                        log_event=Log.Event.MANUAL_FAT,
-                        log_text=(
-                            f"Pilot {character.character_name} "
-                            f"flying a {shiptype} was manually added"
-                        ),
-                        fatlink_hash=link.hash,
-                    )
-
-                    logger.info(
-                        msg=(
-                            f"Pilot {character.character_name} flying a {shiptype} was "
-                            "manually added to FAT link with "
-                            f'hash "{link.hash}" by {request.user}'
-                        )
-                    )
-                else:
-                    messages.info(
-                        request=request,
-                        message=mark_safe(
-                            s=format_lazy(
-                                _(
-                                    "<h4>Information</h4>"
-                                    "<p>Pilot is already registered for this FAT link.</p>"
-                                    "<p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
-                                ),
-                                character_name=character.character_name,
-                                system=afat_object.system,
-                                shiptype=afat_object.shiptype,
-                            )
-                        ),
-                    )
-            else:
-                messages.error(
-                    request=request,
-                    message=mark_safe(
-                        s=_(
-                            "<h4>Oh No!</h4>"
-                            "<p>Manual FAT processing failed! "
-                            "The character name you entered was not found.</p>"
-                        )
-                    ),
-                )
-        else:
-            messages.error(
-                request=request,
-                message=mark_safe(s=_("<h4>Oh No!</h4><p>Something went wrong!</p>")),
-            )
-
-    logger.info(msg=f'FAT link "{fatlink_hash}" details view called by {request.user}')
-
-    # Let's see if the link is still valid or has expired already and can be re-opened
-    # and FATs can be manually added
-    # (only possible for 24 hours after creating the FAT link)
+    now = timezone.now()
     link_ongoing = True
     link_can_be_reopened = False
     link_expires = None
     manual_fat_can_be_added = False
 
-    # Time dependant settings
     try:
         dur = Duration.objects.get(fleet=link)
-    except Duration.DoesNotExist:
-        # ESI link
-        link_ongoing = False
-    else:
         link_expires = link.created + timedelta(minutes=dur.duration)
-        now = timezone.now()
 
         if link_expires <= now:
-            # Link expired
             link_ongoing = False
-
-            if link.reopened is False and get_time_delta(
-                then=link_expires, now=now, interval="minutes"
+            if not link.reopened and get_time_delta(
+                link_expires, now, "minutes"
             ) < Setting.get_setting(Setting.Field.DEFAULT_FATLINK_REOPEN_GRACE_TIME):
                 link_can_be_reopened = True
 
-        # Manual fat still possible?
-        # Only possible if the FAT link has not been re-opened
-        # and has been created within the last 24 hours
-        if (
-            link.reopened is False
-            and get_time_delta(then=link.created, now=now, interval="hours") < 24
-        ):
+        if not link.reopened and get_time_delta(link.created, now, "hours") < 24:
             manual_fat_can_be_added = True
-
-    is_clickable_link = False
-    if link.is_esilink is False:
-        is_clickable_link = True
+    except Duration.DoesNotExist:
+        link_ongoing = False
 
     if link.is_esilink and link.is_registered_on_esi:
         link_ongoing = True
@@ -877,7 +887,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
     context = {
         "link": link,
         "is_esi_link": link.is_esilink,
-        "is_clickable_link": is_clickable_link,
+        "is_clickable_link": not link.is_esilink,
         "link_expires": link_expires,
         "link_ongoing": link_ongoing,
         "link_can_be_reopened": link_can_be_reopened,
@@ -890,11 +900,7 @@ def details_fatlink(  # pylint: disable=too-many-statements too-many-branches to
         ),
     }
 
-    return render(
-        request=request,
-        template_name="afat/view/fatlinks/fatlinks-details-fatlink.html",
-        context=context,
-    )
+    return render(request, "afat/view/fatlinks/fatlinks-details-fatlink.html", context)
 
 
 @login_required()

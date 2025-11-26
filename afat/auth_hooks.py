@@ -38,10 +38,11 @@ class AaAfatMenuItem(MenuItemHook):  # pylint: disable=too-few-public-methods
         :rtype:
         """
 
-        if request.user.has_perm(perm="afat.basic_access"):
-            return MenuItemHook.render(self, request=request)
-
-        return ""
+        return (
+            MenuItemHook.render(self, request=request)
+            if request.user.has_perm(perm="afat.basic_access")
+            else ""
+        )
 
 
 @hooks.register(name="menu_item_hook")

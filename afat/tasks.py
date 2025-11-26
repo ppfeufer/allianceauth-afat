@@ -7,7 +7,6 @@ from datetime import timedelta
 
 # Third Party
 import kombu
-from bravado.exception import HTTPNotFound
 from celery import group, shared_task
 
 # Django
@@ -16,21 +15,20 @@ from django.utils import timezone
 # Alliance Auth
 from allianceauth.services.hooks import get_extension_logger
 from allianceauth.services.tasks import QueueOnce
+from esi.exceptions import HTTPClientError
 from esi.models import Token
 
 # Alliance Auth (External Libs)
-from app_utils.esi import fetch_esi_status
-from app_utils.logging import LoggerAddTag
 from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
 from afat.handler import esi_handler
 from afat.models import Fat, FatLink, Log, Setting
-from afat.providers import esi
+from afat.providers import AppLogger, esi
 from afat.utils import get_or_create_character
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 ESI_ERROR_LIMIT = 50
 ESI_TIMEOUT_ONCE_ERROR_LIMIT_REACHED = 60
@@ -232,23 +230,49 @@ def _check_for_esi_fleet(fatlink: FatLink) -> dict | None:
     )
 
     try:
-        fleet_from_esi = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        fleet_from_esi = esi_handler.result(operation=operation, use_etag=False)
 
         logger.debug("Fleet from ESI: %s", fleet_from_esi)
         logger.debug("FAT Link ESI fleet ID: %s", fatlink.esi_fleet_id)
 
         if not fleet_from_esi or fatlink.esi_fleet_id != fleet_from_esi.fleet_id:
-            raise HTTPNotFound
+            logger.debug(
+                f'Fleet ID mismatch for fleet "{fatlink.fleet}" of {fatlink.character} '
+                f"(ESI ID: {fatlink.esi_fleet_id}): ESI fleet ID is {fleet_from_esi.fleet_id}."
+            )
+
+            _esi_fatlinks_error_handling(
+                error_key=FatLink.EsiError.FC_WRONG_FLEET, fatlink=fatlink
+            )
+
+            return None
 
         return {"fleet": fleet_from_esi, "token": esi_token}
-    except HTTPNotFound:
-        error_key = FatLink.EsiError.NOT_IN_FLEET
-    except Exception:  # pylint: disable=broad-exception-caught
-        error_key = FatLink.EsiError.NO_FLEET
+    except HTTPClientError as ex:
+        logger.debug(
+            f'HTTPClientError while checking fleet "{fatlink.fleet}" of {fatlink.character} '
+            f"(ESI ID: {fatlink.esi_fleet_id}): {ex}"
+        )
 
-    _esi_fatlinks_error_handling(error_key=error_key, fatlink=fatlink)
+        # Handle the case where the fleet is not found
+        if ex.status_code == 404:
+            _esi_fatlinks_error_handling(
+                error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=fatlink
+            )
+        else:  # 400, 401, 402, 403 ?
+            _esi_fatlinks_error_handling(
+                error_key=FatLink.EsiError.NO_FLEET, fatlink=fatlink
+            )
+    except Exception as ex:  # pylint: disable=broad-exception-caught
+        logger.debug(
+            f'Unexpected error while checking fleet "{fatlink.fleet}" of {fatlink.character} '
+            f"(ESI ID: {fatlink.esi_fleet_id}): {ex}"
+        )
+
+        # Handle any other errors that occur
+        _esi_fatlinks_error_handling(
+            error_key=FatLink.EsiError.NO_FLEET, fatlink=fatlink
+        )
 
     return None
 
@@ -284,9 +308,7 @@ def _process_esi_fatlink(fatlink: FatLink) -> None:
     )
 
     try:
-        esi_fleet_member = esi_handler.result(
-            operation=operation, return_cached_for_304=True
-        )
+        esi_fleet_member = esi_handler.result(operation=operation, use_etag=False)
     except Exception:  # pylint: disable=broad-exception-caught
         _esi_fatlinks_error_handling(
             error_key=FatLink.EsiError.NOT_FLEETBOSS, fatlink=fatlink
@@ -319,14 +341,6 @@ def update_esi_fatlinks() -> None:
     )
 
     if esi_fatlinks.exists():
-        esi_status = fetch_esi_status()
-
-        # Abort if ESI seems offline or above the error limit
-        if not esi_status.is_ok:
-            logger.warning("ESI doesn't seem to be available at this time. Aborting.")
-
-            return
-
         logger.debug(msg=f"Found {len(esi_fatlinks)} ESI FAT links to process")
         logger.debug("ESI FAT Links: %s", esi_fatlinks)
 
@@ -334,8 +348,6 @@ def update_esi_fatlinks() -> None:
             _process_esi_fatlink(fatlink=fatlink)
     else:
         logger.debug(msg="No ESI FAT links to process")
-
-        return
 
 
 @shared_task

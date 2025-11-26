@@ -13,9 +13,6 @@ from django.utils import timezone
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
 
-# Alliance Auth (External Libs)
-from app_utils.testing import add_character_to_user, create_user_from_evecharacter
-
 # Alliance Auth AFAT
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
@@ -27,6 +24,10 @@ from afat.helper.views import (
 from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
 from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.tests.fixtures.utils import (
+    add_character_to_user,
+    create_user_from_evecharacter,
+)
 from afat.utils import get_main_character_from_user, write_log
 
 MODULE_PATH = "afat.views.fatlinks"

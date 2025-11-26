@@ -4,14 +4,17 @@ Test cases for the task in the afat module.
 
 # Standard Library
 from datetime import timedelta
+from http import HTTPStatus
 from unittest.mock import ANY, MagicMock, PropertyMock, patch
 
 # Third Party
 import kombu
-from bravado.exception import HTTPNotFound
 
 # Django
 from django.utils.datetime_safe import datetime
+
+# Alliance Auth
+from esi.exceptions import HTTPClientError
 
 # Alliance Auth AFAT
 from afat.models import FatLink
@@ -83,12 +86,9 @@ class TestUpdateEsiFatlinks(BaseTestCase):
     Test cases for the update_esi_fatlinks task.
     """
 
-    @patch("afat.tasks.fetch_esi_status")
     @patch("afat.tasks._process_esi_fatlink")
     @patch("afat.tasks.FatLink.objects.select_related_default")
-    def test_updates_esi_fatlinks_when_esi_is_ok(
-        self, mock_select_related, mock_process_fatlink, mock_fetch_esi_status
-    ):
+    def test_updates_esi_fatlinks(self, mock_select_related, mock_process_fatlink):
         """
         Test that the update_esi_fatlinks task updates ESI FAT links when ESI is operational.
 
@@ -96,8 +96,6 @@ class TestUpdateEsiFatlinks(BaseTestCase):
         :type mock_select_related:
         :param mock_process_fatlink:
         :type mock_process_fatlink:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
         :return:
         :rtype:
         """
@@ -113,51 +111,11 @@ class TestUpdateEsiFatlinks(BaseTestCase):
         mock_select_related.return_value.filter.return_value.distinct.return_value = (
             mock_qs
         )
-
-        mock_fetch_esi_status.return_value = MagicMock(is_ok=True)
 
         update_esi_fatlinks()
 
         mock_process_fatlink.assert_any_call(fatlink=mock_fatlink1)
         mock_process_fatlink.assert_any_call(fatlink=mock_fatlink2)
-
-    @patch("afat.tasks.fetch_esi_status")
-    @patch("afat.tasks._process_esi_fatlink")
-    @patch("afat.tasks.FatLink.objects.select_related_default")
-    def test_aborts_update_when_esi_is_not_ok(
-        self, mock_select_related, mock_process_fatlink, mock_fetch_esi_status
-    ):
-        """
-        Test that the update_esi_fatlinks task aborts when ESI is not operational.
-
-        :param mock_select_related:
-        :type mock_select_related:
-        :param mock_process_fatlink:
-        :type mock_process_fatlink:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
-        :return:
-        :rtype:
-        """
-
-        mock_fatlink1 = MagicMock()
-        mock_fatlink2 = MagicMock()
-
-        mock_qs = MagicMock()
-        mock_qs.exists.return_value = True
-        mock_qs.count.return_value = 2
-        mock_qs.__iter__.return_value = iter([mock_fatlink1, mock_fatlink2])
-
-        mock_select_related.return_value.filter.return_value.distinct.return_value = (
-            mock_qs
-        )
-
-        mock_fetch_esi_status.return_value = MagicMock(is_ok=False)
-
-        update_esi_fatlinks()
-
-        mock_process_fatlink.assert_not_called()
-        mock_select_related.assert_called_once()
 
     @patch("afat.tasks.FatLink.objects.select_related_default")
     @patch("afat.tasks.logger")
@@ -629,26 +587,74 @@ class TestCheckForEsiFleet(BaseTestCase):
 
         self.assertDictEqual(result, {"fleet": mock_fleet, "token": mock_token})
 
+    @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
     @patch("afat.tasks._esi_fatlinks_error_handling")
-    @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
     @patch("esi.models.Token.get_token")
-    def test_handles_http_not_found_error_when_checking_esi_fleet(
-        self, mock_get_token, mock_client_prop, mock_error_handling
+    def test_handles_http_client_error_with_status_404(
+        self, mock_get_token, mock_error_handling, mock_client
     ):
+        """
+        Test that the _check_for_esi_fleet function handles a generic error.
+
+        :param mock_get_token:
+        :type mock_get_token:
+        :param mock_error_handling:
+        :type mock_error_handling:
+        :param mock_client:
+        :type mock_client:
+        :return:
+        :rtype:
+        """
+
         mock_fatlink = MagicMock()
         mock_fatlink.character.character_id = 12345
+        mock_fatlink.esi_fleet_id = 67890
+
         mock_get_token.return_value = MagicMock()
-        mock_client = MagicMock()
-        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.side_effect = HTTPNotFound(
-            MagicMock()
+        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.side_effect = HTTPClientError(
+            HTTPStatus.NOT_FOUND, headers={}, data={}
         )
-        mock_client_prop.return_value = mock_client
 
         result = _check_for_esi_fleet(fatlink=mock_fatlink)
 
         self.assertIsNone(result)
         mock_error_handling.assert_called_once_with(
             error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=mock_fatlink
+        )
+
+    @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
+    @patch("afat.tasks._esi_fatlinks_error_handling")
+    @patch("esi.models.Token.get_token")
+    def test_handles_http_client_error_with_other_status(
+        self, mock_get_token, mock_error_handling, mock_client
+    ):
+        """
+        Test that the _check_for_esi_fleet function handles a generic error.
+
+        :param mock_get_token:
+        :type mock_get_token:
+        :param mock_error_handling:
+        :type mock_error_handling:
+        :param mock_client:
+        :type mock_client:
+        :return:
+        :rtype:
+        """
+
+        mock_fatlink = MagicMock()
+        mock_fatlink.character.character_id = 12345
+        mock_fatlink.esi_fleet_id = 67890
+
+        mock_get_token.return_value = MagicMock()
+        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.side_effect = HTTPClientError(
+            HTTPStatus.FORBIDDEN, headers={}, data={}
+        )
+
+        result = _check_for_esi_fleet(fatlink=mock_fatlink)
+
+        self.assertIsNone(result)
+        mock_error_handling.assert_called_once_with(
+            error_key=FatLink.EsiError.NO_FLEET, fatlink=mock_fatlink
         )
 
     @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
@@ -708,7 +714,7 @@ class TestCheckForEsiFleet(BaseTestCase):
 
         self.assertIsNone(result)
         mock_error_handling.assert_called_once_with(
-            error_key=FatLink.EsiError.NO_FLEET, fatlink=mock_fatlink
+            error_key=FatLink.EsiError.FC_WRONG_FLEET, fatlink=mock_fatlink
         )
 
 
