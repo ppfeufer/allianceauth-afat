@@ -3,7 +3,7 @@ Helper functions for fat links view
 """
 
 # Django
-from django.db.models import Prefetch
+from django.db.models import Prefetch, QuerySet
 
 # Alliance Auth
 from allianceauth.authentication.admin import User
@@ -45,7 +45,7 @@ def get_esi_fleet_information_by_user(
     }
 
 
-def get_doctrines() -> list[dict[int, str]]:
+def get_doctrines() -> QuerySet:
     """
     Get all enabled doctrines
 
