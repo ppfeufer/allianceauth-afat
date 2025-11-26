@@ -18,10 +18,8 @@ from django.utils.translation import gettext as _
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
 
-# Alliance Auth (External Libs)
-from app_utils.django import users_with_permission
-
 # Alliance Auth AFAT
+from afat.helper.users import users_with_permission
 from afat.models import Fat, FatLink, Log
 from afat.utils import get_main_character_from_user
 

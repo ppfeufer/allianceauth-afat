@@ -15,13 +15,11 @@ from django.utils.datetime_safe import datetime
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
 
-# Alliance Auth (External Libs)
-from app_utils.testing import create_user_from_evecharacter
-
 # Alliance Auth AFAT
 from afat.models import FatLink
 from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
+from afat.tests.fixtures.utils import create_user_from_evecharacter
 
 MODULE_PATH = "afat.views.logs"
 

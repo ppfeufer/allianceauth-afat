@@ -10,14 +10,13 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand
 
 # Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
 from eveuniverse.constants import EveCategoryId
 
 # Alliance Auth AFAT
-# AA SRP
 from afat import __title__
+from afat.providers import AppLogger
 
-logger = LoggerAddTag(logging.getLogger(__name__), __title__)
+logger = AppLogger(logging.getLogger(__name__), __title__)
 
 
 class Command(BaseCommand):

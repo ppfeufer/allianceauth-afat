@@ -27,7 +27,6 @@ from esi.decorators import token_required
 from esi.models import Token
 
 # Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
 from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
@@ -51,11 +50,11 @@ from afat.models import (
     Setting,
     get_hash_on_save,
 )
-from afat.providers import esi
+from afat.providers import AppLogger, esi
 from afat.tasks import process_fats
 from afat.utils import get_or_create_character, write_log
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 @login_required()

@@ -19,18 +19,16 @@ from esi.exceptions import HTTPClientError
 from esi.models import Token
 
 # Alliance Auth (External Libs)
-from app_utils.esi import fetch_esi_status
-from app_utils.logging import LoggerAddTag
 from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
 from afat.handler import esi_handler
 from afat.models import Fat, FatLink, Log, Setting
-from afat.providers import esi
+from afat.providers import AppLogger, esi
 from afat.utils import get_or_create_character
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 ESI_ERROR_LIMIT = 50
 ESI_TIMEOUT_ONCE_ERROR_LIMIT_REACHED = 60
@@ -343,14 +341,6 @@ def update_esi_fatlinks() -> None:
     )
 
     if esi_fatlinks.exists():
-        esi_status = fetch_esi_status()
-
-        # Abort if ESI seems offline or above the error limit
-        if not esi_status.is_ok:
-            logger.warning("ESI doesn't seem to be available at this time. Aborting.")
-
-            return
-
         logger.debug(msg=f"Found {len(esi_fatlinks)} ESI FAT links to process")
         logger.debug("ESI FAT Links: %s", esi_fatlinks)
 
@@ -358,8 +348,6 @@ def update_esi_fatlinks() -> None:
             _process_esi_fatlink(fatlink=fatlink)
     else:
         logger.debug(msg="No ESI FAT links to process")
-
-        return
 
 
 @shared_task

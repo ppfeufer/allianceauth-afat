@@ -16,14 +16,14 @@ from allianceauth.authentication.models import CharacterOwnership
 from allianceauth.services.hooks import get_extension_logger
 
 # Alliance Auth (External Libs)
-from app_utils.logging import LoggerAddTag
 from eveuniverse.models import EveType
 
 # Alliance Auth AFAT
 from afat import __title__
 from afat.models.afat import Fat, FleetType
+from afat.providers import AppLogger
 
-logger = LoggerAddTag(my_logger=get_extension_logger(name=__name__), prefix=__title__)
+logger = AppLogger(my_logger=get_extension_logger(name=__name__), prefix=__title__)
 
 
 def _get_threshold_date(timedelta_in_days: int) -> datetime.datetime:

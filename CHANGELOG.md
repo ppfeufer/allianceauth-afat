@@ -46,6 +46,12 @@ Section Order:
 
 - Refactor `views.fatlinks.details_fatlink`, moving form logic to separate functions for
   better readability, maintainability and testability
+- Improved internal ESI handling
+- Simplified menu item rendering logic
+
+### Removed
+
+- `allianceauth-app-utils` as dependency
 
 ## [4.1.2] - 2025-11-20
 

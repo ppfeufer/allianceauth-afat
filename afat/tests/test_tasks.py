@@ -86,12 +86,9 @@ class TestUpdateEsiFatlinks(BaseTestCase):
     Test cases for the update_esi_fatlinks task.
     """
 
-    @patch("afat.tasks.fetch_esi_status")
     @patch("afat.tasks._process_esi_fatlink")
     @patch("afat.tasks.FatLink.objects.select_related_default")
-    def test_updates_esi_fatlinks_when_esi_is_ok(
-        self, mock_select_related, mock_process_fatlink, mock_fetch_esi_status
-    ):
+    def test_updates_esi_fatlinks(self, mock_select_related, mock_process_fatlink):
         """
         Test that the update_esi_fatlinks task updates ESI FAT links when ESI is operational.
 
@@ -99,8 +96,6 @@ class TestUpdateEsiFatlinks(BaseTestCase):
         :type mock_select_related:
         :param mock_process_fatlink:
         :type mock_process_fatlink:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
         :return:
         :rtype:
         """
@@ -116,51 +111,11 @@ class TestUpdateEsiFatlinks(BaseTestCase):
         mock_select_related.return_value.filter.return_value.distinct.return_value = (
             mock_qs
         )
-
-        mock_fetch_esi_status.return_value = MagicMock(is_ok=True)
 
         update_esi_fatlinks()
 
         mock_process_fatlink.assert_any_call(fatlink=mock_fatlink1)
         mock_process_fatlink.assert_any_call(fatlink=mock_fatlink2)
-
-    @patch("afat.tasks.fetch_esi_status")
-    @patch("afat.tasks._process_esi_fatlink")
-    @patch("afat.tasks.FatLink.objects.select_related_default")
-    def test_aborts_update_when_esi_is_not_ok(
-        self, mock_select_related, mock_process_fatlink, mock_fetch_esi_status
-    ):
-        """
-        Test that the update_esi_fatlinks task aborts when ESI is not operational.
-
-        :param mock_select_related:
-        :type mock_select_related:
-        :param mock_process_fatlink:
-        :type mock_process_fatlink:
-        :param mock_fetch_esi_status:
-        :type mock_fetch_esi_status:
-        :return:
-        :rtype:
-        """
-
-        mock_fatlink1 = MagicMock()
-        mock_fatlink2 = MagicMock()
-
-        mock_qs = MagicMock()
-        mock_qs.exists.return_value = True
-        mock_qs.count.return_value = 2
-        mock_qs.__iter__.return_value = iter([mock_fatlink1, mock_fatlink2])
-
-        mock_select_related.return_value.filter.return_value.distinct.return_value = (
-            mock_qs
-        )
-
-        mock_fetch_esi_status.return_value = MagicMock(is_ok=False)
-
-        update_esi_fatlinks()
-
-        mock_process_fatlink.assert_not_called()
-        mock_select_related.assert_called_once()
 
     @patch("afat.tasks.FatLink.objects.select_related_default")
     @patch("afat.tasks.logger")
