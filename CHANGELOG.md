@@ -44,6 +44,7 @@ Section Order:
 
 ### Changed
 
+- Refactor `helper.views.convert_fatlinks_to_dict` function
 - Refactor `views.fatlinks.details_fatlink`, moving form logic to separate functions for
   better readability, maintainability and testability
 - Improved internal ESI handling

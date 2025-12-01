@@ -110,13 +110,15 @@ def ajax_get_fatlinks_by_year(request: WSGIRequest, year: int) -> JsonResponse:
         .annotate_fats_count()
     )
 
+    close_esi_redirect = reverse(viewname="afat:fatlinks_overview")
+
     fatlink_rows = [
         convert_fatlinks_to_dict(
             request=request,
             fatlink=fatlink,
-            close_esi_redirect=reverse(viewname="afat:fatlinks_overview"),
+            close_esi_redirect=close_esi_redirect,
         )
-        for fatlink in fatlinks
+        for fatlink in fatlinks.iterator()
     ]
 
     return JsonResponse(data=fatlink_rows, safe=False)
