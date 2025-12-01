@@ -24,11 +24,93 @@ from afat.models import Fat, FatLink, Log
 from afat.utils import get_main_character_from_user
 
 
-def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
+def _generate_action_button(  # pylint: disable=too-many-arguments, too-many-positional-arguments
+    viewname: str,
+    fatlink_hash: str,
+    redirect_to: str,
+    title: str,
+    confirm_text: str,
+    body_text: str,
+) -> str:
+    """
+    Generate action button HTML
+
+    :param viewname:
+    :type viewname:
+    :param fatlink_hash:
+    :type fatlink_hash:
+    :param redirect_to:
+    :type redirect_to:
+    :param title:
+    :type title:
+    :param confirm_text:
+    :type confirm_text:
+    :param body_text:
+    :type body_text:
+    :return:
+    :rtype:
+    """
+
+    redirect_param = f"?next={redirect_to}" if redirect_to else ""
+
+    return (
+        '<a class="btn btn-afat-action btn-primary btn-sm" style="margin-left: 0.25rem;" '
+        f'title="{title}" data-bs-toggle="modal" data-bs-target="#cancelEsiFleetModal" '
+        f'data-url="{reverse(viewname=viewname, args=[fatlink_hash])}{redirect_param}" '
+        f'data-body-text="{body_text}" data-confirm-text="{confirm_text}">'
+        '<i class="fa-solid fa-times"></i></a>'
+    )
+
+
+def _generate_view_button(viewname: str, fatlink_hash: str) -> str:
+    """
+    Generate view button HTML
+
+    :param viewname:
+    :type viewname:
+    :param fatlink_hash:
+    :type fatlink_hash:
+    :return:
+    :rtype:
+    """
+
+    return (
+        f'<a class="btn btn-info btn-sm m-1" href="{reverse(viewname=viewname, args=[fatlink_hash])}">'
+        '<span class="fa-solid fa-eye"></span></a>'
+    )
+
+
+def _generate_delete_button(
+    viewname: str, fatlink_hash: str, confirm_text: str, body_text: str
+) -> str:
+    """
+    Generate delete button HTML
+
+    :param viewname:
+    :type viewname:
+    :param fatlink_hash:
+    :type fatlink_hash:
+    :param confirm_text:
+    :type confirm_text:
+    :param body_text:
+    :type body_text:
+    :return:
+    :rtype:
+    """
+
+    return (
+        '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteFatLinkModal" '
+        f'data-url="{reverse(viewname=viewname, args=[fatlink_hash])}" data-confirm-text="{confirm_text}" '
+        f'data-body-text="{body_text}">'
+        '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
+    )
+
+
+def convert_fatlinks_to_dict(
     request: WSGIRequest, fatlink: FatLink, close_esi_redirect: str = None
 ) -> dict:
     """
-    Converts a FatLink object into a dictionary
+    Converts an AFatLink object into a dictionary
 
     :param request:
     :type request:
@@ -40,107 +122,68 @@ def convert_fatlinks_to_dict(  # pylint: disable=too-many-locals
     :rtype:
     """
 
-    # Fleet name
-    fatlink_fleet = fatlink.fleet if fatlink.fleet is not None else fatlink.hash
-
-    # ESI marker
+    fatlink_fleet = fatlink.fleet or fatlink.hash
     via_esi = "No"
     esi_fleet_marker = ""
 
-    # Check for ESI link
     if fatlink.is_esilink:
         via_esi = "Yes"
-        esi_fleet_marker_classes = "badge text-bg-secondary afat-label ms-2"
-
-        if fatlink.is_registered_on_esi:
-            esi_fleet_marker_classes = "badge text-bg-success afat-label ms-2"
-
-        marker_text = _("ESI")
-        esi_fleet_marker += (
-            f'<span class="{esi_fleet_marker_classes}">{marker_text}</span>'
+        marker_classes = (
+            "badge text-bg-success afat-label ms-2"
+            if fatlink.is_registered_on_esi
+            else "badge text-bg-secondary afat-label ms-2"
         )
+        esi_fleet_marker = f'<span class="{marker_classes}">{_("ESI")}</span>'
 
-    # Fleet type
-    fleet_type = fatlink.fleet_type
-
-    # Creator name
-    creator_main_character = get_main_character_from_user(user=fatlink.creator)
-
-    # Fleet time
-    fleet_time = fatlink.created
-    fleet_time_timestamp = fleet_time.timestamp()
-
-    # Action buttons
     actions = ""
     if (
         fatlink.is_esilink
         and fatlink.is_registered_on_esi
         and fatlink.creator == request.user
     ):
-        button_close_esi_tracking_url = reverse(
-            viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink.hash]
-        )
-
-        close_esi_redirect_parameter = (
-            f"?next={close_esi_redirect}" if close_esi_redirect is not None else ""
-        )
-
-        button_title = _(
-            "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."  # pylint: disable=line-too-long
-        )
-        modal_body_text = _(
-            "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from {character_name}?</p>"
-        ).format(
-            esi_fleet_id=fatlink.esi_fleet_id,
-            character_name=fatlink.character.character_name,
-        )
-        modal_confirm_text = _("Stop tracking")
-
-        actions += (
-            '<a class="btn btn-afat-action btn-primary btn-sm" '
-            f'style="margin-left: 0.25rem;" title="{button_title}" data-bs-toggle="modal" '
-            'data-bs-target="#cancelEsiFleetModal" '
-            f'data-url="{button_close_esi_tracking_url}{close_esi_redirect_parameter}" '
-            f'data-body-text="{modal_body_text}" '
-            f'data-confirm-text="{modal_confirm_text}">'
-            '<i class="fa-solid fa-times"></i></a>'
+        actions += _generate_action_button(
+            viewname="afat:fatlinks_close_esi_fatlink",
+            fatlink_hash=fatlink.hash,
+            redirect_to=close_esi_redirect,
+            title=_(
+                "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
+            ),
+            confirm_text=_("Stop tracking"),
+            body_text=_(
+                "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from {character_name}?</p>"
+            ).format(
+                esi_fleet_id=fatlink.esi_fleet_id,
+                character_name=fatlink.character.character_name,
+            ),
         )
 
     if request.user.has_perm("afat.manage_afat") or request.user.has_perm(
-        perm="afat.add_fatlink"
+        "afat.add_fatlink"
     ):
-        button_edit_url = reverse(
-            viewname="afat:fatlinks_details_fatlink", args=[fatlink.hash]
+        actions += _generate_view_button(
+            viewname="afat:fatlinks_details_fatlink", fatlink_hash=fatlink.hash
         )
 
-        actions += (
-            '<a class="btn btn-info btn-sm m-1" '
-            f'href="{button_edit_url}"><span class="fa-solid fa-eye"></span></a>'
-        )
-
-    if request.user.has_perm(perm="afat.manage_afat"):
-        button_delete_url = reverse(
-            viewname="afat:fatlinks_delete_fatlink", args=[fatlink.hash]
-        )
-        button_delete_text = _("Delete")
-        modal_body_text = _(
-            "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
-        ).format(fatlink_fleet=fatlink_fleet)
-
-        actions += (
-            '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
-            f'data-bs-target="#deleteFatLinkModal" data-url="{button_delete_url}" '
-            f'data-confirm-text="{button_delete_text}" data-body-text="{modal_body_text}">'
-            '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
+    if request.user.has_perm("afat.manage_afat"):
+        actions += _generate_delete_button(
+            viewname="afat:fatlinks_delete_fatlink",
+            fatlink_hash=fatlink.hash,
+            confirm_text=_("Delete"),
+            body_text=_(
+                "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
+            ).format(fatlink_fleet=fatlink_fleet),
         )
 
     return {
         "pk": fatlink.pk,
         "fleet_name": fatlink_fleet + esi_fleet_marker,
-        "creator_name": creator_main_character,
-        "fleet_type": fleet_type,
+        "creator_name": get_main_character_from_user(user=fatlink.creator),
+        "fleet_type": fatlink.fleet_type,
         "doctrine": fatlink.doctrine,
-        "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
+        "fleet_time": {
+            "time": fatlink.created,
+            "timestamp": fatlink.created.timestamp(),
+        },
         "fats_number": fatlink.fats_count,
         "hash": fatlink.hash,
         "is_esilink": fatlink.is_esilink,
