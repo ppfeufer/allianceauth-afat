@@ -42,6 +42,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.2.0] - 2025-12-02
+
 ### Changed
 
 - Refactor `helper.views.convert_fatlinks_to_dict` function
@@ -49,6 +51,7 @@ Section Order:
   better readability, maintainability and testability
 - Improved internal ESI handling
 - Simplified menu item rendering logic
+- Translations updated
 
 ### Removed
 
@@ -2017,6 +2020,7 @@ Finally restart your supervisor services for AA
 [4.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.0.0...v4.1.0 "v4.1.0"
 [4.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.0...v4.1.1 "v4.1.1"
 [4.1.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.1...v4.1.2 "v4.1.2"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.2...HEAD "In Development"
+[4.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.2...v4.2.0 "v4.2.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
