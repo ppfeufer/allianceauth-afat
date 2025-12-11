@@ -544,7 +544,14 @@ def add_fat(
     ):
         messages.warning(
             request,
-            mark_safe(_("<h4>Warning!</h4><p>Sorry, that FAT link is expired.</p>")),
+            mark_safe(
+                _(
+                    "<h4>Warning!</h4>"
+                    "<p>Sorry, that FAT link is expired. "
+                    "If you were on that fleet, contact your FC about "
+                    "having your FAT manually added.</p>"
+                )
+            ),
         )
 
         return redirect("afat:dashboard")
@@ -560,7 +567,9 @@ def add_fat(
             mark_safe(
                 format_lazy(
                     _(
-                        "<h4>Warning!</h4><p>{character_name} must be online to register.</p>"
+                        "<h4>Warning!</h4>"
+                        "<p>Cannot register the fleet participation for "
+                        "{character_name}. The character needs to be online.</p>"
                     ),
                     character_name=character.character_name,
                 )
