@@ -626,7 +626,7 @@ def add_fat(
             mark_safe(
                 format_lazy(
                     _(
-                        "<h4>Warning!</h4><p>{character_name} is already registered for this FAT link.</p>"
+                        "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
                     ),
                     character_name=character.character_name,
                 )
