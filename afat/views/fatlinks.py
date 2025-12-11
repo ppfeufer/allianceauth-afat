@@ -504,7 +504,7 @@ def create_esi_fatlink(
 
 
 @login_required()
-@permission_required(perm="afat.basic_access")
+@permission_required("afat.basic_access")
 @token_required(
     scopes=[
         "esi-location.read_location.v1",
@@ -512,146 +512,119 @@ def create_esi_fatlink(
         "esi-location.read_online.v1",
     ]
 )
-def add_fat(  # pylint: disable=too-many-locals
+def add_fat(
     request: WSGIRequest, token: Token, fatlink_hash: str
 ) -> HttpResponseRedirect:
     """
-    Click fat link helper
+    Add fat to a clickable fat link
 
-    :param request:
-    :type request:
-    :param token:
-    :type token:
-    :param fatlink_hash:
-    :type fatlink_hash:
-    :return:
-    :rtype:
+    :param request: The request object
+    :type request: WSGIRequest
+    :param token: The ESI token
+    :type token: Token
+    :param fatlink_hash: The fat link hash
+    :type fatlink_hash: str
+    :return: Redirect to dashboard
+    :rtype: HttpResponseRedirect
     """
 
     try:
         fleet = FatLink.objects.get(hash=fatlink_hash, is_esilink=False)
     except FatLink.DoesNotExist:
         messages.warning(
-            request=request,
-            message=mark_safe(
-                s=_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")
-            ),
+            request,
+            mark_safe(_("<h4>Warning!</h4><p>The hash provided is not valid.</p>")),
         )
 
-        return redirect(to="afat:dashboard")
+        return redirect("afat:dashboard")
 
-    dur = Duration.objects.get(fleet=fleet)
-    now = timezone.now() - timedelta(minutes=dur.duration)
-
-    if now >= fleet.created:
+    if (
+        timezone.now() - timedelta(minutes=Duration.objects.get(fleet=fleet).duration)
+        >= fleet.created
+    ):
         messages.warning(
-            request=request,
-            message=mark_safe(
-                s=_(
-                    "<h4>Warning!</h4>"
-                    "<p>Sorry, that FAT link is expired. "
-                    "If you were on that fleet, contact your FC about "
-                    "having your FAT manually added.</p>"
-                )
-            ),
+            request,
+            mark_safe(_("<h4>Warning!</h4><p>Sorry, that FAT link is expired.</p>")),
         )
 
-        return redirect(to="afat:dashboard")
+        return redirect("afat:dashboard")
 
     character = EveCharacter.objects.get(character_id=token.character_id)
-
-    # Check if character is online
     operation = esi.client.Location.GetCharactersCharacterIdOnline(
         character_id=token.character_id, token=token
     )
-    character_online = esi_handler.result(operation=operation, use_etag=False)
 
-    if character_online.online is True:
-        # Character location
-        operation = esi.client.Location.GetCharactersCharacterIdLocation(
-            character_id=token.character_id, token=token
-        )
-        location = esi_handler.result(operation=operation, use_etag=False)
-
-        solar_system, solar_system_created = (  # pylint: disable=unused-variable
-            EveSolarSystem.objects.get_or_create_esi(id=location.solar_system_id)
-        )
-
-        # Current ship
-        operation = esi.client.Location.GetCharactersCharacterIdShip(
-            character_id=token.character_id, token=token
-        )
-        current_ship = esi_handler.result(operation=operation, use_etag=False)
-
-        ship, ship_created = (  # pylint: disable=unused-variable
-            EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)
-        )
-
-        try:
-            Fat(
-                fatlink=fleet,
-                character=character,
-                system=solar_system.name,
-                shiptype=ship.name,
-                corporation_eve_id=character.corporation_id,
-                alliance_eve_id=character.alliance_id,
-            ).save()
-        except IntegrityError:
-            messages.warning(
-                request=request,
-                message=mark_safe(
-                    s=format_lazy(
-                        _(
-                            "<h4>Warning!</h4>"
-                            "<p>The selected charcter ({character_name}) is already "
-                            "registered for this FAT link.</p>"
-                        ),
-                        character_name=character.character_name,
-                    )
-                ),
-            )
-        else:
-            if fleet.fleet is not None:
-                fleet_name = fleet.fleet
-            else:
-                fleet_name = fleet.hash
-
-            messages.success(
-                request=request,
-                message=mark_safe(
-                    s=format_lazy(
-                        _(
-                            "<h4>Success!</h4>"
-                            '<p>FAT registered for {character_name} at "{fleet_name}"</p>'
-                        ),
-                        character_name=character.character_name,
-                        fleet_name=fleet_name,
-                    )
-                ),
-            )
-
-            logger.info(
-                msg=(
-                    f'Participation for fleet "{fleet_name}" registered for '
-                    f"pilot {character.character_name}"
-                )
-            )
-    else:
+    if not esi_handler.result(operation=operation, use_etag=False).online:
         messages.warning(
-            request=request,
-            message=mark_safe(
-                s=format_lazy(
+            request,
+            mark_safe(
+                format_lazy(
                     _(
-                        "<h4>Warning!</h4>"
-                        "<p>Cannot register the fleet participation for "
-                        "{character_name}. The character needs to be online.</p>"
+                        "<h4>Warning!</h4><p>{character_name} must be online to register.</p>"
                     ),
                     character_name=character.character_name,
                 )
             ),
         )
 
-    return redirect(to="afat:dashboard")
+        return redirect("afat:dashboard")
+
+    location = esi_handler.result(
+        operation=esi.client.Location.GetCharactersCharacterIdLocation(
+            character_id=token.character_id, token=token
+        ),
+        use_etag=False,
+    )
+    solar_system = EveSolarSystem.objects.get_or_create_esi(
+        id=location.solar_system_id
+    )[0]
+
+    current_ship = esi_handler.result(
+        operation=esi.client.Location.GetCharactersCharacterIdShip(
+            character_id=token.character_id, token=token
+        ),
+        use_etag=False,
+    )
+    ship = EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)[0]
+
+    try:
+        Fat.objects.create(
+            fatlink=fleet,
+            character=character,
+            system=solar_system.name,
+            shiptype=ship.name,
+            corporation_eve_id=character.corporation_id,
+            alliance_eve_id=character.alliance_id,
+        )
+        messages.success(
+            request,
+            mark_safe(
+                format_lazy(
+                    _(
+                        '<h4>Success!</h4><p>FAT registered for {character_name} at "{fleet_name}"</p>'
+                    ),
+                    character_name=character.character_name,
+                    fleet_name=fleet.fleet or fleet.hash,
+                )
+            ),
+        )
+        logger.info(
+            f'Participation for fleet "{fleet.fleet or fleet.hash}" registered for {character.character_name}'
+        )
+    except IntegrityError:
+        messages.warning(
+            request,
+            mark_safe(
+                format_lazy(
+                    _(
+                        "<h4>Warning!</h4><p>{character_name} is already registered for this FAT link.</p>"
+                    ),
+                    character_name=character.character_name,
+                )
+            ),
+        )
+
+    return redirect("afat:dashboard")
 
 
 @login_required()

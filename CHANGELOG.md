@@ -46,6 +46,12 @@ Section Order:
 
 - Use token from character selection/login instead of fetching a token from the DB
 
+### Changed
+
+- Code refactoring
+  - Use of AA framework functions where ever possible
+  - `views.fatlinks.add_fat` simplified
+
 ## [4.2.0] - 2025-12-02
 
 ### Changed
