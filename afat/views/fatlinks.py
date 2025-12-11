@@ -279,11 +279,10 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
     """
 
     # Check if there is a fleet
-    required_scopes = ["esi-fleets.read_fleet.v1"]
-    esi_token = Token.get_token(character_id=token.character_id, scopes=required_scopes)
     operation = esi.client.Fleets.GetCharactersCharacterIdFleet(
-        character_id=token.character_id, token=esi_token
+        character_id=token.character_id, token=token
     )
+
     try:
 
         fleet_from_esi = esi_handler.result(operation=operation, use_etag=False)
@@ -375,7 +374,7 @@ def create_esi_fatlink_callback(  # pylint: disable=too-many-locals
 
     # Check if we deal with the fleet boss here
     operation = esi.client.Fleets.GetFleetsFleetIdMembers(
-        fleet_id=fleet_from_esi.fleet_id, token=esi_token
+        fleet_id=fleet_from_esi.fleet_id, token=token
     )
     try:
         esi_fleet_member = esi_handler.result(operation=operation, use_etag=False)
@@ -514,7 +513,7 @@ def create_esi_fatlink(
     ]
 )
 def add_fat(  # pylint: disable=too-many-locals
-    request: WSGIRequest, token, fatlink_hash: str
+    request: WSGIRequest, token: Token, fatlink_hash: str
 ) -> HttpResponseRedirect:
     """
     Click fat link helper
@@ -561,42 +560,16 @@ def add_fat(  # pylint: disable=too-many-locals
 
     character = EveCharacter.objects.get(character_id=token.character_id)
 
-    try:
-        required_scopes = [
-            "esi-location.read_location.v1",
-            "esi-location.read_online.v1",
-            "esi-location.read_ship_type.v1",
-        ]
-        esi_token = Token.get_token(
-            character_id=token.character_id, scopes=required_scopes
-        )
-    except Exception:  # pylint: disable=broad-exception-caught
-        messages.warning(
-            request=request,
-            message=mark_safe(
-                s=format_lazy(
-                    _(
-                        "<h4>Warning!</h4>"
-                        "<p>There was an issue with the ESI token for {character_name}. "
-                        "Please try again.</p>"
-                    ),
-                    character_name=character.character_name,
-                )
-            ),
-        )
-
-        return redirect(to="afat:dashboard")
-
     # Check if character is online
     operation = esi.client.Location.GetCharactersCharacterIdOnline(
-        character_id=token.character_id, token=esi_token
+        character_id=token.character_id, token=token
     )
     character_online = esi_handler.result(operation=operation, use_etag=False)
 
     if character_online.online is True:
         # Character location
         operation = esi.client.Location.GetCharactersCharacterIdLocation(
-            character_id=token.character_id, token=esi_token
+            character_id=token.character_id, token=token
         )
         location = esi_handler.result(operation=operation, use_etag=False)
 
@@ -606,7 +579,7 @@ def add_fat(  # pylint: disable=too-many-locals
 
         # Current ship
         operation = esi.client.Location.GetCharactersCharacterIdShip(
-            character_id=token.character_id, token=esi_token
+            character_id=token.character_id, token=token
         )
         current_ship = esi_handler.result(operation=operation, use_etag=False)
 

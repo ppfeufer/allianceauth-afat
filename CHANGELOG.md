@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Use token from character selection/login instead of fetching a token from the DB
+
 ## [4.2.0] - 2025-12-02
 
 ### Changed
