@@ -1644,7 +1644,8 @@ class TestAddFatView(BaseTestCase):
         messages = list(get_messages(request))
         self.assertTrue(
             any(
-                "John Doe is already registered for this FAT link." in str(m)
+                "The selected charcter (John Doe) is already registered for this FAT link."
+                in str(m)
                 for m in messages
             )
         )

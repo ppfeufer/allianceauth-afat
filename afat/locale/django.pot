@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 4.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-12-11 08:03+0100\n"
+"POT-Creation-Date: 2025-12-11 08:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1340,8 +1340,8 @@ msgstr ""
 #: afat/views/fatlinks.py:629
 #, python-brace-format
 msgid ""
-"<h4>Warning!</h4><p>{character_name} is already registered for this FAT link."
-"</p>"
+"<h4>Warning!</h4><p>The selected charcter ({character_name}) is already "
+"registered for this FAT link.</p>"
 msgstr ""
 
 #: afat/views/fatlinks.py:683
