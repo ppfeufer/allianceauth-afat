@@ -12,6 +12,7 @@ from django.utils import timezone
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+from allianceauth.framework.api.user import get_main_character_name_from_user
 
 # Alliance Auth AFAT
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
@@ -28,7 +29,7 @@ from afat.tests.fixtures.utils import (
     add_character_to_user,
     create_user_from_evecharacter,
 )
-from afat.utils import get_main_character_from_user, write_log
+from afat.utils import write_log
 
 MODULE_PATH = "afat.views.fatlinks"
 
@@ -226,7 +227,9 @@ class TestHelpers(BaseTestCase):
 
         fleet_time_1 = fatlink_1.created
         fleet_time_timestamp_1 = fleet_time_1.timestamp()
-        creator_main_character_1 = get_main_character_from_user(user=fatlink_1.creator)
+        creator_main_character_1 = get_main_character_name_from_user(
+            user=fatlink_1.creator
+        )
 
         self.maxDiff = None
 
@@ -274,7 +277,9 @@ class TestHelpers(BaseTestCase):
 
         fleet_time_2 = fatlink_2.created
         fleet_time_timestamp_2 = fleet_time_2.timestamp()
-        creator_main_character_2 = get_main_character_from_user(user=fatlink_2.creator)
+        creator_main_character_2 = get_main_character_name_from_user(
+            user=fatlink_2.creator
+        )
 
         self.assertDictEqual(
             d1=result_2,
@@ -416,7 +421,7 @@ class TestHelpers(BaseTestCase):
         log = Log.objects.get(fatlink_hash=fatlink_hash)
         log_time = log.log_time
         log_time_timestamp = log_time.timestamp()
-        user_main_character = get_main_character_from_user(user=log.user)
+        user_main_character = get_main_character_name_from_user(user=log.user)
         fatlink_link = reverse(
             viewname="afat:fatlinks_details_fatlink", args=[log.fatlink_hash]
         )

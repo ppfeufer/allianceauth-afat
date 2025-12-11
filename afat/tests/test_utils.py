@@ -12,65 +12,10 @@ from allianceauth.eveonline.models import (
 from afat.tests import BaseTestCase
 from afat.utils import (
     NoDataError,
-    get_main_character_from_user,
     get_or_create_alliance_info,
     get_or_create_character,
     get_or_create_corporation_info,
 )
-
-
-class TestGetMainCharacterFromUser(BaseTestCase):
-    """
-    Test the get_main_character_from_user function
-    """
-
-    def test_returns_main_character_name_when_user_has_profile(self):
-        """
-        Test that the function returns the main character name when the user has a profile
-
-        :return:
-        :rtype:
-        """
-
-        mock_user = MagicMock()
-        mock_user.username = "test_user"
-        mock_user.profile.main_character.character_name = "Main Character"
-
-        result = get_main_character_from_user(mock_user)
-
-        self.assertEqual(result, "Main Character")
-
-    def test_returns_username_when_user_has_no_profile(self):
-        """
-        Test that the function returns the username when the user has no profile
-
-        :return:
-        :rtype:
-        """
-
-        mock_user = MagicMock()
-        mock_user.username = "test_user"
-        mock_user.profile = None
-
-        result = get_main_character_from_user(mock_user)
-
-        self.assertEqual(result, "test_user")
-
-    def test_returns_username_when_profile_has_no_main_character(self):
-        """
-        Test that the function returns the username when the profile has no main character
-
-        :return:
-        :rtype:
-        """
-
-        mock_user = MagicMock()
-        mock_user.username = "test_user"
-        mock_user.profile.main_character = None
-
-        result = get_main_character_from_user(mock_user)
-
-        self.assertEqual(result, "test_user")
 
 
 class TestGetOrCreateAllianceInfo(BaseTestCase):

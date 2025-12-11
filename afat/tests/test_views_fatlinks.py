@@ -5,6 +5,7 @@ Test fatlinks views
 # Standard Library
 from datetime import timedelta
 from http import HTTPStatus
+from types import SimpleNamespace
 from unittest.mock import ANY, MagicMock, Mock, patch
 
 # Third Party
@@ -12,19 +13,25 @@ from pytz import utc
 
 # Django
 from django.contrib.messages import get_messages
+from django.contrib.messages.storage.fallback import FallbackStorage
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.db import IntegrityError
+from django.test import RequestFactory
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.datetime_safe import datetime
+from django.utils.timezone import now
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+from allianceauth.framework.api.user import get_main_character_name_from_user
 
 # Alliance Auth AFAT
 from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
 from afat.tests import BaseTestCase
 from afat.tests.fixtures.load_allianceauth import load_allianceauth
-from afat.tests.fixtures.utils import create_user_from_evecharacter
-from afat.utils import get_main_character_from_user
+from afat.tests.fixtures.utils import create_fake_user, create_user_from_evecharacter
+from afat.views import fatlinks as fatlinks_module
 
 MODULE_PATH = "afat.views.fatlinks"
 
@@ -740,7 +747,7 @@ class TestAjaxGetFatlinksByYear(FatlinksViewTestCase):
 
         self.assertEqual(first=result.status_code, second=HTTPStatus.OK)
 
-        creator_main_character = get_main_character_from_user(user=fatlink.creator)
+        creator_main_character = get_main_character_name_from_user(user=fatlink.creator)
         fleet_time = fatlink.created
         fleet_time_timestamp = fleet_time.timestamp()
         esi_marker = '<span class="badge text-bg-success afat-label ms-2">ESI</span>'
@@ -1277,3 +1284,367 @@ class TestCreateClickableFatlink(FatlinksViewTestCase):
 
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
+
+
+class TestAddFatView(BaseTestCase):
+    """
+    Test add fat view
+    """
+
+    def setUp(self):
+        """
+        Set up test users and fatlink
+
+        :return:
+        :rtype:
+        """
+
+        self.user_with_basic_access = create_fake_user(
+            character_id=2001,
+            character_name="Basic Access User",
+            permissions=["afat.basic_access"],
+            corporation_id=300,
+            corporation_name="Basic Corp",
+            corporation_ticker="BASIC",
+            alliance_id=400,
+            alliance_name="Basic Alliance",
+            alliance_ticker="BASIC",
+        )
+        self.user_fatlinik_creator = create_fake_user(
+            character_id=2000,
+            character_name="Fatlink Creator User",
+            permissions=["afat.add_fatlink"],
+            corporation_id=301,
+            corporation_name="Creator Corp",
+            corporation_ticker="CREAT",
+            alliance_id=401,
+            alliance_name="Creator Alliance",
+            alliance_ticker="CREAT",
+        )
+
+        # Provide a non-null fleet name and a creator to avoid IntegrityError
+        self.fatlink = FatLink.objects.create(
+            hash="valid_hash",
+            is_esilink=False,
+            created=now(),
+            fleet="Test Fleet",
+            creator=self.user_fatlinik_creator,
+        )
+
+        Duration.objects.create(fleet=self.fatlink, duration=60)
+        self.url = reverse("afat:fatlinks_add_fat", args=["valid_hash"])
+
+    @patch("afat.views.fatlinks.esi_handler.result")
+    def test_redirects_to_dashboard_if_fatlink_does_not_exist(self, mock_esi_result):
+        """
+        Test redirects to dashboard if fatlink does not exist
+
+        :param mock_esi_result:
+        :type mock_esi_result:
+        :return:
+        :rtype:
+        """
+
+        # Build request for an invalid hash and attach session/messages/user
+        url = reverse("afat:fatlinks_add_fat", args=["invalid_hash"])
+        request = RequestFactory().get(path=url)
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
+        request.session.save()
+        request.user = self.user_with_basic_access
+        request._messages = FallbackStorage(request)
+
+        # Dummy token (not used because fatlink lookup fails first)
+        token_mock = MagicMock()
+
+        # Call the underlying unwrapped view to bypass decorators
+        response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
+            request, token_mock, "invalid_hash"
+        )
+
+        # Assert redirect to dashboard and warning message added
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.esi_handler.result")
+    def test_redirects_to_dashboard_if_fatlink_is_expired(self, mock_esi_result):
+        """
+        Test redirects to dashboard if fatlink is expired
+
+        :param mock_esi_result:
+        :type mock_esi_result:
+        :return:
+        :rtype:
+        """
+
+        # Make the fatlink expired
+        self.fatlink.created = timezone.now() - timedelta(minutes=120)
+        self.fatlink.save()
+
+        url = reverse("afat:fatlinks_add_fat", args=[self.fatlink.hash])
+        request = RequestFactory().get(path=url)
+
+        # Attach session and messages
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
+        request.session.save()
+        request.user = self.user_with_basic_access
+        request._messages = FallbackStorage(request)
+
+        # Dummy token (expiry check runs before token usage)
+        token_mock = MagicMock()
+
+        # Call the underlying unwrapped view to bypass decorators
+        response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
+            request, token_mock, self.fatlink.hash
+        )
+
+        # Assert redirect to dashboard and warning message added
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.esi_handler.result")
+    @patch("afat.views.fatlinks.EveCharacter.objects.get")
+    def test_redirects_to_dashboard_if_character_is_offline(
+        self, mock_eve_get, mock_esi_result
+    ):
+        """
+        Test redirects to dashboard if character is offline
+
+        :param mock_eve_get:
+        :type mock_eve_get:
+        :param mock_esi_result:
+        :type mock_esi_result:
+        :return:
+        :rtype:
+        """
+
+        # ESI reports the character as offline
+        mock_esi_result.side_effect = [MagicMock(online=False)]
+
+        # Ensure EveCharacter lookup returns a character-like object
+        fake_character = MagicMock(character_name="Offline Char", character_id=12345)
+        mock_eve_get.return_value = fake_character
+
+        # Build RequestFactory request and attach session/messages/user
+        url = reverse("afat:fatlinks_add_fat", args=[self.fatlink.hash])
+        request = RequestFactory().get(path=url)
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
+        request.session.save()
+        request.user = self.user_with_basic_access
+        request._messages = FallbackStorage(request)
+
+        # Create a token-like mock
+        token_mock = MagicMock(character_id=fake_character.character_id)
+        token_mock.is_valid.return_value = True
+        token_mock.scopes = [
+            "esi-location.read_location.v1",
+            "esi-location.read_ship_type.v1",
+            "esi-location.read_online.v1",
+        ]
+
+        # Build a tiny fake esi object that won't perform network calls when attributes are accessed
+        fake_location_api = SimpleNamespace(
+            GetCharactersCharacterIdOnline=lambda character_id, token: MagicMock()
+        )
+        fake_client = SimpleNamespace(Location=fake_location_api)
+        fake_esi = SimpleNamespace(client=fake_client)
+
+        # Patch the module-level esi to the fake object for the duration of the call
+        with patch.object(fatlinks_module, "esi", fake_esi):
+            response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
+                request, token_mock, self.fatlink.hash
+            )
+
+        # Assert redirect to dashboard and warning message added
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:dashboard"))
+
+    @patch("afat.views.fatlinks.EveType.objects.get_or_create_esi")
+    @patch("afat.views.fatlinks.EveSolarSystem.objects.get_or_create_esi")
+    @patch("afat.views.fatlinks.esi")
+    @patch("afat.views.fatlinks.esi_handler.result")
+    def test_creates_fat_and_redirects_on_success(
+        self, mock_esi_result, mock_esi, mock_get_solar, mock_get_type
+    ):
+        """
+        Test creates fat and redirects on success
+
+        :param mock_esi_result:
+        :type mock_esi_result:
+        :param mock_esi:
+        :type mock_esi:
+        :param mock_get_solar:
+        :type mock_get_solar:
+        :param mock_get_type:
+        :type mock_get_type:
+        :return:
+        :rtype:
+        """
+
+        # Prepare ESI handler responses: online, location, ship
+        mock_esi_result.side_effect = [
+            MagicMock(online=True),  # online check
+            MagicMock(solar_system_id=30000142),  # location
+            MagicMock(ship_type_id=12345),  # ship
+        ]
+
+        # Create a real EveCharacter in the DB
+        real_character = EveCharacter.objects.create(
+            character_id=123,
+            character_name="Peter Parker",
+            corporation_id=456,
+            alliance_id=789,
+        )
+
+        # Provide fake EveSolarSystem and EveType results to avoid eveuniverse network calls
+        fake_system = SimpleNamespace(name="Jita")
+        fake_type = SimpleNamespace(name="Rifter")
+        mock_get_solar.return_value = (fake_system, False)
+        mock_get_type.return_value = (fake_type, False)
+
+        # Attach a small fake Location API client to the patched module-level esi
+        fake_location_api = SimpleNamespace(
+            GetCharactersCharacterIdOnline=lambda character_id, token: MagicMock(
+                online=True
+            ),
+            GetCharactersCharacterIdLocation=lambda character_id, token: MagicMock(
+                solar_system_id=30000142
+            ),
+            GetCharactersCharacterIdShip=lambda character_id, token: MagicMock(
+                ship_type_id=12345
+            ),
+        )
+        fake_client = SimpleNamespace(Location=fake_location_api)
+        mock_esi.client = fake_client
+
+        # Build request and session/messages
+        rf = RequestFactory()
+        request = rf.get(self.url)
+        request.user = self.user_with_basic_access
+        session_middleware = SessionMiddleware(get_response=lambda req: None)
+        session_middleware.process_request(request)
+        request.session.save()
+        request._messages = FallbackStorage(request)
+
+        # Token-like mock matching the real character
+        token_mock = MagicMock(character_id=real_character.character_id)
+        token_mock.is_valid.return_value = True
+        token_mock.scopes = [
+            "esi-location.read_location.v1",
+            "esi-location.read_ship_type.v1",
+            "esi-location.read_online.v1",
+        ]
+
+        # Call the unwrapped view to bypass decorators
+        response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
+            request, token_mock, self.fatlink.hash
+        )
+
+        # Assertions
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response["Location"], reverse("afat:dashboard"))
+        self.assertTrue(
+            Fat.objects.filter(
+                fatlink=self.fatlink, character__character_id=token_mock.character_id
+            ).exists()
+        )
+
+    @patch("afat.views.fatlinks.EveType.objects.get_or_create_esi")
+    @patch("afat.views.fatlinks.EveSolarSystem.objects.get_or_create_esi")
+    @patch("afat.views.fatlinks.Fat.objects.create")
+    @patch("afat.views.fatlinks.EveCharacter.objects.get")
+    @patch("afat.views.fatlinks.esi")
+    @patch("afat.views.fatlinks.esi_handler.result")
+    def test_does_not_create_duplicate_fat(
+        self,
+        mock_esi_result,
+        mock_esi,
+        mock_eve_get,
+        mock_fat_create,
+        mock_get_solar,
+        mock_get_type,
+    ):
+        """
+        Test does not create duplicate fat and warns user
+
+        :param mock_esi_result:
+        :type mock_esi_result:
+        :param mock_esi:
+        :type mock_esi:
+        :param mock_eve_get:
+        :type mock_eve_get:
+        :param mock_fat_create:
+        :type mock_fat_create:
+        :param mock_get_solar:
+        :type mock_get_solar:
+        :param mock_get_type:
+        :type mock_get_type:
+        :return:
+        :rtype:
+        """
+
+        # Prepare ESI handler responses: online, location, ship
+        mock_esi_result.side_effect = [
+            MagicMock(online=True),  # online check
+            MagicMock(solar_system_id=30000142),  # location
+            MagicMock(ship_type_id=12345),  # ship
+        ]
+
+        # Provide fake EveSolarSystem and EveType results to avoid eveuniverse network calls
+        fake_system = SimpleNamespace(name="Jita")
+        fake_type = SimpleNamespace(name="Rifter")
+        mock_get_solar.return_value = (fake_system, False)
+        mock_get_type.return_value = (fake_type, False)
+
+        # Attach a small fake Location API client to the patched module-level esi
+        fake_location_api = SimpleNamespace(
+            GetCharactersCharacterIdOnline=lambda character_id, token: MagicMock(
+                online=True
+            ),
+            GetCharactersCharacterIdLocation=lambda character_id, token: MagicMock(
+                solar_system_id=30000142
+            ),
+            GetCharactersCharacterIdShip=lambda character_id, token: MagicMock(
+                ship_type_id=12345
+            ),
+        )
+        fake_client = SimpleNamespace(Location=fake_location_api)
+        mock_esi.client = fake_client
+
+        # Mock character and make Fat.create raise IntegrityError
+        mock_eve_get.return_value = EveCharacter(
+            character_id=123,
+            character_name="John Doe",
+            corporation_id=1,
+            alliance_id=None,
+        )
+        mock_fat_create.side_effect = IntegrityError()
+
+        # Build request and session/messages
+        request = RequestFactory().get(self.url)
+        request.user = self.user_with_basic_access
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
+        request.session.save()
+        request._messages = FallbackStorage(request)
+
+        token_mock = MagicMock(character_id=123)
+        token_mock.is_valid.return_value = True
+        token_mock.scopes = [
+            "esi-location.read_location.v1",
+            "esi-location.read_ship_type.v1",
+            "esi-location.read_online.v1",
+        ]
+
+        # Call the unwrapped view to bypass decorators
+        response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
+            request, token_mock, self.fatlink.hash
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:dashboard"))
+        messages = list(get_messages(request))
+        self.assertTrue(
+            any(
+                "John Doe is already registered for this FAT link." in str(m)
+                for m in messages
+            )
+        )

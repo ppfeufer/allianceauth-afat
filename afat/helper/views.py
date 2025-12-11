@@ -17,11 +17,11 @@ from django.utils.translation import gettext as _
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
+from allianceauth.framework.api.user import get_main_character_name_from_user
 
 # Alliance Auth AFAT
 from afat.helper.users import users_with_permission
 from afat.models import Fat, FatLink, Log
-from afat.utils import get_main_character_from_user
 
 
 def _generate_action_button(  # pylint: disable=too-many-arguments, too-many-positional-arguments
@@ -177,7 +177,7 @@ def convert_fatlinks_to_dict(
     return {
         "pk": fatlink.pk,
         "fleet_name": fatlink_fleet + esi_fleet_marker,
-        "creator_name": get_main_character_from_user(user=fatlink.creator),
+        "creator_name": get_main_character_name_from_user(user=fatlink.creator),
         "fleet_type": fatlink.fleet_type,
         "doctrine": fatlink.doctrine,
         "fleet_time": {
@@ -281,7 +281,7 @@ def convert_logs_to_dict(log: Log, fatlink_exists: bool = False) -> dict:
     log_time_timestamp = log_time.timestamp()
 
     # User name
-    user_main_character = get_main_character_from_user(user=log.user)
+    user_main_character = get_main_character_name_from_user(user=log.user)
 
     fatlink_html = _("{fatlink_hash} (Deleted)").format(fatlink_hash=log.fatlink_hash)
     if fatlink_exists is True:
