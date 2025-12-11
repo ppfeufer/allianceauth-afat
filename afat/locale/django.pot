@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 4.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2025-12-11 07:13+0100\n"
+"POT-Creation-Date: 2025-12-11 08:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1312,102 +1312,106 @@ msgid ""
 "FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:536 afat/views/fatlinks.py:651
-#: afat/views/fatlinks.py:704 afat/views/fatlinks.py:805
+#: afat/views/fatlinks.py:536 afat/views/fatlinks.py:660
+#: afat/views/fatlinks.py:713 afat/views/fatlinks.py:814
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:547
-msgid "<h4>Warning!</h4><p>Sorry, that FAT link is expired.</p>"
+#: afat/views/fatlinks.py:549
+msgid ""
+"<h4>Warning!</h4><p>Sorry, that FAT link is expired. If you were on that "
+"fleet, contact your FC about having your FAT manually added.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:563
+#: afat/views/fatlinks.py:570
 #, python-brace-format
-msgid "<h4>Warning!</h4><p>{character_name} must be online to register.</p>"
+msgid ""
+"<h4>Warning!</h4><p>Cannot register the fleet participation for "
+"{character_name}. The character needs to be online.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:604
+#: afat/views/fatlinks.py:613
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</"
 "p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:620
+#: afat/views/fatlinks.py:629
 #, python-brace-format
 msgid ""
 "<h4>Warning!</h4><p>{character_name} is already registered for this FAT link."
 "</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:674
+#: afat/views/fatlinks.py:683
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:679
+#: afat/views/fatlinks.py:688
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:745
+#: afat/views/fatlinks.py:754
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added "
 "flying a {shiptype} in {system}</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:761
+#: afat/views/fatlinks.py:770
 #, python-brace-format
 msgid ""
 "<h4>Information</h4><p>Pilot is already registered for this FAT link.</"
 "p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:776
+#: afat/views/fatlinks.py:785
 msgid ""
 "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you "
 "entered was not found.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:896
+#: afat/views/fatlinks.py:905
 msgid ""
 "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT "
 "link has already been deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:922
+#: afat/views/fatlinks.py:931
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs "
 "have been successfully deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:964
+#: afat/views/fatlinks.py:973
 msgid ""
 "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</"
 "p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:975
+#: afat/views/fatlinks.py:984
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:995
+#: afat/views/fatlinks.py:1004
 #, python-brace-format
 msgid ""
 "<h4>Success!</h4><p>The FAT for {character_name} has been successfully "
 "deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1069
+#: afat/views/fatlinks.py:1078
 msgid ""
 "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1114
+#: afat/views/fatlinks.py:1123
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1124
+#: afat/views/fatlinks.py:1133
 msgid ""
 "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can "
 "be re-opened only once!</p>"
