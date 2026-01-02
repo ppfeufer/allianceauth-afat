@@ -246,7 +246,7 @@ class TestSettingAdmin(BaseTestCase):
         self.assertEqual(admin_instance.form, SettingAdminForm)
 
     def test_handles_missing_form_gracefully(self):
-        with patch("afat.admin.SettingAdmin.form", None):
+        with patch.object(SettingAdmin, "form", None):
             admin_instance = SettingAdmin(model=Setting, admin_site=admin.site)
 
             self.assertIsNone(admin_instance.form)
