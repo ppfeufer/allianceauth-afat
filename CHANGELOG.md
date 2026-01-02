@@ -51,6 +51,7 @@ Section Order:
 - Code refactoring
   - Use of AA framework functions where ever possible
   - `views.fatlinks.add_fat` simplified
+  - Performance improvements in FAT links view
 
 ## [4.2.0] - 2025-12-02
 
