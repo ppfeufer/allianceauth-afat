@@ -4,6 +4,7 @@ Test AFAT helpers
 
 # Standard Library
 from datetime import timedelta
+from unittest.mock import MagicMock, patch
 
 # Django
 from django.test import RequestFactory
@@ -18,6 +19,9 @@ from allianceauth.framework.api.user import get_main_character_name_from_user
 from afat.helper.fatlinks import get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
 from afat.helper.views import (
+    _cached_main_character_name,
+    _get_request_cache,
+    _perm_flags,
     convert_fatlinks_to_dict,
     convert_fats_to_dict,
     convert_logs_to_dict,
@@ -439,3 +443,170 @@ class TestHelpers(BaseTestCase):
                 "description": log.log_text,
             },
         )
+
+
+class TestHelperCachedMainCharacterName(BaseTestCase):
+    """
+    Test _cached_main_character_name function
+    """
+
+    def test_returns_cached_name_if_present(self):
+        """
+        Test that the function returns the cached name if present.
+
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {"main_char_names": {1: "Cached Character"}}
+        user = MagicMock(pk=1)
+
+        with patch("afat.helper.views.get_main_character_name_from_user") as mock_get:
+            result = _cached_main_character_name(request, user)
+
+            self.assertEqual(result, "Cached Character")
+            mock_get.assert_not_called()
+
+    @patch("afat.helper.views.get_main_character_name_from_user")
+    def test_fetches_and_caches_name_if_not_present(self, mock_get):
+        """
+        Test that the function fetches and caches the name if not present.
+
+        :param mock_get:
+        :type mock_get:
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {"main_char_names": {}}
+        user = MagicMock(pk=2)
+        mock_get.return_value = "New Character"
+
+        result = _cached_main_character_name(request, user)
+
+        self.assertEqual(result, "New Character")
+        self.assertEqual(request._afat_cache["main_char_names"][2], "New Character")
+        mock_get.assert_called_once_with(user=user)
+
+    @patch("afat.helper.views.get_main_character_name_from_user")
+    def test_handles_user_without_pk(self, mock_get):
+        """
+        Test that the function handles users without a primary key.
+
+        :param mock_get:
+        :type mock_get:
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {"main_char_names": {}}
+        user = MagicMock(pk=None)
+        mock_get.return_value = "Anonymous"
+
+        result = _cached_main_character_name(request, user)
+
+        self.assertEqual(result, "Anonymous")
+        self.assertIn(None, request._afat_cache["main_char_names"])
+        self.assertEqual(request._afat_cache["main_char_names"][None], "Anonymous")
+
+
+class TestHelperPermFlags(BaseTestCase):
+    """
+    Test _perm_flags function
+    """
+
+    def test_returns_cached_flags_if_present(self):
+        """
+        Test that the function returns the cached flags if present.
+
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {"perm_flags": {"manage": True, "add": False}}
+
+        result = _perm_flags(request)
+
+        self.assertEqual(result, {"manage": True, "add": False})
+
+    def test_fetches_and_caches_flags_if_not_present(self):
+        """
+        Test that the function fetches and caches the flags if not present.
+
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {}
+        user = MagicMock()
+        user.has_perm.side_effect = lambda perm: perm == "afat.manage_afat"
+        request.user = user
+
+        result = _perm_flags(request)
+
+        self.assertEqual(result, {"manage": True, "add": False})
+        self.assertEqual(
+            request._afat_cache["perm_flags"], {"manage": True, "add": False}
+        )
+
+    def test_handles_request_without_user(self):
+        """
+        Test that the function handles requests without a user.
+
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {}
+        request.user = None
+
+        result = _perm_flags(request)
+
+        self.assertEqual(result, {"manage": False, "add": False})
+        self.assertEqual(
+            request._afat_cache["perm_flags"], {"manage": False, "add": False}
+        )
+
+
+class TestHelperGetRequestCache(BaseTestCase):
+    """
+    Test _get_request_cache function
+    """
+
+    def test_returns_existing_cache_if_present(self):
+        """
+        Test that the function returns the existing cache if present.
+
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        request._afat_cache = {"key": "value"}
+
+        result = _get_request_cache(request)
+
+        self.assertEqual(result, {"key": "value"})
+
+    def test_creates_new_cache_if_not_present(self):
+        """
+        Test that the function creates a new cache if not present.
+
+        :return:
+        :rtype:
+        """
+
+        request = MagicMock()
+        delattr(request, "_afat_cache")
+
+        result = _get_request_cache(request)
+
+        self.assertEqual(result, {})
+        self.assertTrue(hasattr(request, "_afat_cache"))
+        self.assertEqual(request._afat_cache, {})
