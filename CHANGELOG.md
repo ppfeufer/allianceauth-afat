@@ -42,6 +42,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.2.1] - 2026-01-06
+
 ### Fixed
 
 - Use token from character selection/login instead of fetching a token from the DB
@@ -51,6 +53,7 @@ Section Order:
 - Code refactoring
   - Use of AA framework functions where ever possible
   - `views.fatlinks.add_fat` simplified
+- Translations updated
 
 ## [4.2.0] - 2025-12-02
 
@@ -2031,6 +2034,7 @@ Finally restart your supervisor services for AA
 [4.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.0...v4.1.1 "v4.1.1"
 [4.1.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.1...v4.1.2 "v4.1.2"
 [4.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.2...v4.2.0 "v4.2.0"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.0...HEAD "In Development"
+[4.2.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.0...v4.2.1 "v4.2.1"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.1...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
