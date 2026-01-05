@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 4.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-06 00:04+0100\n"
+"POT-Creation-Date: 2026-01-06 00:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -176,14 +176,18 @@ msgid ""
 "%(l10n_second)s"
 msgstr ""
 
-#: afat/helper/views.py:136 afat/helper/views.py:220
+#: afat/helper/views.py:36
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:73
 msgid "ESI"
 msgstr ""
 
-#: afat/helper/views.py:149
+#: afat/helper/views.py:38
+msgid "Delete"
+msgstr ""
+
+#: afat/helper/views.py:40
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
 msgid ""
@@ -191,7 +195,7 @@ msgid ""
 "and close the associated FAT link."
 msgstr ""
 
-#: afat/helper/views.py:151
+#: afat/helper/views.py:42
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:41
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
@@ -199,58 +203,54 @@ msgstr ""
 msgid "Stop tracking"
 msgstr ""
 
-#: afat/helper/views.py:153
+#: afat/helper/views.py:249
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from "
 "{character_name}?</p>"
 msgstr ""
 
-#: afat/helper/views.py:171 afat/helper/views.py:231
-msgid "Delete"
-msgstr ""
-
-#: afat/helper/views.py:173
+#: afat/helper/views.py:268
 #, python-brace-format
 msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr ""
 
-#: afat/helper/views.py:233
+#: afat/helper/views.py:327
 #, python-brace-format
 msgid ""
 "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr ""
 
-#: afat/helper/views.py:286
+#: afat/helper/views.py:374
 #, python-brace-format
 msgid "{fatlink_hash} (Deleted)"
 msgstr ""
 
-#: afat/helper/views.py:402
+#: afat/helper/views.py:490
 msgid "Monday"
 msgstr ""
 
-#: afat/helper/views.py:403
+#: afat/helper/views.py:491
 msgid "Tuesday"
 msgstr ""
 
-#: afat/helper/views.py:404
+#: afat/helper/views.py:492
 msgid "Wednesday"
 msgstr ""
 
-#: afat/helper/views.py:405
+#: afat/helper/views.py:493
 msgid "Thursday"
 msgstr ""
 
-#: afat/helper/views.py:406
+#: afat/helper/views.py:494
 msgid "Friday"
 msgstr ""
 
-#: afat/helper/views.py:407
+#: afat/helper/views.py:495
 msgid "Saturday"
 msgstr ""
 
-#: afat/helper/views.py:408
+#: afat/helper/views.py:496
 msgid "Sunday"
 msgstr ""
 

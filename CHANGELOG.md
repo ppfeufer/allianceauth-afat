@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Performance improvements in FAT links view
+
 ## [4.2.1] - 2026-01-06
 
 ### Fixed
@@ -53,7 +57,6 @@ Section Order:
 - Code refactoring
   - Use of AA framework functions where ever possible
   - `views.fatlinks.add_fat` simplified
-- Translations updated
 
 ## [4.2.0] - 2025-12-02
 
