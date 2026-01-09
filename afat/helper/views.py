@@ -37,7 +37,7 @@ class AFATUI(Enum):
 
     BUTTON_DELETE_TEXT = _("Delete")
     BUTTON_CLOSE_ESI_FLEET_TITLE = _(
-        "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
+        "Stop automatic tracking through ESI for this fleet and close the associated FAT link."
     )
     BUTTON_CLOSE_ESI_FLEET_CONFIRM_TEXT = _("Stop tracking")
 
@@ -66,8 +66,11 @@ def _generate_close_esi_fleet_action_button(  # pylint: disable=too-many-argumen
     redirect_param = f"?next={redirect_to}" if redirect_to else ""
 
     return (
-        '<a class="btn btn-afat-action btn-primary btn-sm" style="margin-left: 0.25rem;" '
-        f'title="{AFATUI.BUTTON_CLOSE_ESI_FLEET_TITLE.value}" data-bs-toggle="modal" data-bs-target="#cancelEsiFleetModal" '
+        '<a class="btn btn-afat-action btn-primary btn-sm m-1" '
+        f'title="{AFATUI.BUTTON_CLOSE_ESI_FLEET_TITLE.value}" '
+        'data-bs-toggle="modal" '
+        'data-bs-target="#cancelEsiFleetModal" '
+        'data-bs-tooltip="afat" '
         f'data-url="{reverse(viewname=viewname, args=[fatlink_hash])}{redirect_param}" '
         f'data-body-text="{body_text}" data-confirm-text="{AFATUI.BUTTON_CLOSE_ESI_FLEET_CONFIRM_TEXT.value}">'
         '<i class="fa-solid fa-times"></i></a>'

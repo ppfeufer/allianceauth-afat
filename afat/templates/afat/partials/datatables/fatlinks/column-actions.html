@@ -1,0 +1,45 @@
+{% load i18n %}
+
+{% if row.is_esilink and row.is_registered_on_esi and row.creator == request.user %}
+    <a
+        class="btn btn-afat-action btn-primary btn-sm"
+        style="width: 2rem; height: 2rem;"
+        title='{% translate "Stop automatic tracking through ESI for this fleet and close the associated FAT link." %}'
+        data-bs-toggle="modal"
+        data-bs-target="#cancelEsiFleetModal"
+        data-bs-tooltip="afat"
+        data-url="{% url 'afat:fatlinks_close_esi_fatlink' row.hash %}"
+        data-body-text="<p>{% blocktranslate with esi_fleet_id=row.esi_fleet_id character_name=row.creator.profile.main_character %}Are you sure you want to close ESI fleet with ID {{ esi_fleet_id }} from {{ character_name }}?{% endblocktranslate %}</p>"
+        data-confirm-text='{% translate "Stop tracking" %}'
+    >
+        <i class="fa-solid fa-times"></i>
+    </a>
+{% endif %}
+
+{% if perms.afat.add_fatlink or perms.afat.manage_afat %}
+    <a
+        class="btn btn-info btn-sm"
+        style="width: 2rem; height: 2rem;"
+        href="{% url 'afat:fatlinks_details_fatlink' row.hash %}"
+        title='{% translate "View the FATs associated with this link." %}'
+        data-bs-tooltip="afat"
+    >
+        <i class="fa-solid fa-eye"></i>
+    </a>
+{% endif %}
+
+{% if perms.afat.manage_afat %}
+    <a
+        class="btn btn-danger btn-sm"
+        style="width: 2rem; height: 2rem;"
+        title='{% translate "Delete this FAT link from the system. This action is irreversible." %}'
+        data-bs-toggle="modal"
+        data-bs-target="#deleteFatLinkModal"
+        data-bs-tooltip="afat"
+        data-url="{% url 'afat:fatlinks_delete_fatlink' row.hash %}"
+        data-body-text='<p>{% blocktranslate with fleet_name=row.fleet %}Are you sure you want to delete the FAT link and all registered FATs for fleet "{{ fleet_name }}"?{% endblocktranslate %}</p>'
+        data-confirm-text='{% translate "Delete FAT link" %}'
+    >
+        <i class="fa-solid fa-trash"></i>
+    </a>
+{% endif %}

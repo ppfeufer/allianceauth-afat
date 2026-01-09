@@ -74,8 +74,13 @@
 
     <script>
         const afatJsSettingsOverride = {
-            url: {
-                linkList: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year %}'
+            dataTables: {
+                ajax: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year %}',
+                processing: true,
+                serverSide: true,
+                language: {
+                    processing: `{% include "afat/partials/common/spinner.html" %}`,
+                },
             },
             permissions: {
                 addFatLink: {% if perms.afat.add_fatlink %}true{% else %}false{% endif %},
@@ -103,5 +108,4 @@
     {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-fatlist-js.html" %}
-    {% include "bundles/filterdropdown-js.html" %}
 {% endblock %}

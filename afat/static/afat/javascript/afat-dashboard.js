@@ -13,6 +13,10 @@ $(document).ready(() => {
                     data: data,
                     columns: columns,
                     order: order,
+                    ordering: {
+                        indicators: false,
+                        handler: false
+                    },
                     columnDefs: columnDefs || [],
                     columnControl: columnControl || afatSettings.dataTables.columnControl
                 });
