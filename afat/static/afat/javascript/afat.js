@@ -97,7 +97,6 @@ const _manageModal = (modalElement) => { // eslint-disable-line no-unused-vars
  * @returns {void}
  */
 const _afatBootstrapTooltip = ({selector = '.allianceauth-afat', namespace = 'afat'}) => { // eslint-disable-line no-unused-vars
-    console.log(`Initializing Bootstrap tooltips for selector: ${selector} with namespace: ${namespace}`);
     document.querySelectorAll(`${selector} [data-bs-tooltip="${namespace}"]`)
         .forEach((tooltipTriggerEl) => {
             // Dispose existing tooltip instance if it exists

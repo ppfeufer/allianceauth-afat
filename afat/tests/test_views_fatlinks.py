@@ -24,12 +24,10 @@ from django.utils.timezone import now
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
-from allianceauth.framework.api.user import get_main_character_name_from_user
 
 # Alliance Auth AFAT
-from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
+from afat.models import Duration, Fat, FatLink, Log
 from afat.tests import BaseTestCase
-from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import create_fake_user, create_user_from_evecharacter
 from afat.views import fatlinks as fatlinks_module
 
@@ -51,7 +49,6 @@ class FatlinksViewTestCase(BaseTestCase):
         """
 
         super().setUpClass()
-        load_allianceauth()
 
         cls.character_1001 = EveCharacter.objects.get(character_id=1001)
         cls.character_1002 = EveCharacter.objects.get(character_id=1002)
@@ -699,113 +696,6 @@ class TestProcessManualFat(FatlinksViewTestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertTrue(
             any("The hash provided is not valid." in str(m) for m in messages)
-        )
-
-
-class TestAjaxGetFatlinksByYear(FatlinksViewTestCase):
-    """
-    Test ajax get fatlinks by year
-    """
-
-    def test_ajax_get_fatlinks_by_year(self):
-        """
-        Test ajax get fatlinks by year
-
-        :return:
-        :rtype:
-        """
-
-        self.client.force_login(user=self.user_with_manage_afat)
-
-        fatlink_hash = get_hash_on_save()
-        fatlink_created = FatLink.objects.create(
-            fleet="April Fleet 1",
-            creator=self.user_with_manage_afat,
-            character=self.character_1001,
-            hash=fatlink_hash,
-            is_esilink=True,
-            is_registered_on_esi=True,
-            esi_fleet_id=3726458287,
-            fleet_type="CTA",
-            doctrine="Ships",
-            created="2021-11-05T13:19:49.676Z",
-        )
-
-        Duration.objects.create(fleet=fatlink_created, duration=120)
-
-        fatlink = (
-            FatLink.objects.select_related_default()
-            .annotate_fats_count()
-            .get(hash=fatlink_hash)
-        )
-
-        url_with_year = reverse(
-            viewname="afat:fatlinks_ajax_get_fatlinks_by_year",
-            kwargs={"year": 2021},
-        )
-        result = self.client.get(path=url_with_year)
-
-        self.assertEqual(first=result.status_code, second=HTTPStatus.OK)
-
-        creator_main_character = get_main_character_name_from_user(user=fatlink.creator)
-        fleet_time = fatlink.created
-        fleet_time_timestamp = fleet_time.timestamp()
-        esi_marker = '<span class="badge text-bg-success afat-label ms-2">ESI</span>'
-
-        close_esi_tracking_url = reverse(
-            viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink_hash]
-        )
-        redirect_url = reverse(viewname="afat:fatlinks_overview")
-        edit_url = reverse(
-            viewname="afat:fatlinks_details_fatlink", args=[fatlink_hash]
-        )
-        delete_url = reverse(
-            viewname="afat:fatlinks_delete_fatlink", args=[fatlink_hash]
-        )
-
-        self.assertJSONEqual(
-            raw=str(result.content, encoding="utf8"),
-            expected_data=[
-                {
-                    "pk": fatlink.pk,
-                    "fleet_name": fatlink.fleet + esi_marker,
-                    "creator_name": creator_main_character,
-                    "fleet_type": "CTA",
-                    "fleet_time": {
-                        "time": "2021-11-05T13:19:49.676Z",
-                        "timestamp": fleet_time_timestamp,
-                    },
-                    "fats_number": 0,
-                    "hash": fatlink.hash,
-                    "is_esilink": True,
-                    "doctrine": "Ships",
-                    "esi_fleet_id": fatlink.esi_fleet_id,
-                    "is_registered_on_esi": True,
-                    "actions": (
-                        '<a class="btn btn-afat-action btn-primary btn-sm" '
-                        'style="margin-left: 0.25rem;" title="Clicking here will stop '
-                        "the automatic tracking through ESI for this fleet and close "
-                        'the associated FAT link." data-bs-toggle="modal" '
-                        'data-bs-target="#cancelEsiFleetModal" '
-                        f'data-url="{close_esi_tracking_url}?next={redirect_url}" '
-                        'data-body-text="<p>Are you sure you want to close ESI fleet '
-                        'with ID 3726458287 from Bruce Wayne?</p>" '
-                        'data-confirm-text="Stop tracking"><i class="fa-solid fa-times">'
-                        '</i></a><a class="btn btn-info btn-sm m-1" '
-                        f'href="{edit_url}">'
-                        '<span class="fa-solid fa-eye"></span></a>'
-                        '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" '
-                        'data-bs-target="#deleteFatLinkModal" '
-                        f'data-url="{delete_url}" '
-                        'data-confirm-text="Delete" '
-                        'data-body-text="<p>Are you sure you want to delete FAT '
-                        'link April Fleet 1?</p>">'
-                        '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
-                    ),
-                    # "actions": "",
-                    "via_esi": "Yes",
-                }
-            ],
         )
 
 

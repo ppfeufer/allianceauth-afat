@@ -13,7 +13,6 @@ from allianceauth.eveonline.models import EveCharacter
 
 # Alliance Auth AFAT
 from afat.tests import BaseTestCase
-from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import create_user_from_evecharacter
 
 MODULE_PATH = "afat.views.statistics"
@@ -30,7 +29,6 @@ class TestAccesss(BaseTestCase):
         """
 
         super().setUpClass()
-        load_allianceauth()
 
         # given
         cls.character_1001 = EveCharacter.objects.get(character_id=1001)

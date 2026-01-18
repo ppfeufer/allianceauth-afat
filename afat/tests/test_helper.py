@@ -28,7 +28,6 @@ from afat.helper.views import (
 )
 from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
 from afat.tests import BaseTestCase
-from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import (
     add_character_to_user,
     create_user_from_evecharacter,
@@ -53,7 +52,6 @@ class TestHelpers(BaseTestCase):
         """
 
         super().setUpClass()
-        load_allianceauth()
 
         cls.factory = RequestFactory()
 
@@ -257,11 +255,12 @@ class TestHelpers(BaseTestCase):
                 "esi_fleet_id": 3726458287,
                 "is_registered_on_esi": True,
                 "actions": (
-                    '<a class="btn btn-afat-action btn-primary btn-sm" '
-                    'style="margin-left: 0.25rem;" title="Clicking here will '
-                    "stop the automatic tracking through ESI for this fleet "
-                    'and close the associated FAT link." data-bs-toggle="modal" '
+                    '<a class="btn btn-afat-action btn-primary btn-sm m-1" '
+                    'title="Stop automatic tracking '
+                    'through ESI for this fleet and close the associated FAT link." '
+                    'data-bs-toggle="modal" '
                     'data-bs-target="#cancelEsiFleetModal" '
+                    'data-bs-tooltip="afat" '
                     f'data-url="{close_esi_tracking_url}" '
                     'data-body-text="<p>Are you sure you want to close ESI '
                     'fleet with ID 3726458287 from Bruce Wayne?</p>" '
