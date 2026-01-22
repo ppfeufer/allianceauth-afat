@@ -36,7 +36,7 @@ class FatLinksTableView(PermissionRequiredMixin, DataTablesView):
             "{{ row.creator.profile.main_character }}",
         ),
         ("created", "afat/partials/datatables/fatlinks/column-date.html"),
-        ("fats_count", "{{ row.fats_count }}"),
+        ("", "{{ row.afat_fats.count }}"),
         ("", "afat/partials/datatables/fatlinks/column-actions.html"),
     ]
 
@@ -59,9 +59,10 @@ class FatLinksTableView(PermissionRequiredMixin, DataTablesView):
         """
 
         qs = (
-            self.model.objects.select_related_default()
-            .filter(created__year=kwargs.get("year", datetime.now().year))
-            .annotate_fats_count()
+            self.model.objects.select_related_default().filter(
+                created__year=kwargs.get("year", datetime.now().year)
+            )
+            # .annotate_fats_count()
         )
 
         return qs

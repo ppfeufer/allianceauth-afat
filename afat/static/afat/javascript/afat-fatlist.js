@@ -16,6 +16,10 @@ $(document).ready(() => {
             targets: [4, 5],
             columnControl: _removeSearchFromColumnControl(),
         },
+        {
+            target: 5,
+            orderable: false
+        },
     ];
 
     if (hasPermissions) {
