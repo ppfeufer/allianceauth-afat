@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
+    {% include "bundles/datatables-2-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -71,7 +71,7 @@
         };
     </script>
 
-    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
+    {% include "bundles/datatables-2-js-bs5.html" %}
     {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-dashboard-js.html" %}
