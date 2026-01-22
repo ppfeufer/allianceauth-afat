@@ -42,9 +42,11 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.3.1] - 2026-01-22
+
 ### Removed
 
-- Annotations from FAT links view, as they were a major performance hog
+- Annotations from FAT links view, as they were a major performance hog (Thanks to @pvyParts for helping testing this)
 
 ## [4.3.0] - 2026-01-22
 
@@ -2055,6 +2057,7 @@ Finally restart your supervisor services for AA
 [4.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.2...v4.2.0 "v4.2.0"
 [4.2.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.0...v4.2.1 "v4.2.1"
 [4.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.1...v4.3.0 "v4.3.0"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.0...HEAD "In Development"
+[4.3.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.0...v4.3.1 "v4.3.1"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.1...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"

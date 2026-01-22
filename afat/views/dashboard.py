@@ -108,7 +108,7 @@ def ajax_get_recent_fatlinks(request: WSGIRequest) -> JsonResponse:
     fatlinks = (
         FatLink.objects.filter(id__in=fatlink_ids)
         .order_by("-created")
-        .annotate_fats_count()  # pylint: disable=duplicate-code
+        .annotate_fats_count()
     )
 
     fatlink_rows = [
