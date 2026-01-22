@@ -32,7 +32,12 @@
                     language: '{{ LANGUAGE_CODE }}',
                     dataTables: {
                         paging: true,
-                        language: {url: '{{ DT_LANG_PATH }}'},
+                        processing: true,
+                        responsive: true,
+                        language: {
+                            processing: `{% include "framework/datatables/process-indicator.html" %}`,
+                            url: '{{ DT_LANG_PATH }}'
+                        },
                         layout: { // see https://datatables.net/reference/option/layout
                             topStart: 'pageLength',
                             topEnd: 'search',

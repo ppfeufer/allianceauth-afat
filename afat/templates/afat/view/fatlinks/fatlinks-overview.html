@@ -38,13 +38,7 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td colspan="{% if perms.afat.add_fatlink or perms.afat.manage_afat %}7{% else %}6{% endif %}" class="text-center">
-                            {% include "afat/partials/common/spinner.html" %}
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
 
                 <tfoot>
                     <tr>
@@ -65,7 +59,8 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
+    {% include "bundles/datatables-2-css-bs5.html" %}
+    {% include "bundles/datatables-2-columncontrol-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -76,11 +71,7 @@
         const afatJsSettingsOverride = {
             dataTables: {
                 ajax: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year %}',
-                processing: true,
-                serverSide: true,
-                language: {
-                    processing: `{% include "afat/partials/common/spinner.html" %}`,
-                },
+                serverSide: true
             },
             permissions: {
                 addFatLink: {% if perms.afat.add_fatlink %}true{% else %}false{% endif %},
@@ -104,7 +95,8 @@
         };
     </script>
 
-    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
+    {% include "bundles/datatables-2-js-bs5.html" %}
+    {% include "bundles/datatables-2-columncontrol-js-bs5.html" %}
     {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-fatlist-js.html" %}

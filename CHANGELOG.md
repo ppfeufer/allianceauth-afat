@@ -42,9 +42,19 @@ Section Order:
 
 <!-- Your changes go here -->
 
+> [!IMPORTANT]
+>
+> This version is utilising features that are only available in Alliance Auth >= 4.12.0.
+> Please make sure to update your Alliance Auth instance before installing this version,
+> otherwise, an update to Alliance Auth will be pulled in unsupervised.
+
 ### Changed
 
-- Performance improvements in FAT links view
+- Performance improvements in FAT links view by using serverside processing for
+  DataTables provided by the Alliance Auth framework
+- Switched to DataTables 2 provided by Alliance Auth, instead of bundling it ourselves
+- Minimum requirements:
+  - Alliance Auth >= 4.12.0
 
 ## [4.2.1] - 2026-01-06
 
