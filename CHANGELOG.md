@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Removed
+
+- Unused bundles
+
 ## [4.3.1] - 2026-01-22
 
 ### Removed
@@ -1578,7 +1582,7 @@ that were previously "deleted" as active again.
 
 ### Fixed
 
-- An issue with sorting by date in datatables
+- An issue with sorting by date in DataTables
 
 ## [1.5.2] - 2021-02-02
 
