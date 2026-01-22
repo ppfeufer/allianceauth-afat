@@ -42,6 +42,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.3.0] - 2026-01-22
+
 > [!IMPORTANT]
 >
 > This version is utilising features that are only available in Alliance Auth >= 4.12.0.
@@ -2048,6 +2050,7 @@ Finally restart your supervisor services for AA
 [4.1.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.1...v4.1.2 "v4.1.2"
 [4.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.1.2...v4.2.0 "v4.2.0"
 [4.2.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.0...v4.2.1 "v4.2.1"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.1...HEAD "In Development"
+[4.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.1...v4.3.0 "v4.3.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
