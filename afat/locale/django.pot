@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 4.2.1\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-09 14:01+0100\n"
+"POT-Creation-Date: 2026-01-22 10:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,10 +177,10 @@ msgid ""
 msgstr ""
 
 #: afat/helper/views.py:36
-#: afat/templates/afat/partials/datatables/column-fleetname.html:7
+#: afat/templates/afat/partials/datatables/fatlinks/column-fleetname.html:7
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:5
 #: afat/templates/afat/partials/fatlinks/fatlink-list-legend.html:6
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:73
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:68
 msgid "ESI"
 msgstr ""
 
@@ -688,20 +688,20 @@ msgstr ""
 msgid "View the FATs associated with this link."
 msgstr ""
 
-#: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:34
+#: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:35
 msgid "Delete this FAT link from the system. This action is irreversible."
 msgstr ""
 
-#: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:38
+#: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:40
 #, python-format
 msgid ""
 "Are you sure you want to delete the FAT link and all registered FATs for "
 "fleet \"%(fleet_name)s\"?"
 msgstr ""
 
-#: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:39
+#: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:41
 #: afat/templates/afat/view/dashboard/dashboard.html:24
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:60
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr ""
 
@@ -813,7 +813,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:91
 #: afat/templates/afat/view/dashboard/dashboard.html:27
-#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:63
+#: afat/templates/afat/view/fatlinks/fatlinks-overview.html:57
 msgid "Close ESI fleet tracking"
 msgstr ""
 
