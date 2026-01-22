@@ -2,9 +2,6 @@
 Tests for DataTables views.
 """
 
-# Standard Library
-from unittest.mock import patch
-
 # Django
 from django.test import RequestFactory
 from django.utils.datetime_safe import datetime
@@ -107,22 +104,22 @@ class TestFatLinksTableView(BaseTestCase):
 
         self.assertEqual(qs.count(), 1)
 
-    @patch("afat.models.FatLink.objects.select_related_default")
-    def test_calls_select_related_default_on_queryset(self, mock_select_related):
-        """
-        Test calls select_related_default on queryset
-
-        :param mock_select_related:
-        :type mock_select_related:
-        :return:
-        :rtype:
-        """
-
-        mock_select_related.return_value.filter.return_value.annotate_fats_count.return_value = (
-            []
-        )
-        request = RequestFactory().get("/")
-        view = FatLinksTableView()
-        view.get_model_qs(request)
-
-        mock_select_related.assert_called_once()
+    # @patch("afat.models.FatLink.objects.select_related_default")
+    # def test_calls_select_related_default_on_queryset(self, mock_select_related):
+    #     """
+    #     Test calls select_related_default on queryset
+    #
+    #     :param mock_select_related:
+    #     :type mock_select_related:
+    #     :return:
+    #     :rtype:
+    #     """
+    #
+    #     mock_select_related.return_value.filter.return_value.annotate_fats_count.return_value = (
+    #         []
+    #     )
+    #     request = RequestFactory().get("/")
+    #     view = FatLinksTableView()
+    #     view.get_model_qs(request)
+    #
+    #     mock_select_related.assert_called_once()

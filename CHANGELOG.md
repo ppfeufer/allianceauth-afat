@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Removed
+
+- Annotations from FAT links view, as they were a major performance hog
+
 ## [4.3.0] - 2026-01-22
 
 > [!IMPORTANT]
