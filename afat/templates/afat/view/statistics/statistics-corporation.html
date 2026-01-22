@@ -37,7 +37,8 @@
 {% endblock %}
 
 {% block extra_css %}
-    {% include "afat/bundles/datatables-2-css.html" with extColumnControl=True %}
+    {% include "bundles/datatables-2-css-bs5.html" %}
+    {% include "bundles/datatables-2-columncontrol-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
 {% endblock %}
 
@@ -45,7 +46,8 @@
     {% include "bundles/chart-js.html" %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-statistics-js.html" %}
-    {% include "afat/bundles/datatables-2-js.html" with extColumnControl=True %}
+    {% include "bundles/datatables-2-js-bs5.html" %}
+    {% include "bundles/datatables-2-columncontrol-js-bs5.html" %}
     {% include "bundles/moment-js.html" %}
 
     <script>
