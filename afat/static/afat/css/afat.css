@@ -61,23 +61,7 @@
 ------------------------------------------------------------------------------------- */
 @media all {
     .allianceauth-afat .afat-spinner {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-}
-
-/* DataTables
-------------------------------------------------------------------------------------- */
-@media all {
-    /* DataTables ColumnControl
-    --------------------------------------------------------------------------------- */
-    table.dataTable span.dtcc div.dtcc-search>div select {
-        background-color: var(--bs-body-bg);
-        color: var(--bs-body-color);
-        padding: 0.375rem;
-    }
-
-    table.dataTable .dt-column-header div.dtcc-search-title {
-        display: none;
+        width: 2rem;
+        height: 2rem;
     }
 }

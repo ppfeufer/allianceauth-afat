@@ -14,7 +14,6 @@ from allianceauth.eveonline.models import EveCharacter
 # Alliance Auth AFAT
 from afat.models import Fat, FatLink
 from afat.tests import BaseTestCase
-from afat.tests.fixtures.load_allianceauth import load_allianceauth
 from afat.tests.fixtures.utils import (
     RequestStub,
     add_character_to_user,
@@ -53,7 +52,6 @@ class TestStatistics(BaseTestCase):
         """
 
         super().setUpClass()
-        load_allianceauth()
 
         cls.character_1001 = EveCharacter.objects.get(character_id=1001)
         cls.character_1002 = EveCharacter.objects.get(character_id=1002)

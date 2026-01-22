@@ -8,6 +8,9 @@ import socket
 # Django
 from django.test import TestCase
 
+# Alliance Auth AFAT
+from afat.tests.fixtures.load_allianceauth import load_allianceauth
+
 
 class SocketAccessError(Exception):
     """
@@ -40,6 +43,8 @@ class BaseTestCase(TestCase):
         cls.socket_original = socket.socket
 
         socket.socket = cls.guard
+
+        load_allianceauth()
 
         return super().setUpClass()
 

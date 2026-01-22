@@ -40,7 +40,7 @@ from afat.forms import (
 from afat.handler import esi_handler
 from afat.helper.fatlinks import get_doctrines, get_esi_fleet_information_by_user
 from afat.helper.time import get_time_delta
-from afat.helper.views import convert_fatlinks_to_dict, convert_fats_to_dict
+from afat.helper.views import convert_fats_to_dict
 from afat.models import (
     Duration,
     Fat,
@@ -88,40 +88,6 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         template_name="afat/view/fatlinks/fatlinks-overview.html",
         context=context,
     )
-
-
-@login_required()
-@permission_required("afat.basic_access")
-def ajax_get_fatlinks_by_year(request: WSGIRequest, year: int) -> JsonResponse:
-    """
-    Ajax call :: get all FAT links for a given year
-
-    :param request:
-    :type request:
-    :param year:
-    :type year:
-    :return:
-    :rtype:
-    """
-
-    fatlinks = (
-        FatLink.objects.select_related_default()
-        .filter(created__year=year)
-        .annotate_fats_count()
-    )
-
-    close_esi_redirect = reverse(viewname="afat:fatlinks_overview")
-
-    fatlink_rows = [
-        convert_fatlinks_to_dict(
-            request=request,
-            fatlink=fatlink,
-            close_esi_redirect=close_esi_redirect,
-        )
-        for fatlink in fatlinks.iterator()
-    ]
-
-    return JsonResponse(data=fatlink_rows, safe=False)
 
 
 @login_required()

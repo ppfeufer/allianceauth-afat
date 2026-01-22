@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{{ row.fleet }}
+
+{% if row.is_esilink %}
+    <span class="badge text-bg-{% if row.is_registered_on_esi %}success{% else %}secondary{% endif %} afat-label ms-1">
+        {% translate "ESI" %}
+    </span>
+{% endif %}

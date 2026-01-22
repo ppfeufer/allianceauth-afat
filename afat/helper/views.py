@@ -5,6 +5,7 @@ Views helper
 # Standard Library
 import random
 from collections import OrderedDict
+from enum import Enum
 
 # Django
 from django.contrib.auth.models import Permission, User
@@ -13,7 +14,8 @@ from django.db import models
 from django.db.models import QuerySet
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
-from django.utils.translation import gettext as _
+from django.utils.functional import Promise
+from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter, EveCorporationInfo
@@ -24,12 +26,26 @@ from afat.helper.users import users_with_permission
 from afat.models import Fat, FatLink, Log
 
 
-def _generate_action_button(  # pylint: disable=too-many-arguments, too-many-positional-arguments
+class AFATUI(Enum):
+    """
+    AFAT UI Elements
+    """
+
+    BADGE_ESI_TRACKING_ACTIVE = "badge text-bg-success afat-label ms-2"
+    BADGE_ESI_TRACKING_INACTIVE = "badge text-bg-secondary afat-label ms-2"
+    BADGE_ESI_TRACKING_TEXT = _("ESI")
+
+    BUTTON_DELETE_TEXT = _("Delete")
+    BUTTON_CLOSE_ESI_FLEET_TITLE = _(
+        "Stop automatic tracking through ESI for this fleet and close the associated FAT link."
+    )
+    BUTTON_CLOSE_ESI_FLEET_CONFIRM_TEXT = _("Stop tracking")
+
+
+def _generate_close_esi_fleet_action_button(  # pylint: disable=too-many-arguments, too-many-positional-arguments
     viewname: str,
     fatlink_hash: str,
     redirect_to: str,
-    title: str,
-    confirm_text: str,
     body_text: str,
 ) -> str:
     """
@@ -41,10 +57,6 @@ def _generate_action_button(  # pylint: disable=too-many-arguments, too-many-pos
     :type fatlink_hash:
     :param redirect_to:
     :type redirect_to:
-    :param title:
-    :type title:
-    :param confirm_text:
-    :type confirm_text:
     :param body_text:
     :type body_text:
     :return:
@@ -54,10 +66,13 @@ def _generate_action_button(  # pylint: disable=too-many-arguments, too-many-pos
     redirect_param = f"?next={redirect_to}" if redirect_to else ""
 
     return (
-        '<a class="btn btn-afat-action btn-primary btn-sm" style="margin-left: 0.25rem;" '
-        f'title="{title}" data-bs-toggle="modal" data-bs-target="#cancelEsiFleetModal" '
+        '<a class="btn btn-afat-action btn-primary btn-sm m-1" '
+        f'title="{AFATUI.BUTTON_CLOSE_ESI_FLEET_TITLE.value}" '
+        'data-bs-toggle="modal" '
+        'data-bs-target="#cancelEsiFleetModal" '
+        'data-bs-tooltip="afat" '
         f'data-url="{reverse(viewname=viewname, args=[fatlink_hash])}{redirect_param}" '
-        f'data-body-text="{body_text}" data-confirm-text="{confirm_text}">'
+        f'data-body-text="{body_text}" data-confirm-text="{AFATUI.BUTTON_CLOSE_ESI_FLEET_CONFIRM_TEXT.value}">'
         '<i class="fa-solid fa-times"></i></a>'
     )
 
@@ -80,8 +95,90 @@ def _generate_view_button(viewname: str, fatlink_hash: str) -> str:
     )
 
 
+def _get_request_cache(request: WSGIRequest) -> dict:
+    """
+    Get or create a per-request cache dictionary
+
+    :param request:
+    :type request:
+    :return:
+    :rtype:
+    """
+
+    cache = getattr(request, "_afat_cache", None)
+
+    if cache is None:
+        cache = {}
+        setattr(request, "_afat_cache", cache)
+
+    return cache
+
+
+def _perm_flags(request: WSGIRequest) -> dict[str, bool]:
+    """
+    Get and cache permission flags for the request user
+
+    :param request:
+    :type request:
+    :return:
+    :rtype:
+    """
+
+    cache = getattr(request, "_afat_cache", None)
+
+    if cache is None:
+        request._afat_cache = {}
+        cache = request._afat_cache
+
+    # Return cached value if present
+    if "perm_flags" in cache:
+        return cache["perm_flags"]
+
+    # Safely handle requests without a user
+    user = getattr(request, "user", None)
+
+    if user is None:
+        flags = {"manage": False, "add": False}
+    else:
+        flags = {
+            "manage": bool(user.has_perm("afat.manage_afat")),
+            "add": bool(user.has_perm("afat.add_fatlink")),
+        }
+
+    cache["perm_flags"] = flags
+
+    return flags
+
+
+def _cached_main_character_name(request: WSGIRequest, user: User) -> str:
+    """
+    Get and cache main character name for a user in the request cache
+
+    :param request:
+    :type request:
+    :param user:
+    :type user:
+    :return:
+    :rtype:
+    """
+
+    cache = _get_request_cache(request)
+    names = cache.setdefault("main_char_names", {})
+    uid = getattr(user, "pk", None)
+
+    if uid in names:
+        return names[uid]
+
+    name = get_main_character_name_from_user(user=user)
+    names[uid] = name
+
+    return name
+
+
 def _generate_delete_button(
-    viewname: str, fatlink_hash: str, confirm_text: str, body_text: str
+    viewname: str,
+    fatlink_hash: str,
+    body_text: str | Promise,
 ) -> str:
     """
     Generate delete button HTML
@@ -100,7 +197,7 @@ def _generate_delete_button(
 
     return (
         '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteFatLinkModal" '
-        f'data-url="{reverse(viewname=viewname, args=[fatlink_hash])}" data-confirm-text="{confirm_text}" '
+        f'data-url="{reverse(viewname=viewname, args=[fatlink_hash])}" data-confirm-text="{AFATUI.BUTTON_DELETE_TEXT.value}" '
         f'data-body-text="{body_text}">'
         '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
     )
@@ -122,62 +219,64 @@ def convert_fatlinks_to_dict(
     :rtype:
     """
 
-    fatlink_fleet = fatlink.fleet or fatlink.hash
-    via_esi = "No"
+    user = request.user
+    flags = _perm_flags(request)
+    has_manage = flags["manage"]
+    has_add = flags["add"]
+
+    fleet_label = fatlink.fleet or fatlink.hash
+    via_esi = "Yes" if fatlink.is_esilink else "No"
+
+    # Build ESI marker
     esi_fleet_marker = ""
-
     if fatlink.is_esilink:
-        via_esi = "Yes"
-        marker_classes = (
-            "badge text-bg-success afat-label ms-2"
+        badge_cls = (
+            AFATUI.BADGE_ESI_TRACKING_ACTIVE.value
             if fatlink.is_registered_on_esi
-            else "badge text-bg-secondary afat-label ms-2"
+            else AFATUI.BADGE_ESI_TRACKING_INACTIVE.value
         )
-        esi_fleet_marker = f'<span class="{marker_classes}">{_("ESI")}</span>'
-
-    actions = ""
-    if (
-        fatlink.is_esilink
-        and fatlink.is_registered_on_esi
-        and fatlink.creator == request.user
-    ):
-        actions += _generate_action_button(
-            viewname="afat:fatlinks_close_esi_fatlink",
-            fatlink_hash=fatlink.hash,
-            redirect_to=close_esi_redirect,
-            title=_(
-                "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
-            ),
-            confirm_text=_("Stop tracking"),
-            body_text=_(
-                "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from {character_name}?</p>"
-            ).format(
-                esi_fleet_id=fatlink.esi_fleet_id,
-                character_name=fatlink.character.character_name,
-            ),
+        esi_fleet_marker = (
+            f'<span class="{badge_cls}">{AFATUI.BADGE_ESI_TRACKING_TEXT.value}</span>'
         )
 
-    if request.user.has_perm("afat.manage_afat") or request.user.has_perm(
-        "afat.add_fatlink"
-    ):
-        actions += _generate_view_button(
-            viewname="afat:fatlinks_details_fatlink", fatlink_hash=fatlink.hash
+    actions_parts = []
+
+    # Only compute action button when owner & esilink conditions match
+    if fatlink.is_esilink and fatlink.is_registered_on_esi and fatlink.creator == user:
+        actions_parts.append(
+            _generate_close_esi_fleet_action_button(
+                "afat:fatlinks_close_esi_fatlink",
+                fatlink.hash,
+                close_esi_redirect,
+                _(
+                    "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from {character_name}?</p>"
+                ).format(
+                    esi_fleet_id=fatlink.esi_fleet_id,
+                    character_name=fatlink.character.character_name,
+                ),
+            )
         )
 
-    if request.user.has_perm("afat.manage_afat"):
-        actions += _generate_delete_button(
-            viewname="afat:fatlinks_delete_fatlink",
-            fatlink_hash=fatlink.hash,
-            confirm_text=_("Delete"),
-            body_text=_(
-                "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
-            ).format(fatlink_fleet=fatlink_fleet),
+    if has_manage or has_add:
+        actions_parts.append(
+            _generate_view_button("afat:fatlinks_details_fatlink", fatlink.hash)
+        )
+
+    if has_manage:
+        actions_parts.append(
+            _generate_delete_button(
+                "afat:fatlinks_delete_fatlink",
+                fatlink.hash,
+                _(
+                    "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
+                ).format(fatlink_fleet=fleet_label),
+            )
         )
 
     return {
         "pk": fatlink.pk,
-        "fleet_name": fatlink_fleet + esi_fleet_marker,
-        "creator_name": get_main_character_name_from_user(user=fatlink.creator),
+        "fleet_name": fleet_label + esi_fleet_marker,
+        "creator_name": _cached_main_character_name(request, fatlink.creator),
         "fleet_type": fatlink.fleet_type,
         "doctrine": fatlink.doctrine,
         "fleet_time": {
@@ -189,7 +288,7 @@ def convert_fatlinks_to_dict(
         "is_esilink": fatlink.is_esilink,
         "esi_fleet_id": fatlink.esi_fleet_id,
         "is_registered_on_esi": fatlink.is_registered_on_esi,
-        "actions": actions,
+        "actions": "".join(actions_parts),
         "via_esi": via_esi,
     }
 
@@ -206,42 +305,36 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     :rtype:
     """
 
-    # ESI marker
+    flags = _perm_flags(request)
+    has_manage = flags["manage"]
+
     via_esi = "No"
     esi_fleet_marker = ""
-
     if fat.fatlink.is_esilink:
         via_esi = "Yes"
-        esi_fleet_marker_classes = "badge text-bg-secondary afat-label ms-2"
-
-        if fat.fatlink.is_registered_on_esi:
-            esi_fleet_marker_classes = "badge text-bg-success afat-label ms-2"
-
-        marker_text = _("ESI")
-        esi_fleet_marker += (
-            f'<span class="{esi_fleet_marker_classes}">{marker_text}</span>'
+        badge_cls = (
+            AFATUI.BADGE_ESI_TRACKING_ACTIVE.value
+            if fat.fatlink.is_registered_on_esi
+            else AFATUI.BADGE_ESI_TRACKING_INACTIVE.value
+        )
+        esi_fleet_marker = (
+            f'<span class="{badge_cls}">{AFATUI.BADGE_ESI_TRACKING_TEXT.value}</span>'
         )
 
-    # Actions
-    actions = ""
-    if request.user.has_perm(perm="afat.manage_afat"):
+    actions_parts = []
+    if has_manage:
         button_delete_fat = reverse(
-            viewname="afat:fatlinks_delete_fat", args=[fat.fatlink.hash, fat.id]
+            "afat:fatlinks_delete_fat", args=[fat.fatlink.hash, fat.id]
         )
-        button_delete_text = _("Delete")
         modal_body_text = _(
             "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
         ).format(character_name=fat.character.character_name)
 
-        actions += (
-            '<a class="btn btn-danger btn-sm" '
-            'data-bs-toggle="modal" '
-            'data-bs-target="#deleteFatModal" '
-            f'data-url="{button_delete_fat}" '
-            f'data-confirm-text="{button_delete_text}" '
+        actions_parts.append(
+            '<a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteFatModal" '
+            f'data-url="{button_delete_fat}" data-confirm-text="{AFATUI.BUTTON_DELETE_TEXT.value}" '
             f'data-body-text="{modal_body_text}">'
-            '<i class="fa-solid fa-trash-can fa-fw"></i>'
-            "</a>"
+            '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
         )
 
     fleet_time = fat.fatlink.created
@@ -250,7 +343,7 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
         fat.fatlink.fleet if fat.fatlink.fleet is not None else fat.fatlink.hash
     )
 
-    summary = {
+    return {
         "system": fat.system,
         "ship_type": fat.shiptype,
         "character_name": fat.character.character_name,
@@ -259,10 +352,8 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
         "fleet_time": {"time": fleet_time, "timestamp": fleet_time_timestamp},
         "fleet_type": fat.fatlink.fleet_type,
         "via_esi": via_esi,
-        "actions": actions,
+        "actions": "".join(actions_parts),
     }
-
-    return summary
 
 
 def convert_logs_to_dict(log: Log, fatlink_exists: bool = False) -> dict:
