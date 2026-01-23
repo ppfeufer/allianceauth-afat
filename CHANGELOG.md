@@ -44,6 +44,7 @@ Section Order:
 
 ### Removed
 
+- Obsolete code
 - Unused bundles
 
 ## [4.3.1] - 2026-01-22

@@ -255,6 +255,7 @@ class FatLink(models.Model):
             self.hash
         except ObjectDoesNotExist:
             self.hash = get_hash_on_save()
+
         super().save(*args, **kwargs)
 
     @property
