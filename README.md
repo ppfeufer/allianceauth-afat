@@ -114,6 +114,12 @@ information, see below.
 > If you don't have Alliance Auth running already, please install it first before
 > proceeding. (See the official [AA installation guide](https://allianceauth.readthedocs.io/en/latest/installation/allianceauth.html) for details)
 
+> [!IMPORTANT]
+>
+> This app is utilising features that are only available in Alliance Auth >= 4.12.0.
+> Please make sure to update your Alliance Auth instance before installing this app,
+> otherwise, an update to Alliance Auth will be pulled in unsupervised.
+
 > [!NOTE]
 >
 > For users migrating from Alliance Auth's built-in FAT systems,
