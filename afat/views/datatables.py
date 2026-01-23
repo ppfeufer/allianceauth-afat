@@ -36,7 +36,7 @@ class FatLinksTableView(PermissionRequiredMixin, DataTablesView):
             "{{ row.creator.profile.main_character }}",
         ),
         ("created", "afat/partials/datatables/fatlinks/column-date.html"),
-        ("", "{{ row.afat_fats.count }}"),
+        ("", "{{ row.number_of_fats }}"),
         ("", "afat/partials/datatables/fatlinks/column-actions.html"),
     ]
 
