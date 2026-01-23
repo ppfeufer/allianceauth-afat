@@ -283,7 +283,7 @@ def convert_fatlinks_to_dict(
             "time": fatlink.created,
             "timestamp": fatlink.created.timestamp(),
         },
-        "fats_number": fatlink.fats_count,
+        "fats_number": fatlink.number_of_fats,
         "hash": fatlink.hash,
         "is_esilink": fatlink.is_esilink,
         "esi_fleet_id": fatlink.esi_fleet_id,

@@ -197,10 +197,8 @@ class TestHelpers(BaseTestCase):
             character=self.character_1001, fatlink=fatlink_2_created, shiptype="Omen"
         )
 
-        fatlink_1 = (
-            FatLink.objects.select_related_default()
-            .annotate_fats_count()
-            .get(hash=fatlink_hash_fleet_1)
+        fatlink_1 = FatLink.objects.select_related_default().get(
+            hash=fatlink_hash_fleet_1
         )
         close_esi_tracking_url = reverse(
             viewname="afat:fatlinks_close_esi_fatlink", args=[fatlink_1.hash]
@@ -212,10 +210,8 @@ class TestHelpers(BaseTestCase):
             viewname="afat:fatlinks_delete_fatlink", args=[fatlink_1.hash]
         )
 
-        fatlink_2 = (
-            FatLink.objects.select_related_default()
-            .annotate_fats_count()
-            .get(hash=fatlink_hash_fleet_2)
+        fatlink_2 = FatLink.objects.select_related_default().get(
+            hash=fatlink_hash_fleet_2
         )
         edit_url_2 = reverse(
             viewname="afat:fatlinks_details_fatlink", args=[fatlink_2.hash]
@@ -249,7 +245,7 @@ class TestHelpers(BaseTestCase):
                     "time": fleet_time_1,
                     "timestamp": fleet_time_timestamp_1,
                 },
-                "fats_number": fatlink_1.fats_count,
+                "fats_number": fatlink_1.number_of_fats,
                 "hash": fatlink_1.hash,
                 "is_esilink": True,
                 "esi_fleet_id": 3726458287,
@@ -296,7 +292,7 @@ class TestHelpers(BaseTestCase):
                     "time": fleet_time_2,
                     "timestamp": fleet_time_timestamp_2,
                 },
-                "fats_number": fatlink_2.fats_count,
+                "fats_number": fatlink_2.number_of_fats,
                 "hash": fatlink_2.hash,
                 "is_esilink": False,
                 "esi_fleet_id": None,
