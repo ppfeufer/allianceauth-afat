@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Use object property to count FATs
+
 ### Removed
 
 - Obsolete code
