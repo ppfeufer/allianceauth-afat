@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-22 13:04+0100\n"
+"POT-Creation-Date: 2026-01-24 16:10+0100\n"
 "PO-Revision-Date: 2025-12-15 14:17+0000\n"
 "Last-Translator: Варрус <horowiserus@gmail.com>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
@@ -39,7 +39,7 @@ msgstr "Відстежування активності у флоті"
 msgid "Fleet type"
 msgstr "Тип флоту"
 
-#: afat/admin.py:127 afat/models/afat.py:435
+#: afat/admin.py:127 afat/models/afat.py:436
 msgid "Is enabled"
 msgstr "Увімкнено"
 
@@ -375,43 +375,43 @@ msgstr "FAT-посилання"
 msgid "FAT links"
 msgstr "FAT-посилання"
 
-#: afat/models/afat.py:288
+#: afat/models/afat.py:289
 msgid "FAT link duration"
 msgstr "Тривалість FAT-посилання"
 
-#: afat/models/afat.py:289
+#: afat/models/afat.py:290
 msgid "FAT link durations"
 msgstr "Тривалість FAT-посилання"
 
-#: afat/models/afat.py:302
+#: afat/models/afat.py:303
 msgid "Character who registered this FAT"
 msgstr "Персонаж який зареєстрував цей FAT"
 
-#: afat/models/afat.py:308
+#: afat/models/afat.py:309
 msgid "Corporation EVE ID of the character who registered this FAT at the time of registration"
 msgstr "EVE ID копрорації персонажа, який зареєстрував цей FAT на момент реєстрації"
 
-#: afat/models/afat.py:315
+#: afat/models/afat.py:316
 msgid "Alliance EVE ID of the character who registered this FAT at the time of registration"
 msgstr "EVE ID альянсу персонажа, який зареєстрував цей FAT на момент реєстрації"
 
-#: afat/models/afat.py:323
+#: afat/models/afat.py:324
 msgid "The FAT link the character registered at"
 msgstr "FAT-посилання персонажа який зареєстрував"
 
-#: afat/models/afat.py:327
+#: afat/models/afat.py:328
 msgid "The system the character is in"
 msgstr "Система розташування персонажа"
 
-#: afat/models/afat.py:334
+#: afat/models/afat.py:335
 msgid "The ship the character was flying"
 msgstr "Корабель персонажа"
 
-#: afat/models/afat.py:346
+#: afat/models/afat.py:347
 msgid "FAT"
 msgstr "FAT"
 
-#: afat/models/afat.py:347
+#: afat/models/afat.py:348
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
@@ -421,60 +421,60 @@ msgstr "FAT"
 msgid "FATs"
 msgstr "FATи"
 
-#: afat/models/afat.py:371
+#: afat/models/afat.py:372
 msgid "FAT link created"
 msgstr "FAT-посилання створено"
 
-#: afat/models/afat.py:372
+#: afat/models/afat.py:373
 msgid "FAT link changed"
 msgstr "FAT-посилання змінено"
 
-#: afat/models/afat.py:373
+#: afat/models/afat.py:374
 msgid "FAT link removed"
 msgstr "FAT-посилання видалено"
 
-#: afat/models/afat.py:374
+#: afat/models/afat.py:375
 msgid "FAT link re-opened"
 msgstr "FAT-посилання перевідкрито"
 
-#: afat/models/afat.py:376
+#: afat/models/afat.py:377
 msgid "FAT removed"
 msgstr "FAT видалено"
 
-#: afat/models/afat.py:377
+#: afat/models/afat.py:378
 msgid "Manual FAT added"
 msgstr "Ручний FAT додано"
 
-#: afat/models/afat.py:403
+#: afat/models/afat.py:404
 msgid "Log"
 msgstr "Журнал"
 
-#: afat/models/afat.py:404 afat/templates/afat/view/logs/logs-overview.html:11
+#: afat/models/afat.py:405 afat/templates/afat/view/logs/logs-overview.html:11
 msgid "Logs"
 msgstr "Журнал"
 
-#: afat/models/afat.py:416
+#: afat/models/afat.py:417
 msgid "Short name to identify this doctrine"
 msgstr "Коротка назва для ідентифікації цієї доктрини"
 
-#: afat/models/afat.py:417
+#: afat/models/afat.py:418
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
 msgstr "Назва"
 
-#: afat/models/afat.py:425
+#: afat/models/afat.py:426
 msgid "You can add notes about this doctrine here if you want. (optional)"
 msgstr "Ви можете додати примітки щодо цієї доктрини. (необов'язково)"
 
-#: afat/models/afat.py:427
+#: afat/models/afat.py:428
 msgid "Notes"
 msgstr "Примітки"
 
-#: afat/models/afat.py:434
+#: afat/models/afat.py:435
 msgid "Whether this doctrine is enabled or not."
 msgstr "Чи активна ця доктрина."
 
-#: afat/models/afat.py:443
+#: afat/models/afat.py:444
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:39
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
@@ -482,59 +482,59 @@ msgstr "Чи активна ця доктрина."
 msgid "Doctrine"
 msgstr "Доктрина"
 
-#: afat/models/afat.py:444
+#: afat/models/afat.py:445
 msgid "Doctrines"
 msgstr "Доктрини"
 
-#: afat/models/afat.py:469
+#: afat/models/afat.py:470
 msgid "Default FAT link expiry time"
 msgstr "Термін дії FAT-посилання за замовчуванням"
 
-#: afat/models/afat.py:472
+#: afat/models/afat.py:473
 msgid "Default FAT link reopen duration"
 msgstr "Тривалість повторного відкриття посилання FAT за замовчуванням"
 
-#: afat/models/afat.py:475
+#: afat/models/afat.py:476
 msgid "Default FAT link reopen grace time"
 msgstr "Час для повторного відкриття посилання FAT за замовчуванням"
 
-#: afat/models/afat.py:477
+#: afat/models/afat.py:478
 msgid "Default log duration"
 msgstr "Час зберігання журналу за замовчуванням"
 
-#: afat/models/afat.py:479
+#: afat/models/afat.py:480
 msgid "Use doctrines from fittings module"
 msgstr "Використовувати доктрини з модуля фітингів"
 
-#: afat/models/afat.py:485
+#: afat/models/afat.py:486
 msgid "Default expiry time for clickable FAT links in minutes. (Default: 60 minutes)"
 msgstr "Час до закінчення терміну дії активних FAT-посилань. (За замовчуванням: 60 хвилин)"
 
-#: afat/models/afat.py:494
+#: afat/models/afat.py:495
 msgid "Default time in minutes a FAT link can be re-opened after it is expired. (Default: 60 minutes)"
 msgstr "Час протягом якого можна знову відкрити посилання FAT після його завершення. (За замовчуванням: 60 хвилин)"
 
-#: afat/models/afat.py:503
+#: afat/models/afat.py:504
 msgid "Default time in minutes a FAT link is re-opened for. (Default: 60 minutes)"
 msgstr "Тривалість повторного відкриття посилання FAT у хвилинах. (За замовчуванням: 60 хвилин)"
 
-#: afat/models/afat.py:511
+#: afat/models/afat.py:512
 msgid "Default time in days a log entry is kept. (Default: 60 days)"
 msgstr "Тривалість зберігання запису в журналі в днях. (За замовчуванням: 60 днів)"
 
-#: afat/models/afat.py:519
+#: afat/models/afat.py:520
 msgid "Whether to use the doctrines from the Fittings modules in the doctrine dropdown. Note: The fittings module needs to be installed for this."
 msgstr "Чи використовувати доктрини з модуля фітингів у випадаючому списку доктрин. Примітка: для цього необхідно встановити модуль фітингів."
 
-#: afat/models/afat.py:531
+#: afat/models/afat.py:532
 msgid "Setting"
 msgstr "Налаштування"
 
-#: afat/models/afat.py:532
+#: afat/models/afat.py:533
 msgid "Settings"
 msgstr "Налаштування"
 
-#: afat/models/afat.py:542
+#: afat/models/afat.py:543
 msgid "AFAT Settings"
 msgstr "Налаштування AFAT"
 

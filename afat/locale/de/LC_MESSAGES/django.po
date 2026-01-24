@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-22 13:04+0100\n"
+"POT-Creation-Date: 2026-01-24 16:10+0100\n"
 "PO-Revision-Date: 2026-01-22 09:36+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
@@ -40,7 +40,7 @@ msgstr "Flotten Aktivitäts Verfolgung"
 msgid "Fleet type"
 msgstr "Flottenart"
 
-#: afat/admin.py:127 afat/models/afat.py:435
+#: afat/admin.py:127 afat/models/afat.py:436
 msgid "Is enabled"
 msgstr "Ist aktiviert"
 
@@ -356,43 +356,43 @@ msgstr "FAT-Link"
 msgid "FAT links"
 msgstr "FAT-Links"
 
-#: afat/models/afat.py:288
+#: afat/models/afat.py:289
 msgid "FAT link duration"
 msgstr "FAT-Link Laufzeit"
 
-#: afat/models/afat.py:289
+#: afat/models/afat.py:290
 msgid "FAT link durations"
 msgstr "FAT-Link Laufzeiten"
 
-#: afat/models/afat.py:302
+#: afat/models/afat.py:303
 msgid "Character who registered this FAT"
 msgstr "Charakter welcher diesen FAT registriert hat"
 
-#: afat/models/afat.py:308
+#: afat/models/afat.py:309
 msgid "Corporation EVE ID of the character who registered this FAT at the time of registration"
 msgstr "EVE ID der Corporation des Charakters, der für diesen FAT registriert ist, zum Zeitpunkt der Registrierung"
 
-#: afat/models/afat.py:315
+#: afat/models/afat.py:316
 msgid "Alliance EVE ID of the character who registered this FAT at the time of registration"
 msgstr "EVE ID der Allianz des Charakters, der für diesen FAT registriert ist, zum Zeitpunkt der Registrierung"
 
-#: afat/models/afat.py:323
+#: afat/models/afat.py:324
 msgid "The FAT link the character registered at"
 msgstr "Der FAT-Link zu dem der Charakter registriert ist"
 
-#: afat/models/afat.py:327
+#: afat/models/afat.py:328
 msgid "The system the character is in"
 msgstr "Das System in dem der Charakter ist"
 
-#: afat/models/afat.py:334
+#: afat/models/afat.py:335
 msgid "The ship the character was flying"
 msgstr "Das Schiff welches der Charakter geflogen ist"
 
-#: afat/models/afat.py:346
+#: afat/models/afat.py:347
 msgid "FAT"
 msgstr "FAT"
 
-#: afat/models/afat.py:347
+#: afat/models/afat.py:348
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
@@ -402,60 +402,60 @@ msgstr "FAT"
 msgid "FATs"
 msgstr "FATs"
 
-#: afat/models/afat.py:371
+#: afat/models/afat.py:372
 msgid "FAT link created"
 msgstr "FAT-Link erstellt"
 
-#: afat/models/afat.py:372
+#: afat/models/afat.py:373
 msgid "FAT link changed"
 msgstr "FAT-Link geändert"
 
-#: afat/models/afat.py:373
+#: afat/models/afat.py:374
 msgid "FAT link removed"
 msgstr "FAT-Link entfernt"
 
-#: afat/models/afat.py:374
+#: afat/models/afat.py:375
 msgid "FAT link re-opened"
 msgstr "FAT-Link erneut geöffnet"
 
-#: afat/models/afat.py:376
+#: afat/models/afat.py:377
 msgid "FAT removed"
 msgstr "FAT entfernt"
 
-#: afat/models/afat.py:377
+#: afat/models/afat.py:378
 msgid "Manual FAT added"
 msgstr "Manueller FAT Eintrag hinzugefügt"
 
-#: afat/models/afat.py:403
+#: afat/models/afat.py:404
 msgid "Log"
 msgstr "Log"
 
-#: afat/models/afat.py:404 afat/templates/afat/view/logs/logs-overview.html:11
+#: afat/models/afat.py:405 afat/templates/afat/view/logs/logs-overview.html:11
 msgid "Logs"
 msgstr "Logs"
 
-#: afat/models/afat.py:416
+#: afat/models/afat.py:417
 msgid "Short name to identify this doctrine"
 msgstr "Kurzname der Doktrin"
 
-#: afat/models/afat.py:417
+#: afat/models/afat.py:418
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:10
 msgid "Name"
 msgstr "Name"
 
-#: afat/models/afat.py:425
+#: afat/models/afat.py:426
 msgid "You can add notes about this doctrine here if you want. (optional)"
 msgstr "Du kannst hier bei Bedarf Notizen zu dieser Doktrin hinzufügen. (optional)"
 
-#: afat/models/afat.py:427
+#: afat/models/afat.py:428
 msgid "Notes"
 msgstr "Notizen"
 
-#: afat/models/afat.py:434
+#: afat/models/afat.py:435
 msgid "Whether this doctrine is enabled or not."
 msgstr "Ist diese Doktrin aktiv oder nicht."
 
-#: afat/models/afat.py:443
+#: afat/models/afat.py:444
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:39
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
@@ -463,59 +463,59 @@ msgstr "Ist diese Doktrin aktiv oder nicht."
 msgid "Doctrine"
 msgstr "Doktrin"
 
-#: afat/models/afat.py:444
+#: afat/models/afat.py:445
 msgid "Doctrines"
 msgstr "Doktrinen"
 
-#: afat/models/afat.py:469
+#: afat/models/afat.py:470
 msgid "Default FAT link expiry time"
 msgstr "FAT-Link Ablaufzeit in Minuten"
 
-#: afat/models/afat.py:472
+#: afat/models/afat.py:473
 msgid "Default FAT link reopen duration"
 msgstr "Standarddauer für wieder geöffnete FAT-Links"
 
-#: afat/models/afat.py:475
+#: afat/models/afat.py:476
 msgid "Default FAT link reopen grace time"
 msgstr "Standarddauer in der FAT-Links wieder geöffnet werden können"
 
-#: afat/models/afat.py:477
+#: afat/models/afat.py:478
 msgid "Default log duration"
 msgstr "Standardprotokolldauer"
 
-#: afat/models/afat.py:479
+#: afat/models/afat.py:480
 msgid "Use doctrines from fittings module"
 msgstr "Doktrinen vom Fittings Modul nutzen"
 
-#: afat/models/afat.py:485
+#: afat/models/afat.py:486
 msgid "Default expiry time for clickable FAT links in minutes. (Default: 60 minutes)"
 msgstr "Standardablaufzeit für klickbare FAT-Links in Minuten. (Standard: 60 Minuten)"
 
-#: afat/models/afat.py:494
+#: afat/models/afat.py:495
 msgid "Default time in minutes a FAT link can be re-opened after it is expired. (Default: 60 minutes)"
 msgstr "Standardzeit in Minuten in der ein FAT-Link nach Ablauf wieder geöffnet werden. (Standard: 60 Minuten)"
 
-#: afat/models/afat.py:503
+#: afat/models/afat.py:504
 msgid "Default time in minutes a FAT link is re-opened for. (Default: 60 minutes)"
 msgstr "Standardzeit in Minuten die ein FAT-Link wieder geöffnet wird. (Standard: 60 Minuten)"
 
-#: afat/models/afat.py:511
+#: afat/models/afat.py:512
 msgid "Default time in days a log entry is kept. (Default: 60 days)"
 msgstr "Standardzeit in Tagen die ein Protokolleintrag gespeichert wird. (Standard: 60 Tage)"
 
-#: afat/models/afat.py:519
+#: afat/models/afat.py:520
 msgid "Whether to use the doctrines from the Fittings modules in the doctrine dropdown. Note: The fittings module needs to be installed for this."
 msgstr "Sollen die Doktrinen aus dem Fittings Modul genutzt werden? Hinweis: das Fittings Module muss hierfür installiert sein."
 
-#: afat/models/afat.py:531
+#: afat/models/afat.py:532
 msgid "Setting"
 msgstr "Einstellung"
 
-#: afat/models/afat.py:532
+#: afat/models/afat.py:533
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: afat/models/afat.py:542
+#: afat/models/afat.py:543
 msgid "AFAT Settings"
 msgstr "AFAT Einstellungen"
 
