@@ -13,11 +13,12 @@ $(document).ready(() => {
     // Column definitions based on permissions
     const linkListTableColumnDefs = [
         {
-            targets: [4, 5],
+            target: 4,
             columnControl: _removeSearchFromColumnControl(),
         },
         {
             target: 5,
+            columnControl: _removeColumnControl(),
             orderable: false
         },
     ];

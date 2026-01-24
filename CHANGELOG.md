@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- ColumnControl on FAT list view
+
 ### Changed
 
 - Use object property to count FATs
