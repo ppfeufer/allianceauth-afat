@@ -22,6 +22,13 @@
  */
 
 /**
+ * @callback ValueCallback
+ * @param {String} value
+ * @param {Autocomplete} inst
+ * @returns {void}
+ */
+
+/**
  * @callback ServerCallback
  * @param {Response} response
  * @param {Autocomplete} inst
@@ -73,15 +80,16 @@
  * @property {String} datalist The id of the source datalist
  * @property {String} server Endpoint for data provider
  * @property {String} serverMethod HTTP request method for data provider, default is GET
- * @property {String|Object} serverParams Parameters to pass along to the server. You can specify a "related" key with the id of a related field.
+ * @property {String|Object} serverParams Parameters to pass along to the server.  You can specify a "related" key with (a) the id of a related field or (b) an array of related field ids.
  * @property {String} serverDataKey By default: data
- * @property {Object} fetchOptions Any other fetch options (https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax)
+ * @property {RequestInit} fetchOptions Any other fetch options (https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax)
  * @property {Boolean} liveServer Should the endpoint be called each time on input
  * @property {Boolean} noCache Prevent caching by appending a timestamp
  * @property {Number} debounceTime Debounce time for live server
  * @property {String} notFoundMessage Display a no suggestions found message. Leave empty to disable
  * @property {RenderCallback} onRenderItem Callback function that returns the label
  * @property {ItemCallback} onSelectItem Callback function to call on selection
+ * @property {ValueCallback} onClearItem Callback function to call on clear
  * @property {ServerCallback} onServerResponse Callback function to process server response. Must return a Promise
  * @property {ErrorCallback} onServerError Callback function to process server errors.
  * @property {ItemCallback} onChange Callback function to call on change-event. Returns currently selected item if any
@@ -133,6 +141,7 @@ const DEFAULTS = {
     return label;
   },
   onSelectItem: (item, inst) => {},
+  onClearItem: (item, inst) => {},
   onServerResponse: (response, inst) => {
     return response.json();
   },
@@ -158,6 +167,9 @@ const SHOW_CLASS = "show";
 const NEXT = "next";
 const PREV = "prev";
 
+/**
+ * @type WeakMap<HTMLElement, Autocomplete>
+ */
 const INSTANCE_MAP = new WeakMap();
 let counter = 0;
 let activeCounter = 0;
@@ -216,7 +228,7 @@ function fuzzyMatch(str, lookup) {
   let pos = 0;
   for (let i = 0; i < lookup.length; i++) {
     const c = lookup[i];
-    if (c == " ") continue;
+    if (c === " ") continue;
     pos = str.indexOf(c, pos) + 1;
     if (pos <= 0) {
       return false;
@@ -239,14 +251,15 @@ function insertAfter(el, newEl) {
  * @returns {string}
  */
 function decodeHtml(html) {
-  var txt = document.createElement("textarea");
+  const txt = document.createElement("textarea");
   txt.innerHTML = html;
   return txt.value;
 }
 
 /**
  * @param {HTMLElement} el
- * @param {Object} attrs
+ * @param {Object.<string, string>} attrs
+ * @returns {void}
  */
 function attrs(el, attrs) {
   for (const [k, v] of Object.entries(attrs)) {
@@ -257,6 +270,7 @@ function attrs(el, attrs) {
 /**
  * Add a zero width join between chars
  * @param {HTMLElement|Element} el
+ * @returns {void}
  */
 function zwijit(el) {
   //@ts-ignore
@@ -268,6 +282,11 @@ function zwijit(el) {
     .join("");
 }
 
+/**
+ * @param {string} str
+ * @param {string} obj
+ * @returns {string}
+ */
 function nested(str, obj = "window") {
   return str.split(".").reduce((r, p) => r[p], obj);
 }
@@ -277,7 +296,7 @@ function nested(str, obj = "window") {
 class Autocomplete {
   /**
    * @param {HTMLInputElement} el
-   * @param {Config|Object} config
+   * @param {Partial<Config>} config
    */
   constructor(el, config = {}) {
     if (!(el instanceof HTMLElement)) {
@@ -292,9 +311,13 @@ class Autocomplete {
     this._configure(config);
 
     // Private vars
+    /** @private */
     this._isMouse = false;
+    /** @private */
     this._preventInput = false;
+    /** @private */
     this._keyboardNavigation = false;
+    /** @private */
     this._searchFunc = debounce(() => {
       this._loadFromServer(true);
     }, this._config.debounceTime);
@@ -314,7 +337,7 @@ class Autocomplete {
     }
 
     // Add listeners (remove then on dispose()). See handleEvent.
-    ["focus", "change", "blur", "input", "keydown"].forEach((type) => {
+    ["focus", "change", "blur", "input", "beforeinput", "keydown"].forEach((type) => {
       this._searchInput.addEventListener(type, this);
     });
     ["mousemove", "mouseenter", "mouseleave"].forEach((type) => {
@@ -329,7 +352,8 @@ class Autocomplete {
   /**
    * Attach to all elements matched by the selector
    * @param {string} selector
-   * @param {Config|Object} config
+   * @param {Partial<Config>} config
+   * @returns {void}
    */
   static init(selector = "input.autocomplete", config = {}) {
     /**
@@ -343,6 +367,7 @@ class Autocomplete {
 
   /**
    * @param {HTMLInputElement} el
+   * @returns {Autocomplete | null}
    */
   static getInstance(el) {
     return INSTANCE_MAP.has(el) ? INSTANCE_MAP.get(el) : null;
@@ -350,7 +375,8 @@ class Autocomplete {
 
   /**
    * @param {HTMLInputElement} el
-   * @param {Object} config
+   * @param {Partial<Config>} config
+   * @returns {Autocomplete}
    */
   static getOrCreateInstance(el, config = {}) {
     return this.getInstance(el) || new this(el, config);
@@ -359,7 +385,7 @@ class Autocomplete {
   dispose() {
     activeCounter--;
 
-    ["focus", "change", "blur", "input", "keydown"].forEach((type) => {
+    ["focus", "change", "blur", "input", "beforeinput", "keydown"].forEach((type) => {
       this._searchInput.removeEventListener(type, this);
     });
     ["mousemove", "mouseenter", "mouseleave"].forEach((type) => {
@@ -382,6 +408,9 @@ class Autocomplete {
     INSTANCE_MAP.delete(this._searchInput);
   }
 
+  /**
+   * @private
+   */
   _getClearControl() {
     if (this._config.clearControl) {
       return document.querySelector(this._config.clearControl);
@@ -407,7 +436,8 @@ class Autocomplete {
   };
 
   /**
-   * @param {Config|Object} config
+   * @private
+   * @param {Partial<Config>} config
    */
   _configure(config = {}) {
     this._config = Object.assign({}, DEFAULTS);
@@ -461,7 +491,9 @@ class Autocomplete {
   // #endregion
 
   // #region Html
-
+  /**
+   * @private
+   */
   _configureSearchInput() {
     this._searchInput.autocomplete = "off";
     this._searchInput.spellcheck = false;
@@ -496,10 +528,13 @@ class Autocomplete {
     }
   }
 
+  /**
+   * @private
+   */
   _configureDropElement() {
     this._dropElement = document.createElement("ul");
     this._dropElement.id = "ac-menu-" + counter;
-    this._dropElement.classList.add(...["dropdown-menu", "autocomplete-menu", "p-0"]);
+    this._dropElement.classList.add("dropdown-menu", "autocomplete-menu", "p-0");
     this._dropElement.style.maxHeight = "280px";
     if (!this._config.fullWidth) {
       this._dropElement.style.maxWidth = "360px";
@@ -521,35 +556,58 @@ class Autocomplete {
   // #endregion
 
   // #region Events
-
+  /**
+   * @param {MouseEvent} e
+   */
   onclick(e) {
-    if (e.target.matches(this._config.clearControl)) {
+    if (e.target instanceof Element && e.target.matches(this._config.clearControl)) {
       this.clear();
     }
   }
 
-  oninput(e) {
+  /**
+   * @param {InputEvent} e
+   * @returns {void}
+   */
+  onbeforeinput(e) {
     if (this._preventInput) {
       return;
     }
     // Input has changed, clear value
-    if (this._hiddenInput) {
+    if (this._hiddenInput && this._hiddenInput.value) {
+      this._config.onClearItem(this._searchInput.value, this);
       this._hiddenInput.value = null;
+    }
+  }
+
+  /**
+   * @param {InputEvent} e
+   * @returns {void}
+   */
+  oninput(e) {
+    if (this._preventInput) {
+      return;
     }
     this.showOrSearch();
   }
 
+  /**
+   * @param {InputEvent} e
+   */
   onchange(e) {
     const search = this._searchInput.value;
     const item = this._items.find((item) => item.label === search);
     this._config.onChange(item, this);
   }
 
+    /**
+   * @param {FocusEvent} e
+   */
   onblur(e) {
     const related = e.relatedTarget;
     // Clicking on the scroll in a modal blur the element incorrectly
     // In chrome >= 127, the related target is the dropdown menu
-    if (this._isMouse && related && (related.classList.contains("modal") || related.classList.contains("autocomplete-menu"))) {
+    if (this._isMouse && related instanceof HTMLElement && (related.classList.contains("modal") || related.classList.contains("autocomplete-menu"))) {
       // Restore focus
       this._searchInput.focus();
       return;
@@ -667,6 +725,7 @@ class Autocomplete {
   }
 
   setData(src) {
+    /** @private */
     this._items = [];
     this._addItems(src);
   }
@@ -694,10 +753,14 @@ class Autocomplete {
   }
 
   clear() {
+	const v = this._searchInput.value;
+
     this._searchInput.value = "";
     if (this._hiddenInput) {
       this._hiddenInput.value = "";
     }
+
+    this._config.onClearItem(v, this);
   }
 
   // #endregion
@@ -719,13 +782,15 @@ class Autocomplete {
   }
 
   /**
+   * @private
    * @returns {Array}
    */
   _activeClasses() {
-    return [...this._config.activeClasses, ...[ACTIVE_CLASS]];
+    return [...this._config.activeClasses, ACTIVE_CLASS];
   }
 
   /**
+   * @private
    * @param {HTMLElement} li
    * @returns {Boolean}
    */
@@ -738,6 +803,7 @@ class Autocomplete {
   }
 
   /**
+   * @private
    * @param {String} dir
    * @param {*|HTMLElement} sel
    * @returns {HTMLElement}
@@ -806,6 +872,7 @@ class Autocomplete {
 
   /**
    * Do we have enough input to show suggestions ?
+   * @private
    * @returns {Boolean}
    */
   _shouldShow() {
@@ -837,6 +904,7 @@ class Autocomplete {
   }
 
   /**
+   * @private
    * @param {String} name
    * @returns {HTMLElement}
    */
@@ -844,12 +912,13 @@ class Autocomplete {
     const newChild = this._createLi();
     const newChildSpan = document.createElement("span");
     newChild.append(newChildSpan);
-    newChildSpan.classList.add(...["dropdown-header", "text-truncate"]);
+    newChildSpan.classList.add("dropdown-header", "text-truncate");
     newChildSpan.innerHTML = name;
     return newChild;
   }
 
   /**
+   * @private
    * @param {String} lookup
    * @param {Object} item
    * @returns {HTMLElement}
@@ -873,7 +942,7 @@ class Autocomplete {
     const newChildLink = document.createElement("a");
     newChild.append(newChildLink);
     newChildLink.id = this._dropElement.id + "-" + this._dropElement.children.length;
-    newChildLink.classList.add(...["dropdown-item", "text-truncate"]);
+    newChildLink.classList.add("dropdown-item", "text-truncate");
     if (this._config.itemClass) {
       newChildLink.classList.add(...this._config.itemClass.split(" "));
     }
@@ -894,12 +963,12 @@ class Autocomplete {
     if (this._config.fillIn) {
       const fillIn = document.createElement("button");
       fillIn.type = "button"; // prevent submit
-      fillIn.classList.add(...["btn", "btn-link", "border-0"]);
+      fillIn.classList.add("btn", "btn-link", "border-0");
       fillIn.innerHTML = `<svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1H3.707l10.147 10.146a.5.5 0 0 1-.708.708L3 3.707V8.5a.5.5 0 0 1-1 0z"/>
       </svg>`;
       newChild.append(fillIn);
-      newChild.classList.add(...["d-flex", "justify-content-between"]);
+      newChild.classList.add("d-flex", "justify-content-between");
       fillIn.addEventListener("click", (event) => {
         this._searchInput.value = item.label;
         this._searchInput.focus(); // focus back to keep editing
@@ -941,11 +1010,32 @@ class Autocomplete {
   }
 
   /**
+   * Get the active element, drilling into shadowRoot if necessary.
+   * @private
+   * @link https://www.abeautifulsite.net/posts/finding-the-active-element-in-a-shadow-root/
+   * @param {Document | ShadowRoot} root
+   * @returns {Element}
+   */
+  _getActiveElement(root = document) {
+    const activeEl = root.activeElement;
+
+    if (!activeEl) {
+      return null;
+    }
+
+    if (activeEl.shadowRoot) {
+      return this._getActiveElement(activeEl.shadowRoot);
+    }
+    return activeEl;
+  }
+
+  /**
    * Show drop menu with suggestions
+   * @private
    */
   _showSuggestions() {
     // It's not focused anymore
-    if (document.activeElement != this._searchInput) {
+    if (this._getActiveElement() !== this._searchInput) {
       return;
     }
     const lookup = normalize(this._searchInput.value);
@@ -959,8 +1049,8 @@ class Autocomplete {
       // Check search length since we can trigger dropdown with arrow
       const showAllSuggestions = this._config.showAllSuggestions || lookup.length === 0;
       // Do we find a matching string or do we display immediately ?
-      let isMatched = lookup.length == 0 && this._config.suggestionsThreshold === 0;
-      if (!showAllSuggestions && lookup.length > 0) {
+      let isMatched = lookup.length === 0 && this._config.suggestionsThreshold === 0;
+      if (lookup.length > 0) {
         // match on any field
         this._config.searchFields.forEach((sf) => {
           const text = normalize(entry[sf]);
@@ -976,6 +1066,7 @@ class Autocomplete {
           }
         });
       }
+
       const selectFirst = isMatched || lookup.length === 0;
       if (showAllSuggestions || isMatched) {
         count++;
@@ -1021,6 +1112,7 @@ class Autocomplete {
   }
 
   /**
+   * @private
    * @returns {HTMLLIElement}
    */
   _createLi() {
@@ -1031,6 +1123,7 @@ class Autocomplete {
 
   /**
    * Show and position dropdown
+   * @private
    */
   _showDropdown() {
     this._dropElement.classList.add(SHOW_CLASS);
@@ -1080,12 +1173,19 @@ class Autocomplete {
   }
 
   /**
+   * @returns {HTMLInputElement}
+   */
+  getHiddenInput() {
+    return this._hiddenInput;
+  }
+
+  /**
    * Position the dropdown menu
+   * @private
    */
   _positionMenu() {
-    const styles = window.getComputedStyle(this._searchInput);
     const bounds = this._searchInput.getBoundingClientRect();
-    const isRTL = styles.direction === "rtl";
+    const isRTL = this._searchInput.dir === "rtl" || (this._searchInput.dir === "" && document.dir === "rtl");
     const fullWidth = this._config.fullWidth;
     const fixed = this._config.fixed;
 
@@ -1134,6 +1234,9 @@ class Autocomplete {
     }
   }
 
+  /**
+   * @private
+   */
   _fetchData() {
     this._items = [];
 
@@ -1167,6 +1270,9 @@ class Autocomplete {
     }
   }
 
+  /**
+   * @private
+   */
   _setHiddenVal() {
     if (this._config.hiddenInput && !this._config.hiddenValue) {
       for (const entry of this._items) {
@@ -1177,6 +1283,11 @@ class Autocomplete {
     }
   }
 
+  /**
+   * @private
+   * @param {Array|Object} src
+   * @returns {Array}
+   */
   _normalizeData(src) {
     if (Array.isArray(src)) {
       return src;
@@ -1194,6 +1305,7 @@ class Autocomplete {
   }
 
   /**
+   * @private
    * @param {Array|Object} src An array of items or a value:label object
    */
   _addItems(src) {
@@ -1220,6 +1332,7 @@ class Autocomplete {
   }
 
   /**
+   * @private
    * @param {boolean} show
    */
   _loadFromServer(show = false) {
@@ -1227,6 +1340,9 @@ class Autocomplete {
       this._abortController.abort();
     }
     this._abortController = new AbortController();
+
+    // call early so the config can be changed dynamically
+    this._config.onBeforeFetch(this);
 
     // Read data params dynamically as well
     let extraParams = this._searchInput.dataset.serverParams || {};
@@ -1240,20 +1356,24 @@ class Autocomplete {
     if (this._config.noCache) {
       params.t = Date.now();
     }
-    // We have a related field
+
+     // We have a related field or an array of related fields
     if (params.related) {
-      /**
-       * @type {HTMLInputElement}
-       */
-      //@ts-ignore
-      const input = document.getElementById(params.related);
-      if (input) {
-        params.related = input.value;
-        const inputName = input.getAttribute("name");
-        if (inputName) {
-          params[inputName] = input.value;
+      // Check if params.related is an array
+      const relatedItems = Array.isArray(params.related) ? params.related : [params.related];
+
+      relatedItems.forEach((related) => {
+        const input = document.getElementById(related);
+        if (input && "value" in input) {
+          const inputValue = input.value;
+          const inputName = input.getAttribute("name");
+
+          // Update params with the input value
+          if (inputName) {
+            params[inputName] = inputValue;
+          }
         }
-      }
+      });
     }
 
     const urlParams = new URLSearchParams(params);
@@ -1266,11 +1386,12 @@ class Autocomplete {
     if (fetchOptions.method === "POST") {
       fetchOptions.body = urlParams;
     } else {
-      url += "?" + urlParams.toString();
+      if (url.indexOf('?') == -1) url += "?";
+      else url += "&";
+      url += urlParams.toString();
     }
 
     this._searchInput.classList.add(LOADING_CLASS);
-    this._config.onBeforeFetch(this);
 
     fetch(url, fetchOptions)
       .then((r) => this._config.onServerResponse(r, this))

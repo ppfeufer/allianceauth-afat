@@ -42,6 +42,11 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Autocomplete library updated
+- Import JS library with relative path
+
 ## [4.3.2] - 2026-01-24
 
 ### Fixed

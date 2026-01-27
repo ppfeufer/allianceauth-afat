@@ -1,4 +1,4 @@
-import Autocomplete from '/static/afat/libs/bootstrap5-autocomplete/1.1.33/autocomplete.min.js';
+import Autocomplete from '../libs/bootstrap5-autocomplete/1.1.42/autocomplete.min.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
