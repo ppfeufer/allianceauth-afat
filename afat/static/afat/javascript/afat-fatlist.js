@@ -54,6 +54,7 @@ $(document).ready(() => {
             order: [[4, 'desc']],
             initComplete: () => {
                 _linkListTableInitComplete();
+                dt.on('draw.dt', () => _linkListTableInitComplete());
             }
         });
 

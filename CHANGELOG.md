@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Missing bootstrap tooltip after DataTable redraw in FAT link list view
+
 ### Changed
 
 - Autocomplete library updated
