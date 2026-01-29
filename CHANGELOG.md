@@ -48,6 +48,7 @@ Section Order:
 
 ### Changed
 
+- Switch Logs view to serverside DataTable
 - Autocomplete library updated
 - Import JS library with relative path
 

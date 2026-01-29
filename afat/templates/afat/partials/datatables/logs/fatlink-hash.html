@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% if row.fatlink_exists %}
+    <a href="{% url 'afat:fatlinks_details_fatlink' row.fatlink_hash %}">{{ row.fatlink_hash }}</a>
+{% else %}
+    {{ row.fatlink_hash }} ({% translate "Deleted" %})
+{% endif %}

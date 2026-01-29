@@ -1,0 +1,5 @@
+{% if row.user.profile.main_character %}
+    {{ row.user.profile.main_character }}
+{% else %}
+    {{ row.user.username }}
+{% endif %}

@@ -140,18 +140,3 @@ class TestLogsView(BaseTestCase):
         res = self.client.get(path=url)
 
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
-
-    def test_ajax_get_logs(self):
-        """
-        Test ajax get logs
-
-        :return:
-        :rtype:
-        """
-
-        self.client.force_login(user=self.user_with_log_view)
-
-        url = reverse(viewname="afat:logs_ajax_get_logs")
-        result = self.client.get(path=url)
-
-        self.assertEqual(first=result.status_code, second=HTTPStatus.OK)
