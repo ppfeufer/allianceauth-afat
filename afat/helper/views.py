@@ -23,7 +23,7 @@ from allianceauth.framework.api.user import get_main_character_name_from_user
 
 # Alliance Auth AFAT
 from afat.helper.users import users_with_permission
-from afat.models import Fat, FatLink, Log
+from afat.models import Fat, FatLink
 
 
 class AFATUI(Enum):
@@ -354,44 +354,6 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
         "via_esi": via_esi,
         "actions": "".join(actions_parts),
     }
-
-
-def convert_logs_to_dict(log: Log, fatlink_exists: bool = False) -> dict:
-    """
-    Convert AFatLog to dict
-
-    :param log:
-    :type log:
-    :param fatlink_exists:
-    :type fatlink_exists:
-    :return:
-    :rtype:
-    """
-
-    log_time = log.log_time
-    log_time_timestamp = log_time.timestamp()
-
-    # User name
-    user_main_character = get_main_character_name_from_user(user=log.user)
-
-    fatlink_html = _("{fatlink_hash} (Deleted)").format(fatlink_hash=log.fatlink_hash)
-    if fatlink_exists is True:
-        fatlink_link = reverse(
-            viewname="afat:fatlinks_details_fatlink", args=[log.fatlink_hash]
-        )
-        fatlink_html = f'<a href="{fatlink_link}">{log.fatlink_hash}</a>'
-
-    fatlink = {"html": fatlink_html, "hash": log.fatlink_hash}
-
-    summary = {
-        "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-        "log_event": Log.Event(log.log_event).label,
-        "user": user_main_character,
-        "fatlink": fatlink,
-        "description": log.log_text,
-    }
-
-    return summary
 
 
 def get_random_rgba_color():

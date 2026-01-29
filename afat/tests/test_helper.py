@@ -24,15 +24,13 @@ from afat.helper.views import (
     _perm_flags,
     convert_fatlinks_to_dict,
     convert_fats_to_dict,
-    convert_logs_to_dict,
 )
-from afat.models import Duration, Fat, FatLink, Log, get_hash_on_save
+from afat.models import Fat, FatLink, get_hash_on_save
 from afat.tests import BaseTestCase
 from afat.tests.fixtures.utils import (
     add_character_to_user,
     create_user_from_evecharacter,
 )
-from afat.utils import write_log
 
 MODULE_PATH = "afat.views.fatlinks"
 
@@ -375,67 +373,6 @@ class TestHelpers(BaseTestCase):
                     f'data-body-text="{modal_body_text}">'
                     '<i class="fa-solid fa-trash-can fa-fw"></i></a>'
                 ),
-            },
-        )
-
-    def test_helper_convert_logs_to_dict(self):
-        """
-        Test helper convert_logs_to_dict
-
-        :return:
-        :rtype:
-        """
-
-        self.client.force_login(user=self.user_with_manage_afat)
-        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
-        request.user = self.user_with_manage_afat
-
-        fatlink_hash = get_hash_on_save()
-        fatlink_created = FatLink.objects.create(
-            created=timezone.now(),
-            fleet="April Fleet 1",
-            creator=self.user_with_manage_afat,
-            character=self.character_1001,
-            hash=fatlink_hash,
-            is_esilink=True,
-            is_registered_on_esi=True,
-            esi_fleet_id="3726458287",
-            fleet_type="CTA",
-        )
-
-        duration = Duration.objects.create(fleet=fatlink_created, duration=120)
-
-        fleet_type = " (Fleet type: CTA)"
-
-        write_log(
-            request=request,
-            log_event=Log.Event.CREATE_FATLINK,
-            log_text=(
-                f'FAT link with name "{fatlink_created.fleet}"{fleet_type} and '
-                f"a duration of {duration.duration} minutes was created"
-            ),
-            fatlink_hash=fatlink_created.hash,
-        )
-
-        log = Log.objects.get(fatlink_hash=fatlink_hash)
-        log_time = log.log_time
-        log_time_timestamp = log_time.timestamp()
-        user_main_character = get_main_character_name_from_user(user=log.user)
-        fatlink_link = reverse(
-            viewname="afat:fatlinks_details_fatlink", args=[log.fatlink_hash]
-        )
-        fatlink_html = f'<a href="{fatlink_link}">{log.fatlink_hash}</a>'
-
-        result = convert_logs_to_dict(log=log, fatlink_exists=True)
-
-        self.assertDictEqual(
-            d1=result,
-            d2={
-                "log_time": {"time": log_time, "timestamp": log_time_timestamp},
-                "log_event": Log.Event(log.log_event).label,
-                "user": user_main_character,
-                "fatlink": {"html": fatlink_html, "hash": log.fatlink_hash},
-                "description": log.log_text,
             },
         )
 
