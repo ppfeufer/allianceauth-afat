@@ -6,7 +6,6 @@ Script to remove all generated FAT links from the database, which have been crea
 This script can be executed directly from shell.
 """
 
-
 # Standard Library
 import os
 import sys
