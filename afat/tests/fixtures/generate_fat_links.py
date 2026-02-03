@@ -6,7 +6,6 @@ Script to generate many fat links for load testing.
 This script can be executed directly from shell.
 """
 
-
 # Standard Library
 import os
 import sys
