@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-24 16:10+0100\n"
+"POT-Creation-Date: 2026-02-03 16:58+0100\n"
 "PO-Revision-Date: 2025-07-29 20:18+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Polish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/pl/>\n"
@@ -225,36 +225,31 @@ msgstr ""
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr ""
 
-#: afat/helper/views.py:377
-#, python-brace-format
-msgid "{fatlink_hash} (Deleted)"
-msgstr ""
-
-#: afat/helper/views.py:493
+#: afat/helper/views.py:455
 msgid "Monday"
 msgstr "Poniedziałek"
 
-#: afat/helper/views.py:494
+#: afat/helper/views.py:456
 msgid "Tuesday"
 msgstr "Wtorek"
 
-#: afat/helper/views.py:495
+#: afat/helper/views.py:457
 msgid "Wednesday"
 msgstr "Środa"
 
-#: afat/helper/views.py:496
+#: afat/helper/views.py:458
 msgid "Thursday"
 msgstr "Czwartek"
 
-#: afat/helper/views.py:497
+#: afat/helper/views.py:459
 msgid "Friday"
 msgstr "Piątek"
 
-#: afat/helper/views.py:498
+#: afat/helper/views.py:460
 msgid "Saturday"
 msgstr "Sobota"
 
-#: afat/helper/views.py:499
+#: afat/helper/views.py:461
 msgid "Sunday"
 msgstr "Niedziela"
 
@@ -350,7 +345,7 @@ msgstr ""
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr ""
 
@@ -690,6 +685,12 @@ msgstr ""
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr ""
+
+#: afat/templates/afat/partials/datatables/logs/fatlink-hash.html:6
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Usuń"
 
 #: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
 msgid "Create a clickable FAT link"
@@ -1143,18 +1144,14 @@ msgid "Time"
 msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
-msgid "Event"
-msgstr ""
-
-#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
 msgstr ""
 
-#: afat/templates/afat/view/logs/logs-overview.html:25
+#: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
 msgstr ""
 
-#: afat/templates/afat/view/logs/logs-overview.html:41
+#: afat/templates/afat/view/logs/logs-overview.html:34
 #, python-format
 msgid ""
 "\n"

@@ -4,22 +4,22 @@
 # "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024, 2025.
 # "Andrii M." <elfleg0las88@gmail.com>, 2023, 2024.
 # M <skrypets@gmail.com>, 2025.
-# s0k0l -_- <salarysalo@gmail.com>, 2025.
+# s0k0l -_- <salarysalo@gmail.com>, 2025, 2026.
 # Варрус <horowiserus@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-24 16:10+0100\n"
-"PO-Revision-Date: 2025-12-15 14:17+0000\n"
-"Last-Translator: Варрус <horowiserus@gmail.com>\n"
+"POT-Creation-Date: 2026-02-03 16:58+0100\n"
+"PO-Revision-Date: 2026-02-03 06:23+0000\n"
+"Last-Translator: s0k0l -_- <salarysalo@gmail.com>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -211,10 +211,8 @@ msgstr "Видалити"
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:7
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
-#, fuzzy
-#| msgid "Clicking here will stop the automatic tracking through ESI for this fleet and close the associated FAT link."
 msgid "Stop automatic tracking through ESI for this fleet and close the associated FAT link."
-msgstr "Натиснувши тут, ви зупините автоматичне відстеження через ESI для цього флоту та закриєте відповідне посилання FAT."
+msgstr "Зупинити автоматичне відстеження через ESI для цього флоту та закрити відповідне посилання FAT."
 
 #: afat/helper/views.py:42
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:13
@@ -240,36 +238,31 @@ msgstr "<p>Ви впевнені, що хочете видалити посил�
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr "<p>Ви впевнені, що хочете видалити {character_name} з цього посилання FAT?</p>"
 
-#: afat/helper/views.py:377
-#, python-brace-format
-msgid "{fatlink_hash} (Deleted)"
-msgstr "{fatlink_hash} (Видалено)"
-
-#: afat/helper/views.py:493
+#: afat/helper/views.py:455
 msgid "Monday"
 msgstr "Понеділок"
 
-#: afat/helper/views.py:494
+#: afat/helper/views.py:456
 msgid "Tuesday"
 msgstr "Вівторок"
 
-#: afat/helper/views.py:495
+#: afat/helper/views.py:457
 msgid "Wednesday"
 msgstr "Середа"
 
-#: afat/helper/views.py:496
+#: afat/helper/views.py:458
 msgid "Thursday"
 msgstr "Четвер"
 
-#: afat/helper/views.py:497
+#: afat/helper/views.py:459
 msgid "Friday"
 msgstr "П'ятниця"
 
-#: afat/helper/views.py:498
+#: afat/helper/views.py:460
 msgid "Saturday"
 msgstr "Субота"
 
-#: afat/helper/views.py:499
+#: afat/helper/views.py:461
 msgid "Sunday"
 msgstr "Неділя"
 
@@ -365,7 +358,7 @@ msgstr "Чи доступний флот для цього FAT-посиланн�
 msgid "Has this FAT link being re-opened?"
 msgstr "Чи перевідкрито це FAT-посилання?"
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr "FAT-посилання"
 
@@ -681,32 +674,32 @@ msgid "No recent FAT activity registered for any of your characters."
 msgstr "Немає останньої активності FAT для жодного з ваших персонажів."
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:12
-#, fuzzy, python-format
-#| msgid "<p>Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s</p>"
+#, python-format
 msgid "Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s?"
-msgstr "<p>Ви впевнені, що хочете закрити флот ESI з ID %(esi_fleet_id)s від %(character_name)s</p>"
+msgstr "Ви впевнені, що хочете закрити флот ESI з ID %(esi_fleet_id)s від %(character_name)s"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:24
-#, fuzzy
-#| msgid "All characters associated with this main character."
 msgid "View the FATs associated with this link."
-msgstr "Всі персонажі, пов'язані з цим основним персонажем."
+msgstr "Подивитись ФАТи, пов'язані з цим посиланням."
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:35
 msgid "Delete this FAT link from the system. This action is irreversible."
-msgstr ""
+msgstr "Видалити ФАТ з системи. Ця дія незворотня."
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:40
-#, fuzzy, python-format
-#| msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
+#, python-format
 msgid "Are you sure you want to delete the FAT link and all registered FATs for fleet \"%(fleet_name)s\"?"
-msgstr "<p>Ви впевнені, що хочете видалити посилання FAT {fatlink_fleet}?</p>"
+msgstr "Ви впевнені, що хочете видалити посилання FAT та усі зареєстровані ФАТи для флоту \"%(fleet_name)s\"?"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:41
 #: afat/templates/afat/view/dashboard/dashboard.html:24
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr "Видалити FAT-посилання"
+
+#: afat/templates/afat/partials/datatables/logs/fatlink-hash.html:6
+msgid "Deleted"
+msgstr "Видалено"
 
 #: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
 msgid "Create a clickable FAT link"
@@ -1198,18 +1191,14 @@ msgid "Time"
 msgstr "Час"
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
-msgid "Event"
-msgstr "Подія"
-
-#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
 msgstr "Користувач"
 
-#: afat/templates/afat/view/logs/logs-overview.html:25
+#: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
 msgstr "Опис"
 
-#: afat/templates/afat/view/logs/logs-overview.html:41
+#: afat/templates/afat/view/logs/logs-overview.html:34
 #, python-format
 msgid ""
 "\n"
@@ -1447,6 +1436,13 @@ msgstr "Цей персонаж перебуває в іншій корпора�
 #: afat/views/statistics.py:456
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Попередження!</h4><p>Ви не маєте дозволу переглядати статистику для цієї корпорації.</p>"
+
+#, python-brace-format
+#~ msgid "{fatlink_hash} (Deleted)"
+#~ msgstr "{fatlink_hash} (Видалено)"
+
+#~ msgid "Event"
+#~ msgstr "Подія"
 
 #, fuzzy
 #~| msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"

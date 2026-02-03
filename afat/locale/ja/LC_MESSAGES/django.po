@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-24 16:10+0100\n"
-"PO-Revision-Date: 2026-01-09 17:17+0000\n"
+"POT-Creation-Date: 2026-02-03 16:58+0100\n"
+"PO-Revision-Date: 2026-02-01 14:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
 "Language: ja\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -211,36 +211,31 @@ msgstr "<p>FATリンク {fatlink_fleet} を削除してもよろしいですか�
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr "<p>このFATリンクから{character_name}を削除してもよろしいですか？</p>"
 
-#: afat/helper/views.py:377
-#, python-brace-format
-msgid "{fatlink_hash} (Deleted)"
-msgstr "{fatlink_hash} (削除済み)"
-
-#: afat/helper/views.py:493
+#: afat/helper/views.py:455
 msgid "Monday"
 msgstr "月曜日"
 
-#: afat/helper/views.py:494
+#: afat/helper/views.py:456
 msgid "Tuesday"
 msgstr "火曜日"
 
-#: afat/helper/views.py:495
+#: afat/helper/views.py:457
 msgid "Wednesday"
 msgstr "水曜日"
 
-#: afat/helper/views.py:496
+#: afat/helper/views.py:458
 msgid "Thursday"
 msgstr "木曜日"
 
-#: afat/helper/views.py:497
+#: afat/helper/views.py:459
 msgid "Friday"
 msgstr "金曜日"
 
-#: afat/helper/views.py:498
+#: afat/helper/views.py:460
 msgid "Saturday"
 msgstr "土曜日"
 
-#: afat/helper/views.py:499
+#: afat/helper/views.py:461
 msgid "Sunday"
 msgstr "日曜日"
 
@@ -293,10 +288,8 @@ msgid "FC is no longer the fleet boss."
 msgstr "FCは、もうフリートのボスではない。"
 
 #: afat/models/afat.py:144
-#, fuzzy
-#| msgid "FC is no longer the fleet boss."
 msgid "FC switched to another fleet."
-msgstr "FCは、もうフリートのボスではない。"
+msgstr "FCは別のフリートに切り替えました。"
 
 #: afat/models/afat.py:149
 msgid "When was this FAT link created"
@@ -338,7 +331,7 @@ msgstr "この FAT リンクに対応するフリートが ESI で利用可能�
 msgid "Has this FAT link being re-opened?"
 msgstr "このFATリンクを再び有効化しましたか？"
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr "FATリンク"
 
@@ -549,15 +542,15 @@ msgstr ""
 
 #: afat/templates/afat/modals/general.html:12
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #: afat/templates/afat/modals/general.html:25
 msgid "Cancel"
-msgstr ""
+msgstr "キャンセル"
 
 #: afat/templates/afat/modals/general.html:26
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 #: afat/templates/afat/partials/common/navigation/month-navigation.html:8
 msgid "Previous month"
@@ -678,6 +671,12 @@ msgstr "<p>FATリンク {fatlink_fleet} を削除してもよろしいですか�
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr ""
+
+#: afat/templates/afat/partials/datatables/logs/fatlink-hash.html:6
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "削除"
 
 #: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
 msgid "Create a clickable FAT link"
@@ -805,7 +804,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:46
 msgid "Count"
-msgstr ""
+msgstr "数"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "Is someone missing from the list of FATs? Use this form to add them."
@@ -908,7 +907,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
 msgid "Corporation"
-msgstr ""
+msgstr "会社"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:16
 #: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:32
@@ -1127,18 +1126,14 @@ msgid "Time"
 msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
-msgid "Event"
-msgstr ""
-
-#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
 msgstr "ユーザー"
 
-#: afat/templates/afat/view/logs/logs-overview.html:25
+#: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
 msgstr "説明"
 
-#: afat/templates/afat/view/logs/logs-overview.html:41
+#: afat/templates/afat/view/logs/logs-overview.html:34
 #, python-format
 msgid ""
 "\n"
@@ -1357,6 +1352,10 @@ msgstr ""
 #: afat/views/statistics.py:456
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr ""
+
+#, python-brace-format
+#~ msgid "{fatlink_hash} (Deleted)"
+#~ msgstr "{fatlink_hash} (削除済み)"
 
 #, python-brace-format
 #~ msgid "Fleet Activity Tracking (AFAT) v{__version__}"
