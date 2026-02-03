@@ -42,6 +42,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [4.4.0] - 2026-02-03
+
 ### Fixed
 
 - Missing bootstrap tooltip after DataTable redraw in FAT link list view
@@ -51,6 +53,7 @@ Section Order:
 - Switch Logs view to serverside DataTable
 - Autocomplete library updated
 - Import JS library with relative path
+- Translations updated
 
 ## [4.3.2] - 2026-01-24
 
@@ -2084,6 +2087,7 @@ Finally restart your supervisor services for AA
 [4.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.2.1...v4.3.0 "v4.3.0"
 [4.3.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.0...v4.3.1 "v4.3.1"
 [4.3.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.1...v4.3.2 "v4.3.2"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.2...HEAD "In Development"
+[4.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.2...v4.4.0 "v4.4.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.4.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"

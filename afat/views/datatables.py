@@ -73,7 +73,7 @@ class LogsTableView(PermissionRequiredMixin, DataTablesView):
     Datatables view for FatLinks.
     """
 
-    permission_required = ("afat.manage_afat", "afat.log_view")
+    permission_required = ("afat.manage_afat", "afat.log_view")  # Either permission
     model = Log
     columns = [
         ("log_time", "afat/partials/datatables/logs/log-time.html"),
