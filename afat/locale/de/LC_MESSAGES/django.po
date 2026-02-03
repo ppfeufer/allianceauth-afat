@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-24 16:10+0100\n"
-"PO-Revision-Date: 2026-01-22 09:36+0000\n"
+"POT-Creation-Date: 2026-02-03 16:58+0100\n"
+"PO-Revision-Date: 2026-01-30 16:57+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
 "Language: de\n"
@@ -221,36 +221,31 @@ msgstr "<p>Bist Du sicher das Du den FAT-Link {fatlink_fleet} löschen möchtest
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr "<p>Bist Du sicher das Du {character_name} von diesem FAT-Link löschen möchtest?</p>"
 
-#: afat/helper/views.py:377
-#, python-brace-format
-msgid "{fatlink_hash} (Deleted)"
-msgstr "{fatlink_hash} (Gelöscht)"
-
-#: afat/helper/views.py:493
+#: afat/helper/views.py:455
 msgid "Monday"
 msgstr "Montag"
 
-#: afat/helper/views.py:494
+#: afat/helper/views.py:456
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: afat/helper/views.py:495
+#: afat/helper/views.py:457
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: afat/helper/views.py:496
+#: afat/helper/views.py:458
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: afat/helper/views.py:497
+#: afat/helper/views.py:459
 msgid "Friday"
 msgstr "Freitag"
 
-#: afat/helper/views.py:498
+#: afat/helper/views.py:460
 msgid "Saturday"
 msgstr "Samstag"
 
-#: afat/helper/views.py:499
+#: afat/helper/views.py:461
 msgid "Sunday"
 msgstr "Sonntag"
 
@@ -346,7 +341,7 @@ msgstr "Ist die Flotte zu diesem FAT-Link in ESI verfügbar oder nicht"
 msgid "Has this FAT link being re-opened?"
 msgstr "Wurde dieser FAT-Link nochmals geöffnet?"
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr "FAT-Link"
 
@@ -684,6 +679,10 @@ msgstr "Bist Du sicher, dass Du den FAT-Link und alle registrierten FATs für di
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr "FAT-Link löschen"
+
+#: afat/templates/afat/partials/datatables/logs/fatlink-hash.html:6
+msgid "Deleted"
+msgstr "Gelöscht"
 
 #: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
 msgid "Create a clickable FAT link"
@@ -1159,18 +1158,14 @@ msgid "Time"
 msgstr "Zeit"
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
-msgid "Event"
-msgstr "Ereignis"
-
-#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
 msgstr "Nutzer"
 
-#: afat/templates/afat/view/logs/logs-overview.html:25
+#: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
 msgstr "Beschreibung"
 
-#: afat/templates/afat/view/logs/logs-overview.html:41
+#: afat/templates/afat/view/logs/logs-overview.html:34
 #, python-format
 msgid ""
 "\n"
@@ -1400,6 +1395,13 @@ msgstr "Dieser Charakter ist in einer anderen Corporation und seine FATs werden 
 #: afat/views/statistics.py:456
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diese Corporation zu sehen.</p>"
+
+#, python-brace-format
+#~ msgid "{fatlink_hash} (Deleted)"
+#~ msgstr "{fatlink_hash} (Gelöscht)"
+
+#~ msgid "Event"
+#~ msgstr "Ereignis"
 
 #, fuzzy
 #~| msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"

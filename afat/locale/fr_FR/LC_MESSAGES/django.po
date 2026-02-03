@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-24 16:10+0100\n"
-"PO-Revision-Date: 2026-01-09 17:17+0000\n"
+"POT-Creation-Date: 2026-02-03 16:58+0100\n"
+"PO-Revision-Date: 2026-02-01 14:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: French <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/fr/>\n"
 "Language: fr_FR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -220,36 +220,31 @@ msgstr ""
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr ""
 
-#: afat/helper/views.py:377
-#, python-brace-format
-msgid "{fatlink_hash} (Deleted)"
-msgstr ""
-
-#: afat/helper/views.py:493
+#: afat/helper/views.py:455
 msgid "Monday"
 msgstr "Lundi"
 
-#: afat/helper/views.py:494
+#: afat/helper/views.py:456
 msgid "Tuesday"
 msgstr "Mardi"
 
-#: afat/helper/views.py:495
+#: afat/helper/views.py:457
 msgid "Wednesday"
 msgstr "Mercredi"
 
-#: afat/helper/views.py:496
+#: afat/helper/views.py:458
 msgid "Thursday"
 msgstr "Jeudi"
 
-#: afat/helper/views.py:497
+#: afat/helper/views.py:459
 msgid "Friday"
 msgstr "Vendredi"
 
-#: afat/helper/views.py:498
+#: afat/helper/views.py:460
 msgid "Saturday"
 msgstr "Samedi"
 
-#: afat/helper/views.py:499
+#: afat/helper/views.py:461
 msgid "Sunday"
 msgstr "Dimanche"
 
@@ -302,10 +297,8 @@ msgid "FC is no longer the fleet boss."
 msgstr "Le FC n'est plus à la tête de la flotte."
 
 #: afat/models/afat.py:144
-#, fuzzy
-#| msgid "FC is no longer the fleet boss."
 msgid "FC switched to another fleet."
-msgstr "Le FC n'est plus à la tête de la flotte."
+msgstr "Le FC a changé de flotte."
 
 #: afat/models/afat.py:149
 msgid "When was this FAT link created"
@@ -347,7 +340,7 @@ msgstr ""
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr ""
 
@@ -685,6 +678,12 @@ msgstr ""
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr ""
+
+#: afat/templates/afat/partials/datatables/logs/fatlink-hash.html:6
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Supprimer"
 
 #: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
 msgid "Create a clickable FAT link"
@@ -1136,18 +1135,14 @@ msgid "Time"
 msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
-msgid "Event"
-msgstr ""
-
-#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
 msgstr "Utilisateur"
 
-#: afat/templates/afat/view/logs/logs-overview.html:25
+#: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
 msgstr "Description"
 
-#: afat/templates/afat/view/logs/logs-overview.html:41
+#: afat/templates/afat/view/logs/logs-overview.html:34
 #, python-format
 msgid ""
 "\n"

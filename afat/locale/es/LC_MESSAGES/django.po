@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024, 2025.
+# "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024, 2025, 2026.
 # Zigor Fernandez Moreno <sietehierros@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-01-24 16:10+0100\n"
-"PO-Revision-Date: 2025-08-14 08:41+0000\n"
+"POT-Creation-Date: 2026-02-03 16:58+0100\n"
+"PO-Revision-Date: 2026-02-01 14:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/es/>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -227,36 +227,31 @@ msgstr "<p>¿Está seguro de que desea cerrar la flota ESI con ID {fatlink.esi_f
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
 msgstr ""
 
-#: afat/helper/views.py:377
-#, python-brace-format
-msgid "{fatlink_hash} (Deleted)"
-msgstr ""
-
-#: afat/helper/views.py:493
+#: afat/helper/views.py:455
 msgid "Monday"
 msgstr "Lunes"
 
-#: afat/helper/views.py:494
+#: afat/helper/views.py:456
 msgid "Tuesday"
 msgstr "Martes"
 
-#: afat/helper/views.py:495
+#: afat/helper/views.py:457
 msgid "Wednesday"
 msgstr "Miércoles"
 
-#: afat/helper/views.py:496
+#: afat/helper/views.py:458
 msgid "Thursday"
 msgstr "Jueves"
 
-#: afat/helper/views.py:497
+#: afat/helper/views.py:459
 msgid "Friday"
 msgstr "Viernes"
 
-#: afat/helper/views.py:498
+#: afat/helper/views.py:460
 msgid "Saturday"
 msgstr "Sábado"
 
-#: afat/helper/views.py:499
+#: afat/helper/views.py:461
 msgid "Sunday"
 msgstr "Domingo"
 
@@ -311,10 +306,8 @@ msgid "FC is no longer the fleet boss."
 msgstr "El FC ya no es el jefe de flota."
 
 #: afat/models/afat.py:144
-#, fuzzy
-#| msgid "FC is no longer the fleet boss."
 msgid "FC switched to another fleet."
-msgstr "El FC ya no es el jefe de flota."
+msgstr "El FC se cambió a otra flota."
 
 #: afat/models/afat.py:149
 msgid "When was this FAT link created"
@@ -356,7 +349,7 @@ msgstr ""
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:24
+#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr ""
 
@@ -698,6 +691,12 @@ msgstr "<p>¿Está seguro de que desea cerrar la flota ESI con ID {fatlink.esi_f
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr ""
+
+#: afat/templates/afat/partials/datatables/logs/fatlink-hash.html:6
+#, fuzzy
+#| msgid "Delete"
+msgid "Deleted"
+msgstr "Borrar"
 
 #: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
 msgid "Create a clickable FAT link"
@@ -1151,18 +1150,14 @@ msgid "Time"
 msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
-msgid "Event"
-msgstr ""
-
-#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "User"
 msgstr "Usuario"
 
-#: afat/templates/afat/view/logs/logs-overview.html:25
+#: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
 msgstr "Descripción"
 
-#: afat/templates/afat/view/logs/logs-overview.html:41
+#: afat/templates/afat/view/logs/logs-overview.html:34
 #, python-format
 msgid ""
 "\n"
