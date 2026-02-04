@@ -70,12 +70,15 @@
     <script>
         const afatJsSettingsOverride = {
             dataTables: {
-                ajax: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year %}',
+                ajax: {
+                    url: '{% url "afat:fatlinks_ajax_get_fatlinks_by_year" year=year %}',
+                    error: (xhr, error) => console.error('Error fetching FAT links data:', xhr, error)
+                },
                 serverSide: true
             },
             permissions: {
-                addFatLink: {% if perms.afat.add_fatlink %}true{% else %}false{% endif %},
-                manageAfat: {% if perms.afat.manage_afat %}true{% else %}false{% endif %}
+                addFatLink: {{ perms.afat.add_fatlink|yesno:"true,false" }},
+                manageAfat: {{ perms.afat.manage_afat|yesno:"true,false" }}
             },
             translation: {
                 dataTable: {

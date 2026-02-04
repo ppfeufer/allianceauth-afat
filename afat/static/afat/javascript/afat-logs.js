@@ -8,8 +8,6 @@ $(document).ready(() => {
      */
     const dt = new DataTable($('#afat-logs'), { // eslint-disable-line no-unused-vars
         ...afatSettings.dataTables,
-        serverSide: true,
-        ajax: afatSettings.url.logs,
         columnDefs: [
             {
                 target: 0,

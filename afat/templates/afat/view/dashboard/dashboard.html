@@ -43,8 +43,8 @@
                 recentFatLinks: '{% url "afat:dashboard_ajax_get_recent_fatlinks" %}'
             },
             permissions: {
-                addFatLink: {% if perms.afat.add_fatlink %}true{% else %}false{% endif %},
-                manageAfat: {% if perms.afat.manage_afat %}true{% else %}false{% endif %}
+                addFatLink: {{ perms.afat.add_fatlink|yesno:"true,false" }},
+                manageAfat: {{ perms.afat.manage_afat|yesno:"true,false" }}
             },
             translation: {
                 dataTable: {

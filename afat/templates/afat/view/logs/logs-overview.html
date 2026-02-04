@@ -48,9 +48,13 @@
 {% block extra_javascript %}
     <script>
         const afatJsSettingsOverride = {
-            url: {
-                logs: '{% url "afat:logs_ajax_get_logs" %}'
-            },
+            dataTables: {
+                ajax: {
+                    url: '{% url "afat:logs_ajax_get_logs" %}',
+                    error: (xhr, error) => console.error('Error fetching logs data:', xhr, error)
+                },
+                serverSide: true
+            }
         };
     </script>
 
