@@ -42,6 +42,14 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- JS error handling to server-side DataTables
+
+### Changed
+
+- Use Django templatetag for true/false detection instead of if statements in templates
+
 ## [4.4.0] - 2026-02-03
 
 ### Fixed
@@ -50,7 +58,7 @@ Section Order:
 
 ### Changed
 
-- Switch Logs view to serverside DataTable
+- Switch Logs view to server-side DataTable
 - Autocomplete library updated
 - Import JS library with relative path
 - Translations updated
@@ -86,7 +94,7 @@ Section Order:
 
 ### Changed
 
-- Performance improvements in FAT links view by using serverside processing for
+- Performance improvements in FAT links view by using server-side processing for
   DataTables provided by the Alliance Auth framework
 - Switched to DataTables 2 provided by Alliance Auth, instead of bundling it ourselves
 - Minimum requirements:
