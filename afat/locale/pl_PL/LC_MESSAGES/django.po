@@ -1,13 +1,13 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Peter Pfeufer <info@ppfeufer.de>, 2024, 2025.
+# Peter Pfeufer <info@ppfeufer.de>, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
 "POT-Creation-Date: 2026-02-03 16:58+0100\n"
-"PO-Revision-Date: 2025-07-29 20:18+0000\n"
+"PO-Revision-Date: 2026-02-05 01:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Polish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/pl/>\n"
 "Language: pl_PL\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -99,7 +99,7 @@ msgstr "To pole jest wymagane"
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
 msgid "Fleet name"
-msgstr ""
+msgstr "Nazwa floty"
 
 #: afat/forms.py:44 afat/forms.py:100
 msgid "Enter fleet name"
@@ -460,7 +460,7 @@ msgstr ""
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
-msgstr ""
+msgstr "Doktryna"
 
 #: afat/models/afat.py:445
 msgid "Doctrines"
@@ -622,7 +622,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:30
 msgid "Creator"
-msgstr ""
+msgstr "Twórca"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:16
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:42
@@ -810,7 +810,7 @@ msgstr ""
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:18
 #: afat/templates/afat/partials/statistics/character/tables/character-fats.html:6
 msgid "Character"
-msgstr ""
+msgstr "Postać"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:37
 msgid "Ship type overview"
