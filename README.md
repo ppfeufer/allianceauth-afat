@@ -149,14 +149,14 @@ Configure your AA settings in your `local.py` as follows:
       "afat",
       # ...
   ]
+
+  # This line right below the `INSTALLED_APPS` list, and only if not already added for another app
+  INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
   ```
 
 - Add the Scheduled Tasks
 
   ```python
-  # This line right below the `INSTALLED_APPS` list, and only if not already added for another app
-  INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
-
   # AFAT - https://github.com/ppfeufer/allianceauth-afat
   if "afat" in INSTALLED_APPS:
       CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
@@ -210,14 +210,14 @@ Configure your AA settings (`conf/local.py`) as follows:
       "afat",
       # ...
   ]
+
+  # This line right below the `INSTALLED_APPS` list, and only if not already added for another app
+  INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
   ```
 
 - Add the Scheduled Tasks
 
   ```python
-  # This line right below the `INSTALLED_APPS` list, and only if not already added for another app
-  INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
-
   # AFAT - https://github.com/ppfeufer/allianceauth-afat
   if "afat" in INSTALLED_APPS:
       CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
