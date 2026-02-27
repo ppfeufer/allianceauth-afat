@@ -11,12 +11,13 @@
 # AKA Patrick <hsc844766246@gmail.com>, 2025.
 # LichenKass <yuanchengwei_sz@163.com>, 2025.
 # nm l <mmttyyluo@gmail.com>, 2026.
+# shkno <l13244536339@163.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-02-03 16:58+0100\n"
-"PO-Revision-Date: 2026-01-26 05:17+0000\n"
+"POT-Creation-Date: 2026-02-27 02:59+0100\n"
+"PO-Revision-Date: 2026-02-12 05:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -173,10 +174,13 @@ msgid_plural "%(count)d minutes"
 msgstr[0] "分钟 分钟"
 
 #: afat/helper/time.py:141
-#, python-format
+#, fuzzy, python-format
 msgid "%(count)d second"
 msgid_plural "%(count)d seconds"
 msgstr[0] ""
+"秒\n"
+"\n"
+"秒"
 
 #: afat/helper/time.py:114
 #, python-format
@@ -214,10 +218,9 @@ msgid "Stop tracking"
 msgstr "停止跟踪"
 
 #: afat/helper/views.py:252
-#, fuzzy, python-brace-format
-#| msgid "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
+#, python-brace-format
 msgid "<p>Are you sure you want to close ESI fleet with ID {esi_fleet_id} from {character_name}?</p>"
-msgstr "<p>你确定要关闭{fatlink.character.character_name}关于ID{fatlink.esi_fleet_id}的ESI舰队么？</p>"
+msgstr "<p>你确定要关闭{character_name}关于ID{esi_fleet_id}的ESI舰队么？</p>"
 
 #: afat/helper/views.py:271
 #, python-brace-format
@@ -225,10 +228,9 @@ msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgstr "<p>您确定要删除FAT链接{fatlink_fleet}吗？</p>"
 
 #: afat/helper/views.py:330
-#, fuzzy, python-brace-format
-#| msgid "<p>Are you sure you want to remove {fat.character.character_name} from this FAT link?</p>"
+#, python-brace-format
 msgid "<p>Are you sure you want to remove {character_name} from this FAT link?</p>"
-msgstr "<p>您确定要把{fat.character.character_name}从这个FAT链接中删除吗？</p>"
+msgstr "<p>您确定要把{character_name}从这个FAT链接中删除吗？</p>"
 
 #: afat/helper/views.py:455
 msgid "Monday"
@@ -666,10 +668,9 @@ msgid "No recent FAT activity registered for any of your characters."
 msgstr ""
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:12
-#, fuzzy, python-format
-#| msgid "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
+#, python-format
 msgid "Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s?"
-msgstr "<p>你确定要关闭{fatlink.character.character_name}关于ID{fatlink.esi_fleet_id}的ESI舰队么？</p>"
+msgstr "你确定要关闭%(character_name)sID%(esi_fleet_id)s的ESI舰队么？"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:24
 msgid "View the FATs associated with this link."
@@ -681,9 +682,8 @@ msgstr ""
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:40
 #, fuzzy, python-format
-#| msgid "<p>Are you sure you want to delete FAT link {fatlink_fleet}?</p>"
 msgid "Are you sure you want to delete the FAT link and all registered FATs for fleet \"%(fleet_name)s\"?"
-msgstr "<p>您确定要删除FAT链接{fatlink_fleet}吗？</p>"
+msgstr "<p>您确定要删除FAT链接%(fleet_name)s吗？</p>"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:41
 #: afat/templates/afat/view/dashboard/dashboard.html:24
@@ -1286,8 +1286,8 @@ msgstr ""
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:502 afat/views/fatlinks.py:626
-#: afat/views/fatlinks.py:679 afat/views/fatlinks.py:780
+#: afat/views/fatlinks.py:502 afat/views/fatlinks.py:629
+#: afat/views/fatlinks.py:682 afat/views/fatlinks.py:783
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr ""
 
@@ -1300,69 +1300,69 @@ msgstr ""
 msgid "<h4>Warning!</h4><p>Cannot register the fleet participation for {character_name}. The character needs to be online.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:579
+#: afat/views/fatlinks.py:582
 #, python-brace-format
 msgid "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:595
+#: afat/views/fatlinks.py:598
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:649
+#: afat/views/fatlinks.py:652
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>成功!</h4><p>舰队名称更改成功。</p>"
 
-#: afat/views/fatlinks.py:654
+#: afat/views/fatlinks.py:657
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:720
+#: afat/views/fatlinks.py:723
 #, python-brace-format
 msgid "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added flying a {shiptype} in {system}</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:736
+#: afat/views/fatlinks.py:739
 #, python-brace-format
 msgid "<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:751
+#: afat/views/fatlinks.py:754
 msgid "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you entered was not found.</p>"
 msgstr "<h4>哦不！</h4><p>手动的FAT处理失败了！您输入的角色名未被找到。</p>"
 
-#: afat/views/fatlinks.py:871
+#: afat/views/fatlinks.py:874
 msgid "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT link has already been deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:897
+#: afat/views/fatlinks.py:900
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs have been successfully deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:939
+#: afat/views/fatlinks.py:942
 msgid "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:950
+#: afat/views/fatlinks.py:953
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:970
+#: afat/views/fatlinks.py:973
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT for {character_name} has been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1044
+#: afat/views/fatlinks.py:1047
 msgid "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr ""
 
-#: afat/views/fatlinks.py:1089
+#: afat/views/fatlinks.py:1092
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>成功!</h4><p>这个FAT链接已经被重新开启。</p>"
 
-#: afat/views/fatlinks.py:1099
+#: afat/views/fatlinks.py:1102
 msgid "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can be re-opened only once!</p>"
 msgstr "<h4>警告!</h4><p>这个FAT链接已经被重新开启. FAT链接无法再次重新开启!</p>"
 

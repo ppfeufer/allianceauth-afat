@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024, 2025.
+# "H. Peter Pfeufer" <info@ppfeufer.de>, 2023, 2024, 2025, 2026.
 # "Andrii M." <elfleg0las88@gmail.com>, 2023, 2024.
 # M <skrypets@gmail.com>, 2025.
 # s0k0l -_- <salarysalo@gmail.com>, 2025, 2026.
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-02-03 16:58+0100\n"
-"PO-Revision-Date: 2026-02-03 06:23+0000\n"
+"POT-Creation-Date: 2026-02-27 02:59+0100\n"
+"PO-Revision-Date: 2026-02-22 19:23+0000\n"
 "Last-Translator: s0k0l -_- <salarysalo@gmail.com>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
 "Language: uk\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.16\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -521,7 +521,7 @@ msgstr "Чи використовувати доктрини з модуля ф�
 
 #: afat/models/afat.py:532
 msgid "Setting"
-msgstr "Налаштування"
+msgstr "Опція"
 
 #: afat/models/afat.py:533
 msgid "Settings"
@@ -676,7 +676,7 @@ msgstr "Немає останньої активності FAT для жодно
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:12
 #, python-format
 msgid "Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s?"
-msgstr "Ви впевнені, що хочете закрити флот ESI з ID %(esi_fleet_id)s від %(character_name)s"
+msgstr "Ви впевнені, що хочете закрити флот ESI з ID %(esi_fleet_id)s від %(character_name)s?"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:24
 msgid "View the FATs associated with this link."
@@ -1345,8 +1345,8 @@ msgstr "<h4>Успіх!</h4><p>FAT-посилання створено!</p><p>FA
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI FAT link.</p>"
 msgstr "<h4>Помилка!</h4><p>Щось пішло не так, коли спробували відправити ваше FAT-посилання для ESI.</p>"
 
-#: afat/views/fatlinks.py:502 afat/views/fatlinks.py:626
-#: afat/views/fatlinks.py:679 afat/views/fatlinks.py:780
+#: afat/views/fatlinks.py:502 afat/views/fatlinks.py:629
+#: afat/views/fatlinks.py:682 afat/views/fatlinks.py:783
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr "<h4>Попередження!</h4><p>Вказаний хеш не є дійсним.</p>"
 
@@ -1359,69 +1359,69 @@ msgstr "<h4>Попередження!</h4><p>На жаль, це FAT-посил�
 msgid "<h4>Warning!</h4><p>Cannot register the fleet participation for {character_name}. The character needs to be online.</p>"
 msgstr "<h4>Попередження!</h4><p>Не можна зареєструвати участь у флоті для {character_name}. Персонаж повинен бути онлайн.</p>"
 
-#: afat/views/fatlinks.py:579
+#: afat/views/fatlinks.py:582
 #, python-brace-format
 msgid "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</p>"
 msgstr "<h4>Успіх!</h4><p>FAT зареєстровано для {character_name} у \"{fleet_name}\"</p>"
 
-#: afat/views/fatlinks.py:595
+#: afat/views/fatlinks.py:598
 #, python-brace-format
 msgid "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
 msgstr "<h4>Попередження!</h4><p>Вибраний персонаж ({character_name}) вже зареєстрований для цього FAT-посилання.</p>"
 
-#: afat/views/fatlinks.py:649
+#: afat/views/fatlinks.py:652
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Успіх!</h4><p>Назва флоту успішно змінена.</p>"
 
-#: afat/views/fatlinks.py:654
+#: afat/views/fatlinks.py:657
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr "<h4>Ой, ні!</h4><p>Щось пішло не так!</p>"
 
-#: afat/views/fatlinks.py:720
+#: afat/views/fatlinks.py:723
 #, python-brace-format
 msgid "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added flying a {shiptype} in {system}</p>"
 msgstr "<h4>Успіх!</h4><p>Ручний FAT оброблено.<br>{character_name} додано у флот як корабель {shiptype} в {system}</p>"
 
-#: afat/views/fatlinks.py:736
+#: afat/views/fatlinks.py:739
 #, python-brace-format
 msgid "<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr "<h4>Інформація</h4><p>Пілот вже зареєстрований для цього FAT-посилання.</p><p>Ім'я: {character_name}<br>Система: {system}<br>Корабель: {shiptype}</p>"
 
-#: afat/views/fatlinks.py:751
+#: afat/views/fatlinks.py:754
 msgid "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you entered was not found.</p>"
 msgstr "<h4>Ой, ні!</h4><p>Помилка при обробці ручного FAT! Назва персонажа, яку ви ввели, не знайдена.</p>"
 
-#: afat/views/fatlinks.py:871
+#: afat/views/fatlinks.py:874
 msgid "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT link has already been deleted.</p>"
 msgstr "<h4>Помилка!</h4><p>Вказаний хеш FAT-посилання не є дійсним або FAT-посилання вже видалено.</p>"
 
-#: afat/views/fatlinks.py:897
+#: afat/views/fatlinks.py:900
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs have been successfully deleted.</p>"
 msgstr "<h4>Успіх!</h4><p>FAT-посилання \"{fatlink_hash}\" і всі пов'язані FAT були успішно видалені.</p>"
 
-#: afat/views/fatlinks.py:939
+#: afat/views/fatlinks.py:942
 msgid "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</p>"
 msgstr "<h4>Помилка!</h4><p>Вказаний хеш не є дійсним або він вже видалений.</p>"
 
-#: afat/views/fatlinks.py:950
+#: afat/views/fatlinks.py:953
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr "<h4>Помилка!</h4><p>Хеш і ID FAT не збігаються.</p>"
 
-#: afat/views/fatlinks.py:970
+#: afat/views/fatlinks.py:973
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT for {character_name} has been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr "<h4>Успіх!</h4><p>FAT для {character_name} було успішно видалено з FAT-посилання \"{fatlink_hash}\".</p>"
 
-#: afat/views/fatlinks.py:1044
+#: afat/views/fatlinks.py:1047
 msgid "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr "<h4>Помилка!</h4><p>Вказаний хеш не відповідає жодному FAT-посиланню.</p>"
 
-#: afat/views/fatlinks.py:1089
+#: afat/views/fatlinks.py:1092
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>Успіх!</h4><p>FAT-посилання було успішно повторно відкрито.</p>"
 
-#: afat/views/fatlinks.py:1099
+#: afat/views/fatlinks.py:1102
 msgid "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can be re-opened only once!</p>"
 msgstr "<h4>Попередження!</h4><p>Це FAT-посилання вже було повторно відкрито. FAT-посилання можна повторно відкривати лише один раз!</p>"
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-02-03 16:58+0100\n"
+"POT-Creation-Date: 2026-02-27 02:59+0100\n"
 "PO-Revision-Date: 2026-01-09 17:17+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ru/>\n"
@@ -1381,8 +1381,8 @@ msgstr "<h4>Успех!</h4><p>Запись УБВ флота создана!</p
 msgid "<h4>Error!</h4><p>Something went wrong when attempting to submit your ESI FAT link.</p>"
 msgstr "<h4>Ошибка!</h4><p>Что-то пошло не так при попытке ESI отслеживания флота.</p>"
 
-#: afat/views/fatlinks.py:502 afat/views/fatlinks.py:626
-#: afat/views/fatlinks.py:679 afat/views/fatlinks.py:780
+#: afat/views/fatlinks.py:502 afat/views/fatlinks.py:629
+#: afat/views/fatlinks.py:682 afat/views/fatlinks.py:783
 msgid "<h4>Warning!</h4><p>The hash provided is not valid.</p>"
 msgstr "<h4>Внимание!</h4><p>Предоставлен некорректный hash.</p>"
 
@@ -1395,70 +1395,70 @@ msgstr "<h4>Внимание!</h4><p>К сожалению, срок дейст�
 msgid "<h4>Warning!</h4><p>Cannot register the fleet participation for {character_name}. The character needs to be online.</p>"
 msgstr "<h4>Внимание!</h4><p>Невозможно зарегистрировать участие пилота {character_name}. Пилот должен быть онлайн.</p>"
 
-#: afat/views/fatlinks.py:579
+#: afat/views/fatlinks.py:582
 #, python-brace-format
 msgid "<h4>Success!</h4><p>FAT registered for {character_name} at \"{fleet_name}\"</p>"
 msgstr "<h4>Успех!</h4><p>Пилот {character_name} зарегистрирован в «{fleet_name}»</p>"
 
-#: afat/views/fatlinks.py:595
+#: afat/views/fatlinks.py:598
 #, fuzzy, python-brace-format
 #| msgid "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
 msgid "<h4>Warning!</h4><p>The selected charcter ({character_name}) is already registered for this FAT link.</p>"
 msgstr "<h4>Внимание!</h4><p>БВП ({character_name}) в выбранном флоте уже был учтен.</p>"
 
-#: afat/views/fatlinks.py:649
+#: afat/views/fatlinks.py:652
 msgid "<h4>Success!</h4><p>Fleet name successfully changed.</p>"
 msgstr "<h4>Успех!</h4><p>Название флота успешно изменено.</p>"
 
-#: afat/views/fatlinks.py:654
+#: afat/views/fatlinks.py:657
 msgid "<h4>Oh No!</h4><p>Something went wrong!</p>"
 msgstr "<h4>Упс!</h4><p>Что-то пошло не так!</p>"
 
-#: afat/views/fatlinks.py:720
+#: afat/views/fatlinks.py:723
 #, python-brace-format
 msgid "<h4>Success!</h4><p>Manual FAT processed.<br>{character_name} has been added flying a {shiptype} in {system}</p>"
 msgstr "<h4>Успех!</h4><p>Ссылка РБВ обновлена.<br>{character_name} добавлен на {shiptype} в {system}</p>"
 
-#: afat/views/fatlinks.py:736
+#: afat/views/fatlinks.py:739
 #, python-brace-format
 msgid "<h4>Information</h4><p>Pilot is already registered for this FAT link.</p><p>Name: {character_name}<br>System: {system}<br>Ship: {shiptype}</p>"
 msgstr "<h4>Информация</h4><p>Пилот уже зарегистрирован в указанном БВ.</p><p>Имя: {character_name}<br>Система: {system}<br>Корабль: {shiptype}</p>"
 
-#: afat/views/fatlinks.py:751
+#: afat/views/fatlinks.py:754
 msgid "<h4>Oh No!</h4><p>Manual FAT processing failed! The character name you entered was not found.</p>"
 msgstr "<h4>Упс!</h4><p>Ошибка редактирования БВ! Пилот с введенным именем не найден.</p>"
 
-#: afat/views/fatlinks.py:871
+#: afat/views/fatlinks.py:874
 msgid "<h4>Error!</h4><p>The FAT link hash provided is either invalid or the FAT link has already been deleted.</p>"
 msgstr "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или относится к ранее аннулированной ссылке РБВ.</p>"
 
-#: afat/views/fatlinks.py:897
+#: afat/views/fatlinks.py:900
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT link \"{fatlink_hash}\" and all associated FATs have been successfully deleted.</p>"
 msgstr "<h4>Успех!</h4><p>Запись БВ флота «{fatlink_hash}» и все зарегистрированные БВП были удалены.</p>"
 
-#: afat/views/fatlinks.py:939
+#: afat/views/fatlinks.py:942
 msgid "<h4>Error!</h4><p>The hash provided is either invalid or has been deleted.</p>"
 msgstr "<h4>Ошибка!</h4><p>Предоставленный hash некорректный или ранее удален.</p>"
 
-#: afat/views/fatlinks.py:950
+#: afat/views/fatlinks.py:953
 msgid "<h4>Error!</h4><p>The hash and FAT ID do not match.</p>"
 msgstr "<h4>Ошибка!</h4><p>Значение hash и идентификатор ссылки РБВ не совпадают.</p>"
 
-#: afat/views/fatlinks.py:970
+#: afat/views/fatlinks.py:973
 #, python-brace-format
 msgid "<h4>Success!</h4><p>The FAT for {character_name} has been successfully deleted from FAT link \"{fatlink_hash}\".</p>"
 msgstr "<h4>Успех!</h4><p>Регистрация БВП для {character_name} удалена из БВ флота «{fatlink_hash}».</p>"
 
-#: afat/views/fatlinks.py:1044
+#: afat/views/fatlinks.py:1047
 msgid "<h4>Error!</h4><p>The hash you provided does not match with any FAT link.</p>"
 msgstr "<h4>Ошибка!</h4><p>Предоставленный hash не соответствует никакому БВ флота.</p>"
 
-#: afat/views/fatlinks.py:1089
+#: afat/views/fatlinks.py:1092
 msgid "<h4>Success!</h4><p>The FAT link has been successfully re-opened.</p>"
 msgstr "<h4>Успех!</h4><p>Ссылка РБВ успешно реактивирована.</p>"
 
-#: afat/views/fatlinks.py:1099
+#: afat/views/fatlinks.py:1102
 msgid "<h4>Warning!</h4><p>This FAT link has already been re-opened. FAT links can be re-opened only once!</p>"
 msgstr "<h4>Внимание!</h4><p>Данная ссылка РБВ уже была реактивирована ранее. Возможна только одна реактивация ссылки РБВ!</p>"
 
