@@ -140,30 +140,51 @@ pip install allianceauth-afat==4.4.0
 
 Configure your AA settings in your `local.py` as follows:
 
-- Add `"afat",` to `INSTALLED_APPS`
+- Modify `INSTALLED_APPS` to include the following entries
+
+  ```python
+  INSTALLED_APPS = [
+      # ...
+      "eve_sde",  # Only if not already added for another app
+      "afat",
+      # ...
+  ]
+  ```
+
 - Add the Scheduled Tasks
 
-```python
-# AFAT - https://github.com/ppfeufer/allianceauth-afat
-CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
-    "task": "afat.tasks.update_esi_fatlinks",
-    "schedule": crontab(minute="*/1"),
-}
+  ```python
+  # This line right below the `INSTALLED_APPS` list, and only if not already added for another app
+  INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
 
-CELERYBEAT_SCHEDULE["afat_logrotate"] = {
-    "task": "afat.tasks.logrotate",
-    "schedule": crontab(minute="0", hour="1"),
-}
-```
+  # AFAT - https://github.com/ppfeufer/allianceauth-afat
+  if "afat" in INSTALLED_APPS:
+      CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
+          "task": "afat.tasks.update_esi_fatlinks",
+          "schedule": crontab(minute="*/1"),
+      }
+
+      CELERYBEAT_SCHEDULE["afat_logrotate"] = {
+          "task": "afat.tasks.logrotate",
+          "schedule": crontab(minute="0", hour="1"),
+      }
+
+  if "eve_sde" in INSTALLED_APPS:
+      # Run at 12:00 UTC each day
+      CELERYBEAT_SCHEDULE["EVE SDE :: Check for SDE Updates"] = {
+          "task": "eve_sde.tasks.check_for_sde_updates",
+          "schedule": crontab(minute="0", hour="12"),
+      }
+  ```
 
 #### Step 3: Finalizing the Installation<a name="step-3-finalizing-the-installation"></a>
 
-Run migrations, copy static files and load EVE universe data:
+Run migrations, copy static files and load EVE SDE data
 
 ```shell
 python manage.py collectstatic
 python manage.py migrate
-python manage.py afat_load_shiptypes
+python manage.py esde_load_sde
 ```
 
 ### Docker Installation<a name="docker-installation"></a>
@@ -180,21 +201,42 @@ allianceauth-afat==4.4.0
 
 Configure your AA settings (`conf/local.py`) as follows:
 
-- Add `"afat",` to `INSTALLED_APPS`
+- Modify `INSTALLED_APPS` to include the following entries
+
+  ```python
+  INSTALLED_APPS = [
+      # ...
+      "eve_sde",  # Only if not already added for another app
+      "afat",
+      # ...
+  ]
+  ```
+
 - Add the Scheduled Tasks
 
-```python
-# AFAT - https://github.com/ppfeufer/allianceauth-afat
-CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
-    "task": "afat.tasks.update_esi_fatlinks",
-    "schedule": crontab(minute="*/1"),
-}
+  ```python
+  # This line right below the `INSTALLED_APPS` list, and only if not already added for another app
+  INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
 
-CELERYBEAT_SCHEDULE["afat_logrotate"] = {
-    "task": "afat.tasks.logrotate",
-    "schedule": crontab(minute="0", hour="1"),
-}
-```
+  # AFAT - https://github.com/ppfeufer/allianceauth-afat
+  if "afat" in INSTALLED_APPS:
+      CELERYBEAT_SCHEDULE["afat_update_esi_fatlinks"] = {
+          "task": "afat.tasks.update_esi_fatlinks",
+          "schedule": crontab(minute="*/1"),
+      }
+
+      CELERYBEAT_SCHEDULE["afat_logrotate"] = {
+          "task": "afat.tasks.logrotate",
+          "schedule": crontab(minute="0", hour="1"),
+      }
+
+  if "eve_sde" in INSTALLED_APPS:
+      # Run at 12:00 UTC each day
+      CELERYBEAT_SCHEDULE["EVE SDE :: Check for SDE Updates"] = {
+          "task": "eve_sde.tasks.check_for_sde_updates",
+          "schedule": crontab(minute="0", hour="12"),
+      }
+  ```
 
 #### Step 3: Build Auth and Restart Your Containers<a name="step-3-build-auth-and-restart-your-containers"></a>
 
@@ -205,14 +247,14 @@ docker compose --env-file=.env up -d
 
 #### Step 4: Finalizing the Installation<a name="step-4-finalizing-the-installation"></a>
 
-Run migrations, copy static files and load EVE universe data:
+Run migrations, copy static files and load EVE SDE data:
 
 ```shell
 docker compose exec allianceauth_gunicorn bash
 
 auth collectstatic
 auth migrate
-auth afat_load_shiptypes
+auth esde_load_sde
 ```
 
 ## Updating<a name="updating"></a>
