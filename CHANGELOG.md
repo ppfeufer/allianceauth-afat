@@ -42,6 +42,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [5.0.0] - 2026-02-27
+
 > [!WARNING]
 >
 > This version includes a dependency change, so please make sure to read the update
@@ -2148,6 +2150,7 @@ Finally restart your supervisor services for AA
 [4.3.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.0...v4.3.1 "v4.3.1"
 [4.3.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.1...v4.3.2 "v4.3.2"
 [4.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.2...v4.4.0 "v4.4.0"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.4.0...HEAD "In Development"
+[5.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.4.0...v5.0.0 "v5.0.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
