@@ -56,7 +56,7 @@ if os.environ.get("USE_MYSQL", True) is True:
 INSTALLED_APPS += [
     PACKAGE,
     "eveuniverse",
-    "fittings",
+    "fittings",  # fittings still needs this, but it should be removed in the future
     "eve_sde",
 ]
 

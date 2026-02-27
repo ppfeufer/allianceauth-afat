@@ -1348,8 +1348,8 @@ class TestAddFatView(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response.url, reverse("afat:dashboard"))
 
-    @patch("afat.views.fatlinks.EveType.objects.get_or_create_esi")
-    @patch("afat.views.fatlinks.EveSolarSystem.objects.get_or_create_esi")
+    @patch("afat.views.fatlinks.ItemType.objects.get")
+    @patch("afat.views.fatlinks.SolarSystem.objects.get")
     @patch("afat.views.fatlinks.esi")
     @patch("afat.views.fatlinks.esi_handler.result")
     def test_creates_fat_and_redirects_on_success(
@@ -1370,76 +1370,71 @@ class TestAddFatView(BaseTestCase):
         :rtype:
         """
 
-        # Prepare ESI handler responses: online, location, ship
+        # Prepare ESI responses: online, location, ship
+        location_solar_system_id = 5000
+        ship_type_id = 6000
+
+        esi_online_resp = MagicMock(online=True)
+        esi_location_resp = MagicMock(solar_system_id=location_solar_system_id)
+        esi_ship_resp = MagicMock(ship_type_id=ship_type_id)
+
         mock_esi_result.side_effect = [
-            MagicMock(online=True),  # online check
-            MagicMock(solar_system_id=30000142),  # location
-            MagicMock(ship_type_id=12345),  # ship
+            esi_online_resp,
+            esi_location_resp,
+            esi_ship_resp,
         ]
 
-        # Create a real EveCharacter in the DB
-        real_character = EveCharacter.objects.create(
-            character_id=123,
-            character_name="Peter Parker",
-            corporation_id=456,
-            alliance_id=789,
-        )
+        # Ensure the model lookups return single model-like instances (not tuples)
+        solar_mock = MagicMock()
+        solar_mock.name = "SolarSystemName"
+        mock_get_solar.return_value = solar_mock
 
-        # Provide fake EveSolarSystem and EveType results to avoid eveuniverse network calls
-        fake_system = SimpleNamespace(name="Jita")
-        fake_type = SimpleNamespace(name="Rifter")
-        mock_get_solar.return_value = (fake_system, False)
-        mock_get_type.return_value = (fake_type, False)
+        shiptype_mock = MagicMock()
+        shiptype_mock.name = "ShipTypeName"
+        mock_get_type.return_value = shiptype_mock
 
-        # Attach a small fake Location API client to the patched module-level esi
-        fake_location_api = SimpleNamespace(
-            GetCharactersCharacterIdOnline=lambda character_id, token: MagicMock(
-                online=True
-            ),
-            GetCharactersCharacterIdLocation=lambda character_id, token: MagicMock(
-                solar_system_id=30000142
-            ),
-            GetCharactersCharacterIdShip=lambda character_id, token: MagicMock(
-                ship_type_id=12345
-            ),
-        )
-        fake_client = SimpleNamespace(Location=fake_location_api)
-        mock_esi.client = fake_client
-
-        # Build request and session/messages
-        rf = RequestFactory()
-        request = rf.get(self.url)
-        request.user = self.user_with_basic_access
-        session_middleware = SessionMiddleware(get_response=lambda req: None)
-        session_middleware.process_request(request)
+        # Build request and attach session, messages and user
+        url = self.url  # set in setUp
+        request = RequestFactory().get(path=url)
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
         request.session.save()
+        request.user = self.user_with_basic_access
         request._messages = FallbackStorage(request)
 
-        # Token-like mock matching the real character
-        token_mock = MagicMock(character_id=real_character.character_id)
-        token_mock.is_valid.return_value = True
-        token_mock.scopes = [
-            "esi-location.read_location.v1",
-            "esi-location.read_ship_type.v1",
-            "esi-location.read_online.v1",
-        ]
+        # Token for the user that will be registered
+        # Use an existing EveCharacter from the test setup (created by create_fake_user)
+        eve_char = EveCharacter.objects.get(character_id=2001)
+        token_mock = MagicMock(character_id=eve_char.character_id)
 
-        # Call the unwrapped view to bypass decorators
+        # Call the underlying unwrapped view to bypass decorators
         response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
             request, token_mock, self.fatlink.hash
         )
 
-        # Assertions
+        # Response should redirect to dashboard
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        self.assertEqual(response["Location"], reverse("afat:dashboard"))
+        self.assertEqual(response.url, reverse("afat:dashboard"))
+
+        # Ensure the model lookups were called with the expected IDs
+        mock_get_solar.assert_called_once_with(id=location_solar_system_id)
+        mock_get_type.assert_called_once_with(id=ship_type_id)
+
+        # Verify a Fat was created for this fatlink and character
+        created_fat = Fat.objects.filter(
+            fatlink=self.fatlink, character__character_id=eve_char.character_id
+        ).first()
+        self.assertIsNotNone(created_fat)
+        self.assertEqual(created_fat.system, solar_mock.name)
+        self.assertEqual(created_fat.shiptype, shiptype_mock.name)
+
+        # Check that a success message was added
+        messages = list(get_messages(request))
         self.assertTrue(
-            Fat.objects.filter(
-                fatlink=self.fatlink, character__character_id=token_mock.character_id
-            ).exists()
+            any("Success" in str(m) or "FAT registered" in str(m) for m in messages)
         )
 
-    @patch("afat.views.fatlinks.EveType.objects.get_or_create_esi")
-    @patch("afat.views.fatlinks.EveSolarSystem.objects.get_or_create_esi")
+    @patch("afat.views.fatlinks.ItemType.objects.get")
+    @patch("afat.views.fatlinks.SolarSystem.objects.get")
     @patch("afat.views.fatlinks.Fat.objects.create")
     @patch("afat.views.fatlinks.EveCharacter.objects.get")
     @patch("afat.views.fatlinks.esi")
@@ -1454,7 +1449,7 @@ class TestAddFatView(BaseTestCase):
         mock_get_type,
     ):
         """
-        Test does not create duplicate fat and warns user
+        Test does not create duplicate fat
 
         :param mock_esi_result:
         :type mock_esi_result:
@@ -1472,70 +1467,68 @@ class TestAddFatView(BaseTestCase):
         :rtype:
         """
 
-        # Prepare ESI handler responses: online, location, ship
+        # Prepare ESI responses: online, location, ship
+        location_solar_system_id = 5000
+        ship_type_id = 6000
+
+        esi_online_resp = MagicMock(online=True)
+        esi_location_resp = MagicMock(solar_system_id=location_solar_system_id)
+        esi_ship_resp = MagicMock(ship_type_id=ship_type_id)
+
         mock_esi_result.side_effect = [
-            MagicMock(online=True),  # online check
-            MagicMock(solar_system_id=30000142),  # location
-            MagicMock(ship_type_id=12345),  # ship
+            esi_online_resp,
+            esi_location_resp,
+            esi_ship_resp,
         ]
 
-        # Provide fake EveSolarSystem and EveType results to avoid eveuniverse network calls
-        fake_system = SimpleNamespace(name="Jita")
-        fake_type = SimpleNamespace(name="Rifter")
-        mock_get_solar.return_value = (fake_system, False)
-        mock_get_type.return_value = (fake_type, False)
+        # Ensure the model lookups return single model-like instances (not tuples)
+        solar_mock = MagicMock()
+        solar_mock.name = "SolarSystemName"
+        mock_get_solar.return_value = solar_mock
 
-        # Attach a small fake Location API client to the patched module-level esi
-        fake_location_api = SimpleNamespace(
-            GetCharactersCharacterIdOnline=lambda character_id, token: MagicMock(
-                online=True
-            ),
-            GetCharactersCharacterIdLocation=lambda character_id, token: MagicMock(
-                solar_system_id=30000142
-            ),
-            GetCharactersCharacterIdShip=lambda character_id, token: MagicMock(
-                ship_type_id=12345
-            ),
+        shiptype_mock = MagicMock()
+        shiptype_mock.name = "ShipTypeName"
+        mock_get_type.return_value = shiptype_mock
+
+        # Simulate duplicate creation raising IntegrityError
+        mock_fat_create.side_effect = IntegrityError
+
+        # Ensure EveCharacter lookup returns a character-like object
+        fake_character = MagicMock(
+            character_name="Dup User",
+            character_id=2001,
+            corporation_id=300,
+            alliance_id=400,
         )
-        fake_client = SimpleNamespace(Location=fake_location_api)
-        mock_esi.client = fake_client
+        mock_eve_get.return_value = fake_character
 
-        # Mock character and make Fat.create raise IntegrityError
-        mock_eve_get.return_value = EveCharacter(
-            character_id=123,
-            character_name="John Doe",
-            corporation_id=1,
-            alliance_id=None,
-        )
-        mock_fat_create.side_effect = IntegrityError()
-
-        # Build request and session/messages
-        request = RequestFactory().get(self.url)
-        request.user = self.user_with_basic_access
+        # Build request and attach session, messages and user
+        url = self.url  # set in setUp
+        request = RequestFactory().get(path=url)
         SessionMiddleware(get_response=lambda req: None).process_request(request)
         request.session.save()
+        request.user = self.user_with_basic_access
         request._messages = FallbackStorage(request)
 
-        token_mock = MagicMock(character_id=123)
-        token_mock.is_valid.return_value = True
-        token_mock.scopes = [
-            "esi-location.read_location.v1",
-            "esi-location.read_ship_type.v1",
-            "esi-location.read_online.v1",
-        ]
+        # Token for the user that will be registered
+        token_mock = MagicMock(character_id=fake_character.character_id)
 
-        # Call the unwrapped view to bypass decorators
+        # Call the underlying unwrapped view to bypass decorators
         response = fatlinks_module.add_fat.__wrapped__.__wrapped__.__wrapped__(
             request, token_mock, self.fatlink.hash
         )
 
+        # Response should redirect to dashboard
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response.url, reverse("afat:dashboard"))
+
+        # Ensure the model lookups were called with the expected IDs
+        mock_get_solar.assert_called_once_with(id=location_solar_system_id)
+        mock_get_type.assert_called_once_with(id=ship_type_id)
+
+        # Fat.create should have been attempted and raised IntegrityError
+        self.assertTrue(mock_fat_create.called)
+
+        # Check that a warning about duplicate registration was added
         messages = list(get_messages(request))
-        self.assertTrue(
-            any(
-                "The selected charcter (John Doe) is already registered for this FAT link."
-                in str(m)
-                for m in messages
-            )
-        )
+        self.assertTrue(any("already registered" in str(m) for m in messages))

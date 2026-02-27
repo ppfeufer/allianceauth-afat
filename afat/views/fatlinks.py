@@ -552,10 +552,6 @@ def add_fat(
     )
     solar_system = SolarSystem.objects.get(id=location.solar_system_id)
 
-    logger.debug(
-        f"Registering FAT for character {character.character_name} in system {solar_system} (ID: {solar_system.id})"
-    )
-
     current_ship = esi_handler.result(
         operation=esi.client.Location.GetCharactersCharacterIdShip(
             character_id=token.character_id, token=token
@@ -565,7 +561,8 @@ def add_fat(
     ship = ItemType.objects.get(id=current_ship.ship_type_id)
 
     logger.debug(
-        f"Character {character.character_name} is flying ship type {ship} (ID: {ship.id})"
+        f"Processing character {character} in {solar_system.name} flying a {ship.name} "
+        f"for FAT link with hash {fatlink_hash}"
     )
 
     try:
