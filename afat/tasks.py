@@ -8,6 +8,7 @@ from datetime import timedelta
 # Third Party
 import kombu
 from celery import group, shared_task
+from eve_sde.models import ItemType, SolarSystem
 
 # Django
 from django.utils import timezone
@@ -17,9 +18,6 @@ from allianceauth.services.hooks import get_extension_logger
 from allianceauth.services.tasks import QueueOnce
 from esi.exceptions import HTTPClientError
 from esi.models import Token
-
-# Alliance Auth (External Libs)
-from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
@@ -121,11 +119,12 @@ def process_character(
         return
 
     character = get_or_create_character(character_id=character_id)
-    solar_system, solar_system_created = (  # pylint: disable=unused-variable
-        EveSolarSystem.objects.get_or_create_esi(id=solar_system_id)
-    )
-    ship, ship_created = (  # pylint: disable=unused-variable
-        EveType.objects.get_or_create_esi(id=ship_type_id)
+    solar_system = SolarSystem.objects.get(id=solar_system_id)
+    ship = ItemType.objects.get(id=ship_type_id)
+
+    logger.debug(
+        f"Processing character {character} in {solar_system.name} flying a {ship.name} "
+        f"for FAT link with hash {fatlink_hash}"
     )
 
     fat, created = Fat.objects.get_or_create(

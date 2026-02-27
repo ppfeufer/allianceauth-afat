@@ -42,6 +42,12 @@ Section Order:
 
 <!-- Your changes go here -->
 
+> [!WARNING]
+>
+> This version includes a dependency change, so please make sure to read the update
+> instructions carefully before updating to this version, otherwise, the app will
+> not work properly.
+
 ### Added
 
 - JS error handling to server-side DataTables
@@ -49,6 +55,52 @@ Section Order:
 ### Changed
 
 - Use Django templatetag for true/false detection instead of if statements in templates
+- Replaced `django-eveuniverse` with `django-eveonline-sde` for static data
+
+### Update Instructions
+
+After installing this version, modify your `INSTALLED_APPS` in your `local.py` (or
+`conf/local.py` for Docker installations):
+
+```python
+INSTALLED_APPS = [
+    # ...
+    "eve_sde",  # Only if not already added for another app
+    "afat",  # This one should already be in there
+    # ...
+]
+
+# This line is right below the `INSTALLED_APPS` list, and only if not already added for another app
+INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
+```
+
+Add the following new task to ensure the SDE data is kept up to date:
+
+```python
+if "eve_sde" in INSTALLED_APPS:
+    # Run at 12:00 UTC each day
+    CELERYBEAT_SCHEDULE["EVE SDE :: Check for SDE Updates"] = {
+        "task": "eve_sde.tasks.check_for_sde_updates",
+        "schedule": crontab(minute="0", hour="12"),
+    }
+```
+
+After running migrations, make sure to run the following commands to import the SDE
+data into your database:
+
+#### Bare Metal Installations
+
+```shell
+python manage.py esde_load_sde
+```
+
+Restart your supervisor after running the commands.
+
+#### Docker Installations
+
+```shell
+auth esde_load_sde
+```
 
 ## [4.4.0] - 2026-02-03
 

@@ -5,6 +5,9 @@ Fat links related views
 # Standard Library
 from datetime import timedelta
 
+# Third Party
+from eve_sde.models import ItemType, SolarSystem
+
 # Django
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
@@ -25,9 +28,6 @@ from allianceauth.eveonline.models import EveCharacter
 from allianceauth.services.hooks import get_extension_logger
 from esi.decorators import token_required
 from esi.models import Token
-
-# Alliance Auth (External Libs)
-from eveuniverse.models import EveSolarSystem, EveType
 
 # Alliance Auth AFAT
 from afat import __title__
@@ -550,9 +550,7 @@ def add_fat(
         ),
         use_etag=False,
     )
-    solar_system = EveSolarSystem.objects.get_or_create_esi(
-        id=location.solar_system_id
-    )[0]
+    solar_system = SolarSystem.objects.get(id=location.solar_system_id)
 
     current_ship = esi_handler.result(
         operation=esi.client.Location.GetCharactersCharacterIdShip(
@@ -560,7 +558,12 @@ def add_fat(
         ),
         use_etag=False,
     )
-    ship = EveType.objects.get_or_create_esi(id=current_ship.ship_type_id)[0]
+    ship = ItemType.objects.get(id=current_ship.ship_type_id)
+
+    logger.debug(
+        f"Processing character {character} in {solar_system.name} flying a {ship.name} "
+        f"for FAT link with hash {fatlink_hash}"
+    )
 
     try:
         Fat.objects.create(

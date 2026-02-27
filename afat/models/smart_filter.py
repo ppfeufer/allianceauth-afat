@@ -6,6 +6,9 @@ AFAT Smart Filter
 import datetime
 from collections import defaultdict
 
+# Third Party
+from eve_sde.models import ItemType
+
 # Django
 from django.contrib.auth.models import User
 from django.db import models
@@ -14,9 +17,6 @@ from django.utils.translation import gettext_lazy as _
 # Alliance Auth
 from allianceauth.authentication.models import CharacterOwnership
 from allianceauth.services.hooks import get_extension_logger
-
-# Alliance Auth (External Libs)
-from eveuniverse.models import EveType
 
 # Alliance Auth AFAT
 from afat import __title__
@@ -116,9 +116,9 @@ class FatsInTimeFilter(BaseFilter):
         help_text=_("Any of the selected fleet types are needed to pass the filter."),
     )
     ship_classes = models.ManyToManyField(
-        to=EveType,
+        to=ItemType,
         blank=True,
-        limit_choices_to={"eve_group__eve_category_id": 6},
+        limit_choices_to={"group__category_id": 6},
         help_text=_("Any of the selected ship classes are needed to pass the filter."),
     )
 

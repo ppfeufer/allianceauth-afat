@@ -725,8 +725,8 @@ class TestProcessCharacterTask(BaseTestCase):
 
     @patch("afat.tasks.get_or_create_character")
     @patch("afat.models.FatLink.objects.get")
-    @patch("afat.tasks.EveSolarSystem.objects.get_or_create_esi")
-    @patch("afat.tasks.EveType.objects.get_or_create_esi")
+    @patch("afat.tasks.SolarSystem.objects.get")
+    @patch("afat.tasks.ItemType.objects.get")
     @patch("afat.models.Fat.objects.get_or_create")
     def test_processes_character_when_fatlink_exists(
         self,
@@ -755,8 +755,8 @@ class TestProcessCharacterTask(BaseTestCase):
 
         mock_get_fatlink.return_value = MagicMock()
         mock_get_character.return_value = MagicMock(corporation_id=1, alliance_id=2)
-        mock_get_or_create_system.return_value = (MagicMock(name="SolarSystem"), True)
-        mock_get_or_create_ship.return_value = (MagicMock(name="ShipType"), True)
+        mock_get_or_create_system.return_value = MagicMock(name="SolarSystem")
+        mock_get_or_create_ship.return_value = MagicMock(name="ShipType")
         mock_get_or_create_fat.return_value = (MagicMock(pk=1), True)
 
         process_character(1, 2, 3, "valid_hash")
@@ -792,8 +792,8 @@ class TestProcessCharacterTask(BaseTestCase):
 
     @patch("afat.tasks.get_or_create_character")
     @patch("afat.models.FatLink.objects.get")
-    @patch("afat.tasks.EveSolarSystem.objects.get_or_create_esi")
-    @patch("afat.tasks.EveType.objects.get_or_create_esi")
+    @patch("afat.tasks.SolarSystem.objects.get")
+    @patch("afat.tasks.ItemType.objects.get")
     @patch("afat.models.Fat.objects.get_or_create")
     def test_does_not_create_duplicate_fat_entry(
         self,
@@ -803,10 +803,27 @@ class TestProcessCharacterTask(BaseTestCase):
         mock_get_fatlink,
         mock_get_character,
     ):
+        """
+        Test that the process_character task does not create a duplicate FAT entry when one already exists.
+
+        :param mock_get_or_create_fat:
+        :type mock_get_or_create_fat:
+        :param mock_get_or_create_ship:
+        :type mock_get_or_create_ship:
+        :param mock_get_or_create_system:
+        :type mock_get_or_create_system:
+        :param mock_get_fatlink:
+        :type mock_get_fatlink:
+        :param mock_get_character:
+        :type mock_get_character:
+        :return:
+        :rtype:
+        """
+
         mock_get_fatlink.return_value = MagicMock()
         mock_get_character.return_value = MagicMock(corporation_id=1, alliance_id=2)
-        mock_get_or_create_system.return_value = (MagicMock(name="SolarSystem"), True)
-        mock_get_or_create_ship.return_value = (MagicMock(name="ShipType"), True)
+        mock_get_or_create_system.return_value = MagicMock(name="SolarSystem")
+        mock_get_or_create_ship.return_value = MagicMock(name="ShipType")
         mock_get_or_create_fat.return_value = (MagicMock(pk=1), False)
 
         process_character(1, 2, 3, "valid_hash")
