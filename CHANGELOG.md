@@ -65,7 +65,7 @@ After installing this version, modify your `INSTALLED_APPS` in your `local.py` (
 `conf/local.py` for Docker installations):
 
 ```python
-INSTALLED_APPS = [
+INSTALLED_APPS += [
     # ...
     "eve_sde",  # Only if not already added for another app
     "afat",  # This one should already be in there

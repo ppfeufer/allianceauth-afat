@@ -143,7 +143,7 @@ Configure your AA settings in your `local.py` as follows:
 - Modify `INSTALLED_APPS` to include the following entries
 
   ```python
-  INSTALLED_APPS = [
+  INSTALLED_APPS += [
       # ...
       "eve_sde",  # Only if not already added for another app
       "afat",
@@ -204,7 +204,7 @@ Configure your AA settings (`conf/local.py`) as follows:
 - Modify `INSTALLED_APPS` to include the following entries
 
   ```python
-  INSTALLED_APPS = [
+  INSTALLED_APPS += [
       # ...
       "eve_sde",  # Only if not already added for another app
       "afat",
