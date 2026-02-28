@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
 "POT-Creation-Date: 2026-02-27 02:59+0100\n"
-"PO-Revision-Date: 2026-02-12 05:23+0000\n"
+"PO-Revision-Date: 2026-02-28 19:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15.2\n"
+"X-Generator: Weblate 5.16.1\n"
 
 #: afat/__init__.py:10 afat/templates/afat/base.html:7
 #: afat/templates/afat/base.html:12
@@ -140,47 +140,34 @@ msgid "Expiry time in minutes"
 msgstr "失效时间（分钟）"
 
 #: afat/helper/time.py:117
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d year"
 msgid_plural "%(count)d years"
-msgstr[0] ""
-"年\n"
-"\n"
-"年"
+msgstr[0] "%(count)d 年"
 
 #: afat/helper/time.py:123
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d day"
 msgid_plural "%(count)d days"
-msgstr[0] ""
-"天\n"
-"\n"
-"\n"
-"天"
+msgstr[0] "%(count)d 天"
 
 #: afat/helper/time.py:129
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d hour"
 msgid_plural "%(count)d hours"
-msgstr[0] ""
-"小时\n"
-"\n"
-"小时"
+msgstr[0] "%(count)d 小时"
 
 #: afat/helper/time.py:135
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d minute"
 msgid_plural "%(count)d minutes"
-msgstr[0] "分钟 分钟"
+msgstr[0] "%(count)d 分钟"
 
 #: afat/helper/time.py:141
-#, fuzzy, python-format
+#, python-format
 msgid "%(count)d second"
 msgid_plural "%(count)d seconds"
-msgstr[0] ""
-"秒\n"
-"\n"
-"秒"
+msgstr[0] "%(count)d 秒"
 
 #: afat/helper/time.py:114
 #, python-format
