@@ -61,10 +61,8 @@ urls.GitHub = "https://github.com/ppfeufer/allianceauth-afat"
 urls.Tracker = "https://github.com/ppfeufer/allianceauth-afat/issues"
 urls.Translation = "https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/"
 
-[tool.hatch.build]
-include = [
+[tool.hatch]
+build.include = [
     "/afat",
 ]
-
-[tool.hatch.version]
-path = "afat/__init__.py"
+version.path = "afat/__init__.py"
