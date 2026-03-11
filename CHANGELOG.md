@@ -42,9 +42,11 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [5.0.2] - 2026-03-11
+
 ### Changed
 
-- Switch from `django.utils.datetime_safe` to `django.utils.timezone` in preparation for Django 5
+- Move away from `django.utils.datetime_safe` in preparation for Alliance Auth v5
 
 ## [5.0.1] - 2026-03-03
 
@@ -2159,6 +2161,7 @@ Finally restart your supervisor services for AA
 [4.4.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.3.2...v4.4.0 "v4.4.0"
 [5.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.4.0...v5.0.0 "v5.0.0"
 [5.0.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.0...v5.0.1 "v5.0.1"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.1...HEAD "In Development"
+[5.0.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.1...v5.0.2 "v5.0.2"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.2...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
