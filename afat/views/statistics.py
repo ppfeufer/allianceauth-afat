@@ -15,7 +15,7 @@ from django.db.models import Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.utils.datetime_safe import datetime
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext, gettext_lazy
 
@@ -59,7 +59,9 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     """
 
     if year is None:
-        year = datetime.now().year
+        year = timezone.now().year
+
+    logger.debug(f"Calculating statistics overview for year {year}")
 
     user_can_see_other_corps = False
 
@@ -107,7 +109,7 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
         "data": data,
         "charstats": months,
         "year": year,
-        "year_current": datetime.now().year,
+        "year_current": timezone.now().year,
         "year_prev": int(year) - 1,
         "year_next": int(year) + 1,
         "user_can_see_other_corps": user_can_see_other_corps,
@@ -200,8 +202,8 @@ def character(  # pylint: disable=too-many-locals
     """
 
     # Default to current year and month if not provided
-    year = year or datetime.now().year
-    month = month or datetime.now().month
+    year = year or timezone.now().year
+    month = month or timezone.now().month
 
     current_month, current_year = current_month_and_year()
     eve_character = EveCharacter.objects.get(character_id=charid)
@@ -438,7 +440,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     """
 
     # Default to current year if not provided
-    year = year or datetime.now().year
+    year = year or timezone.now().year
 
     current_month, current_year = current_month_and_year()
 
@@ -582,7 +584,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         "corp": corp,
         "corporation": corp_name,
         "month": month,
-        "month_current": datetime.now().month,
+        "month_current": timezone.now().month,
         "month_prev": int(month) - 1,
         "month_next": int(month) + 1,
         "month_with_year": f"{year}{month:02d}",
@@ -590,7 +592,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
         "month_next_with_year": f"{year}{int(month) + 1:02d}",
         "month_prev_with_year": f"{year}{int(month) - 1:02d}",
         "year": year,
-        "year_current": datetime.now().year,
+        "year_current": timezone.now().year,
         "year_prev": int(year) - 1,
         "year_next": int(year) + 1,
         "data_stacked": data_stacked,
@@ -637,7 +639,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     """
 
     # Default to current year if not provided
-    year = year or datetime.now().year
+    year = year or timezone.now().year
 
     ally = (
         get_or_create_alliance_info(alliance_id=allianceid)

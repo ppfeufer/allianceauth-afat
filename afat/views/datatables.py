@@ -6,7 +6,7 @@ Datatables views for Alliance Auth AFAT app.
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Exists, OuterRef, QuerySet
 from django.http import HttpRequest
-from django.utils.datetime_safe import datetime
+from django.utils import timezone
 
 # Alliance Auth
 from allianceauth.framework.datatables import DataTablesView
@@ -60,7 +60,7 @@ class FatLinksTableView(PermissionRequiredMixin, DataTablesView):
 
         qs = (
             self.model.objects.select_related_default().filter(
-                created__year=kwargs.get("year", datetime.now().year)
+                created__year=kwargs.get("year", timezone.now().year)
             )
             # .annotate_fats_count()
         )

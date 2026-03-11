@@ -13,7 +13,7 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.db import models
 from django.db.models import QuerySet
 from django.urls import reverse
-from django.utils.datetime_safe import datetime
+from django.utils import timezone
 from django.utils.functional import Promise
 from django.utils.translation import gettext_lazy as _
 
@@ -415,8 +415,8 @@ def current_month_and_year() -> tuple[int, int]:
     :rtype: Tuple[(int) Current Month, (int) Current Year]
     """
 
-    current_month = datetime.now().month
-    current_year = datetime.now().year
+    current_month = timezone.now().month
+    current_year = timezone.now().year
 
     return current_month, current_year
 

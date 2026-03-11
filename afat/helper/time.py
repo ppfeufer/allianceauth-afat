@@ -3,12 +3,12 @@ Helper for time related functions
 """
 
 # Django
-from django.utils.datetime_safe import datetime
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext_lazy
 
 
-def get_time_delta(then, now=datetime.now(), interval="default"):
+def get_time_delta(then, now=timezone.now(), interval="default"):
     """
     Returns a duration as specified by variable interval
     functions, except total_duration, returns [quotient, remainder]

@@ -5,7 +5,7 @@ Tests for DataTables views.
 # Django
 from django.http import HttpRequest
 from django.test import RequestFactory
-from django.utils.datetime_safe import datetime
+from django.utils import timezone
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -100,13 +100,13 @@ class TestFatLinksTableView(DataTableBaseTestCase):
             hash="ghi789",
         )
         cls.fatlink_current_year1 = FatLink.objects.create(
-            created=datetime.now(),
+            created=timezone.now(),
             fleet="Fleet Delta",
             creator=cls.user_with_basic_access,
             hash="jkl012",
         )
         cls.fatlink_current_year2 = FatLink.objects.create(
-            created=datetime.now(),
+            created=timezone.now(),
             fleet="Fleet Epsilon",
             creator=cls.user_with_basic_access,
             hash="mno345",
