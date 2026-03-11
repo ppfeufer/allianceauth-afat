@@ -3,15 +3,12 @@ Test cases for the task in the afat module.
 """
 
 # Standard Library
-from datetime import timedelta
+from datetime import datetime, timedelta
 from http import HTTPStatus
 from unittest.mock import ANY, MagicMock, PropertyMock, patch
 
 # Third Party
 import kombu
-
-# Django
-from django.utils.datetime_safe import datetime
 
 # Alliance Auth
 from esi.exceptions import HTTPClientError

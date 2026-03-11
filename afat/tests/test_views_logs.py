@@ -3,6 +3,7 @@ Test logs view
 """
 
 # Standard Library
+from datetime import datetime
 from http import HTTPStatus
 
 # Third Party
@@ -10,7 +11,6 @@ from pytz import utc
 
 # Django
 from django.urls import reverse
-from django.utils.datetime_safe import datetime
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter

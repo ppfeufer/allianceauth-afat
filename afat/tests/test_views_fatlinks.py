@@ -3,7 +3,7 @@ Test fatlinks views
 """
 
 # Standard Library
-from datetime import timedelta
+from datetime import datetime, timedelta
 from http import HTTPStatus
 from types import SimpleNamespace
 from unittest.mock import ANY, MagicMock, Mock, patch
@@ -19,7 +19,6 @@ from django.db import IntegrityError
 from django.test import RequestFactory
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.datetime_safe import datetime
 from django.utils.timezone import now
 
 # Alliance Auth
