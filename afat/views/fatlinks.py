@@ -17,7 +17,6 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.datetime_safe import datetime
 from django.utils.safestring import mark_safe
 from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
@@ -72,11 +71,11 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
     """
 
     if year is None:
-        year = datetime.now().year
+        year = timezone.now().year
 
     context = {
         "year": year,
-        "year_current": datetime.now().year,
+        "year_current": timezone.now().year,
         "year_prev": int(year) - 1,
         "year_next": int(year) + 1,
     }
@@ -1054,7 +1053,7 @@ def reopen_fatlink(request: WSGIRequest, fatlink_hash: str) -> HttpResponseRedir
 
     if not fatlink_duration.fleet.reopened:
         created_at = fatlink_duration.fleet.created
-        now = datetime.now()
+        now = timezone.now()
 
         default_reopen_duration = Setting.get_setting(
             Setting.Field.DEFAULT_FATLINK_REOPEN_DURATION

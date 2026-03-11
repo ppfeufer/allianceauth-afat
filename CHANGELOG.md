@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Switch from `django.utils.datetime_safe` to `django.utils.timezone` in preparation for Django 5
+
 ## [5.0.1] - 2026-03-03
 
 ### Changed

@@ -8,6 +8,7 @@ import re
 
 # Django
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 
 # Alliance Auth
@@ -150,7 +151,7 @@ def _generate_token(
     """
 
     if timestamp_dt is None:
-        timestamp_dt = dt.datetime.utcnow()
+        timestamp_dt = timezone.now()
 
     if scopes is None:
         scopes = [
