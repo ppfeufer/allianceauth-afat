@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Sanitize form input to prevent potential XSS vulnerabilities
+
 ## [5.0.2] - 2026-03-11
 
 ### Changed
