@@ -42,9 +42,12 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [5.0.3] - 2026-04-09
+
 ### Changed
 
 - Sanitize form input to prevent potential XSS vulnerabilities
+- Translations updated
 
 ## [5.0.2] - 2026-03-11
 
@@ -2170,6 +2173,7 @@ Finally restart your supervisor services for AA
 [5.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v4.4.0...v5.0.0 "v5.0.0"
 [5.0.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.0...v5.0.1 "v5.0.1"
 [5.0.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.1...v5.0.2 "v5.0.2"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.2...HEAD "In Development"
+[5.0.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.2...v5.0.3 "v5.0.3"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.3...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
