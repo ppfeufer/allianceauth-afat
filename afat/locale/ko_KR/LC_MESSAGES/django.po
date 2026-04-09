@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-03-11 13:50+0100\n"
+"POT-Creation-Date: 2026-04-09 05:20+0200\n"
 "PO-Revision-Date: 2026-02-01 14:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ko/>\n"
@@ -84,12 +84,12 @@ msgstr "함대 종류"
 msgid "Ship classes"
 msgstr "함급"
 
-#: afat/forms.py:24
+#: afat/forms.py:36
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
 msgstr "필수 항목입니다"
 
-#: afat/forms.py:42 afat/forms.py:98 afat/forms.py:149
+#: afat/forms.py:99 afat/forms.py:179 afat/forms.py:242
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:12
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:37
 #: afat/templates/afat/partials/fatlinks/details/fatlink-name-form.html:11
@@ -98,41 +98,41 @@ msgstr "필수 항목입니다"
 msgid "Fleet name"
 msgstr "함대 이름"
 
-#: afat/forms.py:44 afat/forms.py:100
+#: afat/forms.py:101 afat/forms.py:181
 msgid "Enter fleet name"
 msgstr "함대 이름 입력"
 
-#: afat/forms.py:48 afat/forms.py:104
+#: afat/forms.py:105 afat/forms.py:185
 msgid "Fleet type (optional)"
 msgstr "함대 종류 (선택)"
 
-#: afat/forms.py:58 afat/forms.py:114
+#: afat/forms.py:115 afat/forms.py:195
 #, fuzzy
 #| msgid "Fleet type (optional)"
 msgid "Doctrine (optional)"
 msgstr "함대 종류 (선택)"
 
-#: afat/forms.py:75
+#: afat/forms.py:144
 msgid "Character Name"
 msgstr "캐릭터 이름"
 
-#: afat/forms.py:80
+#: afat/forms.py:149
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
 msgstr "성계"
 
-#: afat/forms.py:85
+#: afat/forms.py:154
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:56
 msgid "Ship type"
 msgstr "함선 종류"
 
-#: afat/forms.py:124
+#: afat/forms.py:205
 msgid "FAT link expiry time in minutes"
 msgstr ""
 
-#: afat/forms.py:127
+#: afat/forms.py:208
 msgid "Expiry time in minutes"
 msgstr "만료 시간"
 

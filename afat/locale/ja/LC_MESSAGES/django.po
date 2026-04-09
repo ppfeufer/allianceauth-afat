@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-03-11 13:50+0100\n"
+"POT-Creation-Date: 2026-04-09 05:20+0200\n"
 "PO-Revision-Date: 2026-02-01 14:23+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
@@ -81,12 +81,12 @@ msgstr "フリートの種類"
 msgid "Ship classes"
 msgstr "船のクラス"
 
-#: afat/forms.py:24
+#: afat/forms.py:36
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
 msgstr "この欄は必須です"
 
-#: afat/forms.py:42 afat/forms.py:98 afat/forms.py:149
+#: afat/forms.py:99 afat/forms.py:179 afat/forms.py:242
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:12
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:37
 #: afat/templates/afat/partials/fatlinks/details/fatlink-name-form.html:11
@@ -95,39 +95,39 @@ msgstr "この欄は必須です"
 msgid "Fleet name"
 msgstr "フリート名"
 
-#: afat/forms.py:44 afat/forms.py:100
+#: afat/forms.py:101 afat/forms.py:181
 msgid "Enter fleet name"
 msgstr "フリート名を記入"
 
-#: afat/forms.py:48 afat/forms.py:104
+#: afat/forms.py:105 afat/forms.py:185
 msgid "Fleet type (optional)"
 msgstr "フリートの種類（任意）"
 
-#: afat/forms.py:58 afat/forms.py:114
+#: afat/forms.py:115 afat/forms.py:195
 msgid "Doctrine (optional)"
 msgstr "ドクトリン（任意）"
 
-#: afat/forms.py:75
+#: afat/forms.py:144
 msgid "Character Name"
 msgstr "キャラクター名"
 
-#: afat/forms.py:80
+#: afat/forms.py:149
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
 msgid "System"
 msgstr "システム（星系）"
 
-#: afat/forms.py:85
+#: afat/forms.py:154
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
 #: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:56
 msgid "Ship type"
 msgstr "シップタイプ"
 
-#: afat/forms.py:124
+#: afat/forms.py:205
 msgid "FAT link expiry time in minutes"
 msgstr "FATリンクの有効期限（分単位）"
 
-#: afat/forms.py:127
+#: afat/forms.py:208
 msgid "Expiry time in minutes"
 msgstr "有効期限（分単位）"
 
