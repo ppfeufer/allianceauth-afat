@@ -15,9 +15,10 @@
 
             <form class="form" role="form" action="{% url 'afat:fatlinks_process_manual_fat' link.hash %}" method="POST">
                 {% csrf_token %}
+
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 {% translate "Character name" as field_label %}
 
@@ -31,12 +32,8 @@
                                 <input type="text" class="form-control" name="character" id="character" placeholder="{{ field_label }}" required>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 {% translate "System" as field_label %}
 
@@ -51,7 +48,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 {% translate "Ship type" as field_label %}
 

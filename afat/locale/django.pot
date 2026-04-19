@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 5.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-04-19 14:21+0200\n"
+"POT-Creation-Date: 2026-04-19 15:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,14 +115,14 @@ msgid "Character Name"
 msgstr ""
 
 #: afat/forms.py:149
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:41
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:38
 msgid "System"
 msgstr ""
 
 #: afat/forms.py:154
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:56
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:53
 msgid "Ship type"
 msgstr ""
 
@@ -856,11 +856,11 @@ msgstr ""
 msgid "This action is logged!"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:22
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:23
 msgid "Character name"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:73
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:70
 msgid "Add manual FAT"
 msgstr ""
 
