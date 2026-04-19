@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% if perms.afat.manage_afat and is_clickable_link and manual_fat_can_be_added %}
+    {% translate 'This field is mandatory' as mandatory_info %}
+
+    <div id="tab-fleetsnapshot" class="tab-pane fade card card-default border-0" role="tabpanel" aria-labelledby="tab-fleetsnapshot">
+        <div class="card-body">
+            <h4>
+                {% translate "Fleet snapshot" as l10nFleetSnapshot %}
+                {{ l10nFleetSnapshot|title }}
+            </h4>
+
+            <p>
+                {% translate "Copy the fleet composition from your fleet window, and paste it in here." %}
+            </p>
+
+            <p>
+                <strong>{% translate "Note" %}:</strong> {% translate "This action is logged!" %}
+            </p>
+
+            <form class="form" role="form" action="{% url 'afat:fatlinks_process_fleetsnapshot' link.hash %}" method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    {% bootstrap_form forms.fleet_snapshot %}
+                </div>
+
+                <div class="form-group text-end">
+                    <button class="btn btn-primary" type="submit" name="fleetsnapshot">
+                        {% translate "Add fleet snapshot" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endif %}

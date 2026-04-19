@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load django_bootstrap5 %}
 
 {% if perms.afat.manage_afat and is_clickable_link and manual_fat_can_be_added %}
     {% translate 'This field is mandatory' as mandatory_info %}
@@ -9,7 +10,9 @@
 
             <p>
                 {% translate "Is someone missing from the list of FATs? Use this form to add them." %}
-                <br>
+            </p>
+
+            <p>
                 <strong>{% translate "Note" %}:</strong> {% translate "This action is logged!" %}
             </p>
 
@@ -17,49 +20,23 @@
                 {% csrf_token %}
 
                 <div class="form-group">
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                {% translate "Character name" as field_label %}
-
-                                <label class="form-label" for="character">
-                                    <span class="form-field-required">
-                                        {{ field_label }}
-                                        <span aria-label="{{ mandatory_info }}" class="form-required-marker">*</span>
-                                    </span>
-                                </label>
-
-                                <input type="text" class="form-control" name="character" id="character" placeholder="{{ field_label }}" required>
+                                {% bootstrap_field forms.manual_fat.character %}
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="mb-3">
-                                {% translate "System" as field_label %}
-
-                                <label class="form-label" for="system">
-                                    <span class="form-field-required">
-                                        {{ field_label }}
-                                        <span aria-label="{{ mandatory_info }}" class="form-required-marker">*</span>
-                                    </span>
-                                </label>
-
-                                <input type="text" class="form-control" name="system" id="system" placeholder="{{ field_label }}" required>
+                                {% bootstrap_field forms.manual_fat.system %}
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <div class="mb-3">
-                                {% translate "Ship type" as field_label %}
-
-                                <label class="form-label" for="shiptype">
-                                    <span class="form-field-required">
-                                        {{ field_label }}
-                                        <span aria-label="{{ mandatory_info }}" class="form-required-marker">*</span>
-                                    </span>
-                                </label>
-
-                                <input type="text" class="form-control" name="shiptype" id="shiptype" placeholder="{{ field_label }}" required>
+                                {% bootstrap_field forms.manual_fat.shiptype %}
                             </div>
                         </div>
                     </div>

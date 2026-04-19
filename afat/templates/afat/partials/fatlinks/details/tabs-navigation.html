@@ -30,5 +30,22 @@
                 {% translate "Manual FAT" %}
             </a>
         </li>
+
+
+
+        <li class="nav-item" role="presentation">
+            <a
+                class="nav-link"
+                id="fleetsnapshot"
+                data-bs-toggle="tab"
+                href="#tab-fleetsnapshot"
+                role="tab"
+                aria-controls="tab-fleetsnapshot"
+                aria-selected="true"
+            >
+                {% translate "Fleet snapshot" as l10nFleetSnapshot %}
+                {{ l10nFleetSnapshot|title }}
+            </a>
+        </li>
     {% endif %}
 </ul>
