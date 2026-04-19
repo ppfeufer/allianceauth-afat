@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 5.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-04-09 05:20+0200\n"
+"POT-Creation-Date: 2026-04-19 14:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: afat/helper/views.py:40
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:7
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:33
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:53
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
 msgid ""
 "Stop automatic tracking through ESI for this fleet and close the associated "
@@ -199,8 +199,8 @@ msgstr ""
 
 #: afat/helper/views.py:42
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:13
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:39
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:42
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:59
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:62
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:38
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:41
 msgid "Stop tracking"
@@ -345,7 +345,9 @@ msgstr ""
 msgid "Has this FAT link being re-opened?"
 msgstr ""
 
-#: afat/models/afat.py:230 afat/templates/afat/view/logs/logs-overview.html:23
+#: afat/models/afat.py:230
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:14
+#: afat/templates/afat/view/logs/logs-overview.html:23
 msgid "FAT link"
 msgstr ""
 
@@ -629,7 +631,7 @@ msgid "Most recent FAT links <small>(latest 10)</small>"
 msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:15
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:6
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:7
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:30
 msgid "Creator"
 msgstr ""
@@ -750,23 +752,27 @@ msgstr ""
 msgid "Add ESI link"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:11
-msgid "Link created (EVE Time)"
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:18
+msgid "Copy FAT link to clipboard"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:17
-msgid "Link expires (EVE Time)"
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:31
+msgid "Link created (EVE time)"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:19
-msgid "Link expired (EVE Time)"
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:37
+msgid "Link expires (EVE time)"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:29
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:39
+msgid "Link expired (EVE time)"
+msgstr ""
+
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:49
 msgid "Participation is being tracked via ESI"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:38
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:58
 #: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
 #, python-format
 msgid ""
@@ -774,18 +780,18 @@ msgid ""
 "%(character_name)s</p>"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:46
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:66
 msgid "Participation has been tracked via ESI"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:53
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:73
 #, python-format
 msgid ""
 "This link has already expired but is within the grace<br>time of "
 "%(reopen_grace_time)s minutes where it can be re-opened."
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:61
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:81
 #, python-format
 msgid ""
 "<p>Are you sure you want to re-open this FAT link for another "
@@ -793,24 +799,16 @@ msgid ""
 "<br><em>(Be aware, this action will be logged)</em></p>"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:62
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:82
 msgid "Re-Open"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:64
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:96
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:84
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:99
 msgid "Re-open FAT link"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:72
-msgid "FAT Link"
-msgstr ""
-
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:83
-msgid "Copy me!"
-msgstr ""
-
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:91
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:94
 #: afat/templates/afat/view/dashboard/dashboard.html:27
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:57
 msgid "Close ESI fleet tracking"

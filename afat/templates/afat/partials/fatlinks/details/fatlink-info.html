@@ -3,23 +3,42 @@
 <div class="col-md-12 mb-3">
     <div class="row">
         <div class="col-md-6">
-            {% translate "Creator" %}: {{ link.creator.profile.main_character.character_name }}
+            <p>
+                <b>{% translate "Creator" %}:</b> {{ link.creator.profile.main_character.character_name }}
+
+                {% comment %}Show FAT link hash and copy to clipboard icon when link is clickable and still ongoing.{% endcomment %}
+                {% if is_clickable_link and link_ongoing %}
+                    <br>
+
+                    <b>{% translate "FAT link" %}:</b> {{ link.hash }}
+                    <sup>
+                        <i
+                            class="fa-regular fa-copy copy-to-clipboard ms-1 cursor-pointer text-success"
+                            title="{% translate "Copy FAT link to clipboard" %}"
+                            data-bs-tooltip="afat"
+                            data-bs-html="true"
+                            data-clipboard-text="{{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}"
+                        >
+                        </i>
+                    </sup>
+                {% endif %}
+            </p>
         </div>
 
-        <div class="col-md-6 text-end">
+        <div class="col-md-6 text-md-end">
             <p>
-                {% translate "Link created (EVE Time)" %}: {{ link.created|date:"d. F Y H:i" }}
+                <b>{% translate "Link created (EVE time)" %}:</b> {{ link.created|date:"d. F Y H:i" }}
 
                 {% if link_expires %}
                     <br>
 
                     {% if link_ongoing %}
-                        {% translate "Link expires (EVE Time)" as line_title %}
+                        {% translate "Link expires (EVE time)" as line_title %}
                     {% else %}
-                        {% translate "Link expired (EVE Time)" as line_title %}
+                        {% translate "Link expired (EVE time)" as line_title %}
                     {% endif %}
 
-                    {{ line_title }}: {{ link_expires|date:"d. F Y H:i" }}
+                    <b>{{ line_title }}:</b> {{ link_expires|date:"d. F Y H:i" }}
                 {% endif %}
 
                 {% if link.is_esilink %}
@@ -66,27 +85,9 @@
                 </p>
             {% endif %}
         </div>
-
-        {% if is_clickable_link and link_ongoing %}
-            <div class="col-md-12">
-                <p>{% translate "FAT Link" %}:
-                    <i>
-                        {{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}
-                        <a class="label label-success copy-link" href="{% url 'afat:fatlinks_add_fat' link.hash %}"></a>
-                    </i>
-
-                    <button class="copy-btn btn btn-success btn-sm ms-3"
-                        data-toggle="tooltip"
-                        data-html="true"
-                        data-clipboard-text="{{ SITE_URL }}{% url 'afat:fatlinks_add_fat' link.hash %}"
-                    >
-                        {% translate "Copy me!" %}
-                    </button>
-                </p>
-            </div>
-        {% endif %}
     </div>
 
+    {% comment %}Modals for ESI fleet tracking and FAT link re-opening.{% endcomment %}
     {% if link.is_registered_on_esi and request.user == link.creator %}
         {% translate "Close ESI fleet tracking" as translated_title %}
         {% include "afat/modals/general.html" with modal_name="cancelEsiFleet" modal_title=translated_title confirm_button_class="btn-danger" %}
