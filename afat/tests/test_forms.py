@@ -15,6 +15,7 @@ from afat.forms import (
     AFatManualFatForm,
     DoctrineAdminForm,
     FatLinkEditForm,
+    FleetSnapshot,
     SettingAdminForm,
     get_mandatory_form_label_text,
     sanitize_cleaned_data,
@@ -174,6 +175,49 @@ class TestSanitizeCleanedData(BaseTestCase):
         result = sanitize_cleaned_data(cleaned_data)
 
         self.assertEqual(result["val"], "Emoji 👍\nand multiple spaces")
+
+    def test_collapses_spaces_and_tabs_when_keep_tabs_false(self):
+        """
+        Test collapses spaces and tabs when keep_tabs is false.
+
+        :return:
+        :rtype:
+        """
+
+        data = {"field": "  a\t\tb   c \t d  "}
+        result = sanitize_cleaned_data(data.copy(), keep_tabs=False)
+
+        # leading/trailing whitespace trimmed and internal sequences of spaces/tabs collapsed
+        self.assertEqual(result["field"], "a b c d")
+
+    def test_preserves_tabs_when_keep_tabs_true_and_collapses_multiple_spaces(self):
+        """
+        Test preserves tabs when keep_tabs is True and collapses multiple spaces.
+
+        :return:
+        :rtype:
+        """
+
+        data = {"field": "\t\tA  B\tC  "}
+        result = sanitize_cleaned_data(data.copy(), keep_tabs=True)
+
+        # consecutive spaces collapsed to one, tabs preserved, trailing spaces removed but not tabs
+        self.assertEqual(result["field"], "A B\tC")
+
+    def test_removes_html_and_control_chars_and_normalizes_newlines(self):
+        """
+        Test removes html and control chars and normalizes newlines.
+
+        :return:
+        :rtype:
+        """
+
+        raw = "Hello\r\n<b>World</b>\x00\x1f!"
+        data = {"field": raw}
+        result = sanitize_cleaned_data(data.copy(), keep_tabs=False)
+
+        # HTML tags removed, control chars removed, CRLF normalized to LF
+        self.assertEqual(result["field"], "Hello\nWorld!")
 
 
 class TestAFatEsiFatForm(BaseTestCase):
@@ -714,3 +758,27 @@ class TestDoctrineAdminForm(BaseTestCase):
         self.assertTrue(form.is_valid())
         self.assertEqual(form.cleaned_data["name"], "EmojiName")
         self.assertEqual(form.cleaned_data["notes"], "Note 😊 more\nend")
+
+
+class TestFleetSnapshotForm(BaseTestCase):
+    """
+    Tests for the Fleet Snapshot form.
+    """
+
+    def test_keeps_tabs_and_collapses_multiple_spaces_per_line(self):
+        """
+        Test keeps tabs and collapses multiple spaces per line.
+
+        :return:
+        :rtype:
+        """
+
+        raw = "\tRounon Dax\t\tDO6H-Q\tMetamorphosis\tFrigate\tFleet       Commander (Boss)\t5 - 5 - 5\t\t"
+        form = FleetSnapshot(data={"fleet_composition": raw})
+
+        self.assertTrue(form.is_valid())
+
+        cleaned = form.cleaned_data["fleet_composition"]
+        expected = "Rounon Dax\t\tDO6H-Q\tMetamorphosis\tFrigate\tFleet Commander (Boss)\t5 - 5 - 5"
+
+        self.assertEqual(cleaned, expected)

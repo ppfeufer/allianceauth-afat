@@ -42,6 +42,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Added
+
+- Create FATs from fleet composition snapshot (Copied from your fleet window -> Fleet Composition)
+
 ### Changed
 
 - Manual FAT form restructured
