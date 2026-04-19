@@ -44,6 +44,7 @@ Section Order:
 
 ### Changed
 
+- Manual FAT form restructured
 - FAT link detail view is now a bit more compact, so the FAT link and the copy button don't look out of place now
 
 ## [5.0.3] - 2026-04-09
