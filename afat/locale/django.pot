@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 5.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-04-19 19:00+0200\n"
+"POT-Creation-Date: 2026-04-21 19:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -682,6 +682,8 @@ msgid "No recent FAT activity registered for any of your characters."
 msgstr ""
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:12
+#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:58
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
 #, python-format
 msgid ""
 "Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from "
@@ -777,14 +779,6 @@ msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:49
 msgid "Participation is being tracked via ESI"
-msgstr ""
-
-#: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:58
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
-#, python-format
-msgid ""
-"<p>Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from "
-"%(character_name)s</p>"
 msgstr ""
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:66
