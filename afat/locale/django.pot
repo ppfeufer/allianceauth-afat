@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 5.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-04-26 13:57+0200\n"
+"POT-Creation-Date: 2026-04-26 14:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -862,7 +862,7 @@ msgstr ""
 msgid "This action is logged!"
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:31
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:33
 msgid "Add fleet snapshot"
 msgstr ""
 
@@ -870,7 +870,7 @@ msgstr ""
 msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr ""
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:47
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:49
 msgid "Add manual FAT"
 msgstr ""
 
