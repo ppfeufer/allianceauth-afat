@@ -568,8 +568,8 @@ def add_fat(
         Fat.objects.create(
             fatlink=fleet,
             character=character,
-            system=solar_system.name,
-            shiptype=ship.name,
+            solar_system=solar_system,
+            ship=ship,
             corporation_eve_id=character.corporation_id,
             alliance_eve_id=character.alliance_id,
         )
@@ -701,7 +701,7 @@ def process_manual_fat(request: WSGIRequest, fatlink_hash: str) -> HttpResponseR
 
                 # Check SDE for system and ship type before we continue
                 try:
-                    SolarSystem.objects.get(name=system)
+                    solar_system = SolarSystem.objects.get(name_en=system)
                 except SolarSystem.DoesNotExist:
                     messages.warning(
                         request,
@@ -720,7 +720,7 @@ def process_manual_fat(request: WSGIRequest, fatlink_hash: str) -> HttpResponseR
                     )
 
                 try:
-                    ItemType.objects.filter(published=1).get(name=ship_type)
+                    ship = ItemType.objects.filter(published=1).get(name_en=ship_type)
                 except ItemType.DoesNotExist:
                     messages.warning(
                         request,
@@ -743,8 +743,8 @@ def process_manual_fat(request: WSGIRequest, fatlink_hash: str) -> HttpResponseR
                         fatlink=fatlink,
                         character=character,
                         defaults={
-                            "system": system,
-                            "shiptype": ship_type,
+                            "solar_system": solar_system,
+                            "ship": ship,
                             "corporation_eve_id": character.corporation_id,
                             "alliance_eve_id": character.alliance_id,
                         },
@@ -879,13 +879,17 @@ def process_fleetsnapshot(request, fatlink_hash) -> HttpResponseRedirect:
                 character = get_or_create_character(name=line[0])
 
                 if character:
+                    solar_system = SolarSystem.objects.get(name_en=line[1])
+                    # We need the ship class here, actually
+                    ship = ItemType.objects.filter(published=1).get(name_en=line[2])
+
                     # Add to the list…
                     fatlinks_to_create.append(
                         Fat(
                             character=character,
                             fatlink=fatlink,
-                            system=line[1],
-                            shiptype=line[2],  # We need the ship class here, actually
+                            solar_system=solar_system,
+                            ship=ship,
                             corporation_eve_id=character.corporation_id,
                             alliance_eve_id=character.alliance_id,
                         )

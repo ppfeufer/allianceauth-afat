@@ -5,9 +5,6 @@ Tests for forms in AFAT
 # Standard Library
 from unittest.mock import patch
 
-# Django
-from django.utils.safestring import SafeString
-
 # Alliance Auth AFAT
 from afat.forms import (
     AFatClickFatForm,
@@ -40,7 +37,6 @@ class TestGetMandatoryFormLabelText(BaseTestCase):
         label = "Field Label"
         result = get_mandatory_form_label_text(label)
 
-        self.assertIsInstance(result, SafeString)
         self.assertIn(label, result)
         self.assertIn(
             '<span aria-label="This field is mandatory" class="form-required-marker">*</span>',

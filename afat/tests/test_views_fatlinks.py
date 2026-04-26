@@ -9,6 +9,8 @@ from types import SimpleNamespace
 from unittest.mock import ANY, MagicMock, Mock, patch
 
 # Third Party
+# Eve SDE
+from eve_sde.models import ItemType, SolarSystem
 from pytz import utc
 
 # Django
@@ -562,11 +564,15 @@ class TestProcessManualFat(FatlinksViewTestCase):
         mock_get_or_create_character.return_value = mock_character
 
         # Ensure SDE lookups in the view succeed for system and ship type
-        mock_solar_get.return_value = MagicMock(name="SolarSystem")
-        mock_item = MagicMock()
-        mock_item.name = "Test Ship"
-        # ItemType.objects.filter(published=1).get(name=ship_type) -> return mock_item
-        mock_item_objects.filter.return_value.get.return_value = mock_item
+        # Return a real SolarSystem model instance instead of a MagicMock so
+        # assigning to Fat.solar_system works during Fat.objects.create
+        mock_solar_get.return_value = SolarSystem.objects.get_or_create(
+            id=5000, defaults={"name": "Test System"}
+        )[0]
+        # Use a real ItemType instance so FK assignment to Fat.ship succeeds
+        shiptype_instance = ItemType(id=7000, name="Test Ship", published=1)
+        shiptype_instance.save()
+        mock_item_objects.filter.return_value.get.return_value = shiptype_instance
 
         form_data = {
             "character": mock_character.character_name,
@@ -618,10 +624,13 @@ class TestProcessManualFat(FatlinksViewTestCase):
         mock_get_or_create_character.return_value = mock_character
 
         # Ensure SDE lookups succeed so the view reaches the duplicate branch
-        mock_solar_get.return_value = MagicMock(name="SolarSystem")
-        mock_item = MagicMock()
-        mock_item.name = "Test Ship"
-        mock_item_objects.filter.return_value.get.return_value = mock_item
+        mock_solar_get.return_value = SolarSystem.objects.get_or_create(
+            id=5000, defaults={"name": "Test System"}
+        )[0]
+        # Use a real ItemType instance so FK assignment to Fat.ship succeeds
+        shiptype_instance = ItemType(id=7000, name="Test Ship", published=1)
+        shiptype_instance.save()
+        mock_item_objects.filter.return_value.get.return_value = shiptype_instance
 
         Fat.objects.create(
             fatlink=fatlink,
@@ -805,7 +814,10 @@ class TestProcessManualFat(FatlinksViewTestCase):
                 return_value=self.character_1001,
             ),
             patch(
-                "afat.views.fatlinks.SolarSystem.objects.get", return_value=MagicMock()
+                "afat.views.fatlinks.SolarSystem.objects.get",
+                return_value=SolarSystem.objects.get_or_create(
+                    id=5000, defaults={"name": "Test System"}
+                )[0],
             ),
             patch("afat.views.fatlinks.ItemType.objects") as mock_item_objects,
         ):
@@ -1352,6 +1364,11 @@ class TestAddFatView(BaseTestCase):
 
         Duration.objects.create(fleet=self.fatlink, duration=60)
         self.url = reverse("afat:fatlinks_add_fat", args=["valid_hash"])
+        # Ensure SDE objects exist for tests that expect real model instances
+        SolarSystem.objects.get_or_create(id=5000, defaults={"name": "Test System"})
+        ItemType.objects.get_or_create(
+            id=6000, defaults={"name": "Test Ship", "published": 1}
+        )
 
     @patch("afat.views.fatlinks.esi_handler.result")
     def test_redirects_to_dashboard_if_fatlink_does_not_exist(self, mock_esi_result):
@@ -1513,14 +1530,17 @@ class TestAddFatView(BaseTestCase):
             esi_ship_resp,
         ]
 
-        # Ensure the model lookups return single model-like instances (not tuples)
-        solar_mock = MagicMock()
-        solar_mock.name = "SolarSystemName"
-        mock_get_solar.return_value = solar_mock
+        # Ensure the model lookups return real model instances so created Fat
+        # objects can be assigned correctly.
+        solar_system = SolarSystem.objects.get_or_create(
+            id=location_solar_system_id, defaults={"name": "SolarSystemName"}
+        )[0]
+        mock_get_solar.return_value = solar_system
 
-        shiptype_mock = MagicMock()
-        shiptype_mock.name = "ShipTypeName"
-        mock_get_type.return_value = shiptype_mock
+        ship = ItemType.objects.get_or_create(
+            id=ship_type_id, defaults={"name": "ShipTypeName", "published": 1}
+        )[0]
+        mock_get_type.return_value = ship
 
         # Build request and attach session, messages and user
         url = self.url  # set in setUp
@@ -1553,8 +1573,9 @@ class TestAddFatView(BaseTestCase):
             fatlink=self.fatlink, character__character_id=eve_char.character_id
         ).first()
         self.assertIsNotNone(created_fat)
-        self.assertEqual(created_fat.system, solar_mock.name)
-        self.assertEqual(created_fat.shiptype, shiptype_mock.name)
+        # The view sets the foreign keys; assert the FK relationships are set
+        self.assertEqual(created_fat.solar_system, solar_system)
+        self.assertEqual(created_fat.ship, ship)
 
         # Check that a success message was added
         messages = list(get_messages(request))
@@ -1724,6 +1745,17 @@ class TestprocessFleetSnapshot(BaseTestCase):
 
         raw = "Rounon Dax\tDO6H-Q\tMetamorphosis\tFrigate\tFleet Commander (Boss)\t5 - 5 - 5\t\t"
 
+        # Ensure SDE lookups succeed for the system and ship class used in the
+        # fleet snapshot so the view can resolve them to real model instances.
+        SolarSystem.objects.get_or_create(
+            id=5002, name_en="DO6H-Q", defaults={"name": "DO6H-Q"}
+        )
+        ItemType.objects.get_or_create(
+            id=6002,
+            name_en="Metamorphosis",
+            defaults={"name": "Metamorphosis", "published": 1},
+        )
+
         request = RequestFactory().post(
             path=reverse("afat:fatlinks_process_fleetsnapshot", args=[fatlink.hash]),
             data={"fleet_composition": raw},
@@ -1782,6 +1814,14 @@ class TestprocessFleetSnapshot(BaseTestCase):
         request = RequestFactory().post(
             path=reverse("afat:fatlinks_process_fleetsnapshot", args=[fatlink.hash]),
             data={"fleet_composition": raw},
+        )
+        # Ensure SDE lookups for the system and ship class used in this
+        # snapshot are available so the view can resolve them.
+        SolarSystem.objects.get_or_create(
+            id=5003, name_en="SYS", defaults={"name": "SYS"}
+        )
+        ItemType.objects.get_or_create(
+            id=6003, name_en="Class", defaults={"name": "Class", "published": 1}
         )
         SessionMiddleware(get_response=lambda req: None).process_request(request)
         request.session.save()
