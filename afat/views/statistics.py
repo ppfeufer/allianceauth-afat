@@ -105,6 +105,8 @@ def overview(request: WSGIRequest, year: int = None) -> HttpResponse:
 
     months = _calculate_year_stats(request=request, year=year)
 
+    logger.debug(f"Statistics overview data for year {year}: {months}")
+
     context = {
         "data": data,
         "charstats": months,
@@ -148,6 +150,7 @@ def _calculate_year_stats(request, year) -> dict:
         Fat.objects.filter(fatlink__created__year=year, character__in=characters)
         .values("character__character_id", "fatlink__created__month")
         .annotate(fat_count=Count("id"))
+        .order_by("fatlink__created__month", "character__character_name")
     )
 
     # Initialize character data

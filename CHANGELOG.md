@@ -46,6 +46,10 @@ Section Order:
 
 - Create FATs from fleet composition snapshot (Copied from your fleet window -> Fleet Composition)
 
+### Fixed
+
+- Months order in statistics overview
+
 ### Changed
 
 - Use SDE for ship type and solar system in FAT model
