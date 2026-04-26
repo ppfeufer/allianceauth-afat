@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 5.0.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-04-26 14:03+0200\n"
+"POT-Creation-Date: 2026-04-26 15:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1473,19 +1473,19 @@ msgid ""
 "be re-opened only once!</p>"
 msgstr ""
 
-#: afat/views/statistics.py:242
+#: afat/views/statistics.py:245
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for this "
 "character.</p>"
 msgstr ""
 
-#: afat/views/statistics.py:380
+#: afat/views/statistics.py:383
 msgid ""
 "This character is in a different corporation and their FATs are not counted "
 "towards the statistics of the main corporation."
 msgstr ""
 
-#: afat/views/statistics.py:458
+#: afat/views/statistics.py:461
 msgid ""
 "<h4>Warning!</h4><p>You do not have permission to view statistics for that "
 "corporation.</p>"
