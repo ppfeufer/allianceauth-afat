@@ -15,8 +15,52 @@ from allianceauth.authentication.models import CharacterOwnership
 from allianceauth.authentication.signals import assign_state_on_active_change
 
 # Alliance Auth AFAT
-from afat.models.smart_filter import FatsInTimeFilter, _get_threshold_date
+from afat.models.smart_filter import BaseFilter, FatsInTimeFilter, _get_threshold_date
 from afat.tests import BaseTestCase
+
+
+class TestBaseFilter(BaseTestCase):
+    """
+    Test cases for the BaseFilter class.
+    """
+
+    def test_str_returns_name_and_description(self):
+        """
+        Test that the str method returns the correct string and description.
+
+        :return:
+        :rtype:
+        """
+
+        obj = type("Dummy", (), {"name": "MyFilter", "description": "Does things"})()
+
+        self.assertEqual(BaseFilter.__str__(obj), "MyFilter: Does things")
+
+    def test_process_filter_raises_not_implemented(self):
+        """
+        Test that the process_filter method raises an NotImplementedError.
+
+        :return:
+        :rtype:
+        """
+
+        obj = type("Dummy", (), {})()
+
+        with self.assertRaises(NotImplementedError):
+            BaseFilter.process_filter(obj, None)
+
+    def test_audit_filter_raises_not_implemented(self):
+        """
+        Test that the audit_filter method raises an NotImplementedError.
+
+        :return:
+        :rtype:
+        """
+
+        obj = type("Dummy", (), {})()
+
+        with self.assertRaises(NotImplementedError):
+            BaseFilter.audit_filter(obj, [])
 
 
 class TestGetThresholdDate(BaseTestCase):

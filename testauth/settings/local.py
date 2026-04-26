@@ -57,6 +57,7 @@ INSTALLED_APPS += [
     PACKAGE,
     "fittings",
     "eve_sde",
+    "securegroups",
 ]
 
 INSTALLED_APPS = ["modeltranslation"] + INSTALLED_APPS
