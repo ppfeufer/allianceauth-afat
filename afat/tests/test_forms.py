@@ -778,3 +778,147 @@ class TestFleetSnapshotForm(BaseTestCase):
         expected = "Rounon Dax\t\tDO6H-Q\tMetamorphosis\tFrigate\tFleet Commander (Boss)\t5 - 5 - 5"
 
         self.assertEqual(cleaned, expected)
+
+    def test_init_handles_copy_exception_and_sanitizes_data(self):
+        """
+        Ensure FleetSnapshot.__init__ handles exceptions from data.copy() by
+        falling back to dict(data) and still sanitizing the fleet_composition field.
+
+        :return:
+        :rtype:
+        """
+
+        class BrokenCopyMapping:
+            """
+            Broken Copy Mapping.
+            """
+
+            def __init__(self, d):
+                """
+                Initialize BrokenCopyMapping.
+
+                :param d:
+                :type d:
+                """
+
+                self._d = dict(d)
+
+            def __contains__(self, key):
+                """
+                Check if key is in self._d.
+
+                :param key:
+                :type key:
+                :return:
+                :rtype:
+                """
+
+                return key in self._d
+
+            def copy(self):
+                """
+                Copy Mapping.
+
+                :return:
+                :rtype:
+                """
+
+                raise Exception("copy failed")
+
+            def __iter__(self):
+                """
+                Iterate Mapping.
+
+                :return:
+                :rtype:
+                """
+
+                return iter(self._d)
+
+            def __getitem__(self, key):
+                """
+                Get Mapping.
+
+                :param key:
+                :type key:
+                :return:
+                :rtype:
+                """
+
+                return self._d[key]
+
+            def items(self):
+                """
+                Get Mapping Items.
+                :return:
+                :rtype:
+                """
+
+                return self._d.items()
+
+            def keys(self):
+                """
+                Get Mapping Keys.
+
+                :return:
+                :rtype:
+                """
+
+                # Provide mapping protocol so dict(self) works in fallback
+                return self._d.keys()
+
+            def get(self, key, default=None):
+                """
+                Get Mapping Key.
+
+                :param key:
+                :type key:
+                :param default:
+                :type default:
+                :return:
+                :rtype:
+                """
+
+                return self._d.get(key, default)
+
+        raw = "\tRounon Dax\t\tDO6H-Q\tMetamorphosis\tFrigate\tFleet       Commander (Boss)\t5 - 5 - 5\t\t"
+
+        broken = BrokenCopyMapping({"fleet_composition": raw})
+
+        # Should not raise despite copy() raising internally
+        form = FleetSnapshot(data=broken)
+
+        self.assertTrue(form.is_valid())
+
+        cleaned = form.cleaned_data["fleet_composition"]
+        expected = "Rounon Dax\t\tDO6H-Q\tMetamorphosis\tFrigate\tFleet Commander (Boss)\t5 - 5 - 5"
+
+        self.assertEqual(cleaned, expected)
+
+    def test_skip_pre_sanitization_when_raw_value_is_none(self):
+        """
+        Ensure the pre-sanitization block in FleetSnapshot.__init__ (the
+        `if raw_value is not None` at forms.py:224) is skipped when the
+        provided data contains the key but its value is None. We verify
+        this by patching sanitize_cleaned_data and asserting it is only
+        called once (from clean), not during __init__.
+
+        :return:
+        :rtype:
+        """
+
+        with patch("afat.forms.sanitize_cleaned_data") as mock_sanitize:
+            # Make sanitize return a harmless structure for clean()
+            mock_sanitize.return_value = {"fleet_composition": None}
+
+            form = FleetSnapshot(data={"fleet_composition": None})
+
+            # Trigger validation (calls clean)
+            is_valid = form.is_valid()
+
+            # sanitize_cleaned_data should have been called exactly once (from clean)
+            self.assertEqual(mock_sanitize.call_count, 1)
+
+            # Form should be invalid because required field is None
+            self.assertFalse(is_valid)
+            self.assertIn("fleet_composition", form.errors)

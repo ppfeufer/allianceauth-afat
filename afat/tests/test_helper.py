@@ -26,6 +26,7 @@ from afat.helper.views import (
     _perm_flags,
     convert_fatlinks_to_dict,
     convert_fats_to_dict,
+    user_has_any_perms,
 )
 from afat.models import Fat, FatLink, get_hash_on_save
 from afat.tests import BaseTestCase
@@ -312,6 +313,62 @@ class TestHelpers(BaseTestCase):
             },
         )
 
+    def test_includes_view_action_when_user_has_add_permission_only(self):
+        """
+        Test that the view button is included when the user has add permission
+        but not manage permission (covers the `if has_manage or has_add` branch).
+        """
+
+        self.client.force_login(user=self.user_with_add_fatlink)
+        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
+        request.user = self.user_with_add_fatlink
+
+        fatlink_hash = get_hash_on_save()
+        fatlink = FatLink.objects.create(
+            created=timezone.now(),
+            fleet="Add Only Fleet",
+            creator=self.user_with_add_fatlink,
+            character=self.character_1001,
+            hash=fatlink_hash,
+        )
+
+        edit_url = reverse(
+            viewname="afat:fatlinks_details_fatlink", args=[fatlink.hash]
+        )
+        delete_url = reverse(
+            viewname="afat:fatlinks_delete_fatlink", args=[fatlink.hash]
+        )
+
+        result = convert_fatlinks_to_dict(request=request, fatlink=fatlink)
+
+        self.assertIn(edit_url, result["actions"])
+        self.assertNotIn(delete_url, result["actions"])
+
+    def test_excludes_view_and_delete_actions_when_user_has_no_permissions(self):
+        """
+        Test that neither view nor delete actions are included when the user has
+        neither add nor manage permissions.
+        """
+
+        anon_user = SimpleNamespace()
+        anon_user.has_perm = lambda perm: False
+        request = self.factory.get(path=reverse(viewname="afat:dashboard"))
+        request.user = anon_user
+
+        fatlink_hash = get_hash_on_save()
+        fatlink = FatLink.objects.create(
+            created=timezone.now(),
+            fleet="NoPerm Fleet",
+            creator=self.user_with_add_fatlink,
+            character=self.character_1001,
+            hash=fatlink_hash,
+        )
+
+        result = convert_fatlinks_to_dict(request=request, fatlink=fatlink)
+
+        # No actions should be present when user lacks both permissions
+        self.assertEqual(result["actions"], "")
+
 
 class TestHelperConvertFatsToDict(BaseTestCase):
     """
@@ -589,3 +646,40 @@ class TestHelperGetRequestCache(BaseTestCase):
         self.assertEqual(result, {})
         self.assertTrue(hasattr(request, "_afat_cache"))
         self.assertEqual(request._afat_cache, {})
+
+
+class TestUserHasAnyPerms(BaseTestCase):
+    """
+    Test user_has_any_perms function
+    """
+
+    def test_returns_true_for_active_superuser(self):
+        """
+        Active superusers should always have permissions.
+        """
+
+        user = SimpleNamespace()
+        user.is_active = True
+        user.is_superuser = True
+        user.has_perm = lambda perm, obj=None: False
+
+        result = user_has_any_perms(user=user, perm_list=["afat.any_perm"])
+
+        self.assertTrue(result)
+
+    def test_returns_based_on_has_perm_for_non_superuser(self):
+        """
+        Non-superusers should be evaluated by their has_perm results.
+        """
+
+        user = SimpleNamespace()
+        user.is_active = True
+        user.is_superuser = False
+
+        def has_perm(perm, obj=None):
+            return perm == "allow.me"
+
+        user.has_perm = has_perm
+
+        self.assertTrue(user_has_any_perms(user=user, perm_list=["allow.me"]))
+        self.assertFalse(user_has_any_perms(user=user, perm_list=["deny.me"]))

@@ -19,19 +19,10 @@ from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
+from allianceauth.framework.api.user import get_sentinel_user
 
 # Alliance Auth AFAT
 from afat.managers import FatLinkManager, FatManager
-
-
-def get_sentinel_user() -> User:
-    """
-    Get user or create the sentinel user
-
-    :return:
-    """
-
-    return User.objects.get_or_create(username="deleted")[0]
 
 
 def get_hash_on_save() -> str:
