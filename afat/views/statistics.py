@@ -258,10 +258,10 @@ def character(  # pylint: disable=too-many-locals
     data_ship_type = {}
 
     for fat in fats:
-        if fat.ship.id in data_ship_type:
+        if fat.ship_id in data_ship_type:
             continue
 
-        data_ship_type[fat.ship.id] = fats.filter(ship=fat.ship).count()
+        data_ship_type[fat.ship_id] = fats.filter(ship=fat.ship).count()
 
     colors = []
 
