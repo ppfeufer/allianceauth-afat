@@ -344,8 +344,8 @@ def convert_fats_to_dict(request: WSGIRequest, fat: Fat) -> dict:
     )
 
     return {
-        "system": fat.system,
-        "ship_type": fat.shiptype,
+        "system": fat.solar_system.name,
+        "ship_type": fat.ship.name,
         "character_name": fat.character.character_name,
         "fleet_name": fleet_name + esi_fleet_marker,
         "doctrine": fat.fatlink.doctrine,

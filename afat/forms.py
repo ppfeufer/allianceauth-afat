@@ -9,6 +9,7 @@ from typing import Any
 # Django
 from django import forms
 from django.utils.safestring import mark_safe
+from django.utils.text import format_lazy
 from django.utils.translation import gettext_lazy as _
 
 # Alliance Auth
@@ -34,12 +35,18 @@ def get_mandatory_form_label_text(text):
     """
 
     required_text = _("This field is mandatory")
-    required_marker = (
-        f'<span aria-label="{required_text}" class="form-required-marker">*</span>'
+
+    # Use format_lazy to preserve lazy translation objects instead of
+    # interpolating them into f-strings which would force evaluation.
+    required_marker = format_lazy(
+        '<span aria-label="{}" class="form-required-marker">*</span>',
+        required_text,
     )
 
     return mark_safe(
-        f'<span class="form-field-required">{text} {required_marker}</span>'
+        format_lazy(
+            '<span class="form-field-required">{} {}</span>', text, required_marker
+        )
     )
 
 

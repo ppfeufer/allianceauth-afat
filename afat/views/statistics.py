@@ -258,10 +258,10 @@ def character(  # pylint: disable=too-many-locals
     data_ship_type = {}
 
     for fat in fats:
-        if fat.shiptype in data_ship_type:
+        if fat.ship.id in data_ship_type:
             continue
 
-        data_ship_type[fat.shiptype] = fats.filter(shiptype=fat.shiptype).count()
+        data_ship_type[fat.ship.id] = fats.filter(ship=fat.ship).count()
 
     colors = []
 
@@ -532,7 +532,7 @@ def corporation(  # pylint: disable=too-many-statements too-many-branches too-ma
     )
 
     for fat in fats:
-        data[fat.shiptype][fat.character.character_name] += 1
+        data[fat.ship.name][fat.character.character_name] += 1
         character_ids.add(fat.character.character_id)
 
     data_stacked = [
@@ -705,7 +705,7 @@ def alliance(  # pylint: disable=too-many-statements too-many-branches too-many-
     corps_in_fats = set()
 
     for fat in fats:
-        shiptype = fat.shiptype
+        shiptype = fat.ship.name
         corp_name = fat.character.corporation_name
 
         if shiptype not in data:
