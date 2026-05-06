@@ -43,6 +43,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [5.1.0] - 2026-05-06
+
 ### Added
 
 - Create FATs from fleet composition snapshot (Copied from your fleet window -> Fleet Composition)
@@ -56,6 +58,11 @@ Section Order:
 - Use SDE for ship type and solar system in FAT model
 - Manual FAT form restructured
 - FAT link detail view is now a bit more compact, so the FAT link and the copy button don't look out of place now
+- Translations updated
+
+### Miscellaneous
+
+- Ready for Alliance Auth v5
 
 ## [5.0.3] - 2026-04-09
 
@@ -2189,6 +2196,7 @@ Finally restart your supervisor services for AA
 [5.0.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.0...v5.0.1 "v5.0.1"
 [5.0.2]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.1...v5.0.2 "v5.0.2"
 [5.0.3]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.2...v5.0.3 "v5.0.3"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.3...HEAD "In Development"
+[5.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.3...v5.1.0 "v5.1.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.1.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
