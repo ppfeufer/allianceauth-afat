@@ -47,6 +47,10 @@ Section Order:
 
 - Grammar - No space before ellipsis
 
+### Changed
+
+- Modular providers
+
 ## [5.1.0] - 2026-05-06
 
 ### Added
