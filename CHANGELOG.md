@@ -43,6 +43,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Grammar - No space before ellipsis
+
 ## [5.1.0] - 2026-05-06
 
 ### Added
@@ -1881,7 +1885,7 @@ fleet boss and didn't close or leave the fleet.
 
 ### Changed
 
-- tables tweaked …
+- tables tweaked…
   - preventing DataTables from getting wider than their parent element
   - even/odd styles
   - text alignments

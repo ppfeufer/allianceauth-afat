@@ -236,7 +236,7 @@ def character(  # pylint: disable=too-many-locals
     ):
         can_view_character = True
 
-    # If the user cannot view the character's statistics, send him home …
+    # If the user cannot view the character's statistics, send him home…
     if can_view_character is False:
         messages.warning(
             request=request,
