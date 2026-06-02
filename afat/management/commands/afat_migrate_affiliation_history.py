@@ -7,7 +7,7 @@ from django.core.management import BaseCommand
 
 # Alliance Auth AFAT
 from afat.models import Fat
-from afat.providers import esi
+from afat.providers.esi import esi
 
 
 def get_input(text) -> str:

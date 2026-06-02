@@ -1370,7 +1370,7 @@ class TestAddFatView(BaseTestCase):
             id=6000, defaults={"name": "Test Ship", "published": 1}
         )
 
-    @patch("afat.views.fatlinks.esi_handler.result")
+    @patch("afat.views.fatlinks.ESIHandler.result")
     def test_redirects_to_dashboard_if_fatlink_does_not_exist(self, mock_esi_result):
         """
         Test redirects to dashboard if fatlink does not exist
@@ -1401,7 +1401,7 @@ class TestAddFatView(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response.url, reverse("afat:dashboard"))
 
-    @patch("afat.views.fatlinks.esi_handler.result")
+    @patch("afat.views.fatlinks.ESIHandler.result")
     def test_redirects_to_dashboard_if_fatlink_is_expired(self, mock_esi_result):
         """
         Test redirects to dashboard if fatlink is expired
@@ -1437,7 +1437,7 @@ class TestAddFatView(BaseTestCase):
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertEqual(response.url, reverse("afat:dashboard"))
 
-    @patch("afat.views.fatlinks.esi_handler.result")
+    @patch("afat.views.fatlinks.ESIHandler.result")
     @patch("afat.views.fatlinks.EveCharacter.objects.get")
     def test_redirects_to_dashboard_if_character_is_offline(
         self, mock_eve_get, mock_esi_result
@@ -1497,7 +1497,7 @@ class TestAddFatView(BaseTestCase):
     @patch("afat.views.fatlinks.ItemType.objects.get")
     @patch("afat.views.fatlinks.SolarSystem.objects.get")
     @patch("afat.views.fatlinks.esi")
-    @patch("afat.views.fatlinks.esi_handler.result")
+    @patch("afat.views.fatlinks.ESIHandler.result")
     def test_creates_fat_and_redirects_on_success(
         self, mock_esi_result, mock_esi, mock_get_solar, mock_get_type
     ):
@@ -1588,7 +1588,7 @@ class TestAddFatView(BaseTestCase):
     @patch("afat.views.fatlinks.Fat.objects.create")
     @patch("afat.views.fatlinks.EveCharacter.objects.get")
     @patch("afat.views.fatlinks.esi")
-    @patch("afat.views.fatlinks.esi_handler.result")
+    @patch("afat.views.fatlinks.ESIHandler.result")
     def test_does_not_create_duplicate_fat(
         self,
         mock_esi_result,
