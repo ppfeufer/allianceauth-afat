@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 5.1.0\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-05-06 11:53+0200\n"
+"POT-Creation-Date: 2026-06-02 21:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -632,7 +632,7 @@ msgid "Current year"
 msgstr ""
 
 #: afat/templates/afat/partials/common/spinner.html:8
-msgid "Loading …"
+msgid "Loading…"
 msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:6
@@ -1148,7 +1148,7 @@ msgstr ""
 
 #: afat/templates/afat/partials/statistics/overview/tabs/mine.html:111
 #, python-format
-msgid "No FATs for %(year)s for any of your characters …"
+msgid "No FATs for %(year)s for any of your characters…"
 msgstr ""
 
 #: afat/templates/afat/view/dashboard/dashboard.html:12
