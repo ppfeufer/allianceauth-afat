@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-06-02 21:51+0200\n"
+"POT-Creation-Date: 2026-06-11 06:38+0200\n"
 "PO-Revision-Date: 2026-06-02 19:50+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Korean <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ko/>\n"
@@ -32,7 +32,20 @@ msgstr ""
 msgid "Fleet Activity Tracking"
 msgstr "플릿 활동 기록"
 
-#: afat/admin.py:114 afat/models/afat.py:107
+#: afat/admin.py:108 afat/forms.py:169 afat/forms.py:171
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
+#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
+msgid "System"
+msgstr "성계"
+
+#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:41
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
+#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
+msgid "Ship"
+msgstr "함선"
+
+#: afat/admin.py:145 afat/models/afat.py:107
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
@@ -40,47 +53,47 @@ msgstr "플릿 활동 기록"
 msgid "Fleet type"
 msgstr "함대 종류"
 
-#: afat/admin.py:127 afat/models/afat.py:444
+#: afat/admin.py:158 afat/models/afat.py:444
 msgid "Is enabled"
 msgstr "활성화"
 
-#: afat/admin.py:142
+#: afat/admin.py:173
 msgid "Activate selected fleet types"
 msgstr "선택된 플릿유형 활성화"
 
-#: afat/admin.py:171
+#: afat/admin.py:202
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
 msgstr[0] "{failed} 함대 종류를 활성화 할 수 없습니다"
 
-#: afat/admin.py:181
+#: afat/admin.py:212
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
 msgstr[0] "{notifications_count} 개의 함대 종류가 활성화 되었습니다"
 
-#: afat/admin.py:187
+#: afat/admin.py:218
 msgid "Deactivate selected fleet types"
 msgstr "선택된 플릿을 필터에서 제외"
 
-#: afat/admin.py:216
+#: afat/admin.py:247
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
 msgstr[0] "{failed} 개의 함대 종류 비활성화에 실패 했습니다"
 
-#: afat/admin.py:226
+#: afat/admin.py:257
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
 msgstr[0] "{notifications_count} 개의 함대 종류 비활성화됨"
 
-#: afat/admin.py:291 afat/models/afat.py:108
+#: afat/admin.py:322 afat/models/afat.py:108
 msgid "Fleet types"
 msgstr "함대 종류"
 
-#: afat/admin.py:304
+#: afat/admin.py:335
 msgid "Ship classes"
 msgstr "함급"
 
@@ -116,13 +129,6 @@ msgstr "함대 종류 (선택)"
 #: afat/forms.py:163 afat/forms.py:165
 msgid "Character Name"
 msgstr "캐릭터 이름"
-
-#: afat/forms.py:169 afat/forms.py:171
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
-#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
-msgid "System"
-msgstr "성계"
 
 #: afat/forms.py:175 afat/forms.py:177
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
@@ -648,12 +654,6 @@ msgstr ""
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:14
 msgid "Only characters that have recent FATs are shown. <small>(latest 10 FATs per character)</small>"
 msgstr ""
-
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:41
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
-#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
-msgid "Ship"
-msgstr "함선"
 
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:69
 msgid "No recent FAT activity registered for any of your characters."

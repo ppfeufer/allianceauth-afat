@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-06-02 21:51+0200\n"
+"POT-Creation-Date: 2026-06-11 06:38+0200\n"
 "PO-Revision-Date: 2026-04-21 17:36+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
@@ -29,7 +29,20 @@ msgstr ""
 msgid "Fleet Activity Tracking"
 msgstr "フリート活動履歴"
 
-#: afat/admin.py:114 afat/models/afat.py:107
+#: afat/admin.py:108 afat/forms.py:169 afat/forms.py:171
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
+#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
+msgid "System"
+msgstr "システム（星系）"
+
+#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:41
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
+#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
+msgid "Ship"
+msgstr ""
+
+#: afat/admin.py:145 afat/models/afat.py:107
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
@@ -37,47 +50,47 @@ msgstr "フリート活動履歴"
 msgid "Fleet type"
 msgstr "フリート種類"
 
-#: afat/admin.py:127 afat/models/afat.py:444
+#: afat/admin.py:158 afat/models/afat.py:444
 msgid "Is enabled"
 msgstr "有効です"
 
-#: afat/admin.py:142
+#: afat/admin.py:173
 msgid "Activate selected fleet types"
 msgstr "選択したフリートの種類を有効にする"
 
-#: afat/admin.py:171
+#: afat/admin.py:202
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
 msgstr[0] "{failed} のフリートタイプの有効化に失敗しました"
 
-#: afat/admin.py:181
+#: afat/admin.py:212
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
 msgstr[0] "有効化された {notifications_count}フリートの種類"
 
-#: afat/admin.py:187
+#: afat/admin.py:218
 msgid "Deactivate selected fleet types"
 msgstr "選択したフリートの種類を無効化する"
 
-#: afat/admin.py:216
+#: afat/admin.py:247
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
 msgstr[0] "{failed} フリートタイプの無効化に失敗しました"
 
-#: afat/admin.py:226
+#: afat/admin.py:257
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
 msgstr[0] "無効化された {notifications_count} フリートの種類"
 
-#: afat/admin.py:291 afat/models/afat.py:108
+#: afat/admin.py:322 afat/models/afat.py:108
 msgid "Fleet types"
 msgstr "フリートの種類"
 
-#: afat/admin.py:304
+#: afat/admin.py:335
 msgid "Ship classes"
 msgstr "船のクラス"
 
@@ -111,13 +124,6 @@ msgstr "ドクトリン（任意）"
 #: afat/forms.py:163 afat/forms.py:165
 msgid "Character Name"
 msgstr "キャラクター名"
-
-#: afat/forms.py:169 afat/forms.py:171
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
-#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
-msgid "System"
-msgstr "システム（星系）"
 
 #: afat/forms.py:175 afat/forms.py:177
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:44
@@ -640,12 +646,6 @@ msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:14
 msgid "Only characters that have recent FATs are shown. <small>(latest 10 FATs per character)</small>"
-msgstr ""
-
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:41
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
-#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
-msgid "Ship"
 msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:69
