@@ -89,16 +89,42 @@ class AFatAdmin(admin.ModelAdmin):
     Config for fat model
     """
 
-    list_display = ("character", "system", "shiptype", "fatlink")
+    list_display = ("character", "_solar_system", "_ship", "fatlink")
     list_filter = ("character", "system", "shiptype")
     ordering = ("-character",)
     search_fields = (
         "character__character_name",
-        "system",
-        "shiptype",
+        "solar_system__name",
+        "ship__name",
         "fatlink__fleet",
         "fatlink__hash",
     )
+
+    @admin.display(description=_("Solar system"), ordering="solar_system")
+    def _solar_system(self, obj):
+        """
+        Return the solar system name
+
+        :param obj:
+        :type obj:
+        :return:
+        :rtype:
+        """
+
+        return obj.solar_system.name
+
+    @admin.display(description=_("Ship"), ordering="ship")
+    def _ship(self, obj):
+        """
+        Return the ship type name
+
+        :param obj:
+        :type obj:
+        :return:
+        :rtype:
+        """
+
+        return obj.ship.name
 
 
 @admin.register(FleetType)
