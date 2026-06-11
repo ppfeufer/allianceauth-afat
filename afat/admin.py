@@ -7,6 +7,7 @@ from solo.admin import SingletonModelAdmin
 
 # Django
 from django.contrib import admin, messages
+from django.contrib.admin import RelatedOnlyFieldListFilter
 from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 from django.utils.translation import ngettext
@@ -90,7 +91,11 @@ class AFatAdmin(admin.ModelAdmin):
     """
 
     list_display = ("character", "_solar_system", "_ship", "fatlink")
-    list_filter = ("character", "system", "shiptype")
+    list_filter = (
+        ("character", RelatedOnlyFieldListFilter),
+        ("solar_system", RelatedOnlyFieldListFilter),
+        ("ship", RelatedOnlyFieldListFilter),
+    )
     ordering = ("-character",)
     search_fields = (
         "character__character_name",
@@ -100,7 +105,7 @@ class AFatAdmin(admin.ModelAdmin):
         "fatlink__hash",
     )
 
-    @admin.display(description=_("Solar system"), ordering="solar_system")
+    @admin.display(description=_("System"), ordering="solar_system")
     def _solar_system(self, obj):
         """
         Return the solar system name
