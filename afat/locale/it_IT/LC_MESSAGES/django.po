@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-06-02 21:51+0200\n"
+"POT-Creation-Date: 2026-06-11 06:38+0200\n"
 "PO-Revision-Date: 2025-07-29 20:18+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: Italian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/it/>\n"
@@ -27,7 +27,20 @@ msgstr ""
 msgid "Fleet Activity Tracking"
 msgstr "Monitoraggio Attività Flotta"
 
-#: afat/admin.py:114 afat/models/afat.py:107
+#: afat/admin.py:108 afat/forms.py:169 afat/forms.py:171
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
+#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
+msgid "System"
+msgstr ""
+
+#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:41
+#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
+#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
+msgid "Ship"
+msgstr ""
+
+#: afat/admin.py:145 afat/models/afat.py:107
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
@@ -35,51 +48,51 @@ msgstr "Monitoraggio Attività Flotta"
 msgid "Fleet type"
 msgstr ""
 
-#: afat/admin.py:127 afat/models/afat.py:444
+#: afat/admin.py:158 afat/models/afat.py:444
 msgid "Is enabled"
 msgstr "È attivo"
 
-#: afat/admin.py:142
+#: afat/admin.py:173
 msgid "Activate selected fleet types"
 msgstr ""
 
-#: afat/admin.py:171
+#: afat/admin.py:202
 #, python-brace-format
 msgid "Failed to activate {failed} fleet type"
 msgid_plural "Failed to activate {failed} fleet types"
 msgstr[0] ""
 msgstr[1] ""
 
-#: afat/admin.py:181
+#: afat/admin.py:212
 #, python-brace-format
 msgid "Activated {notifications_count} fleet type"
 msgid_plural "Activated {notifications_count} fleet types"
 msgstr[0] ""
 msgstr[1] ""
 
-#: afat/admin.py:187
+#: afat/admin.py:218
 msgid "Deactivate selected fleet types"
 msgstr ""
 
-#: afat/admin.py:216
+#: afat/admin.py:247
 #, python-brace-format
 msgid "Failed to deactivate {failed} fleet type"
 msgid_plural "Failed to deactivate {failed} fleet types"
 msgstr[0] ""
 msgstr[1] ""
 
-#: afat/admin.py:226
+#: afat/admin.py:257
 #, python-brace-format
 msgid "Deactivated {notifications_count} fleet type"
 msgid_plural "Deactivated {notifications_count} fleet types"
 msgstr[0] ""
 msgstr[1] ""
 
-#: afat/admin.py:291 afat/models/afat.py:108
+#: afat/admin.py:322 afat/models/afat.py:108
 msgid "Fleet types"
 msgstr ""
 
-#: afat/admin.py:304
+#: afat/admin.py:335
 msgid "Ship classes"
 msgstr ""
 
@@ -112,13 +125,6 @@ msgstr ""
 
 #: afat/forms.py:163 afat/forms.py:165
 msgid "Character Name"
-msgstr ""
-
-#: afat/forms.py:169 afat/forms.py:171
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
-#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
-msgid "System"
 msgstr ""
 
 #: afat/forms.py:175 afat/forms.py:177
@@ -645,12 +651,6 @@ msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:14
 msgid "Only characters that have recent FATs are shown. <small>(latest 10 FATs per character)</small>"
-msgstr ""
-
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:41
-#: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
-#: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
-msgid "Ship"
 msgstr ""
 
 #: afat/templates/afat/partials/dashboard/tabs/fats.html:69
