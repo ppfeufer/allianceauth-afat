@@ -45,6 +45,7 @@ Section Order:
 
 ### Changed
 
+- List only referenced objects in list filters in admin
 - Use SDE fields in admin
 - Migration dependency updates to squashed migrations in Alliance Auth v5
 
