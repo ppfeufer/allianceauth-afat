@@ -10,7 +10,9 @@ from unittest.mock import MagicMock, patch
 
 # Django
 from django.contrib import admin
-from django.contrib.auth.models import User
+
+# Alliance Auth
+from allianceauth.authentication.models import User
 
 # Alliance Auth AFAT
 from afat.admin import (
