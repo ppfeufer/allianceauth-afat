@@ -43,12 +43,19 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [6.1.0] - 2026-07-07
+
+### Added
+
+- Support for Python 3.14
+
 ### Changed
 
 - List only referenced objects in list filters in admin
 - Use SDE fields in admin
-- Migration dependency updates to squashed migrations in Alliance Auth v5
+- Migration dependency updated to squashed migrations in Alliance Auth v5
 - Migrate to Alliance Auth proxy models
+- Translations updated
 
 ## [6.0.0] - 2026-06-07
 
@@ -2237,6 +2244,7 @@ Finally restart your supervisor services for AA
 [5.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.0.3...v5.1.0 "v5.1.0"
 [5.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.1.0...v5.2.0 "v5.2.0"
 [6.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.2.0...v6.0.0 "v6.0.0"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.0.0...HEAD "In Development"
+[6.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.0.0...v6.1.0 "v6.1.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
