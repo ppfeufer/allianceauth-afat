@@ -368,7 +368,7 @@ To keep track of all changes, please read the
 
 ## Translation Status<a name="translation-status"></a>
 
-[![Translation status](https://weblate.ppfeufer.de/widget/alliance-auth-apps/allianceauth-afat/multi-auto.svg)](https://weblate.ppfeufer.de/engage/alliance-auth-apps/)
+[![Translation status](https://weblate.ppfeufer.de/widget/alliance-auth-apps/allianceauth-afat/matrix-auto.svg)](https://weblate.ppfeufer.de/engage/alliance-auth-apps/)
 
 Do you want to help translate this app into your language or improve the existing
 translation? - [Join our team of translators][weblate engage]!
