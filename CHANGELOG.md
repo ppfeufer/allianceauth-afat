@@ -43,6 +43,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Fixed
+
+- Ship type name shown as ID in character statistics view
+
 ## [6.1.0] - 2026-07-07
 
 > [!IMPORTANT]
