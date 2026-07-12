@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-07-07 12:36+0200\n"
+"POT-Creation-Date: 2026-07-12 11:41+0200\n"
 "PO-Revision-Date: 2026-07-07 10:50+0000\n"
 "Last-Translator: Roycce_ <malyasov.roma@mail.ru>\n"
 "Language-Team: Russian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ru/>\n"
@@ -1506,11 +1506,15 @@ msgstr "<h4>Внимание!</h4><p>Данная ссылка РБВ уже б�
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for this character.</p>"
 msgstr "<h4>Внимание!</h4><p>У Вас нет прав для просмотра статистики этого пилота.</p>"
 
-#: afat/views/statistics.py:381
+#: afat/views/statistics.py:263
+msgid "Unknown"
+msgstr ""
+
+#: afat/views/statistics.py:371
 msgid "This character is in a different corporation and their FATs are not counted towards the statistics of the main corporation."
 msgstr ""
 
-#: afat/views/statistics.py:459
+#: afat/views/statistics.py:449
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Внимание!</h4><p>У Вас нет прав для просмотра статистики этой корпорации.</p>"
 
