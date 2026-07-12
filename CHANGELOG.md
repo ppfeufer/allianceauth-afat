@@ -43,9 +43,15 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [6.1.1] - 2026-07-12
+
 ### Fixed
 
 - Ship type name shown as ID in character statistics view
+
+### Changed
+
+- Significantly reduced the number of DB queries in the character statistics view, which should improve performance a lot
 
 ## [6.1.0] - 2026-07-07
 
@@ -2256,6 +2262,7 @@ Finally restart your supervisor services for AA
 [5.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.1.0...v5.2.0 "v5.2.0"
 [6.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.2.0...v6.0.0 "v6.0.0"
 [6.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.0.0...v6.1.0 "v6.1.0"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.0...HEAD "In Development"
+[6.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.0...v6.1.1 "v6.1.1"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.1...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
