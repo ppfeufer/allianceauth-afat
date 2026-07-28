@@ -1,67 +1,63 @@
-/* ESI fleet list (add fatlink view)
-------------------------------------------------------------------------------------- */
 @media all {
-    .allianceauth-afat .esi-fleet-list-item {
-        align-items: center;
-        display: flex;
-        flex-flow: row nowrap;
-        list-style: none;
-        place-content: space-between space-between;
-    }
+    .allianceauth-afat {
+        /* ESI fleet list (add fatlink view)
+        ----------------------------------------------------------------------------- */
+        .esi-fleet-list-item {
+            align-items: center;
+            display: flex;
+            flex-flow: row nowrap;
+            list-style: none;
+            place-content: space-between space-between;
 
-    .allianceauth-afat .esi-fleet-list-item:hover {
-        background-color: rgb(0 0 0 / 10%);
-    }
+            &:hover {
+                background-color: rgb(0 0 0 / 10%);
+            }
 
-    .allianceauth-afat .esi-fleet-list-item .eve-image-with-text {
-        display: flex;
-    }
+            .eve-image-with-text {
+                display: flex;
 
-    .allianceauth-afat .esi-fleet-list-item .eve-image-with-text .eve-image {
-        margin: auto;
-    }
-}
+                .eve-image {
+                    margin: auto;
+                }
+            }
+        }
 
-/* Tables
-------------------------------------------------------------------------------------- */
-@media all {
-    .allianceauth-afat .table > tbody > tr > td,
-    .allianceauth-afat .table > tbody > tr > th,
-    .allianceauth-afat .table > tfoot > tr > td,
-    .allianceauth-afat .table > tfoot > tr > th,
-    .allianceauth-afat .table > thead > tr > td {
-        vertical-align: middle;
-    }
-}
+        /* Tables
+        ----------------------------------------------------------------------------- */
+        .table {
+            > tbody > tr > td,
+            > tbody > tr > th,
+            > tfoot > tr > td,
+            > tfoot > tr > th,
+            > thead > tr > td {
+                vertical-align: middle;
+            }
+        }
 
-/* Labels
-------------------------------------------------------------------------------------- */
-@media all {
-    .allianceauth-afat .afat-label-active-esi-fleet {
-        background-color: rgb(98 196 98);
-    }
+        /* Labels
+        ----------------------------------------------------------------------------- */
+        .afat-label-active-esi-fleet {
+            background-color: rgb(98 196 98);
+        }
 
-    .allianceauth-afat .afat-label-statistics {
-        position: relative;
-        top: 0.2rem;
-    }
-}
+        .afat-label-statistics {
+            position: relative;
+            top: 0.2rem;
+        }
 
-/* Time period select
-------------------------------------------------------------------------------------- */
-@media all {
-    .allianceauth-afat .afat-select-time-period {
-        font-size: 1.25rem;
-        font-weight: 400;
-        line-height: 1.1;
-    }
-}
+        /* Time period select
+        ----------------------------------------------------------------------------- */
+        .afat-select-time-period {
+            font-size: 1.25rem;
+            font-weight: 400;
+            line-height: 1.1;
+        }
 
-/* Loading Spinner
-------------------------------------------------------------------------------------- */
-@media all {
-    .allianceauth-afat .afat-spinner {
-        width: 2rem;
-        height: 2rem;
+        /* Loading Spinner
+        ----------------------------------------------------------------------------- */
+        .afat-spinner {
+            width: 2rem;
+            height: 2rem;
+        }
     }
 }
