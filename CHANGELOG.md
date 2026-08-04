@@ -12,18 +12,23 @@ Highlighting:
 https://docs.github.com/assets/cb-41128/mw-1440/images/help/writing/alerts-rendered.webp
 
 > [!NOTE]
+>
 > Highlights information that users should take into account, even when skimming.
 
 > [!TIP]
+>
 > Optional information to help a user be more successful.
 
 > [!IMPORTANT]
+>
 > Crucial information necessary for users to succeed.
 
 > [!WARNING]
+>
 > Urgent info that needs immediate user attention to avoid problems.
 
 > [!CAUTION]
+>
 > Advised about risks or negative outcomes of certain actions.
 -->
 
@@ -43,10 +48,12 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [6.2.0] - 2026-08-04
+
 ### Changed
 
 - Use `pk` instead of `id` when referring to the primary key of a model instance, since `id` is not guaranteed to be the primary key in Django.
-- CSS modernized
+- CSS modernized (If you have an older browser that can't handle the new CSS, update your browser…)
 
 ## [6.1.1] - 2026-07-12
 
@@ -2268,6 +2275,7 @@ Finally restart your supervisor services for AA
 [6.0.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v5.2.0...v6.0.0 "v6.0.0"
 [6.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.0.0...v6.1.0 "v6.1.0"
 [6.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.0...v6.1.1 "v6.1.1"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.1...HEAD "In Development"
+[6.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.1...v6.2.0 "v6.2.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
