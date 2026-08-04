@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-07-12 11:41+0200\n"
+"POT-Creation-Date: 2026-08-04 08:48+0200\n"
 "PO-Revision-Date: 2026-07-07 10:49+0000\n"
 "Last-Translator: Zigor Fernandez Moreno <sietehierros@gmail.com>\n"
 "Language-Team: Spanish <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/es/>\n"
@@ -1413,17 +1413,3 @@ msgstr ""
 #: afat/views/statistics.py:449
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr ""
-
-#, python-brace-format
-#~ msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-#~ msgstr "Seguimiento de la Actividad de Flota (AFAT) v{__version__}"
-
-#~ msgid "{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"
-#~ msgstr "{int(duration_years[0])} años, {int(duration_days[0])} días, {int(duration_hours[0])} horas, {int(duration_minutos[0])} minutos y {int(duration_segundos[0 ])} segundos"
-
-#~ msgid "Fleet activity tracking"
-#~ msgstr "Seguimiento de la Actividad de Flota"
-
-#~ msgctxt "Decimal separator"
-#~ msgid "."
-#~ msgstr ","
