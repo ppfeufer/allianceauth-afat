@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-07-12 11:41+0200\n"
+"POT-Creation-Date: 2026-08-04 08:48+0200\n"
 "PO-Revision-Date: 2026-07-12 09:47+0000\n"
 "Last-Translator: Automatic translation add-on <noreply-addon-autotranslate@weblate.org>\n"
 "Language-Team: Japanese <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/ja/>\n"
@@ -1388,15 +1388,3 @@ msgstr ""
 #: afat/views/statistics.py:449
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr ""
-
-#, python-format
-#~ msgid "<p>Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s</p>"
-#~ msgstr "<p>本当に、%(character_name)sのESI艦隊 ID %(esi_fleet_id)sを解散させますか？</p>"
-
-#, python-brace-format
-#~ msgid "{fatlink_hash} (Deleted)"
-#~ msgstr "{fatlink_hash} (削除済み)"
-
-#, python-brace-format
-#~ msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-#~ msgstr "フリート活動履歴 (AFAT) v{__version__}"

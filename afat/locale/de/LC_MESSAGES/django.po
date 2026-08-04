@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-07-12 11:41+0200\n"
+"POT-Creation-Date: 2026-08-04 08:48+0200\n"
 "PO-Revision-Date: 2026-07-12 09:47+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
@@ -1428,104 +1428,3 @@ msgstr "Dieser Charakter ist in einer anderen Corporation und seine FATs werden 
 #: afat/views/statistics.py:449
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Warnung!</h4><p>Du hast nicht die Berechtigung die Statistiken für diese Corporation zu sehen.</p>"
-
-#~ msgid "Location"
-#~ msgstr "Ort"
-
-#, python-format
-#~ msgid "<p>Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s</p>"
-#~ msgstr "<p>Bist Du sicher das Du die ESI Flotte mit ID %(esi_fleet_id)s von %(character_name)s schließen möchtest?</p>"
-
-#~ msgid "Character name"
-#~ msgstr "Charaktername"
-
-#~ msgid "FAT Link"
-#~ msgstr "FAT-Link"
-
-#~ msgid "Copy me!"
-#~ msgstr "Kopier mich!"
-
-#, python-brace-format
-#~ msgid "{fatlink_hash} (Deleted)"
-#~ msgstr "{fatlink_hash} (Gelöscht)"
-
-#~ msgid "Event"
-#~ msgstr "Ereignis"
-
-#, fuzzy
-#~| msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
-#~ msgid "<h4>Warning!</h4><p>Sorry, that FAT link is expired.</p>"
-#~ msgstr "<h4>Warnung!</h4><p>Keinen FAT-Link Hash zur Verfügung gestellt.</p>"
-
-#, python-brace-format
-#~ msgid "<h4>Warning!</h4><p>There was an issue with the ESI token for {character_name}. Please try again.</p>"
-#~ msgstr "<h4>Warnung!</h4><p>Es gab ein Problem mit dem ESI Token für {character_name}. Bitte versuche es noch einmal.</p>"
-
-#, python-brace-format
-#~ msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-#~ msgstr "Flotten Aktivitäts Verfolgung v{__version__}"
-
-#~ msgid "{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"
-#~ msgstr "{int(duration_years[0])} Jahre, {int(duration_days[0])} Tage, {int(duration_hours[0])} Stunden, {int(duration_minutes[0])} Minuten und {int(duration_seconds[0])} Sekunden"
-
-#, python-brace-format
-#~ msgid "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
-#~ msgstr "<p>Bist Du sicher das Du die ESI Flotte mit ID {fatlink.esi_fleet_id} von {fatlink.character.character_name} schließen möchtest?</p>"
-
-#~ msgid "Fleet activity tracking"
-#~ msgstr "Flotten Aktivitäts Verfolgung"
-
-#~ msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
-#~ msgstr "<h4>Warnung!</h4><p>Datumsinformationen nicht komplett!</p>"
-
-#~ msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
-#~ msgstr "<h4>Fehler!</h4><p>Datumsinformationen nicht komplett.</p>"
-
-#~ msgctxt "Decimal separator"
-#~ msgid "."
-#~ msgstr ","
-
-#~ msgctxt "Thousands separator"
-#~ msgid ","
-#~ msgstr "."
-
-#~ msgid "No data available in this table"
-#~ msgstr "In dieser Tabelle sind keine Daten verfügbar"
-
-#~ msgctxt "Keep _END_ as it is. It will be replaced by a number."
-#~ msgid "Showing _END_ entries"
-#~ msgstr "Zeige _END_ Einträge"
-
-#~ msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-#~ msgid "(filtered from _MAX_ total entries)"
-#~ msgstr "(gefiltert von _MAX_ Einträgen)"
-
-#~ msgid "No records available"
-#~ msgstr "Keine Datensätze vorhanden"
-
-#~ msgid "Processing …"
-#~ msgstr "Verarbeite …"
-
-#~ msgid "Nothing found, sorry …"
-#~ msgstr "Nichts gefunden, tut mir leid …"
-
-#~ msgid "Search …"
-#~ msgstr "Suche …"
-
-#~ msgid "First"
-#~ msgstr "Erster"
-
-#~ msgid "Last"
-#~ msgstr "Letzter"
-
-#~ msgid "Next"
-#~ msgstr "Nächster"
-
-#~ msgid "Previous"
-#~ msgstr "Vorheriger"
-
-#~ msgid ": activate to sort column ascending"
-#~ msgstr ": aktivieren, um die Spalte aufsteigend zu sortieren"
-
-#~ msgid ": activate to sort column descending"
-#~ msgstr ": aktivieren, um die Spalte absteigend zu sortieren"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-07-12 11:41+0200\n"
+"POT-Creation-Date: 2026-08-04 08:48+0200\n"
 "PO-Revision-Date: 2026-07-12 09:47+0000\n"
 "Last-Translator: Automatic translation add-on <noreply-addon-autotranslate@weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/zh_Hans/>\n"
@@ -1401,33 +1401,3 @@ msgstr ""
 #: afat/views/statistics.py:449
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>警告！</h4><p>你没有查看该公司统计资料的权限。</p>"
-
-#, fuzzy, python-brace-format
-#~| msgid "{log.fatlink_hash} (Deleted)"
-#~ msgid "{fatlink_hash} (Deleted)"
-#~ msgstr "{log.fatlink_hash}（删除）"
-
-#, fuzzy, python-brace-format
-#~| msgid "AFAT - Another Fleet Activity Tracker v{__version__}"
-#~ msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-#~ msgstr "AFAT - 另一个舰队活动追踪器 v{__version__}"
-
-#~ msgid "{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"
-#~ msgstr "{int(duration_years[0])} 年, {int(duration_days[0])} 天, {int(duration_hours[0])} 小时, {int(duration_minutes[0])} 分钟, {int(duration_seconds[0])} 秒"
-
-#~ msgid "Fleet activity tracking"
-#~ msgstr "舰队活动历史"
-
-#~ msgctxt "Decimal separator"
-#~ msgid "."
-#~ msgstr "."
-
-#~ msgctxt "Thousands separator"
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "Processing …"
-#~ msgstr "处理中…"
-
-#~ msgid "Search …"
-#~ msgstr "搜索…"

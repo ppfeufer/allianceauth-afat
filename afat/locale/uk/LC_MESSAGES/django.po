@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
-"POT-Creation-Date: 2026-07-12 11:41+0200\n"
+"POT-Creation-Date: 2026-08-04 08:48+0200\n"
 "PO-Revision-Date: 2026-07-12 09:47+0000\n"
 "Last-Translator: Automatic translation add-on <noreply-addon-autotranslate@weblate.org>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
@@ -1475,96 +1475,3 @@ msgstr "Цей персонаж перебуває в іншій корпора�
 #: afat/views/statistics.py:449
 msgid "<h4>Warning!</h4><p>You do not have permission to view statistics for that corporation.</p>"
 msgstr "<h4>Попередження!</h4><p>Ви не маєте дозволу переглядати статистику для цієї корпорації.</p>"
-
-#~ msgid "Location"
-#~ msgstr "Розташування"
-
-#, python-format
-#~ msgid "<p>Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s</p>"
-#~ msgstr "<p>Ви впевнені, що хочете закрити флот ESI з ID %(esi_fleet_id)s від %(character_name)s</p>"
-
-#~ msgid "Character name"
-#~ msgstr "Назва персонажа"
-
-#~ msgid "FAT Link"
-#~ msgstr "FAT-посилання"
-
-#~ msgid "Copy me!"
-#~ msgstr "Скопіювати!"
-
-#, python-brace-format
-#~ msgid "{fatlink_hash} (Deleted)"
-#~ msgstr "{fatlink_hash} (Видалено)"
-
-#~ msgid "Event"
-#~ msgstr "Подія"
-
-#, fuzzy
-#~| msgid "<h4>Warning!</h4><p>No FAT link hash provided.</p>"
-#~ msgid "<h4>Warning!</h4><p>Sorry, that FAT link is expired.</p>"
-#~ msgstr "<h4>Попередження!</h4><p>Хеш FAT-посилання не вказано.</p>"
-
-#, python-brace-format
-#~ msgid "<h4>Warning!</h4><p>There was an issue with the ESI token for {character_name}. Please try again.</p>"
-#~ msgstr "<h4>Попередження!</h4><p>Щось пішло не так з токеном ESI для {character_name}. Будь ласка, спробуйте ще раз.</p>"
-
-#, python-brace-format
-#~ msgid "Fleet Activity Tracking (AFAT) v{__version__}"
-#~ msgstr "Трекер флотової активності (AFAT) v{__version__}"
-
-#~ msgid "{int(duration_years[0])} years, {int(duration_days[0])} days, {int(duration_hours[0])} hours, {int(duration_minutes[0])} minutes and {int(duration_seconds[0])} seconds"
-#~ msgstr "{int(duration_years[0])} років, {int(duration_days[0])} днів, {int(duration_hours[0])} годин, {int(duration_minutes[0])} хвилин та {int(duration_seconds[0])} секунд"
-
-#, python-brace-format
-#~ msgid "<p>Are you sure you want to close ESI fleet with ID {fatlink.esi_fleet_id} from {fatlink.character.character_name}?</p>"
-#~ msgstr "<p>Ви впевнені, що хочете закрити флот ESI з ID {fatlink.esi_fleet_id} від {fatlink.character.character_name}?</p>"
-
-#~ msgid "Fleet activity tracking"
-#~ msgstr "Відстежування активності у флоті"
-
-#~ msgid "<h4>Warning!</h4><p>Date information not complete!</p>"
-#~ msgstr "<h4>Попередження!</h4><p>Дані про дату не повні!</p>"
-
-#~ msgid "<h4>Error!</h4><p>Date information incomplete.</p>"
-#~ msgstr "<h4>Помилка!</h4><p>Дані про дату не повні.</p>"
-
-#~ msgid "No data available in this table"
-#~ msgstr "Немає даних у цій таблиці"
-
-#~ msgctxt "Keep _END_ as it is. It will be replaced by a number."
-#~ msgid "Showing _END_ entries"
-#~ msgstr "Показано _END_ записів"
-
-#~ msgctxt "Keep _MAX_ as it is. It will be replaced by a number."
-#~ msgid "(filtered from _MAX_ total entries)"
-#~ msgstr "(відфільтровано з _MAX_ загальних записів)"
-
-#~ msgid "No records available"
-#~ msgstr "Записів не знайдено"
-
-#~ msgid "Processing …"
-#~ msgstr "Обробка …"
-
-#~ msgid "Nothing found, sorry …"
-#~ msgstr "Нічого не знайдено, вибачте …"
-
-#~ msgid "Search …"
-#~ msgstr "Пошук …"
-
-#~ msgid "First"
-#~ msgstr "Перший"
-
-#~ msgid "Last"
-#~ msgstr "Останній"
-
-#~ msgid "Next"
-#~ msgstr "Далі"
-
-#~ msgid "Previous"
-#~ msgstr "Назад"
-
-#~ msgid ": activate to sort column ascending"
-#~ msgstr ": активуйте щоб сортувати за зростанням"
-
-#~ msgid ": activate to sort column descending"
-#~ msgstr ": активуйте щоб сортувати за спаданням"
