@@ -48,6 +48,10 @@ Section Order:
 
 <!-- Your changes go here -->
 
+### Changed
+
+- Translations updated
+
 ## [6.2.0] - 2026-08-04
 
 ### Changed
