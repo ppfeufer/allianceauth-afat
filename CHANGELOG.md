@@ -48,6 +48,8 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [6.2.1] - 2026-09-08
+
 ### Changed
 
 - Translations updated
@@ -2280,6 +2282,7 @@ Finally restart your supervisor services for AA
 [6.1.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.0.0...v6.1.0 "v6.1.0"
 [6.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.0...v6.1.1 "v6.1.1"
 [6.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.1...v6.2.0 "v6.2.0"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.0...HEAD "In Development"
+[6.2.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.0...v6.2.1 "v6.2.1"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.1...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
