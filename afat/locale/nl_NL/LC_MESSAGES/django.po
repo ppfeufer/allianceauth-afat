@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Peter Pfeufer <info@ppfeufer.de>, 2025, 2026.
 # Automatic translation add-on <noreply-addon-autotranslate@weblate.org>, 2026.
+# Automatic translation add-on <noreply-addon-autotranslate@weblate.ppfeufer.de>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth Fleet Activity Tracker (AFAT) 3.5.3\n"
 "Report-Msgid-Bugs-To: https://github.com/ppfeufer/allianceauth-afat/issues\n"
 "POT-Creation-Date: 2026-08-04 08:48+0200\n"
-"PO-Revision-Date: 2026-09-04 05:07+0000\n"
-"Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
+"PO-Revision-Date: 2026-09-05 10:58+0000\n"
+"Last-Translator: Automatic translation add-on <noreply-addon-autotranslate@weblate.ppfeufer.de>\n"
 "Language-Team: Dutch <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/nl/>\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
@@ -199,7 +200,7 @@ msgstr ""
 
 #: afat/helper/views.py:42
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 #: afat/helper/views.py:44
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:7
@@ -1138,7 +1139,7 @@ msgstr ""
 
 #: afat/templates/afat/view/logs/logs-overview.html:22
 msgid "User"
-msgstr ""
+msgstr "Gebruiker"
 
 #: afat/templates/afat/view/logs/logs-overview.html:24
 msgid "Description"
