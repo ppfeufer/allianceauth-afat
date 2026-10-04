@@ -48,6 +48,15 @@ Section Order:
 
 <!-- Your changes go here -->
 
+## [6.3.0] - 2026-10-04
+
+> [!IMPORTANT]
+>
+> **This version needs Alliance Auth v5.5.0 or newer!**
+>
+> Please make sure to update your Alliance Auth instance **before** you install this
+> version; otherwise, an update to Alliance Auth will be pulled in unsupervised.
+
 ### Changed
 
 - Switch to `httpx2`
@@ -2287,6 +2296,7 @@ Finally restart your supervisor services for AA
 [6.1.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.0...v6.1.1 "v6.1.1"
 [6.2.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.1.1...v6.2.0 "v6.2.0"
 [6.2.1]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.0...v6.2.1 "v6.2.1"
-[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.1...HEAD "In Development"
+[6.3.0]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.2.1...v6.3.0 "v6.3.0"
+[in development]: https://github.com/ppfeufer/allianceauth-afat/compare/v6.3.0...HEAD "In Development"
 [keep a changelog]: http://keepachangelog.com/ "Keep a Changelog"
 [semantic versioning]: http://semver.org/ "Semantic Versioning"
