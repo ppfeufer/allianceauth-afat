@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <ul class="nav nav-tabs">
-    {#  We only need the tabs when we have more than one ...  #}
+    {# We only need the tabs when we have more than one ... #}
     {% if perms.afat.manage_afat and is_clickable_link and manual_fat_can_be_added %}
         <li class="nav-item" role="presentation">
             <a

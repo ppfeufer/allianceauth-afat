@@ -5,12 +5,12 @@
 {% block page_title %}
     {% translate "Fleet Activity Tracking" as page_title %}
     {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block afat_header %}
     {% translate "All FAT links" as site_title %}
     {% include "framework/header/page-header.html" with title=site_title %}
-{% endblock %}
+{% endblock afat_header %}
 
 {% block afat_body %}
     {% url "afat:fatlinks_overview" year_prev as url_previous_year %}
@@ -56,13 +56,13 @@
 
     {% translate "Close ESI fleet tracking" as translated_title %}
     {% include "afat/modals/general.html" with modal_name="cancelEsiFleet" modal_title=translated_title confirm_button_class="btn-danger" %}
-{% endblock %}
+{% endblock afat_body %}
 
 {% block extra_css %}
     {% include "bundles/datatables-2-css-bs5.html" %}
     {% include "bundles/datatables-2-columncontrol-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
-{% endblock %}
+{% endblock extra_css %}
 
 {% block extra_javascript %}
     {% translate "ESI" as dataTableFilterViaEsi %}
@@ -103,4 +103,4 @@
     {% include "bundles/moment-js.html" with locale=True %}
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-fatlist-js.html" %}
-{% endblock %}
+{% endblock extra_javascript %}

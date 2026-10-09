@@ -5,12 +5,12 @@
 {% block page_title %}
     {% translate "Fleet Activity Tracking" as page_title %}
     {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block afat_header %}
     {% translate "FAT link details" as site_title %}
     {% include "framework/header/page-header.html" with title=site_title %}
-{% endblock %}
+{% endblock afat_header %}
 
 {% block afat_body %}
     {% if perms.afat.manage_afat %}
@@ -28,13 +28,13 @@
 
     {% translate "Delete FAT" as translated_title %}
     {% include "afat/modals/general.html" with modal_name='deleteFat' modal_title=translated_title confirm_button_class='btn-danger' %}
-{% endblock %}
+{% endblock afat_body %}
 
 {% block extra_css %}
     {% include "bundles/datatables-2-css-bs5.html" %}
     {% include "bundles/datatables-2-columncontrol-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
-{% endblock %}
+{% endblock extra_css %}
 
 {% block extra_javascript %}
     <script>
@@ -63,4 +63,4 @@
     {% include "afat/bundles/afat-js.html" %}
     {% include "bundles/clipboard-js.html" %}
     {% include "afat/bundles/afat-fatlink-details-js.html" %}
-{% endblock %}
+{% endblock extra_javascript %}

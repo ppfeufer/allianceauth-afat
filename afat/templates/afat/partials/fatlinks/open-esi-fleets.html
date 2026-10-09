@@ -1,10 +1,9 @@
-{% load evelinks %}
-{% load i18n %}
+{% load evelinks i18n %}
 
 {% if esi_fleet.has_open_esi_fleets %}
     <div class="aa-callout aa-callout-info" role="alert">
         <p>
-            {% blocktranslate count esi_fleet.open_esi_fleets_list|length as open_esi_fleets %}
+            {% blocktranslate count open_esi_fleets=esi_fleet.open_esi_fleets_list|length %}
                 You currently have an active ESI fleet under the following character:
             {% plural %}
                 You currently have {{ open_esi_fleets }} active ESI fleets under the following characters:
@@ -46,7 +45,7 @@
         </ul>
 
         <p>
-            {% blocktranslate count esi_fleet.open_esi_fleets_list|length as open_esi_fleets %}
+            {% blocktranslate count open_esi_fleets=esi_fleet.open_esi_fleets_list|length %}
                 This fleet is already automatically tracked.
             {% plural %}
                 These fleets are already automatically tracked.

@@ -5,12 +5,12 @@
 {% block page_title %}
     {% translate "Fleet Activity Tracking statistics" as page_title %}
     {{ character.character_name }} {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block afat_header %}
     {% translate "Statistics" as site_title %}
     {% include "framework/header/page-header.html" with title=site_title sub_title=character.name %}
-{% endblock %}
+{% endblock afat_header %}
 
 {% block afat_body %}
     {% if month == 1 %}
@@ -34,13 +34,13 @@
         {% include "afat/partials/statistics/character/tabs/graphs.html" %}
         {% include "afat/partials/statistics/character/tabs/raw_data.html" %}
     </div>
-{% endblock %}
+{% endblock afat_body %}
 
 {% block extra_css %}
     {% include "bundles/datatables-2-css-bs5.html" %}
     {% include "bundles/datatables-2-columncontrol-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
-{% endblock %}
+{% endblock extra_css %}
 
 {% block extra_javascript %}
     {% include "bundles/chart-js.html" %}
@@ -77,4 +77,4 @@
             _afatBootstrapTooltip({namespace: 'afat'});
         });
     </script>
-{% endblock %}
+{% endblock extra_javascript %}

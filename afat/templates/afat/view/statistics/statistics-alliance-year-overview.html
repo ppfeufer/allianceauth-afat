@@ -1,17 +1,16 @@
 {% extends "afat/base.html" %}
 
-{% load i18n %}
-{% load afat %}
+{% load afat i18n %}
 
 {% block page_title %}
     {% translate "Fleet Activity Tracking statistics" as page_title %}
     {{ alliance }} {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block afat_header %}
     {% translate "Fleet activity" as site_title %}
     {% include "framework/header/page-header.html" with title=site_title sub_title=alliance %}
-{% endblock %}
+{% endblock afat_header %}
 
 {% block afat_body %}
     {% url "afat:statistics_alliance" allianceid year_prev as url_previous_year %}
@@ -65,8 +64,8 @@
             </table>
         </div>
     </div>
-{% endblock %}
+{% endblock afat_body %}
 
 {% block extra_css %}
     {% include "afat/bundles/afat-css.html" %}
-{% endblock %}
+{% endblock extra_css %}
