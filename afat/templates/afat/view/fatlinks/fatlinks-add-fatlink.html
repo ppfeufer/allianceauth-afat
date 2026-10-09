@@ -5,28 +5,28 @@
 {% block page_title %}
     {% translate "Fleet Activity Tracking" as page_title %}
     {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block afat_header %}
     {% translate "Create a FAT link" as site_title %}
     {% include "framework/header/page-header.html" with title=site_title %}
-{% endblock %}
+{% endblock afat_header %}
 
 {% block afat_body %}
     <div class="row">
         {% include "afat/partials/fatlinks/add/esi-link.html" %}
         {% include "afat/partials/fatlinks/add/clickable-link.html" %}
     </div>
-{% endblock %}
+{% endblock afat_body %}
 
 {% block afat_datalists %}
     {% include "afat/partials/form/fleet-doctrine.html" %}
     {% include "afat/partials/form/fleet-type.html" %}
-{% endblock %}
+{% endblock afat_datalists %}
 
 {% block extra_css %}
     {% include "afat/bundles/afat-css.html" %}
-{% endblock %}
+{% endblock extra_css %}
 
 {% block extra_javascript %}
     {% include "afat/bundles/afat-js.html" %}
@@ -39,4 +39,4 @@
             _manageModal(cancelEsiFleetModal);
         });
     </script>
-{% endblock %}
+{% endblock extra_javascript %}

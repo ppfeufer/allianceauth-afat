@@ -5,12 +5,12 @@
 {% block page_title %}
     {% translate "Fleet Activity Tracking logs" as page_title %}
     {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block afat_header %}
     {% translate "Logs" as site_title %}
     {% include "framework/header/page-header.html" with title=site_title %}
-{% endblock %}
+{% endblock afat_header %}
 
 {% block afat_body %}
     <div class="card card-default">
@@ -31,19 +31,19 @@
     </div>
 
     <p class="text-muted text-end mt-3">
-        {% blocktranslate count log_duration as duration %}
+        {% blocktranslate count duration=log_duration %}
             Logs are kept for {{ duration }} day. Logs older than that are removed automatically.
         {% plural %}
             Logs are kept for {{ duration }} days. Logs older than that are removed automatically.
         {% endblocktranslate %}
     </p>
-{% endblock %}
+{% endblock afat_body %}
 
 {% block extra_css %}
     {% include "bundles/datatables-2-css-bs5.html" %}
     {% include "bundles/datatables-2-columncontrol-css-bs5.html" %}
     {% include "afat/bundles/afat-css.html" %}
-{% endblock %}
+{% endblock extra_css %}
 
 {% block extra_javascript %}
     <script>
@@ -64,4 +64,4 @@
     {% include "afat/bundles/afat-js.html" %}
     {% include "afat/bundles/afat-logs-js.html" %}
     {% include "bundles/filterdropdown-js.html" %}
-{% endblock %}
+{% endblock extra_javascript %}

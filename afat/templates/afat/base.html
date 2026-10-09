@@ -1,21 +1,20 @@
 {% extends "allianceauth/base-bs5.html" %}
 
-{% load i18n %}
-{% load aa_i18n %}
+{% load aa_i18n i18n %}
 
 {% block page_title %}
     {% translate "Fleet Activity Tracking" as page_title %}
     {{ page_title|title }}
-{% endblock %}
+{% endblock page_title %}
 
 {% block header_nav_brand %}
     {% translate "Fleet Activity Tracking" as page_title %}
     {{ page_title|title }}
-{% endblock %}
+{% endblock header_nav_brand %}
 
 {% block header_nav_collapse_left %}
     {% include "afat/partials/common/navigation/top-menu.html" %}
-{% endblock %}
+{% endblock header_nav_collapse_left %}
 
 {% block content %}
     <div class="allianceauth-afat">
@@ -86,7 +85,7 @@
             {% block afat_datalists %}{% endblock %}
         </div>
     </div>
-{% endblock %}
+{% endblock content %}
 
 {% block extra_javascript %}
     {% include "afat/bundles/afat-js.html" %}
