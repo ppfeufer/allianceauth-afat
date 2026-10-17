@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth AFAT\n"
 "Report-Msgid-Bugs-To: https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/\n"
-"POT-Creation-Date: 2026-10-04 10:44+0200\n"
+"POT-Creation-Date: 2026-10-09 12:42+0200\n"
 "PO-Revision-Date: 2026-07-12 09:47+0000\n"
 "Last-Translator: Automatic translation add-on <noreply-addon-autotranslate@weblate.org>\n"
 "Language-Team: Ukrainian <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/uk/>\n"
@@ -23,24 +23,24 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : (n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Weblate 2026.7.1\n"
 
-#: afat/__init__.py:10 afat/templates/afat/base.html:7
-#: afat/templates/afat/base.html:12
-#: afat/templates/afat/view/dashboard/dashboard.html:7
+#: afat/__init__.py:10 afat/templates/afat/base.html:6
+#: afat/templates/afat/base.html:11
+#: afat/templates/afat/view/dashboard/dashboard.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
-#: afat/templates/afat/view/statistics/statistics-overview.html:8
+#: afat/templates/afat/view/statistics/statistics-overview.html:6
 msgid "Fleet Activity Tracking"
 msgstr "Відстежування активності у флоті"
 
 #: afat/admin.py:108 afat/forms.py:169 afat/forms.py:171
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:39
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
 msgid "System"
 msgstr "Система"
 
-#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:41
+#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:40
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
 msgid "Ship"
@@ -48,7 +48,7 @@ msgstr "Корабель"
 
 #: afat/admin.py:145 afat/models/afat.py:107
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:38
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:37
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:28
 msgid "Fleet type"
@@ -111,16 +111,16 @@ msgid "Ship classes"
 msgstr "Класи кораблів"
 
 #: afat/forms.py:36
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:5
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:5
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:4
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
 msgstr "Це поле обовʼязкове"
 
 #: afat/forms.py:118 afat/forms.py:257 afat/forms.py:320
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:12
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:37
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:36
 #: afat/templates/afat/partials/fatlinks/details/fatlink-name-form.html:11
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:24
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
 msgid "Fleet name"
 msgstr "Назва флоту"
@@ -227,7 +227,7 @@ msgstr "Видалити"
 #: afat/helper/views.py:44
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:7
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:53
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:31
 msgid "Stop automatic tracking through ESI for this fleet and close the associated FAT link."
 msgstr "Зупинити автоматичне відстеження через ESI для цього флоту та закрити відповідне посилання FAT."
 
@@ -235,8 +235,8 @@ msgstr "Зупинити автоматичне відстеження чере�
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:13
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:59
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:62
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:38
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:41
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:40
 msgid "Stop tracking"
 msgstr "Припинити відстеження"
 
@@ -382,7 +382,7 @@ msgid "FAT link"
 msgstr "FAT-посилання"
 
 #: afat/models/afat.py:223
-#: afat/templates/afat/partials/common/navigation/top-menu.html:27
+#: afat/templates/afat/partials/common/navigation/top-menu.html:26
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:28
 msgid "FAT links"
 msgstr "FAT-посилання"
@@ -426,10 +426,10 @@ msgstr "FAT"
 #: afat/models/afat.py:356
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:13
 #: afat/templates/afat/partials/statistics/character/tables/character-fats.html:7
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:58
 msgid "FATs"
 msgstr "FATи"
 
@@ -488,7 +488,7 @@ msgstr "Чи активна ця доктрина."
 
 #: afat/models/afat.py:452
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:39
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
@@ -598,35 +598,35 @@ msgstr "Скасувати"
 msgid "Confirm"
 msgstr "Підтвердити"
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:8
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:7
 msgid "Previous month"
 msgstr "Попередній місяць"
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:22
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:21
 msgid "Next month"
 msgstr "Наступний місяць"
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:30
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:29
 msgid "Current month"
 msgstr "Поточний місяць"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:9
+#: afat/templates/afat/partials/common/navigation/top-menu.html:8
 msgid "Dashboard"
 msgstr "Панель керування"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:18
-#: afat/templates/afat/view/statistics/statistics-alliance.html:12
+#: afat/templates/afat/partials/common/navigation/top-menu.html:17
+#: afat/templates/afat/view/statistics/statistics-alliance.html:11
 #: afat/templates/afat/view/statistics/statistics-character.html:11
 #: afat/templates/afat/view/statistics/statistics-corporation.html:11
-#: afat/templates/afat/view/statistics/statistics-overview.html:13
+#: afat/templates/afat/view/statistics/statistics-overview.html:11
 msgid "Statistics"
 msgstr "Статистика"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:37
+#: afat/templates/afat/partials/common/navigation/top-menu.html:36
 msgid "Add FAT link"
 msgstr "Додати FAT-посилання"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:48
+#: afat/templates/afat/partials/common/navigation/top-menu.html:47
 msgid "View log"
 msgstr "Переглянути журнал"
 
@@ -657,7 +657,7 @@ msgid "Creator"
 msgstr "Автор"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:16
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:42
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:41
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:15
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:31
 msgid "EVE time"
@@ -669,21 +669,21 @@ msgstr "Час за EVE"
 msgid "Actions"
 msgstr "Дії"
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:11
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:10
 msgid "Your most recent FATs"
 msgstr "Ваші останні FATи"
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:14
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:13
 msgid "Only characters that have recent FATs are shown. <small>(latest 10 FATs per character)</small>"
 msgstr "Показано лише персонажів, які мають останні FATи. <small>(останні 10 FATи на персонажа)</small>"
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:69
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:68
 msgid "No recent FAT activity registered for any of your characters."
 msgstr "Немає останньої активності FAT для жодного з ваших персонажів."
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:12
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:58
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:36
 #, python-format
 msgid "Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s?"
 msgstr "Ви впевнені, що хочете закрити флот ESI з ID %(esi_fleet_id)s від %(character_name)s?"
@@ -702,7 +702,7 @@ msgid "Are you sure you want to delete the FAT link and all registered FATs for 
 msgstr "Ви впевнені, що хочете видалити посилання FAT та усі зареєстровані ФАТи для флоту \"%(fleet_name)s\"?"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:41
-#: afat/templates/afat/view/dashboard/dashboard.html:24
+#: afat/templates/afat/view/dashboard/dashboard.html:23
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr "Видалити FAT-посилання"
@@ -711,23 +711,23 @@ msgstr "Видалити FAT-посилання"
 msgid "Deleted"
 msgstr "Видалено"
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:7
 msgid "Create a clickable FAT link"
 msgstr "Створити FAT-посилання"
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:14
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:13
 msgid "This option will create a clickable link to share with your fleet members."
 msgstr "Ця опція створить посилання для ваших членів флоту."
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:32
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:31
 msgid "Create link"
 msgstr "Створити посилання"
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:9
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:7
 msgid "Create a FAT link using ESI"
 msgstr "Створити FAT-посилання за допомогою ESI"
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:15
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:13
 msgid ""
 "\n"
 "                    This option will automatically register and track the entire fleet\n"
@@ -743,7 +743,7 @@ msgstr ""
 "                    FAT-посилання.\n"
 "                "
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:24
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:22
 msgid ""
 "\n"
 "                    This will start tracking your fleet automatically and add pilots to\n"
@@ -757,7 +757,7 @@ msgstr ""
 "                    (що означає, що ви покидаєте флот), або поки ви не зупините відстеження тут.\n"
 "                "
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:46
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:44
 msgid "Add ESI link"
 msgstr "Додати ESI посилання"
 
@@ -805,7 +805,7 @@ msgid "Re-open FAT link"
 msgstr "Повторно відкрити FAT-посилання"
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:94
-#: afat/templates/afat/view/dashboard/dashboard.html:27
+#: afat/templates/afat/view/dashboard/dashboard.html:26
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:57
 msgid "Close ESI fleet tracking"
 msgstr "Закрити відстеження флоту через ESI"
@@ -815,12 +815,12 @@ msgid "Set name"
 msgstr "Встановити назву"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:30
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:9
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:8
 msgid "Manual FAT"
 msgstr "FAT вручну"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:46
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:10
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:9
 msgid "Fleet snapshot"
 msgstr "Склад флоту"
 
@@ -845,29 +845,29 @@ msgstr "Огляд типу корабля"
 msgid "Count"
 msgstr "Кількість"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:15
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:14
 msgid "Copy the fleet composition from your fleet window, and paste it in here."
 msgstr "Скопіюй склад флоту з вікна флоту та перенеси його сюди."
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:19
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:16
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:18
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:15
 msgid "Note"
 msgstr "Примітка"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:19
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:16
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:18
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:15
 msgid "This action is logged!"
 msgstr "Ця дія записана!"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:33
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:32
 msgid "Add fleet snapshot"
 msgstr "Додати знімок флоту"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:12
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr "Хтось відсутній у списку FAT? Використовуйте цю форму, щоб додати їх."
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:49
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:48
 msgid "Add manual FAT"
 msgstr "Додати FAT вручну"
 
@@ -883,7 +883,7 @@ msgstr "Флот активний і FATи автоматично відстеж
 msgid "FATs have been automatically tracked via ESI"
 msgstr "FATи було автоматично відстежено через ESI"
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:7
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:6
 #, python-format
 msgid ""
 "\n"
@@ -910,11 +910,11 @@ msgstr[3] ""
 "                У вас активні %(open_esi_fleets)s  ESI флоти,  персонажі:\n"
 "            "
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:24
 msgid "ESI fleet ID"
 msgstr "ID флоту в ESI"
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:49
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:48
 msgid ""
 "\n"
 "                This fleet is already automatically tracked.\n"
@@ -940,15 +940,15 @@ msgstr[3] ""
 "                Ці флоти уже відстежуються автоматично.\n"
 "            "
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:55
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:54
 msgid "However, you can still open more fleets with other alts, if that&apos;s what you like to do."
 msgstr "Однак, ви можете відкрити більше флотів з іншими альтами, якщо ви хочете зробити це."
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:59
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:58
 msgid "Note: Information about your registered fleets might be delayed by up to 5 minutes."
 msgstr "Примітка: інформація про ваші зареєстровані флоти може відображатися з запізненням до 5 хвилин."
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:63
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:62
 msgid "Close ESI Fleet Tracking"
 msgstr "Закрити відстеження флоту через ESI"
 
@@ -972,30 +972,30 @@ msgstr "Графіки"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs-navigation.html:7
 #: afat/templates/afat/partials/statistics/overview/tabs-navigation.html:8
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:9
+#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:8
 msgid "Corporations"
 msgstr "Корпорації"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:8
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:6
 msgid "Member corporations"
 msgstr "Корпорації учасників"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:12
 msgid "Corporation"
 msgstr "Корпорація"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:16
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:32
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:64
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:31
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "Avg FATs"
 msgstr "Середня к-сть FATів"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:17
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
 msgid "Corporation statistics"
 msgstr "Статистика корпорації"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:33
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:88
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:31
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:85
 msgid "View detailed corporation statistics for: "
 msgstr "Переглянути детальну статистику корпорації для: "
 
@@ -1066,20 +1066,20 @@ msgstr "FATи для"
 msgid "Members"
 msgstr "Учасники"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:7
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:6
 msgid "By main character"
 msgstr "За основним персонажем"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:10
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:48
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:9
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:47
 msgid "All characters"
 msgstr "Всі персонажі"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:21
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:20
 msgid "Main characters"
 msgstr "Основні персонажі"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:26
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:25
 #, python-format
 msgid ""
 "\n"
@@ -1090,15 +1090,15 @@ msgstr ""
 "                                            %(corp)s основні персонажі і загальна сума FATів на %(month_name)s %(year)s.\n"
 "                                        "
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:35
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:34
 msgid "This corporation doesn't seem to have any main characters registered."
 msgstr "Ця корпорація не має зареєстрованих основних персонажів."
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:59
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:58
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr "Цей пілот немає FATів на жодному з пов'язаних персонажів."
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:63
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:62
 msgid "All characters associated with this main character."
 msgstr "Всі персонажі, пов'язані з цим основним персонажем."
 
@@ -1106,74 +1106,74 @@ msgstr "Всі персонажі, пов'язані з цим основним 
 msgid "My Stats"
 msgstr "Моя статистика"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/alliance-accordion-item.html:27
+#: afat/templates/afat/partials/statistics/overview/tabs/alliance-accordion-item.html:26
 msgid "Alliance statistics for"
 msgstr "Статистика альянсу для"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/corp-list.html:31
+#: afat/templates/afat/partials/statistics/overview/tabs/corp-list.html:30
 msgid "Corporation statistics for"
 msgstr "Статистика корпорації для"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:10
+#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:9
 msgid "Click on an alliance name to see their corporations"
 msgstr "Натисніть на назву альянсу, щоб переглянути її корпорації"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:8
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:6
 #, python-format
 msgid "Your monthly stats for %(year)s"
 msgstr "Ваша щомісячна статистика за %(year)s"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:12
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:10
 msgid "Only months with FAT data for the selected year are shown."
 msgstr "Показано лише місяці з даними FAT для вибраного року."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:13
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:11
 msgid "Only characters that have FATs for the selected year are shown."
 msgstr "Показано лише персонажі, які мають FATи для вибраного року."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:20
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:18
 msgid "Total monthly FATs"
 msgstr "Загальна к-сть FATів за місяць"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:24
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:22
 msgid "This is the monthly total FAT count for all your characters combined."
 msgstr "Це загальна к-сть FATів за місяць для всіх ваших персонажів."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:30
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:76
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:60
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:28
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:74
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:27
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:57
 msgid "Month"
 msgstr "Місяць"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:31
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:77
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:29
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:75
 msgid "FAT count"
 msgstr "К-сть FATів"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:48
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:46
 #, python-format
 msgid "Total FATs for %(year)s"
 msgstr "Загальна к-сть FATів за %(year)s"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:60
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:58
 msgid "Monthly FATs by character"
 msgstr "FATи за місяць по персонажу"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:93
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:91
 msgid "Statistics for"
 msgstr "Статистика для"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:111
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:109
 #, python-format
 msgid "No FATs for %(year)s for any of your characters…"
 msgstr "Немає FATів у %(year)s для жодного з ваших персонажів…"
 
-#: afat/templates/afat/view/dashboard/dashboard.html:12
+#: afat/templates/afat/view/dashboard/dashboard.html:11
 msgid "Recent activity"
 msgstr "Остання активність"
 
-#: afat/templates/afat/view/dashboard/dashboard.html:37
+#: afat/templates/afat/view/dashboard/dashboard.html:36
 msgid "No recent FAT links"
 msgstr "Немає останніх FAT-посилань"
 
@@ -1236,24 +1236,24 @@ msgstr[3] ""
 "            Логи зберігаються %(duration)s днів. Старі логи видаляються автоматично.\n"
 "        "
 
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:7
-#: afat/templates/afat/view/statistics/statistics-alliance.html:7
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:6
+#: afat/templates/afat/view/statistics/statistics-alliance.html:6
 #: afat/templates/afat/view/statistics/statistics-character.html:6
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:8
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:5
 #: afat/templates/afat/view/statistics/statistics-corporation.html:6
 msgid "Fleet Activity Tracking statistics"
 msgstr "Статистика відстеження активності"
 
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:12
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:13
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:11
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:10
 msgid "Fleet activity"
 msgstr "Активність флоту"
 
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:56
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:55
 msgid "View detailed alliance statistics for: "
 msgstr "Переглянути детальну статистику альянсу для: "
 
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:39
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:36
 #, python-format
 msgid ""
 "\n"
@@ -1264,7 +1264,7 @@ msgstr ""
 "                                Статистика Fleet Activity Tracking <strong>%(corporation)s</strong> за <strong>%(year)s рік</strong>.\n"
 "                            "
 
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:45
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:42
 #, python-format
 msgid ""
 "\n"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth AFAT\n"
 "Report-Msgid-Bugs-To: https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/\n"
-"POT-Creation-Date: 2026-10-04 10:44+0200\n"
+"POT-Creation-Date: 2026-10-09 12:42+0200\n"
 "PO-Revision-Date: 2026-07-12 09:47+0000\n"
 "Last-Translator: Peter Pfeufer <info@ppfeufer.de>\n"
 "Language-Team: German <https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/de/>\n"
@@ -22,24 +22,24 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2026.7.1\n"
 
-#: afat/__init__.py:10 afat/templates/afat/base.html:7
-#: afat/templates/afat/base.html:12
-#: afat/templates/afat/view/dashboard/dashboard.html:7
+#: afat/__init__.py:10 afat/templates/afat/base.html:6
+#: afat/templates/afat/base.html:11
+#: afat/templates/afat/view/dashboard/dashboard.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-add-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-details-fatlink.html:6
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:6
-#: afat/templates/afat/view/statistics/statistics-overview.html:8
+#: afat/templates/afat/view/statistics/statistics-overview.html:6
 msgid "Fleet Activity Tracking"
 msgstr "Flotten Aktivitäts Verfolgung"
 
 #: afat/admin.py:108 afat/forms.py:169 afat/forms.py:171
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:40
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:39
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:19
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:13
 msgid "System"
 msgstr "System"
 
-#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:41
+#: afat/admin.py:121 afat/templates/afat/partials/dashboard/tabs/fats.html:40
 #: afat/templates/afat/partials/fatlinks/details/tabs/fats.html:20
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:14
 msgid "Ship"
@@ -47,7 +47,7 @@ msgstr "Schiff"
 
 #: afat/admin.py:145 afat/models/afat.py:107
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:13
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:38
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:37
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:11
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:28
 msgid "Fleet type"
@@ -102,16 +102,16 @@ msgid "Ship classes"
 msgstr "Schiffsklassen"
 
 #: afat/forms.py:36
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:5
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:5
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:4
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:4
 msgid "This field is mandatory"
 msgstr "Dies ist ein Pflichtfeld"
 
 #: afat/forms.py:118 afat/forms.py:257 afat/forms.py:320
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:12
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:37
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:36
 #: afat/templates/afat/partials/fatlinks/details/fatlink-name-form.html:11
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:24
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:27
 msgid "Fleet name"
 msgstr "Flottenname"
@@ -208,7 +208,7 @@ msgstr "Löschen"
 #: afat/helper/views.py:44
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:7
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:53
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:32
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:31
 msgid "Stop automatic tracking through ESI for this fleet and close the associated FAT link."
 msgstr "Stopp das automatische Tracking mittels ESI für diese Flotte und schließe den zugehörigen FAT-Link."
 
@@ -216,8 +216,8 @@ msgstr "Stopp das automatische Tracking mittels ESI für diese Flotte und schlie
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:13
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:59
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:62
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:38
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:41
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:40
 msgid "Stop tracking"
 msgstr "Tracking stoppen"
 
@@ -363,7 +363,7 @@ msgid "FAT link"
 msgstr "FAT-Link"
 
 #: afat/models/afat.py:223
-#: afat/templates/afat/partials/common/navigation/top-menu.html:27
+#: afat/templates/afat/partials/common/navigation/top-menu.html:26
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:28
 msgid "FAT links"
 msgstr "FAT-Links"
@@ -407,10 +407,10 @@ msgstr "FAT"
 #: afat/models/afat.py:356
 #: afat/templates/afat/partials/dashboard/tabs-navigation.html:14
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:16
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:13
 #: afat/templates/afat/partials/statistics/character/tables/character-fats.html:7
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:29
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:58
 msgid "FATs"
 msgstr "FATs"
 
@@ -469,7 +469,7 @@ msgstr "Ist diese Doktrin aktiv oder nicht."
 
 #: afat/models/afat.py:452
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:14
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:39
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:38
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:12
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:29
 msgid "Doctrine"
@@ -579,35 +579,35 @@ msgstr "Abbrechen"
 msgid "Confirm"
 msgstr "Bestätigen"
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:8
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:7
 msgid "Previous month"
 msgstr "Vorheriger Monat"
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:22
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:21
 msgid "Next month"
 msgstr "Nächster Monat"
 
-#: afat/templates/afat/partials/common/navigation/month-navigation.html:30
+#: afat/templates/afat/partials/common/navigation/month-navigation.html:29
 msgid "Current month"
 msgstr "Aktueller Monat"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:9
+#: afat/templates/afat/partials/common/navigation/top-menu.html:8
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:18
-#: afat/templates/afat/view/statistics/statistics-alliance.html:12
+#: afat/templates/afat/partials/common/navigation/top-menu.html:17
+#: afat/templates/afat/view/statistics/statistics-alliance.html:11
 #: afat/templates/afat/view/statistics/statistics-character.html:11
 #: afat/templates/afat/view/statistics/statistics-corporation.html:11
-#: afat/templates/afat/view/statistics/statistics-overview.html:13
+#: afat/templates/afat/view/statistics/statistics-overview.html:11
 msgid "Statistics"
 msgstr "Statistik"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:37
+#: afat/templates/afat/partials/common/navigation/top-menu.html:36
 msgid "Add FAT link"
 msgstr "FAT-Link hinzufügen"
 
-#: afat/templates/afat/partials/common/navigation/top-menu.html:48
+#: afat/templates/afat/partials/common/navigation/top-menu.html:47
 msgid "View log"
 msgstr "Log ansehen"
 
@@ -638,7 +638,7 @@ msgid "Creator"
 msgstr "Ersteller"
 
 #: afat/templates/afat/partials/dashboard/tabs/fatlinks.html:16
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:42
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:41
 #: afat/templates/afat/partials/statistics/character/tabs/raw_data.html:15
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:31
 msgid "EVE time"
@@ -650,21 +650,21 @@ msgstr "EVE Zeit"
 msgid "Actions"
 msgstr "Aktionen"
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:11
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:10
 msgid "Your most recent FATs"
 msgstr "Deine neuesten FAT-Links"
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:14
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:13
 msgid "Only characters that have recent FATs are shown. <small>(latest 10 FATs per character)</small>"
 msgstr "Nur Charaktere mit kürzlichen FATs werden angezeigt. <small>(Letzte 10 FATs je Charakter)</small>"
 
-#: afat/templates/afat/partials/dashboard/tabs/fats.html:69
+#: afat/templates/afat/partials/dashboard/tabs/fats.html:68
 msgid "No recent FAT activity registered for any of your characters."
 msgstr "Keine Aktivität für Deine Charaktere registriert."
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:12
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:58
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:37
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:36
 #, python-format
 msgid "Are you sure you want to close ESI fleet with ID %(esi_fleet_id)s from %(character_name)s?"
 msgstr "Bist Du sicher, dass Du die ESI Flotte mit ID %(esi_fleet_id)s von %(character_name)s schließen möchtest?"
@@ -683,7 +683,7 @@ msgid "Are you sure you want to delete the FAT link and all registered FATs for 
 msgstr "Bist Du sicher, dass Du den FAT-Link und alle registrierten FATs für die Flotte „%(fleet_name)s“ löschen möchtest?"
 
 #: afat/templates/afat/partials/datatables/fatlinks/column-actions.html:41
-#: afat/templates/afat/view/dashboard/dashboard.html:24
+#: afat/templates/afat/view/dashboard/dashboard.html:23
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:54
 msgid "Delete FAT link"
 msgstr "FAT-Link löschen"
@@ -692,23 +692,23 @@ msgstr "FAT-Link löschen"
 msgid "Deleted"
 msgstr "Gelöscht"
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:8
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:7
 msgid "Create a clickable FAT link"
 msgstr "Klickbaren FAT-Link erstellen"
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:14
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:13
 msgid "This option will create a clickable link to share with your fleet members."
 msgstr "Diese Option erstellt einen klickbaren Link den Du in der Flotte teilen kannst."
 
-#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:32
+#: afat/templates/afat/partials/fatlinks/add/clickable-link.html:31
 msgid "Create link"
 msgstr "Link erstellen"
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:9
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:7
 msgid "Create a FAT link using ESI"
 msgstr "ESI-Link erstellen"
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:15
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:13
 msgid ""
 "\n"
 "                    This option will automatically register and track the entire fleet\n"
@@ -724,7 +724,7 @@ msgstr ""
 "                    nutze die Option für klickbare FAT-Links.\n"
 "                "
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:24
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:22
 msgid ""
 "\n"
 "                    This will start tracking your fleet automatically and add pilots to\n"
@@ -736,7 +736,7 @@ msgstr ""
 "                    Dies startet die automatische Überwachung der Flotte und Piloten werden hinzugefügt, sobald sie beitreten – und zwar so lange, bis die Flotte entweder im Spiel aufgelöst wird (d. h. Du verlässt die Flotte) oder die Überwachung hier beendet wird.\n"
 "                "
 
-#: afat/templates/afat/partials/fatlinks/add/esi-link.html:46
+#: afat/templates/afat/partials/fatlinks/add/esi-link.html:44
 msgid "Add ESI link"
 msgstr "ESI-Link hinzufügen"
 
@@ -784,7 +784,7 @@ msgid "Re-open FAT link"
 msgstr "FAT-Link wieder öffnen"
 
 #: afat/templates/afat/partials/fatlinks/details/fatlink-info.html:94
-#: afat/templates/afat/view/dashboard/dashboard.html:27
+#: afat/templates/afat/view/dashboard/dashboard.html:26
 #: afat/templates/afat/view/fatlinks/fatlinks-overview.html:57
 msgid "Close ESI fleet tracking"
 msgstr "ESI-Tracking beenden"
@@ -794,12 +794,12 @@ msgid "Set name"
 msgstr "Name setzen"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:30
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:9
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:8
 msgid "Manual FAT"
 msgstr "Manueller FAT"
 
 #: afat/templates/afat/partials/fatlinks/details/tabs-navigation.html:46
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:10
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:9
 msgid "Fleet snapshot"
 msgstr "Flottenschappschuss"
 
@@ -824,29 +824,29 @@ msgstr "Schiffsübersicht"
 msgid "Count"
 msgstr "Anzahl"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:15
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:14
 msgid "Copy the fleet composition from your fleet window, and paste it in here."
 msgstr "Kopiere die Flottenzusammensetzung aus Deinem Flottenfenster und füge sie hier ein."
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:19
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:16
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:18
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:15
 msgid "Note"
 msgstr "Hinweis"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:19
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:16
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:18
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:15
 msgid "This action is logged!"
 msgstr "Diese Aktion wird geloggt!"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:33
+#: afat/templates/afat/partials/fatlinks/details/tabs/fleetsnapshot.html:32
 msgid "Add fleet snapshot"
 msgstr "Flottenschnappschuss hinzufügen"
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:12
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:11
 msgid "Is someone missing from the list of FATs? Use this form to add them."
 msgstr "Es fehlen Piloten in der Liste dieses FATs? Nutze dieses Formular um sie manuell hinzuzufügen."
 
-#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:49
+#: afat/templates/afat/partials/fatlinks/details/tabs/manualfat.html:48
 msgid "Add manual FAT"
 msgstr "Manuellen FAT hinzufügen"
 
@@ -862,7 +862,7 @@ msgstr "Flotte ist momentan aktiv und FATs werden mittels ESI hinzugefügt"
 msgid "FATs have been automatically tracked via ESI"
 msgstr "FATs wurden automatisch mittels ESI verfolgt"
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:7
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:6
 #, python-format
 msgid ""
 "\n"
@@ -881,11 +881,11 @@ msgstr[1] ""
 "                Du hast aktuell %(open_esi_fleets)s aktive ESI Flotten mit den folgenden Charakteren:\n"
 "            "
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:25
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:24
 msgid "ESI fleet ID"
 msgstr "ESI Flotten ID"
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:49
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:48
 msgid ""
 "\n"
 "                This fleet is already automatically tracked.\n"
@@ -903,15 +903,15 @@ msgstr[1] ""
 "                Diese Flotten werden bereits automatisch verfolgt.\n"
 "            "
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:55
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:54
 msgid "However, you can still open more fleets with other alts, if that&apos;s what you like to do."
 msgstr "Du kannst jedoch weitere Flotten mit Deinen Alts starten, wenn Du möchtest."
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:59
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:58
 msgid "Note: Information about your registered fleets might be delayed by up to 5 minutes."
 msgstr "Hinweis: Informationen über registrierte Flotten können bis zu 5 Minuten verzögert sein."
 
-#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:63
+#: afat/templates/afat/partials/fatlinks/open-esi-fleets.html:62
 msgid "Close ESI Fleet Tracking"
 msgstr "ESI Tracking beenden"
 
@@ -935,30 +935,30 @@ msgstr "Grafiken"
 
 #: afat/templates/afat/partials/statistics/alliance/tabs-navigation.html:7
 #: afat/templates/afat/partials/statistics/overview/tabs-navigation.html:8
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:9
+#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:8
 msgid "Corporations"
 msgstr "Corporationen"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:8
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:6
 msgid "Member corporations"
 msgstr "Mitglieder-Corporationen"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:12
 msgid "Corporation"
 msgstr "Corporation"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:16
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:32
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:64
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:14
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:31
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:61
 msgid "Avg FATs"
 msgstr "Durschn. FATs"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:17
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:15
 msgid "Corporation statistics"
 msgstr "Corporation-Statistik"
 
-#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:33
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:88
+#: afat/templates/afat/partials/statistics/alliance/tabs/corporations.html:31
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:85
 msgid "View detailed corporation statistics for: "
 msgstr "Zeige detaillierte Corporation-Statistik für: "
 
@@ -1029,20 +1029,20 @@ msgstr "FATs für"
 msgid "Members"
 msgstr "Mitglieder"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:7
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:6
 msgid "By main character"
 msgstr "Bei Hauptcharakter"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:10
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:48
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:9
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:47
 msgid "All characters"
 msgstr "Alle Charaktere"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:21
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:20
 msgid "Main characters"
 msgstr "Hauptcharakter"
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:26
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:25
 #, python-format
 msgid ""
 "\n"
@@ -1053,15 +1053,15 @@ msgstr ""
 "                                            %(corp)s Hauptcharaktere und ihre angesammelten FATs für %(month_name)s %(year)s\n"
 "                                        "
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:35
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:34
 msgid "This corporation doesn't seem to have any main characters registered."
 msgstr "Für diese Corporation scheinen keine Hauptcharaktere registriert zu sein."
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:59
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:58
 msgid "This pilot does not seem to have any FATs on any associated character."
 msgstr "Dieser Pilot scheint keine FATs für einen registrierten Charakter zu haben."
 
-#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:63
+#: afat/templates/afat/partials/statistics/corporation/tabs/member.html:62
 msgid "All characters associated with this main character."
 msgstr "Alle Charaktere, die mit diesem Hauptcharakter assoziiert sind."
 
@@ -1069,74 +1069,74 @@ msgstr "Alle Charaktere, die mit diesem Hauptcharakter assoziiert sind."
 msgid "My Stats"
 msgstr "Meine Statistik"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/alliance-accordion-item.html:27
+#: afat/templates/afat/partials/statistics/overview/tabs/alliance-accordion-item.html:26
 msgid "Alliance statistics for"
 msgstr "Allianz-Statistik für"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/corp-list.html:31
+#: afat/templates/afat/partials/statistics/overview/tabs/corp-list.html:30
 msgid "Corporation statistics for"
 msgstr "Corporation-Statistik für"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:10
+#: afat/templates/afat/partials/statistics/overview/tabs/corps.html:9
 msgid "Click on an alliance name to see their corporations"
 msgstr "Klicke auf eine Allianz um deren Corporations zu sehen"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:8
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:6
 #, python-format
 msgid "Your monthly stats for %(year)s"
 msgstr "Deine monatliche Statistik für %(year)s"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:12
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:10
 msgid "Only months with FAT data for the selected year are shown."
 msgstr "Nur Monate in denen auch FAT-Links registriert sind werden angezeigt."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:13
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:11
 msgid "Only characters that have FATs for the selected year are shown."
 msgstr "Nur Charaktere für die auch FAT-Links registriert sind werden angezeigt."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:20
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:18
 msgid "Total monthly FATs"
 msgstr "Gesamte monatliche FATs"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:24
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:22
 msgid "This is the monthly total FAT count for all your characters combined."
 msgstr "Dies ist die monatliche Gesamtanzahl an FATs aller Deiner Charaktere zusammen."
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:30
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:76
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:28
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:60
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:28
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:74
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:27
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:57
 msgid "Month"
 msgstr "Monat"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:31
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:77
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:29
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:75
 msgid "FAT count"
 msgstr "FAT Anzahl"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:48
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:46
 #, python-format
 msgid "Total FATs for %(year)s"
 msgstr "Gesamte FATs für %(year)s"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:60
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:58
 msgid "Monthly FATs by character"
 msgstr "Monatliche FATs nach Charakter"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:93
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:91
 msgid "Statistics for"
 msgstr "Statistik für"
 
-#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:111
+#: afat/templates/afat/partials/statistics/overview/tabs/mine.html:109
 #, python-format
 msgid "No FATs for %(year)s for any of your characters…"
 msgstr "Keine FATs für %(year)s für einen Deiner Charaktere…"
 
-#: afat/templates/afat/view/dashboard/dashboard.html:12
+#: afat/templates/afat/view/dashboard/dashboard.html:11
 msgid "Recent activity"
 msgstr "Kürzliche Aktivität"
 
-#: afat/templates/afat/view/dashboard/dashboard.html:37
+#: afat/templates/afat/view/dashboard/dashboard.html:36
 msgid "No recent FAT links"
 msgstr "Keine FAT-Links"
 
@@ -1191,24 +1191,24 @@ msgstr[1] ""
 "            Logs werden für %(duration)s Tagen gespeichert. Danach werden sie automatisch gelöscht.\n"
 "        "
 
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:7
-#: afat/templates/afat/view/statistics/statistics-alliance.html:7
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:6
+#: afat/templates/afat/view/statistics/statistics-alliance.html:6
 #: afat/templates/afat/view/statistics/statistics-character.html:6
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:8
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:5
 #: afat/templates/afat/view/statistics/statistics-corporation.html:6
 msgid "Fleet Activity Tracking statistics"
 msgstr "Flotten Aktivitäts Verfolgung Statistik"
 
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:12
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:13
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:11
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:10
 msgid "Fleet activity"
 msgstr "Flottenaktivität"
 
-#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:56
+#: afat/templates/afat/view/statistics/statistics-alliance-year-overview.html:55
 msgid "View detailed alliance statistics for: "
 msgstr "Zeige detaillierte Allianz-Statistik für: "
 
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:39
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:36
 #, python-format
 msgid ""
 "\n"
@@ -1219,7 +1219,7 @@ msgstr ""
 "                                Flotten Aktivitäts Verfolgung Statistiken für <strong>%(corporation)s</strong> für das Jahr <strong>%(year)s</strong>\n"
 "                            "
 
-#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:45
+#: afat/templates/afat/view/statistics/statistics-corporation-year-overview.html:42
 #, python-format
 msgid ""
 "\n"
