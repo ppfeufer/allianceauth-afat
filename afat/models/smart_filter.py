@@ -34,7 +34,7 @@ def _get_threshold_date(timedelta_in_days: int) -> datetime.datetime:
     :rtype: datetime.datetime
     """
 
-    return datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(
+    return datetime.datetime.now(datetime.UTC) - datetime.timedelta(
         days=timedelta_in_days
     )
 
