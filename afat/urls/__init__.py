@@ -7,8 +7,13 @@ from django.urls import include, path
 
 # Alliance Auth AFAT
 from afat.constants import INTERNAL_URL_PREFIX
-from afat.urls import statistics  # pylint: disable=W0406 E0611
-from afat.urls import ajax, dashboard, fatlinks, logs
+from afat.urls import (  # pylint: disable=W0406 E0611
+    ajax,
+    dashboard,
+    fatlinks,
+    logs,
+    statistics,
+)
 
 app_name: str = "afat"  # pylint: disable=invalid-name
 
