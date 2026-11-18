@@ -1,11 +1,14 @@
 # Standard Library
 import datetime as dt
 from http import HTTPStatus
+from unittest.mock import MagicMock, patch
 
 # Third Party
 from eve_sde.models import ItemType
 
 # Django
+from django.http import HttpResponse
+from django.test import RequestFactory
 from django.urls import reverse
 
 # Alliance Auth
@@ -19,6 +22,7 @@ from afat.tests.fixtures.utils import (
     add_character_to_user,
     create_user_from_evecharacter,
 )
+from afat.views import statistics as statistics_module
 from afat.views.statistics import _calculate_year_stats
 
 MODULE_PATH = "afat.views.statistics"
@@ -144,6 +148,8 @@ class TestStatistics(BaseTestCase):
             fatlink=afat_link_april_1,
             shiptype="Omen",
             ship=omen,
+            corporation_eve_id=2002,
+            alliance_eve_id=3001,
         )
         Fat.objects.create(
             character=cls.character_1004,
@@ -181,6 +187,8 @@ class TestStatistics(BaseTestCase):
             fatlink=afat_link_april_2,
             shiptype="Omen",
             ship=omen,
+            corporation_eve_id=2002,
+            alliance_eve_id=3001,
         )
 
         Fat.objects.create(
@@ -559,6 +567,15 @@ class TestStatistics(BaseTestCase):
 
         self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
 
+        data_stacked = res.context["data_stacked"]
+        character_names = data_stacked[0]
+        ship_counts = {
+            ship_name: counts[0] for ship_name, _color, counts in data_stacked[1]
+        }
+
+        self.assertEqual(first=character_names, second=["Peter Parker"])
+        self.assertEqual(first=ship_counts, second={"Omen": 2})
+
     def test_should_not_show_all_corp_stats_for_user_with_stats_corporation_own(self):
         """
         Test should not show all corp stats for user with stats_corporation_own
@@ -783,3 +800,191 @@ class TestStatistics(BaseTestCase):
             first=response_content_to_str(response=res),
             second="",
         )
+
+    @patch("afat.views.statistics.user_has_any_perms", return_value=False)
+    @patch("afat.views.statistics.EveCharacter.objects.get")
+    def test_should_return_empty_json_when_corporation_differs_and_user_lacks_perms(
+        self, mock_get_character, _mock_user_has_any_perms
+    ):
+        """
+        Test that the view returns an empty JSON response when the requester is from
+        another corporation and has no permission to view other corps.
+
+        :return:
+        :rtype:
+        """
+
+        request = RequestFactory().get(path="/dummy")
+        request.user = self.user_with_basic_access
+
+        mock_get_character.return_value = MagicMock(corporation_id=999999)
+
+        response = statistics_module.ajax_get_monthly_fats_for_main_character.__wrapped__.__wrapped__(
+            request=request,
+            corporation_id=999999,
+            character_id=123456,
+            year=2020,
+            month=4,
+        )
+
+        self.assertEqual(first=response.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=response_content_to_str(response=response), second='""')
+
+    @patch("afat.views.statistics.render")
+    @patch("afat.views.statistics.Fat.objects.filter")
+    @patch("afat.views.statistics.get_or_create_corporation_info")
+    def test_should_set_month_average_to_zero_when_corporation_has_no_members(
+        self, mock_get_corp, mock_fat_filter, mock_render
+    ):
+        """
+        Test that the view sets the month average to zero when the corporation has no members.
+
+        :param mock_get_corp:
+        :param mock_fat_filter:
+        :param mock_render:
+        :return:
+        """
+
+        mock_get_corp.return_value = MagicMock(
+            corporation_name="Zero Member Corp", member_count=0
+        )
+
+        mock_values = MagicMock()
+        mock_values.annotate.return_value = [
+            {"fatlink__created__month": 4, "fat_count": 3}
+        ]
+        mock_fat_filter.return_value.values.return_value = mock_values
+
+        mock_render.return_value = HttpResponse("ok")
+
+        self.client.force_login(user=self.user_with_stats_corporation_other)
+
+        response = self.client.get(
+            path=reverse(
+                viewname="afat:statistics_corporation",
+                kwargs={"corpid": 999999, "year": 2020},
+            )
+        )
+
+        context = mock_render.call_args.kwargs["context"]
+
+        self.assertEqual(first=response.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=context["months"], second=[(4, 3, 0)])
+
+    @patch(
+        "afat.views.statistics.get_main_character_from_evecharacter", return_value=None
+    )
+    def test_should_not_add_main_character_when_main_character_is_missing(
+        self, _mock_get_main_character
+    ):
+        """
+        Test that the view does not add a main character to the context when the main character is missing.
+
+        :param _mock_get_main_character:
+        :return:
+        """
+
+        self.client.force_login(user=self.user_with_stats_corporation_other)
+
+        url = reverse(
+            viewname="afat:statistics_corporation",
+            kwargs={"corpid": 2002, "year": 2020, "month": 4},
+        )
+        res = self.client.get(path=url)
+
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=res.context["main_chars"], second={})
+
+    @patch("afat.views.statistics.EveCharacter.objects.filter")
+    @patch("afat.views.statistics.get_main_character_from_evecharacter")
+    def test_should_accumulate_fats_for_existing_main_character(
+        self, mock_get_main_character, mock_character_filter
+    ):
+        """
+        Test that the view accumulates FATs for an existing main character.
+
+        :param mock_get_main_character:
+        :param mock_character_filter:
+        :return:
+        """
+
+        main_character = MagicMock(
+            character_id=9999,
+            character_name="Main Character",
+            corporation_id=2002,
+            corporation_name="Wayne Food",
+        )
+        mock_get_main_character.return_value = main_character
+        mock_character_filter.return_value.select_related.return_value = [
+            self.character_1003,
+            self.character_1004,
+        ]
+
+        self.client.force_login(user=self.user_with_stats_corporation_other)
+
+        url = reverse(
+            viewname="afat:statistics_corporation",
+            kwargs={"corpid": 2002, "year": 2020, "month": 4},
+        )
+        res = self.client.get(path=url)
+
+        self.assertEqual(first=res.status_code, second=HTTPStatus.OK)
+        self.assertEqual(
+            first=res.context["main_chars"][9999]["fats"],
+            second=2,
+        )
+
+    @patch("afat.views.statistics.EveCorporationInfo.objects.filter", return_value=[])
+    @patch("afat.views.statistics.get_average_fats_by_corporations", return_value=[])
+    @patch("afat.views.statistics.get_fats_per_hour", return_value=[])
+    @patch("afat.views.statistics.get_fat_per_weekday", return_value=[])
+    @patch("afat.views.statistics.render", return_value=HttpResponse("ok"))
+    @patch("afat.views.statistics.get_or_create_alliance_info")
+    @patch("afat.views.statistics.Fat.objects.filter")
+    def test_should_replace_none_ship_with_unknown_in_alliance_statistics(
+        self,
+        mock_fat_filter,
+        mock_get_alliance,
+        _mock_render,
+        _mock_weekday,
+        _mock_hour,
+        _mock_average,
+        _mock_corporations,
+    ):
+        """
+        Test that the view replaces None ship with "Unknown" in alliance statistics.
+
+        :param mock_fat_filter:
+        :param mock_get_alliance:
+        :param _mock_render:
+        :param _mock_weekday:
+        :param _mock_hour:
+        :param _mock_average:
+        :param _mock_corporations:
+        :return:
+        """
+
+        mock_get_alliance.return_value = MagicMock(alliance_name="Test Alliance")
+
+        fake_fat = MagicMock()
+        fake_fat.ship.name = None
+        fake_fat.character.corporation_name = "Test Corporation"
+
+        mock_queryset = MagicMock()
+        mock_queryset.__iter__.return_value = iter([fake_fat])
+        mock_queryset.values.return_value.annotate.return_value = []
+        mock_fat_filter.return_value = mock_queryset
+
+        self.client.force_login(user=self.user_with_stats_corporation_other)
+
+        response = self.client.get(
+            path=reverse(
+                viewname="afat:statistics_alliance",
+                kwargs={"allianceid": 3001, "year": 2020, "month": 4},
+            )
+        )
+
+        self.assertEqual(first=response.status_code, second=HTTPStatus.OK)
+        context = _mock_render.call_args.kwargs["context"]
+        self.assertEqual(first=context["data_stacked"][0], second=["Test Corporation"])
+        self.assertEqual(first=context["data_stacked"][1][0][0], second="Unknown")

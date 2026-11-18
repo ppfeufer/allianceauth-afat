@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Alliance Auth AFAT\n"
 "Report-Msgid-Bugs-To: https://weblate.ppfeufer.de/projects/alliance-auth-apps/allianceauth-afat/\n"
-"POT-Creation-Date: 2026-10-09 12:42+0200\n"
+"POT-Creation-Date: 2026-11-18 23:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -527,39 +527,39 @@ msgstr ""
 msgid "AFAT Settings"
 msgstr ""
 
-#: afat/models/smart_filter.py:49
+#: afat/models/smart_filter.py:57
 msgid "The filter name that is shown to the admin."
 msgstr ""
 
-#: afat/models/smart_filter.py:54
+#: afat/models/smart_filter.py:62
 msgid "The filter description that is shown to end users."
 msgstr ""
 
-#: afat/models/smart_filter.py:84
+#: afat/models/smart_filter.py:92
 msgid "Please create a filter!"
 msgstr ""
 
-#: afat/models/smart_filter.py:97
+#: afat/models/smart_filter.py:105
 msgid "Please create an audit function!"
 msgstr ""
 
-#: afat/models/smart_filter.py:106
+#: afat/models/smart_filter.py:114
 msgid "The number of days to look back for FATs."
 msgstr ""
 
-#: afat/models/smart_filter.py:109
+#: afat/models/smart_filter.py:117
 msgid "The number of FATs needed to pass the filter."
 msgstr ""
 
-#: afat/models/smart_filter.py:114
+#: afat/models/smart_filter.py:122
 msgid "Any of the selected fleet types are needed to pass the filter."
 msgstr ""
 
-#: afat/models/smart_filter.py:120
+#: afat/models/smart_filter.py:128
 msgid "Any of the selected ship classes are needed to pass the filter."
 msgstr ""
 
-#: afat/models/smart_filter.py:128
+#: afat/models/smart_filter.py:136
 msgid "Smart Filter: FATs in time period"
 msgstr ""
 

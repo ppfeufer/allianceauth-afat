@@ -1,4 +1,5 @@
 # Standard Library
+from datetime import timedelta
 from http import HTTPStatus
 from unittest.mock import Mock
 
@@ -10,6 +11,7 @@ from eve_sde.models import ItemType, SolarSystem
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test import RequestFactory
 from django.urls import reverse
+from django.utils import timezone
 
 # Alliance Auth
 from allianceauth.eveonline.models import EveCharacter
@@ -177,3 +179,61 @@ class TestDashboard(BaseTestCase):
 
         self.assertEqual(first=response_wrong_char.status_code, second=HTTPStatus.OK)
         self.assertEqual(first=response_wrong_char.json(), second=[])
+
+    def test_recent_fatlinks_ajax_returns_empty_list_when_no_fatlinks_exist(self):
+        """
+        Test that the ajax call returns an empty list when no FAT links exist.
+
+        :return:
+        """
+
+        FatLink.objects.all().delete()
+
+        self.client.force_login(user=self.user)
+
+        response = self.client.get(
+            path=reverse(viewname="afat:dashboard_ajax_get_recent_fatlinks")
+        )
+
+        self.assertEqual(first=response.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=response.json(), second=[])
+
+    def test_recent_fatlinks_ajax_returns_ten_most_recent_fatlinks_in_newest_first_order(
+        self,
+    ):
+        """
+        Test that the ajax call returns the ten most recent FAT links in newest first order.
+
+        :return:
+        """
+
+        FatLink.objects.all().delete()
+
+        base_time = timezone.now()
+        expected_hashes = []
+
+        for index in range(12):
+            fatlink = FatLink.objects.create(
+                fleet=f"Fleet {index}",
+                hash=f"hash-{index}",
+                creator=self.user,
+                character=self.character_1001,
+            )
+            fatlink.created = base_time - timedelta(minutes=index)
+            fatlink.save(update_fields=["created"])
+
+            if index < 10:
+                expected_hashes.append(f"hash-{index}")
+
+        self.client.force_login(user=self.user)
+
+        response = self.client.get(
+            path=reverse(viewname="afat:dashboard_ajax_get_recent_fatlinks")
+        )
+
+        payload = response.json()
+        returned_hashes = [entry["hash"] for entry in payload]
+
+        self.assertEqual(first=response.status_code, second=HTTPStatus.OK)
+        self.assertEqual(first=len(payload), second=10)
+        self.assertEqual(first=returned_hashes, second=expected_hashes)

@@ -2,6 +2,9 @@
 Tests for DataTables views.
 """
 
+# Standard Library
+from unittest.mock import MagicMock
+
 # Django
 from django.http import HttpRequest
 from django.test import RequestFactory
@@ -220,3 +223,37 @@ class TestLogsTableView(DataTableBaseTestCase):
 
         self.assertEqual(queryset.count(), 1)
         self.assertTrue(hasattr(queryset.first(), "fatlink_exists"))
+
+    def test_grants_access_for_single_required_permission_string(self):
+        """
+        Test grants access for single required permission string
+
+        :return:
+        """
+
+        self.view.get_permission_required = MagicMock(return_value="afat.log_view")
+        self.request.user = MagicMock()
+        self.request.user.has_perm.return_value = True
+
+        result = self.view.has_permission()
+
+        self.assertTrue(result)
+        self.view.get_permission_required.assert_called_once_with()
+        self.request.user.has_perm.assert_called_once_with("afat.log_view")
+
+    def test_denies_access_for_single_required_permission_string(self):
+        """
+        Test denies access for single required permission string
+
+        :return:
+        """
+
+        self.view.get_permission_required = MagicMock(return_value="afat.log_view")
+        self.request.user = MagicMock()
+        self.request.user.has_perm.return_value = False
+
+        result = self.view.has_permission()
+
+        self.assertFalse(result)
+        self.view.get_permission_required.assert_called_once_with()
+        self.request.user.has_perm.assert_called_once_with("afat.log_view")

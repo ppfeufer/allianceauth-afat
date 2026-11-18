@@ -96,6 +96,45 @@ class TestGetThresholdDate(BaseTestCase):
 
         self.assertAlmostEqual(result, expected_date, delta=timedelta(seconds=1))
 
+    def test_does_not_import_queryset_at_runtime(self):
+        """
+        Test that QuerySet type-only import is not executed at runtime.
+
+        :return:
+        :rtype:
+        """
+
+        # Alliance Auth AFAT
+        import afat.models.smart_filter as smart_filter_module
+
+        self.assertNotIn("QuerySet", smart_filter_module.__dict__)
+
+    def test_type_checking_guard_controls_queryset_import(self):
+        """
+        Test that QuerySet import is executed only when TYPE_CHECKING is enabled.
+
+        :return:
+        :rtype:
+        """
+
+        # Standard Library
+        import importlib
+        import sys
+
+        module_name = "afat.models.smart_filter"
+
+        sys.modules.pop(module_name, None)
+        with patch("typing.TYPE_CHECKING", True):
+            module_with_type_checking = importlib.import_module(module_name)
+
+        self.assertIn("QuerySet", module_with_type_checking.__dict__)
+
+        sys.modules.pop(module_name, None)
+        with patch("typing.TYPE_CHECKING", False):
+            module_without_type_checking = importlib.import_module(module_name)
+
+        self.assertNotIn("QuerySet", module_without_type_checking.__dict__)
+
 
 class TestFatsInTimeFilter(BaseTestCase):
     """
@@ -227,3 +266,399 @@ class TestFatsInTimeFilter(BaseTestCase):
         self.assertFalse(result[1]["check"])
         self.assertEqual(result[2]["message"], 0)
         self.assertFalse(result[2]["check"])
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_returns_true_when_optional_filters_are_empty_and_count_meets_threshold(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify process_filter returns True when optional ship and fleet filters are empty.
+
+        :param mock_fat_filter:
+        :type mock_fat_filter:
+        :param mock_get_threshold_date:
+        :type mock_get_threshold_date:
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=30
+        )
+
+        fat_queryset = MagicMock()
+        fat_queryset.count.return_value = 3
+        mock_fat_filter.return_value = fat_queryset
+
+        empty_ship_classes = MagicMock()
+        empty_ship_classes.exists.return_value = False
+        empty_fleet_types = MagicMock()
+        empty_fleet_types.exists.return_value = False
+
+        filter_instance = FatsInTimeFilter.objects.create(days=30, fats_needed=3)
+        mock_ship_classes.all.return_value.values_list.return_value = empty_ship_classes
+        mock_fleet_types.all.return_value.values_list.return_value = empty_fleet_types
+
+        user = User.objects.create(username="counting-user")
+
+        self.assertTrue(filter_instance.process_filter(user))
+        fat_queryset.filter.assert_not_called()
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_applies_ship_and_fleet_filters_when_selected(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify process_filter applies selected ship and fleet constraints before counting.
+
+        :param mock_fat_filter:
+        :type mock_fat_filter:
+        :param mock_get_threshold_date:
+        :type mock_get_threshold_date:
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=7
+        )
+
+        filtered_by_ship = MagicMock()
+        filtered_by_fleet = MagicMock()
+        filtered_by_fleet.count.return_value = 2
+
+        base_fat_queryset = MagicMock()
+        base_fat_queryset.filter.return_value = filtered_by_ship
+        filtered_by_ship.filter.return_value = filtered_by_fleet
+        mock_fat_filter.return_value = base_fat_queryset
+
+        selected_ship_classes = MagicMock()
+        selected_ship_classes.exists.return_value = True
+        selected_fleet_types = MagicMock()
+        selected_fleet_types.exists.return_value = True
+
+        filter_instance = FatsInTimeFilter.objects.create(days=7, fats_needed=2)
+        mock_ship_classes.all.return_value.values_list.return_value = (
+            selected_ship_classes
+        )
+        mock_fleet_types.all.return_value.values_list.return_value = (
+            selected_fleet_types
+        )
+
+        user = User.objects.create(username="filtered-user")
+
+        self.assertTrue(filter_instance.process_filter(user))
+        base_fat_queryset.filter.assert_any_call(shiptype__in=selected_ship_classes)
+        filtered_by_ship.filter.assert_any_call(
+            fatlink__fleet_type__in=selected_fleet_types
+        )
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.CharacterOwnership.objects.filter")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_returns_audit_status_for_users_with_and_without_matching_fats(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_character_ownership_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify audit_filter returns pass/fail and counts for mixed user FAT results.
+
+        :param mock_fat_filter:
+        :type mock_fat_filter:
+        :param mock_character_ownership_filter:
+        :type mock_character_ownership_filter:
+        :param mock_get_threshold_date:
+        :type mock_get_threshold_date:
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=14
+        )
+
+        character_queryset = MagicMock()
+        character_queryset.values.return_value = [{"character": 1}, {"character": 2}]
+        mock_character_ownership_filter.return_value = character_queryset
+
+        user1 = User.objects.create(username="audit-user-1")
+        user2 = User.objects.create(username="audit-user-2")
+        user3 = User.objects.create(username="audit-user-3")
+
+        fat1 = MagicMock()
+        fat1.pk = 100
+        fat1.character.character_ownership.user.pk = user1.pk
+
+        fat2 = MagicMock()
+        fat2.pk = 101
+        fat2.character.character_ownership.user.pk = user1.pk
+
+        fat3 = MagicMock()
+        fat3.pk = 102
+        fat3.character.character_ownership.user.pk = user2.pk
+
+        fat_queryset = MagicMock()
+        fat_queryset.select_related.return_value = fat_queryset
+        fat_queryset.__iter__.return_value = iter([fat1, fat2, fat3])
+
+        empty_ship_classes = MagicMock()
+        empty_ship_classes.exists.return_value = False
+        empty_fleet_types = MagicMock()
+        empty_fleet_types.exists.return_value = False
+
+        mock_fat_filter.return_value = fat_queryset
+
+        filter_instance = FatsInTimeFilter.objects.create(days=14, fats_needed=2)
+        mock_ship_classes.all.return_value.values_list.return_value = empty_ship_classes
+        mock_fleet_types.all.return_value.values_list.return_value = empty_fleet_types
+
+        result = filter_instance.audit_filter([user1, user2, user3])
+
+        self.assertEqual(result[user1.pk]["message"], 2)
+        self.assertTrue(result[user1.pk]["check"])
+
+        self.assertEqual(result[user2.pk]["message"], 1)
+        self.assertFalse(result[user2.pk]["check"])
+
+        self.assertEqual(result[user3.pk]["message"], 0)
+        self.assertFalse(result[user3.pk]["check"])
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.CharacterOwnership.objects.filter")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_audit_applies_ship_class_filter_when_ship_classes_exist(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_character_ownership_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify audit_filter applies shiptype filtering when ship classes are configured.
+
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=30
+        )
+
+        character_queryset = MagicMock()
+        character_queryset.values.return_value = [{"character": 1}, {"character": 2}]
+        mock_character_ownership_filter.return_value = character_queryset
+
+        ship_classes = MagicMock()
+        ship_classes.exists.return_value = True
+        fleet_types = MagicMock()
+        fleet_types.exists.return_value = False
+        mock_ship_classes.all.return_value.values_list.return_value = ship_classes
+        mock_fleet_types.all.return_value.values_list.return_value = fleet_types
+
+        user1 = User.objects.create(username="audit-ship-user-1")
+        user2 = User.objects.create(username="audit-ship-user-2")
+
+        fat1 = MagicMock()
+        fat1.pk = 200
+        fat1.character.character_ownership.user.pk = user1.pk
+
+        base_fats = MagicMock()
+        base_fats.select_related.return_value = base_fats
+        base_fats.__iter__.side_effect = AssertionError(
+            "unfiltered queryset should not be iterated"
+        )
+
+        filtered_fats = MagicMock()
+        filtered_fats.__iter__.return_value = iter([fat1])
+
+        base_fats.filter.return_value = filtered_fats
+        mock_fat_filter.return_value = base_fats
+
+        filter_instance = FatsInTimeFilter.objects.create(days=30, fats_needed=1)
+
+        result = filter_instance.audit_filter([user1, user2])
+
+        base_fats.filter.assert_called_once_with(shiptype__in=ship_classes)
+        self.assertEqual(result[user1.pk]["message"], 1)
+        self.assertTrue(result[user1.pk]["check"])
+        self.assertEqual(result[user2.pk]["message"], 0)
+        self.assertFalse(result[user2.pk]["check"])
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_applies_ship_class_filter_when_ship_classes_exist(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify process_filter uses ship class filtering when ship classes are configured.
+
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=30
+        )
+
+        ship_classes = MagicMock()
+        ship_classes.exists.return_value = True
+        fleet_types = MagicMock()
+        fleet_types.exists.return_value = False
+
+        unfiltered_fats = MagicMock()
+        unfiltered_fats.count.return_value = 2
+        filtered_fats = MagicMock()
+        filtered_fats.count.return_value = 1
+        unfiltered_fats.filter.return_value = filtered_fats
+        mock_fat_filter.return_value = unfiltered_fats
+
+        filter_instance = FatsInTimeFilter.objects.create(days=30, fats_needed=2)
+        mock_ship_classes.all.return_value.values_list.return_value = ship_classes
+        mock_fleet_types.all.return_value.values_list.return_value = fleet_types
+
+        user = User.objects.create(username="branch-user")
+
+        self.assertFalse(filter_instance.process_filter(user))
+        unfiltered_fats.filter.assert_called_once_with(shiptype__in=ship_classes)
+        unfiltered_fats.count.assert_not_called()
+        filtered_fats.count.assert_called_once_with()
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_applies_fleet_type_filter_when_fleet_types_exist(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify process_filter applies fleet type filtering when fleet types are configured.
+
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=30
+        )
+
+        ship_classes = MagicMock()
+        ship_classes.exists.return_value = False
+        fleet_types = MagicMock()
+        fleet_types.exists.return_value = True
+
+        unfiltered_fats = MagicMock()
+        unfiltered_fats.count.return_value = 2
+        filtered_fats = MagicMock()
+        filtered_fats.count.return_value = 1
+        unfiltered_fats.filter.return_value = filtered_fats
+        mock_fat_filter.return_value = unfiltered_fats
+
+        filter_instance = FatsInTimeFilter.objects.create(days=30, fats_needed=2)
+        mock_ship_classes.all.return_value.values_list.return_value = ship_classes
+        mock_fleet_types.all.return_value.values_list.return_value = fleet_types
+
+        user = User.objects.create(username="fleet-branch-user")
+
+        self.assertFalse(filter_instance.process_filter(user))
+        unfiltered_fats.filter.assert_called_once_with(
+            fatlink__fleet_type__in=fleet_types
+        )
+        unfiltered_fats.count.assert_not_called()
+        filtered_fats.count.assert_called_once_with()
+
+    @patch("afat.models.smart_filter._get_threshold_date")
+    @patch("afat.models.smart_filter.CharacterOwnership.objects.filter")
+    @patch("afat.models.smart_filter.Fat.objects.filter")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.fleet_types")
+    @patch("afat.models.smart_filter.FatsInTimeFilter.ship_classes")
+    def test_audit_applies_fleet_type_filter_when_fleet_types_exist(
+        self,
+        mock_ship_classes,
+        mock_fleet_types,
+        mock_fat_filter,
+        mock_character_ownership_filter,
+        mock_get_threshold_date,
+    ):
+        """
+        Verify audit_filter applies fleet type filtering when fleet types are configured.
+
+        :return:
+        :rtype:
+        """
+
+        mock_get_threshold_date.return_value = datetime.now(timezone.utc) - timedelta(
+            days=30
+        )
+
+        character_queryset = MagicMock()
+        character_queryset.values.return_value = [{"character": 1}, {"character": 2}]
+        mock_character_ownership_filter.return_value = character_queryset
+
+        ship_classes = MagicMock()
+        ship_classes.exists.return_value = False
+        fleet_types = MagicMock()
+        fleet_types.exists.return_value = True
+        mock_ship_classes.all.return_value.values_list.return_value = ship_classes
+        mock_fleet_types.all.return_value.values_list.return_value = fleet_types
+
+        user1 = User.objects.create(username="audit-fleet-user-1")
+        user2 = User.objects.create(username="audit-fleet-user-2")
+
+        fat1 = MagicMock()
+        fat1.pk = 300
+        fat1.character.character_ownership.user.pk = user1.pk
+
+        base_fats = MagicMock()
+        base_fats.select_related.return_value = base_fats
+        base_fats.__iter__.side_effect = AssertionError(
+            "unfiltered queryset should not be iterated"
+        )
+
+        filtered_fats = MagicMock()
+        filtered_fats.__iter__.return_value = iter([fat1])
+
+        base_fats.filter.return_value = filtered_fats
+        mock_fat_filter.return_value = base_fats
+
+        filter_instance = FatsInTimeFilter.objects.create(days=30, fats_needed=1)
+
+        result = filter_instance.audit_filter([user1, user2])
+
+        base_fats.filter.assert_called_once_with(fatlink__fleet_type__in=fleet_types)
+        self.assertEqual(result[user1.pk]["message"], 1)
+        self.assertTrue(result[user1.pk]["check"])
+        self.assertEqual(result[user2.pk]["message"], 0)
+        self.assertFalse(result[user2.pk]["check"])

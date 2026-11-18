@@ -584,11 +584,12 @@ class TestCheckForEsiFleet(BaseTestCase):
 
         self.assertDictEqual(result, {"fleet": mock_fleet, "token": mock_token})
 
+    @patch("afat.tasks.ESIHandler.result")
     @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
     @patch("afat.tasks._esi_fatlinks_error_handling")
     @patch("esi.models.Token.get_token")
     def test_handles_http_client_error_with_status_404(
-        self, mock_get_token, mock_error_handling, mock_client
+        self, mock_get_token, mock_error_handling, mock_client, mock_esi_result
     ):
         """
         Test that the _check_for_esi_fleet function handles a generic error.
@@ -608,7 +609,7 @@ class TestCheckForEsiFleet(BaseTestCase):
         mock_fatlink.esi_fleet_id = 67890
 
         mock_get_token.return_value = MagicMock()
-        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.side_effect = HTTPClientError(
+        mock_esi_result.side_effect = HTTPClientError(
             HTTPStatus.NOT_FOUND, headers={}, data={}
         )
 
@@ -616,14 +617,15 @@ class TestCheckForEsiFleet(BaseTestCase):
 
         self.assertIsNone(result)
         mock_error_handling.assert_called_once_with(
-            error_key=FatLink.EsiError.NO_FLEET, fatlink=mock_fatlink
+            error_key=FatLink.EsiError.NOT_IN_FLEET, fatlink=mock_fatlink
         )
 
+    @patch("afat.tasks.ESIHandler.result")
     @patch("afat.utils.esi.__class__.client", new_callable=MagicMock)
     @patch("afat.tasks._esi_fatlinks_error_handling")
     @patch("esi.models.Token.get_token")
     def test_handles_http_client_error_with_other_status(
-        self, mock_get_token, mock_error_handling, mock_client
+        self, mock_get_token, mock_error_handling, mock_client, mock_esi_result
     ):
         """
         Test that the _check_for_esi_fleet function handles a generic error.
@@ -643,7 +645,7 @@ class TestCheckForEsiFleet(BaseTestCase):
         mock_fatlink.esi_fleet_id = 67890
 
         mock_get_token.return_value = MagicMock()
-        mock_client.Fleets.GetCharactersCharacterIdFleet.return_value.result.side_effect = HTTPClientError(
+        mock_esi_result.side_effect = HTTPClientError(
             HTTPStatus.FORBIDDEN, headers={}, data={}
         )
 

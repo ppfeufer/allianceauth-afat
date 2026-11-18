@@ -91,7 +91,7 @@ def get_or_create_character(
     elif character_id:
         # If an ID is passed to this function, we can just check the db for it.
         eve_character = EveCharacter.objects.filter(character_id=character_id)
-    elif not name and not character_id:
+    else:
         raise NoDataError(msg="No character name or character id provided.")
 
     if eve_character is not None and len(eve_character) == 0:
