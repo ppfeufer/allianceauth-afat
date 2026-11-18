@@ -247,7 +247,55 @@ class TestGetOrCreateCharacter(BaseTestCase):
         character = get_or_create_character(character_id=22222)
 
         self.assertEqual(character.character_name, "NewChar")
+        mock_corp_filter.assert_called_once_with(corporation_id=33333)
+        mock_corp_filter.return_value.exists.assert_called_once_with()
         mock_create_corp.assert_called_once_with(corp_id=33333)
+
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.EveCorporationInfo.objects.create_corporation")
+    @patch("afat.utils.EveCorporationInfo.objects.filter")
+    @patch("afat.utils.EveCharacter.objects.get")
+    @patch("afat.utils.EveCharacter.objects.create_character")
+    @patch("afat.utils.EveCharacter.objects.filter")
+    def test_does_not_create_corporation_info_when_corporation_exists(
+        self,
+        mock_eve_filter,
+        mock_create_character,
+        mock_get,
+        mock_corp_filter,
+        mock_create_corp,
+    ):
+        """
+        Test that corporation info is not created when it already exists.
+
+        :param mock_eve_filter:
+        :type mock_eve_filter:
+        :param mock_create_character:
+        :type mock_create_character:
+        :param mock_get:
+        :type mock_get:
+        :param mock_corp_filter:
+        :type mock_corp_filter:
+        :param mock_create_corp:
+        :type mock_create_corp:
+        :return:
+        :rtype:
+        """
+
+        mock_eve_filter.return_value = []
+        created = MagicMock(
+            pk=4, character_name="NewChar4", alliance_id=None, corporation_id=88888
+        )
+        mock_create_character.return_value = created
+        mock_get.return_value = created
+        mock_corp_filter.return_value.exists.return_value = True
+
+        character = get_or_create_character(character_id=55555)
+
+        self.assertEqual(character.character_name, "NewChar4")
+        mock_corp_filter.assert_called_once_with(corporation_id=88888)
+        mock_corp_filter.return_value.exists.assert_called_once_with()
+        mock_create_corp.assert_not_called()
 
     @patch("afat.utils.esi", new=MagicMock())
     @patch("afat.utils.EveAllianceInfo.objects.create_alliance")
@@ -291,7 +339,55 @@ class TestGetOrCreateCharacter(BaseTestCase):
         character = get_or_create_character(character_id=33333)
 
         self.assertEqual(character.character_name, "NewChar2")
+        mock_alliance_filter.assert_called_once_with(alliance_id=44444)
+        mock_alliance_filter.return_value.exists.assert_called_once_with()
         mock_create_alliance.assert_called_once_with(alliance_id=44444)
+
+    @patch("afat.utils.esi", new=MagicMock())
+    @patch("afat.utils.EveAllianceInfo.objects.create_alliance")
+    @patch("afat.utils.EveAllianceInfo.objects.filter")
+    @patch("afat.utils.EveCharacter.objects.get")
+    @patch("afat.utils.EveCharacter.objects.create_character")
+    @patch("afat.utils.EveCharacter.objects.filter")
+    def test_does_not_create_alliance_info_when_alliance_exists(
+        self,
+        mock_eve_filter,
+        mock_create_character,
+        mock_get,
+        mock_alliance_filter,
+        mock_create_alliance,
+    ):
+        """
+        Test that the function does not create alliance info when it already exists.
+
+        :param mock_eve_filter:
+        :type mock_eve_filter:
+        :param mock_create_character:
+        :type mock_create_character:
+        :param mock_get:
+        :type mock_get:
+        :param mock_alliance_filter:
+        :type mock_alliance_filter:
+        :param mock_create_alliance:
+        :type mock_create_alliance:
+        :return:
+        :rtype:
+        """
+
+        mock_eve_filter.return_value = []
+        created = MagicMock(
+            pk=3, character_name="NewChar3", alliance_id=66666, corporation_id=77777
+        )
+        mock_create_character.return_value = created
+        mock_get.return_value = created
+        mock_alliance_filter.return_value.exists.return_value = True
+
+        character = get_or_create_character(character_id=44444)
+
+        self.assertEqual(character.character_name, "NewChar3")
+        mock_alliance_filter.assert_called_once_with(alliance_id=66666)
+        mock_alliance_filter.return_value.exists.assert_called_once_with()
+        mock_create_alliance.assert_not_called()
 
     @patch("afat.utils.esi", new=MagicMock())
     @patch("afat.utils.ESIHandler.result")
@@ -311,7 +407,7 @@ class TestGetOrCreateCharacter(BaseTestCase):
 
         self.assertIsNone(result)
 
-    def test_raises_error_when_no_name_or_id_provided(self):
+    def test_raises_error_when_name_and_character_id_are_missing(self):
         """
         Test that the function raises NoDataError when no name or ID is provided
 
@@ -319,8 +415,78 @@ class TestGetOrCreateCharacter(BaseTestCase):
         :rtype:
         """
 
-        with self.assertRaises(NoDataError):
-            get_or_create_character()
+        invalid_inputs = [
+            {"name": None, "character_id": None},
+            {"name": "", "character_id": None},
+            {"name": None, "character_id": 0},
+            {"name": False, "character_id": False},
+            {"name": False, "character_id": None},
+            {"name": None, "character_id": False},
+        ]
+
+        for case in invalid_inputs:
+            with self.subTest(case=case):
+                with self.assertRaisesRegex(
+                    NoDataError, "No character name or character id provided."
+                ):
+                    get_or_create_character(**case)
+
+    def test_raises_error_when_name_and_character_id_are_false(self):
+        """
+        Test that explicit boolean False values trigger NoDataError.
+
+        :return:
+        :rtype:
+        """
+
+        false_inputs = [
+            {"name": False, "character_id": False},
+            {"name": False, "character_id": None},
+            {"name": None, "character_id": False},
+        ]
+
+        for case in false_inputs:
+            with self.subTest(case=case):
+                with self.assertRaisesRegex(
+                    NoDataError, "No character name or character id provided."
+                ):
+                    get_or_create_character(**case)
+
+    def test_raises_error_when_name_false_and_character_id_false(self):
+        """
+        Test that False/False triggers NoDataError.
+
+        :return:
+        """
+
+        with self.assertRaisesRegex(
+            NoDataError, "No character name or character id provided."
+        ):
+            get_or_create_character(name=False, character_id=False)
+
+    def test_raises_error_when_name_false_and_character_id_none(self):
+        """
+        Test that False/None triggers NoDataError.
+
+        :return:
+        """
+
+        with self.assertRaisesRegex(
+            NoDataError, "No character name or character id provided."
+        ):
+            get_or_create_character(name=False, character_id=None)
+
+    def test_raises_error_when_name_none_and_character_id_false(self):
+        """
+        Test that None/False triggers NoDataError.
+
+        :return:
+        """
+
+        with self.assertRaisesRegex(
+            NoDataError, "No character name or character id provided."
+        ):
+            get_or_create_character(name=None, character_id=False)
 
     @patch("afat.utils.esi.__class__.client", new_callable=PropertyMock)
     @patch("allianceauth.eveonline.models.EveCharacter.objects.create_character")

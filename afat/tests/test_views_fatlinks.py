@@ -19,6 +19,7 @@ from django.contrib.messages import get_messages
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.db import IntegrityError
+from django.http import HttpResponse
 from django.test import RequestFactory
 from django.urls import reverse
 from django.utils import timezone
@@ -451,6 +452,80 @@ class TestDetailsFatlink(FatlinksViewTestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTrue(response.context["link_can_be_reopened"])
 
+    @patch("afat.views.fatlinks.render")
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
+    def test_details_fatlink_sets_link_ongoing_true_for_active_esi_link(
+        self, mock_select_related_default, mock_get_duration, mock_render
+    ):
+        """
+        Test details fatlink sets link_ongoing True for active ESI link
+
+        :param mock_select_related_default:
+        :param mock_get_duration:
+        :param mock_render:
+        :return:
+        """
+
+        mock_link = Mock()
+        mock_link.is_esilink = True
+        mock_link.is_registered_on_esi = True
+        mock_link.reopened = False
+        mock_link.created = timezone.now() - dt.timedelta(days=10)
+
+        mock_qs = Mock()
+        mock_qs.get.return_value = mock_link
+        mock_select_related_default.return_value = mock_qs
+        mock_get_duration.side_effect = Duration.DoesNotExist
+        mock_render.return_value = HttpResponse("ok")
+
+        self.client.force_login(self.user_with_add_fatlink)
+        response = self.client.get(
+            reverse("afat:fatlinks_details_fatlink", args=["esi_hash_active"])
+        )
+
+        context = mock_render.call_args.args[2]
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTrue(context["link_ongoing"])
+
+    @patch("afat.views.fatlinks.render")
+    @patch("afat.views.fatlinks.Duration.objects.get")
+    @patch("afat.views.fatlinks.FatLink.objects.select_related_default")
+    def test_details_fatlink_keeps_link_ongoing_false_for_inactive_esi_link(
+        self, mock_select_related_default, mock_get_duration, mock_render
+    ):
+        """
+        Test details fatlink keeps link_ongoing False for inactive ESI link
+
+        :param mock_select_related_default:
+        :param mock_get_duration:
+        :param mock_render:
+        :return:
+        """
+
+        mock_link = Mock()
+        mock_link.is_esilink = True
+        mock_link.is_registered_on_esi = False
+        mock_link.reopened = False
+        mock_link.created = timezone.now() - dt.timedelta(days=10)
+
+        mock_qs = Mock()
+        mock_qs.get.return_value = mock_link
+        mock_select_related_default.return_value = mock_qs
+        mock_get_duration.side_effect = Duration.DoesNotExist
+        mock_render.return_value = HttpResponse("ok")
+
+        self.client.force_login(self.user_with_add_fatlink)
+        response = self.client.get(
+            reverse("afat:fatlinks_details_fatlink", args=["esi_hash_inactive"])
+        )
+
+        context = mock_render.call_args.args[2]
+
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertFalse(context["link_ongoing"])
+
 
 class TestProcessFatlinkNameChange(FatlinksViewTestCase):
     """
@@ -528,6 +603,37 @@ class TestProcessFatlinkNameChange(FatlinksViewTestCase):
         messages = list(get_messages(response.wsgi_request))
         self.assertTrue(
             any("The hash provided is not valid." in str(m) for m in messages)
+        )
+
+    def test_process_fatlink_name_change_get_request_keeps_fleet_name_unchanged(self):
+        """
+        Test process fatlink name change GET request keeps fleet name unchanged
+
+        :return:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="testhash_get",
+            fleet="Unchanged Fleet Name",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        url = reverse("afat:fatlinks_process_fatlink_name_change", args=[fatlink.hash])
+        response = self.client.get(url)
+
+        fatlink.refresh_from_db()
+
+        self.assertEqual(fatlink.fleet, "Unchanged Fleet Name")
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertRedirects(
+            response,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": fatlink.hash}
+            ),
+            target_status_code=HTTPStatus.OK,
         )
 
 
@@ -723,6 +829,40 @@ class TestProcessManualFat(FatlinksViewTestCase):
             any("The hash provided is not valid." in str(m) for m in messages)
         )
 
+    def test_process_manual_fat_invalid_form_does_not_create_fat(self):
+        """
+        Test process manual fat invalid form does not create fat
+
+        :return:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="manual-invalid-form",
+            fleet="Manual Fleet Invalid",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        fats_before = Fat.objects.filter(fatlink=fatlink).count()
+
+        response = self.client.post(
+            reverse("afat:fatlinks_process_manual_fat", args=[fatlink.hash]),
+            data={"character": "", "system": "", "shiptype": ""},
+        )
+
+        fats_after = Fat.objects.filter(fatlink=fatlink).count()
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response.url,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": fatlink.hash}
+            ),
+        )
+        self.assertEqual(fats_after, fats_before)
+
     def test_manual_fat_shows_warning_when_system_not_found(self):
         """
         Test manual_fat shows warning when system is not found.
@@ -838,6 +978,44 @@ class TestProcessManualFat(FatlinksViewTestCase):
         self.assertTrue(
             any("The ship type you entered cannot be found" in str(m) for m in messages)
         )
+
+    def test_process_manual_fat_get_request_keeps_existing_fats_unchanged(self):
+        """
+        Test process manual fat GET request keeps existing fats unchanged
+
+        :return:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="mf-get",
+            fleet="Manual Fleet",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        Fat.objects.create(
+            character=self.character_1001,
+            fatlink=fatlink,
+            shiptype="Omen",
+        )
+        fats_before = Fat.objects.filter(fatlink=fatlink).count()
+
+        response = self.client.get(
+            reverse("afat:fatlinks_process_manual_fat", args=[fatlink.hash])
+        )
+
+        fats_after = Fat.objects.filter(fatlink=fatlink).count()
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response.url,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": fatlink.hash}
+            ),
+        )
+        self.assertEqual(fats_after, fats_before)
 
 
 class TestReopenFatlink(FatlinksViewTestCase):
@@ -1317,6 +1495,320 @@ class TestCreateClickableFatlink(FatlinksViewTestCase):
         self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
 
 
+class TestCreateEsiFatlinkCallback(FatlinksViewTestCase):
+    """
+    Test create ESI FAT link callback
+    """
+
+    def _build_request_for_callback(self, fatlink_hash: str):
+        """
+        Helper method to build a request for the ESI callback view.
+
+        :param fatlink_hash:
+        :return:
+        """
+
+        request = RequestFactory().get(
+            path=reverse(
+                "afat:fatlinks_create_esi_fatlink_callback",
+                kwargs={"fatlink_hash": fatlink_hash},
+            )
+        )
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
+        request.session.save()
+        request.user = self.user_with_manage_afat
+        request._messages = FallbackStorage(request)
+
+        return request
+
+    @patch("afat.views.fatlinks.esi")
+    @patch("afat.views.fatlinks.ESIHandler.result")
+    def test_redirects_to_add_fatlink_when_character_is_not_in_fleet(
+        self, mock_esi_result, mock_esi
+    ):
+        """
+        Test redirects to add fatlink when character is not in fleet
+
+        :param mock_esi_result:
+        :param mock_esi:
+        :return:
+        """
+
+        fatlink_hash = "esi-cb-no-fleet"
+        request = self._build_request_for_callback(fatlink_hash=fatlink_hash)
+        token = MagicMock(character_id=self.character_1003.character_id)
+
+        mock_esi.client.Fleets.GetCharactersCharacterIdFleet.return_value = object()
+        mock_esi_result.side_effect = Exception("not in fleet")
+
+        response = fatlinks_module.create_esi_fatlink_callback.__wrapped__.__wrapped__.__wrapped__(
+            request, token, fatlink_hash
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
+        self.assertFalse(FatLink.objects.filter(hash=fatlink_hash).exists())
+
+        messages = list(get_messages(request))
+        self.assertTrue(any("need to be in fleet" in str(m) for m in messages))
+
+    @patch("afat.views.fatlinks.esi")
+    @patch("afat.views.fatlinks.ESIHandler.result")
+    def test_redirects_to_add_fatlink_when_fleet_is_already_registered(
+        self, mock_esi_result, mock_esi
+    ):
+        """
+        Test redirects to add fatlink when fleet is already registered
+
+        :param mock_esi_result:
+        :param mock_esi:
+        :return:
+        """
+
+        fatlink_hash = "esi-cb-registered"
+        request = self._build_request_for_callback(fatlink_hash=fatlink_hash)
+        token = MagicMock(character_id=self.character_1003.character_id)
+
+        existing = FatLink.objects.create(
+            fleet="Existing Registered Fleet",
+            hash="esi-existing-registered",
+            creator=self.user_with_manage_afat,
+            character=self.character_1003,
+            is_esilink=True,
+            is_registered_on_esi=True,
+            esi_fleet_id=900001,
+        )
+
+        fleet_from_esi = SimpleNamespace(fleet_id=900001)
+        mock_esi.client.Fleets.GetCharactersCharacterIdFleet.return_value = object()
+        mock_esi_result.side_effect = [fleet_from_esi]
+
+        response = fatlinks_module.create_esi_fatlink_callback.__wrapped__.__wrapped__.__wrapped__(
+            request, token, fatlink_hash
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
+        self.assertFalse(FatLink.objects.filter(hash=fatlink_hash).exists())
+
+        existing.refresh_from_db()
+        self.assertTrue(existing.is_registered_on_esi)
+
+        messages = list(get_messages(request))
+        self.assertTrue(any("already been registered" in str(m) for m in messages))
+
+    @patch("afat.views.fatlinks.process_fats.delay")
+    @patch("afat.views.fatlinks.write_log")
+    @patch("afat.views.fatlinks.esi")
+    @patch("afat.views.fatlinks.ESIHandler.result")
+    def test_creates_new_esi_fatlink_and_closes_previous_registered_fleets(
+        self, mock_esi_result, mock_esi, mock_write_log, mock_process_delay
+    ):
+        """
+        Test creates new ESI FAT link and closes previous registered fleets
+
+        :param mock_esi_result:
+        :param mock_esi:
+        :param mock_write_log:
+        :param mock_process_delay:
+        :return:
+        """
+
+        fatlink_hash = "esi-cb-created"
+        request = self._build_request_for_callback(fatlink_hash=fatlink_hash)
+        request.session["fatlink_form__name"] = "Fresh ESI Fleet"
+        request.session["fatlink_form__doctrine"] = "Doctrine X"
+        request.session["fatlink_form__type"] = "Type A"
+
+        token = MagicMock(character_id=self.character_1003.character_id)
+
+        old_registered = FatLink.objects.create(
+            fleet="Old Registered Fleet",
+            hash="esi-old-registered",
+            creator=self.user_with_manage_afat,
+            character=self.character_1003,
+            is_esilink=True,
+            is_registered_on_esi=True,
+            esi_fleet_id=900010,
+        )
+
+        fleet_from_esi = SimpleNamespace(fleet_id=900011)
+        fleet_members = [
+            SimpleNamespace(dict=lambda: {"character_id": 1003}),
+            SimpleNamespace(dict=lambda: {"character_id": 1101}),
+        ]
+
+        mock_esi.client.Fleets.GetCharactersCharacterIdFleet.return_value = object()
+        mock_esi.client.Fleets.GetFleetsFleetIdMembers.return_value = object()
+        mock_esi_result.side_effect = [fleet_from_esi, fleet_members]
+
+        response = fatlinks_module.create_esi_fatlink_callback.__wrapped__.__wrapped__.__wrapped__(
+            request, token, fatlink_hash
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response.url,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": fatlink_hash}
+            ),
+        )
+
+        old_registered.refresh_from_db()
+        self.assertFalse(old_registered.is_registered_on_esi)
+
+        created = FatLink.objects.get(hash=fatlink_hash)
+        self.assertEqual(created.fleet, "Fresh ESI Fleet")
+        self.assertEqual(created.doctrine, "Doctrine X")
+        self.assertEqual(created.fleet_type, "Type A")
+        self.assertTrue(created.is_esilink)
+        self.assertTrue(created.is_registered_on_esi)
+        self.assertEqual(created.esi_fleet_id, 900011)
+
+        self.assertNotIn("fatlink_form__name", request.session)
+        self.assertNotIn("fatlink_form__type", request.session)
+
+        mock_write_log.assert_called_once()
+        mock_process_delay.assert_called_once_with(
+            data_list=[{"character_id": 1003}, {"character_id": 1101}],
+            data_source="esi",
+            fatlink_hash=fatlink_hash,
+        )
+
+        messages = list(get_messages(request))
+        self.assertTrue(any("FAT link Created" in str(m) for m in messages))
+
+    @patch("afat.views.fatlinks.esi")
+    @patch("afat.views.fatlinks.ESIHandler.result")
+    def test_redirects_to_add_fatlink_when_fleet_boss_members_query_fails(
+        self, mock_esi_result, mock_esi
+    ):
+        """
+        Test redirects to add fatlink when fleet boss members query fails
+
+        :param mock_esi_result:
+        :param mock_esi:
+        :return:
+        """
+
+        fatlink_hash = "esi-cb-not-boss"
+        request = self._build_request_for_callback(fatlink_hash=fatlink_hash)
+        token = MagicMock(character_id=self.character_1003.character_id)
+
+        request.session["fatlink_form__name"] = "Should Not Create"
+        request.session["fatlink_form__doctrine"] = "Doctrine Y"
+        request.session["fatlink_form__type"] = "Type B"
+
+        fleet_from_esi = SimpleNamespace(fleet_id=900020)
+        mock_esi.client.Fleets.GetCharactersCharacterIdFleet.return_value = object()
+        mock_esi.client.Fleets.GetFleetsFleetIdMembers.return_value = object()
+        mock_esi_result.side_effect = [fleet_from_esi, Exception("not fleet boss")]
+
+        response = fatlinks_module.create_esi_fatlink_callback.__wrapped__.__wrapped__.__wrapped__(
+            request, token, fatlink_hash
+        )
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse("afat:fatlinks_add_fatlink"))
+        self.assertFalse(FatLink.objects.filter(hash=fatlink_hash).exists())
+
+        messages = list(get_messages(request))
+        self.assertTrue(any("Not Fleet Boss" in str(m) for m in messages))
+
+
+class TestCreateEsiFatlink(FatlinksViewTestCase):
+    """
+    Test create ESI FAT link
+    """
+
+    def _build_request_for_create_esi_fatlink(self):
+        """
+        Helper method to build a request for the create ESI FAT link view.
+
+        :return:
+        """
+
+        request = RequestFactory().post(
+            path=reverse(viewname="afat:fatlinks_create_esi_fatlink"), data={}
+        )
+        SessionMiddleware(get_response=lambda req: None).process_request(request)
+        request.session.save()
+        request.user = self.user_with_manage_afat
+        request._messages = FallbackStorage(request)
+
+        return request
+
+    @patch("afat.views.fatlinks.get_hash_on_save", return_value="esi-created-hash")
+    @patch("afat.views.fatlinks.AFatEsiFatForm")
+    def test_stores_form_values_in_session_and_redirects_to_callback_when_form_is_valid(
+        self, mock_form, mock_get_hash
+    ):
+        """
+        Test stores form values in session and redirects to callback when form is valid
+
+        :param mock_form:
+        :param mock_get_hash:
+        :return:
+        """
+
+        request = self._build_request_for_create_esi_fatlink()
+
+        mock_form.return_value.is_valid.return_value = True
+        mock_form.return_value.cleaned_data = {
+            "name_esi": "ESI Fleet Name",
+            "doctrine_esi": "Shield Doctrine",
+            "type_esi": "Stratop",
+        }
+
+        response = fatlinks_module.create_esi_fatlink.__wrapped__(request)
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response.url,
+            reverse(
+                viewname="afat:fatlinks_create_esi_fatlink_callback",
+                kwargs={"fatlink_hash": "esi-created-hash"},
+            ),
+        )
+
+        self.assertEqual(request.session["fatlink_form__name"], "ESI Fleet Name")
+        self.assertEqual(request.session["fatlink_form__doctrine"], "Shield Doctrine")
+        self.assertEqual(request.session["fatlink_form__type"], "Stratop")
+        mock_get_hash.assert_called_once_with()
+
+    @patch("afat.views.fatlinks.AFatEsiFatForm")
+    def test_redirects_to_add_fatlink_and_sets_error_message_when_form_is_invalid(
+        self, mock_form
+    ):
+        """
+        Test redirects to add fatlink and sets error message when form is invalid
+
+        :param mock_form:
+        :return:
+        """
+
+        request = self._build_request_for_create_esi_fatlink()
+
+        mock_form.return_value.is_valid.return_value = False
+
+        response = fatlinks_module.create_esi_fatlink.__wrapped__(request)
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(response.url, reverse(viewname="afat:fatlinks_add_fatlink"))
+        self.assertNotIn("fatlink_form__name", request.session)
+        self.assertNotIn("fatlink_form__doctrine", request.session)
+        self.assertNotIn("fatlink_form__type", request.session)
+
+        messages = list(get_messages(request))
+        self.assertTrue(
+            any(
+                "Something went wrong when attempting to submit your ESI FAT link"
+                in str(m)
+                for m in messages
+            )
+        )
+
+
 class TestAddFatView(BaseTestCase):
     """
     Test add fat view
@@ -1684,7 +2176,7 @@ class TestAddFatView(BaseTestCase):
         self.assertTrue(any("already registered" in str(m) for m in messages))
 
 
-class TestprocessFleetSnapshot(BaseTestCase):
+class TestProcessFleetSnapshot(BaseTestCase):
     """
     Tests for process_fleetsnapshot
     """
@@ -1901,6 +2393,40 @@ class TestprocessFleetSnapshot(BaseTestCase):
             )
         )
 
+    def test_process_fleetsnapshot_invalid_form_does_not_create_fats(self):
+        """
+        Test process_fleetsnapshot with invalid form does not create fats
+
+        :return:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="snap-invalid-form",
+            fleet="Snapshot Fleet",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        fats_before = Fat.objects.filter(fatlink=fatlink).count()
+
+        response = self.client.post(
+            path=reverse("afat:fatlinks_process_fleetsnapshot", args=[fatlink.hash]),
+            data={"fleet_composition": ""},
+        )
+
+        fats_after = Fat.objects.filter(fatlink=fatlink).count()
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response.url,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": fatlink.hash}
+            ),
+        )
+        self.assertEqual(fats_after, fats_before)
+
     def test_invalid_hash_redirects_to_dashboard_with_warning(self):
         """
         Test invalid hash redirects to dashboard with warning
@@ -1931,3 +2457,36 @@ class TestprocessFleetSnapshot(BaseTestCase):
         self.assertTrue(
             any("The hash provided is not valid" in str(m) for m in messages)
         )
+
+    def test_process_fleetsnapshot_get_request_skips_processing_and_redirects(self):
+        """
+        Test process_fleetsnapshot GET request skips processing and redirects
+
+        :return:
+        """
+
+        self.client.force_login(user=self.user_with_manage_afat)
+
+        fatlink = FatLink.objects.create(
+            hash="snap-get",
+            fleet="Snapshot Fleet",
+            creator=self.user_with_manage_afat,
+            character=self.character_1001,
+        )
+
+        fats_before = Fat.objects.filter(fatlink=fatlink).count()
+
+        response = self.client.get(
+            reverse("afat:fatlinks_process_fleetsnapshot", args=[fatlink.hash])
+        )
+
+        fats_after = Fat.objects.filter(fatlink=fatlink).count()
+
+        self.assertEqual(response.status_code, HTTPStatus.FOUND)
+        self.assertEqual(
+            response.url,
+            reverse(
+                "afat:fatlinks_details_fatlink", kwargs={"fatlink_hash": fatlink.hash}
+            ),
+        )
+        self.assertEqual(fats_after, fats_before)
