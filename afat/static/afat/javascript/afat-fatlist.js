@@ -9,15 +9,24 @@ $(document).ready(() => {
     const RELOAD_INTERVAL = 60000;
     let expectedReloadTime = Date.now() + RELOAD_INTERVAL;
     let dt = null;
+    const dtColumn = {
+        fleetName: 0,
+        fleetType: 1,
+        doctrine: 2,
+        creator: 3,
+        eveTime: 4,
+        fats: 5,
+        actions: 6
+    };
 
     // Column definitions based on permissions
     const linkListTableColumnDefs = [
         {
-            target: 4,
+            targets: dtColumn.eveTime,
             columnControl: _removeSearchFromColumnControl()
         },
         {
-            target: 5,
+            targets: dtColumn.fats,
             columnControl: _removeColumnControl(),
             orderable: false
         }
@@ -25,7 +34,7 @@ $(document).ready(() => {
 
     if (hasPermissions) {
         linkListTableColumnDefs.splice(1, 0, {
-            target: 6,
+            targets: dtColumn.actions,
             createdCell: (td) => {
                 $(td).addClass('text-end');
             },
@@ -51,7 +60,7 @@ $(document).ready(() => {
         dt = new DataTable(linkListTable, {
             ...afatSettings.dataTables,
             columnDefs: linkListTableColumnDefs,
-            order: [[4, 'desc']],
+            order: [[dtColumn.eveTime, 'desc']],
             initComplete: () => {
                 _linkListTableInitComplete();
                 dt.on('draw.dt', () => _linkListTableInitComplete());

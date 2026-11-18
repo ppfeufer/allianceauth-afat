@@ -2,9 +2,12 @@
 AFAT Smart Filter
 """
 
+__lazy_modules__ = ["django.db.models"]
+
 # Standard Library
 import datetime
 from collections import defaultdict
+from typing import TYPE_CHECKING
 
 # Third Party
 from eve_sde.models import ItemType
@@ -22,6 +25,11 @@ from afat.models.afat import Fat, FleetType
 from afat.providers.applogger import AppLogger
 
 logger = AppLogger(my_logger=get_extension_logger(name=__name__))
+
+
+if TYPE_CHECKING:
+    # Django
+    from django.db.models import QuerySet
 
 
 def _get_threshold_date(timedelta_in_days: int) -> datetime.datetime:
@@ -163,14 +171,14 @@ class FatsInTimeFilter(BaseFilter):
             # If the user does not have any characters, return False
             return False
 
-    def audit_filter(self, users):
+    def audit_filter(self, users: "QuerySet[User]"):
         """
         Audit the users for the filter
 
-        :param users:
-        :type users:
-        :return:
-        :rtype:
+        :param users: The users
+        :type users: QuerySet[User]
+        :return: The audit information
+        :rtype: dict
         """
 
         character_list = CharacterOwnership.objects.filter(user__in=users)

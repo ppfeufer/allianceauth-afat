@@ -43,6 +43,12 @@ $(document).ready(() => {
      * @private
      */
     const _initializeDataTable = (data) => {
+        const dtColumn = {
+            characterName: 0,
+            system: 1,
+            shipType: 2,
+            actions: 3
+        };
         const dt = new DataTable(fatListTable, { // eslint-disable-line no-unused-vars
             ...afatSettings.dataTables,
             data: data,
@@ -54,7 +60,7 @@ $(document).ready(() => {
             ],
             columnDefs: [
                 {
-                    target: 3,
+                    targets: dtColumn.actions,
                     columnControl: _removeColumnControl(),
                     createdCell: (td) => {
                         $(td).addClass('text-end');
@@ -63,7 +69,7 @@ $(document).ready(() => {
                     width: 50
                 }
             ],
-            order: [[0, 'asc']],
+            order: [[dtColumn.characterName, 'asc']],
             initComplete: () => {
                 _updateShipTypeCounts(data);
             }
