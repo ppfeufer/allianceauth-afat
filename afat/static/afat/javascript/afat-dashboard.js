@@ -27,6 +27,14 @@ $(document).ready(() => {
     /**
      * Initialize character FAT tables
      */
+    const characterDtColumn = {
+        fleetName: 0,
+        fleetType: 1,
+        doctrine: 2,
+        system: 3,
+        shipType: 4,
+        fleetTime: 5
+    };
     const initCharacterFatTables = () => {
         const characterTableColumns = [
             {data: 'fleet_name'},
@@ -51,7 +59,7 @@ $(document).ready(() => {
                 url: url,
                 columns: characterTableColumns,
                 columnControl: [],
-                order: [[5, 'desc']]
+                order: [[characterDtColumn.fleetTime, 'desc']]
             });
         });
     };
@@ -59,6 +67,14 @@ $(document).ready(() => {
     /**
      * Initialize recent FAT links table
      */
+    const recentFatLinksDtColumn = {
+        fleetName: 0,
+        fleetType: 1,
+        doctrine: 2,
+        creatorName: 3,
+        fleetTime: 4,
+        actions: 5
+    };
     const initRecentFatLinksTable = () => {
         const columns = [
             {data: 'fleet_name'},
@@ -82,7 +98,7 @@ $(document).ready(() => {
             });
 
             columnDefs.push({
-                target: 5,
+                targets: recentFatLinksDtColumn.actions,
                 orderable: false,
                 createdCell: (td) => $(td).addClass('text-end'),
                 width: 125
@@ -99,7 +115,7 @@ $(document).ready(() => {
             columns: columns,
             columnDefs: columnDefs,
             columnControl: [],
-            order: [[4, 'desc']]
+            order: [[recentFatLinksDtColumn.fleetTime, 'desc']]
         });
     };
 

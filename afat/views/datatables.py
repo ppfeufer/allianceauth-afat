@@ -69,7 +69,7 @@ class FatLinksTableView(PermissionRequiredMixin, DataTablesView):
 
 class LogsTableView(PermissionRequiredMixin, DataTablesView):
     """
-    Datatables view for FatLinks.
+    Datatables view for Logs.
     """
 
     permission_required = ("afat.manage_afat", "afat.log_view")  # Either permission

@@ -86,6 +86,12 @@ $(document).ready(() => {
      */
     const handleTableData = (tableData) => {
         const table = $('#character-alt-characters');
+        const dtColumn = {
+            characterName: 0,
+            fatCount: 1,
+            action: 2,
+            inMainCorp: 3
+        };
 
         // Hide loading spinner
         toggleElement('#col-character-alt-characters .afat-character-alt-characters .afat-loading-character-data', false);
@@ -115,17 +121,17 @@ $(document).ready(() => {
                 {data: 'in_main_corp'}
             ],
             order: [
-                [3, 'desc'],
-                [1, 'desc'],
-                [0, 'asc']
+                [dtColumn.inMainCorp, 'desc'],
+                [dtColumn.fatCount, 'desc'],
+                [dtColumn.characterName, 'asc']
             ],
             columnDefs: [
                 {
-                    targets: 1,
+                    targets: dtColumn.fatCount,
                     columnControl: _removeSearchFromColumnControl()
                 },
                 {
-                    target: 2,
+                    targets: dtColumn.action,
                     createdCell: (td) => {
                         $(td).addClass('text-end');
                     },
@@ -133,7 +139,7 @@ $(document).ready(() => {
                     width: 50
                 },
                 {
-                    targets: 3,
+                    targets: dtColumn.inMainCorp,
                     visible: false
                 }
             ],
